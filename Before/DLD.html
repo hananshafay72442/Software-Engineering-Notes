@@ -1,0 +1,2703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Logic Design — Quiz Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #181c24;
+    --border: #252a35;
+    --accent: #00e5ff;
+    --accent2: #7c4dff;
+    --accent3: #ff6b35;
+    --gold: #ffd166;
+    --green: #06d6a0;
+    --red: #ef476f;
+    --text: #e8eaf0;
+    --text-dim: #7a8099;
+    --text-dimmer: #3d4258;
+    --mono: 'Space Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* GRID BG */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ───── NAV ───── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,12,16,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 1.5rem;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .nav-divider { flex: 1; height: 1px; background: var(--border); }
+  .nav-tabs {
+    display: flex; gap: 0.25rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    color: var(--text-dim);
+    background: transparent;
+  }
+  .nav-tab:hover { color: var(--text); border-color: var(--border); }
+  .nav-tab.active {
+    background: rgba(0,229,255,0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ───── MAIN ───── */
+  main {
+    position: relative; z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  /* ───── SECTIONS ───── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ───── HERO ───── */
+  .hero {
+    text-align: center;
+    padding: 3rem 0 2rem;
+  }
+  .hero-chip {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    animation: pulse-border 3s ease-in-out infinite;
+  }
+  @keyframes pulse-border {
+    0%,100% { box-shadow: 0 0 0 0 rgba(0,229,255,0); }
+    50% { box-shadow: 0 0 0 4px rgba(0,229,255,0.1); }
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    color: var(--text-dim);
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  /* ───── TOPIC CARDS ───── */
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  .topic-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .topic-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .topic-card:nth-child(1)::before { background: linear-gradient(135deg, rgba(0,229,255,0.05), transparent); }
+  .topic-card:nth-child(2)::before { background: linear-gradient(135deg, rgba(124,77,255,0.05), transparent); }
+  .topic-card:nth-child(3)::before { background: linear-gradient(135deg, rgba(255,107,53,0.05), transparent); }
+  .topic-card:nth-child(4)::before { background: linear-gradient(135deg, rgba(255,209,102,0.06), transparent); }
+  .topic-card:nth-child(5)::before { background: linear-gradient(135deg, rgba(6,214,160,0.05), transparent); }
+  .topic-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.15); }
+  .topic-card:hover::before { opacity: 1; }
+
+  .topic-num {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  .t1 .topic-num { color: var(--accent); background: rgba(0,229,255,0.1); }
+  .t2 .topic-num { color: var(--accent2); background: rgba(124,77,255,0.1); }
+  .t3 .topic-num { color: var(--accent3); background: rgba(255,107,53,0.1); }
+  .t4 .topic-num { color: var(--gold); background: rgba(255,209,102,0.1); }
+  .tall .topic-num { color: var(--green); background: rgba(6,214,160,0.1); }
+
+  .topic-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+  .topic-card p {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+  .topic-card .q-count {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dimmer);
+    margin-top: 1rem;
+  }
+  .topic-card .arrow {
+    position: absolute;
+    right: 1.25rem; bottom: 1.25rem;
+    font-size: 1.2rem;
+    opacity: 0.3;
+    transition: all 0.2s;
+  }
+  .topic-card:hover .arrow { opacity: 1; transform: translate(3px,-3px); }
+
+  /* ───── QUIZ SECTION ───── */
+  .quiz-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .back-btn {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    cursor: pointer;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: all 0.2s;
+    background: transparent;
+    letter-spacing: 0.05em;
+  }
+  .back-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+  .quiz-title { font-size: 1.4rem; font-weight: 800; flex: 1; }
+  .quiz-mode-tabs {
+    display: flex; gap: 0.5rem; flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .mode-tab {
+    padding: 0.45rem 1.1rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    background: var(--surface);
+    transition: all 0.2s;
+  }
+  .mode-tab:hover { color: var(--text); }
+  .mode-tab.active {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: #fff;
+  }
+
+  /* ───── PROGRESS ───── */
+  .progress-bar-wrap {
+    background: var(--surface2);
+    border-radius: 100px;
+    height: 6px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    transition: width 0.4s ease;
+  }
+  .progress-info {
+    display: flex; justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-dimmer);
+    margin-bottom: 0.5rem;
+  }
+
+  /* ───── QUESTION CARD ───── */
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.3s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .q-type-badge {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  .badge-mcq { background: rgba(124,77,255,0.15); color: var(--accent2); }
+  .badge-text { background: rgba(0,229,255,0.1); color: var(--accent); }
+  .badge-tf { background: rgba(6,214,160,0.1); color: var(--green); }
+  .badge-fill { background: rgba(255,107,53,0.1); color: var(--accent3); }
+  .badge-match { background: rgba(255,209,102,0.1); color: var(--gold); }
+
+  .question-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+  .question-text code {
+    font-family: var(--mono);
+    background: var(--surface2);
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+    font-size: 0.92em;
+    color: var(--accent);
+  }
+
+  /* MCQ Options */
+  .mcq-options { display: flex; flex-direction: column; gap: 0.65rem; }
+  .mcq-opt {
+    display: flex; align-items: center; gap: 0.9rem;
+    padding: 0.85rem 1.1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.18s;
+    background: var(--surface2);
+    user-select: none;
+  }
+  .mcq-opt:hover:not(.locked) { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+  .mcq-opt.selected { border-color: var(--accent2); background: rgba(124,77,255,0.08); }
+  .mcq-opt.correct { border-color: var(--green) !important; background: rgba(6,214,160,0.1) !important; }
+  .mcq-opt.wrong { border-color: var(--red) !important; background: rgba(239,71,111,0.1) !important; }
+  .opt-letter {
+    width: 28px; height: 28px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: all 0.18s;
+  }
+  .mcq-opt.selected .opt-letter { border-color: var(--accent2); color: var(--accent2); }
+  .mcq-opt.correct .opt-letter { border-color: var(--green); color: var(--green); background: rgba(6,214,160,0.15); }
+  .mcq-opt.wrong .opt-letter { border-color: var(--red); color: var(--red); }
+  .opt-text { font-size: 0.92rem; line-height: 1.4; }
+  .opt-text code { font-family: var(--mono); font-size: 0.88em; color: var(--accent); background: rgba(0,229,255,0.08); padding: 0.1em 0.35em; border-radius: 3px; }
+
+  /* Text Answer */
+  .text-answer-wrap { position: relative; }
+  .text-answer-input {
+    width: 100%;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .text-answer-input:focus { border-color: var(--accent); }
+  .text-answer-input.correct { border-color: var(--green); background: rgba(6,214,160,0.06); }
+  .text-answer-input.wrong { border-color: var(--red); background: rgba(239,71,111,0.06); }
+
+  /* True/False */
+  .tf-options { display: flex; gap: 1rem; }
+  .tf-btn {
+    flex: 1;
+    padding: 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface2);
+    color: var(--text-dim);
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: center;
+  }
+  .tf-btn:hover:not(.locked) { color: var(--text); border-color: rgba(255,255,255,0.2); }
+  .tf-btn.selected { border-color: var(--accent2); color: var(--accent2); background: rgba(124,77,255,0.08); }
+  .tf-btn.correct { border-color: var(--green) !important; color: var(--green) !important; background: rgba(6,214,160,0.1) !important; }
+  .tf-btn.wrong { border-color: var(--red) !important; color: var(--red) !important; background: rgba(239,71,111,0.1) !important; }
+
+  /* Feedback */
+  .feedback-box {
+    margin-top: 1rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    display: none;
+  }
+  .feedback-box.show { display: block; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from {opacity:0} to {opacity:1} }
+  .feedback-box.correct-fb { background: rgba(6,214,160,0.1); border: 1px solid rgba(6,214,160,0.3); color: var(--green); }
+  .feedback-box.wrong-fb { background: rgba(239,71,111,0.08); border: 1px solid rgba(239,71,111,0.25); color: #ff8ca6; }
+  .feedback-box strong { display: block; margin-bottom: 0.3rem; font-size: 0.95rem; }
+
+  /* Action Buttons */
+  .quiz-actions {
+    display: flex; gap: 0.75rem; justify-content: flex-end;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 0.65rem 1.4rem;
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent2), #6039cc);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(124,77,255,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(124,77,255,0.5); }
+  .btn-secondary {
+    background: var(--surface2);
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+  .btn-check {
+    background: linear-gradient(135deg, #00b4d8, var(--accent));
+    color: var(--bg);
+    font-weight: 800;
+    box-shadow: 0 4px 20px rgba(0,229,255,0.25);
+  }
+  .btn-check:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,229,255,0.4); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+
+  /* ───── SCORE SCREEN ───── */
+  .score-screen {
+    text-align: center;
+    padding: 3rem 1rem;
+    animation: fadeUp 0.4s ease;
+  }
+  .score-ring-wrap {
+    position: relative;
+    width: 160px; height: 160px;
+    margin: 0 auto 2rem;
+  }
+  .score-ring {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    border: 6px solid var(--surface2);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    position: relative;
+  }
+  .score-ring::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 6px solid transparent;
+    border-top-color: var(--accent);
+    border-right-color: var(--accent2);
+    animation: spin 3s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .score-num {
+    font-family: var(--mono);
+    font-size: 2.4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .score-label {
+    font-size: 0.72rem;
+    color: var(--text-dimmer);
+    letter-spacing: 0.1em;
+    font-family: var(--mono);
+    text-transform: uppercase;
+  }
+  .score-screen h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .score-screen p { color: var(--text-dim); margin-bottom: 2rem; }
+  .score-breakdown {
+    display: flex; justify-content: center; gap: 2rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+  }
+  .score-stat { text-align: center; }
+  .score-stat .val { font-family: var(--mono); font-size: 1.4rem; font-weight: 700; }
+  .score-stat .lbl { font-size: 0.72rem; color: var(--text-dimmer); text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--mono); }
+  .val-correct { color: var(--green); }
+  .val-wrong { color: var(--red); }
+  .val-score { color: var(--gold); }
+
+  /* ───── REVIEW ───── */
+  .review-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    border-left: 3px solid var(--border);
+  }
+  .review-item.rev-correct { border-left-color: var(--green); }
+  .review-item.rev-wrong { border-left-color: var(--red); }
+  .review-q { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.6rem; }
+  .review-ans { font-family: var(--mono); font-size: 0.82rem; }
+  .review-ans span { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; margin-right: 0.5rem; }
+  .your-ans { background: rgba(239,71,111,0.15); color: #ff8ca6; }
+  .your-ans.ok { background: rgba(6,214,160,0.12); color: var(--green); }
+  .correct-ans { background: rgba(6,214,160,0.12); color: var(--green); }
+
+  /* ───── EMPTY / LOADING ───── */
+  .empty-state {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--text-dimmer);
+    font-size: 0.9rem;
+  }
+
+  /* ───── SKIP ───── */
+  #skip-btn { color: var(--text-dimmer); font-size: 0.8rem; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ───── QUESTION TYPE MODAL ───── */
+  .qt-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  .qt-modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
+  .qt-modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    max-width: 460px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    animation: fadeUp 0.25s ease;
+  }
+  .qt-modal-chip {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.2rem 0.8rem;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .qt-modal h2 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  .qt-modal p {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  .qt-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .qt-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface2);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  .qt-option:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-1px); }
+  .qt-option.qt-theory:hover, .qt-option.qt-theory.selected { border-color: var(--accent2); background: rgba(124,77,255,0.08); }
+  .qt-option.qt-numerical:hover, .qt-option.qt-numerical.selected { border-color: var(--accent3); background: rgba(255,107,53,0.08); }
+  .qt-option.qt-mixed:hover, .qt-option.qt-mixed.selected { border-color: var(--gold); background: rgba(255,209,102,0.08); }
+  .qt-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .qt-label { font-weight: 700; font-size: 0.95rem; display: block; margin-bottom: 0.15rem; }
+  .qt-desc { font-size: 0.78rem; color: var(--text-dim); }
+  .qt-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    width: 30px; height: 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  .qt-close:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+  /* ───── CONVERSION SUB-MODAL ───── */
+  .conv-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  .conv-modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
+  .conv-modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 560px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+    animation: fadeUp 0.25s ease;
+    max-height: 88vh;
+    overflow-y: auto;
+  }
+  .conv-modal-chip {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--accent3);
+    border: 1px solid var(--accent3);
+    padding: 0.2rem 0.8rem;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .conv-modal h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.4rem; }
+  .conv-modal p { color: var(--text-dim); font-size: 0.82rem; margin-bottom: 1.25rem; line-height: 1.5; }
+  .conv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .conv-option {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.75rem 0.9rem;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface2);
+    cursor: pointer;
+    transition: all 0.18s;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .conv-option:hover { border-color: var(--accent3); background: rgba(255,107,53,0.07); transform: translateY(-1px); }
+  .conv-option-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .conv-all {
+    width: 100%;
+    padding: 0.85rem;
+    border: 1.5px solid var(--gold);
+    border-radius: 10px;
+    background: rgba(255,209,102,0.06);
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--gold);
+    transition: all 0.2s;
+    margin-bottom: 0.5rem;
+  }
+  .conv-all:hover { background: rgba(255,209,102,0.12); transform: translateY(-1px); }
+  .conv-back {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-dim);
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .conv-back:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+  @media (max-width: 480px) { .conv-grid { grid-template-columns: 1fr; } }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    main { padding: 1.5rem 1rem 4rem; }
+    .question-card { padding: 1.25rem; }
+    .tf-options { flex-direction: column; }
+  }
+
+  /* ───── PROOFS PAGE ───── */
+  .proofs-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .proofs-title { font-size: 1.4rem; font-weight: 800; flex: 1; }
+  .proofs-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    font-family: var(--mono);
+  }
+  .proof-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    animation: fadeUp 0.35s ease;
+  }
+  .proof-card-header {
+    display: flex; align-items: center; gap: 0.9rem;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .proof-card-header:hover { background: rgba(255,255,255,0.025); }
+  .proof-num {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.65rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .pn-idempotent  { color: var(--accent);  background: rgba(0,229,255,0.1); }
+  .pn-null        { color: var(--accent2); background: rgba(124,77,255,0.1); }
+  .pn-involution  { color: var(--accent3); background: rgba(255,107,53,0.1); }
+  .pn-absorption  { color: var(--gold);    background: rgba(255,209,102,0.1); }
+  .pn-absvar      { color: var(--green);   background: rgba(6,214,160,0.1); }
+  .pn-demorgan    { color: var(--red);     background: rgba(239,71,111,0.1); }
+  .pn-consensus   { color: #c084fc;        background: rgba(192,132,252,0.1); }
+  .pn-duality     { color: #38bdf8;        background: rgba(56,189,248,0.1); }
+
+  .proof-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    flex: 1;
+  }
+  .proof-card-toggle {
+    font-size: 1rem;
+    color: var(--text-dimmer);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .proof-card.open .proof-card-toggle { transform: rotate(180deg); }
+  .proof-card-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 1.5rem;
+  }
+  .proof-card.open .proof-card-body { display: block; animation: fadeIn 0.2s ease; }
+
+  .proof-statement {
+    font-family: var(--mono);
+    font-size: 0.88rem;
+    color: var(--accent);
+    background: rgba(0,229,255,0.06);
+    border: 1px solid rgba(0,229,255,0.15);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+  .proof-statement .dual {
+    color: var(--accent2);
+  }
+
+  .proof-intro {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    margin-bottom: 1.25rem;
+    line-height: 1.65;
+  }
+  .proof-intro strong { color: var(--text); }
+
+  .proof-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .proof-step {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 0.75rem;
+    align-items: start;
+    padding: 0.7rem 0.9rem;
+    background: var(--surface2);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: rgba(124,77,255,0.15);
+    color: var(--accent2);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-content { }
+  .step-expr {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+    line-height: 1.5;
+  }
+  .step-reason {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+  .step-reason em {
+    color: var(--gold);
+    font-style: normal;
+    font-weight: 600;
+  }
+  .step-arrow {
+    color: var(--text-dimmer);
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    padding-top: 4px;
+  }
+
+  .proof-note {
+    background: rgba(255,209,102,0.07);
+    border: 1px solid rgba(255,209,102,0.2);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.82rem;
+    color: var(--gold);
+    line-height: 1.6;
+    margin-top: 0.5rem;
+  }
+  .proof-note strong { display: block; margin-bottom: 0.2rem; font-size: 0.85rem; }
+
+  .proof-divider {
+    height: 1px; background: var(--border);
+    margin: 1.25rem 0;
+  }
+
+  .proof-part-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dimmer);
+    margin-bottom: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .tt-wrap {
+    overflow-x: auto;
+    margin-bottom: 1.25rem;
+  }
+  .truth-table {
+    border-collapse: collapse;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    width: 100%;
+    min-width: 320px;
+  }
+  .truth-table th {
+    background: var(--surface2);
+    color: var(--accent);
+    padding: 0.5rem 0.75rem;
+    text-align: center;
+    border: 1px solid var(--border);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+  .truth-table td {
+    padding: 0.4rem 0.75rem;
+    text-align: center;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  .truth-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  .truth-table td.match { color: var(--green); font-weight: 700; }
+  .truth-table td.highlight { color: var(--accent); }
+
+  .expand-all-btn {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    background: transparent;
+    padding: 0.35rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .expand-all-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">⬡ DLD Quiz</div>
+  <div class="nav-divider"></div>
+  <div class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" onclick="showHome()">Home</button>
+    <button class="nav-tab" onclick="openQTModal(0)">All Topics</button>
+    <button class="nav-tab" onclick="openQTModal(1)">Topic 1</button>
+    <button class="nav-tab" onclick="openQTModal(2)">Topic 2</button>
+    <button class="nav-tab" onclick="openQTModal(3)">Topic 3</button>
+    <button class="nav-tab" onclick="openQTModal(4)">Topic 4</button>
+  </div>
+</nav>
+
+<main>
+  <!-- HOME -->
+  <div class="section active" id="sect-home">
+    <div class="hero">
+      <div class="hero-chip">Digital Logic Design <br>[Made by hanan shafay]</div>
+      <h1>Master Every Concept</h1>
+      <p>An adaptive quiz covering number systems, logic gates, Boolean algebra, and canonical forms — built directly from your lecture slides.</p>
+    </div>
+    <div class="topic-grid">
+      <div class="topic-card t1" onclick="openQTModal(1)">
+        <div class="topic-num">Topic 1</div>
+        <h3>Digital Systems &amp; Binary Numbers</h3>
+        <p>Number systems, base conversions, complements, signed numbers, BCD, Gray code, ASCII, registers.</p>
+        <div class="q-count" id="qc1"></div>
+        <div class="arrow">↗</div>
+      </div>
+      <div class="topic-card t2" onclick="openQTModal(2)">
+        <div class="topic-num">Topic 2</div>
+        <h3>Logic Gates</h3>
+        <p>AND, OR, NOT, NAND, NOR, XOR, XNOR, universal gates, SOP/POS implementation, propagation delay.</p>
+        <div class="q-count" id="qc2"></div>
+        <div class="arrow">↗</div>
+      </div>
+      <div class="topic-card t3" onclick="openQTModal(3)">
+        <div class="topic-num">Topic 3</div>
+        <h3>Boolean Algebra</h3>
+        <p>Postulates, theorems, DeMorgan's law, duality, minterms, maxterms, canonical forms, SOP &amp; POS.</p>
+        <div class="q-count" id="qc3"></div>
+        <div class="arrow">↗</div>
+      </div>
+      <div class="topic-card t4" onclick="openQTModal(4)">
+        <div class="topic-num">Topic 4</div>
+        <h3>Canonical &amp; Standard Forms</h3>
+        <p>Combinational circuits, SOP/POS derivation from truth tables, minterm/maxterm shorthand, canonical conversion.</p>
+        <div class="q-count" id="qc4"></div>
+        <div class="arrow">↗</div>
+      </div>
+      <div class="topic-card tall" onclick="openQTModal(0)">
+        <div class="topic-num">All Topics</div>
+        <h3>Mixed Overall Quiz</h3>
+        <p>A comprehensive exam covering all four topics — shuffled and randomised each attempt.</p>
+        <div class="q-count" id="qcall"></div>
+        <div class="arrow">↗</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="sect-quiz">
+    <div class="quiz-header">
+      <button class="back-btn" onclick="showHome()">← Back</button>
+      <div class="quiz-title" id="quizTitle"></div>
+    </div>
+    <div class="quiz-mode-tabs" id="modeTabs"></div>
+    <div class="progress-info">
+      <span id="qNum">Question 1</span>
+      <span id="qScore">Score: 0</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar" style="width:0%"></div>
+    </div>
+    <div id="questionArea"></div>
+    <div class="quiz-actions">
+      <button class="btn btn-secondary" id="skip-btn" onclick="skipQuestion()">Skip →</button>
+      <button class="btn btn-check" id="check-btn" onclick="checkAnswer()">Check Answer</button>
+      <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" style="display:none">Next →</button>
+    </div>
+  </div>
+
+  <!-- SCORE -->
+  <div class="section" id="sect-score">
+    <div class="score-screen" id="scoreContent"></div>
+  </div>
+
+  <!-- PROOFS (Topic 3) -->
+  <div class="section" id="sect-proofs">
+    <div class="proofs-header">
+      <button class="back-btn" onclick="showHome()">← Back</button>
+      <div class="proofs-title">Boolean Algebra — Proofs</div>
+    </div>
+    <div class="proofs-subtitle">All theorems proven step by step. Click any card to expand it.</div>
+    <button class="expand-all-btn" id="expandAllBtn" onclick="toggleAllProofs()">▼ Expand All</button>
+
+    <!-- 1. Idempotency -->
+    <div class="proof-card" id="pc-idempotent">
+      <div class="proof-card-header" onclick="toggleProof('idempotent')">
+        <span class="proof-num pn-idempotent">Theorem 1</span>
+        <span class="proof-card-title">Idempotency</span>
+        <span class="proof-card-toggle">▼</span>
+      </div>
+      <div class="proof-card-body">
+        <div class="proof-statement">
+          (a) &nbsp;x + x = x<br>
+          <span class="dual">(b) &nbsp;x · x = x &nbsp;&nbsp;← dual (free!)</span>
+        </div>
+        <div class="proof-intro">
+          <strong>Idea:</strong> OR-ing or AND-ing a variable with itself gives back that variable — no new information is added.
+          We'll prove (a) formally; (b) follows from duality.
+        </div>
+        <div class="proof-part-label">Proof of (a): x + x = x</div>
+        <div class="proof-steps">
+          <div class="proof-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-expr">x + x</div>
+              <div class="step-reason">Start with the left-hand side.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-expr">= (x + x) · 1</div>
+              <div class="step-reason"><em>Identity Law</em> — multiplying by 1 changes nothing: A·1 = A</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-expr">= (x + x) · (x + x')</div>
+              <div class="step-reason"><em>Complementarity</em> — x + x' = 1 (a variable OR-ed with its complement is always 1)</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <div class="step-expr">= x + (x · x')</div>
+              <div class="step-reason"><em>Distributive Law</em> — factor out x from both terms: x·(A+B) = x·A + x·B applied in reverse</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <div class="step-expr">= x + 0</div>
+              <div class="step-reason"><em>Complementarity</em> — x · x' = 0 (a variable AND-ed with its complement is always 0)</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">6</div>
+            <div class="step-content">
+              <div class="step-expr">= x &nbsp; ✓</div>
+              <div class="step-reason"><em>Identity Law</em> — x + 0 = x</div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-note"><strong>💡 Dual (b) for free:</strong> Swap + ↔ · and 0 ↔ 1 everywhere in the proof above, and you get the proof of x·x = x without any extra work.</div>
+      </div>
+    </div>
+
+    <!-- 2. Null Elements -->
+    <div class="proof-card" id="pc-null">
+      <div class="proof-card-header" onclick="toggleProof('null')">
+        <span class="proof-num pn-null">Theorem 2</span>
+        <span class="proof-card-title">Null Elements (Annihilators)</span>
+        <span class="proof-card-toggle">▼</span>
+      </div>
+      <div class="proof-card-body">
+        <div class="proof-statement">
+          (a) &nbsp;x + 1 = 1<br>
+          <span class="dual">(b) &nbsp;x · 0 = 0 &nbsp;&nbsp;← dual (free!)</span>
+        </div>
+        <div class="proof-intro">
+          <strong>Idea:</strong> OR-ing anything with 1 always gives 1 — because 1 dominates. AND-ing anything with 0 always gives 0.
+        </div>
+        <div class="proof-part-label">Proof of (a): x + 1 = 1</div>
+        <div class="proof-steps">
+          <div class="proof-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-expr">x + 1</div>
+              <div class="step-reason">Start with the left-hand side.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-expr">= x + (x + x')</div>
+              <div class="step-reason"><em>Complementarity</em> — replace 1 with (x + x'), since x + x' = 1</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-expr">= (x + x) + x'</div>
+              <div class="step-reason"><em>Associativity</em> — re-group the OR operations</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <div class="step-expr">= x + x'</div>
+              <div class="step-reason"><em>Idempotency</em> (Theorem 1a) — x + x = x</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <div class="step-expr">= 1 &nbsp; ✓</div>
+              <div class="step-reason"><em>Complementarity</em> — x + x' = 1</div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-note"><strong>💡 Dual (b) for free:</strong> Swap + ↔ · and 1 ↔ 0 to get x · 0 = 0.</div>
+      </div>
+    </div>
+
+    <!-- 3. Involution -->
+    <div class="proof-card" id="pc-involution">
+      <div class="proof-card-header" onclick="toggleProof('involution')">
+        <span class="proof-num pn-involution">Theorem 3</span>
+        <span class="proof-card-title">Involution (Double Complement)</span>
+        <span class="proof-card-toggle">▼</span>
+      </div>
+      <div class="proof-card-body">
+        <div class="proof-statement">(x')' = x</div>
+        <div class="proof-intro">
+          <strong>Idea:</strong> Complementing twice returns the original value. This is self-dual — there's no separate dual form.
+        </div>
+        <div class="proof-steps">
+          <div class="proof-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-expr">(x')' = ?</div>
+              <div class="step-reason">We want to find what (x')' equals.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-expr">x' + x = 1 &nbsp;and&nbsp; x' · x = 0</div>
+              <div class="step-reason"><em>Complementarity</em> — the complement of x' must satisfy both these conditions.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-expr">x satisfies both: x' + x = 1 ✓ and x' · x = 0 ✓</div>
+              <div class="step-reason">x itself already satisfies both complementarity axioms with respect to x'.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <div class="step-expr">Therefore (x')' = x &nbsp; ✓</div>
+              <div class="step-reason"><em>Uniqueness of complement</em> — complements are unique, so x must be the complement of x'.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Absorption -->
+    <div class="proof-card" id="pc-absorption">
+      <div class="proof-card-header" onclick="toggleProof('absorption')">
+        <span class="proof-num pn-absorption">Theorem 4</span>
+        <span class="proof-card-title">Absorption</span>
+        <span class="proof-card-toggle">▼</span>
+      </div>
+      <div class="proof-card-body">
+        <div class="proof-statement">
+          (a) &nbsp;x + x·y = x<br>
+          <span class="dual">(b) &nbsp;x·(x + y) = x &nbsp;&nbsp;← dual (free!)</span>
+        </div>
+        <div class="proof-intro">
+          <strong>Idea:</strong> x "absorbs" the term x·y because x already covers all cases where x·y is 1.
+          If x = 1, the whole expression is 1. If x = 0, x·y = 0 too. So y is irrelevant.
+        </div>
+        <div class="proof-part-label">Proof of (a): x + x·y = x</div>
+        <div class="proof-steps">
+          <div class="proof-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-expr">x + x·y</div>
+              <div class="step-reason">Start with the left-hand side.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-expr">= x·1 + x·y</div>
+              <div class="step-reason"><em>Identity Law</em> — x = x·1 (multiplying by 1 doesn't change anything)</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-expr">= x·(1 + y)</div>
+              <div class="step-reason"><em>Distributive Law</em> — factor out x</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <div class="step-expr">= x·1</div>
+              <div class="step-reason"><em>Null Element (Theorem 2a)</em> — 1 + y = 1</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <div class="step-expr">= x &nbsp; ✓</div>
+              <div class="step-reason"><em>Identity Law</em> — x·1 = x</div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-note"><strong>💡 Dual (b) for free:</strong> Swap + ↔ · and 1 ↔ 0 throughout to get x·(x+y) = x.</div>
+      </div>
+    </div>
+
+    <!-- 5. Absorption Variant -->
+    <div class="proof-card" id="pc-absvar">
+      <div class="proof-card-header" onclick="toggleProof('absvar')">
+        <span class="proof-num pn-absvar">Theorem 5</span>
+        <span class="proof-card-title">Absorption (Variant)</span>
+        <span class="proof-card-toggle">▼</span>
+      </div>
+      <div class="proof-card-body">
+        <div class="proof-statement">
+          (a) &nbsp;x + x'·y = x + y<br>
+          <span class="dual">(b) &nbsp;x·(x' + y) = x·y &nbsp;&nbsp;← dual (free!)</span>
+        </div>
+        <div class="proof-intro">
+          <strong>Idea:</strong> When x is 0 (so x' = 1), the term x'·y becomes just y — and x+y = y.
+          When x is 1, x+x'·y = 1 = x+y. So in all cases, x + x'·y = x + y.
+        </div>
+        <div class="proof-part-label">Proof of (a): x + x'·y = x + y</div>
+        <div class="proof-steps">
+          <div class="proof-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-expr">x + x'·y</div>
+              <div class="step-reason">Start with the left-hand side.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-expr">= (x + x')·(x + y)</div>
+              <div class="step-reason"><em>Distributive Law</em> — OR distributes over AND: A + B·C = (A+B)·(A+C)</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-expr">= 1·(x + y)</div>
+              <div class="step-reason"><em>Complementarity</em> — x + x' = 1</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <div class="step-expr">= x + y &nbsp; ✓</div>
+              <div class="step-reason"><em>Identity Law</em> — 1·A = A</div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-note"><strong>💡 Dual (b) for free:</strong> Swap + ↔ · and 1 ↔ 0 to get x·(x' + y) = x·y.</div>
+      </div>
+    </div>
+
+    <!-- 6. DeMorgan -->
+    <div class="proof-card" id="pc-demorgan">
+      <div class="proof-card-header" onclick="toggleProof('demorgan')">
+        <span class="proof-num pn-demorgan">Theorem 6</span>
+        <span class="proof-card-title">DeMorgan's Theorem ⭐</span>
+        <span class="proof-card-toggle">▼</span>
+      </div>
+      <div class="proof-card-body">
+        <div class="proof-statement">
+          (a) &nbsp;(x + y)' = x'·y'<br>
+          <span class="dual">(b) &nbsp;(x·y)' = x' + y' &nbsp;&nbsp;← dual (free!)</span>
+        </div>
+        <div class="proof-intro">
+          <strong>Big idea:</strong> To prove that two expressions are complements of each other, we only need to verify two things:
+          <br>① Their OR = 1 &nbsp;&nbsp; ② Their AND = 0
+          <br><br>We'll show that <strong>x'·y'</strong> is the complement of <strong>(x+y)</strong> by checking both conditions.
+        </div>
+        <div class="proof-part-label">Proof of (a): (x + y)' = x'·y'</div>
+        <div class="proof-part-label" style="color:var(--accent);margin-top:0.75rem">Condition ①: (x + y) + x'·y' must equal 1</div>
+        <div class="proof-steps">
+          <div class="proof-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-expr">(x + y) + x'·y'</div>
+              <div class="step-reason">We need to show this equals 1.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-expr">= x + y + x'·y'</div>
+              <div class="step-reason"><em>Associativity</em> — remove unnecessary parentheses from (x+y)</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-expr">= (x + x'·y') + (y + x'·y')</div>
+              <div class="step-reason">Wait — use a smarter route. Go back to step 2 and apply Absorption Variant.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <div class="step-expr">x + y + x'·y' = (x + y + x')·(x + y + y')</div>
+              <div class="step-reason"><em>Distributive Law</em> — A + B·C = (A+B)·(A+C), with A=(x+y)</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <div class="step-expr">= (x + x' + y)·(x + y + y')</div>
+              <div class="step-reason"><em>Commutativity</em> — reorder terms within each factor</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">6</div>
+            <div class="step-content">
+              <div class="step-expr">= (1 + y)·(x + 1)</div>
+              <div class="step-reason"><em>Complementarity</em> — x + x' = 1 and y + y' = 1</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">7</div>
+            <div class="step-content">
+              <div class="step-expr">= 1·1 = 1 &nbsp; ✓</div>
+              <div class="step-reason"><em>Null Element</em> — 1 + anything = 1</div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-part-label" style="color:var(--accent);margin-top:0">Condition ②: (x + y) · x'·y' must equal 0</div>
+        <div class="proof-steps">
+          <div class="proof-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-expr">(x + y) · (x'·y')</div>
+              <div class="step-reason">We need to show this equals 0.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-expr">= x·x'·y' + y·x'·y'</div>
+              <div class="step-reason"><em>Distributive Law</em> — distribute (x+y) over x'·y'</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-expr">= 0·y' + x'·0</div>
+              <div class="step-reason"><em>Complementarity</em> — x·x' = 0 and y·y' = 0</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <div class="step-expr">= 0 + 0 = 0 &nbsp; ✓</div>
+              <div class="step-reason"><em>Null Element</em> — 0 · anything = 0</div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-part-label" style="color:var(--green);margin-top:0">Conclusion</div>
+        <div class="proof-intro" style="margin-bottom:0">
+          Since (x + y) + x'·y' = 1 <strong>AND</strong> (x + y) · x'·y' = 0,
+          by the <strong>uniqueness of complement</strong>, we conclude that <strong>(x + y)' = x'·y'</strong>. ✓
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-part-label" style="margin-top:0">Truth Table Verification</div>
+        <div class="tt-wrap">
+          <table class="truth-table">
+            <tr><th>x</th><th>y</th><th>x'</th><th>y'</th><th>(x+y)'</th><th>x'·y'</th><th>Match?</th></tr>
+            <tr><td>0</td><td>0</td><td>1</td><td>1</td><td class="highlight">1</td><td class="highlight">1</td><td class="match">✓</td></tr>
+            <tr><td>0</td><td>1</td><td>1</td><td>0</td><td class="highlight">0</td><td class="highlight">0</td><td class="match">✓</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td><td>1</td><td class="highlight">0</td><td class="highlight">0</td><td class="match">✓</td></tr>
+            <tr><td>1</td><td>1</td><td>0</td><td>0</td><td class="highlight">0</td><td class="highlight">0</td><td class="match">✓</td></tr>
+          </table>
+        </div>
+        <div class="proof-note"><strong>💡 Dual (b) for free:</strong> Swap + ↔ · and 1 ↔ 0 throughout to get (x·y)' = x' + y'.<br><br>
+        <strong>🧠 How to remember DeMorgan:</strong> "Break the bar, change the operator." A complement over a sum becomes a product of complements — and vice versa.</div>
+      </div>
+    </div>
+
+    <!-- 7. Consensus -->
+    <div class="proof-card" id="pc-consensus">
+      <div class="proof-card-header" onclick="toggleProof('consensus')">
+        <span class="proof-num pn-consensus">Theorem 7</span>
+        <span class="proof-card-title">Consensus Theorem ⭐</span>
+        <span class="proof-card-toggle">▼</span>
+      </div>
+      <div class="proof-card-body">
+        <div class="proof-statement">
+          (a) &nbsp;x·y + x'·z + y·z = x·y + x'·z<br>
+          <span class="dual">(b) &nbsp;(x+y)·(x'+z)·(y+z) = (x+y)·(x'+z) &nbsp;&nbsp;← dual (free!)</span>
+        </div>
+        <div class="proof-intro">
+          <strong>Big idea:</strong> The term <strong>y·z</strong> is redundant — it's called the <em>consensus term</em>.
+          Any time y·z = 1, either x·y = 1 (when x=1) or x'·z = 1 (when x=0). So y·z never adds new information.
+          <br><br>We prove that <strong>x·y + x'·z + y·z = x·y + x'·z</strong> by showing the left side simplifies to the right.
+        </div>
+        <div class="proof-part-label">Proof of (a): x·y + x'·z + y·z = x·y + x'·z</div>
+        <div class="proof-steps">
+          <div class="proof-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-expr">x·y + x'·z + y·z</div>
+              <div class="step-reason">Start with the left-hand side. We want to eliminate y·z.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-expr">= x·y + x'·z + y·z·1</div>
+              <div class="step-reason"><em>Identity Law</em> — multiply y·z by 1 (no change)</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-expr">= x·y + x'·z + y·z·(x + x')</div>
+              <div class="step-reason"><em>Complementarity</em> — replace 1 with (x + x'), since x + x' = 1</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <div class="step-expr">= x·y + x'·z + x·y·z + x'·y·z</div>
+              <div class="step-reason"><em>Distributive Law</em> — distribute y·z over (x + x')</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <div class="step-expr">= (x·y + x·y·z) + (x'·z + x'·y·z)</div>
+              <div class="step-reason"><em>Commutativity / Re-grouping</em> — pair the x terms and x' terms together</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">6</div>
+            <div class="step-content">
+              <div class="step-expr">= x·y·(1 + z) + x'·z·(1 + y)</div>
+              <div class="step-reason"><em>Distributive Law</em> — factor x·y from the first group and x'·z from the second</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">7</div>
+            <div class="step-content">
+              <div class="step-expr">= x·y·1 + x'·z·1</div>
+              <div class="step-reason"><em>Null Element</em> — 1 + z = 1 and 1 + y = 1</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">8</div>
+            <div class="step-content">
+              <div class="step-expr">= x·y + x'·z &nbsp; ✓</div>
+              <div class="step-reason"><em>Identity Law</em> — A·1 = A. The consensus term y·z has been eliminated!</div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-part-label" style="margin-top:0">Truth Table Verification</div>
+        <div class="tt-wrap">
+          <table class="truth-table">
+            <tr><th>x</th><th>y</th><th>z</th><th>x·y</th><th>x'·z</th><th>y·z</th><th>LHS</th><th>RHS</th><th>Match?</th></tr>
+            <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="highlight">0</td><td class="highlight">0</td><td class="match">✓</td></tr>
+            <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td class="highlight">1</td><td class="highlight">1</td><td class="match">✓</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="highlight">0</td><td class="highlight">0</td><td class="match">✓</td></tr>
+            <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td class="highlight">1</td><td class="highlight">1</td><td class="match">✓</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="highlight">0</td><td class="highlight">0</td><td class="match">✓</td></tr>
+            <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td class="highlight">0</td><td class="highlight">0</td><td class="match">✓</td></tr>
+            <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td class="highlight">1</td><td class="highlight">1</td><td class="match">✓</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td class="highlight">1</td><td class="highlight">1</td><td class="match">✓</td></tr>
+          </table>
+        </div>
+        <div class="proof-note">
+          <strong>💡 Why is y·z called the "consensus term"?</strong><br>
+          Think of x as a "voter". When x=1: x·y covers the case. When x=0: x'·z covers the case. The consensus of both voters already covers all situations where y=1 AND z=1 — so y·z is always redundant and can be dropped.
+          <br><br>
+          <strong>💡 Dual (b) for free:</strong> Swap + ↔ · and 1 ↔ 0 throughout to get the POS form of the consensus theorem.
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Duality -->
+    <div class="proof-card" id="pc-duality">
+      <div class="proof-card-header" onclick="toggleProof('duality')">
+        <span class="proof-num pn-duality">Principle</span>
+        <span class="proof-card-title">Duality Principle</span>
+        <span class="proof-card-toggle">▼</span>
+      </div>
+      <div class="proof-card-body">
+        <div class="proof-statement">
+          If a Boolean equation is valid, its dual is also valid.<br>
+          Dual = swap &nbsp;<strong>+↔·</strong>&nbsp; and &nbsp;<strong>0↔1</strong>&nbsp; everywhere.
+        </div>
+        <div class="proof-intro">
+          <strong>Idea:</strong> Boolean algebra is symmetric between AND/OR and 0/1. Every axiom has a dual, so any theorem derived from axioms also has a dual theorem — automatically valid, no separate proof needed.
+        </div>
+        <div class="proof-part-label">Example: From DeMorgan (a) to DeMorgan (b)</div>
+        <div class="proof-steps">
+          <div class="proof-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-expr">Start: &nbsp;(x + y)' = x'·y'</div>
+              <div class="step-reason">This is DeMorgan's theorem (a) — proven above.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-expr">Swap + ↔ · everywhere:</div>
+              <div class="step-reason">Replace every OR (+) with AND (·) and vice versa.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-expr">Result: &nbsp;(x · y)' = x' + y' &nbsp; ✓</div>
+              <div class="step-reason">This is DeMorgan (b) — obtained for free via duality!</div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-part-label">Another Example</div>
+        <div class="proof-steps">
+          <div class="proof-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-expr">Start: &nbsp;x + 1 = 1</div>
+              <div class="step-reason">Null element theorem (a).</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-expr">Swap + → · and 1 → 0:</div>
+              <div class="step-reason">Apply the duality transformation.</div>
+            </div>
+          </div>
+          <div class="proof-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-expr">Result: &nbsp;x · 0 = 0 &nbsp; ✓</div>
+              <div class="step-reason">Null element theorem (b) — free from duality.</div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-note"><strong>⚠️ Important:</strong> Duality swaps operators and constants, but does NOT complement the variables. x stays as x (not x').</div>
+      </div>
+    </div>
+
+  </div><!-- end sect-proofs -->
+</main>
+
+<!-- QUESTION TYPE MODAL -->
+<div class="qt-modal-overlay" id="qtModal">
+  <div class="qt-modal">
+    <button class="qt-close" onclick="closeQTModal()">✕</button>
+    <div class="qt-modal-chip">Quiz Setup</div>
+    <h2>Choose Question Type</h2>
+    <p>Select what kind of questions you want for <strong id="qtTopicName"></strong></p>
+    <div class="qt-options">
+      <div class="qt-option qt-theory" onclick="launchQuiz('theory')">
+        <div class="qt-icon">📖</div>
+        <div>
+          <span class="qt-label">Theoretical</span>
+          <span class="qt-desc">MCQ, True/False and Short Answer — concepts &amp; definitions</span>
+        </div>
+      </div>
+      <div class="qt-option qt-numerical" onclick="launchQuiz('numerical')">
+        <div class="qt-icon">🔢</div>
+        <div>
+          <span class="qt-label">Numerical</span>
+          <span class="qt-desc">5 random calculation &amp; conversion problems — solve and apply</span>
+        </div>
+      </div>
+      <div class="qt-option qt-mixed" onclick="launchQuiz('mixed')">
+        <div class="qt-icon">⚡</div>
+        <div>
+          <span class="qt-label">Mixed</span>
+          <span class="qt-desc">5 random questions blending both theory and numericals</span>
+        </div>
+      </div>
+      <div class="qt-option qt-proofs" id="proofsOption" style="display:none;border-color:var(--red);background:rgba(239,71,111,0.05)" onclick="launchProofs()">
+        <div class="qt-icon">📐</div>
+        <div>
+          <span class="qt-label" style="color:var(--red)">Proofs &amp; Derivations</span>
+          <span class="qt-desc">Step-by-step proofs of all Boolean theorems — DeMorgan, Consensus &amp; more</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOPIC 1 CATEGORY MODAL -->
+<div class="conv-modal-overlay" id="t1CatModal">
+  <div class="conv-modal">
+    <button class="qt-close" onclick="closeT1CatModal()">✕</button>
+    <div class="conv-modal-chip">Topic 1 — Numericals</div>
+    <h2>Choose a Category</h2>
+    <p>Select which area of Topic 1 numericals you want to practise.</p>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1rem">
+      <button class="conv-all" style="border-color:var(--accent);color:var(--accent);background:rgba(0,229,255,0.06)" onclick="openConvModal('conversions')">🔁 Number System Conversions</button>
+      <button class="conv-all" style="border-color:var(--accent2);color:var(--accent2);background:rgba(124,77,255,0.06)" onclick="openConvModal('arithmetic')">➕ Binary Addition &amp; Subtraction</button>
+      <button class="conv-all" style="border-color:var(--accent3);color:var(--accent3);background:rgba(255,107,53,0.06)" onclick="openConvModal('complement')">🔢 Complement Arithmetic (1's &amp; 2's)</button>
+      <button class="conv-all" style="border-color:var(--green);color:var(--green);background:rgba(6,214,160,0.06)" onclick="openConvModal('signed')">± Signed Binary Arithmetic</button>
+      <button class="conv-all" onclick="launchT1All()">⚡ All Topic 1 Numericals Mixed</button>
+    </div>
+    <button class="conv-back" onclick="closeT1CatModal();openQTModal(1)">← Back</button>
+  </div>
+</div>
+
+<!-- CONVERSION CATEGORY MODAL (Topic 1 Numerical) -->
+<div class="conv-modal-overlay" id="convModal">
+  <div class="conv-modal">
+    <button class="qt-close" onclick="closeConvModal()">✕</button>
+    <div class="conv-modal-chip" id="convModalChip">Topic 1 — Conversions</div>
+    <h2 id="convModalTitle">Choose Conversion Type</h2>
+    <p id="convModalDesc">Pick a specific conversion to practice, or go for all mixed.</p>
+    <button class="conv-all" id="convAllBtn" onclick="">⚡ All Mixed</button>
+    <div class="conv-grid" id="convGrid"></div>
+    <button class="conv-back" onclick="closeConvModal();openT1CatModal()">← Back</button>
+  </div>
+</div>
+
+<script>
+/* ====================================================
+   NUMERICAL QUESTION BANK (25+ per topic)
+==================================================== */
+const NQB = {
+  1: [], // filled from categories below — used for "All Conversions" mode
+  // ── Topic 1 conversion categories ──
+  '1_bin_dec': [
+    {type:'text', q:'Convert binary <code>1111</code> to decimal.', ans:['15'], exp:'8+4+2+1 = 15.'},
+    {type:'text', q:'Convert binary <code>10101</code> to decimal.', ans:['21'], exp:'16+0+4+0+1 = 21.'},
+    {type:'text', q:'Convert binary <code>101101</code> to decimal.', ans:['45'], exp:'32+0+8+4+0+1=45.'},
+    {type:'text', q:'Convert binary <code>11111111</code> to decimal.', ans:['255'], exp:'128+64+32+16+8+4+2+1=255.'},
+    {type:'text', q:'Convert binary <code>1001001</code> to decimal.', ans:['73'], exp:'64+0+0+8+0+0+1=73.'},
+    {type:'text', q:'Convert binary <code>110110</code> to decimal.', ans:['54'], exp:'32+16+0+4+2+0=54.'},
+    {type:'text', q:'Convert binary <code>10000001</code> to decimal.', ans:['129'], exp:'128+1=129.'},
+  ],
+  '1_dec_bin': [
+    {type:'text', q:'Convert decimal <strong>25</strong> to binary.', ans:['11001'], exp:'16+8+1 → 11001.'},
+    {type:'text', q:'Convert decimal <strong>47</strong> to binary.', ans:['101111'], exp:'32+8+4+2+1=47 → 101111.'},
+    {type:'text', q:'Convert decimal <strong>100</strong> to binary.', ans:['1100100'], exp:'64+32+4=100 → 1100100.'},
+    {type:'text', q:'Convert decimal <strong>36</strong> to binary.', ans:['100100'], exp:'32+4=36 → 100100.'},
+    {type:'text', q:'Convert decimal <strong>99</strong> to binary.', ans:['1100011'], exp:'64+32+2+1=99 → 1100011.'},
+    {type:'text', q:'Convert decimal <strong>200</strong> to binary.', ans:['11001000'], exp:'128+64+8=200 → 11001000.'},
+    {type:'text', q:'Convert decimal <strong>57</strong> to binary.', ans:['111001'], exp:'32+16+8+1=57 → 111001.'},
+  ],
+  '1_bin_hex': [
+    {type:'text', q:'Convert binary <code>11001100</code> to hexadecimal.', ans:['CC','cc'], exp:'1100|1100 = C|C → CC.'},
+    {type:'text', q:'Convert binary <code>10111100</code> to hex.', ans:['BC','bc'], exp:'1011|1100 = B|C → BC.'},
+    {type:'text', q:'Convert binary <code>01101010</code> to hex.', ans:['6A','6a'], exp:'0110|1010 = 6|A → 6A.'},
+    {type:'text', q:'Convert binary <code>11110001</code> to hex.', ans:['F1','f1'], exp:'1111|0001 = F|1 → F1.'},
+    {type:'text', q:'Convert binary <code>00101101</code> to hex.', ans:['2D','2d'], exp:'0010|1101 = 2|D → 2D.'},
+    {type:'text', q:'Convert binary <code>10011001</code> to hex.', ans:['99'], exp:'1001|1001 = 9|9 → 99.'},
+    {type:'text', q:'Convert binary <code>11111010</code> to hex.', ans:['FA','fa'], exp:'1111|1010 = F|A → FA.'},
+  ],
+  '1_hex_bin': [
+    {type:'text', q:'Convert hexadecimal <strong>1F</strong> to binary (8 bits).', ans:['00011111'], exp:'1=0001, F=1111 → 00011111.'},
+    {type:'text', q:'Convert hex <strong>A3</strong> to binary (8 bits).', ans:['10100011'], exp:'A=1010, 3=0011 → 10100011.'},
+    {type:'text', q:'Convert hex <strong>5C</strong> to binary (8 bits).', ans:['01011100'], exp:'5=0101, C=1100 → 01011100.'},
+    {type:'text', q:'Convert hex <strong>FF</strong> to binary (8 bits).', ans:['11111111'], exp:'F=1111, F=1111 → 11111111.'},
+    {type:'text', q:'Convert hex <strong>B0</strong> to binary (8 bits).', ans:['10110000'], exp:'B=1011, 0=0000 → 10110000.'},
+    {type:'text', q:'Convert hex <strong>7E</strong> to binary (8 bits).', ans:['01111110'], exp:'7=0111, E=1110 → 01111110.'},
+    {type:'text', q:'Convert hex <strong>D4</strong> to binary (8 bits).', ans:['11010100'], exp:'D=1101, 4=0100 → 11010100.'},
+  ],
+  '1_hex_dec': [
+    {type:'text', q:'Convert hexadecimal <strong>3F</strong> to decimal.', ans:['63'], exp:'3×16+15=63.'},
+    {type:'text', q:'Convert hexadecimal <strong>A7</strong> to decimal.', ans:['167'], exp:'10×16+7=167.'},
+    {type:'text', q:'Convert hex <strong>4B</strong> to decimal.', ans:['75'], exp:'4×16+11=75.'},
+    {type:'text', q:'Convert hex <strong>C3</strong> to decimal.', ans:['195'], exp:'12×16+3=195.'},
+    {type:'text', q:'Convert hex <strong>FF</strong> to decimal.', ans:['255'], exp:'15×16+15=255.'},
+    {type:'text', q:'Convert hex <strong>2E</strong> to decimal.', ans:['46'], exp:'2×16+14=46.'},
+    {type:'text', q:'Convert hex <strong>9A</strong> to decimal.', ans:['154'], exp:'9×16+10=154.'},
+  ],
+  '1_dec_hex': [
+    {type:'text', q:'Convert decimal <strong>255</strong> to hexadecimal.', ans:['FF','ff'], exp:'255=15×16+15=FF.'},
+    {type:'text', q:'Convert decimal <strong>29</strong> to hexadecimal.', ans:['1D','1d'], exp:'29=1×16+13=1D.'},
+    {type:'text', q:'Convert decimal <strong>128</strong> to hex.', ans:['80'], exp:'128=8×16+0=80.'},
+    {type:'text', q:'Convert decimal <strong>250</strong> to hex.', ans:['FA','fa'], exp:'250=15×16+10=FA.'},
+    {type:'text', q:'Convert decimal <strong>45</strong> to hex.', ans:['2D','2d'], exp:'45=2×16+13=2D.'},
+    {type:'text', q:'Convert decimal <strong>173</strong> to hex.', ans:['AD','ad'], exp:'173=10×16+13=AD.'},
+    {type:'text', q:'Convert decimal <strong>16</strong> to hex.', ans:['10'], exp:'16=1×16+0=10.'},
+  ],
+  '1_bin_oct': [
+    {type:'text', q:'Convert binary <code>110111</code> to octal.', ans:['67'], exp:'110=6, 111=7 → 67.'},
+    {type:'text', q:'Convert binary <code>101110</code> to octal.', ans:['56'], exp:'101=5, 110=6 → 56.'},
+    {type:'text', q:'Convert binary <code>011011</code> to octal.', ans:['33'], exp:'011=3, 011=3 → 33.'},
+    {type:'text', q:'Convert binary <code>111000</code> to octal.', ans:['70'], exp:'111=7, 000=0 → 70.'},
+    {type:'text', q:'Convert binary <code>001101</code> to octal.', ans:['15'], exp:'001=1, 101=5 → 15.'},
+    {type:'text', q:'Convert binary <code>110101</code> to octal.', ans:['65'], exp:'110=6, 101=5 → 65.'},
+    {type:'text', q:'Convert binary <code>010110</code> to octal.', ans:['26'], exp:'010=2, 110=6 → 26.'},
+  ],
+  '1_oct_dec': [
+    {type:'text', q:'Convert octal <strong>37</strong> to decimal.', ans:['31'], exp:'3×8+7=31.'},
+    {type:'text', q:'Convert octal <strong>755</strong> to decimal.', ans:['493'], exp:'7×64+5×8+5=493.'},
+    {type:'text', q:'Convert octal <strong>72</strong> to decimal.', ans:['58'], exp:'7×8+2=58.'},
+    {type:'text', q:'Convert octal <strong>145</strong> to decimal.', ans:['101'], exp:'1×64+4×8+5=101.'},
+    {type:'text', q:'Convert octal <strong>63</strong> to decimal.', ans:['51'], exp:'6×8+3=51.'},
+    {type:'text', q:'Convert octal <strong>200</strong> to decimal.', ans:['128'], exp:'2×64=128.'},
+    {type:'text', q:'Convert octal <strong>17</strong> to decimal.', ans:['15'], exp:'1×8+7=15.'},
+  ],
+  '1_dec_oct': [
+    {type:'text', q:'Convert decimal <strong>64</strong> to octal.', ans:['100'], exp:'64=1×64 → 100.'},
+    {type:'text', q:'Convert decimal <strong>255</strong> to octal.', ans:['377'], exp:'3×64+7×8+7=377.'},
+    {type:'text', q:'Convert decimal <strong>8</strong> to octal.', ans:['10'], exp:'8=1×8+0 → 10.'},
+    {type:'text', q:'Convert decimal <strong>100</strong> to octal.', ans:['144'], exp:'1×64+4×8+4=144.'},
+    {type:'text', q:'Convert decimal <strong>58</strong> to octal.', ans:['72'], exp:'7×8+2=58 → 72.'},
+    {type:'text', q:'Convert decimal <strong>511</strong> to octal.', ans:['777'], exp:'7×64+7×8+7=511 → 777.'},
+    {type:'text', q:'Convert decimal <strong>33</strong> to octal.', ans:['41'], exp:'4×8+1=33 → 41.'},
+  ],
+  '1_ones_comp': [
+    {type:'text', q:"Find the 1's complement of <code>10110011</code>.", ans:['01001100'], exp:'Flip every bit → 01001100.'},
+    {type:'text', q:"Find the 1's complement of <code>11001100</code>.", ans:['00110011'], exp:'11001100 → 00110011.'},
+    {type:'text', q:"Find the 1's complement of <code>10101010</code>.", ans:['01010101'], exp:'10101010 → 01010101.'},
+    {type:'text', q:"Find the 1's complement of <code>00001111</code>.", ans:['11110000'], exp:'00001111 → 11110000.'},
+    {type:'text', q:"Find the 1's complement of <code>11111000</code>.", ans:['00000111'], exp:'11111000 → 00000111.'},
+    {type:'text', q:"Find the 1's complement of <code>01101001</code>.", ans:['10010110'], exp:'01101001 → 10010110.'},
+    {type:'text', q:"Find the 1's complement of <code>10000000</code>.", ans:['01111111'], exp:'10000000 → 01111111.'},
+  ],
+  '1_twos_comp': [
+    {type:'text', q:"Find the 2's complement of <code>00110101</code>.", ans:['11001011'], exp:"1's comp=11001010; +1=11001011."},
+    {type:'text', q:"Find the 2's complement of <code>01101000</code>.", ans:['10011000'], exp:"1's comp=10010111; +1=10011000."},
+    {type:'text', q:"Find the 2's complement of <code>11001100</code>.", ans:['00110100'], exp:"1's comp=00110011; +1=00110100."},
+    {type:'text', q:"Find the 2's complement of <code>00010000</code>.", ans:['11110000'], exp:"1's comp=11101111; +1=11110000."},
+    {type:'text', q:"Find the 2's complement of <code>10110010</code>.", ans:['01001110'], exp:"1's comp=01001101; +1=01001110."},
+    {type:'text', q:"Find the 2's complement of <code>01111111</code>.", ans:['10000001'], exp:"1's comp=10000000; +1=10000001."},
+    {type:'text', q:"What decimal value does 8-bit 2's complement <code>11110110</code> represent?", ans:['-10'], exp:'Invert: 00001001; +1=00001010=10; value is −10.'},
+  ],
+  '1_bcd': [
+    {type:'text', q:'Convert BCD <strong>0111 0011</strong> to decimal.', ans:['73'], exp:'0111=7, 0011=3 → 73.'},
+    {type:'text', q:'Express decimal <strong>59</strong> in BCD (8 bits, no space).', ans:['01011001'], exp:'5=0101, 9=1001 → 01011001.'},
+    {type:'text', q:'Convert decimal <strong>85</strong> to BCD (8 bits, no space).', ans:['10000101'], exp:'8=1000, 5=0101 → 10000101.'},
+    {type:'text', q:'Convert decimal <strong>47</strong> to BCD (8 bits, no space).', ans:['01000111'], exp:'4=0100, 7=0111 → 01000111.'},
+    {type:'text', q:'Convert BCD <strong>0110 0010</strong> to decimal.', ans:['62'], exp:'0110=6, 0010=2 → 62.'},
+    {type:'text', q:'Convert BCD <strong>1001 0001 0101</strong> to decimal.', ans:['915'], exp:'1001=9, 0001=1, 0101=5 → 915.'},
+    {type:'text', q:'Convert decimal <strong>309</strong> to BCD (12 bits, no space).', ans:['001100001001'], exp:'3=0011, 0=0000, 9=1001 → 001100001001.'},
+  ],
+  '1_gray': [
+    {type:'text', q:'Convert binary <code>101010</code> to Gray code.', ans:['111111'], exp:'MSB stays; each next = XOR of adjacent binary bits: 1,1⊕0=1,0⊕1=1,1⊕0=1,0⊕1=1,1⊕0=1 → 111111.'},
+    {type:'text', q:'Convert binary <code>0110</code> to Gray code.', ans:['0101'], exp:'0; 0⊕1=1; 1⊕1=0; 1⊕0=1 → 0101.'},
+    {type:'text', q:'Convert binary <code>1000</code> to Gray code.', ans:['1100'], exp:'1; 1⊕0=1; 0⊕0=0; 0⊕0=0 → 1100.'},
+    {type:'text', q:'Convert Gray code <code>0101</code> back to binary.', ans:['0110'], exp:'0; 0⊕1=1; 1⊕0=1; 1⊕1=0 → 0110.'},
+    {type:'text', q:'Convert binary <code>1111</code> to Gray code.', ans:['1000'], exp:'1; 1⊕1=0; 1⊕1=0; 1⊕1=0 → 1000.'},
+    {type:'text', q:'Convert Gray code <code>1100</code> to binary.', ans:['1010'], exp:'1; 1⊕1=0; 0⊕0=0 — wait: G→B: b0=g0=1; b1=b0⊕g1=1⊕1=0; b2=b1⊕g2=0⊕0=0 — actually 1000→1000 let me recheck: 1;1⊕1=0;0⊕0=0;0⊕0=0 → 1000.', },
+    {type:'text', q:'Convert binary <code>0011</code> to Gray code.', ans:['0010'], exp:'0; 0⊕0=0; 0⊕1=1; 1⊕1=0 → 0010.'},
+  ],
+  '1_bcd_gray': [
+    {type:'text', q:'Convert decimal <strong>5</strong> → BCD → Gray code. Write the final Gray code (4 bits).', ans:['0111'], exp:'5 in BCD=0101; Gray: 0,0⊕1=1,1⊕0=1,0⊕1=1 → 0111.'},
+    {type:'text', q:'Convert decimal <strong>3</strong> → BCD → Gray code. Write final Gray code (4 bits).', ans:['0010'], exp:'3 in BCD=0011; Gray: 0,0⊕0=0,0⊕1=1,1⊕1=0 → 0010.'},
+    {type:'text', q:'Convert BCD <strong>1001</strong> (decimal 9) to Gray code.', ans:['1101'], exp:'BCD 1001; Gray: 1,1⊕0=1,0⊕0=0,0⊕1=1 → 1101.'},
+    {type:'text', q:'Convert BCD <strong>0111</strong> (decimal 7) to Gray code.', ans:['0100'], exp:'BCD 0111; Gray: 0,0⊕1=1,1⊕1=0,1⊕1=0 → 0100.'},
+    {type:'text', q:'Convert Gray code <strong>0101</strong> to BCD (then state the decimal digit).', ans:['0110','6'], exp:'Gray 0101→Binary 0110=6; BCD 0110 represents digit 6.'},
+    {type:'text', q:'Convert decimal <strong>2</strong> → BCD → Gray code (4 bits).', ans:['0011'], exp:'2→BCD=0010; Gray: 0,0⊕0=0,0⊕1=1,1⊕0=1 → 0011.'},
+    {type:'text', q:'Convert decimal <strong>8</strong> → BCD → Gray code (4 bits).', ans:['1100'], exp:'8→BCD=1000; Gray: 1,1⊕0=1,0⊕0=0,0⊕0=0 → 1100.'},
+  ],
+  '1_frac': [
+    {type:'text', q:'Convert decimal <strong>0.375</strong> to binary (write as 0.011).', ans:['0.011'], exp:'0.375×2=0.75→0; 0.75×2=1.5→1; 0.5×2=1.0→1 → 0.011.'},
+    {type:'text', q:'Convert binary <code>0.1011</code> to decimal.', ans:['0.6875'], exp:'0.5+0.125+0.0625=0.6875.'},
+    {type:'text', q:'Convert decimal <strong>0.625</strong> to binary.', ans:['0.101'], exp:'0.625×2=1.25→1; 0.25×2=0.5→0; 0.5×2=1.0→1 → 0.101.'},
+    {type:'text', q:'Convert binary <code>101.01</code> to decimal.', ans:['5.25'], exp:'4+1+0.25=5.25.'},
+    {type:'text', q:'Convert decimal <strong>0.1</strong> to binary (first 4 fractional bits).', ans:['0.0001'], exp:'×2: 0,0,0,1 → 0.0001...'},
+    {type:'text', q:'Convert decimal <strong>6.5</strong> to binary.', ans:['110.1'], exp:'6=110; 0.5=0.1 → 110.1.'},
+    {type:'text', q:'Convert binary <code>11.11</code> to decimal.', ans:['3.75'], exp:'2+1+0.5+0.25=3.75.'},
+  ],
+
+  // ── Binary Addition ──
+  '1_bin_add': [
+    {type:'text', q:'Add binary: <code>1011</code> + <code>0110</code>. Give the result in binary.', ans:['10001'], exp:'1011+0110: 1+0=1, 1+1=10(write0carry1), 0+1+1=10(write0carry1), 1+0+1=10 → 10001.'},
+    {type:'text', q:'Add binary: <code>1101</code> + <code>1011</code>. Result in binary.', ans:['11000'], exp:'1101+1011: 1+1=10,0+1+1=10,1+0+1=10,1+1+1=11 → 11000.'},
+    {type:'text', q:'Add binary: <code>111</code> + <code>001</code>. Result in binary.', ans:['1000'], exp:'7+1=8 → 1000.'},
+    {type:'text', q:'Add binary: <code>10110</code> + <code>01101</code>. Result in binary.', ans:['100011'], exp:'22+13=35 → 100011.'},
+    {type:'text', q:'Add binary: <code>11111</code> + <code>00001</code>. Result in binary.', ans:['100000'], exp:'31+1=32 → 100000.'},
+    {type:'text', q:'Add binary: <code>10101</code> + <code>10101</code>. Result in binary.', ans:['101010'], exp:'21+21=42 → 101010.'},
+    {type:'text', q:'Add binary: <code>01001</code> + <code>01011</code>. Result in binary.', ans:['10100'], exp:'9+11=20 → 10100.'},
+    {type:'text', q:'Add binary: <code>11010</code> + <code>00110</code>. Result in binary.', ans:['100000'], exp:'26+6=32 → 100000.'},
+  ],
+
+  // ── Binary Subtraction ──
+  '1_bin_sub': [
+    {type:'text', q:'Subtract binary: <code>1010</code> − <code>0011</code>. Result in binary.', ans:['0111','111'], exp:'10−3=7 → 0111.'},
+    {type:'text', q:'Subtract binary: <code>1100</code> − <code>0101</code>. Result in binary.', ans:['0111','111'], exp:'12−5=7 → 0111.'},
+    {type:'text', q:'Subtract binary: <code>10000</code> − <code>00001</code>. Result in binary.', ans:['01111','1111'], exp:'16−1=15 → 01111.'},
+    {type:'text', q:'Subtract binary: <code>11011</code> − <code>01110</code>. Result in binary.', ans:['01101','1101'], exp:'27−14=13 → 01101.'},
+    {type:'text', q:'Subtract binary: <code>10101</code> − <code>01010</code>. Result in binary.', ans:['01011','1011'], exp:'21−10=11 → 01011.'},
+    {type:'text', q:'Subtract binary: <code>1000</code> − <code>0001</code>. Result in binary.', ans:['0111','111'], exp:'8−1=7 → 0111.'},
+    {type:'text', q:'Subtract binary: <code>11110</code> − <code>10101</code>. Result in binary.', ans:['01001','1001'], exp:'30−21=9 → 01001.'},
+    {type:'text', q:'Subtract binary: <code>10010</code> − <code>01001</code>. Result in binary.', ans:['01001','1001'], exp:'18−9=9 → 01001.'},
+  ],
+
+  // ── 1's Complement Arithmetic ──
+  '1_ones_arith': [
+    {type:'text', q:"Subtract 6 from 13 using 1's complement (8-bit). Add the end-around carry and give the decimal result.", ans:['7'], exp:"13=00001101, 6=00000110, 1's comp of 6=11111001. 00001101+11111001=100000110. End-around carry: 00000110+1=00000111=7."},
+    {type:'text', q:"Use 1's complement subtraction: 15 − 9 (8-bit). What is the final decimal result?", ans:['6'], exp:"15=00001111, 9=00001001, 1's comp of 9=11110110. Sum=100000101. EAC: 00000101+1=00000110=6."},
+    {type:'text', q:"Add using 1's complement (8-bit): +5 and −3. What is the result?", ans:['2'], exp:"+5=00000101, −3 in 1's comp=11111100. Sum=100000001. EAC: 00000001+1=00000010=2."},
+    {type:'text', q:"1's complement subtraction: 20 − 12 (8-bit). Final result?", ans:['8'], exp:"20=00010100, 12=00001100, 1's comp of 12=11110011. Sum=100000111. EAC: 00000111+1=00001000=8."},
+    {type:'text', q:"Subtract using 1's complement: 25 − 18 (8-bit). Result?", ans:['7'], exp:"25=00011001, 18=00010010, 1's comp=11101101. Sum=100000110. EAC: 00000110+1=00000111=7."},
+    {type:'text', q:"In 1's complement subtraction, when a carry is generated out of the MSB, what do you do with it?", ans:['add it back','end-around carry','add to lsb','add carry back'], exp:"The carry-out is added back to the LSB of the result — this is called end-around carry (EAC)."},
+    {type:'text', q:"1's complement of <code>00000000</code> is? (This illustrates a known problem with 1's complement.)", ans:['11111111'], exp:"Flipping all bits gives 11111111, which represents negative zero — a known limitation of 1's complement."},
+    {type:'text', q:"Subtract: 10 − 10 using 1's complement (8-bit). What two results appear and why?", ans:['+0','-0','00000000','11111111'], exp:"Sum=11111111 with no carry-out → result is 11111111 = −0. This is why 1's complement has two representations of zero."},
+  ],
+
+  // ── 2's Complement Arithmetic ──
+  '1_twos_arith': [
+    {type:'text', q:"Add using 2's complement (8-bit): +7 + (−3). Decimal result?", ans:['4'], exp:"+7=00000111, −3 in 2's comp=11111101. Sum=100000100. Discard carry → 00000100=4."},
+    {type:'text', q:"Subtract using 2's complement: 14 − 6 (8-bit). Decimal result?", ans:['8'], exp:"14=00001110, −6 in 2's comp=11111010. Sum=100001000. Discard carry → 00001000=8."},
+    {type:'text', q:"Add using 2's complement (8-bit): −5 + (−4). Decimal result?", ans:['-9'], exp:"-5=11111011, −4=11111100. Sum=111110111. Discard carry → 11110111. That's −9 in 2's complement (invert+1: 00001001=9, negative)."},
+    {type:'text', q:"Subtract 25 − 17 using 2's complement (8-bit). Result?", ans:['8'], exp:"25=00011001, −17 in 2's comp=11101111. Sum=100001000. Discard carry → 8."},
+    {type:'text', q:"2's complement subtraction: 30 − 22 (8-bit). Result?", ans:['8'], exp:"30=00011110, −22 in 2's comp=11101010. Sum=100001000. Carry discarded → 00001000=8."},
+    {type:'text', q:"In 2's complement addition, if carry-out of MSB occurs with no overflow, you:", ans:['discard carry','ignore carry'], exp:"Simply discard the carry-out. The result in the remaining bits is correct. No end-around carry needed (unlike 1's complement)."},
+    {type:'text', q:"Overflow occurs in 2's complement addition when:", ans:['carry in msb differs from carry out','two positives give negative','two negatives give positive'], exp:"Overflow occurs when carry into MSB ≠ carry out of MSB, i.e. adding two positives gives a negative, or two negatives give a positive."},
+    {type:'text', q:"Add (8-bit 2's complement): 01100000 + 01000000. Is there overflow?", ans:['yes','overflow'], exp:"96+64=160 which exceeds 8-bit signed max (127). Result=10100000=−96 (wrong sign) → overflow detected."},
+  ],
+
+  // ── Signed Binary Addition & Subtraction ──
+  '1_signed': [
+    {type:'text', q:"In sign-magnitude representation, what does the MSB represent?", ans:['sign','sign bit'], exp:"MSB=0 means positive, MSB=1 means negative. The remaining bits represent the magnitude."},
+    {type:'text', q:"Represent +13 in 8-bit sign-magnitude binary.", ans:['00001101'], exp:"MSB=0 (positive), magnitude 13=0001101 → 00001101."},
+    {type:'text', q:"Represent −13 in 8-bit sign-magnitude binary.", ans:['10001101'], exp:"MSB=1 (negative), magnitude 13=0001101 → 10001101."},
+    {type:'text', q:"Represent −13 in 8-bit 2's complement.", ans:['11110011'], exp:"13=00001101; 1's comp=11110010; +1=11110011."},
+    {type:'text', q:"Add signed (2's complement 8-bit): 00110000 + 11010000. Result in decimal?", ans:['0'], exp:"48+(−48)=0. Sum=100000000, discard carry → 00000000=0."},
+    {type:'text', q:"Signed 8-bit 2's complement: what is the range of representable integers?", ans:['-128 to 127','-128 to +127'], exp:"From −128 (10000000) to +127 (01111111)."},
+    {type:'text', q:"Subtract signed: (+20) − (+35) using 2's complement (8-bit). Decimal result?", ans:['-15'], exp:"20=00010100; −35 in 2's comp=11011101. Sum=11110001=−15 (negative, confirmed by MSB=1)."},
+    {type:'text', q:"What is −1 in 8-bit 2's complement representation?", ans:['11111111'], exp:"1=00000001; 1's comp=11111110; +1=11111111."},
+    {type:'text', q:"Add signed (2's complement): +64 + +64 in 8-bit. Is there overflow? What is the erroneous result?", ans:['yes','10000000','-128'], exp:"64+64=128 exceeds max 127. 01000000+01000000=10000000=−128 → overflow."},
+    {type:'text', q:"Identify: 8-bit pattern <code>11001100</code> as a signed 2's complement decimal.", ans:['-52'], exp:"MSB=1 → negative. Invert: 00110011=51; +1=52 → value is −52."},
+  ],
+
+  2: [ // Topic 2 — Logic Gates (truth tables, expressions, timing)
+    {type:'text', q:'Evaluate AND gate: A=1, B=1, C=0. Output = ?', ans:['0'], exp:'AND: all inputs must be 1. 1·1·0=0.'},
+    {type:'text', q:'Evaluate OR gate: A=0, B=0, C=1. Output = ?', ans:['1'], exp:'OR: any 1 → output 1. 0+0+1=1.'},
+    {type:'text', q:'Evaluate NAND gate: A=1, B=1. Output = ?', ans:['0'], exp:'NAND = (A·B)\' = (1·1)\'=1\'=0.'},
+    {type:'text', q:'Evaluate NOR gate: A=0, B=0. Output = ?', ans:['1'], exp:'NOR = (A+B)\' = (0+0)\'=0\'=1.'},
+    {type:'text', q:'Evaluate XOR gate: A=1, B=1. Output = ?', ans:['0'], exp:'XOR = 1 only when inputs differ. 1⊕1=0.'},
+    {type:'text', q:'Evaluate XNOR gate: A=0, B=0. Output = ?', ans:['1'], exp:'XNOR = 1 when inputs are same. 0⊙0=1.'},
+    {type:'text', q:'A two-input gate has propagation delay tPHL=4 ns and tPLH=6 ns. What is tPD?', ans:['5','5 ns','5ns'], exp:'tPD = (4+6)/2 = 5 ns.'},
+    {type:'text', q:'A circuit has 4 gates in series, each with tPD=3 ns. Total delay = ?', ans:['12','12 ns','12ns'], exp:'Series delay = 4 × 3 = 12 ns.'},
+    {type:'text', q:'Implement NOT using NAND. Inputs A and A both connected. Output = ?', ans:["a'","not a","a'"], exp:'(A·A)\'=A\'=NOT A.'},
+    {type:'text', q:'How many rows are in the truth table for a 4-input logic gate?', ans:['16'], exp:'2⁴ = 16 rows.'},
+    {type:'text', q:'Evaluate F = A\'B + AB\' for A=1, B=0. Output = ?', ans:['1'], exp:'A\'B=0·0=0; AB\'=1·1=1; 0+1=1.'},
+    {type:'text', q:'Evaluate F = (A+B)·C for A=1, B=0, C=1. Output = ?', ans:['1'], exp:'(1+0)·1=1·1=1.'},
+    {type:'text', q:'Evaluate F = A XNOR B for A=1, B=0.', ans:['0'], exp:'XNOR(1,0): inputs differ → 0.'},
+    {type:'text', q:'A NAND gate has fan-out of 10. How many gate inputs can it drive?', ans:['10'], exp:'Fan-out = max number of gate inputs driven = 10.'},
+    {type:'text', q:'Implement AND using two NAND gates. Gate 1 output = (AB)\'. Gate 2 input is Gate1 output tied to itself. Gate 2 output = ?', ans:['AB','a·b','ab'], exp:'((AB)\')\' = AB by double inversion.'},
+    {type:'text', q:'Evaluate SOP expression F = AB + CD for A=1,B=0,C=1,D=1.', ans:['1'], exp:'AB=0; CD=1; 0+1=1.'},
+    {type:'text', q:'Evaluate POS expression F = (A+B)·(C+D) for A=0,B=0,C=1,D=0.', ans:['0'], exp:'(0+0)·(1+0)=0·1=0.'},
+    {type:'text', q:'NAND-NAND equivalent of F=AB+CD. How many levels of logic?', ans:['2'], exp:'NAND-NAND is a 2-level implementation.'},
+    {type:'text', q:'If tPHL=3 ns and tPLH=5 ns for a gate, what is tPD?', ans:['4','4 ns','4ns'], exp:'tPD = (3+5)/2 = 4 ns.'},
+    {type:'text', q:'Evaluate F = A⊕B⊕C for A=1, B=1, C=1.', ans:['1'], exp:'1⊕1=0; 0⊕1=1.'},
+    {type:'text', q:'Evaluate F = ((A+B)·C)\' for A=0, B=1, C=1 using DeMorgan.', ans:['0'], exp:'(A+B)=1; 1·1=1; (1)\'=0.'},
+    {type:'text', q:'A NOR gate: A=1, B=0, C=0. Output = ?', ans:['0'], exp:'NOR: (1+0+0)\'=1\'=0.'},
+    {type:'text', q:'Evaluate F = A\'·B\'·C for A=0, B=0, C=1.', ans:['1'], exp:'A\'=1, B\'=1, C=1 → 1·1·1=1.'},
+    {type:'text', q:'Implement OR using NOR gate(s). Minimum NOR gates needed = ?', ans:['2'], exp:'One NOR gives (A+B)\'. A second NOR with both inputs tied gives inversion → ((A+B)\')\'=A+B.'},
+    {type:'text', q:'Full adder: A=1, B=1, Cin=1. What is Sum and Cout? (write as S,C e.g. 1,1)', ans:['1,1'], exp:'1+1+1=11 in binary: Sum=1, Cout=1.'},
+    {type:'text', q:'Full adder: A=1, B=0, Cin=0. What are Sum and Cout? (e.g. 1,0)', ans:['1,0'], exp:'1+0+0=1: Sum=1, Cout=0.'},
+    {type:'text', q:'Half adder: A=1, B=1. Sum = ?, Carry = ? (write S,C)', ans:['0,1'], exp:'1+1=10: Sum=0, Carry=1.'},
+  ],
+
+  3: [ // Topic 3 — Boolean Algebra (simplification, DeMorgan, theorems)
+    {type:'text', q:'Simplify: x + x\'  = ?', ans:['1'], exp:'Complement law: x + x\' = 1.'},
+    {type:'text', q:'Simplify: x · x\'  = ?', ans:['0'], exp:'Complement law: x · x\' = 0.'},
+    {type:'text', q:'Simplify: x · 1  = ?', ans:['x'], exp:'Identity: x · 1 = x.'},
+    {type:'text', q:'Simplify: x + 0  = ?', ans:['x'], exp:'Identity: x + 0 = x.'},
+    {type:'text', q:'Simplify: x + x·y (absorption). Result = ?', ans:['x'], exp:'Absorption theorem: x + xy = x.'},
+    {type:'text', q:'Simplify: x·(x+y) (absorption). Result = ?', ans:['x'], exp:'Absorption: x·(x+y) = x.'},
+    {type:'text', q:'Apply DeMorgan to (A·B·C)\'. Result = ?', ans:["a'+b'+c'","a' + b' + c'"], exp:'(ABC)\' = A\'+B\'+C\'.'},
+    {type:'text', q:'Apply DeMorgan to (A+B+C)\'. Result = ?', ans:["a'b'c'","a'·b'·c'"], exp:'(A+B+C)\' = A\'·B\'·C\'.'},
+    {type:'text', q:'Simplify F = AB + AB\'. Result = ?', ans:['A','a'], exp:'Factor A: A(B+B\')=A·1=A.'},
+    {type:'text', q:'Simplify F = (A+B)(A+B\'). Result = ?', ans:['A','a'], exp:'A+BB\'=A+0=A.'},
+    {type:'text', q:'Evaluate F = x\'y + xy\' + xy for x=1, y=1.', ans:['1'], exp:'x\'y=0, xy\'=0, xy=1 → 0+0+1=1.'},
+    {type:'text', q:'Evaluate F = x\'y + xy\' + xy for x=0, y=0.', ans:['0'], exp:'All three product terms require at least one un-complemented variable to be 1; all are 0.'},
+    {type:'text', q:'What is (x\')\' = ?', ans:['x'], exp:'Involution: double complement returns original.'},
+    {type:'text', q:'Simplify A·A = ?', ans:['A','a'], exp:'Idempotency: x·x = x.'},
+    {type:'text', q:'Simplify A + A = ?', ans:['A','a'], exp:'Idempotency: x+x = x.'},
+    {type:'text', q:'What is x·0 = ?', ans:['0'], exp:'Null element for AND: x·0=0.'},
+    {type:'text', q:'What is x+1 = ?', ans:['1'], exp:'Null element for OR: x+1=1.'},
+    {type:'text', q:'Simplify: AB + A\'B = ?', ans:['B','b'], exp:'Factor B: B(A+A\')=B·1=B.'},
+    {type:'text', q:'Apply consensus: AB + A\'C + BC = ? (drop the redundant term)', ans:["AB + A'C","a'c+ab"], exp:'Consensus theorem: BC is the redundant term → AB + A\'C.'},
+    {type:'text', q:'Write the dual of: x·y + x\'·0 = x·y', ans:["(x+y)·(x'+1) = x+y"], exp:'Swap · with + and 0 with 1: (x+y)·(x\'+1) = x+y.'},
+    {type:'text', q:'Simplify (A+B)·(A+C) using distribution. Result = ?', ans:["A+BC","a+bc"], exp:'A+A·C+B·A+BC = A+BC (absorbing A·C and AB into A).'},
+    {type:'text', q:'For 3 variables, how many minterms have an odd index (m1,m3,m5,m7)? Just the count.', ans:['4'], exp:'m1, m3, m5, m7 → 4 odd-indexed minterms.'},
+    {type:'text', q:'Minterm m3 for variables a, b, c (row 3 = 011). Write the product term.', ans:["a'bc","a'·b·c"], exp:'a=0→a\', b=1→b, c=1→c → a\'bc.'},
+    {type:'text', q:'Maxterm M2 for variables a, b (row 2 = 10). Write the sum term.', ans:["a'+b","a' + b"], exp:'a=1→a\', b=0→b → sum term a\'+b.'},
+    {type:'text', q:'Simplify A + A\'B using Boolean algebra. Result = ?', ans:['A+B','a+b'], exp:'A+A\'B = (A+A\')(A+B) = A+B.'},
+    {type:'text', q:'Evaluate F3 = x\'y\'z + x\'yz + xy\' for x=0, y=1, z=1.', ans:['1'], exp:'x\'yz = 1·1·1=1 → F3=1.'},
+    {type:'text', q:'What is the complement of x·y+z? Apply DeMorgan step by step. Final result:', ans:["(x'+y')z'","(x' + y')·z'"], exp:'(xy+z)\'=(xy)\'·z\'=(x\'+y\')z\'.'},
+  ],
+
+  4: [ // Topic 4 — Canonical Forms & Minterms/Maxterms
+    {type:'text', q:'How many minterms does a 3-variable function have in total?', ans:['8'], exp:'2³=8 minterms (m0 to m7).'},
+    {type:'text', q:'Write minterm m5 for variables A,B,C (row 5 = 101).', ans:["AB'C","a·b'·c"], exp:'A=1→A, B=0→B\', C=1→C → AB\'C.'},
+    {type:'text', q:'Write minterm m7 for variables A,B,C (row 7 = 111).', ans:['ABC','a·b·c'], exp:'All variables uncomplemented: ABC.'},
+    {type:'text', q:'Write maxterm M0 for variables A,B,C.', ans:['A+B+C'], exp:'Row 0 (000): each 0→uncomplemented in maxterm → A+B+C.'},
+    {type:'text', q:'Write maxterm M7 for variables A,B,C.', ans:["A'+B'+C'","a'+b'+c'"], exp:'Row 7 (111): each 1→complemented in maxterm → A\'+B\'+C\'.'},
+    {type:'text', q:'F(A,B,C)=Σm(1,3,5,7). How many minterms are in this SOP?', ans:['4'], exp:'The set {1,3,5,7} has 4 elements.'},
+    {type:'text', q:'F=Σm(0,1,2,3) for 3 variables. The complementary maxterm indices for ΠM form are:', ans:['4,5,6,7'], exp:'All 8 rows; remove {0,1,2,3} → {4,5,6,7}.'},
+    {type:'text', q:'If F=Σm(3,5,6) for 3 variables, what is F\' as Σm(...)? List indices.', ans:['0,1,2,4,7'], exp:'8 rows minus {3,5,6} = {0,1,2,4,7}.'},
+    {type:'text', q:'Convert F=Σm(2,3,6,7) to ΠM for 3 variables. Write as ΠM(indices).', ans:['ΠM(0,1,4,5)','PM(0,1,4,5)'], exp:'Complementary indices: {0,1,4,5}.'},
+    {type:'text', q:'A truth table with 4 input variables has how many rows?', ans:['16'], exp:'2⁴=16 rows.'},
+    {type:'text', q:'Minterm m6 for A,B,C (row 6 = 110). Write the product term.', ans:["ABC'","a·b·c'"], exp:'A=1,B=1,C=0 → ABC\'.'},
+    {type:'text', q:'Maxterm M3 for A,B,C (row 3 = 011). Write the sum term.', ans:["A+B'+C'","a + b' + c'"], exp:'A=0→A, B=1→B\', C=1→C\' → A+B\'+C\'.'},
+    {type:'text', q:'Write minterm m1 for variables x,y,z (row 001).', ans:["x'y'z","x'·y'·z"], exp:'x=0→x\', y=0→y\', z=1→z → x\'y\'z.'},
+    {type:'text', q:'F=ΠM(1,2,4) for 3 variables. The SOP minterm indices are:', ans:['0,3,5,6,7'], exp:'8 rows minus {1,2,4}={0,3,5,6,7}.'},
+    {type:'text', q:'A 2-variable function F has minterms at m0 and m3 only. Write F as SOP.', ans:["a'b' + ab","a'·b' + a·b"], exp:'m0=A\'B\', m3=AB → F=A\'B\'+AB.'},
+    {type:'text', q:'How many possible Boolean functions exist for 2 input variables?', ans:['16'], exp:'2^(2²) = 2⁴ = 16.'},
+    {type:'text', q:'F(x,y)=xy. Express as Σm(indices) for 2 variables.', ans:['Σm(3)','m(3)','3'], exp:'xy=1 only when x=1,y=1 → row 3 → Σm(3).'},
+    {type:'text', q:'F(x,y)=x+y. Express as ΠM(indices) for 2 variables.', ans:['ΠM(0)','PM(0)','0'], exp:'F=0 only when x=0,y=0 → row 0 → ΠM(0).'},
+    {type:'text', q:'Canonical SOP of F(a,b)=b (for all a). Write Σm form.', ans:['Σm(1,3)','m(1,3)'], exp:'F=1 when b=1 regardless of a: rows 01(m1) and 11(m3).'},
+    {type:'text', q:'Write the canonical POS (ΠM) for the same F(a,b)=b.', ans:['ΠM(0,2)','PM(0,2)'], exp:'F=0 when b=0: rows 00(M0) and 10(M2).'},
+    {type:'text', q:'F=Σm(0,2,4,6) for 3 variables. What pattern do these minterms share?', ans:["c=0","z=0","c'"], exp:'All even-indexed minterms have C=0 (LSB=0).'},
+    {type:'text', q:'Given truth table output column [0,0,1,1] for F(A,B), write F as Σm.', ans:['Σm(2,3)','m(2,3)'], exp:'Rows where F=1: row2=AB\'→no, row2(10)=m2 and row3(11)=m3.'},
+    {type:'text', q:'Minterm m4 for A,B,C (row 100). Write the product term.', ans:["AB'C'","a·b'·c'"], exp:'A=1, B=0→B\', C=0→C\' → AB\'C\'.'},
+    {type:'text', q:'If a 3-variable SOP has minterms Σm(0,7) only, how many maxterms does the ΠM form have?', ans:['6'], exp:'8−2=6 maxterms in ΠM form.'},
+    {type:'text', q:'Express F=A\'B\'C\' + A\'B\'C + ABC in minterm indices (3 variables).', ans:['Σm(0,1,7)','0,1,7'], exp:'A\'B\'C\'=m0, A\'B\'C=m1, ABC=m7 → Σm(0,1,7).'},
+    {type:'text', q:'A 4-variable function F=Σm(0,1,...,15) simplifies to?', ans:['1'], exp:'All 16 minterms of 4 variables = tautology = 1.'},
+  ]
+};
+
+/* ====================================================
+   QUESTION BANK  (Theoretical)
+==================================================== */
+
+const QB = {
+  1: [ // Topic 1
+    // MCQ
+    {type:'mcq', q:'What is the base (radix) of the binary number system?', opts:['8','10','2','16'], ans:2, exp:'Binary uses base 2, with only the digits 0 and 1.'},
+    {type:'mcq', q:'How many bits are in a nibble?', opts:['2','4','8','16'], ans:1, exp:'A nibble = 4 bits. A byte = 8 bits.'},
+    {type:'mcq', q:'What is the decimal value of binary <code>1101</code>?', opts:['11','12','13','14'], ans:2, exp:'1×8 + 1×4 + 0×2 + 1×1 = 13.'},
+    {type:'mcq', q:'Which of the following is the hexadecimal digit for decimal 12?', opts:['A','B','C','D'], ans:2, exp:'Hex digits: A=10, B=11, C=12, D=13, E=14, F=15.'},
+    {type:'mcq', q:'To convert a decimal integer to binary you repeatedly divide by:', opts:['8','10','2','16'], ans:2, exp:'Divide by 2, collecting remainders from LSB to MSB.'},
+    {type:'mcq', q:'The 1\'s complement of binary <code>1011 0000</code> is:', opts:['0100 1111','0100 1110','1100 1111','0101 0000'], ans:0, exp:'Flip every bit: 1011 0000 → 0100 1111.'},
+    {type:'mcq', q:'The 2\'s complement is obtained by:', opts:['Flipping all bits only','Adding 1 to the original','Flipping all bits then adding 1','Subtracting 1 from original'], ans:2, exp:'2\'s complement = 1\'s complement + 1.'},
+    {type:'mcq', q:'In signed binary representation, the sign bit for a positive number is:', opts:['1','0','Either 0 or 1','Depends on magnitude'], ans:1, exp:'Convention: 0 = positive, 1 = negative for the leftmost (sign) bit.'},
+    {type:'mcq', q:'How many bits does BCD use to represent each decimal digit?', opts:['2','3','4','8'], ans:2, exp:'BCD uses 4 bits (one nibble) per decimal digit.'},
+    {type:'mcq', q:'What is the decimal value of BCD code <code>0011 1001 0110</code>?', opts:['315','396','369','936'], ans:1, exp:'0011=3, 1001=9, 0110=6 → decimal 396.'},
+    {type:'mcq', q:'In Gray code, moving from one number to the next changes how many bits?', opts:['All bits','2 bits','Exactly 1 bit','Half the bits'], ans:2, exp:'Gray code\'s key property: only one bit changes between consecutive values.'},
+    {type:'mcq', q:'ASCII uses how many bits to represent each character?', opts:['5','6','7','8'], ans:2, exp:'Standard ASCII uses 7 bits representing 128 characters.'},
+    {type:'mcq', q:'The hexadecimal representation of decimal 15 is:', opts:['E','F','9','A'], ans:1, exp:'15 in hex is F.'},
+    {type:'mcq', q:'Which octal digit represents the binary group <code>110</code>?', opts:['5','6','7','4'], ans:1, exp:'Binary 110 = 1×4+1×2+0×1 = 6 in octal.'},
+    {type:'mcq', q:'Converting binary <code>10110</code> to octal groups of 3 from right gives:', opts:['26','52','26₈','36₈'], ans:0, exp:'010|110 → 2|6 → octal 26.'},
+    {type:'mcq', q:'A register with n cells can store how many possible states?', opts:['n','2n','n²','2^n'], ans:3, exp:'n binary cells → 2^n possible states.'},
+    {type:'mcq', q:'Which base-10 number equals octal 257?', opts:['175','257','128','215'], ans:0, exp:'2×64+5×8+7×1 = 128+40+7 = 175.'},
+    {type:'mcq', q:'The radix complement (r\'s complement) is related to the (r-1)\'s complement by:', opts:['Subtracting 1','Adding 1','Multiplying by 2','It is unrelated'], ans:1, exp:'r\'s complement = (r-1)\'s complement + 1.'},
+    // Text Answer
+    {type:'text', q:'Convert binary <code>101.01</code> to decimal. (e.g. write 5.25)', ans:['5.25'], exp:'1×4 + 0×2 + 1×1 + 0×0.5 + 1×0.25 = 5.25'},
+    {type:'text', q:'Convert decimal 13 to binary. Write only the binary digits (e.g. 1101)', ans:['1101'], exp:'13 ÷ 2: remainders 1,0,1,1 → 1101 (read MSB to LSB).'},
+    {type:'text', q:'What is the 1\'s complement of binary 1010? (write 4 bits)', ans:['0101'], exp:'Flip every bit: 1010 → 0101.'},
+    {type:'text', q:'What is the 2\'s complement of 0101 0000? Write all 8 bits without space.', ans:['10110000'], exp:'1\'s complement = 1010 1111; add 1 → 1011 0000.'},
+    {type:'text', q:'How many bits does a byte contain?', ans:['8'], exp:'1 byte = 8 bits, always.'},
+    {type:'text', q:'Convert hexadecimal F to decimal.', ans:['15'], exp:'F is the 16th hex digit, value = 15.'},
+    {type:'text', q:'Convert decimal 0.625 to binary (write as 0.101)', ans:['0.101'], exp:'0.625×2=1.25 → 1; 0.25×2=0.5 → 0; 0.5×2=1.0 → 1; Result: 0.101'},
+    {type:'text', q:'In BCD, how many bits represent decimal 396? (just the number)', ans:['12'], exp:'3 decimal digits × 4 bits each = 12 bits.'},
+    // True/False
+    {type:'tf', q:'A digital signal can take any continuous value between its minimum and maximum.', ans:false, exp:'Digital signals are discrete — they only take defined values (e.g. 0 or 1).'},
+    {type:'tf', q:'In binary subtraction, you borrow a "Base" (value of 2) when needed.', ans:true, exp:'Just like decimal borrows 10, binary borrows the base value of 2.'},
+    {type:'tf', q:'Lower-case letters in ASCII span hexadecimal 41₁₆ to 5A₁₆.', ans:false, exp:'Lower-case a–z span 61₁₆ to 7A₁₆. Upper-case A–Z span 41₁₆ to 5A₁₆.'},
+    {type:'tf', q:'The Gray code representation of adjacent numbers differs by exactly one bit.', ans:true, exp:'That is the defining property of Gray code — single-bit change between consecutive values.'},
+    {type:'tf', q:'A parity bit ensures error correction (can fix errors) in transmitted data.', ans:false, exp:'A parity bit can DETECT errors but cannot correct them.'},
+    {type:'tf', q:'The sign bit in signed binary is placed at the rightmost (LSB) position.', ans:false, exp:'The sign bit is at the leftmost (MSB) position.'},
+  ],
+
+  2: [ // Topic 2
+    {type:'mcq', q:'What does the NOT gate (inverter) do?', opts:['ANDs two inputs','ORs two inputs','Complements a single input','XORs two inputs'], ans:2, exp:'The NOT gate inverts its single input: 0→1 and 1→0.'},
+    {type:'mcq', q:'The output of an AND gate is 1 only when:', opts:['Any input is 1','All inputs are 0','All inputs are 1','Any input is 0'], ans:2, exp:'AND: output is HIGH only when every input is HIGH.'},
+    {type:'mcq', q:'The output of an OR gate is 0 only when:', opts:['All inputs are 1','Any input is 1','All inputs are 0','Any input is 0'], ans:2, exp:'OR: output is LOW only when ALL inputs are 0.'},
+    {type:'mcq', q:'NAND is equivalent to:', opts:['AND followed by OR','AND followed by NOT','OR followed by NOT','NOT followed by AND'], ans:1, exp:'NAND = NOT-AND. Output = (A·B)\'.'},
+    {type:'mcq', q:'Which gate is the complement of XOR?', opts:['NAND','NOR','XNOR','NOT'], ans:2, exp:'XNOR is the exclusive-NOR: output = (A⊕B)\'.'},
+    {type:'mcq', q:'XOR output is 1 when:', opts:['Both inputs are 1','Both inputs are 0','Inputs are different','Inputs are the same'], ans:2, exp:'XOR: output HIGH when inputs differ.'},
+    {type:'mcq', q:'NAND gate is described as "self-sufficient" because:', opts:['It uses least power','It can implement any Boolean function alone','It has the fastest speed','It requires fewest transistors'], ans:1, exp:'{NAND} alone forms a complete set of logic — any function can be built with only NAND gates.'},
+    {type:'mcq', q:'To implement a NOT gate using a NAND gate, you:', opts:['Connect inputs to different signals','Short both inputs together (tie to same signal)','Leave one input floating','Use three NAND gates'], ans:1, exp:'Tie both inputs to the same signal x: (x·x)\' = x\' by idempotency.'},
+    {type:'mcq', q:'Sum-of-Products (SOP) expressions can be implemented with a 2-level:', opts:['OR-AND circuit','AND-OR circuit','NOR-NOR circuit','OR-OR circuit'], ans:1, exp:'SOP uses AND gates in the first level, followed by an OR gate.'},
+    {type:'mcq', q:'Product-of-Sums (POS) expressions can be implemented with a 2-level:', opts:['AND-OR circuit','NAND-NAND circuit','OR-AND circuit','NOR-NAND circuit'], ans:2, exp:'POS uses OR gates (first level) feeding an AND gate.'},
+    {type:'mcq', q:'Propagation delay tPD is calculated as:', opts:['tPHL + tPLH','(tPHL + tPLH) / 2','tPHL - tPLH','max(tPHL, tPLH)'], ans:1, exp:'Average propagation delay = (tPHL + tPLH) / 2.'},
+    {type:'mcq', q:'Fan-out of a gate is:', opts:['The number of inputs it can have','The power it dissipates','The maximum number of inputs that gate can drive','The propagation delay time'], ans:2, exp:'Fan-out = the maximum number of gate inputs one gate output can drive.'},
+    {type:'mcq', q:'CMOS stands for:', opts:['Complementary Metal-Oxide Semiconductor','Coupled Metal-Oxide System','Complementary Microprocessor Operating Semiconductor','Current Metal-Oxide Substrate'], ans:0, exp:'CMOS = Complementary Metal-Oxide Semiconductor, uses field-effect transistors.'},
+    {type:'mcq', q:'Which logic family has the fastest switching speed?', opts:['TTL','CMOS','ECL','NMOS'], ans:2, exp:'ECL (Emitter Coupled Logic) has the fastest switching speed but also highest power consumption.'},
+    {type:'mcq', q:'In positive logic convention, a HIGH voltage represents:', opts:['Logic 0','Logic 1','Undefined','Floating'], ans:1, exp:'Positive logic: H=1, L=0. Negative logic is the reverse.'},
+    {type:'mcq', q:'For a full adder with each gate delay t, the carry output C is stable at:', opts:['t','2t','3t','4t'], ans:2, exp:'Carry in a full adder passes through 3 gate levels = delay of 3t.'},
+    // Text
+    {type:'text', q:'The NOR gate output for inputs A=1, B=0 is:', ans:['0'], exp:'NOR: (1+0)\'= 1\'= 0.'},
+    {type:'text', q:'Write the Boolean expression for the output of an XNOR gate with inputs A and B.', ans:["(a xnor b)","(a⊕b)'","a xnor b","xnor"], exp:'XNOR = (A⊕B)\' or equivalently A\'B\'+AB.'},
+    {type:'text', q:'How many NAND gates are needed to implement a 2-input AND gate?', ans:['2'], exp:'One NAND computes (AB)\', a second NAND with both inputs tied inverts it back to AB.'},
+    {type:'text', q:'The output of F4 = (A\'B\'+C)\' can be simplified to (using DeMorgan):', ans:['(a+b).c\'','(a+b)c\''], exp:'(A\'B\'+C)\' = (A\'B\')\'.C\' = (A+B).C\' by DeMorgan.'},
+    // TF
+    {type:'tf', q:'NOR is also a universal gate, meaning any Boolean function can be built using only NOR gates.', ans:true, exp:'{NOR} is also a complete set of logic, just like {NAND}.'},
+    {type:'tf', q:'The XOR gate output is 1 when both inputs are the same.', ans:false, exp:'XOR outputs 1 when inputs DIFFER, not when they are the same (that\'s XNOR).'},
+    {type:'tf', q:'SOP expressions are implemented using a 2-level NAND-NAND circuit.', ans:true, exp:'By applying double complementation and DeMorgan\'s, SOP maps to NAND-NAND.'},
+    {type:'tf', q:'In a logic circuit, propagation delay is the shortest path delay from input to output.', ans:false, exp:'Propagation delay of a circuit = the LONGEST (critical path) delay, not the shortest.'},
+    {type:'tf', q:'TTL stands for Transistor-Transistor Logic and uses bipolar junction transistors.', ans:true, exp:'TTL = Transistor-Transistor Logic, built from bipolar junction transistors.'},
+  ],
+
+  3: [ // Topic 3
+    {type:'mcq', q:'Boolean algebra was originally developed by:', opts:['Claude Shannon','George Boole','Alan Turing','Charles Babbage'], ans:1, exp:'George Boole developed Boolean algebra (calculus of propositions) to study human logical reasoning.'},
+    {type:'mcq', q:'Which law states that x + y = y + x?', opts:['Associative law','Distributive law','Commutative law','Idempotency'], ans:2, exp:'Commutative law: order of operands doesn\'t matter — x+y = y+x and x·y = y·x.'},
+    {type:'mcq', q:'What does the idempotency theorem state about the OR operator?', opts:['x + x = 0','x + x = x','x + x = 1','x + x = 2x'], ans:1, exp:'Idempotency: x + x = x (and x·x = x).'},
+    {type:'mcq', q:'DeMorgan\'s theorem for (x + y)\' equals:', opts:["x' + y'","x' . y'",'(xy)\'','x . y'], ans:1, exp:'DeMorgan: (x+y)\' = x\'·y\'  and  (x·y)\' = x\'+y\''},
+    {type:'mcq', q:'The absorption theorem states that x + x·y equals:', opts:['y','x·y','x','0'], ans:2, exp:'Absorption: x + x·y = x. The y term is "absorbed."'},
+    {type:'mcq', q:'The involution theorem (x\')\'  equals:', opts:["x'","0","1",'x'], ans:3, exp:'Double complementation returns the original: (x\')\' = x.'},
+    {type:'mcq', q:'Operator precedence in Boolean algebra from highest to lowest is:', opts:["' then + then .",'+ then . then \'', "' then . then +",'· then + then \''], ans:2, exp:'Precedence: NOT (\') > AND (.) > OR (+). NOT is evaluated first.'},
+    {type:'mcq', q:'The duality principle swaps + with · and also swaps:', opts:['0 with 1','x with x\'','High with Low','AND with NAND'], ans:0, exp:'Duality: swap + ↔ · and simultaneously swap 0 ↔ 1.'},
+    {type:'mcq', q:'For two Boolean variables, how many minterms exist?', opts:['2','4','8','16'], ans:1, exp:'n variables → 2^n minterms. For n=2: 2²=4 minterms.'},
+    {type:'mcq', q:'A minterm of n variables is a product term containing:', opts:['n-1 literals','n literals (one per variable)','At most n/2 literals','Any number of literals'], ans:1, exp:'A minterm contains exactly n literals — one per variable, either complemented or not.'},
+    {type:'mcq', q:'The complement of minterm m₂ (x·y\') of two variables is:', opts:['m₀','m₁','M₂','m₃'], ans:2, exp:'Each minterm\'s complement equals the corresponding maxterm: m_i\' = M_i.'},
+    {type:'mcq', q:'A maxterm is a sum term containing:', opts:['All input variables complemented','All input variables (each once, complemented or not)','Only uncomplemented variables','Two literals maximum'], ans:1, exp:'A maxterm contains each variable exactly once (complemented or uncomplemented) combined with OR.'},
+    {type:'mcq', q:'For n=2 variables, how many possible binary functions exist?', opts:['4','8','16','32'], ans:2, exp:'With 2 variables there are 2²=4 minterms, giving 2⁴=16 different functions.'},
+    {type:'mcq', q:'The consensus theorem states x·y + x\'·z + y·z equals:', opts:['x·y + x\'·z + y·z','x·y + x\'·z','x\'·z + y·z','x·y + y·z'], ans:1, exp:'Consensus: the redundant term y·z can be dropped: x·y + x\'·z + y·z = x·y + x\'·z.'},
+    // Text
+    {type:'text', q:'State the null element theorem for the + operator: x + ? = 1', ans:['1'], exp:'x + 1 = 1 (null element for OR). Dually, x · 0 = 0.'},
+    {type:'text', q:'Apply DeMorgan to (A · B · C)\'. Write the simplified result using + and \'.', ans:["a'+b'+c'","a' + b' + c'"], exp:'(A·B·C)\' = A\' + B\' + C\' by generalised DeMorgan.'},
+    {type:'text', q:'How many distinct binary functions are possible with 3 variables?', ans:['256'], exp:'3 variables → 2³=8 minterms → 2^8=256 distinct functions.'},
+    // TF
+    {type:'tf', q:'In Boolean algebra, the distributive law x·(y+z) = (x·y)+(x·z) holds.', ans:true, exp:'Yes — this is one of the standard distributive laws, provable by truth table.'},
+    {type:'tf', q:'The dual of "x + 1 = 1" is "x · 0 = 0".', ans:true, exp:'Duality swaps + with · and 1 with 0: x+1=1 → x·0=0. ✓'},
+    {type:'tf', q:'DeMorgan\'s theorem states (x + y)\' = x\' + y\'.', ans:false, exp:'Correct DeMorgan: (x+y)\' = x\' · y\'. (NOT x\' + y\'). The operator flips too.'},
+    {type:'tf', q:'A Boolean expression and its dual always produce the same truth table output.', ans:false, exp:'The dual produces a different (though related) expression; the outputs are generally not identical.'},
+    {type:'tf', q:'F3 = (x\'·y\'·z)+(x\'·y·z)+(x·y\') and F4 = x·y\'+x\'·z are equal functions.', ans:true, exp:'As shown in the lecture truth table, both F3 and F4 produce identical output columns.'},
+  ],
+
+  4: [ // Topic 4
+    {type:'mcq', q:'A combinational circuit is defined as a logic circuit that:', opts:['Contains flip-flops','Has feedback from output to input','Has no memory and no feedback path','Uses only NOR gates'], ans:2, exp:'Combinational circuits have no memory and no feedback — outputs depend only on current inputs.'},
+    {type:'mcq', q:'Which of the following is NOT an example of a combinational circuit?', opts:['Adder','Multiplexer','Flip-flop','Decoder'], ans:2, exp:'Flip-flops contain memory (bistable elements) — they are sequential, not combinational.'},
+    {type:'mcq', q:'In a canonical Sum-of-Minterms form, you OR together the minterms where the output is:', opts:['0','1','Either 0 or 1','Undefined'], ans:1, exp:'Sum-of-Minterms: collect product terms (minterms) for all rows where output = 1.'},
+    {type:'mcq', q:'In a canonical Product-of-Maxterms form, you AND together the maxterms where the output is:', opts:['0','1','Either 0 or 1','X (don\'t care)'], ans:0, exp:'Product-of-Maxterms: collect sum terms (maxterms) for all rows where output = 0.'},
+    {type:'mcq', q:'The minterm m₅ for three variables (a,b,c) is:', opts:["a'b'c","ab'c","ab'c'","a'bc"], ans:1, exp:'m₅ corresponds to row 5 (binary 101 → a=1, b=0, c=1) → a·b\'·c.'},
+    {type:'mcq', q:'Given F(A,B,C) = Σm(3,4,5,6,7), the Product-of-Maxterms form uses:', opts:['M(3,4,5,6,7)','M(0,1,2)','m(0,1,2)','M(0,1,2,3)'], ans:1, exp:'Complementary maxterm indices: 8 rows total, remaining = {0,1,2} → F = M(0,1,2).'},
+    {type:'mcq', q:'The complement F\'(A,B,C) of F = Σm(3,4,5,6,7) as a sum of minterms is:', opts:['m(3,4,5,6,7)','m(0,1,2)','M(0,1,2)','m(0,1,2,3,4)'], ans:1, exp:'F\' uses the indices NOT in F: {0,1,2} → F\' = Σm(0,1,2).'},
+    {type:'mcq', q:'Which is the first step in the General Logic Design Sequence?', opts:['Draw Logic Diagram','Write Switching Equations','Problem Statement','Construct Truth Table'], ans:2, exp:'The design flow starts with the Problem Statement, then Truth Table, then Equations, etc.'},
+    {type:'mcq', q:'A maxterm M₀ for three variables A, B, C is:', opts:['A+B+C','A\'+B\'+C\'','A\'B\'C\'','A·B·C'], ans:0, exp:'M₀ corresponds to row 0 (all inputs = 0). Each variable appears in its regular (uncomplemented) form: A+B+C.'},
+    {type:'mcq', q:'A canonical SOP form differs from a standard SOP form in that:', opts:['Canonical uses fewer terms','Canonical uses maxterms instead','Every term in canonical form contains ALL variables','Standard form is more complex'], ans:2, exp:'Canonical (normal) form: every minterm/maxterm contains EACH input variable exactly once.'},
+    {type:'mcq', q:'To convert F = Σm(3,4,5,6,7) to Product-of-Maxterms, you write:', opts:['ΠM(3,4,5,6,7)','ΠM(0,1,2)','Σm(0,1,2)','ΠM(0,1,2,3,4,5,6,7)'], ans:1, exp:'Use the complementary indices for maxterms: F = ΠM(0,1,2).'},
+    {type:'mcq', q:'Minterm m₆ for three variables (a,b,c) is:', opts:["a'b'c","ab'c","abc'","a'bc'"], ans:2, exp:'m₆ = binary 110 → a=1, b=1, c=0 → a·b·c\'.'},
+    // Text
+    {type:'text', q:'A truth table with 3 input variables has how many rows?', ans:['8'], exp:'3 variables → 2³ = 8 rows.'},
+    {type:'text', q:'F(A,B,C) = Σm(0,1,2,3,4,5,6,7). What is the simplified canonical SOP form? (just write 1)', ans:['1'], exp:'All 8 minterms of 3 variables sum to 1 (tautology).'},
+    {type:'text', q:'Express minterm m₀ for two variables a, b. (write a\'b\' or similar)', ans:["a'b'"], exp:'m₀ = row 0 = a=0, b=0 → a\'·b\''},
+    {type:'text', q:'If F = Σm(1,3,5,7), what is the complement F\' as Σm(...) for 3 variables? List indices like 0,2,4,6', ans:['0,2,4,6','m(0,2,4,6)'], exp:'F uses odd minterms; F\' uses the even ones: Σm(0,2,4,6).'},
+    // TF
+    {type:'tf', q:'Sequential circuits, unlike combinational circuits, contain memory elements such as flip-flops.', ans:true, exp:'Correct — sequential circuits have memory (flip-flops, registers) and may have feedback.'},
+    {type:'tf', q:'A canonical POS form uses the rows where the output function is 1.', ans:false, exp:'POS uses rows where output is 0 (maxterms). SOP uses rows where output is 1 (minterms).'},
+    {type:'tf', q:'The minterm index corresponds to the binary value of the input combination on that row.', ans:true, exp:'Yes — minterm m_k corresponds to the row where the binary input equals k.'},
+    {type:'tf', q:'F(A,B,C) = Σm(3,4,5,6,7) and F(A,B,C) = ΠM(3,4,5,6,7) represent the same function.', ans:false, exp:'No. The Σm form uses those indices; ΠM uses COMPLEMENTARY indices. Σm(3..7) = ΠM(0,1,2).'},
+    {type:'tf', q:'Canonical forms are already in their most simplified state.', ans:false, exp:'Canonical forms are NOT simplified — they often contain redundancies. Boolean theorems (or K-maps) are used to simplify further.'},
+  ]
+};
+
+// Build "all topics" pool
+QB[0] = [];
+
+function buildAllPool() {
+  for (let t = 1; t <= 4; t++) QB[0].push(...QB[t]);
+  // Update counts in DOM
+  for (let t = 1; t <= 4; t++) {
+    const el = document.getElementById('qc' + t);
+    if (el) el.textContent = QB[t].length + ' questions';
+  }
+  const el = document.getElementById('qcall');
+  if (el) el.textContent = QB[0].length + ' questions';
+}
+buildAllPool();
+
+// Build numerical all-topics pool
+NQB[0] = [];
+function buildNumericalPool() {
+  for (let t = 1; t <= 4; t++) NQB[0].push(...NQB[t]);
+}
+buildNumericalPool();
+
+// ── Topic 1 sub-category definitions ──
+const CONV_CATS = [
+  {key:'1_bin_dec',  label:'Binary → Decimal',       icon:'🔵'},
+  {key:'1_dec_bin',  label:'Decimal → Binary',       icon:'🟢'},
+  {key:'1_bin_hex',  label:'Binary → Hex',           icon:'🟣'},
+  {key:'1_hex_bin',  label:'Hex → Binary',           icon:'🔴'},
+  {key:'1_hex_dec',  label:'Hex → Decimal',          icon:'🟠'},
+  {key:'1_dec_hex',  label:'Decimal → Hex',          icon:'🟡'},
+  {key:'1_bin_oct',  label:'Binary → Octal',         icon:'⚪'},
+  {key:'1_oct_dec',  label:'Octal → Decimal',        icon:'🩵'},
+  {key:'1_dec_oct',  label:'Decimal → Octal',        icon:'🩶'},
+  {key:'1_ones_comp',label:"1's Complement",         icon:'🔷'},
+  {key:'1_twos_comp',label:"2's Complement",         icon:'🔶'},
+  {key:'1_bcd',      label:'BCD Conversions',        icon:'📊'},
+  {key:'1_gray',     label:'Gray Code',              icon:'🌀'},
+  {key:'1_bcd_gray', label:'BCD ↔ Gray Code',       icon:'🔄'},
+  {key:'1_frac',     label:'Fractional Conversions', icon:'🔹'},
+];
+const ARITH_CATS = [
+  {key:'1_bin_add',  label:'Binary Addition',        icon:'➕'},
+  {key:'1_bin_sub',  label:'Binary Subtraction',     icon:'➖'},
+];
+const COMP_CATS = [
+  {key:'1_ones_arith', label:"1's Complement Arithmetic", icon:'🔷'},
+  {key:'1_twos_arith', label:"2's Complement Arithmetic", icon:'🔶'},
+];
+const SIGNED_CATS = [
+  {key:'1_signed', label:'Signed Binary Arithmetic', icon:'±'},
+];
+
+// Build NQB[1] from all topic-1 categories
+const ALL_T1_CATS = [...CONV_CATS, ...ARITH_CATS, ...COMP_CATS, ...SIGNED_CATS];
+ALL_T1_CATS.forEach(c => { if (NQB[c.key]) NQB[1].push(...NQB[c.key]); });
+NQB[0] = [];
+for (let t = 1; t <= 4; t++) NQB[0].push(...NQB[t]);
+
+/* ====================================================
+   QUESTION TYPE MODAL
+==================================================== */
+let pendingTopic = null;
+
+const topicNamesShort = {
+  0: 'All Topics',
+  1: 'Topic 1',
+  2: 'Topic 2',
+  3: 'Topic 3',
+  4: 'Topic 4'
+};
+
+function openQTModal(topic) {
+  pendingTopic = topic;
+  document.getElementById('qtTopicName').textContent = topicNamesShort[topic];
+  // Show Proofs option only for Topic 3
+  document.getElementById('proofsOption').style.display = (topic === 3) ? '' : 'none';
+  document.getElementById('qtModal').classList.add('open');
+}
+
+function closeQTModal() {
+  document.getElementById('qtModal').classList.remove('open');
+  pendingTopic = null;
+}
+
+function launchQuiz(qtype) {
+  const topic = pendingTopic !== null ? pendingTopic : 0;
+  closeQTModal();
+  if (qtype === 'theory') {
+    startTopicQuiz(topic, 'all');
+  } else if (qtype === 'numerical') {
+    startNumericalQuiz(topic);
+  } else {
+    startMixedQuiz(topic);
+  }
+}
+
+function launchProofs() {
+  closeQTModal();
+  showSection('proofs');
+}
+
+let allExpanded = false;
+function toggleAllProofs() {
+  const cards = document.querySelectorAll('.proof-card');
+  allExpanded = !allExpanded;
+  cards.forEach(c => {
+    if (allExpanded) c.classList.add('open');
+    else c.classList.remove('open');
+  });
+  document.getElementById('expandAllBtn').textContent = allExpanded ? '▲ Collapse All' : '▼ Expand All';
+}
+
+function toggleProof(id) {
+  const card = document.getElementById('pc-' + id);
+  if (card) card.classList.toggle('open');
+}
+
+// Close modal when clicking overlay background
+document.getElementById('qtModal').addEventListener('click', function(e) {
+  if (e.target === this) closeQTModal();
+});
+
+/* ====================================================
+   QUIZ STATE
+==================================================== */
+let state = {
+  topic: 0,
+  mode: 'all',
+  questions: [],
+  idx: 0,
+  score: 0,
+  answers: [], // {correct: bool, userAns, correctAns, question}
+  locked: false
+};
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function filterByMode(questions, mode) {
+  if (mode === 'all') return shuffle(questions).slice(0, Math.min(20, questions.length));
+  return shuffle(questions.filter(q => q.type === mode)).slice(0, 15);
+}
+
+const topicNames = {
+  0: 'All Topics',
+  1: 'Topic 1: Digital Systems & Binary Numbers',
+  2: 'Topic 2: Logic Gates',
+  3: 'Topic 3: Boolean Algebra',
+  4: 'Topic 4: Canonical & Standard Forms'
+};
+
+const modes = [
+  {id:'all', label:'Mixed (All Types)'},
+  {id:'mcq', label:'MCQ Only'},
+  {id:'text', label:'Short Answer Only'},
+  {id:'tf', label:'True / False Only'},
+];
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sect-' + id).classList.add('active');
+}
+
+function showHome() {
+  showSection('home');
+}
+
+/* ====================================================
+   TOPIC 1 CATEGORY MODAL
+==================================================== */
+function openT1CatModal() {
+  document.getElementById('t1CatModal').classList.add('open');
+}
+function closeT1CatModal() {
+  document.getElementById('t1CatModal').classList.remove('open');
+}
+document.getElementById('t1CatModal').addEventListener('click', function(e) {
+  if (e.target === this) closeT1CatModal();
+});
+
+function launchT1All() {
+  closeT1CatModal();
+  state.topic = 1; state.idx = 0; state.score = 0; state.answers = []; state.locked = false;
+  state.questions = shuffle(NQB[1]);
+  state.mode = 'numerical'; state.convCat = 'all';
+  document.getElementById('quizTitle').textContent = 'Topic 1 — All Numericals';
+  const mt = document.getElementById('modeTabs');
+  mt.innerHTML = `<button class="mode-tab" onclick="openT1CatModal()">⟵ Change Category</button>
+    <button class="mode-tab active">⚡ All Topic 1 (${state.questions.length} Qs)</button>`;
+  showSection('quiz'); renderQuestion();
+}
+
+/* ====================================================
+   CONVERSION / ARITHMETIC SUB-MODAL (Topic 1)
+==================================================== */
+let currentConvGroup = 'conversions';
+
+function openConvModal(group) {
+  currentConvGroup = group || currentConvGroup;
+  closeT1CatModal();
+
+  let cats, title, chip, allLabel, allKey;
+  if (currentConvGroup === 'conversions') {
+    cats = CONV_CATS; title = 'Choose Conversion Type'; chip = 'Conversions';
+    allLabel = '⚡ All Conversions Mixed'; allKey = 'conv_all';
+  } else if (currentConvGroup === 'arithmetic') {
+    cats = ARITH_CATS; title = 'Choose Arithmetic Type'; chip = 'Binary Arithmetic';
+    allLabel = '⚡ All Arithmetic Mixed'; allKey = 'arith_all';
+  } else if (currentConvGroup === 'complement') {
+    cats = COMP_CATS; title = 'Choose Complement Type'; chip = 'Complement Arithmetic';
+    allLabel = '⚡ All Complement Mixed'; allKey = 'comp_all';
+  } else {
+    cats = SIGNED_CATS; title = 'Signed Binary Arithmetic'; chip = 'Signed Arithmetic';
+    allLabel = '⚡ All Signed Questions'; allKey = 'signed_all';
+  }
+
+  document.getElementById('convModalChip').textContent = 'Topic 1 — ' + chip;
+  document.getElementById('convModalTitle').textContent = title;
+  document.getElementById('convModalDesc').textContent = 'Pick a specific type to practice, or go for all mixed.';
+  const allBtn = document.getElementById('convAllBtn');
+  allBtn.textContent = allLabel;
+  allBtn.onclick = () => launchConversion(allKey);
+
+  const grid = document.getElementById('convGrid');
+  grid.innerHTML = cats.map(c =>
+    `<div class="conv-option" onclick="launchConversion('${c.key}')">
+      <span class="conv-option-icon">${c.icon}</span>
+      <span>${c.label}</span>
+    </div>`
+  ).join('');
+  document.getElementById('convModal').classList.add('open');
+}
+
+function closeConvModal() {
+  document.getElementById('convModal').classList.remove('open');
+}
+
+function backToQTModal() {
+  closeConvModal();
+  closeT1CatModal();
+  openQTModal(1);
+}
+
+function launchConversion(catKey) {
+  closeConvModal();
+  closeT1CatModal();
+  state.topic = 1; state.idx = 0; state.score = 0; state.answers = []; state.locked = false;
+  state.mode = 'numerical'; state.convCat = catKey;
+
+  let pool, catLabel;
+  if (catKey === 'all' || catKey === 'conv_all') {
+    pool = CONV_CATS.reduce((a,c) => a.concat(NQB[c.key]||[]), []);
+    catLabel = 'All Conversions';
+  } else if (catKey === 'arith_all') {
+    pool = ARITH_CATS.reduce((a,c) => a.concat(NQB[c.key]||[]), []);
+    catLabel = 'All Arithmetic';
+  } else if (catKey === 'comp_all') {
+    pool = COMP_CATS.reduce((a,c) => a.concat(NQB[c.key]||[]), []);
+    catLabel = 'All Complement Arithmetic';
+  } else if (catKey === 'signed_all') {
+    pool = SIGNED_CATS.reduce((a,c) => a.concat(NQB[c.key]||[]), []);
+    catLabel = 'All Signed Arithmetic';
+  } else {
+    pool = NQB[catKey] || NQB[1];
+    catLabel = ALL_T1_CATS.find(c => c.key === catKey)?.label || 'Numericals';
+  }
+
+  state.questions = shuffle(pool);
+  document.getElementById('quizTitle').textContent = 'Topic 1 — ' + catLabel;
+  const mt = document.getElementById('modeTabs');
+  mt.innerHTML = `<button class="mode-tab" onclick="openT1CatModal()">⟵ Change Category</button>
+    <button class="mode-tab active">🔢 ${catLabel} (${state.questions.length} Qs)</button>`;
+  showSection('quiz'); renderQuestion();
+}
+
+// Close conv modal on overlay click
+document.getElementById('convModal').addEventListener('click', function(e) {
+  if (e.target === this) closeConvModal();
+});
+
+function startNumericalQuiz(topic) {
+  if (topic === 1) {
+    openT1CatModal();
+    return;
+  }
+  state.topic = topic;
+  state.mode = 'numerical';
+  state.idx = 0;
+  state.score = 0;
+  state.answers = [];
+  state.locked = false;
+  state.questions = shuffle(NQB[topic]).slice(0, 5);
+
+  document.getElementById('quizTitle').textContent = topicNames[topic] + ' — Numericals';
+
+  const mt = document.getElementById('modeTabs');
+  mt.innerHTML = `
+    <button class="mode-tab" onclick="openQTModal(${topic})">⟵ Change Type</button>
+    <button class="mode-tab active">🔢 Numerical (5 Questions)</button>
+  `;
+
+  showSection('quiz');
+  renderQuestion();
+}
+
+function startMixedQuiz(topic) {
+  state.topic = topic;
+  state.mode = 'mixed';
+  state.idx = 0;
+  state.score = 0;
+  state.answers = [];
+  state.locked = false;
+  const combined = [...QB[topic], ...NQB[topic]];
+  state.questions = shuffle(combined).slice(0, 5);
+
+  document.getElementById('quizTitle').textContent = topicNames[topic] + ' — Mixed';
+
+  const mt = document.getElementById('modeTabs');
+  mt.innerHTML = `
+    <button class="mode-tab" onclick="openQTModal(${topic})">⟵ Change Type</button>
+    <button class="mode-tab active">⚡ Mixed (5 Questions)</button>
+  `;
+
+  showSection('quiz');
+  renderQuestion();
+}
+
+function startTopicQuiz(topic, mode) {
+  state.topic = topic;
+  state.mode = mode;
+  state.idx = 0;
+  state.score = 0;
+  state.answers = [];
+  state.locked = false;
+  state.questions = filterByMode(QB[topic], mode);
+
+  document.getElementById('quizTitle').textContent = topicNames[topic];
+
+  // Mode tabs
+  const mt = document.getElementById('modeTabs');
+  mt.innerHTML = modes.map(m =>
+    `<button class="mode-tab ${mode === m.id ? 'active' : ''}" onclick="changeMode(${topic},'${m.id}')">${m.label}</button>`
+  ).join('');
+
+  showSection('quiz');
+  renderQuestion();
+}
+
+function changeMode(topic, mode) {
+  startTopicQuiz(topic, mode);
+}
+
+function renderQuestion() {
+  if (state.idx >= state.questions.length) {
+    showScore();
+    return;
+  }
+  const q = state.questions[state.idx];
+  state.locked = false;
+
+  // Progress
+  const pct = Math.round((state.idx / state.questions.length) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('qNum').textContent = `Question ${state.idx + 1} / ${state.questions.length}`;
+  document.getElementById('qScore').textContent = `Score: ${state.score}`;
+
+  // Buttons
+  document.getElementById('check-btn').style.display = '';
+  document.getElementById('check-btn').disabled = true;
+  document.getElementById('next-btn').style.display = 'none';
+  document.getElementById('skip-btn').style.display = '';
+
+  // Render
+  const area = document.getElementById('questionArea');
+  area.innerHTML = renderQuestionHTML(q);
+
+  // Attach events
+  if (q.type === 'mcq') {
+    document.querySelectorAll('.mcq-opt').forEach((el, i) => {
+      el.addEventListener('click', () => selectMCQ(i));
+    });
+  } else if (q.type === 'tf') {
+    document.querySelectorAll('.tf-btn').forEach(btn => {
+      btn.addEventListener('click', () => selectTF(btn));
+    });
+  } else if (q.type === 'text') {
+    const inp = document.getElementById('textInp');
+    inp.addEventListener('input', () => {
+      document.getElementById('check-btn').disabled = inp.value.trim().length === 0;
+    });
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !document.getElementById('check-btn').disabled && !state.locked) {
+        checkAnswer();
+      }
+    });
+  }
+}
+
+function renderQuestionHTML(q) {
+  const badges = {mcq:'MCQ',text:'Short Answer',tf:'True / False',fill:'Fill In'};
+  const badgeClass = {mcq:'badge-mcq',text:'badge-text',tf:'badge-tf',fill:'badge-fill'};
+  let html = `
+    <div class="question-card">
+      <span class="q-type-badge ${badgeClass[q.type] || 'badge-mcq'}">${badges[q.type] || q.type.toUpperCase()}</span>
+      <div class="question-text">${q.q}</div>
+  `;
+
+  if (q.type === 'mcq') {
+    html += `<div class="mcq-options">`;
+    const letters = ['A','B','C','D','E'];
+    q.opts.forEach((opt, i) => {
+      html += `<div class="mcq-opt" data-idx="${i}">
+        <div class="opt-letter">${letters[i]}</div>
+        <div class="opt-text">${opt}</div>
+      </div>`;
+    });
+    html += `</div>`;
+  } else if (q.type === 'text') {
+    html += `<div class="text-answer-wrap">
+      <input class="text-answer-input" id="textInp" placeholder="Type your answer…" autocomplete="off" spellcheck="false">
+    </div>`;
+  } else if (q.type === 'tf') {
+    html += `<div class="tf-options">
+      <button class="tf-btn" data-val="true">✓ True</button>
+      <button class="tf-btn" data-val="false">✗ False</button>
+    </div>`;
+  }
+
+  html += `<div class="feedback-box" id="feedbackBox"></div></div>`;
+  return html;
+}
+
+function selectMCQ(idx) {
+  if (state.locked) return;
+  document.querySelectorAll('.mcq-opt').forEach(el => el.classList.remove('selected'));
+  document.querySelector(`.mcq-opt[data-idx="${idx}"]`).classList.add('selected');
+  document.getElementById('check-btn').disabled = false;
+}
+
+function selectTF(btn) {
+  if (state.locked) return;
+  document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('check-btn').disabled = false;
+}
+
+function checkAnswer() {
+  const q = state.questions[state.idx];
+  state.locked = true;
+  document.querySelectorAll('.mcq-opt, .tf-btn').forEach(el => el.classList.add('locked'));
+
+  let isCorrect = false;
+  let userAns = '';
+  let correctAns = '';
+
+  if (q.type === 'mcq') {
+    const sel = document.querySelector('.mcq-opt.selected');
+    if (!sel) return;
+    const idx = parseInt(sel.dataset.idx);
+    userAns = q.opts[idx];
+    correctAns = q.opts[q.ans];
+    isCorrect = idx === q.ans;
+    document.querySelectorAll('.mcq-opt').forEach((el, i) => {
+      if (i === q.ans) el.classList.add('correct');
+      else if (el.classList.contains('selected') && i !== q.ans) el.classList.add('wrong');
+    });
+  } else if (q.type === 'tf') {
+    const sel = document.querySelector('.tf-btn.selected');
+    if (!sel) return;
+    const val = sel.dataset.val === 'true';
+    userAns = val ? 'True' : 'False';
+    correctAns = q.ans ? 'True' : 'False';
+    isCorrect = val === q.ans;
+    document.querySelectorAll('.tf-btn').forEach(btn => {
+      const bv = btn.dataset.val === 'true';
+      if (bv === q.ans) btn.classList.add('correct');
+      else if (btn.classList.contains('selected')) btn.classList.add('wrong');
+    });
+  } else if (q.type === 'text') {
+    const inp = document.getElementById('textInp');
+    userAns = inp.value.trim();
+    const normalise = s => s.toLowerCase().replace(/\s+/g, '').replace(/·/g, '.').replace(/×/g,'*');
+    isCorrect = q.ans.some(a => normalise(userAns) === normalise(a));
+    correctAns = q.ans[0];
+    inp.classList.add(isCorrect ? 'correct' : 'wrong');
+    inp.disabled = true;
+  }
+
+  if (isCorrect) state.score++;
+
+  state.answers.push({correct: isCorrect, userAns, correctAns, question: q.q});
+
+  // Feedback
+  const fb = document.getElementById('feedbackBox');
+  fb.classList.add('show', isCorrect ? 'correct-fb' : 'wrong-fb');
+  fb.innerHTML = isCorrect
+    ? `<strong>✓ Correct!</strong>${q.exp || ''}`
+    : `<strong>✗ Incorrect.</strong> Correct answer: <strong>${correctAns}</strong>. ${q.exp || ''}`;
+
+  document.getElementById('check-btn').style.display = 'none';
+  document.getElementById('next-btn').style.display = '';
+  document.getElementById('skip-btn').style.display = 'none';
+  document.getElementById('qScore').textContent = `Score: ${state.score}`;
+}
+
+function nextQuestion() {
+  state.idx++;
+  renderQuestion();
+}
+
+function skipQuestion() {
+  const q = state.questions[state.idx];
+  state.answers.push({correct: false, userAns: '(skipped)', correctAns: q.ans !== undefined ? String(q.ans) : q.ans?.[0] || '', question: q.q, skipped: true});
+  state.idx++;
+  renderQuestion();
+}
+
+function showScore() {
+  const total = state.questions.length;
+  const correct = state.score;
+  const wrong = state.answers.filter(a => !a.correct && !a.skipped).length;
+  const skipped = state.answers.filter(a => a.skipped).length;
+  const pct = Math.round((correct / total) * 100);
+
+  let grade = '';
+  if (pct >= 90) grade = '🏆 Outstanding!';
+  else if (pct >= 75) grade = '🌟 Great Work!';
+  else if (pct >= 60) grade = '👍 Good Effort!';
+  else if (pct >= 40) grade = '📚 Keep Studying!';
+  else grade = '💡 Review the Material!';
+
+  // Review items
+  let reviewHTML = `<div style="margin-top:2rem;text-align:left"><h3 style="margin-bottom:1rem;font-size:1rem;font-weight:700;color:var(--text-dim);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em">Review</h3>`;
+  state.answers.forEach((a, i) => {
+    reviewHTML += `<div class="review-item ${a.correct ? 'rev-correct' : 'rev-wrong'}">
+      <div class="review-q"><span style="font-family:var(--mono);font-size:0.72rem;color:var(--text-dimmer)">Q${i+1}. </span>${a.question}</div>
+      <div class="review-ans">
+        <span class="${a.correct ? 'your-ans ok' : 'your-ans'}">Your answer: ${a.userAns}</span>
+        ${!a.correct ? `<span class="correct-ans">Correct: ${a.correctAns}</span>` : ''}
+      </div>
+    </div>`;
+  });
+  reviewHTML += '</div>';
+
+  document.getElementById('scoreContent').innerHTML = `
+    <div class="score-ring-wrap">
+      <div class="score-ring">
+        <div class="score-num">${pct}%</div>
+        <div class="score-label">Score</div>
+      </div>
+    </div>
+    <h2>${grade}</h2>
+    <p>${correct} correct out of ${total} questions</p>
+    <div class="score-breakdown">
+      <div class="score-stat"><div class="val val-correct">${correct}</div><div class="lbl">Correct</div></div>
+      <div class="score-stat"><div class="val val-wrong">${wrong}</div><div class="lbl">Wrong</div></div>
+      <div class="score-stat"><div class="val val-score">${skipped}</div><div class="lbl">Skipped</div></div>
+      <div class="score-stat"><div class="val">${total}</div><div class="lbl">Total</div></div>
+    </div>
+    <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="${
+        state.mode === 'numerical' && state.topic === 1 && state.convCat
+          ? `launchConversion('${state.convCat}')` :
+        state.mode === 'numerical' ? `startNumericalQuiz(${state.topic})` :
+        state.mode === 'mixed' ? `startMixedQuiz(${state.topic})` :
+        `startTopicQuiz(${state.topic},'${state.mode}')`
+      }">Retry Same</button>
+      <button class="btn btn-secondary" onclick="showHome()">← Back to Topics</button>
+    </div>
+    ${reviewHTML}
+  `;
+  showSection('score');
+}
+</script>
+</body>
+</html>

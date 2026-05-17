@@ -1,0 +1,478 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Sans:wght@300;400;500&display=swap');
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0f0e17;
+    color: #fffffe
+  }
+
+  .wrap {
+    padding: 36px 32px 32px;
+    background: #0f0e17;
+    min-height: 100vh
+  }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 36px
+  }
+
+  .title {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: #fffffe;
+    line-height: 1.1;
+    letter-spacing: -0.5px
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #a7a9be;
+    margin-top: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase
+  }
+
+  .stats {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end
+  }
+
+  .stat {
+    text-align: right
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #ff8906;
+    line-height: 1
+  }
+
+  .stat-lbl {
+    font-size: 11px;
+    color: #a7a9be;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-top: 2px
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, #ff8906 0%, #e53170 40%, transparent 100%);
+    margin-bottom: 28px
+  }
+
+  .exam-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+  }
+
+  .exam-row {
+    display: grid;
+    grid-template-columns: 110px 90px 1fr 1fr 130px 60px;
+    align-items: center;
+    gap: 0;
+    background: #1a1a2e;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: background 0.2s
+  }
+
+  .exam-row:hover {
+    background: #22223b
+  }
+
+  .exam-row.header {
+    background: transparent;
+    margin-bottom: 4px
+  }
+
+  .cell {
+    padding: 14px 16px;
+    font-size: 13px
+  }
+
+  .header .cell {
+    font-size: 11px;
+    color: #a7a9be;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding-bottom: 8px;
+    padding-top: 0
+  }
+
+  .date-col {
+    border-left: 3px solid transparent;
+    border-radius: 10px 0 0 10px
+  }
+
+  .exam-row:nth-child(2) .date-col {
+    border-color: #ff8906
+  }
+
+  .exam-row:nth-child(3) .date-col {
+    border-color: #ff8906
+  }
+
+  .exam-row:nth-child(4) .date-col {
+    border-color: #e53170
+  }
+
+  .exam-row:nth-child(5) .date-col {
+    border-color: #3da9fc
+  }
+
+  .exam-row:nth-child(6) .date-col {
+    border-color: #3da9fc
+  }
+
+  .exam-row:nth-child(7) .date-col {
+    border-color: #3da9fc
+  }
+
+  .exam-row:nth-child(8) .date-col {
+    border-color: #7b2d8b
+  }
+
+  .exam-row:nth-child(9) .date-col {
+    border-color: #7b2d8b
+  }
+
+  .date-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fffffe
+  }
+
+  .day-text {
+    font-size: 12px;
+    color: #a7a9be;
+    margin-top: 2px
+  }
+
+  .teacher-text {
+    font-size: 13px;
+    color: #a7a9be
+  }
+
+  .subject-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fffffe
+  }
+
+  .time-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px
+  }
+
+  .time-text {
+    font-size: 13px;
+    color: #fffffe
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.4px
+  }
+
+  .am {
+    background: #1a3a2a;
+    color: #5dd39e
+  }
+
+  .pm {
+    background: #2a1a3a;
+    color: #c77dff
+  }
+
+  .venue {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    background: #ff890620;
+    color: #ff8906;
+    border: 1px solid #ff890640;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.3px
+  }
+
+  .dl-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px
+  }
+
+  .dl-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ff8906;
+    color: #0f0e17;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 22px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: background 0.15s
+  }
+
+  .dl-btn:hover {
+    background: #e07800
+  }
+
+  .dl-btn svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0
+  }
+
+  .back-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 20px;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    transition: all .2s;
+    background: transparent;
+  }
+
+  .back-link:hover {
+    color: var(--ink);
+    border-color: var(--border-light);
+  }
+</style>
+
+<div class="wrap" id="sheet">
+  <div class="top">
+    <div>
+      <a href="index.html" class="back-link">← Back to Hub</a>
+      <div class="title">Mid-Term Examination</div>
+      <div class="subtitle">BS Software Engineering &nbsp;·&nbsp; Spring 2026</div>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">8</div>
+        <div class="stat-lbl">Exams</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">6</div>
+        <div class="stat-lbl">Days</div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <div class="exam-grid">
+    <div class="exam-row header">
+      <div class="cell">Date/Day</div>
+      <div class="cell">Teacher</div>
+      <div class="cell">Subject</div>
+      <div class="cell">Time</div>
+      <div class="cell">Venue</div>
+    </div>
+
+    <div class="exam-row">
+      <div class="cell date-col">
+        <div class="date-text">30 Mar</div>
+        <div class="day-text">Monday</div>
+      </div>
+      <div class="cell" style="display:none"></div>
+      <div class="cell teacher-text">Mr. Hassaan Ali Shah</div>
+      <div class="cell subject-text">Digital Logic Design</div>
+      <div class="cell">
+        <div class="time-wrap"><span class="time-text">09:00–11:00</span><span class="tag am">AM</span></div>
+      </div>
+      <div class="cell"><span class="venue">F-105</span></div>
+    </div>
+
+    <div class="exam-row">
+      <div class="cell date-col">
+        <div class="date-text">30 Mar</div>
+        <div class="day-text">Monday</div>
+      </div>
+      <div class="cell" style="display:none"></div>
+      <div class="cell teacher-text">Abdur Rehman</div>
+      <div class="cell subject-text">Islamic Studies</div>
+      <div class="cell">
+        <div class="time-wrap"><span class="time-text">02:00–04:00</span><span class="tag pm">PM</span></div>
+      </div>
+      <div class="cell"><span class="venue">F-108</span></div>
+    </div>
+
+    <div class="exam-row">
+      <div class="cell date-col">
+        <div class="date-text">31 Mar</div>
+        <div class="day-text">Tuesday</div>
+      </div>
+      <div class="cell" style="display:none"></div>
+      <div class="cell teacher-text">Izzaz DSS</div>
+      <div class="cell subject-text">Ideology & Constitution of Pakistan</div>
+      <div class="cell">
+        <div class="time-wrap"><span class="time-text">09:00–11:00</span><span class="tag am">AM</span></div>
+      </div>
+      <div class="cell"><span class="venue">F-210</span></div>
+    </div>
+
+    <div class="exam-row">
+      <div class="cell date-col">
+        <div class="date-text">1 Apr</div>
+        <div class="day-text">Wednesday</div>
+      </div>
+      <div class="cell" style="display:none"></div>
+      <div class="cell teacher-text">Muhammad Usman</div>
+      <div class="cell subject-text">Object Oriented Programming</div>
+      <div class="cell">
+        <div class="time-wrap"><span class="time-text">09:00–11:00</span><span class="tag am">AM</span></div>
+      </div>
+      <div class="cell"><span class="venue">F-207</span></div>
+    </div>
+
+    <div class="exam-row">
+      <div class="cell date-col">
+        <div class="date-text">2 Apr</div>
+        <div class="day-text">Thursday</div>
+      </div>
+      <div class="cell" style="display:none"></div>
+      <div class="cell teacher-text">Mr. Javed Iqbal</div>
+      <div class="cell subject-text">Expository Writing</div>
+      <div class="cell">
+        <div class="time-wrap"><span class="time-text">09:00–11:00</span><span class="tag am">AM</span></div>
+      </div>
+      <div class="cell"><span class="venue">F-201</span></div>
+    </div>
+
+    <div class="exam-row">
+      <div class="cell date-col">
+        <div class="date-text">2 Apr</div>
+        <div class="day-text">Thursday</div>
+      </div>
+      <div class="cell" style="display:none"></div>
+      <div class="cell teacher-text">Dr. Muhammad Yaqub Khan</div>
+      <div class="cell subject-text">Calculus & Analytical Geometry</div>
+      <div class="cell">
+        <div class="time-wrap"><span class="time-text">02:00–04:00</span><span class="tag pm">PM</span></div>
+      </div>
+      <div class="cell"><span class="venue">F-207</span></div>
+    </div>
+
+    <div class="exam-row">
+      <div class="cell date-col">
+        <div class="date-text">3 Apr</div>
+        <div class="day-text">Friday</div>
+      </div>
+      <div class="cell" style="display:none"></div>
+      <div class="cell teacher-text">Mr. Shafique Ur Rehman</div>
+      <div class="cell subject-text">Understanding of Quran-II</div>
+      <div class="cell">
+        <div class="time-wrap"><span class="time-text">02:00–04:00</span><span class="tag pm">PM</span></div>
+      </div>
+      <div class="cell"><span class="venue">F-201</span></div>
+    </div>
+
+    <div class="exam-row">
+      <div class="cell date-col">
+        <div class="date-text">4 Apr</div>
+        <div class="day-text">Saturday</div>
+      </div>
+      <div class="cell" style="display:none"></div>
+      <div class="cell teacher-text">Ms. Naima Qamar</div>
+      <div class="cell subject-text">Pre Calculus-II</div>
+      <div class="cell">
+        <div class="time-wrap"><span class="time-text">02:00–04:00</span><span class="tag pm">PM</span></div>
+      </div>
+      <div class="cell"><span class="venue">F-201</span></div>
+    </div>
+  </div>
+
+  <div class="dl-row">
+    <button class="dl-btn" id="dlBtn">
+      <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.5 1v9M4.5 7l3 3 3-3M2.5 13h10" stroke="#0f0e17" stroke-width="1.5" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+      Download A4 Landscape PDF
+    </button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<script>
+  document.getElementById('dlBtn').addEventListener('click', function () {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+    const W = doc.internal.pageSize.getWidth();
+
+    doc.setFillColor(15, 14, 23);
+    doc.rect(0, 0, W, 297, 'F');
+
+    doc.setFillColor(26, 26, 46);
+    doc.rect(0, 0, W, 26, 'F');
+
+    doc.setTextColor(255, 137, 6);
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'normal');
+    doc.text('BS SOFTWARE ENGINEERING  ·  SPRING 2026', 14, 10);
+
+    doc.setTextColor(255, 255, 254);
+    doc.setFontSize(18);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Mid-Term Examination Date Sheet', 14, 20);
+
+    doc.setTextColor(255, 137, 6);
+    doc.setLineWidth(0.6);
+    doc.line(14, 28, W - 14, 28);
+
+    doc.autoTable({
+      startY: 33,
+      head: [['Date', 'Day', 'Teacher', 'Subject', 'Timings', 'Venue']],
+      body: [
+        ['30 Mar 2026', 'Monday', 'Mr. Hassaan Ali Shah', 'Digital Logic Design', '09:00 AM – 11:00 AM', 'F-105'],
+        ['30 Mar 2026', 'Monday', 'Abdur Rehman', 'Islamic Studies', '02:00 PM – 04:00 PM', 'F-108'],
+        ['31 Mar 2026', 'Tuesday', 'Izzaz DSS', 'Ideology & Constitution of Pakistan', '09:00 AM – 11:00 AM', 'F-210'],
+        ['1 Apr 2026', 'Wednesday', 'Muhammad Usman', 'Object Oriented Programming', '09:00 AM – 11:00 AM', 'F-207'],
+        ['2 Apr 2026', 'Thursday', 'Mr. Javed Iqbal', 'Expository Writing', '09:00 AM – 11:00 AM', 'F-201'],
+        ['2 Apr 2026', 'Thursday', 'Dr. Muhammad Yaqub Khan', 'Calculus & Analytical Geometry', '02:00 PM – 04:00 PM', 'F-207'],
+        ['3 Apr 2026', 'Friday', 'Mr. Shafique Ur Rehman', 'Understanding of Quran-II', '02:00 PM – 04:00 PM', 'F-201'],
+        ['4 Apr 2026', 'Saturday', 'Ms. Naima Qamar', 'Pre Calculus-II', '02:00 PM – 04:00 PM', 'F-201'],
+      ],
+      styles: { fontSize: 11, cellPadding: 6, textColor: [255, 255, 254], fillColor: [26, 26, 46], lineColor: [42, 42, 59], lineWidth: 0.3 },
+      headStyles: { fillColor: [255, 137, 6], textColor: [15, 14, 23], fontStyle: 'bold', fontSize: 10 },
+      alternateRowStyles: { fillColor: [20, 20, 35] },
+      columnStyles: { 0: { cellWidth: 32 }, 1: { cellWidth: 28 }, 2: { cellWidth: 55 }, 3: { cellWidth: 70 }, 4: { cellWidth: 46 }, 5: { cellWidth: 22 } },
+      margin: { left: 14, right: 14 },
+    });
+
+    doc.save('BSSE_MidTerm_DateSheet.pdf');
+  });
+</script>

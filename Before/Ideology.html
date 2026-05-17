@@ -1,0 +1,2923 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ideology & Constitution of Pakistan — Quiz</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel+Decorative:wght@700&family=Libre+Baskerville:wght@400;700&family=Gulzar&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0e0c1a;
+      --surface: #16132a;
+      --card: #1e1a35;
+      --border: rgba(180, 140, 255, 0.18);
+      --green: #1db954;
+      --gold: #e8b84b;
+      --gold-dim: #a07c28;
+      --violet: #7c5cbf;
+      --violet-light: #a87de8;
+      --red: #e05555;
+      --text: #f0ecff;
+      --muted: #8a84a8;
+      --correct: #1db954;
+      --wrong: #e05555;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ───── SECTIONS ───── */
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    /* ───── HERO ───── */
+    .hero {
+      text-align: center;
+      padding: 1rem 0 0rem;
+    }
+
+    .hero-chip {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: pulse-border 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-border {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0);
+      }
+
+      50% {
+        box-shadow: 0 0 3px 4px rgba(81, 33, 255, 0.226);
+      }
+    }
+
+    /* LANG BAR */
+    .lang-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14, 12, 26, 0.95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 1.5rem;
+    }
+
+    .lang-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .lang-pills {
+      display: flex;
+      gap: 0.35rem;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 30px;
+      padding: 0.2rem;
+    }
+
+    .lang-pill {
+      padding: 0.38em 1.2em;
+      border-radius: 20px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-family: 'Libre Baskerville', serif;
+      cursor: pointer;
+      transition: all 0.22s;
+      font-weight: 700;
+    }
+
+    .lang-pill.active {
+      background: var(--gold);
+      color: #0e0c1a;
+    }
+
+    .lang-pill.urdu-pill {
+      font-family: 'Gulzar', serif;
+      font-size: 1rem;
+      padding: 0.2em 1.1em;
+    }
+
+    /* HEADER */
+    header {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 4.5rem 1.5rem 3.5rem;
+      background: linear-gradient(160deg, #1a0a3a 0%, #0e1e2a 50%, #0a1a10 100%);
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 18% 50%, rgba(124, 92, 191, 0.28) 0%, transparent 55%), radial-gradient(circle at 82% 30%, rgba(29, 185, 84, 0.15) 0%, transparent 50%), radial-gradient(circle at 50% 95%, rgba(232, 184, 75, 0.12) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 255, 255, 0.55), transparent), radial-gradient(1px 1px at 28% 62%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(2px 2px at 55% 12%, rgba(255, 255, 255, 0.65), transparent), radial-gradient(1px 1px at 74% 48%, rgba(255, 255, 255, 0.35), transparent), radial-gradient(1.5px 1.5px at 87% 72%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(1px 1px at 93% 22%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(1.5px 1.5px at 40% 82%, rgba(255, 255, 255, 0.3), transparent), radial-gradient(1px 1px at 62% 57%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(2px 2px at 8% 77%, rgba(255, 255, 255, 0.45), transparent);
+      pointer-events: none;
+    }
+
+    .header-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .star-crescent {
+      font-size: 3.8rem;
+      display: block;
+      margin-bottom: 0.9rem;
+      filter: drop-shadow(0 0 22px rgba(232, 184, 75, 0.65));
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 0 22px rgba(232, 184, 75, 0.65))
+      }
+
+      50% {
+        filter: drop-shadow(0 0 40px rgba(232, 184, 75, 0.95))
+      }
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--violet), var(--violet-light));
+      color: #fff;
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.35em 1.3em;
+      border-radius: 30px;
+      margin-bottom: 1.3rem;
+      font-family: 'Libre Baskerville', serif;
+    }
+
+    header h1.en-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.3rem, 3.5vw, 2.3rem);
+      font-weight: 700;
+      line-height: 1.25;
+      background: linear-gradient(135deg, #fff 30%, var(--gold) 70%, #fff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.6rem;
+    }
+
+    header .ur-title {
+      font-family: 'Gulzar', serif;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      color: var(--gold);
+      display: none;
+      margin-bottom: 0.6rem;
+      line-height: 1.7;
+    }
+
+    header p.en-sub {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-style: italic;
+    }
+
+    header .ur-sub {
+      display: none;
+      font-family: 'Gulzar', serif;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .header-deco {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+      margin: 1.3rem auto 0;
+      width: min(380px, 80%);
+    }
+
+    .header-deco::before,
+    .header-deco::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+    }
+
+    .deco-diamond {
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* PROGRESS */
+    .progress-wrap {
+      background: var(--surface);
+      padding: 0.85rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .progress-label {
+      font-size: 0.73rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .progress-bar-outer {
+      flex: 1;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green), var(--gold));
+      border-radius: 3px;
+      transition: width 0.45s cubic-bezier(.4, 0, .2, 1);
+      width: 0%;
+      box-shadow: 0 0 8px rgba(29, 185, 84, 0.5);
+    }
+
+    .progress-count {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1.2rem 5rem;
+    }
+
+    /* SECTION HEADING */
+    .section-heading {
+      position: relative;
+      margin: 3rem 0 1.5rem;
+      text-align: center;
+    }
+
+    .section-heading::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--border);
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    .section-heading-inner {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, var(--violet) 0%, #4a2b8c 100%);
+      color: #fff;
+      padding: 0.55em 1.6em;
+      border-radius: 30px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 22px rgba(124, 92, 191, 0.45);
+    }
+
+    .sec-ur-text {
+      display: none;
+      font-family: 'Gulzar', serif;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 1rem;
+    }
+
+    /* QUESTION CARD */
+    .question-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.8rem 2rem 1.8rem 2.4rem;
+      margin-bottom: 1.3rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    }
+
+    .question-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--violet), var(--gold));
+    }
+
+    .question-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(124, 92, 191, 0.22);
+      border-color: rgba(180, 140, 255, 0.35);
+    }
+
+    .question-card.answered::before {
+      background: linear-gradient(to bottom, var(--green), #0a8a3f);
+    }
+
+    html[lang="ur"] .question-card {
+      padding: 1.8rem 2.4rem 1.8rem 2rem;
+    }
+
+    html[lang="ur"] .question-card::before {
+      left: auto;
+      right: 0;
+      border-radius: 0 16px 16px 0;
+    }
+
+    .q-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .q-number {
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(232, 184, 75, 0.12);
+      padding: 0.25em 0.8em;
+      border-radius: 20px;
+      border: 1px solid rgba(232, 184, 75, 0.25);
+    }
+
+    .q-type-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--violet-light);
+      background: rgba(168, 125, 232, 0.12);
+      padding: 0.25em 0.7em;
+      border-radius: 20px;
+      border: 1px solid rgba(168, 125, 232, 0.22);
+    }
+
+    .q-text {
+      font-size: 1.03rem;
+      font-weight: 700;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+
+    .q-text-ur {
+      font-family: 'Gulzar', serif;
+      direction: rtl;
+      text-align: right;
+      font-size: 1.12rem;
+      line-height: 2.1;
+      display: none;
+      margin-bottom: 1.2rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* OPTIONS */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.85rem 1.1rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.18s;
+      font-size: 0.94rem;
+      background: rgba(255, 255, 255, 0.03);
+      user-select: none;
+    }
+
+    .option:hover:not(.locked) {
+      border-color: rgba(168, 125, 232, 0.55);
+      background: rgba(124, 92, 191, 0.1);
+    }
+
+    .option input[type="radio"] {
+      display: none;
+    }
+
+    .opt-letter {
+      width: 28px;
+      height: 28px;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: var(--muted);
+      transition: all 0.18s;
+      font-family: 'Cinzel Decorative', serif;
+    }
+
+    .option:hover:not(.locked) .opt-letter {
+      border-color: var(--violet-light);
+      color: var(--violet-light);
+    }
+
+    .option.selected .opt-letter {
+      background: var(--violet);
+      border-color: var(--violet);
+      color: #fff;
+    }
+
+    .option.correct {
+      border-color: var(--correct) !important;
+      background: rgba(29, 185, 84, 0.1) !important;
+    }
+
+    .option.correct .opt-letter {
+      background: var(--correct);
+      border-color: var(--correct);
+      color: #fff;
+    }
+
+    .option.wrong {
+      border-color: var(--wrong) !important;
+      background: rgba(224, 85, 85, 0.1) !important;
+    }
+
+    .option.wrong .opt-letter {
+      background: var(--wrong);
+      border-color: var(--wrong);
+      color: #fff;
+    }
+
+    .option.show-correct {
+      border-color: var(--correct);
+      background: rgba(29, 185, 84, 0.07);
+    }
+
+    .option.locked {
+      cursor: default;
+    }
+
+    .opt-text-en {
+      display: block;
+    }
+
+    .opt-text-ur {
+      display: none;
+      font-family: 'Gulzar', serif;
+      direction: rtl;
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    /* FILL */
+    .blank-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 0.72rem 1rem;
+      font-size: 1rem;
+      font-family: 'Libre Baskerville', serif;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .blank-input:focus {
+      border-color: var(--violet-light);
+      box-shadow: 0 0 0 3px rgba(168, 125, 232, 0.15);
+    }
+
+    .blank-input.correct-input {
+      border-color: var(--correct);
+      color: var(--correct);
+      box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.15);
+    }
+
+    .blank-input.wrong-input {
+      border-color: var(--wrong);
+      color: var(--wrong);
+    }
+
+    .blank-input:disabled {
+      opacity: 0.7;
+      cursor: default;
+    }
+
+    /* SHORT */
+    .short-answer-area {
+      width: 100%;
+      min-height: 100px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 0.85rem 1.1rem;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-top: 0.4rem;
+    }
+
+    .short-answer-area:focus {
+      border-color: var(--violet-light);
+    }
+
+    .short-answer-area:disabled {
+      opacity: 0.65;
+    }
+
+    .model-answer {
+      display: none;
+      margin-top: 1rem;
+      background: rgba(29, 185, 84, 0.07);
+      border-left: 3px solid var(--green);
+      padding: 0.9rem 1.2rem;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+      color: #ade8c2;
+      line-height: 1.8;
+    }
+
+    .model-answer strong {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+
+    .model-ans-en {
+      display: block;
+    }
+
+    .model-ans-ur {
+      display: none;
+      font-family: 'Gulzar', serif;
+      direction: rtl;
+      text-align: right;
+      font-size: 1.05rem;
+      line-height: 2.1;
+    }
+
+    html[lang="ur"] .model-answer {
+      border-left: none;
+      border-right: 3px solid var(--green);
+      border-radius: 8px 0 0 8px;
+    }
+
+    html[lang="ur"] .model-ans-en {
+      display: none;
+    }
+
+    html[lang="ur"] .model-ans-ur {
+      display: block;
+    }
+
+    /* FEEDBACK */
+    .feedback {
+      display: none;
+      margin-top: 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 0.55rem 1rem;
+      border-radius: 8px;
+    }
+
+    .feedback.correct {
+      color: var(--correct);
+      background: rgba(29, 185, 84, 0.12);
+      display: block;
+    }
+
+    .feedback.wrong {
+      color: var(--wrong);
+      background: rgba(224, 85, 85, 0.12);
+      display: block;
+    }
+
+    /* BUTTONS */
+    .check-btn {
+      margin-top: 1rem;
+      padding: 0.6em 1.6em;
+      background: linear-gradient(135deg, var(--violet) 0%, #5a3a9a 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      font-family: 'Libre Baskerville', serif;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.18s;
+      box-shadow: 0 4px 14px rgba(124, 92, 191, 0.35);
+    }
+
+    .check-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(124, 92, 191, 0.5);
+    }
+
+    .check-btn:active {
+      transform: scale(0.97);
+    }
+
+    .check-btn:disabled {
+      opacity: 0.45;
+      cursor: default;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* SUBMIT */
+    .submit-section {
+      text-align: center;
+      margin-top: 3.5rem;
+    }
+
+    .submit-btn {
+      padding: 1em 3.5em;
+      background: linear-gradient(135deg, var(--gold) 0%, #c89020 100%);
+      color: #0e0c1a;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      font-family: 'Cinzel Decorative', serif;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.2s;
+      box-shadow: 0 6px 28px rgba(232, 184, 75, 0.4);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(232, 184, 75, 0.55);
+    }
+
+    /* RESULTS */
+    #results {
+      display: none;
+      background: linear-gradient(135deg, #1a0a3a 0%, #0a1a10 100%);
+      border: 1px solid rgba(232, 184, 75, 0.3);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-top: 3rem;
+      box-shadow: 0 12px 60px rgba(0, 0, 0, 0.5);
+      animation: resultPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #results::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(232, 184, 75, 0.12), transparent 60%);
+    }
+
+    @keyframes resultPop {
+      from {
+        opacity: 0;
+        transform: scale(0.85) translateY(30px)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0)
+      }
+    }
+
+    #results .trophy {
+      font-size: 4rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    #results h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, var(--gold), #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+    }
+
+    html[lang="ur"] #results h2 {
+      font-family: 'Gulzar', serif;
+      -webkit-text-fill-color: var(--gold);
+    }
+
+    .score-big {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin: 0.8rem 0 0.3rem;
+      position: relative;
+      text-shadow: 0 0 40px rgba(232, 184, 75, 0.5);
+    }
+
+    .score-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      position: relative;
+    }
+
+    .score-detail {
+      margin-top: 1.2rem;
+      font-size: 0.95rem;
+      color: rgba(240, 236, 255, 0.72);
+      line-height: 1.9;
+      position: relative;
+    }
+
+    .grade-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), #c89020);
+      color: #0e0c1a;
+      font-weight: 800;
+      font-size: 1rem;
+      font-family: 'Cinzel Decorative', serif;
+      padding: 0.4em 1.5em;
+      border-radius: 6px;
+      margin-top: 1rem;
+      position: relative;
+    }
+
+    html[lang="ur"] .grade-tag {
+      font-family: 'Gulzar', serif;
+    }
+
+    .retry-btn {
+      margin-top: 2rem;
+      padding: 0.75em 2.5em;
+      background: transparent;
+      color: var(--gold);
+      border: 2px solid var(--gold-dim);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-family: 'Libre Baskerville', serif;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .retry-btn:hover {
+      background: rgba(232, 184, 75, 0.1);
+      border-color: var(--gold);
+    }
+
+    /* URDU MODE GLOBAL SWITCHES */
+    html[lang="ur"] body {
+      font-family: 'Gulzar', 'Amiri', serif;
+      font-size: 1.05rem;
+    }
+
+    html[lang="ur"] .q-text {
+      display: none;
+    }
+
+    html[lang="ur"] .q-text-ur {
+      display: block;
+    }
+
+    html[lang="ur"] .opt-text-en {
+      display: none;
+    }
+
+    html[lang="ur"] .opt-text-ur {
+      display: inline;
+    }
+
+    html[lang="ur"] header h1.en-title {
+      display: none;
+    }
+
+    html[lang="ur"] header .ur-title {
+      display: block;
+    }
+
+    html[lang="ur"] header p.en-sub {
+      display: none;
+    }
+
+    html[lang="ur"] header .ur-sub {
+      display: block;
+    }
+
+    html[lang="ur"] .sec-en-text {
+      display: none;
+    }
+
+    html[lang="ur"] .sec-ur-text {
+      display: inline;
+    }
+
+    html[lang="ur"] .blank-input {
+      text-align: right;
+      font-family: 'Gulzar', serif;
+      direction: rtl;
+    }
+
+    html[lang="ur"] .short-answer-area {
+      text-align: right;
+      font-family: 'Gulzar', serif;
+      direction: rtl;
+    }
+
+    html[lang="ur"] .score-label {
+      text-transform: none;
+      letter-spacing: 0;
+      font-family: 'Gulzar', serif;
+    }
+
+    @media(max-width:580px) {
+      .question-card { padding: 1.3rem 1.2rem 1.3rem 1.7rem }
+      header { padding: 3rem 1rem 2rem }
+      .score-big { font-size: 2.8rem }
+    }
+
+    /* TAB PILLS */
+    .tab-pills { display:flex; gap:0.3rem; background:rgba(255,255,255,0.06); border-radius:30px; padding:0.2rem; }
+    .tab-pill { padding:0.38em 1.1em; border-radius:20px; border:none; background:transparent; color:var(--muted); font-size:0.82rem; font-family:'Libre Baskerville',serif; cursor:pointer; transition:all 0.22s; font-weight:700; white-space:nowrap; }
+    .tab-pill.active { background:var(--violet); color:#fff; }
+    #notesPanel { display:none; }
+    #quizPanel  { display:block; }
+
+    /* NOTES */
+    .notes-wrap { max-width:920px; margin:0 auto; padding:2.5rem 1.2rem 5rem; }
+    .lecture-block { margin-bottom:3.5rem; }
+    .lecture-title-bar { display:flex; align-items:center; gap:1rem; margin-bottom:1.4rem; }
+    .lecture-num-badge { background:linear-gradient(135deg,var(--violet),#4a2b8c); color:#fff; font-family:'Cinzel Decorative',serif; font-size:0.68rem; padding:0.5em 1.1em; border-radius:30px; white-space:nowrap; box-shadow:0 4px 18px rgba(124,92,191,0.4); flex-shrink:0; }
+    .lecture-main-title { font-family:'Cinzel Decorative',serif; font-size:clamp(0.85rem,2vw,1.15rem); background:linear-gradient(135deg,#fff 30%,var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; font-weight:700; line-height:1.4; }
+    .lecture-divider { height:1px; background:linear-gradient(90deg,var(--violet),var(--gold),transparent); margin-bottom:1.6rem; border:none; }
+    .slides-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(265px,1fr)); gap:1.15rem; }
+    .slide-card { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s; }
+    .slide-card:hover { transform:translateY(-3px); box-shadow:0 12px 36px rgba(124,92,191,0.28); border-color:rgba(180,140,255,0.4); }
+    .slide-card::before { content:''; display:block; height:5px; width:100%; }
+    .slide-card.cv::before { background:linear-gradient(90deg,#7c5cbf,#a87de8); }
+    .slide-card.cg::before { background:linear-gradient(90deg,#c89020,#e8b84b); }
+    .slide-card.cn::before { background:linear-gradient(90deg,#0a8a3f,#1db954); }
+    .slide-card.ct::before { background:linear-gradient(90deg,#028090,#02c39a); }
+    .slide-card.cr::before { background:linear-gradient(90deg,#990011,#e05555); }
+    .slide-inner { padding:1.1rem 1.25rem 1.3rem; }
+    .slide-tag { font-size:0.6rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:0.45rem; display:block; }
+    .slide-heading { font-family:'Cinzel Decorative',serif; font-size:0.8rem; font-weight:700; color:var(--text); margin-bottom:0.7rem; line-height:1.45; }
+    .slide-body { font-size:0.81rem; color:rgba(240,236,255,0.8); line-height:1.8; }
+    .slide-body ul { margin:0; padding-left:1.1em; }
+    .slide-body ul li { margin-bottom:0.3em; }
+    .slide-body .hl { color:var(--gold); font-weight:700; }
+    .slide-body .pill { display:inline-block; background:rgba(124,92,191,0.18); border:1px solid rgba(168,125,232,0.3); color:var(--violet-light); font-size:0.7rem; padding:0.12em 0.55em; border-radius:20px; margin:0.12em 0.1em; font-weight:700; }
+    .slide-card.full-row { grid-column:1/-1; }
+    .full-row .slide-inner { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+    .col-left { border-right:1px solid var(--border); padding-right:1.2rem; }
+    .comp-t { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.5rem; }
+    .comp-t.gold { color:var(--gold); }
+    .comp-t.violet { color:var(--violet-light); }
+    .comp-t.green { color:var(--green); }
+    .comp-t.red { color:var(--red); }
+    .quote-text { font-size:0.86rem; font-style:italic; color:var(--gold); line-height:1.9; border-left:3px solid var(--gold); padding-left:1rem; margin-bottom:0.6rem; }
+    .quote-attr { font-size:0.7rem; color:var(--muted); text-align:right; }
+    .notes-obj { background:rgba(29,185,84,0.07); border:1px solid rgba(29,185,84,0.2); border-radius:12px; padding:1rem 1.3rem; margin-bottom:1.4rem; font-size:0.82rem; color:rgba(240,236,255,0.8); line-height:1.8; }
+    .notes-obj strong { display:block; color:var(--green); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.4rem; }
+    .notes-obj ul { margin:0; padding-left:1.1em; }
+    .notes-obj li { margin-bottom:0.25em; }
+    @media(max-width:640px) {
+      .full-row .slide-inner { grid-template-columns:1fr; }
+      .col-left { border-right:none; border-bottom:1px solid var(--border); padding-right:0; padding-bottom:1rem; }
+      .slides-grid { grid-template-columns:1fr; }
+      .lang-bar { flex-wrap:wrap; gap:0.5rem; }
+    }
+
+    /* Notes Urdu toggle */
+    .slide-body-en { display: block; }
+    .slide-body-ur { display: none; font-family: 'Gulzar', serif; direction: rtl; text-align: right; font-size: 0.88rem; line-height: 2.1; }
+    .slide-heading-en { display: block; }
+    .slide-heading-ur { display: none; font-family: 'Gulzar', serif; direction: rtl; text-align: right; font-size: 0.9rem; line-height: 1.8; }
+    .slide-tag-en { display: inline; }
+    .slide-tag-ur { display: none; font-family: 'Gulzar', serif; }
+    .notes-obj-en { display: block; }
+    .notes-obj-ur { display: none; font-family: 'Gulzar', serif; direction: rtl; text-align: right; font-size: 0.88rem; line-height: 2.1; }
+    .lecture-title-ur { display: none; font-family: 'Gulzar', serif; direction: rtl; text-align: right; font-size: clamp(0.85rem,2vw,1.1rem); font-weight: 700; color: var(--gold); }
+    .lecture-badge-ur { display: none; font-family: 'Gulzar', serif; }
+
+    html[lang="ur"] .slide-body-en { display: none; }
+    html[lang="ur"] .slide-body-ur { display: block; }
+    html[lang="ur"] .slide-heading-en { display: none; }
+    html[lang="ur"] .slide-heading-ur { display: block; }
+    html[lang="ur"] .slide-tag-en { display: none; }
+    html[lang="ur"] .slide-tag-ur { display: inline; }
+    html[lang="ur"] .notes-obj-en { display: none; }
+    html[lang="ur"] .notes-obj-ur { display: block; }
+    html[lang="ur"] .lecture-title-ur { display: block; }
+    html[lang="ur"] .lecture-title-bar .lecture-main-title { display: none; }
+    html[lang="ur"] .quote-text { font-family: 'Gulzar', serif; direction: rtl; text-align: right; font-size: 0.95rem; line-height: 2.2; border-left: none; border-right: 3px solid var(--gold); padding-left: 0; padding-right: 1rem; }
+    html[lang="ur"] .comp-t { font-family: 'Gulzar', serif; }
+    html[lang="ur"] .slide-body ul, html[lang="ur"] .slide-body-ur ul { padding-left: 0; padding-right: 1.1em; }
+  </style>
+</head>
+
+<body>
+
+  <!-- LANG BAR -->
+  <div class="lang-bar">
+    <span class="lang-label">Language / زبان</span>
+    <div class="lang-pills">
+      <button class="lang-pill active" id="btnEn" onclick="setLang('en')">English</button>
+      <button class="lang-pill urdu-pill" id="btnUr" onclick="setLang('ur')">اردو</button>
+    </div>
+    <div class="tab-pills">
+      <button class="tab-pill active" id="tabQuiz" onclick="switchTab('quiz')">📝 Quiz</button>
+      <button class="tab-pill" id="tabNotes" onclick="switchTab('notes')">📚 Notes</button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <span class="star-crescent">☪</span>
+      <div class="header-badge">Riphah International University · Islamic Studies</div>
+      <h1 class="en-title">Ideology &amp; Constitution<br>of Pakistan</h1>
+      <div class="ur-title">نظریۂ پاکستان اور آئینِ پاکستان</div>
+      <!-- here -->
+      <div class="section active" id="sect-home">
+        <div class="hero">
+          <div class="hero-chip">Made by Hanan Shafay & Mohid Ahmed</div>
+        </div>
+      </div>
+      <!-- here -->
+      <p class="en-sub">Comprehensive Quiz — Lectures 01, 02 &amp; 05 · Political Isms</p>
+      <div class="ur-sub">جامع امتحان — لیکچر ۰۱، ۰۲ اور ۰۵ · سیاسی نظریات</div>
+      <div class="header-deco">
+        <div class="deco-diamond"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROGRESS -->
+  <div id="quizPanel">
+  <div class="progress-wrap">
+    <span class="progress-label" id="progLabel">Progress</span>
+    <div class="progress-bar-outer">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-count" id="progressCount">0 / 10</span>
+  </div>
+
+  <main>
+
+    <!-- ══ SECTION 1: MCQ ══ -->
+    <div class="section-heading">
+      <div class="section-heading-inner">
+        <span>①</span>
+        <span class="sec-en-text">Multiple Choice Questions</span>
+        <span class="sec-ur-text">کثیر انتخابی سوالات</span>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="question-card" data-type="mcq" data-answer="b">
+      <div class="q-meta"><span class="q-number">Q 01</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">What is the Islamic concept of sovereignty according to the Quran?</div>
+      <div class="q-text-ur">قرآن کے مطابق اسلامی تصورِ حاکمیت کیا ہے؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q1" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">Sovereignty belongs to elected
+            representatives</span><span class="opt-text-ur">حاکمیت منتخب نمائندوں کی ہے</span>
+        </label>
+        <label class="option"><input type="radio" name="q1" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">Sovereignty belongs to Allah alone</span><span
+            class="opt-text-ur">حاکمیت صرف اللہ کے لیے ہے</span>
+        </label>
+        <label class="option"><input type="radio" name="q1" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">Sovereignty resides in the state</span><span
+            class="opt-text-ur">حاکمیت ریاست میں ہے</span>
+        </label>
+        <label class="option"><input type="radio" name="q1" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">Sovereignty is shared between Ummah and
+            Caliph</span><span class="opt-text-ur">حاکمیت امت اور خلیفہ کے درمیان مشترک ہے</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-card" data-type="mcq" data-answer="c">
+      <div class="q-meta"><span class="q-number">Q 02</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">Sir Syed Ahmed Khan established M.A.O College at Aligarh in which year?</div>
+      <div class="q-text-ur">سرسید احمد خان نے علی گڑھ میں ایم اے او کالج کس سال قائم کیا؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q2" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">1857</span><span class="opt-text-ur">۱۸۵۷</span>
+        </label>
+        <label class="option"><input type="radio" name="q2" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">1870</span><span class="opt-text-ur">۱۸۷۰</span>
+        </label>
+        <label class="option"><input type="radio" name="q2" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">1875</span><span class="opt-text-ur">۱۸۷۵</span>
+        </label>
+        <label class="option"><input type="radio" name="q2" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">1883</span><span class="opt-text-ur">۱۸۸۳</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-card" data-type="mcq" data-answer="a">
+      <div class="q-meta"><span class="q-number">Q 03</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">The Two Nation Theory holds that Hindus and Muslims are separate nations primarily because of:
+      </div>
+      <div class="q-text-ur">دو قومی نظریہ کے مطابق ہندو اور مسلمان الگ الگ قومیں ہیں، بنیادی طور پر:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q3" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">Different religions, philosophies, social customs,
+            and civilizations</span><span class="opt-text-ur">مختلف مذاہب، فلسفہ، سماجی رسوم اور تہذیب کی وجہ سے</span>
+        </label>
+        <label class="option"><input type="radio" name="q3" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">Different languages and geographical
+            regions</span><span class="opt-text-ur">مختلف زبانوں اور جغرافیائی علاقوں کی وجہ سے</span>
+        </label>
+        <label class="option"><input type="radio" name="q3" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">Economic disparities between communities</span><span
+            class="opt-text-ur">برادریوں کے درمیان معاشی فرق کی وجہ سے</span>
+        </label>
+        <label class="option"><input type="radio" name="q3" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">British colonial divide-and-rule policies</span><span
+            class="opt-text-ur">انگریزوں کی تقسیم کرو اور حکومت کرو پالیسی</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card" data-type="mcq" data-answer="b">
+      <div class="q-meta"><span class="q-number">Q 04</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">Dar ul Uloom Deoband was established primarily on the initiative of:</div>
+      <div class="q-text-ur">دارالعلوم دیوبند کس کی پہل پر قائم کیا گیا؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q4" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">Maulana Hussain Ahmad Madni</span><span
+            class="opt-text-ur">مولانا حسین احمد مدنی</span>
+        </label>
+        <label class="option"><input type="radio" name="q4" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">Haji Muhammad Abid and Maulana Muhammad Qasim
+            Nanautvi</span><span class="opt-text-ur">حاجی محمد عابد اور مولانا محمد قاسم نانوتوی</span>
+        </label>
+        <label class="option"><input type="radio" name="q4" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">Sir Syed Ahmed Khan</span><span
+            class="opt-text-ur">سرسید احمد خان</span>
+        </label>
+        <label class="option"><input type="radio" name="q4" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">Maulana Shibli Naumani</span><span
+            class="opt-text-ur">مولانا شبلی نعمانی</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card" data-type="mcq" data-answer="d">
+      <div class="q-meta"><span class="q-number">Q 05</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">Nadva-tul-Ulema Lucknow was established in which year?</div>
+      <div class="q-text-ur">ندوۃ العلماء لکھنؤ کس سال قائم ہوئی؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q5" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">1875</span><span class="opt-text-ur">۱۸۷۵</span>
+        </label>
+        <label class="option"><input type="radio" name="q5" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">1885</span><span class="opt-text-ur">۱۸۸۵</span>
+        </label>
+        <label class="option"><input type="radio" name="q5" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">1890</span><span class="opt-text-ur">۱۸۹۰</span>
+        </label>
+        <label class="option"><input type="radio" name="q5" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">1894</span><span class="opt-text-ur">۱۸۹۴</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-card" data-type="mcq" data-answer="a">
+      <div class="q-meta"><span class="q-number">Q 06</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">Which ideology advocates abolition of the state and substitution with free agreements between
+        individuals?</div>
+      <div class="q-text-ur">کون سا نظریہ ریاست کے خاتمے اور افراد کے درمیان آزادانہ معاہدوں کی حمایت کرتا ہے؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q6" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">Anarchism</span><span
+            class="opt-text-ur">لاسلطانیت</span>
+        </label>
+        <label class="option"><input type="radio" name="q6" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">Libertarianism</span><span class="opt-text-ur">آزادی
+            پسندی</span>
+        </label>
+        <label class="option"><input type="radio" name="q6" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">Syndicalism</span><span class="opt-text-ur">سنڈیکل
+            ازم</span>
+        </label>
+        <label class="option"><input type="radio" name="q6" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">Collectivism</span><span class="opt-text-ur">اجتماعیت
+            پسندی</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-card" data-type="mcq" data-answer="c">
+      <div class="q-meta"><span class="q-number">Q 07</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">When a custom is transferred from generation to generation, it takes the form of:</div>
+      <div class="q-text-ur">جب کوئی رسم نسل در نسل منتقل ہوتی ہے تو وہ کیا بن جاتی ہے؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q7" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">Culture</span><span class="opt-text-ur">ثقافت</span>
+        </label>
+        <label class="option"><input type="radio" name="q7" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">Civilization</span><span
+            class="opt-text-ur">تہذیب</span>
+        </label>
+        <label class="option"><input type="radio" name="q7" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">Tradition</span><span
+            class="opt-text-ur">روایت</span>
+        </label>
+        <label class="option"><input type="radio" name="q7" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">Sovereignty</span><span
+            class="opt-text-ur">حاکمیت</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-card" data-type="mcq" data-answer="b">
+      <div class="q-meta"><span class="q-number">Q 08</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">Anjuman-i-Himayat-i-Islam was founded in Lahore in:</div>
+      <div class="q-text-ur">انجمنِ حمایتِ اسلام لاہور میں کس سال قائم ہوئی؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q8" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">1875</span><span class="opt-text-ur">۱۸۷۵</span>
+        </label>
+        <label class="option"><input type="radio" name="q8" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">1884</span><span class="opt-text-ur">۱۸۸۴</span>
+        </label>
+        <label class="option"><input type="radio" name="q8" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">1892</span><span class="opt-text-ur">۱۸۹۲</span>
+        </label>
+        <label class="option"><input type="radio" name="q8" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">1898</span><span class="opt-text-ur">۱۸۹۸</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-card" data-type="mcq" data-answer="d">
+      <div class="q-meta"><span class="q-number">Q 09</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">The ideology of Pakistan is based on which foundational principle?</div>
+      <div class="q-text-ur">نظریۂ پاکستان کی بنیاد کس اصول پر ہے؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q9" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">Democratic secularism</span><span
+            class="opt-text-ur">جمہوری سیکولرازم</span>
+        </label>
+        <label class="option"><input type="radio" name="q9" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">Nationalist republicanism</span><span
+            class="opt-text-ur">قوم پرست جمہوریت</span>
+        </label>
+        <label class="option"><input type="radio" name="q9" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">Federal constitutionalism</span><span
+            class="opt-text-ur">وفاقی آئینیت</span>
+        </label>
+        <label class="option"><input type="radio" name="q9" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">"The only sovereign is Allah" — Islamic
+            ideology</span><span class="opt-text-ur">"حاکمیتِ اعلیٰ صرف اللہ کی ہے" — اسلامی نظریہ</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-card" data-type="mcq" data-answer="b">
+      <div class="q-meta"><span class="q-number">Q 10</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">According to Lecture 02, what is the primary function of ideology for a nation?</div>
+      <div class="q-text-ur">لیکچر ۰۲ کے مطابق کسی قوم کے لیے نظریے کا بنیادی کردار کیا ہے؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q10" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">To establish military supremacy</span><span class="opt-text-ur">فوجی برتری قائم کرنا</span>
+        </label>
+        <label class="option"><input type="radio" name="q10" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">To bind scattered groups and impel them toward joint action for common goals</span><span class="opt-text-ur">بکھرے گروہوں کو یکجا کرنا اور انہیں مشترکہ مقاصد کے لیے متحد عمل پر آمادہ کرنا</span>
+        </label>
+        <label class="option"><input type="radio" name="q10" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">To promote trade and economic growth</span><span class="opt-text-ur">تجارت اور اقتصادی ترقی کو فروغ دینا</span>
+        </label>
+        <label class="option"><input type="radio" name="q10" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">To preserve cultural traditions of the past</span><span class="opt-text-ur">ماضی کی ثقافتی روایات کو محفوظ رکھنا</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="question-card" data-type="mcq" data-answer="c">
+      <div class="q-meta"><span class="q-number">Q 11</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">Sindh Madressatul Islam was founded on 1st September 1885, led by:</div>
+      <div class="q-text-ur">سندھ مدرسۃ الاسلام ۱ ستمبر ۱۸۸۵ کو کس کی قیادت میں قائم ہوئی؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q11" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">Sir Syed Ahmed Khan</span><span
+            class="opt-text-ur">سرسید احمد خان</span>
+        </label>
+        <label class="option"><input type="radio" name="q11" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">Maulana Shibli Naumani</span><span
+            class="opt-text-ur">مولانا شبلی نعمانی</span>
+        </label>
+        <label class="option"><input type="radio" name="q11" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">Khan Bahadur Hassanally Effendi</span><span
+            class="opt-text-ur">خان بہادر حسن علی آفندی</span>
+        </label>
+        <label class="option"><input type="radio" name="q11" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">Maulana Abdul Ghafoor</span><span
+            class="opt-text-ur">مولانا عبدالغفور</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="question-card" data-type="mcq" data-answer="d">
+      <div class="q-meta"><span class="q-number">Q 12</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">What was the main reason Sir Syed Ahmed Khan favored a separate electorate for Muslims in 1883?</div>
+      <div class="q-text-ur">سرسید احمد خان نے ۱۸۸۳ میں مسلمانوں کے لیے علیحدہ انتخابی حلقوں کی حمایت کیوں کی؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q12" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">To oppose the British government</span><span class="opt-text-ur">برطانوی حکومت کی مخالفت کرنا</span>
+        </label>
+        <label class="option"><input type="radio" name="q12" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">To promote Hindu–Muslim unity</span><span class="opt-text-ur">ہندو مسلم اتحاد کو فروغ دینا</span>
+        </label>
+        <label class="option"><input type="radio" name="q12" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">To establish a separate Muslim state immediately</span><span class="opt-text-ur">فوری طور پر ایک علیحدہ مسلم ریاست قائم کرنا</span>
+        </label>
+        <label class="option"><input type="radio" name="q12" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">Because a majority would otherwise override minority Muslim interests</span><span class="opt-text-ur">کیونکہ اکثریت مسلمان اقلیت کے مفادات دبا دیتی</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="question-card" data-type="mcq" data-answer="d">
+      <div class="q-meta"><span class="q-number">Q 13</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">Which key distinction separates civilization from culture (Lecture 01)?</div>
+      <div class="q-text-ur">لیکچر ۰۱ کے مطابق تہذیب اور ثقافت میں بنیادی فرق کیا ہے؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q13" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">Culture is external; civilization is
+            internal</span><span class="opt-text-ur">ثقافت بیرونی ہے؛ تہذیب اندرونی</span>
+        </label>
+        <label class="option"><input type="radio" name="q13" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">Culture changes; civilization does not</span><span
+            class="opt-text-ur">ثقافت بدلتی ہے؛ تہذیب نہیں بدلتی</span>
+        </label>
+        <label class="option"><input type="radio" name="q13" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">Civilization is what we are; culture is what we
+            have</span><span class="opt-text-ur">تہذیب وہ ہے جو ہم ہیں؛ ثقافت وہ جو ہمارے پاس ہے</span>
+        </label>
+        <label class="option"><input type="radio" name="q13" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">Culture is what we are; civilization is what we
+            have</span><span class="opt-text-ur">ثقافت وہ ہے جو ہم ہیں؛ تہذیب وہ جو ہمارے پاس ہے</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="question-card" data-type="mcq" data-answer="a">
+      <div class="q-meta"><span class="q-number">Q 14</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">Quaid-e-Azam described Pakistan as a "Laboratory to experiment on Islamic principles" at:
+      </div>
+      <div class="q-text-ur">قائداعظم نے پاکستان کو "اسلامی اصولوں پر تجربہ کرنے کی تجربہ گاہ" کہاں قرار دیا؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q14" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">Islamia College Peshawar (1946)</span><span
+            class="opt-text-ur">اسلامیہ کالج پشاور (۱۹۴۶)</span>
+        </label>
+        <label class="option"><input type="radio" name="q14" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">Muslim University Aligarh (1944)</span><span
+            class="opt-text-ur">مسلم یونیورسٹی علی گڑھ (۱۹۴۴)</span>
+        </label>
+        <label class="option"><input type="radio" name="q14" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">Frontier Muslim Student Federation (1945)</span><span
+            class="opt-text-ur">فرنٹیئر مسلم اسٹوڈنٹ فیڈریشن (۱۹۴۵)</span>
+        </label>
+        <label class="option"><input type="radio" name="q14" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">Pakistan Resolution gathering (1940)</span><span
+            class="opt-text-ur">قرارداد پاکستان کا اجتماع (۱۹۴۰)</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="question-card" data-type="mcq" data-answer="a">
+      <div class="q-meta"><span class="q-number">Q 15</span><span class="q-type-tag">MCQ</span></div>
+      <div class="q-text">What was the key difference between Dar ul Uloom Deoband and Nadva tul Ulema in their educational approach?</div>
+      <div class="q-text-ur">دارالعلوم دیوبند اور ندوۃ العلماء کے تعلیمی نقطۂ نظر میں بنیادی فرق کیا تھا؟</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q15" value="a">
+          <div class="opt-letter">A</div><span class="opt-text-en">Deoband focused only on religious education; Nadva combined religious and modern sciences</span><span class="opt-text-ur">دیوبند صرف دینی تعلیم دیتا تھا؛ ندوہ نے دینی اور جدید علوم دونوں کو یکجا کیا</span>
+        </label>
+        <label class="option"><input type="radio" name="q15" value="b">
+          <div class="opt-letter">B</div><span class="opt-text-en">Deoband was pro-Pakistan; Nadva was pro-Congress</span><span class="opt-text-ur">دیوبند پاکستان حامی تھا؛ ندوہ کانگریس حامی</span>
+        </label>
+        <label class="option"><input type="radio" name="q15" value="c">
+          <div class="opt-letter">C</div><span class="opt-text-en">Nadva focused only on religious education; Deoband offered modern sciences</span><span class="opt-text-ur">ندوہ صرف دینی تعلیم دیتا تھا؛ دیوبند جدید علوم پیش کرتا تھا</span>
+        </label>
+        <label class="option"><input type="radio" name="q15" value="d">
+          <div class="opt-letter">D</div><span class="opt-text-en">Both institutions had identical curricula</span><span class="opt-text-ur">دونوں اداروں کا نصاب یکساں تھا</span>
+        </label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- ══ SECTION 2: FILL BLANKS ══ -->
+    <div class="section-heading">
+      <div class="section-heading-inner">
+        <span>②</span>
+        <span class="sec-en-text">Fill in the Blanks</span>
+        <span class="sec-ur-text">خالی جگہ پُر کریں</span>
+      </div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="question-card" data-type="fill" data-answers='["quran","holy quran"]'>
+      <div class="q-meta"><span class="q-number">Q 16</span><span class="q-type-tag">Fill Blank</span></div>
+      <div class="q-text">Quaid-e-Azam said: "What relationships knits the Muslims into one whole… the relationship, the
+        sheet anchor and the rock is ___________."</div>
+      <div class="q-text-ur">قائداعظم نے فرمایا: "جو رشتہ مسلمانوں کو ایک کرتا ہے، وہ لنگر اور چٹان ___________ ہے۔"
+      </div>
+      <input class="blank-input" type="text" placeholder="Your answer…" autocomplete="off">
+      <br><button class="check-btn" data-role="fill">Check</button>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q17 -->
+    <div class="question-card" data-type="fill" data-answers='["sovereignty"]'>
+      <div class="q-meta"><span class="q-number">Q 17</span><span class="q-type-tag">Fill Blank</span></div>
+      <div class="q-text">The full right and power of a governing body over itself, without outside interference, is
+        called ___________.</div>
+      <div class="q-text-ur">کسی حکومتی ادارے کا اپنے اوپر مکمل حق و اختیار، بغیر کسی بیرونی مداخلت کے، ___________
+        کہلاتا ہے۔</div>
+      <input class="blank-input" type="text" placeholder="Your answer…" autocomplete="off">
+      <br><button class="check-btn" data-role="fill">Check</button>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="question-card" data-type="fill" data-answers='["1857"]'>
+      <div class="q-meta"><span class="q-number">Q 18</span><span class="q-type-tag">Fill Blank</span></div>
+      <div class="q-text">After the War of ___________, Sir Syed Ahmed Khan published "The Causes of Indian Mutiny."
+      </div>
+      <div class="q-text-ur">___________ کی جنگ کے بعد، سرسید احمد خان نے "اسبابِ بغاوتِ ہند" شائع کی۔</div>
+      <input class="blank-input" type="text" placeholder="Year…" autocomplete="off">
+      <br><button class="check-btn" data-role="fill">Check</button>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="question-card" data-type="fill"
+      data-answers='["jamiatul ulama i hind","jamiat ulama hind","jamiatul-ulama-i-hind","jamiat ul ulama"]'>
+      <div class="q-meta"><span class="q-number">Q 19</span><span class="q-type-tag">Fill Blank</span></div>
+      <div class="q-text">The Ulama of Deoband formed ___________ in 1919 to participate in political affairs
+        systematically.</div>
+      <div class="q-text-ur">دیوبند کے علماء نے ۱۹۱۹ میں ___________ بنائی تاکہ سیاسی معاملات میں منظم حصہ لے سکیں۔
+      </div>
+      <input class="blank-input" type="text" placeholder="Organization name…" autocomplete="off">
+      <br><button class="check-btn" data-role="fill">Check</button>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q20 -->
+    <div class="question-card" data-type="fill" data-answers='["tauheed","tawheed","oneness of god","oneness"]'>
+      <div class="q-meta"><span class="q-number">Q 20</span><span class="q-type-tag">Fill Blank</span></div>
+      <div class="q-text">___________ (Oneness of God) is the most important article of faith in Islam, forming the foundation of Islamic sovereignty.</div>
+      <div class="q-text-ur">___________ (توحیدِ الٰہی) اسلام میں ایمان کا سب سے اہم رکن ہے جو اسلامی حاکمیت کی بنیاد بناتا ہے۔</div>
+      <input class="blank-input" type="text" placeholder="Arabic term…" autocomplete="off">
+      <br><button class="check-btn" data-role="fill">Check</button>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q21 -->
+    <div class="question-card" data-type="fill" data-answers='["al-malik","al malik"]'>
+      <div class="q-meta"><span class="q-number">Q 21</span><span class="q-type-tag">Fill Blank</span></div>
+      <div class="q-text">The Quran describes Allah as ___________, meaning "sovereign," and Malik-ul-Mulk — the eternal
+        possessor of sovereignty.</div>
+      <div class="q-text-ur">قرآن اللہ تعالیٰ کو ___________ یعنی "بادشاہ" اور مالک الملک قرار دیتا ہے۔</div>
+      <input class="blank-input" type="text" placeholder="Arabic title…" autocomplete="off">
+      <br><button class="check-btn" data-role="fill">Check</button>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q22 -->
+    <div class="question-card" data-type="fill" data-answers='["maulana shibli naumani","shibli naumani","shibli"]'>
+      <div class="q-meta"><span class="q-number">Q 22</span><span class="q-type-tag">Fill Blank</span></div>
+      <div class="q-text">In 1904, ___________ introduced revolutionary changes in the syllabus of Nadva-tul-Ulema.
+      </div>
+      <div class="q-text-ur">۱۹۰۴ میں ___________ نے ندوۃ العلماء کے نصاب میں انقلابی تبدیلیاں لائیں۔</div>
+      <input class="blank-input" type="text" placeholder="Scholar's name…" autocomplete="off">
+      <br><button class="check-btn" data-role="fill">Check</button>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q23 -->
+    <div class="question-card" data-type="fill" data-answers='["ummah","muslim ummah"]'>
+      <div class="q-meta"><span class="q-number">Q 23</span><span class="q-type-tag">Fill Blank</span></div>
+      <div class="q-text">In Islamic polity, the Muslim community united under one sovereign by virtue of faith is
+        called one ___________.</div>
+      <div class="q-text-ur">اسلامی سیاست میں، ایمان کی بنیاد پر ایک حاکم کے تحت متحد مسلم برادری کو ___________ کہتے
+        ہیں۔</div>
+      <input class="blank-input" type="text" placeholder="Arabic term…" autocomplete="off">
+      <br><button class="check-btn" data-role="fill">Check</button>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q24 -->
+    <div class="question-card" data-type="fill"
+      data-answers='["two nation theory","2 nation theory","two-nation theory"]'>
+      <div class="q-meta"><span class="q-number">Q 24</span><span class="q-type-tag">Fill Blank</span></div>
+      <div class="q-text">The ideological basis of Pakistan, holding that Muslims and Hindus are two entirely different
+        nations, is called the ___________.</div>
+      <div class="q-text-ur">پاکستان کی نظریاتی بنیاد جس کے مطابق مسلمان اور ہندو دو بالکل مختلف قومیں ہیں، ___________
+        کہلاتی ہے۔</div>
+      <input class="blank-input" type="text" placeholder="Theory name…" autocomplete="off">
+      <br><button class="check-btn" data-role="fill">Check</button>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- Q25 -->
+    <div class="question-card" data-type="fill" data-answers='["1884"]'>
+      <div class="q-meta"><span class="q-number">Q 25</span><span class="q-type-tag">Fill Blank</span></div>
+      <div class="q-text">Anjuman-i-Himayat-i-Islam was founded on 24 September ___________ by Khalifa Hameed-ud-Din.
+      </div>
+      <div class="q-text-ur">انجمنِ حمایتِ اسلام ۲۴ ستمبر ___________ کو خلیفہ حمیدالدین نے قائم کی۔</div>
+      <input class="blank-input" type="text" placeholder="Year…" autocomplete="off">
+      <br><button class="check-btn" data-role="fill">Check</button>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- ══ SECTION 3: SHORT ANSWER ══ -->
+    <div class="section-heading">
+      <div class="section-heading-inner">
+        <span>③</span>
+        <span class="sec-en-text">Short Answer Questions</span>
+        <span class="sec-ur-text">مختصر جوابی سوالات</span>
+      </div>
+    </div>
+
+    <!-- Q26 -->
+    <div class="question-card" data-type="short">
+      <div class="q-meta"><span class="q-number">Q 26</span><span class="q-type-tag">Short Answer</span></div>
+      <div class="q-text">Explain the difference between Western sovereignty and Islamic sovereignty.</div>
+      <div class="q-text-ur">مغربی حاکمیت اور اسلامی حاکمیت کے درمیان فرق بیان کریں۔</div>
+      <textarea class="short-answer-area" placeholder="Write your answer here (3–5 sentences)…"></textarea>
+      <br><button class="check-btn" data-role="short">Show Model Answer</button>
+      <div class="model-answer"><strong>Model Answer</strong>
+        <span class="model-ans-en">Western sovereignty places supreme authority in the state or people. Islamic
+          sovereignty places absolute authority in Allah alone — all legislation must conform to the Quran (Shariah).
+          Western law is human-made; Islamic polity is governed by Tauheed. The Islamic concept unconditionally
+          subordinates human will to the will of God.</span>
+        <span class="model-ans-ur">مغربی حاکمیت میں اعلیٰ اختیار ریاست یا عوام کو ہے۔ اسلامی حاکمیت میں مطلق اختیار صرف
+          اللہ کو ہے — تمام قانون سازی قرآن (شریعت) کے مطابق ہونی چاہیے۔ مغربی قانون انسانی ہے جبکہ اسلامی سیاست توحید
+          پر مبنی ہے۔</span>
+      </div>
+    </div>
+
+    <!-- Q27 -->
+    <div class="question-card" data-type="short">
+      <div class="q-meta"><span class="q-number">Q 27</span><span class="q-type-tag">Short Answer</span></div>
+      <div class="q-text">What were the main objectives of Sir Syed Ahmed Khan's Aligarh Movement?</div>
+      <div class="q-text-ur">سرسید احمد خان کی علی گڑھ تحریک کے بنیادی مقاصد کیا تھے؟</div>
+      <textarea class="short-answer-area" placeholder="Write your answer here (3–5 sentences)…"></textarea>
+      <br><button class="check-btn" data-role="short">Show Model Answer</button>
+      <div class="model-answer"><strong>Model Answer</strong>
+        <span class="model-ans-en">Sir Syed had two main objectives: (1) remove tension between Muslims and the British,
+          (2) motivate Muslims to acquire Western education. He established M.A.O College (1875) and advocated separate
+          electorates for Muslims (1883). By defining Muslims as a separate nation, the Aligarh Movement planted the
+          seed of Muslim nationalism that grew into Pakistan's ideology.</span>
+        <span class="model-ans-ur">سرسید کے دو بنیادی مقاصد تھے: (۱) مسلمانوں اور انگریزوں کے درمیان کشیدگی ختم کرنا،
+          (۲) مسلمانوں کو مغربی تعلیم حاصل کرنے پر آمادہ کرنا۔ انہوں نے ایم اے او کالج (۱۸۷۵) قائم کیا اور ۱۸۸۳ میں
+          علیحدہ انتخابی حلقوں کی حمایت کی۔ علی گڑھ تحریک نے مسلم قوم پرستی کا بیج بویا جو نظریۂ پاکستان بنا۔</span>
+      </div>
+    </div>
+
+    <!-- Q28 -->
+    <div class="question-card" data-type="short">
+      <div class="q-meta"><span class="q-number">Q 28</span><span class="q-type-tag">Short Answer</span></div>
+      <div class="q-text">Distinguish between culture and civilization — how are they related and how do they differ?
+      </div>
+      <div class="q-text-ur">ثقافت اور تہذیب میں فرق بیان کریں — وہ باہم کیسے متعلق ہیں اور کیسے مختلف؟</div>
+      <textarea class="short-answer-area" placeholder="Write your answer here (3–5 sentences)…"></textarea>
+      <br><button class="check-btn" data-role="short">Show Model Answer</button>
+      <div class="model-answer"><strong>Model Answer</strong>
+        <span class="model-ans-en">Culture encompasses beliefs, arts, religion — it is internal, what we "are."
+          Civilization refers to material advancement (technology, infrastructure) — external, what we "have." Culture
+          has no measurement standard (end in itself); civilization is measured by utility (a means). Culture is a
+          pre-condition for civilization; all societies have culture but only some develop civilization. Civilization
+          always progresses; culture cannot be judged superior to past forms.</span>
+        <span class="model-ans-ur">ثقافت عقائد، فنون اور مذہب پر مشتمل ہے — یہ اندرونی ہے، یعنی "ہم کیا ہیں"۔ تہذیب مادی
+          ترقی ہے — بیرونی، یعنی "ہمارے پاس کیا ہے"۔ ثقافت کا کوئی پیمانہ نہیں (خود مقصد ہے)؛ تہذیب افادیت سے ناپی جاتی
+          ہے (ذریعہ ہے)۔ ثقافت تہذیب کی شرط ہے؛ تمام معاشروں میں ثقافت ہوتی ہے مگر تہذیب چند میں۔</span>
+      </div>
+    </div>
+
+    <!-- Q29 -->
+    <div class="question-card" data-type="short">
+      <div class="q-meta"><span class="q-number">Q 29</span><span class="q-type-tag">Short Answer</span></div>
+      <div class="q-text">What was the purpose of Nadva-tul-Ulema Lucknow and what gap did it fill between Aligarh and
+        Deoband?</div>
+      <div class="q-text-ur">ندوۃ العلماء لکھنؤ کا مقصد کیا تھا اور اس نے علی گڑھ اور دیوبند کے درمیان کون سا خلا پُر
+        کیا؟</div>
+      <textarea class="short-answer-area" placeholder="Write your answer here (3–5 sentences)…"></textarea>
+      <br><button class="check-btn" data-role="short">Show Model Answer</button>
+      <div class="model-answer"><strong>Model Answer</strong>
+        <span class="model-ans-en">Founded in 1894 by Maulana Abdul Ghafoor, Shibli Naumani, and Abdul Haq. Aligarh
+          graduates lacked religious knowledge; Deoband neglected modern sciences. Nadva aimed to produce graduates
+          well-versed in both. Its goals included promoting Islamic thought, reforming the curriculum, ending scholarly
+          differences, and producing well-rounded Muslim graduates.</span>
+        <span class="model-ans-ur">۱۸۹۴ میں مولانا عبدالغفور، شبلی نعمانی اور عبدالحق نے ندوہ قائم کیا۔ علی گڑھ کے فارغ
+          التحصیل مذہبی علم میں کمزور تھے؛ دیوبند نے جدید علوم نظرانداز کیے۔ ندوہ نے دونوں میں ماہر فارغ التحصیل پیدا
+          کرنے کا ہدف رکھا۔</span>
+      </div>
+    </div>
+
+    <!-- Q30 -->
+    <div class="question-card" data-type="short">
+      <div class="q-meta"><span class="q-number">Q 30</span><span class="q-type-tag">Short Answer</span></div>
+      <div class="q-text">What were the key contributions of Sindh Madressatul Islam to Muslim education, and what made it unique compared to other Muslim institutions?</div>
+      <div class="q-text-ur">سندھ مدرسۃ الاسلام کا مسلم تعلیم میں کیا کردار رہا اور اسے دیگر مسلم اداروں سے کیا چیز منفرد بناتی تھی؟</div>
+      <textarea class="short-answer-area" placeholder="Write your answer here (3–5 sentences)…"></textarea>
+      <br><button class="check-btn" data-role="short">Show Model Answer</button>
+      <div class="model-answer"><strong>Model Answer</strong>
+        <span class="model-ans-en">Founded on 1 September 1885 by Khan Bahadur Hassanally Effendi, Sindh Madressatul Islam was the first modern Muslim educational institution of Sindh. It was established in a context where in the 1870 matriculation exams, not a single Muslim passed despite Muslims forming 75% of Sindh's population. What made it unique was that it was open to all religions — approximately 10% of students were always from non-Muslim communities — creating a cosmopolitan, multicultural, and liberal atmosphere. It was modeled on the reformist spirit of Sir Syed Ahmed Khan in the south-west, alongside Justice Syed Amir Ali's efforts in the east.</span>
+        <span class="model-ans-ur">سندھ مدرسۃ الاسلام ۱ ستمبر ۱۸۸۵ کو خان بہادر حسن علی آفندی نے قائم کیا — یہ سندھ کا پہلا جدید مسلم تعلیمی ادارہ تھا۔ یہ اس تناظر میں قائم ہوا کہ ۱۸۷۰ کے میٹرک امتحانات میں ایک بھی مسلمان پاس نہیں ہوا حالانکہ مسلمان سندھ کی ۷۵٪ آبادی تھے۔ اسے منفرد بنانے والی بات یہ تھی کہ یہ تمام مذاہب کے لیے کھلا تھا — تقریباً ۱۰٪ طلبہ غیر مسلم ہوتے تھے۔</span>
+      </div>
+    </div>
+
+    <!-- Q31 -->
+    <div class="question-card" data-type="short">
+      <div class="q-meta"><span class="q-number">Q 31</span><span class="q-type-tag">Short Answer</span></div>
+      <div class="q-text">What was the role of Anjuman-i-Himayat-i-Islam in Muslim educational and social uplift in
+        Punjab?</div>
+      <div class="q-text-ur">انجمنِ حمایتِ اسلام نے پنجاب میں مسلمانوں کی تعلیمی اور سماجی ترقی میں کیا کردار ادا کیا؟
+      </div>
+      <textarea class="short-answer-area" placeholder="Write your answer here (3–5 sentences)…"></textarea>
+      <br><button class="check-btn" data-role="short">Show Model Answer</button>
+      <div class="model-answer"><strong>Model Answer</strong>
+        <span class="model-ans-en">Founded 1884 by Khalifa Hameed-ud-Din. Established girls' schools, orphanages,
+          Islamia College (1892, elevated 1903), and Islamia College for Women (1939). Its press produced textbooks for
+          Muslim schools across Punjab and an accurate Quran text. It countered Christian missionary activity and
+          politically organized Muslims, making it vital for Muslim social and cultural progress.</span>
+        <span class="model-ans-ur">۱۸۸۴ میں خلیفہ حمیدالدین نے قائم کی۔ لڑکیوں کے اسکول، یتیم خانے، اسلامیہ کالج (۱۸۹۲)
+          اور اسلامیہ کالج برائے خواتین (۱۹۳۹) قائم کیے۔ پریس نے پنجاب بھر میں نصابی کتب اور قرآن کریم کا درست متن شائع
+          کیا۔ عیسائی مشنریوں کا مقابلہ کیا اور مسلمانوں کو سیاسی طور پر منظم کیا۔</span>
+      </div>
+    </div>
+
+    <!-- Q32 -->
+    <div class="question-card" data-type="short">
+      <div class="q-meta"><span class="q-number">Q 32</span><span class="q-type-tag">Short Answer</span></div>
+      <div class="q-text">Define "ideology" in the context of Pakistan's founding. Why is it a motivating force for a
+        nation?</div>
+      <div class="q-text-ur">پاکستان کے قیام کے تناظر میں "نظریہ" کی تعریف کریں۔ اسے قوم کے لیے محرک قوت کیوں کہا جاتا
+        ہے؟</div>
+      <textarea class="short-answer-area" placeholder="Write your answer here (3–5 sentences)…"></textarea>
+      <br><button class="check-btn" data-role="short">Show Model Answer</button>
+      <div class="model-answer"><strong>Model Answer</strong>
+        <span class="model-ans-en">Ideology is a plan or program based on philosophy (George Lewis). It binds scattered
+          groups in society, bringing them to a common platform, and impels people toward joint action for shared goals.
+          Pakistan's ideology — Islamic ideology based on the Two Nation Theory — provided cohesion to subcontinent
+          Muslims by rallying them around shared faith and the goal of a sovereign Islamic state.</span>
+        <span class="model-ans-ur">نظریہ فلسفے پر مبنی منصوبہ ہے (جارج لیوس)۔ یہ بکھرے گروہوں کو ایک مشترکہ پلیٹ فارم پر
+          اکٹھا کرتا ہے اور مشترکہ مقاصد کے لیے متحد عمل پر مجبور کرتا ہے۔ پاکستان کا اسلامی نظریہ — دو قومی نظریے پر
+          مبنی — برصغیر کے مسلمانوں کو ایک اسلامی ریاست کے ہدف کے گرد یکجا کرنے کا ذریعہ بنا۔</span>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-section">
+      <button class="submit-btn" id="submitBtn">📋 Submit &amp; See Results</button>
+    </div>
+
+    <div id="results">
+      <div class="trophy" id="trophyEmoji">🏆</div>
+      <h2 id="resultsTitle">Quiz Complete!</h2>
+      <div class="score-big" id="scoreDisplay">0/25</div>
+      <div class="score-label" id="scoreLabel">MCQ + Fill in the Blank Score</div>
+      <div class="score-detail" id="scoreDetail"></div>
+      <div class="grade-tag" id="gradeTag"></div>
+      <br>
+      <button class="retry-btn" onclick="location.reload()">↺ Retake Quiz</button>
+    </div>
+
+  </main>
+  </div><!-- end #quizPanel -->
+
+  <!-- ═══════════════════════════════════════════════════
+       NOTES PANEL
+  ═══════════════════════════════════════════════════ -->
+  <div id="notesPanel">
+    <div class="notes-wrap">
+
+      <!-- ══════════════════════════════════════
+           LECTURE 01 — Custom, Tradition, Culture & Civilization
+      ══════════════════════════════════════ -->
+      <div class="lecture-block">
+        <div class="lecture-title-bar">
+          <span class="lecture-num-badge">Lecture 01</span>
+          <span class="lecture-main-title">Custom, Tradition, Culture, Civilization &amp; Sovereignty</span>
+          <span class="lecture-title-ur">رسم، روایت، ثقافت، تہذیب اور حاکمیت</span>
+        </div>
+        <hr class="lecture-divider">
+
+        <div class="notes-obj">
+          <strong>📌 Lecture Objectives</strong>
+          <div class="notes-obj-en">
+          <ul>
+            <li>Understand basic concepts of customs, traditions, culture and civilization</li>
+            <li>Differentiate between custom &amp; tradition, and culture &amp; civilization</li>
+            <li>Learn and compare Islamic vs. Western concepts of sovereignty</li>
+          </ul>
+          </div>
+          <div class="notes-obj-ur">
+          <ul>
+            <li>رسم، روایت، ثقافت اور تہذیب کے بنیادی تصورات سمجھیں</li>
+            <li>رسم اور روایت کے درمیان، اور ثقافت اور تہذیب کے درمیان فرق جانیں</li>
+            <li>حاکمیت کے اسلامی اور مغربی تصورات سیکھیں اور ان کا موازنہ کریں</li>
+          </ul>
+          </div>
+        </div>
+
+        <div class="slides-grid">
+
+          <!-- Slide: Custom -->
+          <div class="slide-card cv">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Definition</span><span class="slide-tag-ur">تعریف</span></span>
+              <div class="slide-heading slide-heading-en">Custom</div>
+              <div class="slide-heading slide-heading-ur">رسم</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>A <span class="hl">customary way</span> of doing something; a habitual practice</li>
+                  <li>Firmly established and generally accepted practice or procedure</li>
+                  <li>Long-established practice considered as <span class="hl">unwritten law</span></li>
+                  <li>The whole body of usages that <span class="hl">regulate social life</span></li>
+                  <li>An accepted way of behaving specific to a particular society, place, or time</li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>کچھ کرنے کا <span class="hl">معمول کا طریقہ</span>؛ ایک عادی عمل</li>
+                  <li>مضبوط اور عام طور پر قابلِ قبول طریقہ یا روش</li>
+                  <li>طویل عرصے سے قائم عمل جسے <span class="hl">غیر تحریری قانون</span> سمجھا جاتا ہے</li>
+                  <li>تمام رواج جو <span class="hl">سماجی زندگی کو منظم</span> کرتے ہیں</li>
+                  <li>کسی خاص معاشرے، جگہ یا وقت سے مخصوص قابلِ قبول طرزِ عمل</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide: Tradition -->
+          <div class="slide-card cg">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Definition</span><span class="slide-tag-ur">تعریف</span></span>
+              <div class="slide-heading slide-heading-en">Tradition</div>
+              <div class="slide-heading slide-heading-ur">روایت</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li><span class="hl">Transmission</span> of customs or beliefs from generation to generation</li>
+                  <li>An inherited, established pattern of thought, action, or behavior</li>
+                  <li>Beliefs or stories relating to the past — accepted as historical though not verifiable</li>
+                  <li>Handing down of information by <span class="hl">word of mouth or example</span></li>
+                  <li>Key link: when a custom is <span class="hl">transferred across generations</span>, it becomes tradition</li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>رسوم یا عقائد کی ایک نسل سے دوسری نسل کو <span class="hl">منتقلی</span></li>
+                  <li>وراثت میں ملا ہوا قائم شدہ فکر، عمل یا رویے کا نمونہ</li>
+                  <li>ماضی سے متعلق عقائد یا کہانیاں — تاریخی طور پر قبول کی جاتی ہیں اگرچہ قابلِ تصدیق نہ ہوں</li>
+                  <li><span class="hl">زبانی یا مثال</span> کے ذریعے معلومات کی نسل در نسل منتقلی</li>
+                  <li>اہم ربط: جب کوئی رسم <span class="hl">نسلوں میں منتقل</span> ہو جائے تو وہ روایت بن جاتی ہے</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide: Culture -->
+          <div class="slide-card ct">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Definition</span><span class="slide-tag-ur">تعریف</span></span>
+              <div class="slide-heading slide-heading-en">Culture</div>
+              <div class="slide-heading slide-heading-ur">ثقافت</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Arts and manifestations of human intellectual achievement</li>
+                  <li>Ideas, customs, and social behavior of a particular people or society</li>
+                  <li>Customary beliefs, social forms, and <span class="hl">material traits</span> of a group</li>
+                  <li>Set of shared attitudes, values, goals, and practices of an organization</li>
+                  <li>Encompasses <span class="hl">language, religion, cuisine, social habits, music &amp; arts</span></li>
+                  <li><span class="hl">Culture is what we ARE</span></li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>انسانی ذہنی کامیابی کے فنون اور مظاہر</li>
+                  <li>کسی خاص قوم یا معاشرے کے خیالات، رسوم اور سماجی رویے</li>
+                  <li>کسی گروہ کے روایتی عقائد، سماجی اشکال اور <span class="hl">مادی خصوصیات</span></li>
+                  <li>کسی تنظیم کے مشترکہ رویوں، اقدار، اہداف اور طریقوں کا مجموعہ</li>
+                  <li><span class="hl">زبان، مذہب، کھانا، سماجی عادات، موسیقی اور فنون</span> کو شامل ہے</li>
+                  <li><span class="hl">ثقافت وہ ہے جو ہم ہیں</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide: Civilization -->
+          <div class="slide-card cr">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Definition</span><span class="slide-tag-ur">تعریف</span></span>
+              <div class="slide-heading slide-heading-en">Civilization</div>
+              <div class="slide-heading slide-heading-ur">تہذیب</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Stage of human social development considered <span class="hl">most advanced</span></li>
+                  <li>From Latin <em>civis</em> — someone who lives in a town</li>
+                  <li>A relatively high level of cultural and <span class="hl">technological development</span></li>
+                  <li>Consists of technology and social control of man's behavior</li>
+                  <li>Always advancing — machines, transport, communication are constantly progressive</li>
+                  <li><span class="hl">Civilization is what we HAVE</span></li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>انسانی سماجی ترقی کا <span class="hl">سب سے ترقی یافتہ</span> مرحلہ</li>
+                  <li>لاطینی لفظ <em>civis</em> سے — جس کا مطلب ہے شہر میں رہنے والا</li>
+                  <li>ثقافت اور <span class="hl">تکنیکی ترقی</span> کی نسبتاً اعلیٰ سطح</li>
+                  <li>ٹیکنالوجی اور انسانی رویے پر سماجی کنٹرول پر مشتمل</li>
+                  <li>ہمیشہ آگے بڑھتی ہے — مشینیں، نقل و حمل، مواصلات مسلسل ترقی کرتے ہیں</li>
+                  <li><span class="hl">تہذیب وہ ہے جو ہمارے پاس ہے</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comparison: Culture vs Civilization (full row) -->
+          <div class="slide-card cn full-row">
+            <div class="slide-inner">
+              <div class="col-left">
+                <div class="comp-t gold"><span class="slide-tag-en">Culture</span><span class="slide-tag-ur">ثقافت</span></div>
+                <div class="slide-body slide-body-en">
+                  <ul>
+                    <li><span class="hl">All</span> societies have culture</li>
+                    <li>Culture is <span class="hl">earlier</span> — a pre-condition for civilization</li>
+                    <li>Internal: related to thoughts, feelings, ideals, values — like the <span class="hl">soul</span></li>
+                    <li>No standard of measurement — it is an <span class="hl">end in itself</span></li>
+                    <li>Cannot be said to be advancing; art of today is not superior to past</li>
+                    <li>Super-organic; a totality of traditions</li>
+                    <li>Includes religion, art, philosophy, literature, music, dance</li>
+                  </ul>
+                </div>
+                <div class="slide-body slide-body-ur">
+                  <ul>
+                    <li><span class="hl">تمام</span> معاشروں میں ثقافت ہوتی ہے</li>
+                    <li>ثقافت <span class="hl">پہلے</span> آتی ہے — تہذیب کی شرط ہے</li>
+                    <li>اندرونی: خیالات، احساسات، آدرشوں اور اقدار سے متعلق — <span class="hl">روح</span> کی طرح</li>
+                    <li>پیمائش کا کوئی معیار نہیں — <span class="hl">خود مقصد</span> ہے</li>
+                    <li>ترقی پذیر نہیں کہلا سکتی؛ آج کا فن ماضی سے برتر نہیں</li>
+                    <li>روایات کا مجموعہ؛ سماجی زندگی سے اوپر</li>
+                    <li>مذہب، فن، فلسفہ، ادب، موسیقی، رقص شامل ہیں</li>
+                  </ul>
+                </div>
+              </div>
+              <div>
+                <div class="comp-t violet"><span class="slide-tag-en">Civilization</span><span class="slide-tag-ur">تہذیب</span></div>
+                <div class="slide-body slide-body-en">
+                  <ul>
+                    <li>Only <span class="hl">some</span> societies have civilization</li>
+                    <li>Civilization is <span class="hl">later</span> — represents a stage of cultural advancement</li>
+                    <li>External: like the <span class="hl">body</span> of an individual — a means, not an end</li>
+                    <li>Has a precise standard: <span class="hl">utility</span></li>
+                    <li>Always advancing — machines, communication, transport progress constantly</li>
+                    <li>Includes technology and tools by which other objectives are attained</li>
+                    <li>A totality of great and little traditions</li>
+                  </ul>
+                </div>
+                <div class="slide-body slide-body-ur">
+                  <ul>
+                    <li>صرف <span class="hl">بعض</span> معاشروں میں تہذیب ہوتی ہے</li>
+                    <li>تہذیب <span class="hl">بعد میں</span> آتی ہے — ثقافتی ترقی کے ایک مرحلے کی نمائندگی کرتی ہے</li>
+                    <li>بیرونی: فرد کے <span class="hl">جسم</span> کی طرح — ذریعہ ہے، مقصد نہیں</li>
+                    <li>درست معیار ہے: <span class="hl">افادیت</span></li>
+                    <li>ہمیشہ آگے بڑھتی ہے — مشینیں، مواصلات، نقل و حمل مسلسل ترقی کرتے ہیں</li>
+                    <li>ٹیکنالوجی اور آلات شامل ہیں جن سے دیگر مقاصد حاصل کیے جاتے ہیں</li>
+                    <li>بڑی اور چھوٹی روایات کا مجموعہ</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide: Sovereignty -->
+          <div class="slide-card cv">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Political Concept</span><span class="slide-tag-ur">سیاسی تصور</span></span>
+              <div class="slide-heading slide-heading-en">Sovereignty</div>
+              <div class="slide-heading slide-heading-ur">حاکمیت</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Full right and power of a governing body over itself — <span class="hl">no outside interference</span></li>
+                  <li>Designates <span class="hl">supreme authority</span> over some polity</li>
+                  <li>Basic principle of the dominant Westphalian model of state</li>
+                  <li>Quality or state of having <span class="hl">supreme power or authority</span></li>
+                  <li>Supreme and independent authority in government</li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>حکومتی ادارے کا اپنے اوپر مکمل حق و اختیار — <span class="hl">کوئی بیرونی مداخلت نہیں</span></li>
+                  <li>کسی سیاسی وحدت پر <span class="hl">اعلیٰ اختیار</span> کی نشاندہی کرتی ہے</li>
+                  <li>غالب ویسٹ فیلیائی ریاستی نمونے کا بنیادی اصول</li>
+                  <li><span class="hl">اعلیٰ طاقت یا اختیار</span> رکھنے کی حالت یا کیفیت</li>
+                  <li>حکومت میں اعلیٰ اور خودمختار اختیار</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide: Western Sovereignty -->
+          <div class="slide-card cg">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Western Concept</span><span class="slide-tag-ur">مغربی تصور</span></span>
+              <div class="slide-heading slide-heading-en">Western Sovereignty</div>
+              <div class="slide-heading slide-heading-ur">مغربی حاکمیت</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li><span class="hl">Popular Sovereignty</span>: Government created by and subject to the will of the people</li>
+                  <li>Pre-Civil War doctrine: right of people in territories to decide affairs by vote</li>
+                  <li>Divine Sovereignty (Christian): God has absolute right to do all things according to His pleasure</li>
+                  <li>Supreme authority placed in <span class="hl">state or the people</span></li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li><span class="hl">عوامی حاکمیت</span>: حکومت عوام کی مرضی سے بنتی اور اسی کے تابع ہوتی ہے</li>
+                  <li>خانہ جنگی سے پہلے کا نظریہ: علاقوں کے لوگ ووٹ سے اپنے معاملات طے کریں</li>
+                  <li>الہٰی حاکمیت (مسیحی): خدا کو اپنی مرضی کے مطابق سب کچھ کرنے کا مطلق حق ہے</li>
+                  <li>اعلیٰ اختیار <span class="hl">ریاست یا عوام</span> میں رکھا گیا ہے</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide: Islamic Sovereignty -->
+          <div class="slide-card cr">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Islamic Concept</span><span class="slide-tag-ur">اسلامی تصور</span></span>
+              <div class="slide-heading slide-heading-en">Islamic Sovereignty</div>
+              <div class="slide-heading slide-heading-ur">اسلامی حاکمیت</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li><span class="hl">Allah</span> is the supreme authority — all things are under His control</li>
+                  <li>Quran describes Allah as <span class="hl">Al-Malik</span> (sovereign) and <em>Malik-ul-Mulk</em></li>
+                  <li>All legislation must conform to the Quran — the <span class="hl">Shariah</span></li>
+                  <li><span class="hl">Tauheed</span> (Oneness of God) is the most important article of faith</li>
+                  <li>Muslim community (Ummah) united under one sovereign by virtue of faith</li>
+                  <li>Islam means complete submission — human will subordinated to God's will <span class="hl">unconditionally</span></li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li><span class="hl">اللہ</span> اعلیٰ اختیار ہے — تمام چیزیں اس کے اختیار میں ہیں</li>
+                  <li>قرآن اللہ کو <span class="hl">الملک</span> (بادشاہ) اور <em>مالک الملک</em> قرار دیتا ہے</li>
+                  <li>تمام قانون سازی قرآن — <span class="hl">شریعت</span> کے مطابق ہونی چاہیے</li>
+                  <li><span class="hl">توحید</span> (اللہ کی وحدانیت) ایمان کا سب سے اہم رکن ہے</li>
+                  <li>مسلم برادری (امت) ایمان کی بنیاد پر ایک حاکم کے تحت متحد ہے</li>
+                  <li>اسلام کا مطلب مکمل فرمانبرداری ہے — انسانی مرضی <span class="hl">غیر مشروط</span> طور پر خدا کی مرضی کے تابع ہے</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quote: Islamic vs Western Sovereignty -->
+          <div class="slide-card cg full-row">
+            <div class="slide-inner" style="display:block; padding:1.3rem 1.5rem;">
+              <span class="slide-tag"><span class="slide-tag-en">Key Distinction</span><span class="slide-tag-ur">اہم فرق</span></span>
+              <div class="slide-heading slide-heading-en" style="margin-bottom:0.9rem;">Islamic vs Western Sovereignty — Core Difference</div>
+              <div class="slide-heading slide-heading-ur" style="margin-bottom:0.9rem;">اسلامی بمقابلہ مغربی حاکمیت — بنیادی فرق</div>
+              <div class="slide-body slide-body-en">
+                Western polity places sovereignty in the <span class="hl">state or the people</span> (popular sovereignty). Islamic polity places it <span class="hl">absolutely in Allah</span>. The source of all legislation in Islam is the Quran. The word <em>Islam</em> means complete submission — it subordinates human will to the will and law of God <span class="hl">unconditionally</span>, even more powerfully than how Thomas Hobbes envisioned complete surrender to the state.
+              </div>
+              <div class="slide-body slide-body-ur">
+                مغربی سیاست حاکمیت کو <span class="hl">ریاست یا عوام</span> میں رکھتی ہے (عوامی حاکمیت)۔ اسلامی سیاست اسے <span class="hl">مطلق طور پر اللہ</span> میں رکھتی ہے۔ اسلام میں تمام قانون سازی کا سرچشمہ قرآن ہے۔ لفظ <em>اسلام</em> کا مطلب مکمل فرمانبرداری ہے — یہ انسانی مرضی کو خدا کی مرضی اور قانون کے <span class="hl">غیر مشروط</span> تابع کرتا ہے۔
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /slides-grid L01 -->
+      </div><!-- /lecture-block L01 -->
+
+
+      <!-- ══════════════════════════════════════
+           LECTURE 02 — Ideology of Pakistan & Two Nation Theory
+      ══════════════════════════════════════ -->
+      <div class="lecture-block">
+        <div class="lecture-title-bar">
+          <span class="lecture-num-badge">Lecture 02</span>
+          <span class="lecture-main-title">Ideology of Pakistan &amp; Two Nation Theory</span>
+          <span class="lecture-title-ur">نظریۂ پاکستان اور دو قومی نظریہ</span>
+        </div>
+        <hr class="lecture-divider">
+
+        <div class="notes-obj">
+          <strong>📌 Lecture Objectives</strong>
+          <div class="notes-obj-en">
+          <ul>
+            <li>Understand the concept and importance of ideology</li>
+            <li>Know the ideological rationale of Pakistan</li>
+            <li>Learn the contributions of Sir Syed Ahmed Khan and Quaid-e-Azam to Pakistan's ideology</li>
+          </ul>
+          </div>
+          <div class="notes-obj-ur">
+          <ul>
+            <li>نظریے کا تصور اور اہمیت سمجھیں</li>
+            <li>پاکستان کی نظریاتی بنیاد جانیں</li>
+            <li>سرسید احمد خان اور قائداعظم کی پاکستان کے نظریے میں خدمات سیکھیں</li>
+          </ul>
+          </div>
+        </div>
+
+        <div class="slides-grid">
+
+          <!-- What is Ideology -->
+          <div class="slide-card cv">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Core Concept</span><span class="slide-tag-ur">بنیادی تصور</span></span>
+              <div class="slide-heading slide-heading-en">What is Ideology?</div>
+              <div class="slide-heading slide-heading-ur">نظریہ کیا ہے؟</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Science of ideas; visionary speculations; manner of thinking characteristic of a class or individual</li>
+                  <li>Ideas based on some <span class="hl">economic, social or political</span> theory or system</li>
+                  <li>Contains ideals a nation strives to accomplish to bring <span class="hl">stability to its nationhood</span></li>
+                  <li>George Lewis: <em>"Ideology is a plan or program which is based upon philosophy"</em></li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>خیالات کی سائنس؛ تخیلاتی قیاسات؛ کسی طبقے یا فرد کی خاص سوچ کا انداز</li>
+                  <li>کسی <span class="hl">اقتصادی، سماجی یا سیاسی</span> نظریے یا نظام پر مبنی خیالات</li>
+                  <li>ان آدرشوں پر مشتمل جن کو حاصل کرنے کی قوم کوشش کرتی ہے تاکہ <span class="hl">قومی استحکام</span> آئے</li>
+                  <li>جارج لیوس: <em>"نظریہ ایک منصوبہ یا پروگرام ہے جو فلسفے پر مبنی ہے"</em></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Importance of Ideology -->
+          <div class="slide-card cg">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Significance</span><span class="slide-tag-ur">اہمیت</span></span>
+              <div class="slide-heading slide-heading-en">Importance of Ideology</div>
+              <div class="slide-heading slide-heading-ur">نظریے کی اہمیت</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li><span class="hl">Motivating force</span> for a nation striving for stability and homogeneity</li>
+                  <li>Provides <span class="hl">binding force</span> to scattered groups, uniting them on a common platform</li>
+                  <li>Impels adherents to take <span class="hl">joint linked action</span> for common goals</li>
+                  <li>Gives shape to revolutions and creates new cultures and civilizations</li>
+                  <li>Requires urgent agreement among people on shared ideals</li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>استحکام اور یکجہتی کے لیے کوشاں قوم کے لیے <span class="hl">محرک قوت</span></li>
+                  <li>بکھرے گروہوں کو <span class="hl">یکجا کرنے کی طاقت</span> فراہم کرتا ہے، انہیں ایک مشترک پلیٹ فارم پر متحد کرتا ہے</li>
+                  <li>پیروکاروں کو مشترکہ مقاصد کے لیے <span class="hl">متحد عمل</span> پر آمادہ کرتا ہے</li>
+                  <li>انقلابوں کو شکل دیتا ہے اور نئی ثقافتوں و تہذیبوں کو جنم دیتا ہے</li>
+                  <li>لوگوں میں مشترکہ آدرشوں پر فوری اتفاق رائے ضروری ہے</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ideology of Pakistan -->
+          <div class="slide-card cr">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Foundation</span><span class="slide-tag-ur">بنیاد</span></span>
+              <div class="slide-heading slide-heading-en">Ideology of Pakistan</div>
+              <div class="slide-heading slide-heading-ur">نظریۂ پاکستان</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Pakistan is an <span class="hl">ideological state</span> — ideology is Islamic</li>
+                  <li>Basic principle: <span class="hl">"The only sovereign is Allah"</span></li>
+                  <li>Muslims must have opportunity to live according to Islamic principles</li>
+                  <li>Based on <span class="hl">Two-Nation Theory</span> in political and cultural background of Sub-continent</li>
+                  <li>Implementation of Islamic teachings in governance</li>
+                  <li>Struggle for unity among Muslim Ummah and Islamic rule</li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>پاکستان ایک <span class="hl">نظریاتی ریاست</span> ہے — نظریہ اسلامی ہے</li>
+                  <li>بنیادی اصول: <span class="hl">"حاکمیت صرف اللہ کی ہے"</span></li>
+                  <li>مسلمانوں کو اسلامی اصولوں کے مطابق زندگی گزارنے کا موقع ملنا چاہیے</li>
+                  <li>برصغیر کے سیاسی اور ثقافتی پس منظر میں <span class="hl">دو قومی نظریے</span> پر مبنی</li>
+                  <li>حکومت میں اسلامی تعلیمات کا نفاذ</li>
+                  <li>مسلم امت کے اتحاد اور اسلامی حکومت کے لیے جدوجہد</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sir Syed Ahmed Khan -->
+          <div class="slide-card ct">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Personality</span><span class="slide-tag-ur">شخصیت</span></span>
+              <div class="slide-heading slide-heading-en">Sir Syed Ahmed Khan (1817–1898)</div>
+              <div class="slide-heading slide-heading-ur">سرسید احمد خان (۱۸۱۷–۱۸۹۸)</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Worked for East India Company as Jurist</li>
+                  <li>After 1857 War: published <em>"The Causes of Indian Mutiny"</em> (Rasala Asbaab Baghaawat e Hind)</li>
+                  <li>Founded <span class="hl">Aligarh Muslim University (1875)</span></li>
+                  <li>Founded Scientific Society of Aligarh</li>
+                  <li>Denounced Congress for being pro-Hindu</li>
+                  <li>Favored <span class="hl">separate electorate</span> for Muslims (1883)</li>
+                  <li>1888: Set up Patriotic Association to counter Congress propaganda</li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>ایسٹ انڈیا کمپنی میں بطور قانون دان کام کیا</li>
+                  <li>۱۸۵۷ کی جنگ کے بعد: <em>"اسبابِ بغاوتِ ہند"</em> شائع کی</li>
+                  <li><span class="hl">علی گڑھ مسلم یونیورسٹی (۱۸۷۵)</span> قائم کی</li>
+                  <li>سائنٹیفک سوسائٹی آف علی گڑھ قائم کی</li>
+                  <li>کانگریس کو ہندو نواز قرار دے کر مخالفت کی</li>
+                  <li>مسلمانوں کے لیے <span class="hl">علیحدہ انتخابی حلقوں</span> کی حمایت کی (۱۸۸۳)</li>
+                  <li>۱۸۸۸: کانگریس کے پروپیگنڈے کا مقابلہ کرنے کے لیے پیٹریاٹک ایسوسی ایشن قائم کی</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sir Syed's Goals -->
+          <div class="slide-card cg">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Two Key Goals</span><span class="slide-tag-ur">دو بنیادی مقاصد</span></span>
+              <div class="slide-heading slide-heading-en">Sir Syed's Objectives</div>
+              <div class="slide-heading slide-heading-ur">سرسید کے مقاصد</div>
+              <div class="slide-body slide-body-en">
+                <ol style="padding-left:1.1em; margin:0;">
+                  <li style="margin-bottom:0.5em"><span class="hl">Remove tension</span> between Muslims and the British government</li>
+                  <li><span class="hl">Induce Muslims</span> to get jobs and facilities under the new government by acquiring Western education</li>
+                </ol>
+                <div style="margin-top:0.75rem;">
+                  He started the <span class="hl">Aligarh Movement</span> to modernize Muslims, motivated them to learn Western philosophy and English, and advocated for Hindu–Muslim unity as a working relationship — not a merger of identity.
+                </div>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ol style="padding-right:1.1em; margin:0;">
+                  <li style="margin-bottom:0.5em">مسلمانوں اور برطانوی حکومت کے درمیان <span class="hl">کشیدگی ختم</span> کرنا</li>
+                  <li>مسلمانوں کو مغربی تعلیم حاصل کر کے نئی حکومت میں ملازمتیں اور سہولتیں لینے پر <span class="hl">آمادہ کرنا</span></li>
+                </ol>
+                <div style="margin-top:0.75rem;">
+                  انہوں نے مسلمانوں کو جدید بنانے کے لیے <span class="hl">علی گڑھ تحریک</span> شروع کی، انہیں مغربی فلسفہ اور انگریزی سیکھنے کی ترغیب دی اور ہندو مسلم اتحاد کو ایک عملی رشتے کے طور پر پیش کیا۔
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sir Syed and Muslim Nation -->
+          <div class="slide-card cv">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Muslims as a Nation</span><span class="slide-tag-ur">مسلمان بطور قوم</span></span>
+              <div class="slide-heading slide-heading-en">Sir Syed &amp; Muslim Identity</div>
+              <div class="slide-heading slide-heading-ur">سرسید اور مسلم شناخت</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Sir Syed used the word <span class="hl">'nation'</span> for Muslims — advocated a separate Muslim national identity</li>
+                  <li>Favored Hindu–Muslim unity only as a <em>working relationship</em> for mutual progress</li>
+                  <li>Favored <span class="hl">separate electorate</span> in 1883: majority would override minority interests otherwise</li>
+                  <li>1893: Founded the Association to protect political, religious, and social rights of Muslims</li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>سرسید نے مسلمانوں کے لیے <span class="hl">'قوم'</span> کا لفظ استعمال کیا — ایک علیحدہ مسلم قومی شناخت کی وکالت کی</li>
+                  <li>ہندو مسلم اتحاد کو صرف باہمی ترقی کے لیے ایک <em>عملی رشتے</em> کے طور پر پسند کیا</li>
+                  <li>۱۸۸۳ میں <span class="hl">علیحدہ انتخابی حلقوں</span> کی حمایت: ورنہ اکثریت اقلیتی مفادات دبا دیتی</li>
+                  <li>۱۸۹۳: مسلمانوں کے سیاسی، مذہبی اور سماجی حقوق کے تحفظ کے لیے ایسوسی ایشن قائم کی</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quaid-e-Azam -->
+          <div class="slide-card cr">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Personality</span><span class="slide-tag-ur">شخصیت</span></span>
+              <div class="slide-heading slide-heading-en">Quaid-e-Azam &amp; Two Nation Theory</div>
+              <div class="slide-heading slide-heading-ur">قائداعظم اور دو قومی نظریہ</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Born 1876; studied Bar at Law in England; joined Muslim League 1913</li>
+                  <li>Firm advocate of Two Nation Theory — considered Muslims a <span class="hl">separate nation</span></li>
+                  <li><em>"Pakistan was created the day the first Indian National entered the field of Islam."</em></li>
+                  <li><em>"Muslims are a nation by every right to establish their separate homeland."</em></li>
+                  <li>1946 at Islamia College Peshawar: <span class="hl">"We want a Laboratory where we could experiment on Islamic principles."</span></li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>۱۸۷۶ میں پیدا ہوئے؛ انگلینڈ میں بار ایٹ لا کی تعلیم؛ ۱۹۱۳ میں مسلم لیگ میں شامل ہوئے</li>
+                  <li>دو قومی نظریے کے پختہ حامی — مسلمانوں کو <span class="hl">ایک الگ قوم</span> سمجھتے تھے</li>
+                  <li><em>"پاکستان اس دن بن گیا تھا جب پہلے ہندوستانی نے اسلام قبول کیا۔"</em></li>
+                  <li><em>"مسلمانوں کو ہر لحاظ سے اپنی الگ وطن قائم کرنے کا حق ہے۔"</em></li>
+                  <li>۱۹۴۶ میں اسلامیہ کالج پشاور: <span class="hl">"ہم ایک ایسی تجربہ گاہ چاہتے ہیں جہاں اسلامی اصولوں پر تجربہ کریں۔"</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pakistan Resolution 1940 -->
+          <div class="slide-card cg full-row">
+            <div class="slide-inner" style="display:block; padding:1.3rem 1.5rem;">
+              <span class="slide-tag"><span class="slide-tag-en">Historic Address — 23 March 1940</span><span class="slide-tag-ur">تاریخی خطاب — ۲۳ مارچ ۱۹۴۰</span></span>
+              <div class="quote-text">"India is not a nation, nor a country. It is a Sub Continent of nationalities. Hindus and Muslims belong to two different religions, philosophies, social customs and literature. They neither intermarry nor interdine and they belong to two different civilizations which are based mainly on conflicting ideas and conceptions."</div>
+              <div class="quote-attr">— Quaid-e-Azam Muhammad Ali Jinnah, Pakistan Resolution, 1940</div>
+            </div>
+          </div>
+
+          <!-- Aligarh 1944 -->
+          <div class="slide-card ct">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Muslim University Aligarh, 1944</span><span class="slide-tag-ur">مسلم یونیورسٹی علی گڑھ، ۱۹۴۴</span></span>
+              <div class="slide-heading slide-heading-en">Quaid on Millat-e-Islamia</div>
+              <div class="slide-heading slide-heading-ur">قائد کا ملتِ اسلامیہ پر خطاب</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Foundation of Muslims is <span class="hl">Kalama-e-Tauheed</span> — not state or race</li>
+                  <li>When a Hindu converted to Islam, a <span class="hl">new nation was born</span></li>
+                  <li>The sheet anchor of Muslim Millat is the <span class="hl">Holy Quran</span></li>
+                  <li>1945: <em>"Pakistan only means freedom and independence but Muslim Ideology, which has to be preserved"</em></li>
+                  <li>Pakistan was not just a piece of land but a <span class="hl">laboratory for Islamic principles</span></li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>مسلمانوں کی بنیاد <span class="hl">کلمۂ توحید</span> ہے — ریاست یا نسل نہیں</li>
+                  <li>جب کسی ہندو نے اسلام قبول کیا تو <span class="hl">ایک نئی قوم</span> پیدا ہوئی</li>
+                  <li>مسلم ملت کا لنگر <span class="hl">قرآنِ کریم</span> ہے</li>
+                  <li>۱۹۴۵: <em>"پاکستان کا مطلب صرف آزادی نہیں بلکہ مسلم نظریہ ہے جسے محفوظ رکھنا ہے"</em></li>
+                  <li>پاکستان صرف ایک ٹکڑہ زمین نہیں بلکہ <span class="hl">اسلامی اصولوں کی تجربہ گاہ</span> ہے</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary L02 -->
+          <div class="slide-card cv full-row">
+            <div class="slide-inner" style="display:block;">
+              <span class="slide-tag"><span class="slide-tag-en">Lecture Summary</span><span class="slide-tag-ur">لیکچر خلاصہ</span></span>
+              <div class="slide-heading slide-heading-en">Key Takeaways — Lecture 02</div>
+              <div class="slide-heading slide-heading-ur">اہم نکات — لیکچر ۰۲</div>
+              <div class="slide-body slide-body-en">
+                Ideology is a <span class="hl">binding force</span> that integrates scattered groups. The ideology of Pakistan is <span class="hl">Islamic ideology</span> based on the Two Nation Theory — Muslims and Hindus of the sub-continent are entirely different, hence Muslims deserved a sovereign independent state. Pakistan is founded on <span class="hl">ideological basis</span>, not territorial grounds. The Two Nation Theory became reality with a distinct ideology called <span class="hl">Pakistan Ideology</span>.
+                <br><br>
+                <span class="pill">Islamic Ideology</span>
+                <span class="pill">Two Nation Theory</span>
+                <span class="pill">Muslim Sovereignty</span>
+                <span class="pill">Aligarh Movement</span>
+                <span class="pill">Pakistan Resolution 1940</span>
+              </div>
+              <div class="slide-body slide-body-ur">
+                نظریہ ایک <span class="hl">یکجا کرنے والی قوت</span> ہے جو بکھرے گروہوں کو جوڑتی ہے۔ پاکستان کا نظریہ دو قومی نظریے پر مبنی <span class="hl">اسلامی نظریہ</span> ہے — برصغیر کے مسلمان اور ہندو بالکل مختلف ہیں، اس لیے مسلمان ایک خودمختار آزاد ریاست کے مستحق تھے۔ پاکستان <span class="hl">نظریاتی بنیاد</span> پر قائم ہے، علاقائی بنیاد پر نہیں۔ دو قومی نظریہ <span class="hl">نظریۂ پاکستان</span> کی شکل میں حقیقت بن گیا۔
+                <br><br>
+                <span class="pill">اسلامی نظریہ</span>
+                <span class="pill">دو قومی نظریہ</span>
+                <span class="pill">مسلم حاکمیت</span>
+                <span class="pill">علی گڑھ تحریک</span>
+                <span class="pill">قراردادِ پاکستان ۱۹۴۰</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /slides-grid L02 -->
+      </div><!-- /lecture-block L02 -->
+
+
+      <!-- ══════════════════════════════════════
+           LECTURE 05 — Role of Ulema & Muslim Educational Institutions
+      ══════════════════════════════════════ -->
+      <div class="lecture-block">
+        <div class="lecture-title-bar">
+          <span class="lecture-num-badge">Lecture 05</span>
+          <span class="lecture-main-title">Role of Ulema &amp; Muslim Educational Institutions in Formation of Pakistan</span>
+          <span class="lecture-title-ur">علمائے کرام اور مسلم تعلیمی اداروں کا قیامِ پاکستان میں کردار</span>
+        </div>
+        <hr class="lecture-divider">
+
+        <div class="notes-obj">
+          <strong>📌 Lecture Objectives</strong>
+          <div class="notes-obj-en">
+          <ul>
+            <li>Learn the role of Muslim institutions, Ulama and Mashaikh in supporting ideology of Islam and Pakistan</li>
+            <li>Understand how they supported Pakistan as a religious duty</li>
+            <li>Discuss formation and role of: Dar ul Uloom Deoband, Nadva tul Ulema Lucknow, Anjuman-i-Himayat-i-Islam, and Sindh Madressatul Islam</li>
+          </ul>
+          </div>
+          <div class="notes-obj-ur">
+          <ul>
+            <li>اسلام اور پاکستان کے نظریے کی حمایت میں مسلم اداروں، علماء اور مشائخ کا کردار جانیں</li>
+            <li>سمجھیں کہ انہوں نے پاکستان کی حمایت کو مذہبی فریضہ کیسے سمجھا</li>
+            <li>دارالعلوم دیوبند، ندوۃ العلماء لکھنؤ، انجمنِ حمایتِ اسلام اور سندھ مدرسۃ الاسلام کی تشکیل و کردار پر بحث</li>
+          </ul>
+          </div>
+        </div>
+
+        <div class="slides-grid">
+
+          <!-- Prominent Ulama -->
+          <div class="slide-card cv">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Key Personalities</span><span class="slide-tag-ur">اہم شخصیات</span></span>
+              <div class="slide-heading slide-heading-en">Prominent Ulama &amp; Mashaikh</div>
+              <div class="slide-heading slide-heading-ur">نمایاں علماء اور مشائخ</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li><span class="hl">Maulana Ashraf Ali Thanvi</span></li>
+                  <li>Allama Shafi</li>
+                  <li>Maulana Muhammad Ibrahim Sialkoti</li>
+                  <li>Pir Ghulam Mujaddid Sirhindi</li>
+                  <li>Amin-ul-Hasnant Pir Sahib of Manki Sharif</li>
+                  <li>Pir Sahib Zakori Sharif</li>
+                  <li>Pir Jamat Ali Shah</li>
+                  <li><span class="hl">Maulana Sanaullah Amritsari</span></li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li><span class="hl">مولانا اشرف علی تھانوی</span></li>
+                  <li>علامہ شفیع</li>
+                  <li>مولانا محمد ابراہیم سیالکوٹی</li>
+                  <li>پیر غلام مجدد سرہندی</li>
+                  <li>امین الحسنات پیر صاحب مانکی شریف</li>
+                  <li>پیر صاحب ذاکوری شریف</li>
+                  <li>پیر جماعت علی شاہ</li>
+                  <li><span class="hl">مولانا ثناء اللہ امرتسری</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Background Context -->
+          <div class="slide-card cg">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Historical Context</span><span class="slide-tag-ur">تاریخی پسِ منظر</span></span>
+              <div class="slide-heading slide-heading-en">Post-1857 Religious Revival</div>
+              <div class="slide-heading slide-heading-ur">۱۸۵۷ کے بعد مذہبی احیاء</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>After the War of 1857 and termination of Muslim rule, Ulama established educational institutions for <span class="hl">religious teaching</span></li>
+                  <li>Goal: enable younger generations to protect faith and solve problems in light of Quran &amp; Sunnah</li>
+                  <li>Started <span class="hl">underground movements</span> for political awakening of Muslims</li>
+                  <li>Participated in politics through <span class="hl">Silk Handkerchief Movement</span>, Tehrik-i-Hijrat, and Majlis-i-Khilafat</li>
+                  <li>1919: Ulama of Deoband formed <span class="hl">Jamiatul-Ulama-i-Hind</span> for organized political participation</li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>۱۸۵۷ کی جنگ اور مسلم حکومت کے خاتمے کے بعد علماء نے <span class="hl">دینی تعلیم</span> کے لیے تعلیمی ادارے قائم کیے</li>
+                  <li>مقصد: نئی نسل کو ایمان کی حفاظت اور قرآن و سنت کی روشنی میں مسائل حل کرنے کے قابل بنانا</li>
+                  <li>مسلمانوں کی سیاسی بیداری کے لیے <span class="hl">خفیہ تحریکیں</span> شروع کیں</li>
+                  <li><span class="hl">ریشمی رومال تحریک</span>، تحریکِ ہجرت اور مجلسِ خلافت کے ذریعے سیاست میں حصہ لیا</li>
+                  <li>۱۹۱۹: دیوبند کے علماء نے منظم سیاسی شرکت کے لیے <span class="hl">جمعیت علمائے ہند</span> بنائی</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dar ul Uloom Deoband -->
+          <div class="slide-card cr">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Institution 01</span><span class="slide-tag-ur">ادارہ ۰۱</span></span>
+              <div class="slide-heading slide-heading-en">Dar ul Uloom Deoband</div>
+              <div class="slide-heading slide-heading-ur">دارالعلوم دیوبند</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Founded by <span class="hl">Haji Muhammad Abid</span> (initiator) and <span class="hl">Maulana Muhammad Qasim Nanautvi</span></li>
+                  <li>Restricted to <span class="hl">religious education</span> only</li>
+                  <li>Provided education activities reaching across the world</li>
+                  <li>Politically influenced by Congress — but split into two groups:</li>
+                </ul>
+                <div style="margin-top:0.5rem;">
+                  <span class="pill">Thanvi Group</span> Maulana Ashraf Ali Thanvi &amp; Maulana Shabir Ahmed Usmani — differed with Congress
+                  <br>
+                  <span class="pill">Madani Group</span> Maulana Hussain Ahmed Madni, Mufti Kifayat Ullah, Maulana Abul Kalam Azad — pro-Congress
+                </div>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li><span class="hl">حاجی محمد عابد</span> (بانی) اور <span class="hl">مولانا محمد قاسم نانوتوی</span> نے قائم کیا</li>
+                  <li>صرف <span class="hl">دینی تعلیم</span> تک محدود</li>
+                  <li>دنیا بھر میں تعلیمی سرگرمیاں پھیلائیں</li>
+                  <li>سیاسی طور پر کانگریس سے متاثر — لیکن دو گروہوں میں تقسیم ہوئے:</li>
+                </ul>
+                <div style="margin-top:0.5rem;">
+                  <span class="pill">تھانوی گروپ</span> مولانا اشرف علی تھانوی اور مولانا شبیر احمد عثمانی — کانگریس سے اختلاف
+                  <br>
+                  <span class="pill">مدنی گروپ</span> مولانا حسین احمد مدنی، مفتی کفایت اللہ، مولانا ابوالکلام آزاد — کانگریس نواز
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nadva tul Ulema -->
+          <div class="slide-card ct">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Institution 02</span><span class="slide-tag-ur">ادارہ ۰۲</span></span>
+              <div class="slide-heading slide-heading-en">Nadva tul Ulema Lucknow</div>
+              <div class="slide-heading slide-heading-ur">ندوۃ العلماء لکھنؤ</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Founded <span class="hl">1894</span> by Maulana Abdul Ghafoor, <span class="hl">Maulana Shibli Naumani</span>, and Maulana Abdul Haq</li>
+                  <li>Started functioning <span class="hl">1898</span></li>
+                  <li><span class="hl">Gap it filled:</span> Aligarh lacked religious education; Deoband neglected modern sciences</li>
+                  <li>Aimed to produce graduates <span class="hl">well-versed in BOTH</span> — Western and religious knowledge</li>
+                  <li>1904: Maulana Shibli Naumani introduced <span class="hl">revolutionary curriculum changes</span></li>
+                  <li>Tafseer &amp; Hadith given importance over Philosophy &amp; Logic</li>
+                  <li>Modern science subjects introduced; Hindi &amp; Sanskrit included</li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li><span class="hl">۱۸۹۴</span> میں مولانا عبدالغفور، <span class="hl">مولانا شبلی نعمانی</span> اور مولانا عبدالحق نے قائم کیا</li>
+                  <li><span class="hl">۱۸۹۸</span> میں کام شروع کیا</li>
+                  <li><span class="hl">جو خلا پُر کیا:</span> علی گڑھ میں دینی تعلیم نہیں تھی؛ دیوبند نے جدید علوم نظرانداز کیے</li>
+                  <li><span class="hl">دونوں</span> — مغربی اور دینی علوم — میں ماہر فارغ التحصیل پیدا کرنا ہدف تھا</li>
+                  <li>۱۹۰۴: مولانا شبلی نعمانی نے <span class="hl">انقلابی نصابی تبدیلیاں</span> کیں</li>
+                  <li>فلسفہ و منطق کی بجائے تفسیر و حدیث کو اہمیت دی گئی</li>
+                  <li>جدید سائنسی مضامین شامل کیے؛ ہندی اور سنسکرت بھی شامل</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nadva Objectives -->
+          <div class="slide-card cv">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Objectives</span><span class="slide-tag-ur">مقاصد</span></span>
+              <div class="slide-heading slide-heading-en">Nadva tul Ulema — Goals</div>
+              <div class="slide-heading slide-heading-ur">ندوۃ العلماء — مقاصد</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Reformation of Muslims by producing well-rounded graduates</li>
+                  <li>Promotion of <span class="hl">Islamic knowledge and thought</span></li>
+                  <li>Reform the curriculum of Islamic education</li>
+                  <li>End mutual differences among Muslim religious scholars</li>
+                  <li>Work for the <span class="hl">welfare of Muslims</span></li>
+                  <li>Elevate Nadva to status of Muslim seat of learning with both modern and religious sciences</li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>ہمہ جہت فارغ التحصیل پیدا کر کے مسلمانوں کی اصلاح</li>
+                  <li><span class="hl">اسلامی علم اور فکر</span> کو فروغ دینا</li>
+                  <li>اسلامی تعلیم کے نصاب کی اصلاح</li>
+                  <li>مسلم علمائے دین کے آپسی اختلافات ختم کرنا</li>
+                  <li><span class="hl">مسلمانوں کی فلاح</span> کے لیے کام کرنا</li>
+                  <li>ندوہ کو جدید اور دینی علوم دونوں کے ساتھ مسلم علم کا مرکز بنانا</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anjuman-i-Himayat-i-Islam -->
+          <div class="slide-card cg">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Institution 03</span><span class="slide-tag-ur">ادارہ ۰۳</span></span>
+              <div class="slide-heading slide-heading-en">Anjuman-i-Himayat-i-Islam</div>
+              <div class="slide-heading slide-heading-ur">انجمنِ حمایتِ اسلام</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Founded <span class="hl">24 September 1884</span> by <span class="hl">Khalifa Hameed-ud-Din</span> — in Masjid Bakan, Lahore</li>
+                  <li>"The Association for the Service of Islam"</li>
+                  <li>Result of the <span class="hl">Aligarh Movement</span> by Sir Syed Ahmed Khan</li>
+                  <li>1885: Published <em>Risala-i-Anjuman Himayat-i-Islam</em> — principles of Islam</li>
+                  <li>1892: Established <span class="hl">Islamia College Lahore</span> (elevated to degree level 1903)</li>
+                  <li>1925: Schools; 1939: <span class="hl">Islamia College for Girls</span> — only one of its kind in the region</li>
+                  <li>1928: Published standard works on religion, literature, geography, sciences, economics</li>
+                  <li>Produced an absolutely correct text of the <span class="hl">Holy Quran</span></li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li><span class="hl">۲۴ ستمبر ۱۸۸۴</span> کو <span class="hl">خلیفہ حمیدالدین</span> نے — مسجد بکاں، لاہور میں قائم کی</li>
+                  <li>"اسلام کی خدمت کی انجمن"</li>
+                  <li>سرسید احمد خان کی <span class="hl">علی گڑھ تحریک</span> کا نتیجہ</li>
+                  <li>۱۸۸۵: <em>رسالۂ انجمن حمایتِ اسلام</em> شائع کیا — اصولِ اسلام</li>
+                  <li>۱۸۹۲: <span class="hl">اسلامیہ کالج لاہور</span> قائم کیا (۱۹۰۳ میں ڈگری سطح پر ترقی دی)</li>
+                  <li>۱۹۲۵: اسکول؛ ۱۹۳۹: <span class="hl">اسلامیہ کالج برائے خواتین</span> — علاقے میں اپنی نوعیت کا واحد</li>
+                  <li>۱۹۲۸: مذہب، ادب، جغرافیہ، علوم اور معاشیات پر معیاری کتابیں شائع کیں</li>
+                  <li><span class="hl">قرآنِ کریم</span> کا بالکل درست متن شائع کیا</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anjuman Objectives -->
+          <div class="slide-card cr">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Objectives</span><span class="slide-tag-ur">مقاصد</span></span>
+              <div class="slide-heading slide-heading-en">Anjuman — Key Goals</div>
+              <div class="slide-heading slide-heading-ur">انجمن — اہم مقاصد</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Provide <span class="hl">modern education</span> to Muslims</li>
+                  <li>Counter the agenda of <span class="hl">Christian missionaries</span></li>
+                  <li>Look after Muslim <span class="hl">orphan children</span> and provide proper education</li>
+                  <li>Establish a sound Muslim society</li>
+                  <li>Struggle for social and <span class="hl">cultural progress</span> of Muslims</li>
+                  <li>Organize Muslim masses <span class="hl">politically</span> and safeguard Islam</li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li>مسلمانوں کو <span class="hl">جدید تعلیم</span> فراہم کرنا</li>
+                  <li><span class="hl">عیسائی مشنریوں</span> کے ایجنڈے کا مقابلہ کرنا</li>
+                  <li>مسلمان <span class="hl">یتیم بچوں</span> کی دیکھ بھال اور انہیں مناسب تعلیم دینا</li>
+                  <li>ایک مضبوط مسلم معاشرہ قائم کرنا</li>
+                  <li>مسلمانوں کی سماجی اور <span class="hl">ثقافتی ترقی</span> کے لیے جدوجہد</li>
+                  <li>مسلم عوام کو <span class="hl">سیاسی طور پر منظم</span> کرنا اور اسلام کی حفاظت کرنا</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sindh Madressatul Islam -->
+          <div class="slide-card cv">
+            <div class="slide-inner">
+              <span class="slide-tag"><span class="slide-tag-en">Institution 04</span><span class="slide-tag-ur">ادارہ ۰۴</span></span>
+              <div class="slide-heading slide-heading-en">Sindh Madressatul Islam</div>
+              <div class="slide-heading slide-heading-ur">سندھ مدرسۃ الاسلام</div>
+              <div class="slide-body slide-body-en">
+                <ul>
+                  <li>Founded <span class="hl">1 September 1885</span> by <span class="hl">Khan Bahadur Hassanally Effendi</span></li>
+                  <li>First modern Muslim educational institution of Sindh — open to <span class="hl">all religions</span></li>
+                  <li>Context: In 1870 matriculation exam, not a single Muslim passed — Muslims were 75% of Sindh's population</li>
+                  <li>Three reformers: Sir Syed (North), Justice Syed Amir Ali (East), <span class="hl">Hassanally Effendi (South-West)</span></li>
+                  <li>~10% of students always from non-Muslim communities</li>
+                  <li>Created a <span class="hl">cosmopolitan, multicultural, liberal</span> atmosphere</li>
+                </ul>
+              </div>
+              <div class="slide-body slide-body-ur">
+                <ul>
+                  <li><span class="hl">۱ ستمبر ۱۸۸۵</span> کو <span class="hl">خان بہادر حسن علی آفندی</span> نے قائم کیا</li>
+                  <li>سندھ کا پہلا جدید مسلم تعلیمی ادارہ — <span class="hl">تمام مذاہب</span> کے لیے کھلا</li>
+                  <li>پس منظر: ۱۸۷۰ کے میٹرک امتحان میں ایک بھی مسلمان پاس نہیں ہوا — مسلمان سندھ کی ۷۵٪ آبادی تھے</li>
+                  <li>تین مصلح: سرسید (شمال)، جسٹس سید امیر علی (مشرق)، <span class="hl">حسن علی آفندی (جنوب مغرب)</span></li>
+                  <li>تقریباً ۱۰٪ طلبہ ہمیشہ غیر مسلم طبقات سے ہوتے تھے</li>
+                  <li>ایک <span class="hl">کثیر الثقافتی، ہمہ گیر، آزاد خیال</span> ماحول بنایا</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comparison: 4 Institutions Full Row -->
+          <div class="slide-card ct full-row">
+            <div class="slide-inner" style="display:block;">
+              <span class="slide-tag"><span class="slide-tag-en">Quick Reference</span><span class="slide-tag-ur">فوری حوالہ</span></span>
+              <div class="slide-heading slide-heading-en" style="margin-bottom:0.9rem;">4 Major Muslim Institutions — At a Glance</div>
+              <div class="slide-heading slide-heading-ur" style="margin-bottom:0.9rem;">۴ بڑے مسلم ادارے — ایک نظر میں</div>
+              <div class="slide-body slide-body-en" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:0.9rem;">
+                <div>
+                  <div class="comp-t red">Dar ul Uloom Deoband</div>
+                  <ul>
+                    <li>Religious education only</li>
+                    <li>Founders: Haji Abid &amp; Maulana Qasim Nanautvi</li>
+                    <li>Split: Thanvi (pro-Pakistan) vs Madani (pro-Congress)</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="comp-t violet">Nadva tul Ulema, Lucknow</div>
+                  <ul>
+                    <li>Founded 1894; functioning 1898</li>
+                    <li>Combined Western + religious education</li>
+                    <li>Curriculum reform by Shibli Naumani (1904)</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="comp-t gold">Anjuman-i-Himayat-i-Islam</div>
+                  <ul>
+                    <li>Founded 1884, Lahore</li>
+                    <li>Girls schools, orphanages, Islamia College</li>
+                    <li>Countered Christian missionaries</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="comp-t green">Sindh Madressatul Islam</div>
+                  <ul>
+                    <li>Founded 1885, Sindh</li>
+                    <li>First modern Muslim school of Sindh</li>
+                    <li>Open to all religions; multicultural</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="slide-body slide-body-ur" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:0.9rem;">
+                <div>
+                  <div class="comp-t red">دارالعلوم دیوبند</div>
+                  <ul>
+                    <li>صرف دینی تعلیم</li>
+                    <li>بانی: حاجی عابد اور مولانا قاسم نانوتوی</li>
+                    <li>تقسیم: تھانوی (پاکستان حامی) بمقابلہ مدنی (کانگریس حامی)</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="comp-t violet">ندوۃ العلماء، لکھنؤ</div>
+                  <ul>
+                    <li>۱۸۹۴ میں قائم؛ ۱۸۹۸ سے فعال</li>
+                    <li>مغربی + دینی تعلیم کا امتزاج</li>
+                    <li>شبلی نعمانی کی نصابی اصلاح (۱۹۰۴)</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="comp-t gold">انجمنِ حمایتِ اسلام</div>
+                  <ul>
+                    <li>۱۸۸۴ میں قائم، لاہور</li>
+                    <li>لڑکیوں کے اسکول، یتیم خانے، اسلامیہ کالج</li>
+                    <li>عیسائی مشنریوں کا مقابلہ کیا</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="comp-t green">سندھ مدرسۃ الاسلام</div>
+                  <ul>
+                    <li>۱۸۸۵ میں قائم، سندھ</li>
+                    <li>سندھ کا پہلا جدید مسلم اسکول</li>
+                    <li>تمام مذاہب کے لیے؛ کثیر الثقافتی</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conclusion L05 -->
+          <div class="slide-card cg full-row">
+            <div class="slide-inner" style="display:block;">
+              <span class="slide-tag"><span class="slide-tag-en">Lecture Conclusion</span><span class="slide-tag-ur">لیکچر کا خلاصہ</span></span>
+              <div class="slide-heading slide-heading-en">Summary — Lecture 05</div>
+              <div class="slide-heading slide-heading-ur">خلاصہ — لیکچر ۰۵</div>
+              <div class="slide-body slide-body-en">
+                Many Muslim individuals and institutions played vital roles for the revival of Muslims in the Sub-continent. Prominent Ulama and Mashaikh — including <span class="hl">Maulana Ashraf Ali Thanvi, Allama Shafi, Maulana Ibrahim Sialkoti, and Pir Jamat Ali Shah</span> — fought for the Muslim cause. Institutions like <span class="hl">Dar ul Uloom Deoband, Nadva tul Ulema Lucknow, Anjuman-i-Himayat-i-Islam, and Sindh Madressatul Islam</span> were prominent seats of learning in the 20th century that shaped Muslim political and educational consciousness, ultimately contributing to the formation of Pakistan.
+                <br><br>
+                <span class="pill">Religious Education</span>
+                <span class="pill">Political Awakening</span>
+                <span class="pill">Khilafat Movement</span>
+                <span class="pill">Muslim Institutions</span>
+                <span class="pill">Jamiatul-Ulama-i-Hind 1919</span>
+              </div>
+              <div class="slide-body slide-body-ur">
+                بہت سے مسلم افراد اور اداروں نے برصغیر میں مسلمانوں کے احیاء کے لیے اہم کردار ادا کیا۔ نمایاں علماء اور مشائخ — جن میں <span class="hl">مولانا اشرف علی تھانوی، علامہ شفیع، مولانا ابراہیم سیالکوٹی اور پیر جماعت علی شاہ</span> شامل ہیں — مسلم مقصد کے لیے لڑے۔ <span class="hl">دارالعلوم دیوبند، ندوۃ العلماء لکھنؤ، انجمنِ حمایتِ اسلام اور سندھ مدرسۃ الاسلام</span> جیسے ادارے بیسویں صدی میں علم کے اہم مراکز تھے جنہوں نے مسلم سیاسی اور تعلیمی شعور کو شکل دی اور بالآخر قیامِ پاکستان میں اہم کردار ادا کیا۔
+                <br><br>
+                <span class="pill">دینی تعلیم</span>
+                <span class="pill">سیاسی بیداری</span>
+                <span class="pill">تحریکِ خلافت</span>
+                <span class="pill">مسلم ادارے</span>
+                <span class="pill">جمعیت علمائے ہند ۱۹۱۹</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /slides-grid L05 -->
+      </div><!-- /lecture-block L05 -->
+
+    </div><!-- /notes-wrap -->
+  </div><!-- end #notesPanel -->
+
+  <script>
+    function switchTab(tab) {
+      const quiz  = document.getElementById('quizPanel');
+      const notes = document.getElementById('notesPanel');
+      const tq    = document.getElementById('tabQuiz');
+      const tn    = document.getElementById('tabNotes');
+      if (tab === 'notes') {
+        quiz.style.display  = 'none';
+        notes.style.display = 'block';
+        tq.classList.remove('active');
+        tn.classList.add('active');
+      } else {
+        quiz.style.display  = 'block';
+        notes.style.display = 'none';
+        tq.classList.add('active');
+        tn.classList.remove('active');
+      }
+    }
+
+    const T = {
+      en: {
+        correct: '✓ Correct!', wrong: '✗ Incorrect. Accepted: ',
+        check: 'Check', modelShown: 'Answer Shown', showModel: 'Show Model Answer',
+        progress: 'Progress', submit: '📋 Submit & See Results',
+        resultsTitle: 'Quiz Complete!', scoreLabel: 'MCQ + Fill in the Blank Score',
+        grades: ['Needs Improvement — F', 'Below Average — D', 'Average — C', 'Good — B', 'Excellent — A'],
+        scoreDetail: (mc, mt, fc, ft, st, pct) => `MCQs: <strong>${mc}/${mt}</strong> &nbsp;|&nbsp; Fill in Blanks: <strong>${fc}/${ft}</strong><br>Short Answers: <strong>${st} self-reviewed</strong> &nbsp;|&nbsp; Overall: <strong>${pct}%</strong>`
+      },
+      ur: {
+        correct: '✓ درست!', wrong: '✗ غلط۔ قابلِ قبول جواب: ',
+        check: 'جانچیں', modelShown: 'نمونہ جواب دکھایا گیا', showModel: 'نمونہ جواب دیکھیں',
+        progress: 'پیش رفت', submit: '📋 جمع کریں اور نتیجہ دیکھیں',
+        resultsTitle: 'امتحان مکمل!', scoreLabel: 'ایم سی کیو + خالی جگہ کا اسکور',
+        grades: ['بہتری ضروری — ناکام', 'اوسط سے کم — ڈی', 'اوسط — سی', 'اچھا — بی', 'عمدہ — اے'],
+        scoreDetail: (mc, mt, fc, ft, st, pct) => `ایم سی کیو: <strong>${mc}/${mt}</strong> | خالی جگہ: <strong>${fc}/${ft}</strong><br>مختصر جوابات: <strong>${st}</strong> خود جائزہ | مجموعی: <strong>${pct}%</strong>`
+      }
+    };
+
+    const QUIZ_SIZE = 10;
+    let lang = 'en';
+    const answered = new Set();
+
+    // ── Random selection: pick QUIZ_SIZE questions, trying to avoid repeats ──
+    const SEEN_KEY = 'piq_seen';
+    const allCards = Array.from(document.querySelectorAll('.question-card'));
+
+    function loadSeen() {
+      try { return JSON.parse(sessionStorage.getItem(SEEN_KEY) || '[]'); } catch { return []; }
+    }
+    function saveSeen(ids) {
+      try { sessionStorage.setItem(SEEN_KEY, JSON.stringify(ids)); } catch { }
+    }
+
+    function pickQuestions() {
+      const allIds = allCards.map((_, i) => i);
+      let seen = loadSeen();
+      // Unseen pool: indices not yet shown this session
+      let pool = allIds.filter(i => !seen.includes(i));
+      // If pool is smaller than quiz size, reset and use full pool
+      if (pool.length < QUIZ_SIZE) {
+        seen = [];
+        pool = [...allIds];
+      }
+      // Shuffle pool
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      const chosen = pool.slice(0, QUIZ_SIZE);
+      saveSeen([...seen, ...chosen]);
+      return new Set(chosen);
+    }
+
+    const activeSet = pickQuestions();
+
+    // Hide non-active cards and section headings initially; show only chosen
+    allCards.forEach((card, idx) => {
+      if (!activeSet.has(idx)) {
+        card.style.display = 'none';
+      }
+    });
+
+    // Hide section headings if no visible card follows them in their section
+    document.querySelectorAll('.section-heading').forEach(heading => {
+      let next = heading.nextElementSibling;
+      let hasVisible = false;
+      while (next && !next.classList.contains('section-heading') && !next.classList.contains('submit-section')) {
+        if (next.classList.contains('question-card') && next.style.display !== 'none') {
+          hasVisible = true; break;
+        }
+        next = next.nextElementSibling;
+      }
+      if (!hasVisible) heading.style.display = 'none';
+    });
+
+    const activeCards = allCards.filter((_, i) => activeSet.has(i));
+    const totalQ = activeCards.length;
+
+    function updateProgress() {
+      const n = answered.size;
+      document.getElementById('progressCount').textContent = `${n} / ${totalQ}`;
+      document.getElementById('progressFill').style.width = `${(n / totalQ) * 100}%`;
+    }
+    updateProgress();
+
+    function setLang(l) {
+      lang = l;
+      document.documentElement.lang = l;
+      document.getElementById('btnEn').classList.toggle('active', l === 'en');
+      document.getElementById('btnUr').classList.toggle('active', l === 'ur');
+      document.getElementById('progLabel').textContent = T[l].progress;
+      document.getElementById('submitBtn').textContent = T[l].submit;
+      document.querySelectorAll('.check-btn:not([disabled])').forEach(b => {
+        b.textContent = b.dataset.role === 'short' ? T[l].showModel : T[l].check;
+      });
+      document.querySelectorAll('.blank-input').forEach(i => {
+        i.placeholder = l === 'ur' ? 'جواب لکھیں…' : 'Your answer…';
+        i.dir = l === 'ur' ? 'rtl' : 'ltr';
+      });
+      document.querySelectorAll('.short-answer-area').forEach(a => {
+        a.placeholder = l === 'ur' ? 'یہاں جواب لکھیں (۳ سے ۵ جملے)…' : 'Write your answer here (3–5 sentences)…';
+        a.dir = l === 'ur' ? 'rtl' : 'ltr';
+      });
+      updateProgress();
+    }
+
+    // Renumber visible questions 1–10
+    activeCards.forEach((card, i) => {
+      const numEl = card.querySelector('.q-number');
+      if (numEl) numEl.textContent = `Q ${String(i + 1).padStart(2, '0')}`;
+    });
+
+    // ── MCQ ──
+    activeCards.filter(c => c.dataset.type === 'mcq').forEach(card => {
+      const opts = card.querySelectorAll('.option');
+      const correct = card.dataset.answer;
+      const fb = card.querySelector('.feedback');
+      opts.forEach(opt => {
+        opt.addEventListener('click', () => {
+          if (card.classList.contains('locked-card')) return;
+          opts.forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          card.classList.add('locked-card', 'answered');
+          opts.forEach(o => o.classList.add('locked'));
+          const chosen = opt.querySelector('input').value;
+          if (chosen === correct) {
+            opt.classList.add('correct');
+            fb.textContent = T[lang].correct; fb.className = 'feedback correct';
+          } else {
+            opt.classList.add('wrong');
+            fb.textContent = T[lang].wrong; fb.className = 'feedback wrong';
+            opts.forEach(o => { if (o.querySelector('input').value === correct) o.classList.add('show-correct'); });
+          }
+          answered.add(card); updateProgress();
+        });
+      });
+    });
+
+    // ── FILL ──
+    activeCards.filter(c => c.dataset.type === 'fill').forEach(card => {
+      const inp = card.querySelector('.blank-input');
+      const btn = card.querySelector('.check-btn');
+      const fb = card.querySelector('.feedback');
+      const acc = JSON.parse(card.dataset.answers);
+      btn.addEventListener('click', () => {
+        if (btn.disabled) return;
+        const val = inp.value.trim().toLowerCase();
+        const ok = acc.some(a => val === a.toLowerCase() || val.includes(a.toLowerCase()));
+        inp.disabled = true; btn.disabled = true;
+        if (ok) { inp.classList.add('correct-input'); fb.textContent = T[lang].correct; fb.className = 'feedback correct'; }
+        else { inp.classList.add('wrong-input'); fb.textContent = T[lang].wrong + '"' + acc[0] + '"'; fb.className = 'feedback wrong'; }
+        card.classList.add('answered'); answered.add(card); updateProgress();
+      });
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') btn.click(); });
+    });
+
+    // ── SHORT ──
+    activeCards.filter(c => c.dataset.type === 'short').forEach(card => {
+      const btn = card.querySelector('.check-btn');
+      const ma = card.querySelector('.model-answer');
+      const ta = card.querySelector('.short-answer-area');
+      btn.addEventListener('click', () => {
+        if (btn.disabled) return;
+        ma.style.display = 'block'; ta.disabled = true; btn.disabled = true;
+        btn.textContent = T[lang].modelShown;
+        card.classList.add('answered'); answered.add(card); updateProgress();
+      });
+    });
+
+    // ── SUBMIT ──
+    document.getElementById('submitBtn').addEventListener('click', () => {
+      let mc = 0, mt = 0, fc = 0, ft = 0;
+      activeCards.filter(c => c.dataset.type === 'mcq').forEach(c => {
+        mt++;
+        const s = c.querySelector('.option.selected');
+        if (s && s.querySelector('input').value === c.dataset.answer) mc++;
+      });
+      activeCards.filter(c => c.dataset.type === 'fill').forEach(c => {
+        ft++;
+        if (c.querySelector('.blank-input.correct-input')) fc++;
+      });
+      const st = activeCards.filter(c => c.dataset.type === 'short').length;
+      const total = mt + ft, score = mc + fc, pct = total > 0 ? Math.round((score / total) * 100) : 0;
+      let gi, em;
+      if (pct >= 90) { gi = 4; em = '🏆'; }
+      else if (pct >= 75) { gi = 3; em = '🎖️'; }
+      else if (pct >= 60) { gi = 2; em = '📘'; }
+      else if (pct >= 45) { gi = 1; em = '📖'; }
+      else { gi = 0; em = '📝'; }
+      document.getElementById('trophyEmoji').textContent = em;
+      document.getElementById('resultsTitle').textContent = T[lang].resultsTitle;
+      document.getElementById('scoreLabel').textContent = T[lang].scoreLabel;
+      document.getElementById('scoreDisplay').textContent = `${score}/${total}`;
+      document.getElementById('scoreDetail').innerHTML = T[lang].scoreDetail(mc, mt, fc, ft, st, pct);
+      document.getElementById('gradeTag').textContent = T[lang].grades[gi];
+      const r = document.getElementById('results');
+      r.style.display = 'block';
+      r.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  </script>
+</body>
+
+</html>

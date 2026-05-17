@@ -1,0 +1,3315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OOP Quiz Hub</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;800&family=Amiri:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #060811;
+      --surface: #0d1117;
+      --panel: #111827;
+      --border: rgba(255, 255, 255, 0.07);
+      --cpp: #60a5fa;
+      --cpp-dim: #1e3a5f;
+      --java: #fb923c;
+      --java-dim: #4a2010;
+      --basic: #a78bfa;
+      --basic-dim: #2e1a5e;
+      --green: #34d399;
+      --red: #f87171;
+      --gold: #f5c842;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* ── GLOWS ── */
+    .glow-cpp {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(96, 165, 250, 0.06), transparent 70%);
+      top: -100px;
+      left: -100px;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatA 15s ease-in-out infinite alternate;
+    }
+
+    .glow-java {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(251, 146, 60, 0.06), transparent 70%);
+      bottom: -100px;
+      right: -100px;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatB 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatA {
+      from { transform: translate(0, 0) }
+      to { transform: translate(60px, 40px) }
+    }
+
+    @keyframes floatB {
+      from { transform: translate(0, 0) }
+      to { transform: translate(-50px, -60px) }
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 70px 24px 50px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .site-header .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.8;
+      margin-bottom: 16px;
+    }
+
+    .site-header h1 {
+      font-family: 'Amiri', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--cpp) 0%, #fff 40%, var(--java) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      margin-bottom: 12px;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .site-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      animation: fadeDown 0.8s ease 0.15s both;
+    }
+
+    .header-divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 20px auto 0;
+    }
+
+    .header-tags {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      animation: fadeDown 0.8s ease 0.3s both;
+    }
+
+    .htag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 4px 14px;
+      border-radius: 100px;
+      border: 1px solid;
+      letter-spacing: 0.05em;
+    }
+
+    .htag-cpp {
+      border-color: var(--cpp);
+      color: var(--cpp);
+      background: rgba(96, 165, 250, 0.08);
+    }
+
+    .htag-java {
+      border-color: var(--java);
+      color: var(--java);
+      background: rgba(251, 146, 60, 0.08);
+    }
+
+    .htag-oop {
+      border-color: var(--basic);
+      color: var(--basic);
+      background: rgba(167, 139, 250, 0.08);
+    }
+
+    /* ── NAV ── */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(6, 8, 17, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .sticky-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-inner {
+      display: flex;
+      gap: 4px;
+      padding: 10px 0;
+      min-width: max-content;
+      justify-content: center;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--muted);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 7px 18px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-btn.cpp.active {
+      color: var(--cpp);
+      border-color: var(--cpp);
+      background: rgba(96, 165, 250, 0.1);
+    }
+
+    .nav-btn.java.active {
+      color: var(--java);
+      border-color: var(--java);
+      background: rgba(251, 146, 60, 0.1);
+    }
+
+    .nav-btn.basic.active {
+      color: var(--basic);
+      border-color: var(--basic);
+      background: rgba(167, 139, 250, 0.1);
+    }
+
+    .nav-btn.notes.active {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: rgba(245, 200, 66, 0.1);
+    }
+
+    .nav-btn.finalquiz.active {
+      color: var(--green);
+      border-color: var(--green);
+      background: rgba(52, 211, 153, 0.1);
+    }
+
+    .nav-btn.challenge.active {
+      color: #e879f9;
+      border-color: #e879f9;
+      background: rgba(232, 121, 249, 0.1);
+    }
+
+    /* ── MAIN ── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 50px 20px 100px;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .quiz-section {
+      margin-bottom: 80px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 36px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .icon-cpp {
+      background: rgba(96, 165, 250, 0.15);
+      box-shadow: 0 0 24px rgba(96, 165, 250, 0.15);
+    }
+
+    .icon-java {
+      background: rgba(251, 146, 60, 0.15);
+      box-shadow: 0 0 24px rgba(251, 146, 60, 0.15);
+    }
+
+    .icon-basic {
+      background: rgba(167, 139, 250, 0.15);
+      box-shadow: 0 0 24px rgba(167, 139, 250, 0.15);
+    }
+
+    .icon-final {
+      background: rgba(52, 211, 153, 0.15);
+      box-shadow: 0 0 24px rgba(52, 211, 153, 0.15);
+    }
+
+    .section-heading h2 {
+      font-family: 'Amiri', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .section-heading .lang-tag {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid;
+    }
+
+    .lt-cpp { border-color: var(--cpp); color: var(--cpp); }
+    .lt-java { border-color: var(--java); color: var(--java); }
+    .lt-basic { border-color: var(--basic); color: var(--basic); }
+    .lt-final { border-color: var(--green); color: var(--green); }
+
+    .section-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 600px;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .progress-bar-track {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      transition: width 0.4s ease;
+    }
+
+    .pb-cpp { background: linear-gradient(90deg, var(--cpp), #93c5fd); }
+    .pb-java { background: linear-gradient(90deg, var(--java), #fcd34d); }
+    .pb-basic { background: linear-gradient(90deg, var(--basic), #c4b5fd); }
+    .pb-final { background: linear-gradient(90deg, var(--green), #6ee7b7); }
+
+    .progress-text {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── QUIZ CARD ── */
+    .quiz-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px 28px 24px;
+      margin-bottom: 16px;
+      transition: border-color 0.3s;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .quiz-card.answered-correct {
+      border-color: rgba(52, 211, 153, 0.4);
+      background: rgba(52, 211, 153, 0.04);
+    }
+
+    .quiz-card.answered-wrong {
+      border-color: rgba(248, 113, 113, 0.4);
+      background: rgba(248, 113, 113, 0.04);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .q-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 3px;
+    }
+
+    .q-badge {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+      border: 1px solid;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .qb-cpp { border-color: var(--cpp-dim); color: var(--cpp); background: rgba(96, 165, 250, 0.06); }
+    .qb-java { border-color: var(--java-dim); color: var(--java); background: rgba(251, 146, 60, 0.06); }
+    .qb-basic { border-color: rgba(167, 139, 250, 0.3); color: var(--basic); background: rgba(167, 139, 250, 0.06); }
+    .qb-final { border-color: rgba(52,211,153,0.3); color: var(--green); background: rgba(52,211,153,0.06); }
+
+    .q-text {
+      font-size: 0.97rem;
+      line-height: 1.65;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .q-text code {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 2px 7px;
+      border-radius: 5px;
+      color: #93c5fd;
+    }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      background: #0a0c14;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      line-height: 1.7;
+      color: #94a3b8;
+      white-space: pre;
+    }
+
+    .code-block .kw { color: #60a5fa; }
+    .code-block .fn { color: #34d399; }
+    .code-block .st { color: #f59e0b; }
+    .code-block .cm { color: #475569; font-style: italic; }
+    .code-block .num { color: #fb923c; }
+
+    /* ── OPTIONS ── */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 11px 16px;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.86rem;
+      color: var(--text);
+      transition: all 0.2s;
+      width: 100%;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateX(4px);
+    }
+
+    .option-btn .opt-key {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      flex-shrink: 0;
+      color: var(--muted);
+    }
+
+    .option-btn.correct {
+      border-color: var(--green);
+      background: rgba(52, 211, 153, 0.1);
+      color: var(--green);
+    }
+
+    .option-btn.correct .opt-key {
+      background: var(--green);
+      color: #000;
+      border-color: var(--green);
+    }
+
+    .option-btn.wrong {
+      border-color: var(--red);
+      background: rgba(248, 113, 113, 0.1);
+      color: var(--red);
+    }
+
+    .option-btn.wrong .opt-key {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red);
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+      transform: none;
+    }
+
+    .option-btn code {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    /* ── FEEDBACK ── */
+    .feedback {
+      display: none;
+      margin-top: 14px;
+      padding: 13px 16px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    .feedback.show { display: block; }
+
+    .feedback.correct-fb {
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      color: #6ee7b7;
+    }
+
+    .feedback.wrong-fb {
+      background: rgba(248, 113, 113, 0.08);
+      border: 1px solid rgba(248, 113, 113, 0.25);
+      color: #fca5a5;
+    }
+
+    .feedback strong { font-weight: 700; }
+
+    /* ── SCORE CARD ── */
+    .score-panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .score-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 1.2rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .score-info h3 { font-size: 1.1rem; margin-bottom: 4px; }
+    .score-info p { font-size: 0.82rem; color: var(--muted); }
+    .score-info .score-nums {
+      font-family: var(--mono);
+      color: var(--gold);
+      font-size: 0.85rem;
+      margin-top: 4px;
+    }
+
+    .sc-cpp { background: rgba(96, 165, 250, 0.15); border: 2px solid var(--cpp); color: var(--cpp); }
+    .sc-java { background: rgba(251, 146, 60, 0.15); border: 2px solid var(--java); color: var(--java); }
+    .sc-basic { background: rgba(167, 139, 250, 0.15); border: 2px solid var(--basic); color: var(--basic); }
+    .sc-final { background: rgba(52, 211, 153, 0.15); border: 2px solid var(--green); color: var(--green); }
+
+    /* ── RESET BTN ── */
+    .reset-btn {
+      margin-top: 12px;
+      padding: 9px 22px;
+      border-radius: 100px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      opacity: 0.4;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px) }
+      to { opacity: 1; transform: translateY(0) }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px) }
+      to { opacity: 1; transform: translateY(0) }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .quiz-card { padding: 20px 16px 18px; }
+      .section-heading h2 { font-size: 1.4rem; }
+    }
+
+    /* ══ NOTES PANEL ══ */
+    .notes-section { margin-bottom: 80px; }
+
+    .note-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .note-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s;
+      animation: fadeUp 0.4s ease both;
+    }
+    .note-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.4);
+    }
+    .note-card::before {
+      content: '';
+      display: block;
+      height: 4px;
+    }
+    .note-card.nc-basic::before  { background: linear-gradient(90deg, var(--basic), #c4b5fd); }
+    .note-card.nc-cpp::before    { background: linear-gradient(90deg, var(--cpp), #93c5fd); }
+    .note-card.nc-java::before   { background: linear-gradient(90deg, var(--java), #fcd34d); }
+
+    .note-card.nc-basic { border-color: rgba(167,139,250,0.15); }
+    .note-card.nc-cpp   { border-color: rgba(96,165,250,0.15); }
+    .note-card.nc-java  { border-color: rgba(251,146,60,0.15); }
+
+    .note-card.nc-basic:hover { border-color: rgba(167,139,250,0.4); box-shadow: 0 10px 32px rgba(167,139,250,0.1); }
+    .note-card.nc-cpp:hover   { border-color: rgba(96,165,250,0.4);  box-shadow: 0 10px 32px rgba(96,165,250,0.1); }
+    .note-card.nc-java:hover  { border-color: rgba(251,146,60,0.4);  box-shadow: 0 10px 32px rgba(251,146,60,0.1); }
+
+    .note-card-inner { padding: 20px 22px 22px; }
+
+    .nc-tag {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+      opacity: 0.8;
+    }
+    .nc-tag.t-basic { color: var(--basic); }
+    .nc-tag.t-cpp   { color: var(--cpp); }
+    .nc-tag.t-java  { color: var(--java); }
+    .nc-tag.t-gold  { color: var(--gold); }
+
+    .nc-title {
+      font-family: 'Amiri', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+
+    .nc-body {
+      font-size: 0.82rem;
+      color: rgba(226,232,240,0.75);
+      line-height: 1.8;
+    }
+    .nc-body ul { margin: 0; padding-left: 1.1em; }
+    .nc-body li { margin-bottom: 4px; }
+    .nc-body .hl { color: var(--gold); font-weight: 700; }
+    .nc-body .hl-cpp  { color: var(--cpp); font-weight: 700; }
+    .nc-body .hl-java { color: var(--java); font-weight: 700; }
+    .nc-body .hl-basic { color: var(--basic); font-weight: 700; }
+    .nc-body code {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      background: rgba(255,255,255,0.07);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: #93c5fd;
+    }
+
+    .note-card.full { grid-column: 1 / -1; }
+    .note-card.full .note-card-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .note-card.full.three-col .note-card-inner {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .nc-col-title {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nc-col-title.t-basic { color: var(--basic); }
+    .nc-col-title.t-cpp   { color: var(--cpp); }
+    .nc-col-title.t-java  { color: var(--java); }
+    .nc-col-title.t-gold  { color: var(--gold); }
+    .nc-col-title.t-green { color: var(--green); }
+    .nc-col-title.t-red   { color: var(--red); }
+
+    .nc-pill {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin: 2px 2px 2px 0;
+      color: var(--muted);
+    }
+    .nc-pill.p-cpp   { border-color: rgba(96,165,250,0.3);  color: var(--cpp); }
+    .nc-pill.p-java  { border-color: rgba(251,146,60,0.3);  color: var(--java); }
+    .nc-pill.p-basic { border-color: rgba(167,139,250,0.3); color: var(--basic); }
+    .nc-pill.p-green { border-color: rgba(52,211,153,0.3);  color: var(--green); }
+    .nc-pill.p-gold  { border-color: rgba(245,200,66,0.3);  color: var(--gold); }
+
+    @media (max-width: 640px) {
+      .note-card.full .note-card-inner,
+      .note-card.full.three-col .note-card-inner { grid-template-columns: 1fr; }
+      .note-cards-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Panel visibility */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ── VISUAL DIAGRAM CARDS ── */
+    .visual-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px 28px 28px;
+      margin-bottom: 16px;
+      animation: fadeUp 0.4s ease both;
+    }
+    .visual-card-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
+    }
+    .visual-icon {
+      font-size: 1.1rem;
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    }
+    .visual-title {
+      font-family: 'Amiri', serif; font-size: 1.05rem; font-weight: 700;
+    }
+    .visual-subtitle {
+      font-family: var(--mono); font-size: 0.6rem; color: var(--muted);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-top: 1px;
+    }
+    .visual-grid { display: grid; gap: 16px; }
+    .visual-grid.col2 { grid-template-columns: 1fr 1fr; }
+    .visual-grid.col3 { grid-template-columns: 1fr 1fr 1fr; }
+    @media(max-width:680px){.visual-grid.col2,.visual-grid.col3{grid-template-columns:1fr;}}
+
+    /* SVG diagrams */
+    .diagram-wrap { display: flex; justify-content: center; overflow-x: auto; }
+    .diagram-wrap svg { max-width: 100%; }
+
+    /* code example */
+    .code-example {
+      background: #080b14;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .code-example-bar {
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 8px 16px;
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 0.62rem; color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .code-example-bar .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-r { background: #f87171; } .dot-y { background: #f59e0b; } .dot-g { background: #34d399; }
+    .code-example pre {
+      margin: 0; padding: 16px 18px;
+      font-family: var(--mono); font-size: 0.78rem;
+      line-height: 1.8; color: #94a3b8;
+      overflow-x: auto; white-space: pre;
+    }
+    .ce-kw { color: #60a5fa; }
+    .ce-fn { color: #34d399; }
+    .ce-st { color: #f59e0b; }
+    .ce-cm { color: #475569; font-style: italic; }
+    .ce-num { color: #fb923c; }
+    .ce-cl { color: #e879f9; }
+    .ce-out { color: #a3e635; }
+
+    /* ── CODE CHALLENGE PANEL ── */
+    .challenge-panel { }
+    .challenge-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 20px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .ch-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .ch-difficulty {
+      font-family: var(--mono); font-size: 0.6rem; padding: 3px 12px;
+      border-radius: 100px; border: 1px solid; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .diff-easy   { border-color: rgba(52,211,153,0.4); color: var(--green); background: rgba(52,211,153,0.07); }
+    .diff-medium { border-color: rgba(245,200,66,0.4); color: var(--gold); background: rgba(245,200,66,0.07); }
+    .diff-hard   { border-color: rgba(248,113,113,0.4); color: var(--red); background: rgba(248,113,113,0.07); }
+    .ch-lang-tag {
+      font-family: var(--mono); font-size: 0.6rem; padding: 3px 12px;
+      border-radius: 100px; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .ch-title { font-family: 'Amiri', serif; font-size: 1.3rem; margin-bottom: 12px; }
+    .ch-desc { font-size: 0.88rem; color: rgba(226,232,240,0.8); line-height: 1.7; margin-bottom: 18px; }
+    .ch-desc code { font-family: var(--mono); font-size: 0.8rem; background: rgba(255,255,255,0.07); padding: 1px 6px; border-radius: 4px; color: #93c5fd; }
+    .ch-expected {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 14px 18px; margin-bottom: 18px;
+      font-family: var(--mono); font-size: 0.78rem; color: var(--muted); line-height: 1.6;
+    }
+    .ch-expected strong { color: var(--gold); }
+    .ch-textarea {
+      width: 100%; min-height: 220px; background: #080b14;
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+      color: #e2e8f0; font-family: var(--mono); font-size: 0.82rem;
+      padding: 16px 18px; resize: vertical; line-height: 1.7;
+      outline: none; transition: border-color 0.2s; margin-bottom: 14px;
+    }
+    .ch-textarea:focus { border-color: rgba(232,121,249,0.4); }
+    .ch-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .ch-submit {
+      padding: 10px 26px; border-radius: 100px; cursor: pointer;
+      font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      background: linear-gradient(135deg, #e879f9, #a855f7);
+      border: none; color: #fff; transition: all 0.2s;
+    }
+    .ch-submit:hover { opacity: 0.85; transform: translateY(-1px); }
+    .ch-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .ch-next {
+      padding: 10px 22px; border-radius: 100px; cursor: pointer;
+      font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 600;
+      background: transparent; border: 1px solid rgba(255,255,255,0.15);
+      color: var(--muted); transition: all 0.2s;
+    }
+    .ch-next:hover { background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.3); }
+    .ch-feedback {
+      display: none; margin-top: 18px; border-radius: 12px; overflow: hidden;
+    }
+    .ch-feedback.show { display: block; }
+    .ch-fb-bar {
+      padding: 10px 18px; font-family: var(--mono); font-size: 0.7rem;
+      letter-spacing: 0.06em; display: flex; align-items: center; gap: 8px;
+    }
+    .ch-fb-body { padding: 16px 18px; font-size: 0.85rem; line-height: 1.7; }
+    .ch-fb-body code { font-family: var(--mono); font-size: 0.78rem; background: rgba(255,255,255,0.07); padding: 1px 6px; border-radius: 4px; }
+    .ch-verdict-pass { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.3); }
+    .ch-verdict-pass .ch-fb-bar { background: rgba(52,211,153,0.12); color: var(--green); }
+    .ch-verdict-fail { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.3); }
+    .ch-verdict-fail .ch-fb-bar { background: rgba(248,113,113,0.12); color: var(--red); }
+    .ch-verdict-partial { background: rgba(245,200,66,0.06); border: 1px solid rgba(245,200,66,0.3); }
+    .ch-verdict-partial .ch-fb-bar { background: rgba(245,200,66,0.1); color: var(--gold); }
+    .ch-checks { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .ch-check {
+      font-family: var(--mono); font-size: 0.65rem; padding: 3px 10px;
+      border-radius: 6px; border: 1px solid;
+    }
+    .chk-pass { border-color: rgba(52,211,153,0.4); color: var(--green); background: rgba(52,211,153,0.07); }
+    .chk-fail { border-color: rgba(248,113,113,0.4); color: var(--red); background: rgba(248,113,113,0.07); }
+    .ch-loading {
+      display: flex; align-items: center; gap: 10px; padding: 14px 0;
+      font-family: var(--mono); font-size: 0.78rem; color: var(--muted);
+    }
+    .spinner {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid rgba(232,121,249,0.2);
+      border-top-color: #e879f9;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .ch-score-bar {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 18px; padding: 24px 28px; margin-bottom: 24px;
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .ch-score-circle {
+      width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(232,121,249,0.12); border: 2px solid #e879f9;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 1.1rem; font-weight: 700; color: #e879f9;
+    }
+    .challenge-selector {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: 10px; margin-bottom: 24px;
+    }
+    .ch-sel-btn {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 14px 16px; cursor: pointer; text-align: left;
+      transition: all 0.2s; color: var(--text); font-family: 'Syne', sans-serif;
+    }
+    .ch-sel-btn:hover { background: rgba(232,121,249,0.07); border-color: rgba(232,121,249,0.3); }
+    .ch-sel-title { font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; }
+    .ch-sel-meta { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
+
+    /* hero chip */
+    .hero { text-align: center; padding: 1rem 0 0; }
+    .hero-chip {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: pulse-border 3s ease-in-out infinite;
+    }
+    @keyframes pulse-border {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,229,255,0); }
+      50% { box-shadow: 0 0 4px 4px rgba(67,227,248,0.281); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="glow-cpp"></div>
+  <div class="glow-java"></div>
+
+  <!-- ══ HEADER ══ -->
+  <header class="site-header">
+    <p class="eyebrow">💻 Exam Preparation · OOP</p>
+    <h1>Object Oriented<br>Programming</h1>
+    <div class="hero">
+      <div class="hero-chip">Made by Hanan Shafay &amp; Mohid Ahmed</div>
+    </div>
+    <p>C++ · Java · Core Concepts · All Four Pillars</p>
+    <div class="header-divider"></div>
+    <div class="header-tags">
+      <span class="htag htag-cpp">C++ Basics</span>
+      <span class="htag htag-oop">OOP Pillars</span>
+      <span class="htag htag-cpp">Constructors &amp; Destructors</span>
+      <span class="htag htag-cpp">Inheritance</span>
+      <span class="htag htag-cpp">Polymorphism</span>
+      <span class="htag htag-cpp">Templates</span>
+      <span class="htag htag-java">Java · JVM · JIT · JDK</span>
+    </div>
+  </header>
+
+  <!-- ══ NAV ══ -->
+  <nav class="sticky-nav">
+    <div class="nav-inner">
+      <button class="nav-btn notes active" onclick="switchTab('notes', this)">📚 Notes</button>
+      <button class="nav-btn basic" onclick="switchTab('basic', this)">🧱 Basic Concepts</button>
+      <button class="nav-btn cpp" onclick="switchTab('cpp', this)">⚙️ C++ &amp; OOP</button>
+      <button class="nav-btn java" onclick="switchTab('java', this)">☕ Java</button>
+      <button class="nav-btn finalquiz" onclick="switchTab('final', this)">🏆 Final Quiz</button>
+      <button class="nav-btn challenge" onclick="switchTab('challenge', this)">📄 Sample Paper</button>
+    </div>
+  </nav>
+
+  <!-- ══ NOTES PANEL ══ -->
+  <div id="panel-notes" class="panel active">
+  <div>  <div>  <div>  <div>  <div>  <div>  <div>  <div>  <div>  <div>  <div>
+  <main>
+
+    <!-- NOTES SECTION 1 — BASIC OOP CONCEPTS -->
+    <section class="notes-section">
+      <div class="section-heading">
+        <div class="section-icon icon-basic">🧱</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <h2>Basic OOP Concepts</h2>
+            <span class="lang-tag lt-basic">Fundamentals</span>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);">Classes · Objects · The Four Pillars · Pointers · Access Specifiers</p>
+        </div>
+      </div>
+
+      <div class="note-cards-grid">
+        <div class="note-card nc-basic">
+          <div class="note-card-inner">
+            <span class="nc-tag t-basic">Pillar 1</span>
+            <div class="nc-title">Encapsulation</div>
+            <div class="nc-body">
+              <ul>
+                <li>Bundles <span class="hl-basic">data + methods</span> into a single class unit</li>
+                <li>Restricts direct access to internal state using <span class="hl">access specifiers</span></li>
+                <li>Data is hidden (<code>private</code>); only exposed via public methods (getters/setters)</li>
+                <li>Benefit: protects integrity of object data; changes to internals don't break outside code</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card nc-basic">
+          <div class="note-card-inner">
+            <span class="nc-tag t-basic">Pillar 2</span>
+            <div class="nc-title">Abstraction</div>
+            <div class="nc-body">
+              <ul>
+                <li>Exposes <span class="hl">what</span> an object does, hides <span class="hl">how</span> it does it</li>
+                <li>Shows only essential features to the outside world</li>
+                <li>Achieved via <span class="hl-basic">abstract classes</span> and <span class="hl-basic">interfaces</span></li>
+                <li>Reduces complexity — user interacts with a simplified model</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card nc-basic">
+          <div class="note-card-inner">
+            <span class="nc-tag t-basic">Pillar 3</span>
+            <div class="nc-title">Inheritance</div>
+            <div class="nc-body">
+              <ul>
+                <li>A child (derived) class <span class="hl">acquires</span> properties and behavior of a parent (base) class</li>
+                <li>Establishes an <span class="hl">"is-a"</span> relationship — e.g. Dog is-a Animal</li>
+                <li>Promotes <span class="hl">code reuse</span> — no need to rewrite common logic</li>
+                <li>Child can <span class="hl">extend</span> (add new) or <span class="hl">override</span> (replace) parent behavior</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card nc-basic">
+          <div class="note-card-inner">
+            <span class="nc-tag t-basic">Pillar 4</span>
+            <div class="nc-title">Polymorphism</div>
+            <div class="nc-body">
+              <ul>
+                <li><span class="hl">One interface, many forms</span> — same function name, different behavior</li>
+                <li><span class="hl-basic">Compile-time</span>: function/operator overloading — resolved by compiler</li>
+                <li><span class="hl-basic">Runtime</span>: function overriding via virtual functions — resolved at runtime via vtable</li>
+                <li>Allows treating objects of different classes uniformly through a common interface</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div><!-- /note-cards-grid pillars -->
+
+      <!-- ── VISUAL: Four Pillars Diagram + Code Examples ── -->
+      <div class="visual-card nc-basic" style="border-color:rgba(167,139,250,0.2);">
+        <div class="visual-card-header">
+          <div class="visual-icon">🎨</div>
+          <div>
+            <div class="visual-title">The Four Pillars — Visual Overview</div>
+            <div class="visual-subtitle">How the pillars relate and interact</div>
+          </div>
+        </div>
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 740 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:740px;">
+            <defs>
+              <linearGradient id="gEnc" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient>
+              <linearGradient id="gAbs" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#2563eb"/></linearGradient>
+              <linearGradient id="gInh" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#34d399"/><stop offset="100%" stop-color="#059669"/></linearGradient>
+              <linearGradient id="gPol" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fb923c"/><stop offset="100%" stop-color="#ea580c"/></linearGradient>
+              <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <!-- center OOP circle -->
+            <circle cx="370" cy="160" r="46" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <text x="370" y="155" text-anchor="middle" fill="#e2e8f0" font-family="serif" font-size="13" font-weight="700">OOP</text>
+            <text x="370" y="172" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="9">Core</text>
+            <!-- Encapsulation box -->
+            <rect x="30" y="30" width="160" height="80" rx="14" fill="url(#gEnc)" opacity="0.18" stroke="url(#gEnc)" stroke-width="1.5"/>
+            <text x="110" y="62" text-anchor="middle" fill="#c4b5fd" font-family="serif" font-size="13" font-weight="700">Encapsulation</text>
+            <text x="110" y="80" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="9">Bundles data + methods</text>
+            <text x="110" y="96" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="9">Hides internals (private)</text>
+            <!-- Abstraction box -->
+            <rect x="550" y="30" width="160" height="80" rx="14" fill="url(#gAbs)" opacity="0.18" stroke="url(#gAbs)" stroke-width="1.5"/>
+            <text x="630" y="62" text-anchor="middle" fill="#93c5fd" font-family="serif" font-size="13" font-weight="700">Abstraction</text>
+            <text x="630" y="80" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="9">Hides complexity</text>
+            <text x="630" y="96" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="9">Shows only interface</text>
+            <!-- Inheritance box -->
+            <rect x="30" y="210" width="160" height="80" rx="14" fill="url(#gInh)" opacity="0.18" stroke="url(#gInh)" stroke-width="1.5"/>
+            <text x="110" y="242" text-anchor="middle" fill="#6ee7b7" font-family="serif" font-size="13" font-weight="700">Inheritance</text>
+            <text x="110" y="260" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="9">Reuse parent behavior</text>
+            <text x="110" y="276" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="9">extends / is-a</text>
+            <!-- Polymorphism box -->
+            <rect x="550" y="210" width="160" height="80" rx="14" fill="url(#gPol)" opacity="0.18" stroke="url(#gPol)" stroke-width="1.5"/>
+            <text x="630" y="242" text-anchor="middle" fill="#fdba74" font-family="serif" font-size="13" font-weight="700">Polymorphism</text>
+            <text x="630" y="260" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="9">One interface</text>
+            <text x="630" y="276" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="9">Many forms</text>
+            <!-- connector lines -->
+            <line x1="190" y1="70" x2="324" y2="130" stroke="rgba(167,139,250,0.35)" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="550" y1="70" x2="416" y2="130" stroke="rgba(96,165,250,0.35)" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="190" y1="250" x2="324" y2="190" stroke="rgba(52,211,153,0.35)" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="550" y1="250" x2="416" y2="190" stroke="rgba(251,146,60,0.35)" stroke-width="1.5" stroke-dasharray="5,3"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- ── CODE EXAMPLES: Encapsulation & Inheritance ── -->
+      <div class="visual-grid col2" style="margin-bottom:16px;">
+        <div>
+          <div class="code-example">
+            <div class="code-example-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div> Encapsulation — C++</div>
+            <pre><span class="ce-kw">class</span> <span class="ce-cl">BankAccount</span> {
+<span class="ce-kw">private</span>:
+  <span class="ce-kw">double</span> balance; <span class="ce-cm">// hidden</span>
+<span class="ce-kw">public</span>:
+  <span class="ce-fn">BankAccount</span>(<span class="ce-kw">double</span> b) : balance(b) {}
+  <span class="ce-kw">void</span> <span class="ce-fn">deposit</span>(<span class="ce-kw">double</span> amt) {
+    <span class="ce-kw">if</span>(amt > <span class="ce-num">0</span>) balance += amt;
+  }
+  <span class="ce-kw">double</span> <span class="ce-fn">getBalance</span>() { <span class="ce-kw">return</span> balance; }
+};
+<span class="ce-cm">// balance is only changed via methods</span></pre>
+          </div>
+        </div>
+        <div>
+          <div class="code-example">
+            <div class="code-example-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div> Inheritance — C++</div>
+            <pre><span class="ce-kw">class</span> <span class="ce-cl">Animal</span> {
+<span class="ce-kw">public</span>:
+  <span class="ce-kw">void</span> <span class="ce-fn">breathe</span>() {
+    cout &lt;&lt; <span class="ce-st">"Breathing..."</span>;
+  }
+};
+
+<span class="ce-kw">class</span> <span class="ce-cl">Dog</span> : <span class="ce-kw">public</span> <span class="ce-cl">Animal</span> {
+<span class="ce-kw">public</span>:
+  <span class="ce-kw">void</span> <span class="ce-fn">bark</span>() {
+    cout &lt;&lt; <span class="ce-st">"Woof!"</span>;
+  }
+};
+<span class="ce-cm">// Dog inherits breathe() from Animal</span></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CODE EXAMPLES: Polymorphism ── -->
+      <div class="visual-grid col2" style="margin-bottom:16px;">
+        <div>
+          <div class="code-example">
+            <div class="code-example-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div> Polymorphism (Runtime) — C++</div>
+            <pre><span class="ce-kw">class</span> <span class="ce-cl">Shape</span> {
+<span class="ce-kw">public</span>:
+  <span class="ce-kw">virtual void</span> <span class="ce-fn">draw</span>() {
+    cout &lt;&lt; <span class="ce-st">"Shape"</span>;
+  }
+};
+<span class="ce-kw">class</span> <span class="ce-cl">Circle</span> : <span class="ce-kw">public</span> <span class="ce-cl">Shape</span> {
+<span class="ce-kw">public</span>:
+  <span class="ce-kw">void</span> <span class="ce-fn">draw</span>() <span class="ce-kw">override</span> {
+    cout &lt;&lt; <span class="ce-st">"Circle"</span>;
+  }
+};
+<span class="ce-cl">Shape</span>* s = <span class="ce-kw">new</span> <span class="ce-cl">Circle</span>();
+s-><span class="ce-fn">draw</span>(); <span class="ce-cm">// prints "Circle" ← runtime!</span></pre>
+          </div>
+        </div>
+        <div>
+          <div class="code-example">
+            <div class="code-example-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div> Abstraction — Abstract Class C++</div>
+            <pre><span class="ce-kw">class</span> <span class="ce-cl">Vehicle</span> {  <span class="ce-cm">// Abstract</span>
+<span class="ce-kw">public</span>:
+  <span class="ce-kw">virtual void</span> <span class="ce-fn">start</span>() = <span class="ce-num">0</span>; <span class="ce-cm">// pure virtual</span>
+  <span class="ce-kw">void</span> <span class="ce-fn">stop</span>() {
+    cout &lt;&lt; <span class="ce-st">"Stopped"</span>;
+  }
+};
+<span class="ce-kw">class</span> <span class="ce-cl">Car</span> : <span class="ce-kw">public</span> <span class="ce-cl">Vehicle</span> {
+<span class="ce-kw">public</span>:
+  <span class="ce-kw">void</span> <span class="ce-fn">start</span>() <span class="ce-kw">override</span> {
+    cout &lt;&lt; <span class="ce-st">"Car started"</span>;
+  }
+};
+<span class="ce-cm">// Vehicle* v = new Vehicle(); ← ERROR!</span></pre>
+          </div>
+        </div>
+      </div>
+              <div class="nc-body">
+                <ul>
+                  <li>A <span class="hl-basic">Class</span> is a <span class="hl">blueprint / template</span> — it defines data members and member functions but holds no memory itself</li>
+                  <li>An <span class="hl-basic">Object</span> is a <span class="hl">runtime instance</span> of a class, allocated in memory with its own copy of data members</li>
+                  <li>Example: <code>class Car { };</code> is the blueprint; <code>Car myCar;</code> creates an object</li>
+                  <li>Multiple objects can be created from one class — each has its own state</li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div class="nc-col-title t-gold">Access Specifiers</div>
+              <div class="nc-body">
+                <ul>
+                  <li><code>private</code> — accessible <span class="hl">only within the class</span>. Default in <code>class</code></li>
+                  <li><code>protected</code> — accessible within the class <span class="hl">and derived classes</span></li>
+                  <li><code>public</code> — accessible from <span class="hl">anywhere</span></li>
+                  <li>In a <code>struct</code>, members are <code>public</code> by default</li>
+                  <li>Core mechanism of <span class="hl-basic">Encapsulation</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-cards-grid">
+        <div class="note-card nc-basic">
+          <div class="note-card-inner">
+            <span class="nc-tag t-cpp">Pointers — Basics</span>
+            <div class="nc-title">Address-of &amp; Dereference</div>
+            <div class="nc-body">
+              <ul>
+                <li><code>&amp;x</code> — <span class="hl">address-of</span> operator: returns the memory address of <code>x</code></li>
+                <li><code>int* p = &amp;x;</code> — pointer <code>p</code> stores the address of <code>x</code></li>
+                <li><code>*p</code> — <span class="hl">dereference</span>: follows the address in <code>p</code> and returns the value</li>
+                <li>Changing <code>*p</code> changes the original variable <code>x</code></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card nc-basic">
+          <div class="note-card-inner">
+            <span class="nc-tag t-cpp">Pointers — Member Access</span>
+            <div class="nc-title">Dot vs Arrow Operator</div>
+            <div class="nc-body">
+              <ul>
+                <li><code>obj.member</code> — dot operator used on a <span class="hl">direct object instance</span></li>
+                <li><code>ptr-&gt;member</code> — arrow operator used when accessing through a <span class="hl">pointer</span></li>
+                <li><code>ptr-&gt;speed</code> is shorthand for <code>(*ptr).speed</code></li>
+                <li><code>::</code> (scope resolution) is used to access class members <em>outside</em> the class definition, or to access static members</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── VISUAL: Pointer Diagram ── -->
+      <div class="visual-card" style="border-color:rgba(96,165,250,0.2);">
+        <div class="visual-card-header">
+          <div class="visual-icon">📍</div>
+          <div>
+            <div class="visual-title">Pointers — Memory Visualization</div>
+            <div class="visual-subtitle">How & and * work in memory</div>
+          </div>
+        </div>
+        <div class="visual-grid col2">
+          <div class="diagram-wrap">
+            <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:340px;">
+              <!-- memory cells -->
+              <rect x="30" y="40" width="80" height="50" rx="8" fill="rgba(96,165,250,0.1)" stroke="rgba(96,165,250,0.4)" stroke-width="1.5"/>
+              <text x="70" y="60" text-anchor="middle" fill="#93c5fd" font-family="monospace" font-size="10">0x1A4</text>
+              <text x="70" y="76" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-size="14" font-weight="700">42</text>
+              <text x="70" y="106" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="9">int x = 42</text>
+
+              <rect x="200" y="40" width="100" height="50" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+              <text x="250" y="60" text-anchor="middle" fill="#6ee7b7" font-family="monospace" font-size="10">0x2B8</text>
+              <text x="250" y="76" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-size="11">0x1A4</text>
+              <text x="250" y="106" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="9">int* p = &amp;x</text>
+
+              <!-- arrow from p to x -->
+              <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#6ee7b7"/></marker></defs>
+              <path d="M200,65 Q150,120 110,65" stroke="#6ee7b7" stroke-width="1.5" fill="none" marker-end="url(#arr)" stroke-dasharray="4,3"/>
+              <text x="155" y="135" text-anchor="middle" fill="#6ee7b7" font-family="monospace" font-size="9">p points to x</text>
+
+              <text x="30" y="170" fill="#64748b" font-family="monospace" font-size="9">&amp;x → address of x (0x1A4)</text>
+              <text x="30" y="186" fill="#64748b" font-family="monospace" font-size="9">*p  → value at address (42)</text>
+            </svg>
+          </div>
+          <div>
+            <div class="code-example">
+              <div class="code-example-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div> Pointers — C++</div>
+              <pre><span class="ce-kw">int</span> x = <span class="ce-num">42</span>;
+<span class="ce-kw">int</span>* p = &amp;x;     <span class="ce-cm">// p holds address of x</span>
+
+cout &lt;&lt; x;      <span class="ce-cm">// 42  (direct)</span>
+cout &lt;&lt; &amp;x;     <span class="ce-cm">// 0x1A4 (address)</span>
+cout &lt;&lt; p;      <span class="ce-cm">// 0x1A4 (same address)</span>
+cout &lt;&lt; *p;     <span class="ce-cm">// 42   (dereference)</span>
+
+*p = <span class="ce-num">99</span>;        <span class="ce-cm">// changes x!</span>
+cout &lt;&lt; x;      <span class="ce-out">// 99</span>
+
+<span class="ce-cm">// Arrow operator with objects:</span>
+<span class="ce-cl">Car</span>* car = <span class="ce-kw">new</span> <span class="ce-cl">Car</span>();
+car-><span class="ce-fn">start</span>();   <span class="ce-cm">// same as (*car).start()</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTES SECTION 2 — C++ & OOP IN DEPTH -->
+    <section class="notes-section">
+      <div class="section-heading">
+        <div class="section-icon icon-cpp">⚙️</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <h2>C++ &amp; OOP In Depth</h2>
+            <span class="lang-tag lt-cpp">C++</span>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);">Constructors · Destructors · Friend Functions · Inheritance · Polymorphism · Templates</p>
+        </div>
+      </div>
+
+      <div class="note-cards-grid">
+        <div class="note-card nc-cpp">
+          <div class="note-card-inner">
+            <span class="nc-tag t-cpp">Constructors</span>
+            <div class="nc-title">Types of Constructors</div>
+            <div class="nc-body">
+              <ul>
+                <li><span class="hl-cpp">Default</span> — no parameters; called when object is created with no args</li>
+                <li><span class="hl-cpp">Parameterized</span> — accepts arguments to initialize members with specific values</li>
+                <li><span class="hl-cpp">Copy constructor</span> — signature: <code>MyClass(const MyClass&amp; other)</code>; invoked when initializing from another object, passing by value, or returning by value</li>
+                <li>Same name as class; <span class="hl">no return type</span> (not even <code>void</code>)</li>
+                <li>Constructors <span class="hl">can be overloaded</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card nc-cpp">
+          <div class="note-card-inner">
+            <span class="nc-tag t-cpp">Destructors</span>
+            <div class="nc-title">Destructor</div>
+            <div class="nc-body">
+              <ul>
+                <li>Prefixed with <code>~</code>: e.g. <code>~MyClass()</code></li>
+                <li>Called <span class="hl">automatically</span> when an object goes out of scope or is <code>delete</code>d</li>
+                <li>Purpose: <span class="hl">release resources</span> — free heap memory, close file handles, release locks</li>
+                <li>A class has <span class="hl">only one</span> destructor — cannot be overloaded</li>
+                <li>Always declare virtual destructor in base classes to ensure correct cleanup for derived objects</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card nc-cpp">
+          <div class="note-card-inner">
+            <span class="nc-tag t-cpp">Friend Functions</span>
+            <div class="nc-title">Friend Function</div>
+            <div class="nc-body">
+              <ul>
+                <li>Declared inside the class with the <code>friend</code> keyword</li>
+                <li><span class="hl">Not a member</span> of the class — defined outside</li>
+                <li>Has access to <span class="hl">private and protected</span> members of the class</li>
+                <li>Breaks encapsulation intentionally — commonly used for <span class="hl">operator overloading</span></li>
+                <li>Friendship is <span class="hl">not inherited</span> — not transitive</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div><!-- /constructors grid -->
+
+      <!-- ── VISUAL: Constructor Types + Inheritance Diagram ── -->
+      <div class="visual-grid col2" style="margin-bottom:16px;">
+        <div>
+          <div class="code-example">
+            <div class="code-example-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div> All Constructor Types — C++</div>
+            <pre><span class="ce-kw">class</span> <span class="ce-cl">Box</span> {
+  <span class="ce-kw">int</span> w, h;
+<span class="ce-kw">public</span>:
+  <span class="ce-cm">// 1. Default constructor</span>
+  <span class="ce-fn">Box</span>() : w(<span class="ce-num">0</span>), h(<span class="ce-num">0</span>) {}
+
+  <span class="ce-cm">// 2. Parameterized constructor</span>
+  <span class="ce-fn">Box</span>(<span class="ce-kw">int</span> w, <span class="ce-kw">int</span> h) : w(w), h(h) {}
+
+  <span class="ce-cm">// 3. Copy constructor</span>
+  <span class="ce-fn">Box</span>(<span class="ce-kw">const</span> <span class="ce-cl">Box</span>&amp; b) : w(b.w), h(b.h) {}
+
+  <span class="ce-cm">// Destructor</span>
+  ~<span class="ce-fn">Box</span>() { <span class="ce-cm">/* cleanup */</span> }
+};
+
+<span class="ce-cl">Box</span> b1;          <span class="ce-cm">// default</span>
+<span class="ce-cl">Box</span> b2(<span class="ce-num">5</span>, <span class="ce-num">10</span>);  <span class="ce-cm">// parameterized</span>
+<span class="ce-cl">Box</span> b3 = b2;    <span class="ce-cm">// copy constructor</span></pre>
+          </div>
+        </div>
+        <div>
+          <div class="code-example">
+            <div class="code-example-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div> Friend Function — C++</div>
+            <pre><span class="ce-kw">class</span> <span class="ce-cl">Counter</span> {
+  <span class="ce-kw">int</span> count = <span class="ce-num">0</span>;
+<span class="ce-kw">public</span>:
+  <span class="ce-cm">// friend declaration inside class</span>
+  <span class="ce-kw">friend void</span> <span class="ce-fn">showCount</span>(<span class="ce-cl">Counter</span>&amp; c);
+};
+
+<span class="ce-cm">// defined OUTSIDE the class</span>
+<span class="ce-kw">void</span> <span class="ce-fn">showCount</span>(<span class="ce-cl">Counter</span>&amp; c) {
+  <span class="ce-cm">// accesses private 'count'</span>
+  cout &lt;&lt; <span class="ce-st">"Count: "</span> &lt;&lt; c.count;
+}
+
+<span class="ce-cl">Counter</span> c;
+<span class="ce-fn">showCount</span>(c); <span class="ce-out">// Count: 0</span>
+<span class="ce-cm">// not a member — called without object!</span></pre>
+          </div>
+        </div>
+      </div>
+              <div class="nc-body">
+                <ul>
+                  <li>One child inherits from <span class="hl">one parent</span></li>
+                  <li><code>class B : public A { };</code></li>
+                  <li>Simplest form; clean hierarchy</li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div class="nc-col-title t-cpp">Multiple Inheritance</div>
+              <div class="nc-body">
+                <ul>
+                  <li>One child inherits from <span class="hl">two or more parents</span></li>
+                  <li><code>class C : public A, public B { };</code></li>
+                  <li>Can cause <span class="hl">Diamond Problem</span> — solved with <code>virtual</code> base classes</li>
+                  <li>Java does <span class="hl">not</span> support this for classes</li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div class="nc-col-title t-cpp">Multilevel &amp; Hierarchical</div>
+              <div class="nc-body">
+                <ul>
+                  <li><span class="hl">Multilevel</span>: chain — A→B→C (grandparent/parent/child)</li>
+                  <li><span class="hl">Hierarchical</span>: <span class="hl">one base, many children</span> — e.g. Animal → Dog, Cat, Bird</li>
+                  <li><span class="hl">Hybrid</span>: combination of multiple types</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /inheritance grid -->
+
+      <!-- ── VISUAL: Inheritance Hierarchy Diagram ── -->
+      <div class="visual-card" style="border-color:rgba(96,165,250,0.2); margin-bottom:16px;">
+        <div class="visual-card-header">
+          <div class="visual-icon">🌳</div>
+          <div>
+            <div class="visual-title">Inheritance Types — Visual</div>
+            <div class="visual-subtitle">Single · Multiple · Multilevel · Hierarchical</div>
+          </div>
+        </div>
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 740 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:740px;">
+            <defs>
+              <marker id="arrowB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="rgba(96,165,250,0.7)"/></marker>
+            </defs>
+            <!-- Single -->
+            <text x="90" y="20" text-anchor="middle" fill="#60a5fa" font-family="monospace" font-size="9" letter-spacing="0.1em">SINGLE</text>
+            <rect x="40" y="30" width="100" height="36" rx="8" fill="rgba(96,165,250,0.1)" stroke="rgba(96,165,250,0.5)" stroke-width="1.5"/>
+            <text x="90" y="53" text-anchor="middle" fill="#e2e8f0" font-family="serif" font-size="12" font-weight="700">Animal</text>
+            <line x1="90" y1="66" x2="90" y2="86" stroke="rgba(96,165,250,0.5)" stroke-width="1.5" marker-end="url(#arrowB)"/>
+            <rect x="40" y="90" width="100" height="36" rx="8" fill="rgba(96,165,250,0.07)" stroke="rgba(96,165,250,0.35)" stroke-width="1.5"/>
+            <text x="90" y="113" text-anchor="middle" fill="#93c5fd" font-family="serif" font-size="12">Dog</text>
+
+            <!-- Multiple -->
+            <text x="300" y="20" text-anchor="middle" fill="#34d399" font-family="monospace" font-size="9" letter-spacing="0.1em">MULTIPLE</text>
+            <rect x="210" y="30" width="80" height="36" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.5)" stroke-width="1.5"/>
+            <text x="250" y="53" text-anchor="middle" fill="#e2e8f0" font-family="serif" font-size="12">Flyable</text>
+            <rect x="310" y="30" width="80" height="36" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.5)" stroke-width="1.5"/>
+            <text x="350" y="53" text-anchor="middle" fill="#e2e8f0" font-family="serif" font-size="12">Animal</text>
+            <line x1="250" y1="66" x2="295" y2="86" stroke="rgba(52,211,153,0.5)" stroke-width="1.5" marker-end="url(#arrowB)"/>
+            <line x1="350" y1="66" x2="305" y2="86" stroke="rgba(52,211,153,0.5)" stroke-width="1.5" marker-end="url(#arrowB)"/>
+            <rect x="260" y="90" width="80" height="36" rx="8" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.35)" stroke-width="1.5"/>
+            <text x="300" y="113" text-anchor="middle" fill="#6ee7b7" font-family="serif" font-size="12">Duck</text>
+            <text x="300" y="148" text-anchor="middle" fill="#475569" font-family="monospace" font-size="8">C++ only — Java uses interfaces</text>
+
+            <!-- Multilevel -->
+            <text x="530" y="20" text-anchor="middle" fill="#fb923c" font-family="monospace" font-size="9" letter-spacing="0.1em">MULTILEVEL</text>
+            <rect x="480" y="30" width="100" height="34" rx="8" fill="rgba(251,146,60,0.1)" stroke="rgba(251,146,60,0.5)" stroke-width="1.5"/>
+            <text x="530" y="52" text-anchor="middle" fill="#e2e8f0" font-family="serif" font-size="12">Animal</text>
+            <line x1="530" y1="64" x2="530" y2="80" stroke="rgba(251,146,60,0.5)" stroke-width="1.5" marker-end="url(#arrowB)"/>
+            <rect x="480" y="84" width="100" height="34" rx="8" fill="rgba(251,146,60,0.07)" stroke="rgba(251,146,60,0.35)" stroke-width="1.5"/>
+            <text x="530" y="106" text-anchor="middle" fill="#fdba74" font-family="serif" font-size="12">Mammal</text>
+            <line x1="530" y1="118" x2="530" y2="134" stroke="rgba(251,146,60,0.5)" stroke-width="1.5" marker-end="url(#arrowB)"/>
+            <rect x="480" y="138" width="100" height="34" rx="8" fill="rgba(251,146,60,0.05)" stroke="rgba(251,146,60,0.25)" stroke-width="1.5"/>
+            <text x="530" y="160" text-anchor="middle" fill="#fdba74" font-family="serif" font-size="12">Dog</text>
+
+            <!-- Hierarchical row label -->
+            <text x="370" y="200" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="9" letter-spacing="0.1em">HIERARCHICAL: one parent → many children</text>
+            <rect x="310" y="215" width="120" height="32" rx="8" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
+            <text x="370" y="236" text-anchor="middle" fill="#e2e8f0" font-family="serif" font-size="12">Animal</text>
+            <line x1="340" y1="247" x2="280" y2="255" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
+            <line x1="370" y1="247" x2="370" y2="255" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
+            <line x1="400" y1="247" x2="460" y2="255" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
+            <text x="255" y="260" text-anchor="middle" fill="#c4b5fd" font-family="serif" font-size="11">Dog</text>
+            <text x="370" y="260" text-anchor="middle" fill="#c4b5fd" font-family="serif" font-size="11">Cat</text>
+            <text x="485" y="260" text-anchor="middle" fill="#c4b5fd" font-family="serif" font-size="11">Bird</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- ── CODE EXAMPLES: Templates and Virtual Functions ── -->
+      <div class="visual-grid col2" style="margin-bottom:16px;">
+        <div>
+          <div class="code-example">
+            <div class="code-example-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div> Templates — C++</div>
+            <pre><span class="ce-cm">// Generic function — works with any type</span>
+<span class="ce-kw">template</span>&lt;<span class="ce-kw">typename</span> T&gt;
+T <span class="ce-fn">getMax</span>(T a, T b) {
+  <span class="ce-kw">return</span> (a > b) ? a : b;
+}
+
+cout &lt;&lt; <span class="ce-fn">getMax</span>(<span class="ce-num">3</span>, <span class="ce-num">7</span>);      <span class="ce-out">// 7   (int)</span>
+cout &lt;&lt; <span class="ce-fn">getMax</span>(<span class="ce-num">3.5</span>, <span class="ce-num">2.1</span>); <span class="ce-out">// 3.5 (double)</span>
+
+<span class="ce-cm">// Class template</span>
+<span class="ce-kw">template</span>&lt;<span class="ce-kw">typename</span> T&gt;
+<span class="ce-kw">class</span> <span class="ce-cl">Stack</span> {
+  T data[<span class="ce-num">100</span>];
+  <span class="ce-kw">int</span> top = -<span class="ce-num">1</span>;
+<span class="ce-kw">public</span>:
+  <span class="ce-kw">void</span> <span class="ce-fn">push</span>(T val) { data[++top] = val; }
+  T <span class="ce-fn">pop</span>() { <span class="ce-kw">return</span> data[top--]; }
+};</pre>
+          </div>
+        </div>
+        <div>
+          <div class="code-example">
+            <div class="code-example-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div> Virtual Functions &amp; vtable — C++</div>
+            <pre><span class="ce-kw">class</span> <span class="ce-cl">Base</span> {
+<span class="ce-kw">public</span>:
+  <span class="ce-kw">virtual void</span> <span class="ce-fn">speak</span>() {
+    cout &lt;&lt; <span class="ce-st">"Base speaks"</span>;
+  }
+  <span class="ce-kw">virtual</span> ~<span class="ce-fn">Base</span>() {} <span class="ce-cm">// virtual destructor!</span>
+};
+
+<span class="ce-kw">class</span> <span class="ce-cl">Derived</span> : <span class="ce-kw">public</span> <span class="ce-cl">Base</span> {
+<span class="ce-kw">public</span>:
+  <span class="ce-kw">void</span> <span class="ce-fn">speak</span>() <span class="ce-kw">override</span> {
+    cout &lt;&lt; <span class="ce-st">"Derived speaks"</span>;
+  }
+};
+
+<span class="ce-cl">Base</span>* ptr = <span class="ce-kw">new</span> <span class="ce-cl">Derived</span>();
+ptr-><span class="ce-fn">speak</span>(); <span class="ce-out">// "Derived speaks"</span>
+<span class="ce-cm">// vtable lookup at RUNTIME</span></pre>
+          </div>
+        </div>
+      </div>
+            <div class="nc-title">Function &amp; Operator Overloading</div>
+            <div class="nc-body">
+              <ul>
+                <li><span class="hl">Function overloading</span>: same name, different parameter types/count — resolved by <span class="hl">compiler</span></li>
+                <li><span class="hl">Operator overloading</span>: redefine built-in operators for user-defined types using <code>operator+</code>, <code>operator==</code>, etc.</li>
+                <li>Example: <code>Point p3 = p1 + p2;</code> calls <code>operator+</code></li>
+                <li>Also called <span class="hl">static polymorphism</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card nc-cpp">
+          <div class="note-card-inner">
+            <span class="nc-tag t-cpp">Runtime Polymorphism</span>
+            <div class="nc-title">Virtual Functions &amp; Abstract Classes</div>
+            <div class="nc-body">
+              <ul>
+                <li>Declare base function as <code>virtual</code> → enables <span class="hl">dynamic dispatch</span> via vtable</li>
+                <li>Correct overridden version runs based on <span class="hl">actual object type</span> at runtime</li>
+                <li><span class="hl">Pure virtual</span>: <code>virtual void func() = 0;</code> — must be overridden in derived classes</li>
+                <li>A class with at least one pure virtual function is an <span class="hl">abstract class</span> — cannot be instantiated</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card nc-cpp">
+          <div class="note-card-inner">
+            <span class="nc-tag t-cpp">Templates</span>
+            <div class="nc-title">Function &amp; Class Templates</div>
+            <div class="nc-body">
+              <ul>
+                <li>Write <span class="hl">generic code</span> that works with any data type</li>
+                <li>Syntax: <code>template&lt;typename T&gt;</code></li>
+                <li>Compiler generates a version for each type used — called <span class="hl">template instantiation</span></li>
+                <li>Avoids code duplication for <code>int</code>, <code>float</code>, <code>string</code>, etc.</li>
+                <li>Also applies to <span class="hl">class templates</span> (e.g. <code>std::vector&lt;T&gt;</code>)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTES SECTION 3 — JAVA FUNDAMENTALS -->
+    <section class="notes-section">
+      <div class="section-heading">
+        <div class="section-icon icon-java">☕</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <h2>Java Fundamentals</h2>
+            <span class="lang-tag lt-java">Java</span>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);">JVM · JIT · JDK · JRE · Data Types · OOP in Java · Memory Model</p>
+        </div>
+      </div>
+
+      <div class="note-cards-grid">
+        <div class="note-card nc-java full">
+          <div class="note-card-inner">
+            <div>
+              <div class="nc-col-title t-java">JDK / JRE / JVM — What's what</div>
+              <div class="nc-body">
+                <ul>
+                  <li><span class="hl-java">JDK</span> (Java Development Kit) — full developer toolkit: includes <code>javac</code> (compiler), <code>javadoc</code>, <code>jar</code>, debugger <span class="hl">+ JRE</span>. <span class="hl">Needed to develop</span></li>
+                  <li><span class="hl-java">JRE</span> (Java Runtime Environment) — libraries + JVM. <span class="hl">Needed to run</span> Java programs. No compiler</li>
+                  <li><span class="hl-java">JVM</span> (Java Virtual Machine) — executes bytecode. <span class="hl">Platform-specific</span>; bytecode is not</li>
+                  <li>Compilation flow: <code>.java</code> → <code>javac</code> → <code>.class</code> (bytecode) → JVM → native machine code</li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div class="nc-col-title t-java">Write Once, Run Anywhere</div>
+              <div class="nc-body">
+                <ul>
+                  <li><code>javac</code> compiles source to <span class="hl">platform-independent bytecode</span> (<code>.class</code>)</li>
+                  <li>The bytecode is <span class="hl">identical on all platforms</span> — the JVM is what's platform-specific</li>
+                  <li>Each OS has its own JVM implementation that translates bytecode to native CPU instructions</li>
+                  <li><span class="hl-java">JIT Compiler</span> (Just-In-Time): part of the JVM's Execution Engine — profiles running code, finds "hot spots", compiles them to <span class="hl">native machine code at runtime</span> for speed</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-cards-grid">
+        <div class="note-card nc-java">
+          <div class="note-card-inner">
+            <span class="nc-tag t-java">JVM Components</span>
+            <div class="nc-title">Inside the JVM</div>
+            <div class="nc-body">
+              <ul>
+                <li><span class="hl-java">Class Loader</span> — loads <code>.class</code> files from disk into memory</li>
+                <li><span class="hl-java">Execution Engine</span> — runs bytecode; contains Interpreter + JIT compiler</li>
+                <li><span class="hl-java">Garbage Collector</span> — automatically frees heap memory for unreferenced objects; <span class="hl">no manual <code>delete</code></span> needed (unlike C++)</li>
+                <li><span class="hl-java">Runtime Data Areas</span> — memory regions: Heap, Stack, Method Area, PC Register</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card nc-java">
+          <div class="note-card-inner">
+            <span class="nc-tag t-java">JVM Memory Model</span>
+            <div class="nc-title">Heap, Stack &amp; Method Area</div>
+            <div class="nc-body">
+              <ul>
+                <li><span class="hl">Heap</span> — stores all <span class="hl-java">objects and class instances</span>; managed by GC</li>
+                <li><span class="hl">Stack</span> — stores <span class="hl-java">method call frames and local variables</span>; one per thread</li>
+                <li><span class="hl">Method Area</span> — stores <span class="hl-java">class metadata, static fields, and constants</span></li>
+                <li><span class="hl">PC Register</span> — program counter; tracks current instruction per thread</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card nc-java">
+          <div class="note-card-inner">
+            <span class="nc-tag t-java">Data Types</span>
+            <div class="nc-title">Java Primitive Types</div>
+            <div class="nc-body">
+              <div class="nc-body">Java has <span class="hl">8 primitive types</span>:</div><br>
+              <span class="nc-pill p-java">byte</span>
+              <span class="nc-pill p-java">short</span>
+              <span class="nc-pill p-java">int</span>
+              <span class="nc-pill p-java">long</span>
+              <span class="nc-pill p-java">float</span>
+              <span class="nc-pill p-java">double</span>
+              <span class="nc-pill p-java">char</span>
+              <span class="nc-pill p-java">boolean</span>
+              <br><br>
+              <div class="nc-body">
+                <li><code>char</code> — <span class="hl">16-bit Unicode</span> character</li>
+                <li><code>String</code> is a <span class="hl">class</span>, not a primitive</li>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-cards-grid">
+        <div class="note-card nc-java">
+          <div class="note-card-inner">
+            <span class="nc-tag t-java">Java OOP</span>
+            <div class="nc-title">Inheritance &amp; Keywords</div>
+            <div class="nc-body">
+              <ul>
+                <li><code>extends</code> — create a child class: <code>class Dog extends Animal</code></li>
+                <li>Java supports <span class="hl">single class inheritance only</span> — no multiple inheritance for classes</li>
+                <li><code>super</code> — calls parent constructor or method</li>
+                <li><code>implements</code> — implement an interface</li>
+                <li>A class can <code>implement</code> <span class="hl">multiple interfaces</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card nc-java">
+          <div class="note-card-inner">
+            <span class="nc-tag t-java">Java Interfaces</span>
+            <div class="nc-title">Interface vs Abstract Class</div>
+            <div class="nc-body">
+              <ul>
+                <li><span class="hl-java">Interface</span>: a <span class="hl">contract</span> of method signatures a class must implement; enables multiple type inheritance</li>
+                <li>Pre-Java 8: no method bodies; post-Java 8: can have <code>default</code> and <code>static</code> methods</li>
+                <li><span class="hl-java">Abstract class</span>: cannot be instantiated; may have both abstract and concrete methods</li>
+                <li>A class can implement <span class="hl">many interfaces</span> but extend <span class="hl">only one</span> abstract class</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card nc-java">
+          <div class="note-card-inner">
+            <span class="nc-tag t-java">Access Modifiers</span>
+            <div class="nc-title">Visibility in Java</div>
+            <div class="nc-body">
+              Visibility from most to least restrictive:<br><br>
+              <ul>
+                <li><code>private</code> — <span class="hl">class only</span></li>
+                <li>package-private (no modifier) — <span class="hl">same package</span></li>
+                <li><code>protected</code> — <span class="hl">package + subclasses</span></li>
+                <li><code>public</code> — <span class="hl">everywhere</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div><!-- /java last grid -->
+
+      <!-- ── VISUAL: JVM Architecture Diagram ── -->
+      <div class="visual-card" style="border-color:rgba(251,146,60,0.2);">
+        <div class="visual-card-header">
+          <div class="visual-icon">☕</div>
+          <div>
+            <div class="visual-title">JVM Architecture & Java Compilation Flow</div>
+            <div class="visual-subtitle">From .java source to execution</div>
+          </div>
+        </div>
+        <div class="visual-grid col2">
+          <div class="diagram-wrap">
+            <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:320px;">
+              <defs>
+                <marker id="arrowJ" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="rgba(251,146,60,0.8)"/></marker>
+              </defs>
+              <!-- .java file -->
+              <rect x="100" y="10" width="120" height="34" rx="8" fill="rgba(251,146,60,0.12)" stroke="rgba(251,146,60,0.5)" stroke-width="1.5"/>
+              <text x="160" y="32" text-anchor="middle" fill="#fdba74" font-family="monospace" font-size="11" font-weight="700">MyClass.java</text>
+              <line x1="160" y1="44" x2="160" y2="60" stroke="rgba(251,146,60,0.5)" stroke-width="1.5" marker-end="url(#arrowJ)"/>
+              <!-- javac -->
+              <rect x="115" y="64" width="90" height="28" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <text x="160" y="82" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="10">javac compiler</text>
+              <line x1="160" y1="92" x2="160" y2="108" stroke="rgba(251,146,60,0.5)" stroke-width="1.5" marker-end="url(#arrowJ)"/>
+              <!-- .class -->
+              <rect x="100" y="112" width="120" height="34" rx="8" fill="rgba(96,165,250,0.12)" stroke="rgba(96,165,250,0.5)" stroke-width="1.5"/>
+              <text x="160" y="134" text-anchor="middle" fill="#93c5fd" font-family="monospace" font-size="11" font-weight="700">MyClass.class</text>
+              <text x="160" y="155" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="8">(bytecode)</text>
+              <line x1="160" y1="158" x2="160" y2="172" stroke="rgba(96,165,250,0.5)" stroke-width="1.5" marker-end="url(#arrowJ)"/>
+              <!-- JVM box -->
+              <rect x="30" y="176" width="260" height="90" rx="10" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+              <text x="160" y="194" text-anchor="middle" fill="#e2e8f0" font-family="monospace" font-size="9" letter-spacing="0.1em">JVM</text>
+              <!-- inner JVM components -->
+              <rect x="44" y="200" width="72" height="28" rx="6" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.3)" stroke-width="1"/>
+              <text x="80" y="218" text-anchor="middle" fill="#6ee7b7" font-family="monospace" font-size="8">ClassLoader</text>
+              <rect x="124" y="200" width="72" height="28" rx="6" fill="rgba(251,146,60,0.1)" stroke="rgba(251,146,60,0.3)" stroke-width="1"/>
+              <text x="160" y="218" text-anchor="middle" fill="#fdba74" font-family="monospace" font-size="8">JIT + Interp.</text>
+              <rect x="204" y="200" width="72" height="28" rx="6" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.3)" stroke-width="1"/>
+              <text x="240" y="218" text-anchor="middle" fill="#c4b5fd" font-family="monospace" font-size="8">GC</text>
+              <text x="160" y="256" text-anchor="middle" fill="#64748b" font-family="monospace" font-size="8">Heap | Stack | Method Area | PC</text>
+              <!-- arrow to native -->
+              <line x1="160" y1="266" x2="160" y2="276" stroke="rgba(52,211,153,0.5)" stroke-width="1.5" marker-end="url(#arrowJ)"/>
+              <text x="160" y="278" text-anchor="middle" fill="#34d399" font-family="monospace" font-size="8" font-weight="700">Native Machine Code</text>
+            </svg>
+          </div>
+          <div>
+            <div class="code-example">
+              <div class="code-example-bar"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div> Java OOP — Interface + Inheritance</div>
+              <pre><span class="ce-kw">interface</span> <span class="ce-cl">Drawable</span> {
+  <span class="ce-kw">void</span> <span class="ce-fn">draw</span>(); <span class="ce-cm">// contract</span>
+}
+
+<span class="ce-kw">abstract class</span> <span class="ce-cl">Shape</span> {
+  <span class="ce-kw">abstract double</span> <span class="ce-fn">area</span>();
+  <span class="ce-kw">void</span> <span class="ce-fn">describe</span>() {
+    System.out.println(<span class="ce-st">"I am a shape"</span>);
+  }
+}
+
+<span class="ce-kw">class</span> <span class="ce-cl">Circle</span> <span class="ce-kw">extends</span> <span class="ce-cl">Shape</span>
+               <span class="ce-kw">implements</span> <span class="ce-cl">Drawable</span> {
+  <span class="ce-kw">double</span> r;
+  <span class="ce-cl">Circle</span>(<span class="ce-kw">double</span> r) { <span class="ce-kw">this</span>.r = r; }
+
+  <span class="ce-kw">public double</span> <span class="ce-fn">area</span>() {
+    <span class="ce-kw">return</span> Math.PI * r * r;
+  }
+  <span class="ce-kw">public void</span> <span class="ce-fn">draw</span>() {
+    System.out.println(<span class="ce-st">"Drawing circle"</span>);
+  }
+}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </div>  </div>  </div>  </div>  </div>  </div>  </div>  </div>  </div>  </div>  </div>  </main>
+  </div>
+
+  <!-- ══ BASIC CONCEPTS QUIZ PANEL ══ -->
+  <div id="panel-basic" class="panel">
+  <main>
+    <section class="quiz-section" id="sect-basic">
+      <div class="section-heading">
+        <div class="section-icon icon-basic">🧱</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <h2>Basic OOP Concepts</h2>
+            <span class="lang-tag lt-basic">Fundamentals</span>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);">Core theory — Classes, Objects, Pillars, Pointers</p>
+        </div>
+      </div>
+
+      <div class="score-panel" id="score-basic">
+        <div class="score-circle sc-basic" id="circle-basic">0%</div>
+        <div class="score-info">
+          <h3>Basic Concepts Score</h3>
+          <p>Answer all questions to see your result</p>
+          <div class="score-nums" id="nums-basic">0 / 10 correct</div>
+        </div>
+        <button class="reset-btn" onclick="resetSection('basic')">↺ Reset</button>
+      </div>
+
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill pb-basic" id="pb-basic" style="width:0%"></div>
+        </div>
+        <span class="progress-text" id="pt-basic">0 / 10</span>
+      </div>
+
+      <p class="section-desc">10 randomly selected questions from a pool of 25+ covering the four pillars of OOP, classes, objects, and basic pointer concepts.</p>
+
+      <div id="cards-basic"></div>
+    </section>
+  </main>
+  </div>
+
+  <!-- ══ C++ QUIZ PANEL ══ -->
+  <div id="panel-cpp" class="panel">
+  <main>
+    <section class="quiz-section" id="sect-cpp">
+      <div class="section-heading">
+        <div class="section-icon icon-cpp">⚙️</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <h2>C++ &amp; OOP In Depth</h2>
+            <span class="lang-tag lt-cpp">C++</span>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);">Constructors · Inheritance · Polymorphism · Templates · Code Questions</p>
+        </div>
+      </div>
+
+      <div class="score-panel" id="score-cpp">
+        <div class="score-circle sc-cpp" id="circle-cpp">0%</div>
+        <div class="score-info">
+          <h3>C++ Score</h3>
+          <p>Answer all questions to see your result</p>
+          <div class="score-nums" id="nums-cpp">0 / 10 correct</div>
+        </div>
+        <button class="reset-btn" onclick="resetSection('cpp')">↺ Reset</button>
+      </div>
+
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill pb-cpp" id="pb-cpp" style="width:0%"></div>
+        </div>
+        <span class="progress-text" id="pt-cpp">0 / 10</span>
+      </div>
+
+      <p class="section-desc">10 randomly selected questions from a pool of 25+ covering Constructors, Destructors, Friend functions, Inheritance, Polymorphism, Operator Overloading, Virtual Functions, Templates, and code output questions.</p>
+
+      <div id="cards-cpp"></div>
+    </section>
+  </main>
+  </div>
+
+  <!-- ══ JAVA QUIZ PANEL ══ -->
+  <div id="panel-java" class="panel">
+  <main>
+    <section class="quiz-section" id="sect-java">
+      <div class="section-heading">
+        <div class="section-icon icon-java">☕</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <h2>Java Fundamentals</h2>
+            <span class="lang-tag lt-java">Java</span>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);">JVM · JIT · JDK · JRE · Syntax · OOP in Java · Code Questions</p>
+        </div>
+      </div>
+
+      <div class="score-panel" id="score-java">
+        <div class="score-circle sc-java" id="circle-java">0%</div>
+        <div class="score-info">
+          <h3>Java Score</h3>
+          <p>Answer all questions to see your result</p>
+          <div class="score-nums" id="nums-java">0 / 10 correct</div>
+        </div>
+        <button class="reset-btn" onclick="resetSection('java')">↺ Reset</button>
+      </div>
+
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill pb-java" id="pb-java" style="width:0%"></div>
+        </div>
+        <span class="progress-text" id="pt-java">0 / 10</span>
+      </div>
+
+      <p class="section-desc">10 randomly selected questions from a pool of 25+ covering the Java Platform (JVM, JIT, JDK, JRE), language basics, data types, OOP in Java, and code output questions.</p>
+
+      <div id="cards-java"></div>
+    </section>
+  </main>
+  </div>
+
+  <!-- ══ FINAL QUIZ PANEL ══ -->
+  <div id="panel-final" class="panel">
+  <main>
+    <section class="quiz-section" id="sect-final">
+      <div class="section-heading">
+        <div class="section-icon icon-final">🏆</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <h2>Final Quiz</h2>
+            <span class="lang-tag lt-final">All Topics</span>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);">25 random questions from all 75+ questions across all topics</p>
+        </div>
+      </div>
+
+      <div class="score-panel" id="score-final">
+        <div class="score-circle sc-final" id="circle-final">0%</div>
+        <div class="score-info">
+          <h3>Final Quiz Score</h3>
+          <p>Answer all questions to see your result</p>
+          <div class="score-nums" id="nums-final">0 / 25 correct</div>
+        </div>
+        <button class="reset-btn" onclick="resetSection('final')">↺ Reset</button>
+      </div>
+
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill pb-final" id="pb-final" style="width:0%"></div>
+        </div>
+        <span class="progress-text" id="pt-final">0 / 25</span>
+      </div>
+
+      <p class="section-desc">A comprehensive exam with 25 randomly selected questions drawn from all topics — Basic OOP, C++, and Java. Tests your overall understanding.</p>
+
+      <div id="cards-final"></div>
+    </section>
+  </main>
+  </div>
+
+  <footer>Made by Hanan Shafay &amp; Mohid Ahmed &nbsp;·&nbsp; OOP Quiz Hub &nbsp;·&nbsp; Good luck! ✨</footer>
+
+  <script>
+  // ═══════════════════════════════════════════════════
+  // QUESTION BANK
+  // ═══════════════════════════════════════════════════
+
+  const Q = {
+
+    // ─── BASIC OOP (25 questions) ───
+    basic: [
+      {
+        badge: 'OOP Theory', badgeCls: 'qb-basic',
+        q: 'Which of the four OOP pillars refers to wrapping data and the functions that operate on it into a single unit, and restricting direct access to some components?',
+        opts: ['Inheritance','Encapsulation','Polymorphism','Abstraction'],
+        ans: 1,
+        fb: '<strong>✓ Encapsulation</strong> bundles data (attributes) and methods together inside a class and uses access specifiers (<code>private</code>, <code>protected</code>, <code>public</code>) to hide internal state.'
+      },
+      {
+        badge: 'OOP Theory', badgeCls: 'qb-basic',
+        q: 'What is a <strong>class</strong> in OOP?',
+        opts: ['A running instance in memory','A function that returns an object','A blueprint / template for creating objects','A primitive data type'],
+        ans: 2,
+        fb: '<strong>✓ A class is a blueprint.</strong> It defines the structure (data members) and behavior (member functions) that its objects will have. An <em>object</em> is an actual instance of that class created in memory.'
+      },
+      {
+        badge: 'Pointers', badgeCls: 'qb-basic',
+        q: 'What does the <code>&amp;</code> operator do when placed before a variable name in C++?',
+        opts: ['Dereferences a pointer','Multiplies the variable by 2','Returns the memory address of the variable','Declares a reference-to-pointer'],
+        ans: 2,
+        fb: '<strong>✓ Address-of operator.</strong> <code>&amp;x</code> gives the memory address where <code>x</code> is stored.'
+      },
+      {
+        badge: 'Pointers', badgeCls: 'qb-basic',
+        q: 'Given <code>int x = 5; int* p = &amp;x;</code>, what does <code>*p</code> evaluate to?',
+        opts: ['The memory address of x','5 (the value stored at the address)','The address of pointer p itself','Undefined behavior'],
+        ans: 1,
+        fb: '<strong>✓ Dereferencing.</strong> The <code>*</code> operator when used on a pointer dereferences it — it follows the address stored in <code>p</code> and returns the value found there, which is <code>5</code>.'
+      },
+      {
+        badge: 'OOP Pillars', badgeCls: 'qb-basic',
+        q: 'Abstraction in OOP means:',
+        opts: ['Allowing a class to inherit from multiple classes','The same function name behaving differently for different types','Hiding internal implementation and showing only essential features','Creating a new object from an existing class'],
+        ans: 2,
+        fb: '<strong>✓ Hiding complexity.</strong> Abstraction means exposing only the necessary interface (what an object does) and hiding the implementation details (how it does it). Achieved via abstract classes and interfaces.'
+      },
+      {
+        badge: 'Inheritance', badgeCls: 'qb-basic',
+        q: 'Which OOP pillar allows a child class to acquire properties and behaviors of a parent class?',
+        opts: ['Encapsulation','Inheritance','Polymorphism','Abstraction'],
+        ans: 1,
+        fb: '<strong>✓ Inheritance</strong> establishes an "is-a" relationship. The child (derived) class reuses the parent\'s (base) code and can extend or override it, promoting code reuse.'
+      },
+      {
+        badge: 'OOP Theory', badgeCls: 'qb-basic',
+        q: 'What is an <strong>object</strong> in OOP?',
+        opts: ['A keyword used to define a class','A function inside a class','A runtime instance of a class with its own state','A type of pointer'],
+        ans: 2,
+        fb: '<strong>✓ A runtime instance.</strong> When you write <code>Car myCar;</code>, <code>myCar</code> is an object — a concrete entity allocated in memory based on the <code>Car</code> class blueprint.'
+      },
+      {
+        badge: 'Polymorphism', badgeCls: 'qb-basic',
+        q: 'Which of the following best describes <strong>polymorphism</strong>?',
+        opts: ['One interface, many forms — same function name, different behavior','Bundling data and functions together into one unit','Creating a class from another class','Allocating memory dynamically at runtime'],
+        ans: 0,
+        fb: '<strong>✓ One interface, many forms.</strong> Polymorphism allows functions/methods with the same name to behave differently depending on the context — via compile-time (overloading) or runtime (overriding with virtual functions) mechanisms.'
+      },
+      {
+        badge: 'Pointers', badgeCls: 'qb-basic',
+        q: 'Which access operator is used to access a member of an object through a pointer?',
+        opts: ['The dot operator <code>.</code>','The arrow operator <code>-&gt;</code>','The scope resolution operator <code>::</code>','The dereference operator <code>*</code>'],
+        ans: 1,
+        fb: '<strong>✓ Arrow operator <code>-&gt;</code>.</strong> When you have a pointer <code>Car* p</code>, you use <code>p-&gt;speed</code> to access its member. This is shorthand for <code>(*p).speed</code>.'
+      },
+      {
+        badge: 'Access Specifiers', badgeCls: 'qb-basic',
+        q: 'Which access specifier makes a class member accessible only within the class itself?',
+        opts: ['<code>public</code>','<code>private</code>','<code>protected</code>','<code>static</code>'],
+        ans: 1,
+        fb: '<strong>✓ <code>private</code></strong> restricts access to within the class only. <code>protected</code> also allows derived classes. <code>public</code> allows access from anywhere.'
+      },
+      {
+        badge: 'OOP Theory', badgeCls: 'qb-basic',
+        q: 'What is the relationship between a class and an object?',
+        opts: ['Object is a copy of the class','Class is an instance of the object','Class is a blueprint; object is an instance','They are the same thing'],
+        ans: 2,
+        fb: '<strong>✓ Class is the blueprint.</strong> A class defines the structure, an object is the actual, usable instance created from that blueprint.'
+      },
+      {
+        badge: 'OOP Pillars', badgeCls: 'qb-basic',
+        q: 'Which two pillars of OOP work together to achieve data hiding?',
+        opts: ['Inheritance and Polymorphism','Encapsulation and Abstraction','Abstraction and Inheritance','Polymorphism and Encapsulation'],
+        ans: 1,
+        fb: '<strong>✓ Encapsulation and Abstraction.</strong> Encapsulation bundles and restricts access to data; Abstraction hides implementation details and shows only the essential interface.'
+      },
+      {
+        badge: 'Access Specifiers', badgeCls: 'qb-basic',
+        q: 'In C++, what is the default access specifier for members of a <code>class</code>?',
+        opts: ['<code>public</code>','<code>protected</code>','<code>private</code>','<code>internal</code>'],
+        ans: 2,
+        fb: '<strong>✓ <code>private</code>.</strong> In a C++ <code>class</code>, members are private by default. In a <code>struct</code>, members are public by default.'
+      },
+      {
+        badge: 'Pointers', badgeCls: 'qb-basic',
+        q: 'What is a <strong>null pointer</strong>?',
+        opts: ['A pointer that stores the value 0','A pointer to a deleted object','A pointer that does not point to any valid memory location','A pointer to a constant value'],
+        ans: 2,
+        fb: '<strong>✓ A null pointer</strong> is a pointer that has been explicitly set to not point to any valid memory location (e.g. <code>int* p = nullptr;</code>). Dereferencing a null pointer causes undefined behavior.'
+      },
+      {
+        badge: 'OOP Theory', badgeCls: 'qb-basic',
+        q: 'Which OOP concept is demonstrated when a function in a derived class has the same name and signature as in the base class?',
+        opts: ['Overloading','Overriding','Shadowing','Instantiation'],
+        ans: 1,
+        fb: '<strong>✓ Function Overriding.</strong> Overriding occurs when a derived class provides its own implementation for a base class function with the same name and parameters, enabling runtime polymorphism.'
+      },
+      {
+        badge: 'OOP Pillars', badgeCls: 'qb-basic',
+        q: 'What does the term "is-a" relationship represent in OOP?',
+        opts: ['Encapsulation','Composition','Polymorphism','Inheritance'],
+        ans: 3,
+        fb: '<strong>✓ Inheritance.</strong> The "is-a" relationship means a derived class is a type of the base class. Example: A <code>Dog</code> "is-a" <code>Animal</code>.'
+      },
+      {
+        badge: 'OOP Pillars', badgeCls: 'qb-basic',
+        q: 'What does the term "has-a" relationship represent in OOP?',
+        opts: ['Inheritance','Polymorphism','Composition / Aggregation','Abstraction'],
+        ans: 2,
+        fb: '<strong>✓ Composition.</strong> The "has-a" relationship means one class contains an instance of another class as a member. Example: A <code>Car</code> "has-a" <code>Engine</code>.'
+      },
+      {
+        badge: 'Access Specifiers', badgeCls: 'qb-basic',
+        q: 'Which access specifier allows members to be accessed in the class and its derived classes, but NOT outside?',
+        opts: ['<code>public</code>','<code>private</code>','<code>protected</code>','<code>friend</code>'],
+        ans: 2,
+        fb: '<strong>✓ <code>protected</code>.</strong> Protected members are accessible within the class and any class that inherits from it, but not from external code.'
+      },
+      {
+        badge: 'OOP Theory', badgeCls: 'qb-basic',
+        q: 'Which of the following is NOT one of the four pillars of OOP?',
+        opts: ['Encapsulation','Abstraction','Compilation','Polymorphism'],
+        ans: 2,
+        fb: '<strong>✓ Compilation</strong> is not an OOP pillar. The four pillars are <strong>Encapsulation, Abstraction, Inheritance, and Polymorphism</strong>.'
+      },
+      {
+        badge: 'Pointers', badgeCls: 'qb-basic',
+        q: 'What happens when you apply <code>delete</code> to a pointer in C++?',
+        opts: ['The pointer variable is destroyed','The memory the pointer points to is freed','The pointer is set to nullptr automatically','The program throws an exception'],
+        ans: 1,
+        fb: '<strong>✓ Memory is freed.</strong> <code>delete p</code> releases the heap memory that <code>p</code> points to. The pointer variable itself still exists (and becomes a dangling pointer). You should set it to <code>nullptr</code> afterward.'
+      },
+      {
+        badge: 'OOP Theory', badgeCls: 'qb-basic',
+        q: 'What is <strong>data hiding</strong> in OOP?',
+        opts: ['Making all class members static','Encrypting object data at runtime','Restricting access to internal data using access specifiers','Removing unused member functions'],
+        ans: 2,
+        fb: '<strong>✓ Data hiding</strong> is the practice of restricting access to class internals using <code>private</code> or <code>protected</code> access specifiers, a key part of Encapsulation.'
+      },
+      {
+        badge: 'Polymorphism', badgeCls: 'qb-basic',
+        q: 'Function overloading is resolved at:',
+        opts: ['Runtime','Compile-time','Link-time','Load-time'],
+        ans: 1,
+        fb: '<strong>✓ Compile-time.</strong> The compiler determines which overloaded function to call based on the argument types and count. This is also called static or early binding.'
+      },
+      {
+        badge: 'OOP Theory', badgeCls: 'qb-basic',
+        q: 'What is a <strong>member function</strong> (method) in OOP?',
+        opts: ['A function defined outside any class','A function that is a member of a class and can access its data','A global utility function','A function pointer stored in a struct'],
+        ans: 1,
+        fb: '<strong>✓ A member function</strong> is a function defined inside a class that can directly access the class\'s data members (attributes). It represents the behavior of the object.'
+      },
+      {
+        badge: 'Access Specifiers', badgeCls: 'qb-basic',
+        q: 'In C++, what is the default access specifier for members of a <code>struct</code>?',
+        opts: ['<code>private</code>','<code>protected</code>','<code>public</code>','<code>static</code>'],
+        ans: 2,
+        fb: '<strong>✓ <code>public</code>.</strong> Unlike <code>class</code> (where default is <code>private</code>), members of a <code>struct</code> are <code>public</code> by default.'
+      },
+      {
+        badge: 'Pointers', badgeCls: 'qb-basic',
+        q: 'What is a <strong>dangling pointer</strong>?',
+        opts: ['A pointer that is declared but never used','A pointer that still holds the address of memory that has been freed','A pointer that points to a null value','A pointer that is passed as a function argument'],
+        ans: 1,
+        fb: '<strong>✓ Dangling pointer.</strong> After <code>delete p</code>, the memory is freed but <code>p</code> still holds the old address. Using this pointer leads to undefined behavior. Always set to <code>nullptr</code> after deletion.'
+      },
+    ],
+
+    // ─── C++ OOP (25 questions) ───
+    cpp: [
+      {
+        badge: 'Constructors', badgeCls: 'qb-cpp',
+        q: 'Which statement about constructors in C++ is <strong>correct</strong>?',
+        opts: ['A constructor must have a return type of <code>void</code>','A constructor has the same name as the class and no return type','A class can have at most one constructor','Constructors cannot be overloaded'],
+        ans: 1,
+        fb: '<strong>✓ Same name, no return type.</strong> Constructors are special member functions — they share the class name and have <em>no</em> return type (not even <code>void</code>). A class can have multiple overloaded constructors (default, parameterized, copy).'
+      },
+      {
+        badge: 'Destructors', badgeCls: 'qb-cpp',
+        q: 'What is the purpose of a <strong>destructor</strong> in C++?',
+        opts: ['To initialize object data members','To create a copy of an object','To release resources when an object goes out of scope or is deleted','To overload the assignment operator'],
+        ans: 2,
+        fb: '<strong>✓ Resource cleanup.</strong> A destructor (prefixed with <code>~</code>, e.g. <code>~MyClass()</code>) is automatically called when an object is destroyed. It releases heap memory, closes file handles, or any resource the object owns.'
+      },
+      {
+        badge: 'Friend Functions', badgeCls: 'qb-cpp',
+        q: 'A <code>friend</code> function in C++:',
+        opts: ['Is a member of the class it is declared a friend of','Is not a member but has access to the class\'s private and protected members','Can only access public members of the class','Must be defined inside the class body'],
+        ans: 1,
+        fb: '<strong>✓ Non-member with private access.</strong> A friend function is declared inside the class with the <code>friend</code> keyword but defined outside. It bypasses encapsulation to access private/protected members.'
+      },
+      {
+        badge: 'Inheritance', badgeCls: 'qb-cpp',
+        q: 'In C++, which type of inheritance does a class participate in when it inherits from <strong>two or more</strong> base classes?',
+        opts: ['Single inheritance','Multilevel inheritance','Multiple inheritance','Hierarchical inheritance'],
+        ans: 2,
+        fb: '<strong>✓ Multiple inheritance.</strong> C++ supports multiple inheritance (e.g. <code>class C : public A, public B</code>). Multiple can cause the Diamond Problem, solved with <code>virtual</code> base classes.'
+      },
+      {
+        badge: 'Polymorphism', badgeCls: 'qb-cpp',
+        q: 'Method overloading is an example of which type of polymorphism?',
+        opts: ['Compile-time (static) polymorphism','Runtime (dynamic) polymorphism','Parametric polymorphism','Subtype polymorphism'],
+        ans: 0,
+        fb: '<strong>✓ Compile-time / static polymorphism.</strong> The compiler resolves which overloaded function to call at compile time based on argument types/count. Runtime polymorphism (dynamic dispatch) is achieved via virtual functions.'
+      },
+      {
+        badge: 'Virtual Functions', badgeCls: 'qb-cpp',
+        q: 'What keyword must a base class function be marked with to enable runtime polymorphism (dynamic dispatch) in C++?',
+        opts: ['<code>override</code>','<code>abstract</code>','<code>virtual</code>','<code>dynamic</code>'],
+        ans: 2,
+        fb: '<strong>✓ <code>virtual</code>.</strong> Declaring a function <code>virtual</code> in the base class tells the compiler to use the vtable (virtual dispatch table) for that function, so the correct overridden version runs based on the actual object type at runtime.'
+      },
+      {
+        badge: 'Pure Virtual / Abstract', badgeCls: 'qb-cpp',
+        q: 'A class that contains at least one <strong>pure virtual function</strong> is called:',
+        opts: ['A template class','A friend class','An abstract class','A static class'],
+        ans: 2,
+        fb: '<strong>✓ Abstract class.</strong> A pure virtual function is declared as <code>virtual void func() = 0;</code>. A class with at least one such function is abstract — it cannot be instantiated directly. Derived classes must provide implementations.'
+      },
+      {
+        badge: 'Operator Overloading', badgeCls: 'qb-cpp',
+        q: 'What is the output of the following code?<div class="code-block"><span class="kw">class</span> <span class="fn">Point</span> {\n<span class="kw">public:</span>\n  <span class="kw">int</span> x, y;\n  Point(<span class="kw">int</span> a, <span class="kw">int</span> b) : x(a), y(b) {}\n  Point <span class="kw">operator</span>+(<span class="fn">Point</span> p) {\n    <span class="kw">return</span> Point(x + p.x, y + p.y);\n  }\n};\n<span class="fn">Point</span> p1(<span class="num">2</span>, <span class="num">3</span>), p2(<span class="num">4</span>, <span class="num">1</span>);\n<span class="fn">Point</span> p3 = p1 + p2;\ncout &lt;&lt; p3.x &lt;&lt; <span class="st">" "</span> &lt;&lt; p3.y;</div>',
+        opts: ['2 3','4 1','6 4','8 3'],
+        ans: 2,
+        fb: '<strong>✓ 6 4.</strong> The overloaded <code>+</code> adds corresponding components: x = 2+4 = 6, y = 3+1 = 4. Operator overloading lets built-in operators work with user-defined types.'
+      },
+      {
+        badge: 'Templates', badgeCls: 'qb-cpp',
+        q: 'What is the main advantage of using <strong>function templates</strong> in C++?',
+        opts: ['They allow functions to run faster by pre-compiling code','They allow writing generic functions that work with any data type','They enable runtime type checking','They enforce access specifiers'],
+        ans: 1,
+        fb: '<strong>✓ Generic code.</strong> Templates use a type parameter (e.g. <code>template&lt;typename T&gt;</code>) so one function definition works for <code>int</code>, <code>float</code>, <code>string</code>, etc. The compiler generates the appropriate code for each type used — template instantiation.'
+      },
+      {
+        badge: 'Inheritance', badgeCls: 'qb-cpp',
+        q: 'In <strong>hierarchical inheritance</strong>, what is the relationship between the classes?',
+        opts: ['One child class inherits from multiple parent classes','A chain of classes: A inherits from B, B inherits from C','Multiple child classes inherit from a single base class','Two classes inherit from each other mutually'],
+        ans: 2,
+        fb: '<strong>✓ One base, many children.</strong> Hierarchical inheritance: a single parent class is inherited by several child classes (e.g. <code>Animal</code> → <code>Dog</code>, <code>Cat</code>, <code>Bird</code>).'
+      },
+      {
+        badge: 'Copy Constructor', badgeCls: 'qb-cpp',
+        q: 'When is a <strong>copy constructor</strong> invoked?',
+        opts: ['When an object is destroyed','When an object calls a virtual function','When a new object is initialized from an existing object of the same class','When overloading the <code>[]</code> operator'],
+        ans: 2,
+        fb: '<strong>✓ Initializing from an existing object.</strong> The copy constructor is called in three scenarios: (1) <code>MyClass b = a;</code>, (2) passing by value to a function, (3) returning by value. Its signature is <code>MyClass(const MyClass&amp; other)</code>.'
+      },
+      {
+        badge: 'Code Output', badgeCls: 'qb-cpp',
+        q: 'What is the output of this C++ code?<div class="code-block"><span class="kw">class</span> <span class="fn">Animal</span> {\n<span class="kw">public:</span>\n  <span class="kw">virtual void</span> <span class="fn">speak</span>() { cout &lt;&lt; <span class="st">"Animal"</span>; }\n};\n<span class="kw">class</span> <span class="fn">Dog</span> : <span class="kw">public</span> Animal {\n<span class="kw">public:</span>\n  <span class="kw">void</span> <span class="fn">speak</span>() { cout &lt;&lt; <span class="st">"Dog"</span>; }\n};\nAnimal* a = <span class="kw">new</span> Dog();\na-&gt;<span class="fn">speak</span>();</div>',
+        opts: ['Animal','Dog','Error','AnimalDog'],
+        ans: 1,
+        fb: '<strong>✓ Dog.</strong> Because <code>speak()</code> is declared <code>virtual</code> in the base class, C++ uses dynamic dispatch. Even though the pointer type is <code>Animal*</code>, the actual object is a <code>Dog</code>, so <code>Dog::speak()</code> is called.'
+      },
+      {
+        badge: 'Code Output', badgeCls: 'qb-cpp',
+        q: 'What does this code print?<div class="code-block"><span class="kw">class</span> <span class="fn">Counter</span> {\n<span class="kw">public:</span>\n  <span class="kw">int</span> n;\n  Counter(<span class="kw">int</span> x) : n(x) {}\n  Counter <span class="kw">operator</span>++() {\n    n++; <span class="kw">return</span> *<span class="kw">this</span>;\n  }\n};\nCounter c(<span class="num">5</span>);\n++c;\ncout &lt;&lt; c.n;</div>',
+        opts: ['4','5','6','Compilation error'],
+        ans: 2,
+        fb: '<strong>✓ 6.</strong> The prefix <code>++</code> operator is overloaded. It increments <code>n</code> from 5 to 6 and returns <code>*this</code>. The prefix form takes no arguments; the postfix form takes a dummy <code>int</code> parameter.'
+      },
+      {
+        badge: 'Constructors', badgeCls: 'qb-cpp',
+        q: 'What is a <strong>default constructor</strong>?',
+        opts: ['A constructor defined by the compiler only','A constructor that initializes all members to zero','A constructor that takes no parameters','A constructor called after the object is destroyed'],
+        ans: 2,
+        fb: '<strong>✓ A constructor that takes no parameters.</strong> If you don\'t define any constructor, the compiler provides a default one automatically. Once you define any constructor, the compiler no longer provides the default.'
+      },
+      {
+        badge: 'Inheritance', badgeCls: 'qb-cpp',
+        q: 'In <strong>multilevel inheritance</strong>, which of the following is correct?',
+        opts: ['A class inherits from two base classes','Multiple classes inherit from one parent','A chain: A is base of B, B is base of C','Class A and B inherit from each other'],
+        ans: 2,
+        fb: '<strong>✓ A chain.</strong> Multilevel inheritance forms a hierarchy: A → B → C. C inherits from B which inherits from A. It\'s like grandparent → parent → child.'
+      },
+      {
+        badge: 'Polymorphism', badgeCls: 'qb-cpp',
+        q: 'What keyword is used in a derived class to explicitly signal that it is overriding a virtual function?',
+        opts: ['<code>virtual</code>','<code>override</code>','<code>final</code>','<code>explicit</code>'],
+        ans: 1,
+        fb: '<strong>✓ <code>override</code>.</strong> Using <code>override</code> in C++11 and later tells the compiler you intend to override a virtual function. If the base class has no matching virtual function, the compiler will give an error — helping catch bugs.'
+      },
+      {
+        badge: 'Code Output', badgeCls: 'qb-cpp',
+        q: 'What is the output?<div class="code-block"><span class="kw">class</span> <span class="fn">Box</span> {\n<span class="kw">public:</span>\n  <span class="kw">int</span> vol;\n  Box(<span class="kw">int</span> v) : vol(v) {}\n  Box(<span class="kw">const</span> Box&amp; b) { vol = b.vol * <span class="num">2</span>; }\n};\nBox b1(<span class="num">10</span>);\nBox b2 = b1;\ncout &lt;&lt; b2.vol;</div>',
+        opts: ['5','10','20','Compilation error'],
+        ans: 2,
+        fb: '<strong>✓ 20.</strong> <code>Box b2 = b1;</code> invokes the copy constructor. The custom copy constructor sets <code>vol = b.vol * 2 = 10 * 2 = 20</code>.'
+      },
+      {
+        badge: 'Templates', badgeCls: 'qb-cpp',
+        q: 'Which of the following is the correct syntax for a function template in C++?',
+        opts: ['<code>generic&lt;T&gt; T add(T a, T b)</code>','<code>template&lt;typename T&gt; T add(T a, T b)</code>','<code>template T add(T a, T b)</code>','<code>function&lt;T&gt; add(T a, T b)</code>'],
+        ans: 1,
+        fb: '<strong>✓ <code>template&lt;typename T&gt; T add(T a, T b)</code>.</strong> The <code>template&lt;typename T&gt;</code> prefix declares T as a generic type parameter. The compiler instantiates the function for each type it is used with.'
+      },
+      {
+        badge: 'Friend Functions', badgeCls: 'qb-cpp',
+        q: 'Can a friend function be inherited by a derived class?',
+        opts: ['Yes, friendship is inherited','No, friendship is not inherited','Only if the function is also virtual','Only with public inheritance'],
+        ans: 1,
+        fb: '<strong>✓ No, friendship is not inherited.</strong> A friend function declared in a base class does NOT automatically become a friend of derived classes. Each class must explicitly declare its own friends.'
+      },
+      {
+        badge: 'Code Output', badgeCls: 'qb-cpp',
+        q: 'What is the output?<div class="code-block"><span class="kw">class</span> <span class="fn">A</span> {\n<span class="kw">public:</span>\n  A() { cout &lt;&lt; <span class="st">"A"</span>; }\n  ~A() { cout &lt;&lt; <span class="st">"~A"</span>; }\n};\n<span class="kw">class</span> <span class="fn">B</span> : <span class="kw">public</span> A {\n<span class="kw">public:</span>\n  B() { cout &lt;&lt; <span class="st">"B"</span>; }\n  ~B() { cout &lt;&lt; <span class="st">"~B"</span>; }\n};\nB obj;</div>',
+        opts: ['BA~B~A','AB~B~A','AB~A~B','BA~A~B'],
+        ans: 1,
+        fb: '<strong>✓ AB~B~A.</strong> Base constructor runs first (A), then derived (B). Destructors run in reverse: derived (~B) then base (~A). Constructors: Base first, top-down. Destructors: Derived first, bottom-up.'
+      },
+      {
+        badge: 'Operator Overloading', badgeCls: 'qb-cpp',
+        q: 'Which of the following operators CANNOT be overloaded in C++?',
+        opts: ['<code>+</code>','<code>::</code> (scope resolution)','<code>==</code>','<code>[]</code>'],
+        ans: 1,
+        fb: '<strong>✓ <code>::</code> (scope resolution)</strong> cannot be overloaded. Other operators that cannot be overloaded include <code>.</code>, <code>.*</code>, <code>?:</code>, and <code>sizeof</code>.'
+      },
+      {
+        badge: 'Virtual Functions', badgeCls: 'qb-cpp',
+        q: 'What is a <strong>vtable</strong> in C++?',
+        opts: ['A table of variable declarations','A table of virtual function pointers used for dynamic dispatch','A hash table for template types','A lookup table for operator overloads'],
+        ans: 1,
+        fb: '<strong>✓ A table of virtual function pointers.</strong> Each class with virtual functions has a vtable. Each object has a hidden pointer (vptr) to its class\'s vtable. At runtime, the correct function is looked up via the vtable.'
+      },
+      {
+        badge: 'Code Output', badgeCls: 'qb-cpp',
+        q: 'What is the output?<div class="code-block"><span class="kw">template</span>&lt;<span class="kw">typename</span> T&gt;\nT <span class="fn">myMax</span>(T a, T b) {\n  <span class="kw">return</span> a &gt; b ? a : b;\n}\ncout &lt;&lt; <span class="fn">myMax</span>(<span class="num">3</span>, <span class="num">7</span>) &lt;&lt; <span class="st">" "</span> &lt;&lt; <span class="fn">myMax</span>(<span class="num">2.5</span>, <span class="num">1.1</span>);</div>',
+        opts: ['3 2.5','7 2.5','7 1.1','3 1.1'],
+        ans: 1,
+        fb: '<strong>✓ 7 2.5.</strong> The template function returns the larger of two values. For ints: max(3,7)=7. For doubles: max(2.5,1.1)=2.5. The compiler instantiates the template twice — once for <code>int</code> and once for <code>double</code>.'
+      },
+      {
+        badge: 'Constructors', badgeCls: 'qb-cpp',
+        q: 'What is an <strong>initializer list</strong> in C++ constructors?',
+        opts: ['A list of constructors a class has','A way to initialize member variables before the constructor body runs','A list of friend functions','A way to call multiple constructors at once'],
+        ans: 1,
+        fb: '<strong>✓ Pre-body initialization.</strong> Initializer lists (e.g. <code>MyClass(int x) : member(x) {}</code>) initialize members before the constructor body executes. They are more efficient and required for <code>const</code> members and references.'
+      },
+      {
+        badge: 'Inheritance', badgeCls: 'qb-cpp',
+        q: 'What is the <strong>Diamond Problem</strong> in C++ inheritance?',
+        opts: ['When a class has four base classes','Ambiguity that arises when two base classes share a common ancestor and both are inherited by a derived class','When overloading the diamond operator','When destructors are not virtual'],
+        ans: 1,
+        fb: '<strong>✓ Ambiguity from shared ancestor.</strong> In diamond inheritance (A→B, A→C, B&C→D), class D gets two copies of A\'s members. Solved using <code>virtual</code> inheritance: <code>class B : virtual public A</code>.'
+      },
+    ],
+
+    // ─── JAVA (25 questions) ───
+    java: [
+      {
+        badge: 'JVM', badgeCls: 'qb-java',
+        q: 'Java\'s "Write Once, Run Anywhere" promise is enabled because:',
+        opts: ['Java source code is interpreted line by line on any OS','Bytecode is platform-independent; only the JVM is platform-specific','The JDK contains all OS libraries needed','Java has no pointers so it runs on any device'],
+        ans: 1,
+        fb: '<strong>✓ Platform-independent bytecode.</strong> <code>javac</code> compiles <code>.java</code> → <code>.class</code> (bytecode). The bytecode is identical on all platforms. Each OS/architecture has its own JVM that translates that bytecode to native machine code.'
+      },
+      {
+        badge: 'JIT Compiler', badgeCls: 'qb-java',
+        q: 'What does the JIT (Just-In-Time) compiler do?',
+        opts: ['Compiles Java source code into bytecode before execution','Garbage-collects unused objects in the heap','Detects "hot" bytecode and compiles it to native machine code at runtime for speed','Loads class files from disk into the JVM'],
+        ans: 2,
+        fb: '<strong>✓ Runtime native compilation of hot code.</strong> The JIT is part of the JVM\'s Execution Engine. It profiles the running program, finds "hot spots" (frequently executed code), and compiles them to native code — dramatically improving performance.'
+      },
+      {
+        badge: 'JDK vs JRE', badgeCls: 'qb-java',
+        q: 'A developer needs to write, compile, and test a Java application. Which tool do they need?',
+        opts: ['JRE only','JVM only','JDK (which includes JRE and JVM)','A separate bytecode compiler not part of Java'],
+        ans: 2,
+        fb: '<strong>✓ JDK.</strong> JDK = JRE + development tools (<code>javac</code>, <code>javadoc</code>, <code>jar</code>, debugger, etc.). JRE is for running only. To develop: always install the JDK.'
+      },
+      {
+        badge: 'JVM Components', badgeCls: 'qb-java',
+        q: 'Which JVM component is responsible for automatically freeing memory occupied by objects that are no longer referenced?',
+        opts: ['Class Loader','Execution Engine','Runtime Data Areas','Garbage Collector'],
+        ans: 3,
+        fb: '<strong>✓ Garbage Collector.</strong> Java\'s GC automatically manages heap memory — no manual <code>delete</code> like in C++. It tracks object references and frees memory for objects with no live references, preventing memory leaks.'
+      },
+      {
+        badge: 'Data Types', badgeCls: 'qb-java',
+        q: 'Which Java primitive type is used to store a single Unicode character?',
+        opts: ['<code>String</code>','<code>byte</code>','<code>char</code>','<code>short</code>'],
+        ans: 2,
+        fb: '<strong>✓ <code>char</code>.</strong> Java\'s <code>char</code> is a 16-bit Unicode character. Note: <code>String</code> is a class, not a primitive. Java has 8 primitive types: <code>byte, short, int, long, float, double, char, boolean</code>.'
+      },
+      {
+        badge: 'Java OOP', badgeCls: 'qb-java',
+        q: 'In Java, which keyword is used to create a child class that inherits from a parent class?',
+        opts: ['<code>implements</code>','<code>inherits</code>','<code>extends</code>','<code>super</code>'],
+        ans: 2,
+        fb: '<strong>✓ <code>extends</code>.</strong> Java uses <code>class Dog extends Animal</code> for inheritance. <code>implements</code> is for interfaces. <code>super</code> is used to call the parent constructor/method. Unlike C++, Java doesn\'t support multiple class inheritance.'
+      },
+      {
+        badge: 'Java Interfaces', badgeCls: 'qb-java',
+        q: 'Which of the following correctly describes a Java <code>interface</code>?',
+        opts: ['A class that cannot be instantiated and may have abstract methods','A contract of methods a class must implement; supports multiple type inheritance','A runtime component of the JVM','The same as an abstract class in all ways'],
+        ans: 1,
+        fb: '<strong>✓ A contract enabling multiple type inheritance.</strong> An interface declares method signatures; implementing classes must provide bodies. A class can <code>implement</code> multiple interfaces, solving Java\'s lack of multiple class inheritance.'
+      },
+      {
+        badge: 'Java Syntax', badgeCls: 'qb-java',
+        q: 'What is printed by this Java program?<div class="code-block"><span class="kw">public class</span> <span class="fn">Test</span> {\n  <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {\n    <span class="kw">int</span>[] nums = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>};\n    <span class="kw">for</span> (<span class="kw">int</span> n : nums) {\n      System.out.print(n + <span class="st">" "</span>);\n    }\n  }\n}</div>',
+        opts: ['0 1 2','10 20 30','30 20 10','Compilation error'],
+        ans: 1,
+        fb: '<strong>✓ 10 20 30.</strong> The enhanced <code>for-each</code> loop iterates over each element of the array in order, printing each value followed by a space.'
+      },
+      {
+        badge: 'JVM Memory', badgeCls: 'qb-java',
+        q: 'In the JVM, where are <strong>objects</strong> stored at runtime?',
+        opts: ['The Stack','The Heap','The Method Area','The PC Register'],
+        ans: 1,
+        fb: '<strong>✓ The Heap.</strong> In the JVM\'s Runtime Data Areas: the <strong>Heap</strong> stores all objects and class instances. The <strong>Stack</strong> holds method call frames and local variables. The <strong>Method Area</strong> stores class metadata and static fields.'
+      },
+      {
+        badge: 'Access Modifiers', badgeCls: 'qb-java',
+        q: 'In Java, which access modifier makes a member accessible to the class itself <strong>and</strong> all subclasses, but <strong>not</strong> to unrelated classes?',
+        opts: ['<code>public</code>','<code>private</code>','<code>protected</code>','package-private (no modifier)'],
+        ans: 2,
+        fb: '<strong>✓ <code>protected</code>.</strong> Visibility: <code>private</code> (class only) &lt; package-private (same package) &lt; <code>protected</code> (package + subclasses) &lt; <code>public</code> (everywhere).'
+      },
+      {
+        badge: 'Code Output', badgeCls: 'qb-java',
+        q: 'What is the output of this Java code?<div class="code-block"><span class="kw">public class</span> <span class="fn">Test</span> {\n  <span class="kw">static int</span> x = <span class="num">5</span>;\n  <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {\n    x += <span class="num">3</span>;\n    System.out.println(x);\n  }\n}</div>',
+        opts: ['3','5','8','Compilation error'],
+        ans: 2,
+        fb: '<strong>✓ 8.</strong> <code>static int x = 5</code> initializes the class-level variable. <code>x += 3</code> adds 3 to it, making it 8. <code>println</code> prints 8 followed by a newline.'
+      },
+      {
+        badge: 'Code Output', badgeCls: 'qb-java',
+        q: 'What does this code print?<div class="code-block"><span class="kw">class</span> <span class="fn">Shape</span> {\n  <span class="kw">void</span> <span class="fn">draw</span>() { System.out.print(<span class="st">"Shape"</span>); }\n}\n<span class="kw">class</span> <span class="fn">Circle</span> <span class="kw">extends</span> Shape {\n  <span class="kw">void</span> <span class="fn">draw</span>() { System.out.print(<span class="st">"Circle"</span>); }\n}\nShape s = <span class="kw">new</span> Circle();\ns.<span class="fn">draw</span>();</div>',
+        opts: ['Shape','Circle','ShapeCircle','Compilation error'],
+        ans: 1,
+        fb: '<strong>✓ Circle.</strong> Java uses dynamic (runtime) polymorphism. Even though the reference type is <code>Shape</code>, the actual object is a <code>Circle</code>. Java automatically dispatches to the overridden method in <code>Circle</code>.'
+      },
+      {
+        badge: 'Java OOP', badgeCls: 'qb-java',
+        q: 'What is the purpose of the <code>super</code> keyword in Java?',
+        opts: ['To create an instance of the parent class','To call the parent class constructor or method from a subclass','To declare a class as a superclass','To override a method in the parent class'],
+        ans: 1,
+        fb: '<strong>✓ Calls parent constructor or method.</strong> <code>super()</code> calls the parent constructor; <code>super.method()</code> calls a parent method. <code>super()</code> must be the first statement in a subclass constructor.'
+      },
+      {
+        badge: 'Data Types', badgeCls: 'qb-java',
+        q: 'How many bits does the Java <code>int</code> primitive type use?',
+        opts: ['8 bits','16 bits','32 bits','64 bits'],
+        ans: 2,
+        fb: '<strong>✓ 32 bits.</strong> Java <code>int</code> is always 32-bit (unlike C/C++ where it depends on the platform). Range: −2,147,483,648 to 2,147,483,647. Use <code>long</code> (64-bit) for larger values.'
+      },
+      {
+        badge: 'Java OOP', badgeCls: 'qb-java',
+        q: 'Can Java support multiple inheritance through classes?',
+        opts: ['Yes, using <code>extends</code> with multiple classes','No, Java supports only single class inheritance','Yes, using the <code>multi</code> keyword','Yes, but only for abstract classes'],
+        ans: 1,
+        fb: '<strong>✓ No.</strong> Java does not allow a class to <code>extend</code> multiple classes. Multiple inheritance is achieved through <strong>interfaces</strong> — a class can implement as many interfaces as needed.'
+      },
+      {
+        badge: 'Code Output', badgeCls: 'qb-java',
+        q: 'What is the output?<div class="code-block"><span class="kw">public class</span> <span class="fn">Test</span> {\n  <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {\n    String s1 = <span class="st">"Hello"</span>;\n    String s2 = <span class="st">"Hello"</span>;\n    System.out.println(s1 == s2);\n    System.out.println(s1.<span class="fn">equals</span>(s2));\n  }\n}</div>',
+        opts: ['false false','true true','false true','true false'],
+        ans: 1,
+        fb: '<strong>✓ true true.</strong> String literals in Java are interned — <code>s1</code> and <code>s2</code> point to the same object in the String pool, so <code>==</code> is true. <code>equals()</code> compares content, also true.'
+      },
+      {
+        badge: 'JVM Components', badgeCls: 'qb-java',
+        q: 'Which JVM component loads <code>.class</code> files from disk into memory?',
+        opts: ['Execution Engine','JIT Compiler','Class Loader','Garbage Collector'],
+        ans: 2,
+        fb: '<strong>✓ Class Loader.</strong> The Class Loader subsystem of the JVM is responsible for loading <code>.class</code> bytecode files into the runtime memory areas. It performs loading, linking, and initialization.'
+      },
+      {
+        badge: 'Java OOP', badgeCls: 'qb-java',
+        q: 'What does <code>final</code> mean when applied to a Java class?',
+        opts: ['The class cannot be instantiated','The class cannot be extended (inherited from)','All methods in the class become static','The class is abstract'],
+        ans: 1,
+        fb: '<strong>✓ Cannot be extended.</strong> A <code>final</code> class cannot be subclassed. Example: <code>String</code> is final in Java. <code>final</code> on a method prevents overriding; on a variable it makes it a constant.'
+      },
+      {
+        badge: 'Code Output', badgeCls: 'qb-java',
+        q: 'What is the output?<div class="code-block"><span class="kw">public class</span> <span class="fn">Test</span> {\n  <span class="kw">int</span> x;\n  Test(<span class="kw">int</span> x) { <span class="kw">this</span>.x = x; }\n  <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {\n    Test a = <span class="kw">new</span> Test(<span class="num">10</span>);\n    Test b = a;\n    b.x = <span class="num">20</span>;\n    System.out.println(a.x);\n  }\n}</div>',
+        opts: ['10','20','0','Compilation error'],
+        ans: 1,
+        fb: '<strong>✓ 20.</strong> In Java, objects are reference types. <code>b = a</code> copies the reference, not the object. Both <code>a</code> and <code>b</code> point to the same object. Changing <code>b.x</code> also changes <code>a.x</code>.'
+      },
+      {
+        badge: 'Data Types', badgeCls: 'qb-java',
+        q: 'What is the default value of an uninitialized <code>int</code> instance variable in Java?',
+        opts: ['-1','undefined','null','0'],
+        ans: 3,
+        fb: '<strong>✓ 0.</strong> Java automatically initializes instance variables: <code>int</code> → 0, <code>double</code> → 0.0, <code>boolean</code> → false, object references → null. Local variables must be explicitly initialized.'
+      },
+      {
+        badge: 'Code Output', badgeCls: 'qb-java',
+        q: 'What is the output?<div class="code-block"><span class="kw">public class</span> <span class="fn">Test</span> {\n  <span class="kw">static void</span> <span class="fn">print</span>(<span class="kw">int</span> n) {\n    <span class="kw">if</span> (n == <span class="num">0</span>) <span class="kw">return</span>;\n    System.out.print(n + <span class="st">" "</span>);\n    <span class="fn">print</span>(n - <span class="num">1</span>);\n  }\n  <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {\n    <span class="fn">print</span>(<span class="num">3</span>);\n  }\n}</div>',
+        opts: ['1 2 3','3 2 1','3 2 1 0','1 2 3 0'],
+        ans: 1,
+        fb: '<strong>✓ 3 2 1.</strong> The recursive method prints <code>n</code> then calls itself with <code>n-1</code>. Execution: print(3)→"3 " then print(2)→"2 " then print(1)→"1 " then print(0)→returns. Result: "3 2 1 ".'
+      },
+      {
+        badge: 'Java OOP', badgeCls: 'qb-java',
+        q: 'What is the role of a <strong>constructor</strong> in Java?',
+        opts: ['To destroy objects after use','To initialize a newly created object','To define abstract methods','To implement interfaces'],
+        ans: 1,
+        fb: '<strong>✓ To initialize a new object.</strong> A constructor is a special method called automatically when an object is created with <code>new</code>. It has the same name as the class and no return type. Java provides a default no-arg constructor if none is defined.'
+      },
+      {
+        badge: 'Java Interfaces', badgeCls: 'qb-java',
+        q: 'In Java, can an interface contain variables?',
+        opts: ['No, interfaces cannot have any variables','Yes, but they are implicitly public, static, and final','Yes, they can have any type of variable','Only private variables are allowed'],
+        ans: 1,
+        fb: '<strong>✓ Yes — public, static, and final.</strong> Variables declared in a Java interface are implicitly <code>public static final</code> (i.e., constants). You cannot have instance variables in an interface.'
+      },
+      {
+        badge: 'Code Output', badgeCls: 'qb-java',
+        q: 'What is the output?<div class="code-block"><span class="kw">public class</span> <span class="fn">Test</span> {\n  <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {\n    <span class="kw">int</span> i = <span class="num">1</span>;\n    <span class="kw">while</span> (i &lt;= <span class="num">3</span>) {\n      System.out.print(i * i + <span class="st">" "</span>);\n      i++;\n    }\n  }\n}</div>',
+        opts: ['1 2 3','1 4 9','3 2 1','2 4 6'],
+        ans: 1,
+        fb: '<strong>✓ 1 4 9.</strong> The loop runs for i=1,2,3. It prints i*i each iteration: 1*1=1, 2*2=4, 3*3=9. Output: "1 4 9 ".'
+      },
+      {
+        badge: 'JVM Memory', badgeCls: 'qb-java',
+        q: 'Where are <strong>local variables</strong> and method call frames stored in the JVM?',
+        opts: ['Heap','Method Area','Stack','PC Register'],
+        ans: 2,
+        fb: '<strong>✓ Stack.</strong> Each thread in the JVM has its own stack. When a method is called, a stack frame containing local variables and the return address is pushed. When the method returns, the frame is popped.'
+      },
+    ]
+  };
+
+  // ═══════════════════════════════════════════════════
+  // UTILITY
+  // ═══════════════════════════════════════════════════
+
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function pick(arr, n) {
+    return shuffle(arr).slice(0, n);
+  }
+
+  // ═══════════════════════════════════════════════════
+  // RENDER
+  // ═══════════════════════════════════════════════════
+
+  const state = {};
+  const activeQuestions = {};
+
+  function renderCard(q, section, displayIdx, cardId) {
+    const keys = ['A','B','C','D'];
+    const optsBtns = q.opts.map((opt, oi) => {
+      const isCorrect = oi === q.ans;
+      return `<button class="option-btn" onclick="answer(this,'${isCorrect?'correct':'wrong'}','${section}','${cardId}')">
+        <span class="opt-key">${keys[oi]}</span> ${opt}
+      </button>`;
+    }).join('');
+
+    const codeInQ = q.q; // may contain embedded code block
+
+    return `<div class="quiz-card" id="qcard-${cardId}" data-section="${section}" data-cardid="${cardId}">
+      <div class="q-header"><span class="q-num">Q${displayIdx}</span><span class="q-badge ${q.badgeCls}">${q.badge}</span></div>
+      <div class="q-text">${codeInQ}</div>
+      <div class="options">${optsBtns}</div>
+      <div class="feedback" id="fb-${cardId}">${q.fb}</div>
+    </div>`;
+  }
+
+  function buildSection(section, pool, count) {
+    const chosen = pick(pool, count);
+    activeQuestions[section] = chosen;
+    state[section] = { total: count, correct: 0, answered: 0 };
+
+    const container = document.getElementById('cards-' + section);
+    container.innerHTML = chosen.map((q, i) => {
+      const cardId = section + '_' + i;
+      return renderCard(q, section, i + 1, cardId);
+    }).join('');
+
+    // stagger animations
+    container.querySelectorAll('.quiz-card').forEach((card, i) => {
+      card.style.animationDelay = (i * 0.06) + 's';
+    });
+
+    updateScoreDisplay(section);
+  }
+
+  function buildFinal() {
+    // pick from all pools combined
+    const allBasic = pick(Q.basic, 9).map(q => ({...q, badge: '🧱 ' + q.badge}));
+    const allCpp   = pick(Q.cpp,   8).map(q => ({...q, badge: '⚙️ ' + q.badge}));
+    const allJava  = pick(Q.java,  8).map(q => ({...q, badge: '☕ ' + q.badge}));
+    const combined = shuffle([...allBasic, ...allCpp, ...allJava]);
+
+    activeQuestions['final'] = combined;
+    state['final'] = { total: 25, correct: 0, answered: 0 };
+
+    const container = document.getElementById('cards-final');
+    container.innerHTML = combined.map((q, i) => {
+      const cardId = 'final_' + i;
+      return renderCard(q, 'final', i + 1, cardId);
+    }).join('');
+
+    container.querySelectorAll('.quiz-card').forEach((card, i) => {
+      card.style.animationDelay = (i * 0.04) + 's';
+    });
+
+    updateScoreDisplay('final');
+  }
+
+  // ═══════════════════════════════════════════════════
+  // ANSWER HANDLER
+  // ═══════════════════════════════════════════════════
+
+  function answer(btn, result, section, cardId) {
+    const card = document.getElementById('qcard-' + cardId);
+    if (card.dataset.done) return;
+    card.dataset.done = '1';
+
+    card.querySelectorAll('.option-btn').forEach(b => {
+      b.disabled = true;
+      b.style.opacity = '0.35';
+    });
+    btn.style.opacity = '1';
+
+    const fb = document.getElementById('fb-' + cardId);
+    state[section].answered++;
+
+    if (result === 'correct') {
+      btn.classList.add('correct');
+      card.classList.add('answered-correct');
+      fb.classList.add('correct-fb', 'show');
+      state[section].correct++;
+    } else {
+      btn.classList.add('wrong');
+      card.classList.add('answered-wrong');
+      fb.classList.add('wrong-fb', 'show');
+      // highlight correct answer
+      card.querySelectorAll('.option-btn').forEach(b => {
+        if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'correct'")) {
+          b.classList.add('correct');
+          b.style.opacity = '1';
+        }
+      });
+    }
+
+    updateScoreDisplay(section);
+  }
+
+  function updateScoreDisplay(section) {
+    const s = state[section] || { total: 10, correct: 0, answered: 0 };
+    const pct = s.total ? Math.round((s.correct / s.total) * 100) : 0;
+
+    const pb = document.getElementById('pb-' + section);
+    const pt = document.getElementById('pt-' + section);
+    const nums = document.getElementById('nums-' + section);
+    const circle = document.getElementById('circle-' + section);
+    const panel = document.getElementById('score-' + section);
+
+    if (pb) pb.style.width = (s.answered / s.total * 100) + '%';
+    if (pt) pt.textContent = s.answered + ' / ' + s.total;
+    if (nums) nums.textContent = s.correct + ' / ' + s.total + ' correct';
+    if (circle) circle.textContent = s.answered === s.total ? pct + '%' : s.correct + '/' + s.answered;
+
+    if (s.answered === s.total && panel) {
+      if (circle) circle.textContent = pct + '%';
+      panel.style.borderColor = pct >= 70 ? 'rgba(52,211,153,0.4)' : 'rgba(248,113,113,0.4)';
+    }
+  }
+
+  // ═══════════════════════════════════════════════════
+  // RESET
+  // ═══════════════════════════════════════════════════
+
+  function resetSection(section) {
+    if (section === 'basic') buildSection('basic', Q.basic, 10);
+    else if (section === 'cpp') buildSection('cpp', Q.cpp, 10);
+    else if (section === 'java') buildSection('java', Q.java, 10);
+    else if (section === 'final') buildFinal();
+
+    const panel = document.getElementById('score-' + section);
+    if (panel) panel.style.borderColor = '';
+  }
+
+  // ═══════════════════════════════════════════════════
+  // TAB SWITCHING
+  // ═══════════════════════════════════════════════════
+
+  const panelIds = ['notes','basic','cpp','java','final','challenge'];
+  const sectionBuilt = {};
+
+  function switchTab(tab, btn) {
+    // hide all panels
+    panelIds.forEach(id => {
+      const el = document.getElementById('panel-' + id);
+      if (el) el.classList.remove('active');
+    });
+
+    // show selected
+    const target = document.getElementById('panel-' + tab);
+    if (target) target.classList.add('active');
+
+    // update nav active
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // build quiz on first visit
+    if (tab === 'basic' && !sectionBuilt.basic) {
+      buildSection('basic', Q.basic, 10);
+      sectionBuilt.basic = true;
+    } else if (tab === 'cpp' && !sectionBuilt.cpp) {
+      buildSection('cpp', Q.cpp, 10);
+      sectionBuilt.cpp = true;
+    } else if (tab === 'java' && !sectionBuilt.java) {
+      buildSection('java', Q.java, 10);
+      sectionBuilt.java = true;
+    } else if (tab === 'final' && !sectionBuilt.final) {
+      buildFinal();
+      sectionBuilt.final = true;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  </script>
+
+  <!-- ══ SAMPLE PAPER PANEL ══ -->
+  <div id="panel-challenge" class="panel">
+  <main>
+    <section class="quiz-section">
+      <div class="section-heading">
+        <div class="section-icon" style="background:rgba(232,121,249,0.15);box-shadow:0 0 24px rgba(232,121,249,0.15);">📄</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+            <h2>Sample Paper</h2>
+            <span class="lang-tag" style="border:1px solid #e879f9;color:#e879f9;font-family:var(--mono);font-size:0.62rem;padding:3px 10px;border-radius:100px;letter-spacing:0.1em;text-transform:uppercase;">Mid-Term · Spring 2026</span>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);">Official Mid-Term paper with full solutions — OOP · 2nd Semester · Section 2</p>
+        </div>
+      </div>
+
+      <!-- Credit note -->
+      <div style="background:rgba(245,200,66,0.07);border:1px solid rgba(245,200,66,0.25);border-radius:14px;padding:18px 24px;margin-bottom:28px;font-size:0.88rem;line-height:1.7;color:var(--text);">
+        📝 This paper was made by <strong style="color:var(--gold);">Sir Muhammad Usman</strong> for the <strong>Mid-Term Exam</strong> of the <strong>Second Section</strong> of the <strong>2nd Semester</strong>. <span style="color:var(--muted);">(Thanks to Abdullah for sharing this file)</span>
+      </div>
+
+      <!-- Paper images -->
+      <div style="background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:36px;">
+        <p style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;text-align:center;">📎 Original Examination Paper</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;">
+          <!-- Question 1 -->
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <p style="font-family:var(--mono);font-size:0.62rem;color:var(--cpp);text-transform:uppercase;letter-spacing:0.08em;text-align:center;">Page 1 — Question 1</p>
+            <div style="position:relative;width:100%;padding-bottom:141.4%;overflow:hidden;border-radius:10px;border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 40px rgba(0,0,0,0.5);background:#0a0c14;">
+              <img id="paper1-img" src="OOPS1.jpeg" alt="Mid-Term Examination Paper – Page 1" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:10px;" onerror="this.style.display='none';document.getElementById('paper1-fallback').style.display='flex';" />
+              <div id="paper1-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:8px;padding:20px;color:var(--muted);font-size:0.78rem;text-align:center;">
+                <span style="font-size:2rem;">📄</span>
+                <span>Place <code style="font-family:var(--mono);background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;">OOPS1.jpeg</code> in the same folder</span>
+              </div>
+            </div>
+          </div>
+          <!-- Question 2 -->
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <p style="font-family:var(--mono);font-size:0.62rem;color:var(--basic);text-transform:uppercase;letter-spacing:0.08em;text-align:center;">Page 2 — Question 2</p>
+            <div style="position:relative;width:100%;padding-bottom:141.4%;overflow:hidden;border-radius:10px;border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 40px rgba(0,0,0,0.5);background:#0a0c14;">
+              <img id="paper2-img" src="OOPS2.png" alt="Mid-Term Examination Paper – Page 2" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:10px;" onerror="this.style.display='none';document.getElementById('paper2-fallback').style.display='flex';" />
+              <div id="paper2-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:8px;padding:20px;color:var(--muted);font-size:0.78rem;text-align:center;">
+                <span style="font-size:2rem;">📄</span>
+                <span>Place <code style="font-family:var(--mono);background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;">OOPS2.png</code> in the same folder</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SOLUTION ── -->
+      <div style="background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.2);border-radius:14px;padding:18px 24px;margin-bottom:32px;">
+        <h3 style="font-family:'Amiri',serif;font-size:1.4rem;color:var(--cpp);margin-bottom:4px;">📘 Complete Paper Solutions</h3>
+        <p style="font-size:0.82rem;color:var(--muted);">All answers are written simply and clearly, at the level of a 2nd-semester OOP course.</p>
+      </div>
+
+      <!-- Q1 Divider -->
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;">
+        <div style="flex:1;height:1px;background:var(--border);"></div>
+        <span style="font-family:var(--mono);font-size:0.7rem;color:var(--cpp);letter-spacing:0.12em;text-transform:uppercase;padding:4px 16px;border:1px solid rgba(96,165,250,0.3);border-radius:100px;background:rgba(96,165,250,0.07);">Question 1 · 12 Marks</span>
+        <div style="flex:1;height:1px;background:var(--border);"></div>
+      </div>
+
+      <!-- ────────────────────────────────── PART A ──────────────────────────────── -->
+      <div class="challenge-card" style="margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+          <span style="font-family:var(--mono);font-size:0.62rem;padding:3px 12px;border-radius:100px;border:1px solid rgba(96,165,250,0.4);color:var(--cpp);background:rgba(96,165,250,0.07);text-transform:uppercase;letter-spacing:0.08em;">Part A · CLO1</span>
+          <span style="font-family:var(--mono);font-size:0.62rem;color:var(--muted);">3 Marks</span>
+        </div>
+        <h3 style="font-family:'Amiri',serif;font-size:1.25rem;margin-bottom:14px;">Encapsulation &amp; Abstraction</h3>
+        <p style="font-size:0.88rem;color:rgba(226,232,240,0.85);line-height:1.75;margin-bottom:18px;">Explain the concept of Encapsulation and Abstraction with suitable examples.</p>
+
+        <div style="border-left:3px solid var(--cpp);padding-left:18px;margin-bottom:18px;">
+          <p style="font-family:var(--mono);font-size:0.65rem;color:var(--cpp);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">✦ Encapsulation</p>
+          <p style="font-size:0.87rem;color:var(--text);line-height:1.75;margin-bottom:10px;">
+            <strong>Encapsulation</strong> means wrapping data (variables) and functions together inside a class, and hiding the data from outside access. We use <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">private</code> to protect the data and <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">public</code> functions to access or change it.
+          </p>
+          <p style="font-size:0.84rem;color:var(--muted);margin-bottom:10px;"><strong style="color:var(--text);">Real-life example:</strong> A bank account hides the balance. You cannot directly change it — you must use deposit() or withdraw().</p>
+          <div class="code-block"><span class="kw">class</span> <span class="fn">BankAccount</span> {
+<span class="kw">private:</span>
+    <span class="kw">int</span> balance;          <span class="cm">// hidden from outside</span>
+<span class="kw">public:</span>
+    BankAccount() { balance = <span class="num">0</span>; }
+
+    <span class="kw">void</span> <span class="fn">deposit</span>(<span class="kw">int</span> amount) {
+        balance += amount;
+    }
+    <span class="kw">int</span> <span class="fn">getBalance</span>() {
+        <span class="kw">return</span> balance;
+    }
+};
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    BankAccount acc;
+    acc.<span class="fn">deposit</span>(<span class="num">500</span>);
+    cout &lt;&lt; acc.<span class="fn">getBalance</span>();   <span class="cm">// 500</span>
+}</div>
+        </div>
+
+        <div style="border-left:3px solid var(--basic);padding-left:18px;">
+          <p style="font-family:var(--mono);font-size:0.65rem;color:var(--basic);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">✦ Abstraction</p>
+          <p style="font-size:0.87rem;color:var(--text);line-height:1.75;margin-bottom:10px;">
+            <strong>Abstraction</strong> means showing only the necessary details to the user and hiding the internal implementation. The user knows <em>what</em> a function does, not <em>how</em> it does it.
+          </p>
+          <p style="font-size:0.84rem;color:var(--muted);margin-bottom:10px;"><strong style="color:var(--text);">Real-life example:</strong> When you drive a car, you use the steering wheel and pedals. You do not need to know how the engine works internally.</p>
+          <div class="code-block"><span class="kw">class</span> <span class="fn">Car</span> {
+<span class="kw">private:</span>
+    <span class="kw">void</span> <span class="fn">startEngine</span>() {   <span class="cm">// hidden internal detail</span>
+        cout &lt;&lt; <span class="st">"Engine started"</span>;
+    }
+<span class="kw">public:</span>
+    <span class="kw">void</span> <span class="fn">drive</span>() {          <span class="cm">// user only sees this</span>
+        <span class="fn">startEngine</span>();
+        cout &lt;&lt; <span class="st">"Car is moving"</span>;
+    }
+};
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    Car myCar;
+    myCar.<span class="fn">drive</span>();           <span class="cm">// user does not know about startEngine()</span>
+}</div>
+        </div>
+
+        <div style="margin-top:16px;background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.2);border-radius:10px;padding:12px 16px;font-size:0.82rem;color:#6ee7b7;">
+          💡 <strong>Key Difference:</strong> Encapsulation is about <em>protecting data</em>. Abstraction is about <em>hiding complexity</em>.
+        </div>
+      </div>
+
+      <!-- ────────────────────────────────── PART B ──────────────────────────────── -->
+      <div class="challenge-card" style="margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+          <span style="font-family:var(--mono);font-size:0.62rem;padding:3px 12px;border-radius:100px;border:1px solid rgba(96,165,250,0.4);color:var(--cpp);background:rgba(96,165,250,0.07);text-transform:uppercase;letter-spacing:0.08em;">Part B · CLO1</span>
+          <span style="font-family:var(--mono);font-size:0.62rem;color:var(--muted);">3 Marks</span>
+        </div>
+        <h3 style="font-family:'Amiri',serif;font-size:1.25rem;margin-bottom:14px;">Function Overloading vs Function Overriding</h3>
+        <p style="font-size:0.88rem;color:rgba(226,232,240,0.85);line-height:1.75;margin-bottom:18px;">Differentiate between Function Overloading and Function Overriding with examples.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+          <div style="background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.2);border-radius:12px;padding:16px;">
+            <p style="font-family:var(--mono);font-size:0.65rem;color:var(--cpp);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Overloading</p>
+            <p style="font-size:0.82rem;color:var(--text);line-height:1.7;">Same function name, <strong>different parameters</strong>, in the <strong>same class</strong>. Decided at <em>compile time</em>.</p>
+          </div>
+          <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.2);border-radius:12px;padding:16px;">
+            <p style="font-family:var(--mono);font-size:0.65rem;color:var(--basic);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Overriding</p>
+            <p style="font-size:0.82rem;color:var(--text);line-height:1.7;">Same function name, <strong>same parameters</strong>, in <strong>parent &amp; child class</strong>. Decided at <em>run time</em>.</p>
+          </div>
+        </div>
+
+        <p style="font-family:var(--mono);font-size:0.65rem;color:var(--cpp);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Example — Overloading</p>
+        <div class="code-block" style="margin-bottom:18px;"><span class="kw">class</span> <span class="fn">Calculator</span> {
+<span class="kw">public:</span>
+    <span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b) {
+        <span class="kw">return</span> a + b;
+    }
+    <span class="kw">double</span> <span class="fn">add</span>(<span class="kw">double</span> a, <span class="kw">double</span> b) {  <span class="cm">// same name, different params</span>
+        <span class="kw">return</span> a + b;
+    }
+};
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    Calculator c;
+    cout &lt;&lt; c.<span class="fn">add</span>(<span class="num">2</span>, <span class="num">3</span>);          <span class="cm">// calls first add → 5</span>
+    cout &lt;&lt; c.<span class="fn">add</span>(<span class="num">2.5</span>, <span class="num">3.1</span>);      <span class="cm">// calls second add → 5.6</span>
+}</div>
+
+        <p style="font-family:var(--mono);font-size:0.65rem;color:var(--basic);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Example — Overriding</p>
+        <div class="code-block"><span class="kw">class</span> <span class="fn">Animal</span> {
+<span class="kw">public:</span>
+    <span class="kw">virtual void</span> <span class="fn">sound</span>() {
+        cout &lt;&lt; <span class="st">"Some animal sound"</span>;
+    }
+};
+
+<span class="kw">class</span> <span class="fn">Dog</span> : <span class="kw">public</span> Animal {
+<span class="kw">public:</span>
+    <span class="kw">void</span> <span class="fn">sound</span>() {              <span class="cm">// overrides parent function</span>
+        cout &lt;&lt; <span class="st">"Woof!"</span>;
+    }
+};
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    Animal* a = <span class="kw">new</span> Dog();
+    a-&gt;<span class="fn">sound</span>();                  <span class="cm">// prints: Woof!  (Dog's version)</span>
+}</div>
+      </div>
+
+      <!-- ────────────────────────────────── PART C ──────────────────────────────── -->
+      <div class="challenge-card" style="margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+          <span style="font-family:var(--mono);font-size:0.62rem;padding:3px 12px;border-radius:100px;border:1px solid rgba(245,200,66,0.4);color:var(--gold);background:rgba(245,200,66,0.07);text-transform:uppercase;letter-spacing:0.08em;">Part C · CLO2</span>
+          <span style="font-family:var(--mono);font-size:0.62rem;color:var(--muted);">3 Marks</span>
+        </div>
+        <h3 style="font-family:'Amiri',serif;font-size:1.25rem;margin-bottom:14px;">Library Management System</h3>
+        <p style="font-size:0.88rem;color:rgba(226,232,240,0.85);line-height:1.75;margin-bottom:18px;">Identify three objects (classes), their attributes and functions, and describe the relationship between two of them.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:20px;">
+          <div style="background:rgba(245,200,66,0.06);border:1px solid rgba(245,200,66,0.2);border-radius:12px;padding:16px;">
+            <p style="font-family:var(--mono);font-size:0.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">📗 Book</p>
+            <p style="font-size:0.83rem;color:var(--muted);margin-bottom:4px;"><strong style="color:var(--text);">Attribute:</strong> title (string)</p>
+            <p style="font-size:0.83rem;color:var(--muted);"><strong style="color:var(--text);">Function:</strong> getTitle()</p>
+          </div>
+          <div style="background:rgba(245,200,66,0.06);border:1px solid rgba(245,200,66,0.2);border-radius:12px;padding:16px;">
+            <p style="font-family:var(--mono);font-size:0.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">👤 Member</p>
+            <p style="font-size:0.83rem;color:var(--muted);margin-bottom:4px;"><strong style="color:var(--text);">Attribute:</strong> name (string)</p>
+            <p style="font-size:0.83rem;color:var(--muted);"><strong style="color:var(--text);">Function:</strong> borrowBook()</p>
+          </div>
+          <div style="background:rgba(245,200,66,0.06);border:1px solid rgba(245,200,66,0.2);border-radius:12px;padding:16px;">
+            <p style="font-family:var(--mono);font-size:0.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">📚 Library</p>
+            <p style="font-size:0.83rem;color:var(--muted);margin-bottom:4px;"><strong style="color:var(--text);">Attribute:</strong> libraryName (string)</p>
+            <p style="font-size:0.83rem;color:var(--muted);"><strong style="color:var(--text);">Function:</strong> addBook()</p>
+          </div>
+        </div>
+
+        <div style="border-left:3px solid var(--gold);padding-left:18px;margin-bottom:16px;">
+          <p style="font-family:var(--mono);font-size:0.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Relationship</p>
+          <p style="font-size:0.87rem;color:var(--text);line-height:1.75;">
+            A <strong>Library</strong> <em>has many</em> <strong>Books</strong> — this is a <strong>Has-A relationship</strong> (Composition/Aggregation). The Library class contains Book objects. If the library is closed, the books still exist, so it is Aggregation.
+          </p>
+        </div>
+
+        <div class="code-block"><span class="kw">class</span> <span class="fn">Book</span> {
+<span class="kw">public:</span>
+    string title;
+    string <span class="fn">getTitle</span>() { <span class="kw">return</span> title; }
+};
+
+<span class="kw">class</span> <span class="fn">Library</span> {
+<span class="kw">public:</span>
+    string libraryName;
+    Book books[<span class="num">100</span>];    <span class="cm">// Library HAS Books (aggregation)</span>
+    <span class="kw">int</span> count = <span class="num">0</span>;
+
+    <span class="kw">void</span> <span class="fn">addBook</span>(Book b) {
+        books[count++] = b;
+    }
+};</div>
+      </div>
+
+      <!-- ────────────────────────────────── PART D ──────────────────────────────── -->
+      <div class="challenge-card" style="margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+          <span style="font-family:var(--mono);font-size:0.62rem;padding:3px 12px;border-radius:100px;border:1px solid rgba(96,165,250,0.4);color:var(--cpp);background:rgba(96,165,250,0.07);text-transform:uppercase;letter-spacing:0.08em;">Part D · CLO2</span>
+          <span style="font-family:var(--mono);font-size:0.62rem;color:var(--muted);">3 Marks</span>
+        </div>
+        <h3 style="font-family:'Amiri',serif;font-size:1.25rem;margin-bottom:14px;">Code Output Prediction</h3>
+        <p style="font-size:0.88rem;color:rgba(226,232,240,0.85);line-height:1.75;margin-bottom:18px;">Predict the output and explain the reason behind the behavior.</p>
+
+        <p style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">Given Code</p>
+        <div class="code-block" style="margin-bottom:20px;"><span class="kw">class</span> <span class="fn">Student</span> {
+<span class="kw">public:</span>
+    string name;
+    <span class="kw">int</span> marks;
+};
+
+<span class="kw">void</span> <span class="fn">modify</span>(Student s) {     <span class="cm">// pass by VALUE</span>
+    s.marks = <span class="num">100</span>;
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    Student s1 = {<span class="st">"Ali"</span>, <span class="num">70</span>};
+    <span class="fn">modify</span>(s1);
+    cout &lt;&lt; s1.marks;
+}</div>
+
+        <div style="background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.25);border-radius:12px;padding:16px 20px;margin-bottom:18px;">
+          <p style="font-family:var(--mono);font-size:0.65rem;color:var(--green);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">✅ Output</p>
+          <p style="font-family:var(--mono);font-size:1.1rem;color:#fff;letter-spacing:0.05em;">70</p>
+        </div>
+
+        <div style="border-left:3px solid var(--cpp);padding-left:18px;">
+          <p style="font-family:var(--mono);font-size:0.65rem;color:var(--cpp);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">📖 Explanation</p>
+          <p style="font-size:0.87rem;color:var(--text);line-height:1.75;margin-bottom:10px;">
+            The function <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">modify(Student s)</code> receives the object <strong>by value</strong>. This means C++ creates a <strong>copy</strong> of <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">s1</code> and sends that copy to the function.
+          </p>
+          <p style="font-size:0.87rem;color:var(--text);line-height:1.75;margin-bottom:10px;">
+            When we write <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">s.marks = 100</code> inside the function, we are changing the <em>copy</em>, not the original <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">s1</code>. So <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">s1.marks</code> remains <strong>70</strong>.
+          </p>
+          <p style="font-size:0.84rem;color:var(--muted);margin-bottom:12px;">To actually change <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;">s1.marks</code>, you would need to pass by reference:</p>
+          <div class="code-block"><span class="kw">void</span> <span class="fn">modify</span>(Student&amp; s) {   <span class="cm">// pass by REFERENCE</span>
+    s.marks = <span class="num">100</span>;              <span class="cm">// now changes the original</span>
+}
+<span class="cm">// Output would then be: 100</span></div>
+        </div>
+      </div>
+
+      <!-- Total marks note Q1 -->
+      <div style="text-align:center;padding:20px;font-family:var(--mono);font-size:0.72rem;color:var(--muted);letter-spacing:0.08em;">
+        QUESTION 1: 4 PARTS × 3 MARKS = 12 MARKS &nbsp;·&nbsp; EXAM DURATION: 90 MINUTES &nbsp;·&nbsp; SPRING 2026
+      </div>
+
+      <!-- ══════════════════════════ QUESTION 2 ══════════════════════════ -->
+      <!-- Q2 Divider -->
+      <div style="display:flex;align-items:center;gap:16px;margin:40px 0 28px;">
+        <div style="flex:1;height:1px;background:var(--border);"></div>
+        <span style="font-family:var(--mono);font-size:0.7rem;color:#e879f9;letter-spacing:0.12em;text-transform:uppercase;padding:4px 16px;border:1px solid rgba(232,121,249,0.3);border-radius:100px;background:rgba(232,121,249,0.07);">Question 2 · 08 Marks</span>
+        <div style="flex:1;height:1px;background:var(--border);"></div>
+      </div>
+
+      <!-- Q2 Header card -->
+      <div style="background:rgba(232,121,249,0.06);border:1px solid rgba(232,121,249,0.2);border-radius:14px;padding:18px 24px;margin-bottom:28px;">
+        <h3 style="font-family:'Amiri',serif;font-size:1.35rem;color:#e879f9;margin-bottom:6px;">📗 University Library Book Issuing System</h3>
+        <p style="font-size:0.82rem;color:var(--muted);line-height:1.7;">Estimated time: 40 minutes &nbsp;·&nbsp; CLO3 &nbsp;·&nbsp; 8 × 1 = 08 Marks &nbsp;·&nbsp; Concepts: Classes, Inheritance, Polymorphism, Encapsulation</p>
+      </div>
+
+      <!-- ──────────────── Q2 PART A ──────────────── -->
+      <div class="challenge-card" style="margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+          <span style="font-family:var(--mono);font-size:0.62rem;padding:3px 12px;border-radius:100px;border:1px solid rgba(232,121,249,0.4);color:#e879f9;background:rgba(232,121,249,0.07);text-transform:uppercase;letter-spacing:0.08em;">Part (a) · CLO3</span>
+          <span style="font-family:var(--mono);font-size:0.62rem;color:var(--muted);">Book Class</span>
+        </div>
+        <h3 style="font-family:'Amiri',serif;font-size:1.25rem;margin-bottom:14px;">Designing the <code style="font-family:var(--mono);font-size:1rem;background:rgba(255,255,255,0.07);padding:2px 8px;border-radius:6px;color:#e879f9;">Book</code> Class</h3>
+        <p style="font-size:0.88rem;color:rgba(226,232,240,0.85);line-height:1.75;margin-bottom:18px;">
+          We create a class <strong>Book</strong> with <strong>private</strong> data members (<code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">bookID</code>, <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">title</code>, <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">author</code>) and <strong>public</strong> member functions (<code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">setData()</code>, <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">display()</code>).
+        </p>
+        <div class="code-block"><span class="kw">#include</span> &lt;iostream&gt;
+<span class="kw">#include</span> &lt;string&gt;
+<span class="kw">using namespace</span> std;
+
+<span class="kw">class</span> <span class="fn">Book</span> {
+<span class="kw">private:</span>
+    <span class="kw">int</span> bookID;        <span class="cm">// private — cannot be accessed from outside</span>
+    string title;
+    string author;
+
+<span class="kw">public:</span>
+    <span class="cm">// setData() takes input and stores it in private members</span>
+    <span class="kw">void</span> <span class="fn">setData</span>(<span class="kw">int</span> id, string t, string a) {
+        bookID = id;
+        title  = t;
+        author = a;
+    }
+
+    <span class="cm">// display() shows the book information</span>
+    <span class="kw">void</span> <span class="fn">display</span>() {
+        cout &lt;&lt; <span class="st">"Book ID : "</span> &lt;&lt; bookID &lt;&lt; endl;
+        cout &lt;&lt; <span class="st">"Title   : "</span> &lt;&lt; title  &lt;&lt; endl;
+        cout &lt;&lt; <span class="st">"Author  : "</span> &lt;&lt; author &lt;&lt; endl;
+    }
+};</div>
+      </div>
+
+      <!-- ──────────────── Q2 PART B ──────────────── -->
+      <div class="challenge-card" style="margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+          <span style="font-family:var(--mono);font-size:0.62rem;padding:3px 12px;border-radius:100px;border:1px solid rgba(232,121,249,0.4);color:#e879f9;background:rgba(232,121,249,0.07);text-transform:uppercase;letter-spacing:0.08em;">Part (b) · CLO3</span>
+          <span style="font-family:var(--mono);font-size:0.62rem;color:var(--muted);">Inheritance &amp; Polymorphism</span>
+        </div>
+        <h3 style="font-family:'Amiri',serif;font-size:1.25rem;margin-bottom:14px;">Creating <code style="font-family:var(--mono);font-size:1rem;background:rgba(255,255,255,0.07);padding:2px 8px;border-radius:6px;color:#e879f9;">IssuedBook</code> — Inheritance &amp; Polymorphism</h3>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;">
+          <div style="background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.2);border-radius:12px;padding:14px;">
+            <p style="font-family:var(--mono);font-size:0.65rem;color:var(--cpp);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">🔗 Inheritance</p>
+            <p style="font-size:0.83rem;color:var(--text);line-height:1.7;"><code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 5px;border-radius:4px;color:#93c5fd;">IssuedBook</code> inherits from <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 5px;border-radius:4px;color:#93c5fd;">Book</code> using <strong>: public Book</strong>. This means it gets all public functions of Book automatically — no need to re-write them.</p>
+          </div>
+          <div style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.2);border-radius:12px;padding:14px;">
+            <p style="font-family:var(--mono);font-size:0.65rem;color:var(--basic);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">🔄 Polymorphism</p>
+            <p style="font-size:0.83rem;color:var(--text);line-height:1.7;">The <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 5px;border-radius:4px;color:#93c5fd;">display()</code> function is <strong>overridden</strong> in <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 5px;border-radius:4px;color:#93c5fd;">IssuedBook</code> to also print the issue date — same function name, new behaviour in child class.</p>
+          </div>
+        </div>
+
+        <div class="code-block"><span class="kw">class</span> <span class="fn">IssuedBook</span> : <span class="kw">public</span> <span class="fn">Book</span> {   <span class="cm">// IssuedBook inherits from Book</span>
+<span class="kw">private:</span>
+    string issueDate;   <span class="cm">// extra data member only in IssuedBook</span>
+
+<span class="kw">public:</span>
+    <span class="cm">// setIssueDate() stores the issue date</span>
+    <span class="kw">void</span> <span class="fn">setIssueDate</span>(string date) {
+        issueDate = date;
+    }
+
+    <span class="cm">// display() is OVERRIDDEN to also show issue date</span>
+    <span class="kw">void</span> <span class="fn">display</span>() {
+        Book::<span class="fn">display</span>();           <span class="cm">// call parent's display first</span>
+        cout &lt;&lt; <span class="st">"Issue Date: "</span> &lt;&lt; issueDate &lt;&lt; endl;
+    }
+};</div>
+      </div>
+
+      <!-- ──────────────── Q2 PART C ──────────────── -->
+      <div class="challenge-card" style="margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+          <span style="font-family:var(--mono);font-size:0.62rem;padding:3px 12px;border-radius:100px;border:1px solid rgba(232,121,249,0.4);color:#e879f9;background:rgba(232,121,249,0.07);text-transform:uppercase;letter-spacing:0.08em;">Part (c) · CLO3</span>
+          <span style="font-family:var(--mono);font-size:0.62rem;color:var(--muted);">Encapsulation</span>
+        </div>
+        <h3 style="font-family:'Amiri',serif;font-size:1.25rem;margin-bottom:14px;">Encapsulation — Keeping Data Safe</h3>
+        <p style="font-size:0.88rem;color:rgba(226,232,240,0.85);line-height:1.75;margin-bottom:16px;">
+          In both classes, all data members are declared <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">private</code>. This means no code outside the class can directly read or change them. They can only be accessed through the <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">public</code> member functions we provide.
+        </p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
+          <div style="background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.25);border-radius:12px;padding:14px;">
+            <p style="font-family:var(--mono);font-size:0.65rem;color:var(--red);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">❌ Without Encapsulation</p>
+            <p style="font-size:0.82rem;color:var(--text);line-height:1.7;">Anyone can write <code style="font-family:var(--mono);font-size:0.78rem;background:rgba(255,255,255,0.07);padding:1px 5px;border-radius:4px;">b1.bookID = -99;</code> and corrupt the data. No control, no safety.</p>
+          </div>
+          <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.25);border-radius:12px;padding:14px;">
+            <p style="font-family:var(--mono);font-size:0.65rem;color:var(--green);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">✅ With Encapsulation</p>
+            <p style="font-size:0.82rem;color:var(--text);line-height:1.7;">Data is <code style="font-family:var(--mono);font-size:0.78rem;background:rgba(255,255,255,0.07);padding:1px 5px;border-radius:4px;">private</code>. Only <code style="font-family:var(--mono);font-size:0.78rem;background:rgba(255,255,255,0.07);padding:1px 5px;border-radius:4px;">setData()</code> can change it — full control over what goes in.</p>
+          </div>
+        </div>
+
+        <div style="border-left:3px solid #e879f9;padding-left:18px;">
+          <p style="font-size:0.87rem;color:var(--text);line-height:1.75;">
+            <strong style="color:#e879f9;">Rule:</strong> Data members → <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">private</code>. Functions that access them → <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">public</code>. This is the foundation of Encapsulation.
+          </p>
+        </div>
+      </div>
+
+      <!-- ──────────────── Q2 PART D ──────────────── -->
+      <div class="challenge-card" style="margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+          <span style="font-family:var(--mono);font-size:0.62rem;padding:3px 12px;border-radius:100px;border:1px solid rgba(232,121,249,0.4);color:#e879f9;background:rgba(232,121,249,0.07);text-transform:uppercase;letter-spacing:0.08em;">Part (d) · CLO3</span>
+          <span style="font-family:var(--mono);font-size:0.62rem;color:var(--muted);">main() Demonstration</span>
+        </div>
+        <h3 style="font-family:'Amiri',serif;font-size:1.25rem;margin-bottom:14px;">Complete Program — <code style="font-family:var(--mono);font-size:1rem;background:rgba(255,255,255,0.07);padding:2px 8px;border-radius:6px;color:#e879f9;">main()</code> Function</h3>
+        <p style="font-size:0.88rem;color:rgba(226,232,240,0.85);line-height:1.75;margin-bottom:18px;">
+          Below is the full working program combining all parts. It creates one object of <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">Book</code> and one of <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">IssuedBook</code>, inputs their data, and displays them.
+        </p>
+
+        <div class="code-block"><span class="kw">#include</span> &lt;iostream&gt;
+<span class="kw">#include</span> &lt;string&gt;
+<span class="kw">using namespace</span> std;
+
+<span class="cm">// ── Base Class ──────────────────────────────────────────</span>
+<span class="kw">class</span> <span class="fn">Book</span> {
+<span class="kw">private:</span>
+    <span class="kw">int</span> bookID;
+    string title;
+    string author;
+
+<span class="kw">public:</span>
+    <span class="kw">void</span> <span class="fn">setData</span>(<span class="kw">int</span> id, string t, string a) {
+        bookID = id;
+        title  = t;
+        author = a;
+    }
+
+    <span class="kw">void</span> <span class="fn">display</span>() {
+        cout &lt;&lt; <span class="st">"Book ID : "</span> &lt;&lt; bookID &lt;&lt; endl;
+        cout &lt;&lt; <span class="st">"Title   : "</span> &lt;&lt; title  &lt;&lt; endl;
+        cout &lt;&lt; <span class="st">"Author  : "</span> &lt;&lt; author &lt;&lt; endl;
+    }
+};
+
+<span class="cm">// ── Derived Class ───────────────────────────────────────</span>
+<span class="kw">class</span> <span class="fn">IssuedBook</span> : <span class="kw">public</span> <span class="fn">Book</span> {
+<span class="kw">private:</span>
+    string issueDate;
+
+<span class="kw">public:</span>
+    <span class="kw">void</span> <span class="fn">setIssueDate</span>(string date) {
+        issueDate = date;
+    }
+
+    <span class="kw">void</span> <span class="fn">display</span>() {               <span class="cm">// overrides Book::display()</span>
+        Book::<span class="fn">display</span>();           <span class="cm">// print base class info first</span>
+        cout &lt;&lt; <span class="st">"Issue Date: "</span> &lt;&lt; issueDate &lt;&lt; endl;
+    }
+};
+
+<span class="cm">// ── main() ──────────────────────────────────────────────</span>
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cm">// Object of Book (base class)</span>
+    Book b1;
+    b1.<span class="fn">setData</span>(<span class="num">101</span>, <span class="st">"Introduction to C++"</span>, <span class="st">"Bjarne Stroustrup"</span>);
+
+    cout &lt;&lt; <span class="st">"--- Regular Book ---"</span> &lt;&lt; endl;
+    b1.<span class="fn">display</span>();
+
+    <span class="cm">// Object of IssuedBook (derived class)</span>
+    IssuedBook ib1;
+    ib1.<span class="fn">setData</span>(<span class="num">202</span>, <span class="st">"Object Oriented Programming"</span>, <span class="st">"Robert Lafore"</span>);
+    ib1.<span class="fn">setIssueDate</span>(<span class="st">"31-March-2026"</span>);
+
+    cout &lt;&lt; <span class="st">"\n--- Issued Book ---"</span> &lt;&lt; endl;
+    ib1.<span class="fn">display</span>();  <span class="cm">// calls IssuedBook's display() — polymorphism</span>
+
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+
+        <!-- Output box -->
+        <div style="background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.25);border-radius:12px;padding:16px 20px;margin-top:18px;margin-bottom:18px;">
+          <p style="font-family:var(--mono);font-size:0.65rem;color:var(--green);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">✅ Expected Output</p>
+          <div style="font-family:var(--mono);font-size:0.85rem;color:#e2e8f0;line-height:2;">
+            <span style="color:var(--muted);">--- Regular Book ---</span><br>
+            Book ID : 101<br>
+            Title   : Introduction to C++<br>
+            Author  : Bjarne Stroustrup<br>
+            <br>
+            <span style="color:var(--muted);">--- Issued Book ---</span><br>
+            Book ID : 202<br>
+            Title   : Object Oriented Programming<br>
+            Author  : Robert Lafore<br>
+            Issue Date: 31-March-2026
+          </div>
+        </div>
+
+        <!-- Relationship summary -->
+        <div style="border-left:3px solid #e879f9;padding-left:18px;">
+          <p style="font-family:var(--mono);font-size:0.65rem;color:#e879f9;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">🔗 Relationship Summary</p>
+          <p style="font-size:0.87rem;color:var(--text);line-height:1.8;">
+            <strong>Book</strong> is the <em>parent (base) class</em>. <strong>IssuedBook</strong> is the <em>child (derived) class</em>. This is an <strong>IS-A relationship</strong> — every IssuedBook <em>is a</em> Book, plus it has extra issue details. The child inherits <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">setData()</code> from the parent and <em>overrides</em> <code style="font-family:var(--mono);font-size:0.8rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;color:#93c5fd;">display()</code> to add its own information.
+          </p>
+        </div>
+      </div>
+
+      <!-- Total marks note Q2 -->
+      <div style="text-align:center;padding:20px;font-family:var(--mono);font-size:0.72rem;color:var(--muted);letter-spacing:0.08em;margin-bottom:16px;">
+        QUESTION 2: 8 × 1 = 08 MARKS &nbsp;·&nbsp; CLO3 &nbsp;·&nbsp; SPRING 2026
+      </div>
+
+      <!-- Best of luck -->
+      <div style="text-align:center;padding:24px 0 8px;font-size:1.3rem;letter-spacing:0.2em;color:var(--gold);">
+        ☺ ☺ ☺ &nbsp; Best of Luck &nbsp; ☺ ☺ ☺
+      </div>
+
+    </section>
+  </main>
+  </div>
+
+</body>
+
+</html>

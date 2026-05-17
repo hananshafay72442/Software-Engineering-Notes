@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Logic Design — Study Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f0f6ff;
+  --bg2: #ffffff;
+  --bg3: #e8f0fb;
+  --topbar-bg: rgba(240,246,255,0.92);
+  --glass: rgba(0,0,0,0.03);
+  --glass-border: rgba(0,0,0,0.09);
+  --accent: #0284c7;
+  --accent2: #0ea5e9;
+  --accent-dim: rgba(2,132,199,0.10);
+  --accent2-dim: rgba(14,165,233,0.10);
+  --green: #16a34a;
+  --green-dim: rgba(22,163,74,0.10);
+  --red: #dc2626;
+  --red-dim: rgba(220,38,38,0.10);
+  --gold: #b45309;
+  --purple: #7c3aed;
+  --purple-dim: rgba(124,58,237,0.10);
+  --text: #0f172a;
+  --text2: #374151;
+  --text3: #6b7280;
+  --sidebar-w: 270px;
+  --radius: 12px;
+}
+
+html.dark {
+  --bg: #080c14;
+  --bg2: #0d1320;
+  --bg3: #111827;
+  --topbar-bg: rgba(8,12,20,0.88);
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --accent: #6ee7f7;
+  --accent2: #38bdf8;
+  --accent-dim: rgba(110,231,247,0.13);
+  --accent2-dim: rgba(56,189,248,0.13);
+  --green: #4ade80;
+  --green-dim: rgba(74,222,128,0.12);
+  --red: #f87171;
+  --red-dim: rgba(248,113,113,0.12);
+  --gold: #fbbf24;
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.12);
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+}
+
+body, .sidebar, .topbar, .card {
+  transition: background-color .25s ease, border-color .25s ease, color .2s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(2,132,199,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(2,132,199,0.025) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none; z-index: 0;
+}
+
+html.dark body::before {
+  background-image:
+    linear-gradient(rgba(110,231,247,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(110,231,247,0.025) 1px, transparent 1px);
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--text3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+.app { display: flex; min-height: 100vh; position: relative; z-index: 1; }
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--bg2);
+  border-right: 1px solid var(--glass-border);
+  position: fixed; top: 0; left: 0; bottom: 0;
+  overflow-y: auto;
+  z-index: 100;
+  display: flex; flex-direction: column;
+  transition: transform .3s ease;
+}
+
+.sidebar-logo {
+  padding: 22px 18px 14px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.logo-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(2,132,199,0.28);
+  border-radius: 8px; padding: 6px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 600; color: var(--accent);
+  letter-spacing: .5px;
+}
+html.dark .logo-badge { border-color: rgba(110,231,247,0.28); }
+
+.sidebar-title {
+  font-size: 10px; font-weight: 700; color: var(--text3);
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 18px 18px 6px;
+}
+
+.sidebar-nav { padding: 4px 0; flex: 1; }
+
+.nav-topic { padding: 2px 8px; }
+
+.nav-topic-header {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 10px; border-radius: 8px;
+  font-size: 11.5px; font-weight: 700;
+  color: var(--text3); cursor: pointer;
+  transition: all .2s;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.nav-topic-header:hover { color: var(--text2); background: var(--glass); }
+
+.nav-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+.nav-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 10px 5px 22px; border-radius: 6px;
+  font-size: 12px; color: var(--text2);
+  cursor: pointer; transition: all .2s;
+  text-decoration: none;
+}
+.nav-item:hover { color: var(--text); background: var(--glass); }
+.nav-item.active { color: var(--accent); background: var(--accent-dim); }
+
+.nav-sub {
+  display: flex; flex-direction: column; gap: 1px;
+  padding-left: 8px;
+}
+.nav-sub-item {
+  padding: 4px 10px 4px 14px; border-radius: 5px;
+  font-size: 11px; color: var(--text3);
+  cursor: pointer; transition: all .2s;
+}
+.nav-sub-item:hover { color: var(--accent); background: var(--accent-dim); }
+
+.sidebar-bottom {
+  padding: 14px;
+  border-top: 1px solid var(--glass-border);
+}
+
+.theme-btn {
+  width: 100%;
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-radius: 8px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  color: var(--text2); cursor: pointer;
+  font-size: 12px; font-family: 'Inter', sans-serif;
+  transition: all .2s;
+}
+.theme-btn:hover { color: var(--text); border-color: var(--accent); }
+
+/* ─── MAIN ─── */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1; min-height: 100vh;
+}
+
+/* ─── TOPBAR ─── */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--topbar-bg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 0 32px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.topbar-title { font-size: 15px; font-weight: 700; }
+.topbar-sub { font-size: 11px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+
+.menu-toggle {
+  display: none;
+  background: none; border: none;
+  color: var(--text2); cursor: pointer;
+  font-size: 22px; padding: 4px;
+}
+
+/* ─── CONTENT ─── */
+.content { padding: 32px; max-width: 900px; }
+
+/* ─── SECTION VISIBILITY ─── */
+.section { display: none; }
+.section.active { display: block; }
+
+/* ─── HOME HERO ─── */
+.hero {
+  text-align: center;
+  padding: 2.5rem 0 1.5rem;
+}
+.hero-chip {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.3rem 1rem; border-radius: 100px;
+  margin-bottom: 1.3rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  animation: pulse-border 3s ease-in-out infinite;
+}
+@keyframes pulse-border {
+  0%,100% { box-shadow: 0 0 0 0 rgba(2,132,199,0); }
+  50% { box-shadow: 0 0 0 4px rgba(2,132,199,0.12); }
+}
+html.dark .hero-chip { animation-name: pulse-border-dark; }
+@keyframes pulse-border-dark {
+  0%,100% { box-shadow: 0 0 0 0 rgba(110,231,247,0); }
+  50% { box-shadow: 0 0 0 4px rgba(110,231,247,0.12); }
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800; line-height: 1.1;
+  margin-bottom: 0.9rem;
+  background: linear-gradient(135deg, #0f172a 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+html.dark .hero h1 { background: linear-gradient(135deg, #fff 0%, var(--accent) 100%); -webkit-background-clip: text; background-clip: text; }
+.hero p {
+  color: var(--text2); font-size: 0.95rem;
+  max-width: 480px; margin: 0 auto 1.2rem;
+  line-height: 1.7;
+}
+.made-by-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; color: var(--text3);
+  background: var(--bg3);
+  border: 1px solid var(--glass-border);
+  padding: 0.3rem 0.8rem; border-radius: 100px;
+  margin-bottom: 2rem;
+  letter-spacing: 0.04em;
+}
+.made-by-tag span { color: var(--accent); }
+
+/* ─── TOPIC GRID ─── */
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.1rem; margin-bottom: 2rem;
+}
+
+.topic-card {
+  background: var(--bg2);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px; padding: 1.4rem;
+  cursor: pointer; transition: all 0.22s;
+  position: relative; overflow: hidden;
+}
+.topic-card:hover { transform: translateY(-3px); border-color: rgba(0,0,0,0.15); box-shadow: 0 12px 36px rgba(0,0,0,0.1); }
+html.dark .topic-card:hover { border-color: rgba(255,255,255,0.15); box-shadow: 0 12px 36px rgba(0,0,0,0.3); }
+
+.topic-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  padding: 0.2rem 0.6rem; border-radius: 4px;
+  display: inline-block;
+}
+.tc-blue .topic-num { color: var(--accent); background: var(--accent-dim); }
+.tc-purple .topic-num { color: var(--purple); background: var(--purple-dim); }
+.tc-green .topic-num { color: var(--green); background: var(--green-dim); }
+.tc-gold .topic-num { color: var(--gold); background: rgba(180,83,9,0.1); }
+
+.topic-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.45rem; }
+.topic-card p { font-size: 0.81rem; color: var(--text2); line-height: 1.5; }
+.topic-card .q-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; color: var(--text3); margin-top: 0.9rem;
+}
+.topic-card-actions {
+  display: flex; gap: 0.5rem; margin-top: 0.9rem;
+}
+.topic-card-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.7rem; font-family: 'JetBrains Mono', monospace;
+  padding: 4px 10px; border-radius: 6px;
+  border: 1px solid var(--glass-border);
+  cursor: pointer; transition: all .2s;
+  text-decoration: none; background: var(--bg3); color: var(--text2);
+}
+.topic-card-btn:hover { color: var(--accent); border-color: var(--accent); }
+.topic-card-btn.primary { background: var(--accent-dim); color: var(--accent); border-color: var(--accent); }
+
+.topic-card .dl-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.7rem; font-family: 'JetBrains Mono', monospace;
+  color: var(--text3); text-decoration: none;
+  padding: 3px 8px; border-radius: 5px;
+  border: 1px solid var(--glass-border);
+  transition: all .2s;
+}
+.topic-card .dl-link:hover { color: var(--accent); border-color: var(--accent); }
+
+.topic-card .arrow {
+  position: absolute; right: 1.2rem; bottom: 1.2rem;
+  font-size: 1.1rem; opacity: 0.2; transition: all .2s;
+}
+.topic-card:hover .arrow { opacity: 0.7; transform: translate(3px, -3px); }
+
+/* ─── NOTES SECTION ─── */
+.notes-header {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.8rem; flex-wrap: wrap;
+}
+.back-btn {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.73rem; color: var(--text2);
+  cursor: pointer; padding: 0.4rem 0.8rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 6px; transition: all .2s;
+  background: transparent;
+}
+.back-btn:hover { color: var(--text); border-color: rgba(0,0,0,0.2); }
+html.dark .back-btn:hover { border-color: rgba(255,255,255,0.2); }
+
+.notes-title { font-size: 1.3rem; font-weight: 800; flex: 1; }
+
+.dl-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: var(--text2);
+  text-decoration: none;
+  padding: 0.4rem 0.9rem; border-radius: 6px;
+  border: 1px solid var(--glass-border);
+  transition: all .2s;
+}
+.dl-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Notes content */
+.notes-body { line-height: 1.8; }
+.notes-body h2 {
+  font-size: 1.1rem; font-weight: 800; margin: 2rem 0 0.7rem;
+  color: var(--accent); display: flex; align-items: center; gap: 8px;
+}
+.notes-body h2::before {
+  content: ''; display: inline-block;
+  width: 4px; height: 18px; border-radius: 2px;
+  background: var(--accent); flex-shrink: 0;
+}
+.notes-body h3 {
+  font-size: 0.97rem; font-weight: 700; margin: 1.4rem 0 0.5rem;
+  color: var(--text);
+}
+.notes-body p { margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text2); }
+.notes-body ul, .notes-body ol {
+  padding-left: 1.4rem; margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text2);
+}
+.notes-body li { margin-bottom: 0.3rem; }
+.notes-body code {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg3); padding: 0.1em 0.45em;
+  border-radius: 4px; font-size: 0.88em; color: var(--accent);
+}
+.why-box {
+  background: var(--accent-dim);
+  border: 1px solid rgba(2,132,199,0.2);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px; padding: 1rem 1.2rem;
+  margin: 1rem 0; font-size: 0.87rem; color: var(--text2);
+}
+html.dark .why-box { border-color: rgba(110,231,247,0.2); border-left-color: var(--accent); }
+.why-box strong { color: var(--accent); display: block; margin-bottom: 0.3rem; font-size: 0.9rem; }
+.step-box {
+  background: var(--bg2);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px; padding: 1rem 1.2rem;
+  margin: 0.7rem 0; position: relative;
+}
+.step-num {
+  position: absolute; left: -12px; top: 50%; transform: translateY(-50%);
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  font-size: 0.65rem; font-weight: 800; font-family: 'JetBrains Mono', monospace;
+  display: flex; align-items: center; justify-content: center;
+}
+.steps-wrap { padding-left: 18px; }
+.truth-table {
+  width: 100%; border-collapse: collapse;
+  margin: 1rem 0; font-size: 0.82rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.truth-table th {
+  background: var(--accent-dim); color: var(--accent);
+  padding: 6px 14px; text-align: center;
+  border: 1px solid var(--glass-border); font-weight: 700;
+}
+.truth-table td {
+  padding: 5px 14px; text-align: center;
+  border: 1px solid var(--glass-border); color: var(--text2);
+}
+.truth-table tr:nth-child(even) td { background: var(--bg3); }
+.table-wrap { overflow-x: auto; margin: 1rem 0; }
+
+/* Take Quiz CTA */
+.take-quiz-cta {
+  margin-top: 2.5rem;
+  background: linear-gradient(135deg, var(--accent-dim), var(--accent2-dim));
+  border: 1px solid var(--accent);
+  border-radius: 14px; padding: 1.6rem;
+  text-align: center;
+}
+.take-quiz-cta h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.4rem; }
+.take-quiz-cta p { font-size: 0.85rem; color: var(--text2); margin-bottom: 1.2rem; }
+.take-quiz-cta .quiz-types { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.quiz-type-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+  padding: 0.2rem 0.6rem; border-radius: 4px;
+  background: var(--bg2); border: 1px solid var(--glass-border); color: var(--text3);
+}
+.btn-quiz-big {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #fff; font-weight: 800; font-size: 0.92rem;
+  padding: 0.7rem 1.8rem; border-radius: 10px;
+  border: none; cursor: pointer;
+  box-shadow: 0 4px 18px rgba(14,165,233,0.3);
+  transition: all .2s; font-family: 'Inter', sans-serif;
+  text-decoration: none;
+}
+.btn-quiz-big:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(14,165,233,0.45); }
+
+/* ─── QUIZ SECTION ─── */
+.quiz-header {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.8rem; flex-wrap: wrap;
+}
+.quiz-title { font-size: 1.3rem; font-weight: 800; flex: 1; }
+
+.quiz-mode-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
+.mode-tab {
+  padding: 0.42rem 1.1rem; border-radius: 8px;
+  font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; border: 1px solid var(--glass-border);
+  color: var(--text2); background: var(--bg2); transition: all .2s;
+  font-family: 'Inter', sans-serif;
+}
+.mode-tab:hover { color: var(--text); }
+.mode-tab.active { background: var(--accent2-dim); border-color: var(--accent2); color: var(--accent2); }
+
+/* ─── PROGRESS ─── */
+.progress-info {
+  display: flex; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; color: var(--text3); margin-bottom: 0.4rem;
+}
+.progress-bar-wrap {
+  background: var(--bg3); border-radius: 100px;
+  height: 5px; margin-bottom: 1.8rem; overflow: hidden;
+}
+.progress-bar {
+  height: 100%; border-radius: 100px;
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
+  transition: width .4s ease; width: 0%;
+}
+
+/* ─── QUESTION CARD ─── */
+.question-card {
+  background: var(--bg2);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px; padding: 1.8rem;
+  margin-bottom: 1.4rem;
+  animation: fadeUp 0.3s ease;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.q-type-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 0.2rem 0.6rem;
+  border-radius: 4px; display: inline-block; margin-bottom: 1rem;
+}
+.badge-mcq { background: var(--purple-dim); color: var(--purple); }
+.badge-text { background: var(--accent-dim); color: var(--accent); }
+.badge-tf { background: var(--green-dim); color: var(--green); }
+
+.question-text {
+  font-size: 1rem; font-weight: 600; line-height: 1.65;
+  margin-bottom: 1.4rem;
+}
+.question-text code {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg3); padding: 0.1em 0.4em;
+  border-radius: 4px; font-size: 0.9em; color: var(--accent);
+}
+
+/* MCQ */
+.mcq-options { display: flex; flex-direction: column; gap: 0.6rem; }
+.mcq-opt {
+  display: flex; align-items: flex-start; gap: 0.85rem;
+  padding: 0.8rem 1rem; border: 1.5px solid var(--glass-border);
+  border-radius: 10px; cursor: pointer; transition: all .18s;
+  background: var(--bg3);
+}
+.mcq-opt:hover:not(.locked) { border-color: rgba(0,0,0,0.2); background: rgba(0,0,0,0.02); }
+html.dark .mcq-opt:hover:not(.locked) { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.03); }
+.mcq-opt.selected { border-color: var(--accent2); background: var(--accent2-dim); }
+.mcq-opt.correct { border-color: var(--green) !important; background: var(--green-dim) !important; }
+.mcq-opt.wrong { border-color: var(--red) !important; background: var(--red-dim) !important; }
+
+.opt-letter {
+  width: 26px; height: 26px; flex-shrink: 0;
+  border: 1.5px solid var(--glass-border); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700;
+  transition: all .18s; margin-top: 1px;
+}
+.mcq-opt.selected .opt-letter { border-color: var(--accent2); color: var(--accent2); }
+.mcq-opt.correct .opt-letter { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+.mcq-opt.wrong .opt-letter { border-color: var(--red); color: var(--red); }
+.opt-text { font-size: 0.9rem; line-height: 1.45; padding-top: 2px; }
+
+/* Text Input */
+.text-answer-input {
+  width: 100%; background: var(--bg3);
+  border: 1.5px solid var(--glass-border); border-radius: 10px;
+  padding: 0.85rem 1rem; color: var(--text);
+  font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;
+  outline: none; transition: border-color .2s;
+}
+.text-answer-input:focus { border-color: var(--accent); }
+.text-answer-input.correct { border-color: var(--green); background: var(--green-dim); }
+.text-answer-input.wrong { border-color: var(--red); background: var(--red-dim); }
+
+/* True/False */
+.tf-options { display: flex; gap: 1rem; }
+.tf-btn {
+  flex: 1; padding: 1rem; border: 1.5px solid var(--glass-border);
+  border-radius: 10px; background: var(--bg3); color: var(--text2);
+  font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; transition: all .18s; text-align: center;
+}
+.tf-btn:hover:not(.locked) { color: var(--text); border-color: rgba(0,0,0,0.2); }
+html.dark .tf-btn:hover:not(.locked) { border-color: rgba(255,255,255,0.2); }
+.tf-btn.selected { border-color: var(--accent2); color: var(--accent2); background: var(--accent2-dim); }
+.tf-btn.correct { border-color: var(--green) !important; color: var(--green) !important; background: var(--green-dim) !important; }
+.tf-btn.wrong { border-color: var(--red) !important; color: var(--red) !important; background: var(--red-dim) !important; }
+
+/* Feedback */
+.feedback-box {
+  margin-top: 1rem; padding: 0.85rem 1rem;
+  border-radius: 10px; font-size: 0.86rem; line-height: 1.55; display: none;
+}
+.feedback-box.show { display: block; animation: fadeIn .2s ease; }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+.feedback-box.correct-fb { background: var(--green-dim); border: 1px solid rgba(22,163,74,0.3); color: var(--green); }
+.feedback-box.wrong-fb { background: var(--red-dim); border: 1px solid rgba(220,38,38,0.25); color: var(--red); }
+.feedback-box strong { display: block; margin-bottom: 0.25rem; font-size: 0.92rem; }
+
+/* Action Buttons */
+.quiz-actions {
+  display: flex; gap: 0.7rem; justify-content: flex-end;
+  margin-top: 1.4rem; flex-wrap: wrap;
+}
+.btn {
+  padding: 0.6rem 1.3rem; border-radius: 8px;
+  font-family: 'Inter', sans-serif; font-size: 0.83rem; font-weight: 700;
+  cursor: pointer; transition: all .2s; border: none;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent2), #0369a1);
+  color: #fff; box-shadow: 0 4px 18px rgba(14,165,233,0.3);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(14,165,233,0.45); }
+.btn-secondary {
+  background: var(--bg3); color: var(--text2);
+  border: 1px solid var(--glass-border);
+}
+.btn-secondary:hover { color: var(--text); border-color: rgba(0,0,0,0.2); }
+html.dark .btn-secondary:hover { border-color: rgba(255,255,255,0.2); }
+.btn-check {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff; font-weight: 800;
+  box-shadow: 0 4px 18px rgba(2,132,199,0.25);
+}
+html.dark .btn-check { color: var(--bg); }
+.btn-check:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(2,132,199,0.4); }
+.btn:disabled { opacity: 0.38; cursor: not-allowed; transform: none !important; }
+#skip-btn { color: var(--text3); font-size: 0.78rem; background: none; border: none; cursor: pointer; font-family: 'JetBrains Mono', monospace; }
+#skip-btn:hover { color: var(--text2); }
+
+/* ─── SCORE SCREEN ─── */
+.score-screen { text-align: center; padding: 2.5rem 1rem; animation: fadeUp .4s ease; }
+.score-ring-wrap { position: relative; width: 150px; height: 150px; margin: 0 auto 1.8rem; }
+.score-ring {
+  width: 150px; height: 150px; border-radius: 50%;
+  border: 5px solid var(--bg3);
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  position: relative;
+}
+.score-ring::before {
+  content: ''; position: absolute; inset: -5px; border-radius: 50%;
+  border: 5px solid transparent;
+  border-top-color: var(--accent); border-right-color: var(--accent2);
+  animation: spin 2.5s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.score-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 2.2rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.score-label { font-size: 0.68rem; color: var(--text3); letter-spacing: 0.1em; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; }
+.score-screen h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.4rem; }
+.score-screen > p { color: var(--text2); margin-bottom: 1.8rem; }
+.score-breakdown { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin: 1.8rem 0; }
+.score-stat { text-align: center; }
+.score-stat .val { font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; }
+.score-stat .lbl { font-size: 0.68rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; font-family: 'JetBrains Mono', monospace; }
+.val-correct { color: var(--green); }
+.val-wrong { color: var(--red); }
+.val-skip { color: var(--gold); }
+
+/* Review */
+.review-wrap { margin-top: 1.8rem; text-align: left; }
+.review-wrap h3 { font-size: 0.9rem; font-weight: 700; color: var(--text2); font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 1rem; }
+.review-item {
+  background: var(--bg2); border: 1px solid var(--glass-border);
+  border-radius: 10px; padding: 1.1rem;
+  margin-bottom: 0.8rem; border-left: 3px solid var(--glass-border);
+}
+.review-item.rev-correct { border-left-color: var(--green); }
+.review-item.rev-wrong { border-left-color: var(--red); }
+.review-q { font-size: 0.87rem; font-weight: 600; margin-bottom: 0.5rem; }
+.review-ans { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
+.review-ans span { display: inline-block; padding: 0.12rem 0.45rem; border-radius: 4px; margin-right: 0.4rem; margin-top: 0.2rem; }
+.your-ans { background: var(--red-dim); color: var(--red); }
+.your-ans.ok { background: var(--green-dim); color: var(--green); }
+.correct-ans { background: var(--green-dim); color: var(--green); }
+
+/* ─── MOBILE ─── */
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6); z-index: 99;
+}
+.overlay.open { display: block; }
+
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .content { padding: 20px; }
+  .menu-toggle { display: block; }
+  .topic-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="app">
+
+<!-- ─── SIDEBAR ─── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-badge">
+      <span>⚡</span> DLD Study Hub
+    </div>
+  </div>
+  <div class="sidebar-title">Topics</div>
+  <nav class="sidebar-nav">
+
+    <div class="nav-topic">
+      <div class="nav-topic-header"><div class="nav-dot"></div> Topic 5</div>
+      <div class="nav-item" onclick="goNotes(5);closeSidebar()">📖 Notes</div>
+      <div class="nav-item" onclick="goQuiz(5,'all');closeSidebar()">🧠 Quiz</div>
+    </div>
+
+    <div class="nav-topic">
+      <div class="nav-topic-header"><div class="nav-dot"></div> Topic 6A</div>
+      <div class="nav-item" onclick="goNotes('6a');closeSidebar()">📖 Notes</div>
+      <div class="nav-item" onclick="goQuiz('6a','all');closeSidebar()">🧠 Quiz</div>
+    </div>
+
+    <div class="nav-topic">
+      <div class="nav-topic-header"><div class="nav-dot"></div> Topic 6B</div>
+      <div class="nav-item" onclick="goNotes('6b');closeSidebar()">📖 Notes</div>
+      <div class="nav-item" onclick="goQuiz('6b','all');closeSidebar()">🧠 Quiz</div>
+    </div>
+
+    <div class="nav-topic">
+      <div class="nav-topic-header"><div class="nav-dot"></div> Topic 6C</div>
+      <div class="nav-item" onclick="goNotes('6c');closeSidebar()">📖 Notes</div>
+      <div class="nav-item" onclick="goQuiz('6c','all');closeSidebar()">🧠 Quiz</div>
+    </div>
+
+    <div class="nav-topic">
+      <div class="nav-topic-header"><div class="nav-dot"></div> Topic 7</div>
+      <div class="nav-item" onclick="goNotes(7);closeSidebar()">📖 Notes</div>
+      <div class="nav-item" onclick="goQuiz(7,'all');closeSidebar()">🧠 Quiz</div>
+    </div>
+
+    <div class="nav-topic">
+      <div class="nav-topic-header"><div class="nav-dot"></div> Topic 8</div>
+      <div class="nav-item" onclick="goNotes(8);closeSidebar()">📖 Notes</div>
+      <div class="nav-item" onclick="goQuiz(8,'all');closeSidebar()">🧠 Quiz</div>
+    </div>
+
+  </nav>
+  <div class="sidebar-bottom">
+    <button class="theme-btn" onclick="toggleTheme()">
+      <span id="themeIcon">🌙</span>
+      <span id="themeLabel">Dark Mode</span>
+    </button>
+  </div>
+</aside>
+
+<!-- ─── MAIN ─── -->
+<main class="main">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <div>
+        <div class="topbar-title" id="topbarTitle">Digital Logic Design</div>
+        <div class="topbar-sub" id="topbarSub">Study Hub — Select a topic to begin</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ─── HOME ─── -->
+    <div class="section active" id="section-home">
+      <div class="hero">
+        <div class="hero-chip">FLB 20203 · Digital Systems</div>
+        <h1>DLD Study Hub</h1>
+        <p>Study notes & practice quizzes for Digital Logic Design — covering simplification, MSI components, flip-flops, and counters.</p>
+        <div class="made-by-tag">✦ Made by <span>Mohid Ahmed</span> &amp; <span>Hanan Shafay</span></div>
+      </div>
+
+      <div class="topic-grid">
+
+        <div class="topic-card tc-blue" onclick="goNotes(5)">
+          <div class="topic-num">Topic 5</div>
+          <h3>Quine-McCluskey Method</h3>
+          <p>Tabular minimization of Boolean functions, prime implicants, essential PIs, and the PI table.</p>
+          <div class="q-count">20 questions · MCQ / T-F / Short Answer</div>
+          <div class="topic-card-actions">
+            <span class="topic-card-btn primary" onclick="goNotes(5);event.stopPropagation()">📖 Notes</span>
+            <span class="topic-card-btn" onclick="goQuiz(5,'all');event.stopPropagation()">🧠 Quiz</span>
+            <a class="dl-link" href="dld/Topic5.ppt" download onclick="event.stopPropagation()">⬇ Slides</a>
+          </div>
+          <div class="arrow">↗</div>
+        </div>
+
+        <div class="topic-card tc-purple" onclick="goNotes('6a')">
+          <div class="topic-num">Topic 6A</div>
+          <h3>Adders &amp; Subtractors</h3>
+          <p>Half adder, full adder, ripple adder, subtraction using two's complement, and comparators.</p>
+          <div class="q-count">20 questions · MCQ / T-F / Short Answer</div>
+          <div class="topic-card-actions">
+            <span class="topic-card-btn primary" onclick="goNotes('6a');event.stopPropagation()">📖 Notes</span>
+            <span class="topic-card-btn" onclick="goQuiz('6a','all');event.stopPropagation()">🧠 Quiz</span>
+            <a class="dl-link" href="dld/Topic6A.ppt" download onclick="event.stopPropagation()">⬇ Slides</a>
+          </div>
+          <div class="arrow">↗</div>
+        </div>
+
+        <div class="topic-card tc-green" onclick="goNotes('6b')">
+          <div class="topic-num">Topic 6B</div>
+          <h3>Decoders &amp; Encoders</h3>
+          <p>n-to-2ⁿ decoders, implementing functions with decoders, enable signals, and encoders.</p>
+          <div class="q-count">18 questions · MCQ / T-F / Short Answer</div>
+          <div class="topic-card-actions">
+            <span class="topic-card-btn primary" onclick="goNotes('6b');event.stopPropagation()">📖 Notes</span>
+            <span class="topic-card-btn" onclick="goQuiz('6b','all');event.stopPropagation()">🧠 Quiz</span>
+            <a class="dl-link" href="dld/Topic6B.ppt" download onclick="event.stopPropagation()">⬇ Slides</a>
+          </div>
+          <div class="arrow">↗</div>
+        </div>
+
+        <div class="topic-card tc-gold" onclick="goNotes('6c')">
+          <div class="topic-num">Topic 6C</div>
+          <h3>Multiplexers &amp; Demux</h3>
+          <p>MUX/DEMUX operation, implementing functions with multiplexers, standard MSI packages.</p>
+          <div class="q-count">18 questions · MCQ / T-F / Short Answer</div>
+          <div class="topic-card-actions">
+            <span class="topic-card-btn primary" onclick="goNotes('6c');event.stopPropagation()">📖 Notes</span>
+            <span class="topic-card-btn" onclick="goQuiz('6c','all');event.stopPropagation()">🧠 Quiz</span>
+            <a class="dl-link" href="dld/Topic6C.ppt" download onclick="event.stopPropagation()">⬇ Slides</a>
+          </div>
+          <div class="arrow">↗</div>
+        </div>
+
+        <div class="topic-card tc-blue" onclick="goNotes(7)">
+          <div class="topic-num">Topic 7</div>
+          <h3>Latches &amp; Flip-Flops</h3>
+          <p>SR / D / JK / T latches and flip-flops, edge triggering, master-slave, asynchronous inputs.</p>
+          <div class="q-count">22 questions · MCQ / T-F / Short Answer</div>
+          <div class="topic-card-actions">
+            <span class="topic-card-btn primary" onclick="goNotes(7);event.stopPropagation()">📖 Notes</span>
+            <span class="topic-card-btn" onclick="goQuiz(7,'all');event.stopPropagation()">🧠 Quiz</span>
+            <a class="dl-link" href="dld/Topic7.ppt" download onclick="event.stopPropagation()">⬇ Slides</a>
+          </div>
+          <div class="arrow">↗</div>
+        </div>
+
+        <div class="topic-card tc-purple" onclick="goNotes(8)">
+          <div class="topic-num">Topic 8</div>
+          <h3>Counters</h3>
+          <p>Asynchronous and synchronous counters, modulo-N counters, up/down counters, state diagrams.</p>
+          <div class="q-count">20 questions · MCQ / T-F / Short Answer</div>
+          <div class="topic-card-actions">
+            <span class="topic-card-btn primary" onclick="goNotes(8);event.stopPropagation()">📖 Notes</span>
+            <span class="topic-card-btn" onclick="goQuiz(8,'all');event.stopPropagation()">🧠 Quiz</span>
+            <a class="dl-link" href="dld/Topic8.ppt" download onclick="event.stopPropagation()">⬇ Slides</a>
+          </div>
+          <div class="arrow">↗</div>
+        </div>
+
+      </div>
+    </div><!-- /home -->
+
+    <!-- ─── NOTES ─── -->
+    <div class="section" id="section-notes">
+      <div class="notes-header">
+        <button class="back-btn" onclick="showHome()">← Back</button>
+        <div class="notes-title" id="notesTitle"></div>
+        <a class="dl-btn" id="notesDlBtn" href="#" download>⬇ Slides</a>
+      </div>
+      <div class="notes-body" id="notesBody"></div>
+      <div class="take-quiz-cta" id="notesQuizCta">
+        <h3>🧠 Ready to Test Yourself?</h3>
+        <p>You've reviewed the notes — now see how much you actually remember!</p>
+        <div class="quiz-types">
+          <span class="quiz-type-tag">◉ Multiple Choice</span>
+          <span class="quiz-type-tag">✓✗ True / False</span>
+          <span class="quiz-type-tag">✏ Short Answer</span>
+        </div>
+        <button class="btn-quiz-big" id="notesStartQuizBtn">Take the Quiz →</button>
+      </div>
+    </div>
+
+    <!-- ─── QUIZ ─── -->
+    <div class="section" id="section-quiz">
+      <div class="quiz-header">
+        <button class="back-btn" id="quizBackBtn" onclick="showHome()">← Back</button>
+        <div class="quiz-title" id="quizTitle"></div>
+        <a class="dl-btn" id="quizDlBtn" href="#" download>⬇ Slides</a>
+      </div>
+      <div class="quiz-mode-tabs" id="modeTabs"></div>
+      <div class="progress-info">
+        <span id="qNum">Question 1 / —</span>
+        <span id="qScore">Score: 0</span>
+      </div>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+      <div id="questionArea"></div>
+      <div class="quiz-actions">
+        <button id="skip-btn" onclick="skipQuestion()">Skip →</button>
+        <button class="btn btn-check" id="check-btn" onclick="checkAnswer()" disabled>Check Answer</button>
+        <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" style="display:none">Next →</button>
+      </div>
+    </div>
+
+    <!-- ─── SCORE ─── -->
+    <div class="section" id="section-score">
+      <div class="score-screen" id="scoreContent"></div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+</div><!-- /app -->
+
+<script>
+// ══════════════════════════════════════════
+//  NOTES CONTENT
+// ══════════════════════════════════════════
+const NOTES = {
+  5: `
+<h2>Why Do We Need the Quine-McCluskey Method?</h2>
+<div class="why-box">
+  <strong>🤔 The Problem</strong>
+  The Karnaugh map is great for simplifying Boolean functions — but only when you have 4 or fewer variables. Once you go beyond that (5, 6, 7 variables), a K-map becomes incredibly messy and hard to read. The <strong>Quine-McCluskey (QM) method</strong> solves this: it's a systematic, step-by-step algorithm that works for any number of variables and can even be run on a computer.
+</div>
+
+<h2>Core Idea</h2>
+<p>The QM method uses one key Boolean theorem: <code>XY + XY' = X</code>. Two minterms that differ in exactly one bit position can be combined — eliminating that variable. The method repeats this process until no more combinations are possible, giving you the <strong>prime implicants</strong>.</p>
+
+<h2>Step 1 — Finding Prime Implicants</h2>
+<div class="steps-wrap">
+  <div class="step-box"><div class="step-num">1</div>
+    <strong>List all minterms in binary</strong> and group them by the number of 1-bits they contain. Group 0 has zero 1s, Group 1 has one 1, Group 2 has two 1s, etc.
+  </div>
+  <div class="step-box"><div class="step-num">2</div>
+    <strong>Compare adjacent groups</strong> (Group 0 with Group 1, Group 1 with Group 2, etc.). Two minterms can be combined if they differ in <em>exactly one bit position</em>. When combined, replace that bit with a <code>—</code> (dash).
+  </div>
+  <div class="step-box"><div class="step-num">3</div>
+    <strong>Check off combined minterms</strong> and carry the result to the next column. Repeat until no more combinations are possible.
+  </div>
+  <div class="step-box"><div class="step-num">4</div>
+    <strong>Any unchecked term</strong> (one that could not be combined further) is a <em>prime implicant (PI)</em>.
+  </div>
+</div>
+
+<h3>Example: f(a,b,c,d) = Σm(0,1,2,5,6,7,8,9,10,14)</h3>
+<p>Minterms are listed in groups by number of 1-bits:</p>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Group</th><th>Minterm</th><th>Binary</th></tr>
+<tr><td>0</td><td>0</td><td>0000</td></tr>
+<tr><td>1</td><td>1, 2, 8</td><td>0001, 0010, 1000</td></tr>
+<tr><td>2</td><td>5, 6, 9, 10</td><td>0101, 0110, 1001, 1010</td></tr>
+<tr><td>3</td><td>7, 14</td><td>0111, 1110</td></tr>
+</table></div>
+<p>After combining adjacent groups step-by-step, the prime implicants found are: <code>b'c'</code> (0,1,8,9), <code>b'd'</code> (0,2,8,10), <code>cd'</code> (2,6,10,14), <code>a'c'd</code> (1,5), <code>a'bd</code> (5,7), <code>a'bc</code> (6,7).</p>
+
+<h2>Step 2 — The Prime Implicant Table</h2>
+<div class="steps-wrap">
+  <div class="step-box"><div class="step-num">1</div>
+    <strong>Create a table</strong>: rows = prime implicants, columns = original minterms. Place an ✗ where a PI covers a minterm.
+  </div>
+  <div class="step-box"><div class="step-num">2</div>
+    <strong>Find essential PIs</strong>: if a column has only one ✗, that PI is <em>essential</em> — it's the only one covering that minterm, so it MUST be in the final answer.
+  </div>
+  <div class="step-box"><div class="step-num">3</div>
+    <strong>Select essential PIs</strong> first, then cross off all minterms they cover.
+  </div>
+  <div class="step-box"><div class="step-num">4</div>
+    <strong>Cover remaining minterms</strong> using the fewest additional PIs. (For cyclic charts, use Petrick's method.)
+  </div>
+</div>
+
+<h3>Don't-Care Conditions</h3>
+<div class="why-box">
+  <strong>💡 Don't-cares in QM</strong>
+  Don't-care minterms (denoted Σd) are used to <em>help form</em> prime implicants — they can be combined just like regular minterms. However, they are <em>not included as columns</em> in the PI table, because we don't care whether they're covered or not.
+</div>
+
+<h3>Cyclic Prime Implicant Charts</h3>
+<p>When every column in the PI table has two or more ✗ marks, there are no essential PIs. This is called a <strong>cyclic chart</strong>. In this case, you pick any PI to start, eliminate the minterms it covers, and continue. There may be multiple valid minimum solutions.</p>
+`,
+
+  '6a': `
+<h2>Why Do We Need Adders & Subtractors?</h2>
+<div class="why-box">
+  <strong>🤔 The Problem</strong>
+  Computers need to do arithmetic — adding and subtracting numbers is the foundation of almost every computation. Digital adder circuits allow us to add binary numbers using simple logic gates. Once you can add, subtraction is just addition with a trick (two's complement).
+</div>
+
+<h2>Half Adder</h2>
+<p>The simplest adder: adds two 1-bit numbers (X and Y). Produces two outputs: <strong>Sum (S)</strong> and <strong>Carry-out (CO)</strong>.</p>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>X</th><th>Y</th><th>Sum (S)</th><th>Carry (CO)</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+</table></div>
+<p><strong>Circuit:</strong> <code>S = X ⊕ Y</code> (XOR gate) and <code>CO = X · Y</code> (AND gate).</p>
+<p><em>Limitation:</em> No carry-in — can't be chained for multi-bit addition on its own.</p>
+
+<h2>Full Adder</h2>
+<p>Adds three 1-bit numbers: X, Y, and a Carry-in (Cin). This lets us chain adders together for multi-bit numbers.</p>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>X</th><th>Y</th><th>Cin</th><th>Sum (S)</th><th>Cout</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+</table></div>
+<p><strong>Equations:</strong> <code>S = X ⊕ Y ⊕ Cin</code> &nbsp;|&nbsp; <code>Cout = X·Y + X·Cin + Y·Cin</code></p>
+<p><strong>Rule of thumb:</strong> S = 1 when an <em>odd</em> number of inputs are 1. Cout = 1 when <em>two or more</em> inputs are 1.</p>
+
+<h2>Ripple Carry Adder</h2>
+<p>A multi-bit adder formed by chaining Full Adders together. The carry "ripples" from the LSB (least significant bit) all the way to the MSB (most significant bit).</p>
+<div class="why-box">
+  <strong>⚠️ Limitation</strong>
+  The main drawback: you must wait for each carry to propagate through the chain. A 16-bit ripple adder has to wait for 16 sequential carry computations. This makes it slow for large bit widths.
+</div>
+<p><strong>74x283</strong>: A common 4-bit MSI adder IC that uses <em>carry-lookahead</em> internally (computes carries in parallel) to speed things up. Multiple 74x283s can be chained for 8-bit, 16-bit, etc. — but the carry between chips still ripples (group-ripple adder).</p>
+
+<h2>Subtraction Using Two's Complement</h2>
+<div class="steps-wrap">
+  <div class="step-box"><div class="step-num">1</div>
+    <strong>One's complement:</strong> Flip every bit of Y. If Y = 0110, one's complement = 1001.
+  </div>
+  <div class="step-box"><div class="step-num">2</div>
+    <strong>Two's complement:</strong> One's complement + 1. This gives <code>-Y</code> in binary.
+  </div>
+  <div class="step-box"><div class="step-num">3</div>
+    <strong>Subtraction:</strong> X - Y = X + (two's complement of Y) = X + Y' + 1
+  </div>
+</div>
+<p><strong>Circuit trick:</strong> To turn a ripple adder into an adder/subtractor, connect all Y inputs through XOR gates with a mode select input <em>M</em>. When M=0 it adds; when M=1 it inverts all Y bits AND sets the initial carry (Cin of LSB) to 1 — this automatically computes X + Y' + 1 = X - Y.</p>
+
+<h2>Comparators</h2>
+<p>A comparator checks the relationship between two binary numbers A and B, producing outputs for A=B, A&gt;B, and A&lt;B.</p>
+<p><strong>74x85</strong>: A standard 4-bit MSI magnitude comparator with three outputs (A=B, A&lt;B, A&gt;B) and three cascading inputs that allow chaining multiple chips for wider comparisons. For the least-significant chip, set <code>A=B_IN=1</code>, <code>A&gt;B_IN=0</code>, <code>A&lt;B_IN=0</code>.</p>
+`,
+
+  '6b': `
+<h2>Why Do We Need Decoders & Encoders?</h2>
+<div class="why-box">
+  <strong>🤔 The Problem</strong>
+  In digital systems, we often need to identify which one of many things is selected (e.g., which memory location, which device on a bus). A <strong>decoder</strong> takes a compact binary code and "expands" it to activate exactly one of many output lines. An <strong>encoder</strong> does the opposite: given which one line is active, it tells you the binary code. These are fundamental building blocks of memory systems, buses, and display drivers.
+</div>
+
+<h2>Decoder (n-to-2ⁿ)</h2>
+<p>Takes an n-bit binary input and activates exactly one of up to 2ⁿ output lines. Each output corresponds to one minterm of the input variables.</p>
+<h3>2-to-4 Decoder (Example)</h3>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>X</th><th>Y</th><th>F0 (X'Y')</th><th>F1 (X'Y)</th><th>F2 (XY')</th><th>F3 (XY)</th></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+</table></div>
+<p>The circuit uses AND gates: each output is one minterm. A 3-to-8 decoder needs 8 AND gates (for 8 minterms of 3 variables).</p>
+
+<h2>Enable Inputs</h2>
+<p>Most real decoders have an <strong>enable (EN)</strong> input:</p>
+<ul>
+  <li><strong>1-enable (active-HIGH):</strong> Decoder works when EN = 1; all outputs are 0 when EN = 0.</li>
+  <li><strong>0-enable (active-LOW):</strong> Decoder works when EN = 0 (the enable pin is labeled with a bubble). Most MSI decoders use this.</li>
+</ul>
+
+<h2>Building Larger Decoders</h2>
+<div class="steps-wrap">
+  <div class="step-box"><div class="step-num">1</div>
+    To build a 3-to-8 decoder from two 2-to-4 decoders (with 1-enable), connect the MSB input to: the enable of one decoder directly, and the enable of the other through an inverter.
+  </div>
+  <div class="step-box"><div class="step-num">2</div>
+    When MSB = 0: the first decoder is enabled (handles outputs 0–3). When MSB = 1: the second decoder is enabled (handles outputs 4–7).
+  </div>
+  <div class="step-box"><div class="step-num">3</div>
+    Similarly, a 4-to-16 decoder is built from two 3-to-8 decoders with enable.
+  </div>
+</div>
+
+<h2>Implementing Boolean Functions with Decoders</h2>
+<div class="why-box">
+  <strong>💡 Key Insight</strong>
+  A decoder generates ALL minterms simultaneously. Any Boolean function in SOP form is just a selection of minterms — so you just OR the outputs you need!
+</div>
+<p><strong>Example — Full Adder using a 3-to-8 decoder:</strong></p>
+<ul>
+  <li><code>S(x,y,z) = Σm(1,2,4,7)</code> → OR decoder outputs 1, 2, 4, and 7</li>
+  <li><code>Cout(x,y,z) = Σm(3,5,6,7)</code> → OR decoder outputs 3, 5, 6, and 7</li>
+</ul>
+<p>You can also use active-LOW outputs with NAND gates, or use NOR gates for POS implementation.</p>
+
+<h2>Standard MSI: 74138 (3-to-8 Decoder)</h2>
+<p>The 74138 is the go-to 3-to-8 decoder chip. It has <em>active-LOW outputs</em> and three enable pins (two active-LOW, one active-HIGH — all must be satisfied for the decoder to work). It's extremely common in memory address decoding.</p>
+
+<h2>Encoder (Reverse of Decoder)</h2>
+<p>Takes 2ⁿ input lines (where exactly one is active at a time) and outputs an n-bit binary code identifying which line is active.</p>
+<p><strong>Example — 8-to-3 encoder:</strong> If input line 5 (representing decimal 5) is active, the output is binary 101.</p>
+<p>Built using OR gates: each output bit is the OR of the input lines where that bit is 1 in the corresponding binary code.</p>
+`,
+
+  '6c': `
+<h2>Why Do We Need Multiplexers & Demultiplexers?</h2>
+<div class="why-box">
+  <strong>🤔 The Problem</strong>
+  In communication and data routing, you often want to send many signals over a single wire, then split them back out at the other end. A <strong>multiplexer (MUX)</strong> selects one of many input signals and sends it to a single output — like a switch that chooses which lane gets through. A <strong>demultiplexer (DEMUX)</strong> does the reverse: takes one input and routes it to one of many outputs. They're also incredibly useful for implementing any Boolean function using a single chip.
+</div>
+
+<h2>Multiplexer (MUX)</h2>
+<p>A 2ⁿ-to-1 MUX has: <strong>2ⁿ data inputs</strong>, <strong>n select lines</strong>, and <strong>1 output</strong>. The select lines determine which data input gets routed to the output.</p>
+<h3>4-to-1 MUX (2 select lines, 4 data inputs)</h3>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>S1</th><th>S0</th><th>Output Y</th></tr>
+<tr><td>0</td><td>0</td><td>I0</td></tr>
+<tr><td>0</td><td>1</td><td>I1</td></tr>
+<tr><td>1</td><td>0</td><td>I2</td></tr>
+<tr><td>1</td><td>1</td><td>I3</td></tr>
+</table></div>
+<p><strong>Output equation:</strong> <code>Y = I0·S1'S0' + I1·S1'S0 + I2·S1S0' + I3·S1S0</code></p>
+<p><strong>74x151</strong>: Standard MSI 8-to-1 MUX with a complemented output. Very commonly used.</p>
+
+<h2>Demultiplexer (DEMUX)</h2>
+<p>Takes 1 data input and routes it to one of 2ⁿ output lines based on n select lines. Note: a decoder with enable input IS a demultiplexer — the enable pin is the data input, and the select pins choose the output.</p>
+
+<h2>Encoder</h2>
+<p>Converts one-hot input (exactly one of 2ⁿ lines is active) to an n-bit binary code. Built from OR gates. Example: 8-to-3 encoder has 3 output bits, each being an OR of specific input lines.</p>
+
+<h2>Implementing Boolean Functions with a MUX</h2>
+<div class="steps-wrap">
+  <div class="step-box"><div class="step-num">1</div>
+    Express the function in sum-of-minterms form. Example: <code>F(A,B,C) = Σm(1,3,5,6)</code>
+  </div>
+  <div class="step-box"><div class="step-num">2</div>
+    Connect all n input variables to the n select lines of a 2ⁿ-to-1 MUX.
+  </div>
+  <div class="step-box"><div class="step-num">3</div>
+    For each data input Iₖ: if minterm k is in the function, connect Iₖ to logic 1; otherwise connect to logic 0.
+  </div>
+</div>
+
+<h2>Using a Smaller MUX (Half-Size Trick)</h2>
+<div class="why-box">
+  <strong>💡 Key Insight</strong>
+  You can implement a function of n variables using a 2^(n-1)-to-1 MUX (half the size!) by using one variable as a data input instead of a select line.
+</div>
+<div class="steps-wrap">
+  <div class="step-box"><div class="step-num">1</div>
+    Pick one variable (usually the LSB) as the "data variable". Use the remaining (n-1) variables as select lines.
+  </div>
+  <div class="step-box"><div class="step-num">2</div>
+    Group the truth table rows by select-line values (pairs of rows sharing the same top-variable values).
+  </div>
+  <div class="step-box"><div class="step-num">3</div>
+    For each group, compare the data variable (C) and output (F):
+    <ul>
+      <li>Both F=0 → connect data input to 0</li>
+      <li>Both F=1 → connect data input to 1</li>
+      <li>F equals C → connect data input to C</li>
+      <li>F equals C' → connect data input to C'</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Building Larger MUXes</h2>
+<p>A 16-to-1 MUX can be built from five 4-to-1 MUXes: four handle the 16 inputs (in groups of 4), and the fifth selects among those four outputs. An 8-to-1 MUX can be built from two 4-to-1 MUXes plus a 2-to-1 MUX at the top.</p>
+`,
+
+  7: `
+<h2>Why Do We Need Latches & Flip-Flops?</h2>
+<div class="why-box">
+  <strong>🤔 The Problem</strong>
+  Everything we've studied so far (gates, decoders, adders) is <em>combinational</em> — outputs depend only on current inputs, with no memory. But real systems need to remember things: a processor needs registers, a counter needs to know its current count. <strong>Latches and flip-flops</strong> are the basic memory elements of digital logic. They store one bit of state (0 or 1) and form the foundation of all sequential circuits.
+</div>
+
+<h2>Key Concepts</h2>
+<ul>
+  <li><strong>Sequential circuit:</strong> Combinational logic + memory elements. Outputs depend on inputs AND stored state.</li>
+  <li><strong>Bistable device:</strong> Has exactly 2 stable states (stores one bit). Both latches and flip-flops are bistable.</li>
+  <li><strong>Latch vs Flip-Flop:</strong> Latches are <em>level-triggered</em> (respond while enable signal is active). Flip-flops are <em>edge-triggered</em> (respond only on a clock edge — either rising or falling).</li>
+</ul>
+
+<h2>SR Latch (Basic Memory Cell)</h2>
+<p>Built from two cross-coupled gates. Has two inputs: S (Set) and R (Reset).</p>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>S</th><th>R</th><th>Q (next)</th><th>Note</th></tr>
+<tr><td>0</td><td>0</td><td>Q (hold)</td><td>No change</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>Set</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>Reset</td></tr>
+<tr><td>1</td><td>1</td><td>Invalid</td><td>⚠ Forbidden!</td></tr>
+</table></div>
+<p><strong>Active-HIGH (NOR) latch:</strong> S=R=1 is forbidden (forces Q=Q'=0, breaking complementary outputs).<br>
+<strong>Active-LOW (NAND) S'R' latch:</strong> S'=R'=0 is forbidden (forces Q=Q'=1).</p>
+
+<h2>Gated SR Latch</h2>
+<p>Adds an Enable (EN) input. The latch only responds to S and R when EN=1. When EN=0, state is held regardless of S and R.</p>
+
+<h2>Gated D Latch</h2>
+<p>Solves the forbidden state problem by always making R = S'. The single data input D directly controls the state when EN=1.</p>
+<ul>
+  <li>EN=1 and D=1 → Q goes to 1 (Set)</li>
+  <li>EN=1 and D=0 → Q goes to 0 (Reset)</li>
+  <li>EN=0 → Q holds its current value</li>
+</ul>
+<div class="why-box">
+  <strong>⚠️ Why Latches Are Not Used in Synchronous Systems</strong>
+  While EN is active, any glitch on the D input goes straight to Q. In a synchronous circuit with many interconnected latches, this causes unpredictable behavior. The solution: <strong>edge-triggered flip-flops</strong> that only respond at one precise instant — the clock edge.
+</div>
+
+<h2>Edge-Triggered Flip-Flops</h2>
+<p>Change state only at a <strong>clock edge</strong>: positive edge (↑, LOW→HIGH) or negative edge (↓, HIGH→LOW). The ">" symbol on the clock input in circuit diagrams indicates edge triggering.</p>
+
+<h3>D Flip-Flop</h3>
+<p>Simplest flip-flop. On the active clock edge, Q takes the value of D.</p>
+<p><strong>Characteristic equation:</strong> <code>Q(t+1) = D</code></p>
+<p><em>Application:</em> Parallel data storage — connect multiple D flip-flops to a common clock to simultaneously capture a multi-bit value.</p>
+
+<h3>JK Flip-Flop</h3>
+<p>An improved version of the SR flip-flop with no invalid state. When J=K=1, it <em>toggles</em> (Q flips).</p>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>J</th><th>K</th><th>Q(t+1)</th><th>Operation</th></tr>
+<tr><td>0</td><td>0</td><td>Q</td><td>Hold</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>Reset</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>Set</td></tr>
+<tr><td>1</td><td>1</td><td>Q'</td><td>Toggle</td></tr>
+</table></div>
+<p><strong>Characteristic equation:</strong> <code>Q(t+1) = J·Q' + K'·Q</code></p>
+
+<h3>T Flip-Flop</h3>
+<p>Created by connecting J and K together (J=K=T). When T=0 it holds; when T=1 it toggles.</p>
+<p><strong>Characteristic equation:</strong> <code>Q(t+1) = T ⊕ Q</code></p>
+<p><em>Application:</em> Frequency division. With T=1 always, the Q output toggles every clock cycle — dividing the clock frequency by 2.</p>
+
+<h2>Asynchronous Inputs (PRE & CLR)</h2>
+<p>Preset (PRE) and Clear (CLR) are special inputs that act <em>immediately</em>, ignoring the clock. PRE forces Q=1; CLR forces Q=0. They override everything else and are typically active-LOW.</p>
+
+<h2>Master-Slave Flip-Flops</h2>
+<p>Consist of two latches: a master (clocked on the leading edge) and a slave (clocked on the trailing edge, via an inverted clock). The output only updates at the trailing edge of the clock pulse, even though data is captured at the leading edge. This prevents "racing" conditions but is largely replaced by edge-triggered designs today.</p>
+`,
+
+  8: `
+<h2>Why Do We Need Counters?</h2>
+<div class="why-box">
+  <strong>🤔 The Problem</strong>
+  Digital systems constantly need to count: clock cycles, clock ticks, events, items, frequencies. A <strong>counter</strong> is a sequential circuit that cycles through a sequence of states. It's used in everything from digital clocks (which count seconds, minutes, hours) to CPU program counters (which track which instruction to execute next) to frequency dividers in communication circuits.
+</div>
+
+<h2>Key Terminology</h2>
+<ul>
+  <li><strong>MOD-N counter:</strong> Cycles through N unique states, then repeats. A MOD-8 counter has 8 states (0–7).</li>
+  <li><strong>Ripple (Asynchronous) counter:</strong> Each flip-flop's clock is driven by the output of the previous one.</li>
+  <li><strong>Synchronous (Parallel) counter:</strong> All flip-flops share the same clock signal.</li>
+</ul>
+
+<h2>Asynchronous (Ripple) Counters</h2>
+<p>Simple to build: chain T flip-flops (or JK with J=K=1) together. The first flip-flop toggles on every clock edge; each subsequent flip-flop toggles when the previous one's Q falls (or rises).</p>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Clock Pulse</th><th>Q2 (MSB)</th><th>Q1</th><th>Q0 (LSB)</th><th>Decimal</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>2</td><td>0</td><td>1</td><td>0</td><td>2</td></tr>
+<tr><td>3</td><td>0</td><td>1</td><td>1</td><td>3</td></tr>
+<tr><td>4</td><td>1</td><td>0</td><td>0</td><td>4</td></tr>
+<tr><td>5</td><td>1</td><td>0</td><td>1</td><td>5</td></tr>
+<tr><td>6</td><td>1</td><td>1</td><td>0</td><td>6</td></tr>
+<tr><td>7</td><td>1</td><td>1</td><td>1</td><td>7</td></tr>
+</table></div>
+<div class="why-box">
+  <strong>⚠️ Main Drawback of Ripple Counters</strong>
+  Propagation delay accumulates: flip-flop 2 can't update until flip-flop 1 settles, which can't update until flip-flop 0 settles. For a 16-bit ripple counter, you wait for 16 sequential delays. At high frequencies, the counter may produce incorrect intermediate states (glitches). This is why synchronous counters are preferred for speed.
+</div>
+
+<h2>MOD-N Counters (N < 2ⁿ)</h2>
+<p>To make a counter stop before its natural maximum, detect the target count and force a reset:</p>
+<div class="steps-wrap">
+  <div class="step-box"><div class="step-num">1</div>
+    Determine which state to detect. For a MOD-6 counter using 3 flip-flops, detect state 6 (binary: 110).
+  </div>
+  <div class="step-box"><div class="step-num">2</div>
+    Use a NAND or AND gate connected to the flip-flop outputs that are 1 in that state (Q2 and Q1 for state 6).
+  </div>
+  <div class="step-box"><div class="step-num">3</div>
+    Feed the gate output to the active-LOW Clear (CLR) inputs of all flip-flops. When the count reaches 6, all flip-flops are immediately reset to 0.
+  </div>
+</div>
+<p><strong>Decade counter (MOD-10 / BCD counter):</strong> Counts 0–9, then resets. Detect state 10 (1010) and reset. Used in digital clocks and any base-10 application.</p>
+
+<h2>Down Counters</h2>
+<p>Count downward (7, 6, 5, … 0, 7, …). For a ripple down counter, take the Q' (complemented) output of each flip-flop as the clock for the next stage (instead of Q).</p>
+
+<h2>Cascading Asynchronous Counters</h2>
+<p>Connect the MSB output of one counter to the clock input of the next counter. This builds larger counters: a MOD-4 counter cascaded with a MOD-8 counter gives a MOD-32 counter.</p>
+
+<h2>Synchronous (Parallel) Counters</h2>
+<p>All flip-flops are clocked simultaneously. No ripple delay — the maximum delay is just one flip-flop stage, regardless of bit width.</p>
+<h3>Design Rules for Synchronous Binary Counters (using T flip-flops):</h3>
+<ul>
+  <li><code>T₀ = 1</code> (LSB always toggles)</li>
+  <li><code>T₁ = Q₀</code> (bit 1 toggles when bit 0 = 1)</li>
+  <li><code>T₂ = Q₁·Q₀</code> (bit 2 toggles when bits 0 and 1 are both 1)</li>
+  <li><code>T₃ = Q₂·Q₁·Q₀</code> (bit 3 toggles when bits 0, 1, 2 are all 1)</li>
+  <li>General: <code>Tₙ = Qₙ₋₁ · Qₙ₋₂ · … · Q₀</code></li>
+</ul>
+
+<h2>Up/Down Synchronous Counters</h2>
+<p>A bidirectional counter with a mode-control input (Up/Down). When Up=1, it counts up; when Up=0, it counts down.</p>
+<p>For a 3-bit example:<br>
+<code>TQ1 = (Q0·Up) + (Q0'·Up')</code> — toggle Q1 when Q0=1 (counting up) or Q0=0 (counting down).</p>
+
+<h2>74x163 — Standard 4-bit Synchronous Counter</h2>
+<p>A very common MSI counter chip with: synchronous count enable (CEP, CET), synchronous load (LD), synchronous clear (CLR), and a terminal count output (TC/RCO). The TC output goes HIGH when the counter reaches 15 (1111), allowing counters to be cascaded by connecting TC to the count-enable of the next chip.</p>
+
+<h2>Ring & Johnson Counters</h2>
+<ul>
+  <li><strong>Ring counter:</strong> A shift register with the last output fed back to the first input. Circulates a single 1. With n flip-flops, has n states.</li>
+  <li><strong>Johnson (twisted-ring) counter:</strong> The complemented (Q') output of the last flip-flop is fed back to the D input of the first. With n flip-flops, has 2n states. Produces a smooth, easily-decoded sequence.</li>
+</ul>
+`
+};
+
+// ══════════════════════════════════════════
+//  QUESTION BANK
+// ══════════════════════════════════════════
+const TOPICS = {
+  5: {
+    name: 'Quine-McCluskey Method',
+    dl: 'dld/Topic5.ppt',
+    questions: [
+      { type:'mcq', q:'The Quine-McCluskey (QM) method is used to:', opts:['Design flip-flop circuits','Minimize Boolean functions systematically','Convert binary to Gray code','Implement multiplexers'], ans:1, exp:'QM is a tabular algorithm for systematic minimization of Boolean functions, suitable for automation.' },
+      { type:'mcq', q:'In the QM method, two minterms can be combined if they differ in exactly:', opts:['Zero bit positions','One bit position','Two bit positions','Any number of bit positions'], ans:1, exp:'Two minterms can be merged if their binary representations differ in exactly one bit, producing a prime implicant with a dash in that position.' },
+      { type:'tf', q:'The Quine-McCluskey method is functionally equivalent to the Karnaugh map but is more suitable for functions with many variables.', ans:true, exp:'Both methods yield the same minimal SOP, but QM is algorithmic and scales better to functions with more variables (> 4–6).' },
+      { type:'tf', q:'A prime implicant is a minterm that cannot be combined with any other minterm in the QM table.', ans:false, exp:'A prime implicant is an implicant that cannot be combined with any other implicant to produce one with fewer literals — it does not have to start from a single minterm.' },
+      { type:'mcq', q:'In the QM table, minterms are grouped by:', opts:['Their decimal value','The number of 1s in their binary representation','Their position in the Karnaugh map','The number of variables'], ans:1, exp:'Minterms are sorted into groups based on the count of 1-bits in their binary representation so that only adjacent groups (differing by 1 count) are compared.' },
+      { type:'mcq', q:"A \"don't-care\" condition in the QM method:", opts:['Is ignored completely','Can be used to form prime implicants but not required to be covered','Must be covered by the prime implicant table','Represents an invalid minterm that must be eliminated'], ans:1, exp:"Don't-care minterms can be combined to generate prime implicants but are never required in the PI cover table." },
+      { type:'text', q:'What symbol is used in the QM method to represent a "combined" or "eliminated" variable in an implicant?', ans:['dash','-','–','—'], exp:'A dash (–) replaces the bit position that was eliminated when two minterms were combined.' },
+      { type:'mcq', q:'An essential prime implicant is one that:', opts:['Covers the most minterms','Is the only prime implicant covering at least one minterm','Has no dash in its binary representation','Appears in every row of the prime implicant table'], ans:1, exp:'An essential PI is the unique PI covering some minterm; it must be included in the final cover.' },
+      { type:'tf', q:'All essential prime implicants must be included in the final minimal cover.', ans:true, exp:'By definition, essential PIs are mandatory — no other PI covers the minterm they uniquely cover.' },
+      { type:'mcq', q:'In the prime implicant table (PI table), columns represent:', opts:['Prime implicants','Minterms of the function','Groups in the QM table','Combinations of variables'], ans:1, exp:'Columns correspond to the ON-set minterms; rows correspond to prime implicants. A ✓ marks which minterms a PI covers.' },
+      { type:'mcq', q:"After selecting all essential PIs, the remaining uncovered minterms are handled by:", opts:["Petrick's method or additional PI selection","Repeating the QM grouping process","Converting to a Karnaugh map","Adding more don't-care conditions"], ans:0, exp:"Petrick's method (or a greedy/branching heuristic) selects minimum additional PIs to cover any uncovered minterms." },
+      { type:'tf', q:'Two implicants with dashes in different positions can always be combined into a larger implicant in the next iteration.', ans:false, exp:'Implicants can only be combined in the next iteration if they differ in exactly one bit and have dashes in the same positions.' },
+      { type:'mcq', q:'The QM algorithm terminates when:', opts:['All minterms are in the same group','No two implicants in consecutive groups can be combined','All prime implicants are essential','The PI table has exactly one row'], ans:1, exp:'The process repeats until no further combinations are possible; those remaining uncombined implicants are the prime implicants.' },
+      { type:'mcq', q:'For a function of n variables, minterms are represented as n-bit binary numbers. How many groups are possible?', opts:['n','n+1','2^n','n^2'], ans:1, exp:'Groups are 0 through n (by number of 1-bits), giving n+1 groups.' },
+      { type:'tf', q:'The Quine-McCluskey method guarantees a minimal (fewest literals) sum-of-products expression.', ans:true, exp:'When applied correctly, QM finds all prime implicants and then selects a minimum cover, producing a minimal SOP.' },
+      { type:'mcq', q:'Which of the following pairs of minterms CAN be combined in the QM method?', opts:['0000 and 0011','0101 and 1010','0110 and 1110','0001 and 0011'], ans:2, exp:'0110 (6) and 1110 (14) differ only in bit 3, so they combine to give -110.' },
+      { type:'text', q:'What is the term for an implicant that can no longer be combined with any other implicant to produce a simpler one?', ans:['prime implicant','prime implicants','PI'], exp:'A prime implicant is an implicant that is not a proper subset of any larger implicant.' },
+      { type:'mcq', q:'Which step comes FIRST in the QM method?', opts:["Build the prime implicant table","Select essential prime implicants","List and group all minterms by number of 1s","Apply Petrick's method"], ans:2, exp:'The first step is to list all ON-set minterms in groups by number of 1-bits, then begin combining.' },
+      { type:'tf', q:"Don't-care minterms appear as columns in the prime implicant table.", ans:false, exp:"Don't-cares are used to generate prime implicants but are not listed as column entries in the PI table since we don't need to cover them." },
+      { type:'mcq', q:'If a prime implicant covers k variables (has k literals after simplification), it was formed by combining how many original minterms?', opts:['k','k²','2^(n-k)','n-k'], ans:2, exp:'A PI with k remaining literals was formed from 2^(n-k) original minterms, where n is the total number of variables.' },
+    ]
+  },
+  '6a': {
+    name: 'Adders & Subtractors',
+    dl: 'dld/Topic6A.ppt',
+    questions: [
+      { type:'mcq', q:'A Half Adder adds two 1-bit operands and produces:', opts:['A sum bit only','A carry-out bit only','A sum bit and a carry-out bit','A sum, carry-in, and carry-out'], ans:2, exp:'The Half Adder has two inputs (X, Y) and two outputs: Sum (HS = X⊕Y) and Carry-out (CO = X·Y).' },
+      { type:'tf', q:'A Full Adder has three inputs: two data bits and one carry-in.', ans:true, exp:'The Full Adder inputs are X, Y, and Cin, producing Sum and Cout.' },
+      { type:'mcq', q:'The Sum output of a Full Adder is 1 when:', opts:['Both inputs are 1','All three inputs are 1','An odd number of inputs are 1','An even number of inputs are 1'], ans:2, exp:'S=1 when an odd number of the three inputs (X, Y, Cin) are 1 — this is XOR logic.' },
+      { type:'mcq', q:'In a Ripple Carry Adder, the carry must propagate:', opts:['Through all bit positions in parallel','Sequentially from the least significant to the most significant bit','From the MSB to the LSB','Only through adder stages where carry-in is 0'], ans:1, exp:'The name "ripple" refers to the fact that carry propagates (ripples) from the LSB stage through each stage to the MSB.' },
+      { type:'tf', q:'The 74x283 is a 4-bit adder that uses carry-lookahead internally.', ans:true, exp:'The 74x283 IC is a standard 4-bit binary adder with internal carry-lookahead for faster operation.' },
+      { type:'mcq', q:"Subtraction X – Y is computed using two's complement as:", opts:['X + Y','X + Y + 1','X + Y\' + 1','X\' + Y + 1'], ans:2, exp:"Two's complement of Y is Y' + 1, so X – Y = X + Y' + 1." },
+      { type:'mcq', q:'To convert a Ripple Adder into a subtractor, you:', opts:['Add more full-adder stages','Invert all Y inputs and set Cin of the LSB to 1','Invert all X inputs and set Cin to 0','Swap X and Y inputs'], ans:1, exp:"Inverting all Y bits gives Y' and setting the initial carry to 1 adds 1, producing Y' + 1 = two's complement of Y." },
+      { type:'tf', q:"The one's complement of a number is obtained by adding 1 to each bit.", ans:false, exp:"One's complement is obtained by inverting (flipping) each bit. Adding 1 to the one's complement gives the two's complement." },
+      { type:'mcq', q:'For the Full Adder, Cout = 1 when:', opts:['At least one input is 1','Exactly two inputs are 1','Two or more inputs are 1','All three inputs are 0'], ans:2, exp:'Cout=1 whenever two or more of the three inputs (X, Y, Cin) are 1.' },
+      { type:'mcq', q:'A magnitude comparator with a single output EQ indicates:', opts:['A > B','A < B','A = B','A ≠ B'], ans:2, exp:'The equality (EQ) output is HIGH when all corresponding bits of A and B match, meaning A = B.' },
+      { type:'mcq', q:'The 74x85 MSI comparator produces how many output signals?', opts:['1 (equal only)','2 (equal, greater)','3 (A=B, A<B, A>B)','4'], ans:2, exp:'The 74x85 has three outputs: A=B, A<B, and A>B.' },
+      { type:'tf', q:'To cascade two 74x85 comparators for an 8-bit comparison, the cascading inputs of the more significant comparator are connected to the outputs of the less significant one.', ans:true, exp:'The cascading inputs (A=B_IN, A>B_IN, A<B_IN) of the high-order 74x85 are fed from the outputs of the low-order 74x85.' },
+      { type:'mcq', q:'The initial values for cascading inputs of the least-significant 74x85 are:', opts:['A=B_IN=0, A>B_IN=0, A<B_IN=0','A=B_IN=1, A>B_IN=0, A<B_IN=0','A=B_IN=0, A>B_IN=1, A<B_IN=0','A=B_IN=1, A>B_IN=1, A<B_IN=1'], ans:1, exp:'For the LSB comparator, A=B_IN is set to 1 (no difference yet) and A>B_IN and A<B_IN are 0.' },
+      { type:'text', q:'What is the Boolean expression for the Sum output of a Full Adder?', ans:['X XOR Y XOR Cin','X⊕Y⊕Cin','X xor Y xor Cin','S=X⊕Y⊕Cin'], exp:'S = X ⊕ Y ⊕ Cin (XOR of all three inputs).' },
+      { type:'tf', q:'Carry lookahead reduces the delay in a multi-bit adder by computing carries in parallel.', ans:true, exp:'Carry lookahead generates and propagates carry signals simultaneously rather than waiting for ripple propagation.' },
+      { type:'mcq', q:'In a 16-bit group-ripple adder built from four 74x283 chips, the carry between 4-bit groups:', opts:['Is computed by lookahead logic','Ripples from one group to the next','Is always 0','Is discarded'], ans:1, exp:"Within each 74x283 carry is lookahead, but between the four chips the carry still ripples — hence 'group-ripple'." },
+      { type:'mcq', q:'The Half Adder differs from the Full Adder in that the Half Adder:', opts:['Does not produce a carry','Has no carry-in input','Can add three bits at once','Uses NAND gates only'], ans:1, exp:'The Half Adder has no carry-in (Cin) — it can only add two bits. The Full Adder adds three bits including Cin.' },
+      { type:'tf', q:"A two's complement is formed by inverting all bits and adding 1.", ans:true, exp:"Two's complement = one's complement + 1, i.e., invert all bits then add 1." },
+      { type:'mcq', q:'Which gate implements the Sum (HS) of a Half Adder?', opts:['AND','OR','XOR','NAND'], ans:2, exp:'HS = X ⊕ Y (XOR). The carry CO = X · Y (AND).' },
+      { type:'mcq', q:'In a Full Adder, the Cout expression is:', opts:['X·Y + Cin','X·Y + X·Cin + Y·Cin','X⊕Y⊕Cin','X·Y·Cin'], ans:1, exp:'Cout = X·Y + X·Cin + Y·Cin — Cout is 1 when any two or all three inputs are 1.' },
+    ]
+  },
+  '6b': {
+    name: 'Decoders & Encoders',
+    dl: 'dld/Topic6B.ppt',
+    questions: [
+      { type:'mcq', q:'An n-to-2ⁿ decoder converts:', opts:['2ⁿ input lines to n output lines','n input lines to up to 2ⁿ output lines','n input lines to n output lines','Binary to BCD'], ans:1, exp:'A decoder takes an n-bit code and activates one of up to 2ⁿ output lines corresponding to that code.' },
+      { type:'mcq', q:'Each output of a 3-to-8 decoder represents a:', opts:['Maxterm','Minterm of the 3 input variables','Sum-of-products expression','Product-of-sums expression'], ans:1, exp:'Each output line of an n-to-2ⁿ decoder corresponds to exactly one minterm of the n input variables.' },
+      { type:'tf', q:'A 2-to-4 decoder with active-HIGH outputs has all outputs LOW when the enable input (1-enable) is LOW.', ans:true, exp:'When E=0 for a 1-enable decoder, no output is selected and all outputs remain LOW.' },
+      { type:'mcq', q:'To implement a Full Adder using a 3-to-8 decoder, you need:', opts:['No additional gates','One OR gate for S and one OR gate for Cout','One AND gate','One NAND gate and one NOR gate'], ans:1, exp:'Connect the decoder outputs for the minterms of S and Cout each to separate OR gates.' },
+      { type:'mcq', q:'S(x,y,z) = Σm(1,2,4,7). Using a 3-to-8 decoder, the Sum output is formed by:', opts:['ORing outputs 0,3,5,6','ORing outputs 1,2,4,7','ANDing outputs 1,2,4,7','Inverting outputs 0,3,5,6'], ans:1, exp:'OR the decoder outputs corresponding to the minterms of the function: outputs 1, 2, 4, and 7.' },
+      { type:'tf', q:'A 3-to-8 decoder can be built from two 2-to-4 decoders (with enable), using the MSB to select between the two smaller decoders.', ans:true, exp:'The MSB enables one decoder for codes 0–3 and the other for codes 4–7 via the enable pin.' },
+      { type:'mcq', q:'An active-LOW enable on a decoder means the decoder is activated when the enable signal is:', opts:['HIGH (1)','LOW (0)',"Don't care",'Either HIGH or LOW'], ans:1, exp:'Active-LOW enable: the decoder operates when the enable pin is pulled to logic 0.' },
+      { type:'mcq', q:'An encoder performs the reverse function of a decoder. An 8-to-3 encoder takes:', opts:['3 input lines and produces 8 output lines','8 input lines and produces a 3-bit binary code','8 input lines and produces 8 output lines','3 input lines and produces 3 output lines'], ans:1, exp:'An encoder converts 2ⁿ (or fewer) input lines into an n-bit binary code.' },
+      { type:'tf', q:'A standard decoder has active-HIGH outputs and a 0-enable (active-LOW enable).', ans:true, exp:'Most MSI decoders use active-LOW enables and can have active-HIGH or active-LOW outputs depending on the IC.' },
+      { type:'mcq', q:'To build a 4-to-16 decoder from two 3-to-8 decoders with 1-enable, the MSB input is connected to:', opts:['Both decoders in parallel','The enable of the high-group decoder directly and through an inverter to the low-group decoder','The select inputs only','The output OR gate'], ans:1, exp:'MSB=0 enables the lower decoder (outputs 0–7); MSB=1 enables the upper decoder (outputs 8–15) via direct and inverted connections to the enable pins.' },
+      { type:'mcq', q:'How many AND gates are needed to implement a 3-to-8 decoder with active-HIGH outputs (no enable)?', opts:['3','6','8','16'], ans:2, exp:'Each of the 8 output minterms requires one 3-input AND gate.' },
+      { type:'tf', q:'The output F3 of a 2-to-4 decoder with inputs X and Y is X·Y.', ans:true, exp:'F3 is the minterm m3 = X·Y (both inputs HIGH).' },
+      { type:'mcq', q:'In the context of MSI circuits, "MSI" stands for:', opts:['Multi-Stage Integration','Medium Scale Integration','Minimal Sum Implicant','Master Slave Interface'], ans:1, exp:'MSI = Medium Scale Integration, typically 10–100 logic gates on one chip.' },
+      { type:'mcq', q:'The application of a 3-to-8 decoder is equivalent to:', opts:['Generating all maxterms of 3 variables','Generating all minterms of 3 variables','Binary-to-Gray code conversion','Parity generation'], ans:1, exp:'A 3-to-8 decoder generates all 8 minterms of 3 variables simultaneously.' },
+      { type:'tf', q:'Any combinational circuit with n inputs and m outputs can be implemented with an n-to-2ⁿ decoder plus m OR gates.', ans:true, exp:'Since each output is a sum of minterms, you OR the relevant decoder outputs for each function output.' },
+      { type:'mcq', q:"F0 of a 2-to-4 decoder with inputs X and Y is:", opts:["X'·Y'","X'·Y","X·Y'","X·Y"], ans:0, exp:"F0 = m0 = X'·Y' (both inputs LOW)." },
+      { type:'mcq', q:'A 4-to-16 decoder can also be built from how many 2-to-4 decoders with enable?', opts:['2','4','5','8'], ans:2, exp:'One 2-to-4 decoder selects among four groups of four; four 2-to-4 decoders each handle 4 outputs — total 5 chips.' },
+      { type:'tf', q:'A decoder can simultaneously generate all minterms, which is why it is useful for implementing multiple Boolean functions.', ans:true, exp:'All minterms are available at the outputs; you just OR the desired ones to implement any SOP function.' },
+    ]
+  },
+  '6c': {
+    name: 'Multiplexers & Demultiplexers',
+    dl: 'dld/Topic6C.ppt',
+    questions: [
+      { type:'mcq', q:'A multiplexer (MUX) is a combinational circuit that:', opts:['Distributes one data input to multiple outputs','Selects one of many data inputs and routes it to a single output','Converts parallel data to serial data exclusively','Adds multiple binary numbers'], ans:1, exp:'A MUX selects one of 2ⁿ data inputs based on n select lines and routes it to a single output.' },
+      { type:'mcq', q:'A 4-to-1 MUX has how many select lines?', opts:['1','2','3','4'], ans:1, exp:'A 4-to-1 MUX needs 2 select lines since 2² = 4 possible input selections.' },
+      { type:'tf', q:'A demultiplexer (DEMUX) performs the reverse operation of a multiplexer.', ans:true, exp:'A DEMUX routes one input to one of many outputs selected by the select lines — opposite of MUX.' },
+      { type:'mcq', q:'A decoder with enable can function as a:', opts:['Multiplexer','Demultiplexer','Encoder','Comparator'], ans:1, exp:'When the enable acts as the data input and the select lines direct it to an output, the decoder acts as a DEMUX.' },
+      { type:'mcq', q:'To implement a Boolean function using a 2ⁿ-to-1 MUX with n select variables, you connect:', opts:['Select lines to the output','Data inputs to 0 or 1 based on the truth table','All data inputs to the same logic level','The output to a flip-flop'], ans:1, exp:'For each minterm, the corresponding data input (I₀, I₁, …) is set to 1 if the minterm is in the ON-set, 0 otherwise.' },
+      { type:'tf', q:'A function of n variables can be implemented using a 2^(n-1)-to-1 MUX (half the size) by using the last variable as a data input.', ans:true, exp:'By fixing one variable as a data input and using the remaining n-1 as select lines, the MUX size is halved.' },
+      { type:'mcq', q:'The 74x151 is a standard MSI device that implements a:', opts:['4-to-1 MUX','8-to-1 MUX','4-to-16 decoder','8-bit comparator'], ans:1, exp:'The 74x151 is a classic 8-to-1 (8-input) multiplexer IC.' },
+      { type:'mcq', q:'For implementing a function of 4 variables using a MUX, you would typically use a:', opts:['2-to-1 MUX','4-to-1 MUX','8-to-1 MUX','16-to-1 MUX'], ans:3, exp:'A function of 4 variables has 2⁴=16 minterms, requiring a 16-to-1 MUX (or an 8-to-1 with one variable on data inputs).' },
+      { type:'tf', q:'In a MUX, the number of select lines determines how many data inputs can be handled.', ans:true, exp:'With n select lines, a MUX can select from 2ⁿ data inputs.' },
+      { type:'mcq', q:'A DEMUX with n select lines distributes one input to:', opts:['n outputs','n+1 outputs','2ⁿ outputs','2n outputs'], ans:2, exp:'A DEMUX with n select lines has 2ⁿ possible output destinations.' },
+      { type:'mcq', q:'To build a larger MUX from smaller ones, you can use:', opts:['Decoders and OR gates','Smaller MUXes with an additional MUX to select between them','Only AND gates','Only NOR gates'], ans:1, exp:'A tree of smaller MUXes, with a final MUX selecting among the groups, implements a larger MUX.' },
+      { type:'tf', q:'A 4-to-1 MUX requires 4 select lines.', ans:false, exp:'A 4-to-1 MUX requires only 2 select lines (2² = 4 inputs).' },
+      { type:'mcq', q:'When implementing F(A,B,C) using an 8-to-1 MUX, the three variables A, B, C are connected to:', opts:['The data inputs','The select lines','The enable','The output'], ans:1, exp:'All input variables are connected to the select lines; the data inputs are set to constants (0 or 1) per the truth table.' },
+      { type:'mcq', q:'The block-level symbol for a MUX shows:', opts:['Multiple inputs, multiple outputs, and select lines','A single data input, select lines, and multiple data outputs','Multiple data inputs, select lines, and a single output','Multiple inputs with no select lines'], ans:2, exp:'A MUX has multiple data inputs (I₀…I_{n-1}), n select lines, and one data output.' },
+      { type:'tf', q:'An encoder converts a 2ⁿ-line input (one-hot) into an n-bit binary code.', ans:true, exp:'An encoder takes up to 2ⁿ input lines where exactly one is active and produces the corresponding n-bit binary code.' },
+      { type:'mcq', q:'Which MSI component is best described as "many-to-one data routing"?', opts:['Decoder','Demultiplexer','Multiplexer','Encoder'], ans:2, exp:'A MUX routes one of many input data lines to a single output — many-to-one routing.' },
+      { type:'mcq', q:'The select inputs of a 4-to-1 MUX labeled S1 and S0, when S1=1 and S0=0, select data input:', opts:['I0','I1','I2','I3'], ans:2, exp:'S1S0 = 10 (binary 2), so input I2 is selected.' },
+      { type:'tf', q:'A MUX can implement any Boolean function by assigning 0 or 1 to its data inputs.', ans:true, exp:'By connecting the n input variables to the select lines and setting each data input to match the truth table output for that minterm, any function can be implemented.' },
+    ]
+  },
+  7: {
+    name: 'Latches & Flip-Flops',
+    dl: 'dld/Topic7.ppt',
+    questions: [
+      { type:'mcq', q:'A sequential circuit differs from a combinational circuit in that it:', opts:['Uses only NAND gates','Has outputs that depend on current inputs and past state (memory)','Requires no clock signal','Cannot have feedback'], ans:1, exp:'Sequential circuits include memory elements; outputs depend on current inputs AND the stored state.' },
+      { type:'mcq', q:'A bistable device has:', opts:['No stable state','One stable state','Two stable states','An infinite number of stable states'], ans:2, exp:'Bistable means two stable states — the foundation of latches and flip-flops.' },
+      { type:'tf', q:'Latches are level-triggered (pulse-triggered) while edge-triggered flip-flops change state only on a specific clock edge.', ans:true, exp:'Latches respond to the enable/clock level; flip-flops respond to the rising or falling edge of the clock.' },
+      { type:'mcq', q:'In an active-HIGH SR latch (NOR latch), the invalid (forbidden) state occurs when:', opts:['S=0, R=0','S=1, R=0','S=0, R=1','S=1, R=1'], ans:3, exp:"S=R=1 forces both Q and Q' LOW simultaneously, violating the complementary output requirement." },
+      { type:'tf', q:"In an active-LOW S'R' latch (NAND latch), the forbidden state occurs when both S' and R' are LOW.", ans:true, exp:"S'=R'=0 forces both Q and Q' HIGH — an invalid condition." },
+      { type:'mcq', q:'The Gated SR Latch differs from the basic SR Latch by adding:', opts:['A second output','An enable (EN) input and two additional NAND gates','A clock oscillator','A feedback inverter'], ans:1, exp:'The gated SR latch adds an EN input; outputs change only when EN=1 (for 1-enable).' },
+      { type:'mcq', q:"A Gated D Latch eliminates the invalid state of the SR latch by:", opts:['Using three inputs',"Setting R = S'",'Adding an inverter to the clock','Using a master-slave configuration'], ans:1, exp:"Making R = S' ensures S and R are always complements, so S=R=1 is impossible." },
+      { type:'tf', q:'When EN=1 in a Gated D Latch, the output Q follows the D input.', ans:true, exp:'With EN=1, Q tracks D: D=1 sets Q=1, D=0 sets Q=0.' },
+      { type:'mcq', q:'A positive edge-triggered flip-flop changes its output:', opts:['While the clock is HIGH','When the clock transitions from LOW to HIGH','When the clock transitions from HIGH to LOW','At any clock level'], ans:1, exp:'Positive edge-triggered = responds to the rising (LOW→HIGH) clock edge.' },
+      { type:'mcq', q:'In a JK Flip-Flop, setting J=1 and K=1 causes the output to:', opts:['Set to 1','Reset to 0','Hold (no change)','Toggle'], ans:3, exp:"J=K=1 causes the JK flip-flop to toggle — Q becomes Q'." },
+      { type:'mcq', q:'The characteristic equation of a D Flip-Flop is:', opts:['Q(t+1) = D',"Q(t+1) = J·Q' + K'·Q","Q(t+1) = T·Q' + T'·Q","Q(t+1) = S + R'·Q"], ans:0, exp:'The D flip-flop simply stores D on the clock edge: Q(t+1) = D.' },
+      { type:'mcq', q:'The characteristic equation of a JK Flip-Flop is:', opts:['Q(t+1) = D',"Q(t+1) = J·Q' + K'·Q","Q(t+1) = T·Q' + T'·Q","Q(t+1) = S + R'·Q"], ans:1, exp:"Q(t+1) = J·Q' + K'·Q — this covers all four JK input combinations." },
+      { type:'mcq', q:'A T Flip-Flop is formed from a JK Flip-Flop by:', opts:['Adding an inverter to the J input','Connecting J and K together to a single input T',"Connecting J to Q and K to Q'",'Inverting the clock signal'], ans:1, exp:'Tying J=K=T creates the toggle flip-flop: T=0 → hold, T=1 → toggle.' },
+      { type:'tf', q:'The characteristic equation of the T Flip-Flop is Q(t+1) = T⊕Q.', ans:true, exp:'T=0: Q holds. T=1: Q toggles. This is equivalent to T⊕Q (XOR).' },
+      { type:'mcq', q:'Asynchronous inputs (PRE and CLR) affect the flip-flop:', opts:['Only on the clock edge','Only when the clock is HIGH','Independently of the clock, immediately','Only when both are active at once'], ans:2, exp:'Asynchronous inputs override the clock: PRE immediately sets Q=1, CLR immediately resets Q=0.' },
+      { type:'tf', q:'In a Master-Slave JK flip-flop, the output changes at the leading edge of the clock pulse.', ans:false, exp:'The master captures data at the leading edge, but the output (slave) updates at the trailing edge of the clock.' },
+      { type:'mcq', q:'Why are latches considered unsuitable for synchronous sequential circuits?', opts:['They are too slow','They are transparent: any input change while EN is active immediately affects the output','They do not have complementary outputs','They require too many gates'], ans:1, exp:'Latches are transparent — while EN is active, glitches on inputs directly propagate to the output, causing timing problems in synchronous systems.' },
+      { type:'mcq', q:'The SR Flip-Flop has an invalid condition when:', opts:['S=0, R=0','S=1, R=0','S=0, R=1','S=1, R=1'], ans:3, exp:'S=R=1 is undefined/invalid for the SR flip-flop (same as the SR latch).' },
+      { type:'mcq', q:'A T flip-flop connected so that T=1 always will:', opts:['Hold its current state','Set Q to 1','Divide the clock frequency by 2','Reset Q to 0'], ans:2, exp:'With T=1, the flip-flop toggles on every clock edge, producing a frequency-divided-by-2 output.' },
+      { type:'tf', q:'A JK Flip-Flop with J=0 and K=0 holds its current state.', ans:true, exp:'J=K=0 is the hold condition for the JK flip-flop; Q(t+1) = Q(t).' },
+      { type:'mcq', q:'The ">" symbol on the clock input of a flip-flop symbol indicates:', opts:['The flip-flop is level triggered','Edge triggering','The clock frequency','An asynchronous input'], ans:1, exp:'The ">" (dynamic indicator) at the clock input denotes edge-triggered operation.' },
+      { type:'mcq', q:'Which flip-flop type is a special case of the JK with J=K tied together?', opts:['SR','D','T','Master-Slave'], ans:2, exp:'T = J = K; the T flip-flop is a simplified version of the JK flip-flop.' },
+    ]
+  },
+  8: {
+    name: 'Counters',
+    dl: 'dld/Topic8.ppt',
+    questions: [
+      { type:'mcq', q:'An asynchronous (ripple) counter differs from a synchronous counter in that:', opts:['All flip-flops are clocked simultaneously','Flip-flops are clocked by the output of the previous flip-flop','It can only count up','It uses D flip-flops exclusively'], ans:1, exp:'In a ripple counter, the clock of each flip-flop is driven by the output Q of the preceding flip-flop, causing propagation delay.' },
+      { type:'tf', q:'In a synchronous counter, all flip-flops receive the clock signal simultaneously.', ans:true, exp:'Synchronous counters apply the clock to all flip-flops at once, eliminating ripple delay.' },
+      { type:'mcq', q:'A 3-bit binary ripple counter (MOD-8) counts from:', opts:['0 to 4','0 to 7','1 to 8','0 to 15'], ans:1, exp:'A 3-bit counter has 2³ = 8 states: 000 through 111 (0–7).' },
+      { type:'mcq', q:'A MOD-N counter counts through N unique states before returning to 0. A MOD-5 counter counts:', opts:['0 to 4','0 to 5','1 to 5','0 to 6'], ans:0, exp:'MOD-5 means 5 states: 000, 001, 010, 011, 100 (0–4), then back to 0.' },
+      { type:'tf', q:'A T flip-flop with T=1 (toggling) is commonly used in ripple counters.', ans:true, exp:'Each stage of a ripple counter is a T flip-flop (or JK with J=K=1) that toggles on each falling edge of its clock.' },
+      { type:'mcq', q:'The main disadvantage of a ripple counter is:', opts:['It uses too many flip-flops','It cannot count downward','Propagation delay accumulates through the flip-flop chain','It requires a separate clock for each flip-flop'], ans:2, exp:'As each flip-flop clocks from the previous output, delays accumulate, limiting operating speed.' },
+      { type:'mcq', q:'To design a synchronous counter, you typically use:', opts:['Only NAND gates','Excitation tables for flip-flops plus combinational logic for next-state','Only D flip-flops in series','An SR latch for each bit'], ans:1, exp:'Synchronous counter design derives next-state equations using flip-flop excitation tables and implements them with combinational logic.' },
+      { type:'tf', q:'An up/down counter can count in both incrementing and decrementing sequences.', ans:true, exp:'A bidirectional counter has a mode-control input that selects whether it counts up or down.' },
+      { type:'mcq', q:'How many flip-flops are needed to build a MOD-16 synchronous counter?', opts:['2','3','4','5'], ans:2, exp:'2⁴ = 16, so 4 flip-flops are required.' },
+      { type:'mcq', q:'A ring counter with n flip-flops has:', opts:['2ⁿ states','n states','n+1 states','n-1 states'], ans:1, exp:'A ring counter circulates a single 1 (or 0) through n positions, giving n unique states.' },
+      { type:'tf', q:"A Johnson (twisted-ring) counter with n flip-flops has 2n states.", ans:true, exp:"A Johnson counter feeds Q' of the last flip-flop back to the D of the first, producing 2n unique states." },
+      { type:'mcq', q:'To implement a MOD-6 counter using a MOD-8 (3-bit) counter, you can:', opts:['Add a 4th flip-flop','Use a NAND gate to detect state 6 and reset the counter to 0','Use only two flip-flops','Connect the MSB to the clock input'], ans:1, exp:'Detect the count reaching 6 (110) using a gate and use it to asynchronously clear all flip-flops back to 0.' },
+      { type:'mcq', q:'In a state diagram for a counter, each node represents:', opts:['A clock pulse','A flip-flop output','A unique state of the counter','A Boolean expression'], ans:2, exp:'Each node (circle) in a state diagram represents one unique counter state (the combination of flip-flop outputs).' },
+      { type:'tf', q:'A synchronous counter is faster than an asynchronous counter for the same number of bits.', ans:true, exp:'All flip-flops switch simultaneously in a synchronous counter, so delay does not accumulate across stages.' },
+      { type:'mcq', q:'The 74x163 is a standard synchronous 4-bit binary counter. Its synchronous clear takes effect:', opts:['Immediately when CLR is asserted','On the next rising clock edge after CLR is asserted','Only when the count reaches 15','Only when load is also asserted'], ans:1, exp:'The 74x163 has a synchronous clear: CLR is sampled at the clock edge and takes effect on the following edge.' },
+      { type:'mcq', q:'Connecting the terminal count (TC/RCO) output of one counter to the clock-enable of the next allows you to:', opts:['Slow down the counter','Cascade counters for longer counts','Create a ring counter','Build a Johnson counter'], ans:1, exp:'TC goes HIGH when the counter reaches its maximum count, enabling the next counter stage — standard cascading technique.' },
+      { type:'tf', q:'A 2-bit synchronous counter requires combinational logic (AND gate) to generate the toggle condition for the MSB.', ans:true, exp:'The MSB (Q1) toggles only when Q0=1 (lower bit is 1), requiring a J1=K1=Q0 connection — achieved with an AND or direct connection.' },
+      { type:'mcq', q:'Which counter type eliminates cumulative propagation delay across all bits?', opts:['Ripple counter','Asynchronous counter','Synchronous counter','Ring counter'], ans:2, exp:'Synchronous counters clock all flip-flops simultaneously, so maximum delay is only one flip-flop stage regardless of bit width.' },
+      { type:'mcq', q:'The output waveform of the Q output of the first flip-flop (LSB) in a ripple counter toggles:', opts:['At every clock rising edge','Every 2 clock cycles','Every 4 clock cycles','At the terminal count only'], ans:0, exp:'The LSB flip-flop toggles on every rising (or falling) clock edge, giving a period equal to 2 clock periods (half the frequency).' },
+      { type:'tf', q:'A decade counter (MOD-10) is used in digital clocks and frequency dividers that work in base-10.', ans:true, exp:'MOD-10 counters cycle through 10 states (0–9), making them ideal for BCD counting in decimal-based applications.' },
+    ]
+  }
+};
+
+const topicNames = {
+  5: 'Topic 5 · Quine-McCluskey Method',
+  '6a': 'Topic 6A · Adders & Subtractors',
+  '6b': 'Topic 6B · Decoders & Encoders',
+  '6c': 'Topic 6C · Multiplexers & Demux',
+  7: 'Topic 7 · Latches & Flip-Flops',
+  8: 'Topic 8 · Counters'
+};
+
+// ══════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════
+let state = { topic: null, mode: 'all', questions: [], idx: 0, score: 0, answers: [], locked: false, fromNotes: false };
+
+const modes = [
+  { id: 'all',  label: '🔀 All Types' },
+  { id: 'mcq',  label: '◉ MCQ' },
+  { id: 'tf',   label: '✓✗ True/False' },
+  { id: 'text', label: '✏ Short Answer' }
+];
+
+// ══════════════════════════════════════════
+//  NAVIGATION
+// ══════════════════════════════════════════
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showHome() {
+  showSection('home');
+  document.getElementById('topbarTitle').textContent = 'Digital Logic Design';
+  document.getElementById('topbarSub').textContent = 'Study Hub — Select a topic to begin';
+}
+
+function goNotes(topic) {
+  state.topic = topic;
+  const name = topicNames[topic];
+  document.getElementById('notesTitle').textContent = name;
+  document.getElementById('topbarTitle').textContent = name;
+  document.getElementById('topbarSub').textContent = 'Study Notes';
+
+  const dl = TOPICS[topic].dl;
+  const dlBtn = document.getElementById('notesDlBtn');
+  dlBtn.href = dl; dlBtn.download = TOPICS[topic].dl.split('/').pop();
+  dlBtn.textContent = '⬇ Slides';
+
+  document.getElementById('notesBody').innerHTML = NOTES[topic];
+  document.getElementById('notesStartQuizBtn').onclick = () => goQuiz(topic, 'all', true);
+
+  // Update sidebar active state
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+  showSection('notes');
+}
+
+function goQuiz(topic, mode, fromNotes) {
+  state.topic = topic;
+  state.mode = mode;
+  state.fromNotes = !!fromNotes;
+  buildQuestions(topic, mode);
+  state.idx = 0; state.score = 0; state.answers = [];
+
+  const name = topicNames[topic];
+  document.getElementById('quizTitle').textContent = name;
+  document.getElementById('topbarTitle').textContent = name;
+  document.getElementById('topbarSub').textContent = state.questions.length + ' questions';
+
+  const dl = TOPICS[topic].dl;
+  const dlBtn = document.getElementById('quizDlBtn');
+  dlBtn.href = dl; dlBtn.download = dl.split('/').pop();
+  dlBtn.textContent = '⬇ Slides';
+
+  // Back button behavior
+  if (fromNotes) {
+    document.getElementById('quizBackBtn').onclick = () => goNotes(topic);
+  } else {
+    document.getElementById('quizBackBtn').onclick = () => showHome();
+  }
+
+  const mt = document.getElementById('modeTabs');
+  mt.innerHTML = modes.map(m =>
+    `<button class="mode-tab ${mode === m.id ? 'active' : ''}" onclick="goQuiz(${JSON.stringify(topic)},'${m.id}',${!!fromNotes})">${m.label}</button>`
+  ).join('');
+
+  showSection('quiz');
+  renderQuestion();
+}
+
+function buildQuestions(topic, mode) {
+  let qs = [...TOPICS[topic].questions];
+  if (mode !== 'all') qs = qs.filter(q => q.type === mode);
+  for (let i = qs.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [qs[i], qs[j]] = [qs[j], qs[i]];
+  }
+  state.questions = qs;
+}
+
+// ══════════════════════════════════════════
+//  RENDER QUESTION
+// ══════════════════════════════════════════
+function renderQuestion() {
+  if (state.idx >= state.questions.length) { showScore(); return; }
+  const q = state.questions[state.idx];
+  state.locked = false;
+
+  const pct = Math.round((state.idx / state.questions.length) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('qNum').textContent = `Question ${state.idx + 1} / ${state.questions.length}`;
+  document.getElementById('qScore').textContent = `Score: ${state.score}`;
+
+  document.getElementById('check-btn').style.display = '';
+  document.getElementById('check-btn').disabled = true;
+  document.getElementById('next-btn').style.display = 'none';
+  document.getElementById('skip-btn').style.display = '';
+
+  document.getElementById('questionArea').innerHTML = renderQHTML(q);
+
+  if (q.type === 'mcq') {
+    document.querySelectorAll('.mcq-opt').forEach((el, i) => {
+      el.addEventListener('click', () => selectMCQ(i));
+    });
+  } else if (q.type === 'tf') {
+    document.querySelectorAll('.tf-btn').forEach(btn => {
+      btn.addEventListener('click', () => selectTF(btn));
+    });
+  } else if (q.type === 'text') {
+    const inp = document.getElementById('textInp');
+    inp.addEventListener('input', () => {
+      document.getElementById('check-btn').disabled = inp.value.trim().length === 0;
+    });
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !document.getElementById('check-btn').disabled && !state.locked) checkAnswer();
+    });
+  }
+}
+
+function renderQHTML(q) {
+  const badges = { mcq:'MCQ', text:'Short Answer', tf:'True / False' };
+  const badgeClass = { mcq:'badge-mcq', text:'badge-text', tf:'badge-tf' };
+  let html = `<div class="question-card">
+    <span class="q-type-badge ${badgeClass[q.type]}">${badges[q.type]}</span>
+    <div class="question-text">${q.q}</div>`;
+
+  if (q.type === 'mcq') {
+    html += `<div class="mcq-options">`;
+    ['A','B','C','D'].forEach((l, i) => {
+      html += `<div class="mcq-opt" data-idx="${i}">
+        <div class="opt-letter">${l}</div>
+        <div class="opt-text">${q.opts[i]}</div>
+      </div>`;
+    });
+    html += `</div>`;
+  } else if (q.type === 'text') {
+    html += `<div><input class="text-answer-input" id="textInp" placeholder="Type your answer…" autocomplete="off" spellcheck="false"></div>`;
+  } else if (q.type === 'tf') {
+    html += `<div class="tf-options">
+      <button class="tf-btn" data-val="true">✓ True</button>
+      <button class="tf-btn" data-val="false">✗ False</button>
+    </div>`;
+  }
+
+  html += `<div class="feedback-box" id="feedbackBox"></div></div>`;
+  return html;
+}
+
+// ══════════════════════════════════════════
+//  INTERACTIONS
+// ══════════════════════════════════════════
+function selectMCQ(idx) {
+  if (state.locked) return;
+  document.querySelectorAll('.mcq-opt').forEach(el => el.classList.remove('selected'));
+  document.querySelector(`.mcq-opt[data-idx="${idx}"]`).classList.add('selected');
+  document.getElementById('check-btn').disabled = false;
+}
+
+function selectTF(btn) {
+  if (state.locked) return;
+  document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('check-btn').disabled = false;
+}
+
+function checkAnswer() {
+  const q = state.questions[state.idx];
+  state.locked = true;
+  document.querySelectorAll('.mcq-opt, .tf-btn').forEach(el => el.classList.add('locked'));
+
+  let isCorrect = false, userAns = '', correctAns = '';
+
+  if (q.type === 'mcq') {
+    const sel = document.querySelector('.mcq-opt.selected');
+    if (!sel) return;
+    const idx = parseInt(sel.dataset.idx);
+    userAns = q.opts[idx]; correctAns = q.opts[q.ans];
+    isCorrect = idx === q.ans;
+    document.querySelectorAll('.mcq-opt').forEach((el, i) => {
+      if (i === q.ans) el.classList.add('correct');
+      else if (el.classList.contains('selected')) el.classList.add('wrong');
+    });
+  } else if (q.type === 'tf') {
+    const sel = document.querySelector('.tf-btn.selected');
+    if (!sel) return;
+    const val = sel.dataset.val === 'true';
+    userAns = val ? 'True' : 'False';
+    correctAns = q.ans ? 'True' : 'False';
+    isCorrect = val === q.ans;
+    document.querySelectorAll('.tf-btn').forEach(btn => {
+      const bv = btn.dataset.val === 'true';
+      if (bv === q.ans) btn.classList.add('correct');
+      else if (btn.classList.contains('selected')) btn.classList.add('wrong');
+    });
+  } else if (q.type === 'text') {
+    const inp = document.getElementById('textInp');
+    userAns = inp.value.trim();
+    const norm = s => s.toLowerCase().replace(/\s+/g,'').replace(/[''']/g,"'");
+    isCorrect = q.ans.some(a => norm(userAns) === norm(a));
+    correctAns = q.ans[0];
+    inp.classList.add(isCorrect ? 'correct' : 'wrong');
+    inp.disabled = true;
+  }
+
+  if (isCorrect) state.score++;
+  state.answers.push({ correct: isCorrect, userAns, correctAns, question: q.q });
+
+  const fb = document.getElementById('feedbackBox');
+  fb.classList.add('show', isCorrect ? 'correct-fb' : 'wrong-fb');
+  fb.innerHTML = isCorrect
+    ? `<strong>✓ Correct!</strong>${q.exp ? ' ' + q.exp : ''}`
+    : `<strong>✗ Incorrect.</strong> Correct answer: <strong>${correctAns}</strong>.${q.exp ? '<br>' + q.exp : ''}`;
+
+  document.getElementById('check-btn').style.display = 'none';
+  document.getElementById('next-btn').style.display = '';
+  document.getElementById('skip-btn').style.display = 'none';
+  document.getElementById('qScore').textContent = `Score: ${state.score}`;
+}
+
+function nextQuestion() { state.idx++; renderQuestion(); }
+
+function skipQuestion() {
+  const q = state.questions[state.idx];
+  const ca = q.type === 'text' ? q.ans[0] : q.type === 'tf' ? (q.ans ? 'True' : 'False') : q.opts[q.ans];
+  state.answers.push({ correct: false, userAns: '(skipped)', correctAns: ca, question: q.q, skipped: true });
+  state.idx++; renderQuestion();
+}
+
+// ══════════════════════════════════════════
+//  SCORE SCREEN
+// ══════════════════════════════════════════
+function showScore() {
+  const total = state.questions.length;
+  const correct = state.score;
+  const wrong = state.answers.filter(a => !a.correct && !a.skipped).length;
+  const skipped = state.answers.filter(a => a.skipped).length;
+  const pct = Math.round((correct / total) * 100);
+
+  let grade = '';
+  if (pct >= 90) grade = '🏆 Outstanding!';
+  else if (pct >= 75) grade = '🌟 Great Work!';
+  else if (pct >= 60) grade = '👍 Good Effort!';
+  else if (pct >= 40) grade = '📚 Keep Studying!';
+  else grade = '💡 Review the Material!';
+
+  let reviewHTML = '<div class="review-wrap"><h3>Review</h3>';
+  state.answers.forEach((a, i) => {
+    reviewHTML += `<div class="review-item ${a.correct ? 'rev-correct' : 'rev-wrong'}">
+      <div class="review-q">Q${i+1}. ${a.question}</div>
+      <div class="review-ans">
+        <span class="${a.correct ? 'your-ans ok' : 'your-ans'}">Your answer: ${a.userAns}</span>
+        ${!a.correct ? `<span class="correct-ans">Correct: ${a.correctAns}</span>` : ''}
+      </div>
+    </div>`;
+  });
+  reviewHTML += '</div>';
+
+  const topicKey = JSON.stringify(state.topic);
+  const backAction = state.fromNotes ? `goNotes(${topicKey})` : 'showHome()';
+  const backLabel = state.fromNotes ? '← Back to Notes' : '← Back to Topics';
+
+  document.getElementById('scoreContent').innerHTML = `
+    <div class="score-ring-wrap">
+      <div class="score-ring">
+        <div class="score-num">${pct}%</div>
+        <div class="score-label">Score</div>
+      </div>
+    </div>
+    <h2>${grade}</h2>
+    <p>${correct} correct out of ${total} questions</p>
+    <div class="score-breakdown">
+      <div class="score-stat"><div class="val val-correct">${correct}</div><div class="lbl">Correct</div></div>
+      <div class="score-stat"><div class="val val-wrong">${wrong}</div><div class="lbl">Wrong</div></div>
+      <div class="score-stat"><div class="val val-skip">${skipped}</div><div class="lbl">Skipped</div></div>
+      <div class="score-stat"><div class="val">${total}</div><div class="lbl">Total</div></div>
+    </div>
+    <div style="display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="goQuiz(${topicKey},'${state.mode}',${state.fromNotes})">Retry Same</button>
+      <button class="btn btn-secondary" onclick="${backAction}">${backLabel}</button>
+    </div>
+    ${reviewHTML}
+  `;
+  showSection('score');
+}
+
+// ══════════════════════════════════════════
+//  THEME
+// ══════════════════════════════════════════
+function toggleTheme() {
+  const isDark = document.documentElement.classList.toggle('dark');
+  document.documentElement.classList.toggle('light', !isDark);
+  document.getElementById('themeIcon').textContent = isDark ? '☀️' : '🌙';
+  document.getElementById('themeLabel').textContent = isDark ? 'Light Mode' : 'Dark Mode';
+  try { localStorage.setItem('dld_theme', isDark ? 'dark' : 'light'); } catch(e) {}
+}
+
+function applyTheme() {
+  try {
+    const t = localStorage.getItem('dld_theme');
+    if (t === 'dark') {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+      document.getElementById('themeIcon').textContent = '☀️';
+      document.getElementById('themeLabel').textContent = 'Light Mode';
+    }
+    // Default is light (already set on <html>)
+  } catch(e) {}
+}
+
+// ══════════════════════════════════════════
+//  SIDEBAR
+// ══════════════════════════════════════════
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  if (window.innerWidth <= 768) {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+}
+
+// ── INIT ──
+applyTheme();
+</script>
+</body>
+</html>

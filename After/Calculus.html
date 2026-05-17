@@ -1,0 +1,2901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculus &amp; Analytical Geometry — Study Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+  <!-- MathJax: load synchronously (no async) to eliminate the raw $...$ flash -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'none'
+      },
+      svg: { fontCache: 'global', scale: 1.05 },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea'] },
+      startup: {
+        typeset: false,   // we typeset manually after DOM is ready
+        ready() { MathJax.startup.defaultReady(); }
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ══════════════════════════════════════
+       LIGHT THEME (default)
+    ══════════════════════════════════════ */
+    :root {
+      --bg:         #f0f2f8;
+      --surface:    #ffffff;
+      --surface2:   #f7f8fc;
+      --navy:       #1e2456;
+      --navy-mid:   #2d3580;
+      --purple:     #6c5fc7;
+      --purple-l:   #8b7fd4;
+      --purple-bg:  #ede9ff;
+      --blue:       #3f6de8;
+      --blue-bg:    #e8eeff;
+      --blue-text:  #2a4db0;
+      --rust:       #e05c3a;
+      --rust-bg:    #ffeee9;
+      --rust-text:  #b03a1c;
+      --green:      #1a9e72;
+      --green-bg:   #e4f8f1;
+      --green-text: #0e6b4c;
+      --amber:      #c98000;
+      --amber-bg:   #fff6e0;
+      --amber-text: #8a5500;
+      --text:       #1a1e3a;
+      --text2:      #4a5080;
+      --text3:      #7a82b0;
+      --border:     #e2e6f4;
+      --border2:    #ccd0e8;
+      --mono:       'JetBrains Mono', monospace;
+      --sans:       'Nunito', system-ui, sans-serif;
+      --radius:     16px;
+      --radius-sm:  10px;
+      --shadow-sm:  0 2px 8px rgba(30,36,86,0.08);
+      --shadow:     0 4px 20px rgba(30,36,86,0.10);
+      --shadow-lg:  0 8px 36px rgba(30,36,86,0.14);
+    }
+
+    /* ══════════════════════════════════════
+       DARK THEME
+    ══════════════════════════════════════ */
+    html.dark {
+      --bg:         #12152a;
+      --surface:    #1c2040;
+      --surface2:   #222848;
+      --navy:       #c8cefc;
+      --navy-mid:   #a0aaee;
+      --purple:     #8b7fd4;
+      --purple-l:   #a99ee0;
+      --purple-bg:  rgba(108,95,199,0.2);
+      --blue:       #5b84f0;
+      --blue-bg:    rgba(63,109,232,0.18);
+      --blue-text:  #8aa8f8;
+      --rust:       #f07050;
+      --rust-bg:    rgba(224,92,58,0.18);
+      --rust-text:  #f9a090;
+      --green:      #3dbf8c;
+      --green-bg:   rgba(26,158,114,0.18);
+      --green-text: #70dab4;
+      --amber:      #f0a820;
+      --amber-bg:   rgba(201,128,0,0.18);
+      --amber-text: #f7c95a;
+      --text:       #e8ecff;
+      --text2:      #9aa0cc;
+      --text3:      #606890;
+      --border:     rgba(255,255,255,0.07);
+      --border2:    rgba(255,255,255,0.13);
+      --shadow-sm:  0 2px 8px rgba(0,0,0,0.3);
+      --shadow:     0 4px 20px rgba(0,0,0,0.4);
+      --shadow-lg:  0 8px 36px rgba(0,0,0,0.55);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+      /* hide raw TeX until MathJax renders */
+    }
+
+    /* ─── THEME TOGGLE ─── */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface2);
+      border: 1.5px solid var(--border2);
+      border-radius: 100px;
+      padding: 6px 14px 6px 10px;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text2);
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover { border-color: var(--purple); color: var(--purple); }
+    .theme-toggle .toggle-track {
+      width: 34px; height: 18px;
+      background: var(--border2);
+      border-radius: 100px;
+      position: relative;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    html.dark .theme-toggle .toggle-track { background: var(--purple); }
+    .theme-toggle .toggle-thumb {
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    }
+    html.dark .theme-toggle .toggle-thumb { transform: translateX(16px); }
+
+    /* ─── HEADER ─── */
+    .site-header {
+      background: var(--navy);
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+    html.dark .site-header { background: var(--surface); border-bottom: 1px solid var(--border2); }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 0 0;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 100px;
+      padding: 4px 14px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 10px;
+    }
+    html.dark .header-badge {
+      background: var(--purple-bg);
+      border-color: rgba(139,127,212,0.35);
+      color: var(--purple-l);
+    }
+
+    .header-h1 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .header-sub {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+    }
+    html.dark .header-sub { color: var(--text3); }
+
+    .header-authors {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      font-weight: 600;
+      margin-top: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 3px 12px;
+    }
+    .header-authors strong { color: rgba(255,255,255,0.85); }
+    html.dark .header-authors { background: var(--purple-bg); border-color: rgba(139,127,212,0.3); color: var(--text3); }
+    html.dark .header-authors strong { color: var(--purple-l); }
+
+    .book-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      color: #fff;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+      backdrop-filter: blur(8px);
+    }
+    .book-btn:hover { background: rgba(255,255,255,0.25); transform: translateY(-1px); }
+    html.dark .book-btn {
+      background: var(--purple-bg);
+      border-color: rgba(139,127,212,0.4);
+      color: var(--purple-l);
+    }
+    .book-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* chapter pills */
+    .chapter-pills { display: flex; gap: 8px; flex-wrap: wrap; padding-bottom: 1px; }
+    .cpill {
+      font-size: 0.72rem; font-weight: 700;
+      padding: 5px 14px; border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.1);
+    }
+    html.dark .cpill { border-color: var(--border2); color: var(--text3); background: var(--surface2); }
+    .cpill.cp-blue  { border-color: rgba(255,255,255,0.3); color: #b8ccff; background: rgba(63,109,232,0.25); }
+    .cpill.cp-rust  { border-color: rgba(255,255,255,0.3); color: #ffc4b4; background: rgba(224,92,58,0.25); }
+    .cpill.cp-green { border-color: rgba(255,255,255,0.3); color: #a0f0d4; background: rgba(26,158,114,0.25); }
+    .cpill.cp-amber { border-color: rgba(255,255,255,0.3); color: #ffd98a; background: rgba(201,128,0,0.25); }
+    html.dark .cpill.cp-blue  { border-color: rgba(91,132,240,0.4); color: var(--blue-text);  background: var(--blue-bg); }
+    html.dark .cpill.cp-rust  { border-color: rgba(240,112,80,0.4); color: var(--rust-text);  background: var(--rust-bg); }
+    html.dark .cpill.cp-green { border-color: rgba(61,191,140,0.4); color: var(--green-text); background: var(--green-bg); }
+    html.dark .cpill.cp-amber { border-color: rgba(240,168,32,0.4); color: var(--amber-text); background: var(--amber-bg); }
+
+    /* ─── TAB NAV ─── */
+    .tab-nav {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--surface);
+      border-bottom: 1.5px solid var(--border);
+      overflow-x: auto; scrollbar-width: none;
+      box-shadow: var(--shadow-sm);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .tab-nav::-webkit-scrollbar { display: none; }
+
+    .tab-inner {
+      display: flex; min-width: max-content;
+      max-width: 900px; margin: 0 auto; padding: 0 16px;
+    }
+
+    .tab-btn {
+      background: transparent; border: none;
+      border-bottom: 3px solid transparent;
+      color: var(--text3);
+      font-family: var(--sans); font-size: 0.875rem; font-weight: 700;
+      padding: 14px 18px 11px; cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap; margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--text2); }
+    .tab-btn.t-blue  { color: var(--blue-text);  border-bottom-color: var(--blue); }
+    .tab-btn.t-rust  { color: var(--rust-text);  border-bottom-color: var(--rust); }
+    .tab-btn.t-green { color: var(--green-text); border-bottom-color: var(--green); }
+    .tab-btn.t-amber { color: var(--amber-text); border-bottom-color: var(--amber); }
+    .tab-btn.t-gray  { color: var(--purple);     border-bottom-color: var(--purple); }
+
+    /* ─── MAIN ─── */
+    main { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
+
+    .quiz-section { display: none; }
+    .quiz-section.active { display: block; animation: sectionIn 0.3s ease both; }
+    @keyframes sectionIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── SECTION HEADER ─── */
+    .sec-head { margin-bottom: 24px; }
+    .sec-head h2 {
+      font-size: 1.45rem; font-weight: 900;
+      color: var(--text); margin-bottom: 6px; letter-spacing: -0.01em;
+    }
+    .sec-intro {
+      font-size: 0.875rem; color: var(--text3); font-weight: 600;
+      border-left: 3px solid var(--border2);
+      padding-left: 14px; margin-top: 10px;
+    }
+    .si-blue  { border-left-color: var(--blue); }
+    .si-rust  { border-left-color: var(--rust); }
+    .si-green { border-left-color: var(--green); }
+    .si-amber { border-left-color: var(--amber); }
+
+    /* ─── SCORE PANEL ─── */
+    .score-panel {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 18px 22px;
+      margin-bottom: 20px; box-shadow: var(--shadow-sm);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .score-circle {
+      width: 62px; height: 62px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 0.8rem; font-weight: 600;
+      flex-shrink: 0; border: 2.5px solid var(--border2);
+      color: var(--text3); background: var(--surface2);
+    }
+    .sc-blue  { border-color: var(--blue);  color: var(--blue-text);  background: var(--blue-bg); }
+    .sc-rust  { border-color: var(--rust);  color: var(--rust-text);  background: var(--rust-bg); }
+    .sc-green { border-color: var(--green); color: var(--green-text); background: var(--green-bg); }
+    .sc-amber { border-color: var(--amber); color: var(--amber-text); background: var(--amber-bg); }
+
+    .score-info { flex: 1; min-width: 140px; }
+    .score-info h3 { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 2px; }
+    .score-info p  { font-size: 0.8rem; color: var(--text3); font-weight: 600; }
+    .score-nums { font-family: var(--mono); font-size: 0.7rem; color: var(--text2); margin-top: 3px; }
+
+    .reset-btn {
+      padding: 8px 20px; border-radius: 100px;
+      font-size: 0.82rem; font-weight: 700; font-family: var(--sans);
+      border: 1.5px solid var(--border2);
+      background: var(--surface2); color: var(--text2);
+      cursor: pointer; transition: all 0.2s; margin-left: auto; white-space: nowrap;
+    }
+    .reset-btn:hover { border-color: var(--purple); color: var(--purple); background: var(--purple-bg); }
+
+    /* ─── PROGRESS ─── */
+    .progress-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .progress-track {
+      flex: 1; height: 5px; background: var(--border);
+      border-radius: 100px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 100px;
+      transition: width 0.5s cubic-bezier(0.34,1.4,0.64,1);
+    }
+    .pf-blue  { background: var(--blue); }
+    .pf-rust  { background: var(--rust); }
+    .pf-green { background: var(--green); }
+    .pf-amber { background: var(--amber); }
+    .progress-text { font-family: var(--mono); font-size: 0.68rem; color: var(--text3); white-space: nowrap; }
+
+    /* ─── QUIZ CARD ─── */
+    .quiz-card {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      box-shadow: var(--shadow); animation: cardIn 0.3s ease both;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .quiz-card.hidden { display: none; }
+
+    .q-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .q-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); }
+
+    .q-badge {
+      font-size: 0.68rem; font-weight: 700;
+      padding: 3px 12px; border-radius: 100px;
+      border: 1px solid var(--border2); color: var(--text3);
+      background: var(--surface2);
+    }
+    .qb-blue  { border-color: rgba(63,109,232,0.35); color: var(--blue-text);  background: var(--blue-bg); }
+    .qb-rust  { border-color: rgba(224,92,58,0.35);  color: var(--rust-text);  background: var(--rust-bg); }
+    .qb-green { border-color: rgba(26,158,114,0.35); color: var(--green-text); background: var(--green-bg); }
+    .qb-amber { border-color: rgba(201,128,0,0.35);  color: var(--amber-text); background: var(--amber-bg); }
+
+    .q-text { font-size: 1.05rem; font-weight: 700; line-height: 1.8; color: var(--text); margin-bottom: 18px; }
+    .q-hint {
+      font-size: 0.82rem; color: var(--text3); font-style: italic; font-weight: 600;
+      margin-bottom: 12px; padding: 8px 14px;
+      background: var(--purple-bg); border-radius: var(--radius-sm);
+      border-left: 3px solid var(--purple);
+    }
+
+    /* ─── ANSWER ─── */
+    .answer-field {
+      width: 100%; background: var(--surface2);
+      border: 1.5px solid var(--border2); border-radius: var(--radius-sm);
+      padding: 12px 16px; font-family: var(--sans);
+      font-size: 0.95rem; font-weight: 600; color: var(--text);
+      outline: none; resize: vertical; min-height: 52px;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.3s;
+    }
+    .answer-field:focus {
+      border-color: var(--purple); background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(108,95,199,0.15);
+    }
+    .answer-field::placeholder { color: var(--text3); }
+
+    .submit-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+
+    .submit-btn {
+      padding: 11px 28px; border-radius: 100px;
+      font-family: var(--sans); font-size: 0.9rem; font-weight: 800;
+      border: none; cursor: pointer; transition: all 0.2s; color: #fff;
+    }
+    .submit-btn-blue  { background: var(--blue);  box-shadow: 0 4px 14px rgba(63,109,232,0.35); }
+    .submit-btn-rust  { background: var(--rust);  box-shadow: 0 4px 14px rgba(224,92,58,0.35); }
+    .submit-btn-green { background: var(--green); box-shadow: 0 4px 14px rgba(26,158,114,0.35); }
+    .submit-btn-amber { background: var(--amber); box-shadow: 0 4px 14px rgba(201,128,0,0.35); }
+    .submit-btn:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+    .skip-btn {
+      padding: 10px 20px; border-radius: 100px;
+      font-size: 0.84rem; font-weight: 700; font-family: var(--sans);
+      border: 1.5px solid var(--border2); background: transparent;
+      color: var(--text3); cursor: pointer; transition: all 0.2s;
+    }
+    .skip-btn:hover { background: var(--surface2); color: var(--text2); border-color: var(--border2); }
+
+    /* ─── RESULT ─── */
+    .result-panel { display: none; margin-top: 20px; }
+    .result-panel.show { display: block; animation: cardIn 0.3s ease both; }
+
+    .result-verdict {
+      padding: 12px 18px; display: flex; align-items: center;
+      gap: 10px; font-weight: 800; font-size: 0.9rem;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    }
+    .verdict-correct { background: var(--green-bg); color: var(--green-text); border: 1.5px solid rgba(26,158,114,0.25); }
+    .verdict-wrong   { background: var(--rust-bg);  color: var(--rust-text);  border: 1.5px solid rgba(224,92,58,0.25); }
+
+    .result-your-answer {
+      padding: 8px 18px; background: var(--surface2);
+      border-left: 1.5px solid var(--border2); border-right: 1.5px solid var(--border2);
+      font-size: 0.82rem; color: var(--text3); font-style: italic; font-weight: 600;
+    }
+    .result-steps {
+      padding: 20px 22px; background: var(--surface2);
+      border: 1.5px solid var(--border2); border-top: none;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+    .result-steps h4 {
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text3); margin-bottom: 14px;
+    }
+    .step-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .step-item {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: 0.9rem; line-height: 1.7; font-weight: 600; color: var(--text2);
+    }
+    .step-num {
+      font-family: var(--mono); font-size: 0.62rem;
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--amber-bg); color: var(--amber-text);
+      border: 1px solid rgba(201,128,0,0.3);
+      flex-shrink: 0; margin-top: 3px; font-weight: 600;
+    }
+    .final-answer {
+      margin-top: 14px; padding: 12px 16px;
+      background: var(--amber-bg); border: 1.5px solid rgba(201,128,0,0.25);
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem; font-weight: 700; color: var(--amber-text);
+    }
+
+    /* ─── NAV CONTROLS ─── */
+    .nav-controls { display: flex; gap: 8px; margin-top: 20px; justify-content: flex-end; }
+    .nav-ctrl-btn {
+      padding: 9px 22px; border-radius: 100px;
+      font-size: 0.84rem; font-weight: 700; font-family: var(--sans);
+      border: 1.5px solid var(--border2); background: var(--surface2);
+      color: var(--text2); cursor: pointer; transition: all 0.2s;
+    }
+    .nav-ctrl-btn:hover { border-color: var(--purple); color: var(--purple); background: var(--purple-bg); }
+    .nav-ctrl-btn.primary { background: var(--purple-bg); border-color: rgba(108,95,199,0.35); color: var(--purple); }
+    .nav-ctrl-btn.primary:hover { background: var(--purple); color: #fff; }
+
+    /* ─── COMPLETE STATE ─── */
+    .section-complete {
+      display: none; text-align: center; padding: 48px 28px;
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .section-complete.show { display: block; animation: cardIn 0.35s ease both; }
+    .complete-icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .complete-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; color: var(--text); letter-spacing: -0.02em; }
+    .complete-sub { font-size: 0.88rem; color: var(--text3); font-weight: 600; margin-bottom: 16px; }
+    .complete-grade { font-family: var(--mono); font-size: 2rem; margin: 14px 0; color: var(--green-text); font-weight: 600; }
+
+    /* ─── NOTES ─── */
+    .notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 620px) { .notes-grid { grid-template-columns: 1fr; } }
+
+    .note-card {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 22px;
+      box-shadow: var(--shadow-sm); transition: background 0.3s, border-color 0.3s;
+    }
+    .note-card.full { grid-column: 1 / -1; }
+
+    .note-card-title {
+      font-size: 0.7rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 16px;
+      padding-bottom: 12px; border-bottom: 1.5px solid var(--border);
+    }
+    .note-block {
+      padding: 7px 0; font-size: 0.9rem; font-weight: 600;
+      line-height: 1.75; border-bottom: 1px solid var(--border);
+      color: var(--text2);
+    }
+    .note-block:last-child { border-bottom: none; }
+    .note-block strong { color: var(--text); font-weight: 800; }
+
+    .formula-box {
+      background: var(--surface2); border: 1.5px solid var(--border);
+      border-left: 3px solid var(--purple);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px; margin: 8px 0;
+      font-size: 0.9rem; line-height: 2.2; color: var(--text);
+    }
+    .note-divider { height: 1px; background: var(--border); margin: 12px 0; }
+
+    /* real-life callout */
+    .reallife-box {
+      background: var(--blue-bg); border: 1.5px solid rgba(63,109,232,0.25);
+      border-left: 3px solid var(--blue);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px; margin: 10px 0;
+      font-size: 0.85rem; color: var(--blue-text); font-weight: 600; line-height: 1.6;
+    }
+    .reallife-box strong { font-weight: 800; }
+
+    /* method steps inside notes */
+    .method-steps { list-style: none; margin: 8px 0; display: flex; flex-direction: column; gap: 6px; }
+    .method-steps li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.88rem; font-weight: 600; color: var(--text2); line-height: 1.6; }
+    .method-steps li .ms-num {
+      width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-family: var(--mono); font-size: 0.6rem;
+      background: var(--green-bg); color: var(--green-text); border: 1px solid rgba(26,158,114,0.3);
+      flex-shrink: 0; margin-top: 2px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center; padding: 28px 24px;
+      border-top: 1.5px solid var(--border);
+      color: var(--text3); font-size: 0.8rem; font-weight: 600;
+      background: var(--surface);
+    }
+
+    /* ─── SYLLABUS BUBBLE ─── */
+    .syllabus-bubble {
+      margin: 18px 0 6px;
+      background: rgba(255,255,255,0.10);
+      border: 1.5px solid rgba(255,255,255,0.22);
+      border-radius: 18px;
+      padding: 16px 22px;
+      backdrop-filter: blur(10px);
+      display: inline-block;
+      max-width: 100%;
+    }
+    html.dark .syllabus-bubble {
+      background: rgba(108,95,199,0.13);
+      border-color: rgba(139,127,212,0.28);
+    }
+    .syllabus-bubble-title {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    html.dark .syllabus-bubble-title { color: var(--purple-l); }
+    .syllabus-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .syllabus-list li {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.88);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 100px;
+      padding: 4px 13px 4px 9px;
+      white-space: nowrap;
+    }
+    html.dark .syllabus-list li {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.1);
+      color: var(--text2);
+    }
+    .syllabus-list li .syl-num {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.22);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.6rem; font-weight: 800;
+      color: rgba(255,255,255,0.9);
+      flex-shrink: 0;
+      font-family: var(--mono);
+    }
+    html.dark .syllabus-list li .syl-num {
+      background: var(--purple-bg);
+      color: var(--purple-l);
+    }
+    .syl-blue  .syl-num { background: rgba(91,132,240,0.4);  color: #c0d4ff; }
+    .syl-rust  .syl-num { background: rgba(224,92,58,0.4);   color: #ffd0c4; }
+    .syl-green .syl-num { background: rgba(26,158,114,0.4);  color: #a0f0d4; }
+    .syl-rust2 .syl-num { background: rgba(224,92,58,0.3);   color: #ffd0c4; }
+    .syl-amber .syl-num { background: rgba(201,128,0,0.4);   color: #ffe0a0; }
+    .syl-purple .syl-num { background: rgba(108,95,199,0.4); color: #d4c8ff; }
+
+    /* ─── NOTES TOPIC NAV ─── */
+    .notes-topic-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .topic-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 18px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border2);
+      background: var(--surface);
+      color: var(--text2);
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-sm);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .topic-btn::after {
+      content: '→';
+      position: absolute;
+      right: 16px;
+      opacity: 0.4;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .topic-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .topic-btn:hover::after { opacity: 1; right: 12px; }
+    .topic-btn .tb-dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }
+    .topic-btn .tb-label { flex: 1; }
+    .topic-btn.tb-blue  { border-color: rgba(63,109,232,0.35);  color: var(--blue-text);  background: var(--blue-bg); }
+    .topic-btn.tb-blue:hover  { background: var(--blue);  color: #fff; border-color: var(--blue); }
+    .topic-btn.tb-rust  { border-color: rgba(224,92,58,0.35);   color: var(--rust-text);  background: var(--rust-bg); }
+    .topic-btn.tb-rust:hover  { background: var(--rust);  color: #fff; border-color: var(--rust); }
+    .topic-btn.tb-green { border-color: rgba(26,158,114,0.35);  color: var(--green-text); background: var(--green-bg); }
+    .topic-btn.tb-green:hover { background: var(--green); color: #fff; border-color: var(--green); }
+    .topic-btn.tb-rust2 { border-color: rgba(224,92,58,0.25);   color: var(--rust-text);  background: var(--rust-bg); }
+    .topic-btn.tb-rust2:hover { background: var(--rust);  color: #fff; border-color: var(--rust); }
+    .topic-btn.tb-amber { border-color: rgba(201,128,0,0.35);   color: var(--amber-text); background: var(--amber-bg); }
+    .topic-btn.tb-amber:hover { background: var(--amber); color: #fff; border-color: var(--amber); }
+    .topic-btn.tb-purple{ border-color: rgba(108,95,199,0.35);  color: var(--purple);     background: var(--purple-bg); }
+    .topic-btn.tb-purple:hover{ background: var(--purple); color: #fff; border-color: var(--purple); }
+    .topic-btn.tb-teal  { border-color: rgba(26,158,114,0.35);  color: var(--green-text); background: var(--green-bg); }
+    .topic-btn.tb-teal:hover  { background: var(--green); color: #fff; border-color: var(--green); }
+    .topic-btn .tb-dot.dot-blue   { background: var(--blue); }
+    .topic-btn.tb-blue:hover .tb-dot  { background: #fff; }
+    .topic-btn .tb-dot.dot-rust   { background: var(--rust); }
+    .topic-btn.tb-rust:hover .tb-dot  { background: #fff; }
+    .topic-btn .tb-dot.dot-rust2  { background: var(--rust); }
+    .topic-btn.tb-rust2:hover .tb-dot { background: #fff; }
+    .topic-btn .tb-dot.dot-green  { background: var(--green); }
+    .topic-btn.tb-green:hover .tb-dot { background: #fff; }
+    .topic-btn .tb-dot.dot-amber  { background: var(--amber); }
+    .topic-btn.tb-amber:hover .tb-dot { background: #fff; }
+    .topic-btn .tb-dot.dot-purple { background: var(--purple); }
+    .topic-btn.tb-purple:hover .tb-dot{ background: #fff; }
+    .topic-btn .tb-dot.dot-teal   { background: var(--green); }
+    .topic-btn.tb-teal:hover .tb-dot  { background: #fff; }
+
+    /* ─── TOPIC PANEL (full content view) ─── */
+    .topic-panel { display: none; }
+    .topic-panel.active { display: block; animation: sectionIn 0.3s ease both; }
+    .topic-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 100px;
+      border: 1.5px solid var(--border2);
+      background: var(--surface2);
+      color: var(--text2);
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 20px;
+    }
+    .topic-back-btn:hover { border-color: var(--purple); color: var(--purple); background: var(--purple-bg); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      .quiz-card { padding: 20px 16px; }
+      main { padding: 20px 14px 60px; }
+      .header-inner { padding: 18px 0 0; }
+      .book-btn { padding: 9px 14px; font-size: 0.8rem; }
+      .submit-btn { padding: 10px 22px; }
+      .score-panel { padding: 14px 16px; gap: 12px; }
+      .theme-toggle span { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="header-title-group">
+        <div class="header-badge">📐 Exam Preparation</div>
+        <h1 class="header-h1">Calculus &amp; Analytical Geometry</h1>
+        <p class="header-sub">Anton, Bivens &amp; Davis — 10th Edition &nbsp;·&nbsp; Ch. 2.5, 2.6, 3.2, 4.1, 4.2, 4.3</p>
+        <p class="header-authors">✏️ Made by <strong>Mohid Ahmed</strong> &amp; <strong>Hanan Shafay</strong></p>
+      </div>
+      <a href="CalculusBook.pdf" target="_blank" class="book-btn">
+        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Open Textbook
+      </a>
+    </div>
+    <div class="chapter-pills">
+      <span class="cpill cp-blue">Ch.2.5 · Trig Derivatives</span>
+      <span class="cpill cp-rust">Ch.2.6 · Chain Rule</span>
+      <span class="cpill cp-green">Ch.3.2 · Relative Extrema</span>
+      <span class="cpill cp-amber">Ch.4.1–4.3 · Integration</span>
+      <span class="cpill cp-blue">Ch.6.2 · Logarithmic Derivatives</span>
+      <span class="cpill cp-rust">Ch.6.3 · Exponential Derivatives</span>
+      <span class="cpill">📒 Notes</span>
+    </div>
+
+    <!-- SYLLABUS BUBBLE -->
+    <div class="syllabus-bubble">
+      <div class="syllabus-bubble-title">📋 Calculus Syllabus</div>
+      <ul class="syllabus-list">
+        <li class="syl-blue">  <span class="syl-num">1</span> Differentiation of Trigonometric Functions</li>
+        <li class="syl-rust">  <span class="syl-num">2</span> Chain Rule</li>
+        <li class="syl-green"> <span class="syl-num">3</span> Relative Minima &amp; Maxima</li>
+        <li class="syl-rust2"> <span class="syl-num">4</span> Absolute Minima &amp; Maxima</li>
+        <li class="syl-amber"> <span class="syl-num">5</span> Indefinite Integrals</li>
+        <li class="syl-purple"><span class="syl-num">6</span> Integration by Substitution</li>
+        <li class="syl-blue">  <span class="syl-num">6.2</span> Derivatives of Logarithmic Functions</li>
+        <li class="syl-rust">  <span class="syl-num">6.3</span> Derivatives of Exponential Functions</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<!-- ══ TAB NAV ══ -->
+<nav class="tab-nav">
+  <div class="tab-inner">
+    <button class="tab-btn" id="nb-notes"    onclick="switchTab('sect-notes','gray')">📒 Formula Notes</button>
+    <button class="tab-btn" id="nb-trig"     onclick="switchTab('sect-trig','blue')">Ch.2.5 · Trig Derivatives</button>
+    <button class="tab-btn" id="nb-chain"    onclick="switchTab('sect-chain','rust')">Ch.2.6 · Chain Rule</button>
+    <button class="tab-btn" id="nb-log"      onclick="switchTab('sect-log','blue')">Ch.6.2 · Log Derivatives</button>
+    <button class="tab-btn" id="nb-exp"      onclick="switchTab('sect-exp','rust')">Ch.6.3 · Exp Derivatives</button>
+    <button class="tab-btn" id="nb-extrema"  onclick="switchTab('sect-extrema','green')">Extrema</button>
+    <button class="tab-btn" id="nb-integral" onclick="switchTab('sect-integral','amber')">Integration</button>
+    <button class="tab-btn" id="nb-overall"  onclick="switchTab('sect-overall','blue')">Overall Quiz</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════ NOTES ══════════════════════════ -->
+<section class="quiz-section" id="sect-notes">
+  <div id="notes-home">
+  <div class="sec-head">
+    <h2>Formula Notes &amp; Key Concepts</h2>
+    <p class="sec-intro">Select a topic below to view all formulas, methods, and real-life motivation.</p>
+  </div>
+
+  <!-- TOPIC NAV BUTTONS -->
+  <div class="notes-topic-nav">
+    <button class="topic-btn tb-blue"   onclick="openTopic('topic-trig')">   <span class="tb-dot dot-blue"></span>   <span class="tb-label">Trig Derivatives<br><small style="font-weight:600;opacity:0.75;">Ch. 2.5</small></span></button>
+    <button class="topic-btn tb-rust"   onclick="openTopic('topic-chain')">  <span class="tb-dot dot-rust"></span>   <span class="tb-label">Chain Rule<br><small style="font-weight:600;opacity:0.75;">Ch. 2.6</small></span></button>
+    <button class="topic-btn tb-teal"   onclick="openTopic('topic-log')">    <span class="tb-dot dot-teal"></span>   <span class="tb-label">Logarithmic Derivatives<br><small style="font-weight:600;opacity:0.75;">Ch. 6.2</small></span></button>
+    <button class="topic-btn tb-rust"   onclick="openTopic('topic-exp')">    <span class="tb-dot dot-rust"></span>   <span class="tb-label">Exponential Derivatives<br><small style="font-weight:600;opacity:0.75;">Ch. 6.3</small></span></button>
+    <button class="topic-btn tb-green"  onclick="openTopic('topic-relext')"> <span class="tb-dot dot-green"></span>  <span class="tb-label">Relative Min &amp; Max<br><small style="font-weight:600;opacity:0.75;">Ch. 3.2</small></span></button>
+    <button class="topic-btn tb-rust2"  onclick="openTopic('topic-absext')"> <span class="tb-dot dot-rust2"></span>  <span class="tb-label">Absolute Min &amp; Max<br><small style="font-weight:600;opacity:0.75;">Ch. 3.2</small></span></button>
+    <button class="topic-btn tb-amber"  onclick="openTopic('topic-area')">   <span class="tb-dot dot-amber"></span>  <span class="tb-label">Area &amp; Integration Concept<br><small style="font-weight:600;opacity:0.75;">Ch. 4.1</small></span></button>
+    <button class="topic-btn tb-amber"  onclick="openTopic('topic-indef')">  <span class="tb-dot dot-amber"></span>  <span class="tb-label">Indefinite Integrals<br><small style="font-weight:600;opacity:0.75;">Ch. 4.2</small></span></button>
+    <button class="topic-btn tb-purple" onclick="openTopic('topic-usub')">   <span class="tb-dot dot-purple"></span> <span class="tb-label">Integration by Substitution<br><small style="font-weight:600;opacity:0.75;">Ch. 4.3</small></span></button>
+  </div>
+  </div><!-- end notes-home -->
+
+  <!-- TOPIC PANELS -->
+  <div id="topic-trig" class="topic-panel">
+    <button class="topic-back-btn" onclick="closeTopic()">← Back to Topics</button>
+    <div class="notes-grid">
+
+    <!-- Ch.2.5 FORMULAS -->
+    <div class="note-card full" id="note-trig">
+      <div class="note-card-title">Ch. 2.5 — Derivatives of Trigonometric Functions · All Formulas</div>
+      <div class="notes-grid" style="gap:12px;margin-top:0;">
+        <div>
+          <div class="formula-box">
+            $\dfrac{d}{dx}[\sin x] = \cos x$<br>
+            $\dfrac{d}{dx}[\cos x] = -\sin x$<br>
+            $\dfrac{d}{dx}[\tan x] = \sec^2 x$<br>
+            $\dfrac{d}{dx}[\cot x] = -\csc^2 x$<br>
+            $\dfrac{d}{dx}[\sec x] = \sec x\tan x$<br>
+            $\dfrac{d}{dx}[\csc x] = -\csc x\cot x$
+          </div>
+        </div>
+        <div>
+          <div class="note-block"><strong>Key limits used in proofs:</strong></div>
+          <div class="formula-box">
+            $\displaystyle\lim_{h\to 0}\frac{\sin h}{h} = 1$<br>
+            $\displaystyle\lim_{h\to 0}\frac{1-\cos h}{h} = 0$
+          </div>
+          <div class="note-block"><strong>Derived from:</strong> $\tan x = \dfrac{\sin x}{\cos x}$, $\sec x = \dfrac{1}{\cos x}$, etc. — quotient rule applied to these identities gives formulas (5)–(8).</div>
+        </div>
+      </div>
+      <div class="reallife-box" style="margin-top:12px;">
+        <strong>Why it matters:</strong> Oscillating systems — spring-mass, pendulums, AC circuits, ocean waves — all use $\sin$ and $\cos$. Their derivatives tell us velocity and acceleration of the oscillation instantly.
+      </div>
+      <div class="note-block" style="margin-top:12px;"><strong>Method — differentiating trig functions:</strong> Use the formulas directly, combine with Product/Quotient Rule for products like $x\sin x$ or $\frac{\sin x}{1+\cos x}$. Always simplify using trig identities ($\sin^2 x + \cos^2 x = 1$) when possible.</div>
+    </div>
+
+    </div><!-- end notes-grid -->
+  </div><!-- end topic-trig panel -->
+
+  <div id="topic-chain" class="topic-panel">
+    <button class="topic-back-btn" onclick="closeTopic()">← Back to Topics</button>
+    <div class="notes-grid">
+    <div class="note-card full" id="note-chain">
+      <div class="note-card-title">Ch. 2.6 — The Chain Rule · All Formulas</div>
+      <div class="notes-grid" style="gap:12px;margin-top:0;">
+        <div>
+          <div class="note-block"><strong>Leibniz form (two-variable):</strong></div>
+          <div class="formula-box">
+            If $y = f(u)$ and $u = g(x)$, then<br>
+            $\dfrac{dy}{dx} = \dfrac{dy}{du}\cdot\dfrac{du}{dx}$
+          </div>
+          <div class="note-block"><strong>Function form:</strong></div>
+          <div class="formula-box">
+            $\dfrac{d}{dx}[f(g(x))] = f'(g(x))\cdot g'(x)$
+          </div>
+        </div>
+        <div>
+          <div class="note-block"><strong>Generalized derivative formulas (u = g(x)):</strong></div>
+          <div class="formula-box">
+            $\dfrac{d}{dx}[u^r] = ru^{r-1}\dfrac{du}{dx}$<br>
+            $\dfrac{d}{dx}[\sin u] = \cos u\dfrac{du}{dx}$<br>
+            $\dfrac{d}{dx}[\cos u] = -\sin u\dfrac{du}{dx}$<br>
+            $\dfrac{d}{dx}[\tan u] = \sec^2 u\dfrac{du}{dx}$<br>
+            $\dfrac{d}{dx}[\sec u] = \sec u\tan u\dfrac{du}{dx}$<br>
+            $\dfrac{d}{dx}[\ln u] = \dfrac{1}{u}\dfrac{du}{dx}$ &nbsp;(see Ch. 6.2)<br>
+            $\dfrac{d}{dx}[e^u] = e^u\dfrac{du}{dx}$ &nbsp;(see Ch. 6.3)
+          </div>
+        </div>
+      </div>
+      <div class="reallife-box" style="margin-top:12px;">
+        <strong>Why it matters:</strong> Almost every real formula is a composition — e.g. the volume of a balloon depends on radius, which depends on time. The chain rule connects those layers of dependence.
+      </div>
+      <div class="note-block" style="margin-top:10px;"><strong>Method — applying the chain rule:</strong></div>
+      <ul class="method-steps" style="margin-top:6px;">
+        <li><span class="ms-num">1</span><span>Identify the <strong>outside</strong> function $f$ and the <strong>inside</strong> function $g(x)$.</span></li>
+        <li><span class="ms-num">2</span><span>Differentiate the outside: $f'(g(x))$ — evaluate $f'$ at the inside, leaving $g(x)$ untouched.</span></li>
+        <li><span class="ms-num">3</span><span>Multiply by the derivative of the inside: $g'(x)$.</span></li>
+        <li><span class="ms-num">4</span><span>For nested compositions (chain within chain), repeat steps 1–3 from the outside in.</span></li>
+      </ul>
+    </div>
+
+    </div><!-- end notes-grid -->
+  </div><!-- end topic-chain panel -->
+
+  <!-- LOG/LN TOPIC PANEL — Ch. 6.2 -->
+  <div id="topic-log" class="topic-panel">
+    <button class="topic-back-btn" onclick="closeTopic()">← Back to Topics</button>
+    <div class="notes-grid">
+    <div class="note-card full" id="note-log">
+      <div class="note-card-title">Ch. 6.2 — Derivatives of Logarithmic Functions · All Formulas</div>
+      <div class="notes-grid" style="gap:12px;margin-top:0;">
+        <div>
+          <div class="note-block"><strong>Logarithm Laws (all bases):</strong></div>
+          <div class="formula-box">
+            $\ln(a \cdot b) = \ln a + \ln b$<br>
+            $\ln\!\left(\dfrac{a}{b}\right) = \ln a - \ln b$<br>
+            $\ln(a^r) = r\ln a$<br>
+            $\ln 1 = 0 \quad;\quad \ln e = 1$<br>
+            $e^{\ln x} = x \quad;\quad \ln(e^x) = x$<br><br>
+            <strong>Change of Base:</strong><br>
+            $\log_b a = \dfrac{\ln a}{\ln b}$
+          </div>
+        </div>
+        <div>
+          <div class="note-block"><strong>Derivative Formulas:</strong></div>
+          <div class="formula-box">
+            $\dfrac{d}{dx}[\ln x] = \dfrac{1}{x}$<br><br>
+            $\dfrac{d}{dx}[\ln|x|] = \dfrac{1}{x}$<br><br>
+            $\dfrac{d}{dx}[\ln u] = \dfrac{u'}{u}$ &nbsp;(chain rule form)<br><br>
+            $\dfrac{d}{dx}[\log_b x] = \dfrac{1}{x\ln b}$<br><br>
+            $\dfrac{d}{dx}[\log_b u] = \dfrac{u'}{u\ln b}$ &nbsp;(chain rule form)
+          </div>
+        </div>
+      </div>
+      <div class="notes-grid" style="gap:12px;margin-top:12px;">
+        <div class="formula-box" style="border-left-color:var(--green);">
+          <strong>Example 1 — ln with chain rule:</strong><br>
+          $y = \ln(x^2+1)$, &nbsp; $u=x^2+1$, $u'=2x$<br><br>
+          $y' = \dfrac{2x}{x^2+1}$
+        </div>
+        <div class="formula-box" style="border-left-color:var(--blue);">
+          <strong>Example 2 — log base 10:</strong><br>
+          $y = \log_{10}(3x)$, &nbsp; $u=3x$, $u'=3$<br><br>
+          $y' = \dfrac{3}{3x\ln 10} = \dfrac{1}{x\ln 10}$
+        </div>
+        <div class="formula-box" style="border-left-color:var(--amber);">
+          <strong>Example 3 — simplify first:</strong><br>
+          $y = \ln(x^2\sqrt{x+1})$<br>
+          $= 2\ln x + \tfrac{1}{2}\ln(x+1)$<br><br>
+          $y' = \dfrac{2}{x} + \dfrac{1}{2(x+1)}$
+        </div>
+      </div>
+      <div class="reallife-box" style="margin-top:12px;">
+        <strong>Why it matters:</strong> Logarithms appear everywhere — pH (chemistry), decibels (acoustics), the Richter scale, information theory, compound growth. The formula $\tfrac{d}{dx}[\ln x]=\tfrac{1}{x}$ fills the gap in the power rule (which fails at $r=-1$) and gives us $\int\tfrac{1}{x}dx = \ln|x|+C$.
+      </div>
+      <div class="note-block" style="margin-top:10px;"><strong>Logarithmic differentiation:</strong> For messy products/quotients/variable powers, take $\ln$ of both sides, use log laws to break it apart, then differentiate implicitly. Great for $y=x^x$ or $y=\dfrac{x^3\sqrt{x+1}}{(2x-1)^4}$.</div>
+    </div>
+    </div><!-- end notes-grid -->
+  </div><!-- end topic-log panel -->
+
+  <!-- EXPONENTIAL TOPIC PANEL — Ch. 6.3 -->
+  <div id="topic-exp" class="topic-panel">
+    <button class="topic-back-btn" onclick="closeTopic()">← Back to Topics</button>
+    <div class="notes-grid">
+    <div class="note-card full" id="note-exp">
+      <div class="note-card-title">Ch. 6.3 — Derivatives of Exponential Functions · All Formulas</div>
+      <div class="notes-grid" style="gap:12px;margin-top:0;">
+        <div>
+          <div class="note-block"><strong>Core Derivative Formulas:</strong></div>
+          <div class="formula-box">
+            $\dfrac{d}{dx}[e^x] = e^x$<br><br>
+            $\dfrac{d}{dx}[e^u] = e^u\dfrac{du}{dx}$ &nbsp;(chain rule form)<br><br>
+            $\dfrac{d}{dx}[a^x] = a^x\ln a$<br><br>
+            $\dfrac{d}{dx}[a^u] = a^u\ln a\cdot\dfrac{du}{dx}$ &nbsp;(chain rule form)<br><br>
+            <em>Special case: $a=e$ gives $e^x\ln e = e^x\cdot 1 = e^x$ ✓</em>
+          </div>
+        </div>
+        <div>
+          <div class="note-block"><strong>Why $\dfrac{d}{dx}[a^x] = a^x \ln a$:</strong></div>
+          <div class="formula-box" style="border-left-color:var(--blue);">
+            Rewrite $a^x = e^{x\ln a}$ (since $a = e^{\ln a}$)<br><br>
+            Then by chain rule:<br>
+            $\dfrac{d}{dx}[e^{x\ln a}] = e^{x\ln a}\cdot\ln a = a^x\ln a$<br><br>
+            <strong>The $\ln a$ factor is the "cost" of using a base other than $e$.</strong> When $a=e$, $\ln e=1$ and it disappears.
+          </div>
+          <div class="note-block" style="margin-top:10px;"><strong>Exponential Properties (review):</strong></div>
+          <div class="formula-box">
+            $a^0 = 1 \quad;\quad a^1 = a$<br>
+            $a^m \cdot a^n = a^{m+n}$<br>
+            $\dfrac{a^m}{a^n} = a^{m-n}$<br>
+            $(a^m)^n = a^{mn}$<br>
+            $(ab)^n = a^n b^n$
+          </div>
+        </div>
+      </div>
+      <div class="notes-grid" style="gap:12px;margin-top:12px;">
+        <div class="formula-box" style="border-left-color:var(--green);">
+          <strong>Example 1 — basic:</strong><br>
+          $\dfrac{d}{dx}[e^{3x}]$<br><br>
+          $u=3x$, $u'=3$<br>
+          $= e^{3x}\cdot 3 = 3e^{3x}$
+        </div>
+        <div class="formula-box" style="border-left-color:var(--blue);">
+          <strong>Example 2 — base $a$:</strong><br>
+          $\dfrac{d}{dx}[2^x]$<br><br>
+          $a=2$, so multiply by $\ln 2$<br>
+          $= 2^x\ln 2$
+        </div>
+        <div class="formula-box" style="border-left-color:var(--rust);">
+          <strong>Example 3 — chain rule + $a^u$:</strong><br>
+          $\dfrac{d}{dx}[5^{x^2}]$<br><br>
+          $u=x^2$, $u'=2x$, $a=5$<br>
+          $= 5^{x^2}\cdot\ln 5\cdot 2x = 2x\ln 5\cdot 5^{x^2}$
+        </div>
+        <div class="formula-box" style="border-left-color:var(--amber);">
+          <strong>Example 4 — $e^u$ with product:</strong><br>
+          $\dfrac{d}{dx}[x^2 e^x]$ &nbsp; (product rule)<br><br>
+          $= 2x\cdot e^x + x^2\cdot e^x$<br>
+          $= xe^x(2+x)$
+        </div>
+      </div>
+      <div class="reallife-box" style="margin-top:12px;">
+        <strong>Why it matters:</strong> Exponential functions model virtually every continuous growth or decay process — population growth, radioactive decay, compound interest, charging capacitors, cooling/heating (Newton's Law of Cooling). The fact that $\tfrac{d}{dx}[e^x]=e^x$ makes $e$ the "natural" base: the function that is its own rate of change, which is exactly what exponential growth means.
+      </div>
+      <div class="note-block" style="margin-top:10px;"><strong>Key contrast with power rule:</strong> The power rule $\tfrac{d}{dx}[x^n]=nx^{n-1}$ handles <em>variable base, fixed exponent</em>. The exponential rule $\tfrac{d}{dx}[a^x]=a^x\ln a$ handles <em>fixed base, variable exponent</em>. These are fundamentally different — do not mix them up!</div>
+    </div>
+    </div><!-- end notes-grid -->
+  </div><!-- end topic-exp panel -->
+
+  <!-- RELATIVE EXTREMA TOPIC PANEL -->
+  <div id="topic-relext" class="topic-panel">
+    <button class="topic-back-btn" onclick="closeTopic()">← Back to Topics</button>
+
+    <!-- Video Bubble Box -->
+    <div style="
+      background: linear-gradient(135deg, var(--green-bg) 0%, var(--blue-bg) 100%);
+      border: 1.5px solid rgba(26,158,114,0.22);
+      border-radius: 22px;
+      padding: 20px 24px 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 28px rgba(26,158,114,0.10), 0 1px 4px rgba(0,0,0,0.04);
+      position: relative;
+      overflow: hidden;
+    ">
+      <!-- decorative blobs -->
+      <div style="position:absolute;top:-22px;right:-22px;width:100px;height:100px;border-radius:50%;background:rgba(26,158,114,0.09);pointer-events:none;"></div>
+      <div style="position:absolute;bottom:-28px;left:8px;width:70px;height:70px;border-radius:50%;background:rgba(63,109,232,0.07);pointer-events:none;"></div>
+
+      <!-- header row -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <div style="background:linear-gradient(135deg,#1a9e72,#3f6de8);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 12px rgba(26,158,114,0.35);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><polygon points="8,5 19,12 8,19" fill="#fff"/></svg>
+        </div>
+        <div>
+          <div style="font-family:var(--sans);font-size:0.72rem;font-weight:800;color:var(--green-text);letter-spacing:0.07em;text-transform:uppercase;margin-bottom:2px;">Watch &amp; Learn</div>
+          <div style="font-family:var(--sans);font-size:1rem;font-weight:800;color:var(--text);line-height:1.25;">Understand this through videos 🎬</div>
+        </div>
+      </div>
+
+      <!-- two buttons -->
+      <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        <a href="https://youtu.be/fOGyFFMH9LI?si=ZxQPn1UcWLAZV4q2" target="_blank" rel="noopener noreferrer"
+           style="display:inline-flex;align-items:center;gap:9px;background:var(--green);color:#fff;text-decoration:none;padding:11px 22px;border-radius:100px;font-family:var(--sans);font-size:0.85rem;font-weight:800;box-shadow:0 4px 14px rgba(26,158,114,0.38);border:1.5px solid rgba(255,255,255,0.18);transition:transform 0.15s,box-shadow 0.15s;"
+           onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 22px rgba(26,158,114,0.52)';"
+           onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 14px rgba(26,158,114,0.38)';">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="rgba(255,255,255,0.2)"/><polygon points="9,7 17,12 9,17" fill="#fff"/></svg>
+          First Derivative Test
+        </a>
+        <a href="https://youtu.be/bmHa-MPwhAY?si=YQp_GHDWqiobg4k8" target="_blank" rel="noopener noreferrer"
+           style="display:inline-flex;align-items:center;gap:9px;background:var(--blue);color:#fff;text-decoration:none;padding:11px 22px;border-radius:100px;font-family:var(--sans);font-size:0.85rem;font-weight:800;box-shadow:0 4px 14px rgba(63,109,232,0.38);border:1.5px solid rgba(255,255,255,0.18);transition:transform 0.15s,box-shadow 0.15s;"
+           onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 22px rgba(63,109,232,0.52)';"
+           onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 14px rgba(63,109,232,0.38)';">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="5" fill="rgba(255,255,255,0.2)"/><polygon points="9,7 17,12 9,17" fill="#fff"/></svg>
+          Second Derivative Test
+        </a>
+      </div>
+    </div>
+
+    <div class="notes-grid">
+
+    <!-- Ch.3.2 FORMULAS -->
+    <div class="note-card full" id="note-relext">
+      <div class="note-card-title">Ch. 3.2 — Relative Extrema & Graphing Polynomials · All Formulas & Theorems</div>
+
+      <!-- CRITICAL POINT DEFINITION -->
+      <div class="note-block" style="margin-bottom:10px;"><strong>Critical Point:</strong> $x_0$ is a critical point of $f$ if $f'(x_0)=0$ (called a <em>stationary point</em>) or $f'(x_0)$ does not exist. Extrema can only happen at critical points — but not every critical point is an extremum.</div>
+
+      <!-- RELATIVE MINIMA / MAXIMA TITLE -->
+      <div class="note-block" style="margin-top:6px;font-size:1rem;color:var(--green-text);"><strong>🔺 Relative Minima &amp; Maxima</strong></div>
+      <div class="note-block" style="margin-bottom:8px;">A <strong>relative (local) maximum</strong> is a point where $f$ is higher than all nearby points — a local "peak." A <strong>relative (local) minimum</strong> is a point where $f$ is lower than all nearby points — a local "valley." There are <strong>two tests</strong> to classify them:</div>
+
+      <!-- ══ FIRST DERIVATIVE TEST ══ -->
+      <div style="margin-top:14px;padding:18px 20px;background:var(--blue-bg);border:1.5px solid rgba(63,109,232,0.22);border-left:4px solid var(--blue);border-radius:var(--radius-sm);">
+        <div style="font-size:1rem;font-weight:800;color:var(--blue-text);margin-bottom:8px;">📈 Test 1 — First Derivative Test</div>
+
+        <div class="note-block"><strong>Core Idea:</strong> $f'(x)$ tells you whether the function is <em>increasing</em> (going uphill) or <em>decreasing</em> (going downhill) at any point. At a critical point, look at what happens to $f'$ just before and just after it — the direction change reveals whether you're at a peak or a valley.</div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0;">
+          <div class="formula-box" style="border-left-color:var(--rust);">
+            <strong style="color:var(--rust-text);">Case 1 → Relative Maximum</strong><br><br>
+            $f'$ goes from <strong style="color:var(--green);">positive (+)</strong> to <strong style="color:var(--rust);">negative (−)</strong><br><br>
+            Left of $x_0$: $f' > 0$ → function <strong>rising ↗</strong><br>
+            Right of $x_0$: $f' < 0$ → function <strong>falling ↘</strong><br><br>
+            Rising then falling = a <strong style="color:var(--rust);">PEAK = Relative Maximum</strong>
+          </div>
+          <div class="formula-box" style="border-left-color:var(--green);">
+            <strong style="color:var(--green-text);">Case 2 → Relative Minimum</strong><br><br>
+            $f'$ goes from <strong style="color:var(--rust);">negative (−)</strong> to <strong style="color:var(--green);">positive (+)</strong><br><br>
+            Left of $x_0$: $f' < 0$ → function <strong>falling ↘</strong><br>
+            Right of $x_0$: $f' > 0$ → function <strong>rising ↗</strong><br><br>
+            Falling then rising = a <strong style="color:var(--green);">VALLEY = Relative Minimum</strong>
+          </div>
+        </div>
+        <div class="formula-box" style="border-left-color:var(--text3);margin-bottom:12px;">
+          <strong>Case 3 → Neither:</strong> If $f'$ has the <strong>same sign</strong> on both sides (both + or both −), the function doesn't reverse direction — no peak or valley, just a flat inflection point.
+        </div>
+
+        <div class="note-block" style="margin-bottom:8px;"><strong>📋 How to Apply it — Step by Step:</strong></div>
+        <ul class="method-steps">
+          <li><span class="ms-num">1</span><span><strong>Find $f'(x)$</strong> and solve $f'(x) = 0$. Also find any $x$ where $f'$ doesn't exist. These are your critical points.</span></li>
+          <li><span class="ms-num">2</span><span><strong>Draw a number line</strong> and mark all critical points on it. They split the line into intervals.</span></li>
+          <li><span class="ms-num">3</span><span><strong>Pick a test value</strong> inside each interval and plug it into $f'(x)$. Record the sign (+ or −) for that whole interval.</span></li>
+          <li><span class="ms-num">4</span><span><strong>Read the sign changes</strong> at each critical point: $(+\to-)$ = max, $(-\to+)$ = min, same sign = neither.</span></li>
+          <li><span class="ms-num">5</span><span><strong>Find the $y$-value</strong> at each extremum by plugging $x_0$ back into the original $f(x)$.</span></li>
+        </ul>
+
+        <div class="formula-box" style="margin-top:12px;border-left-color:var(--blue);">
+          <strong>Fully Worked Example:</strong> &nbsp;$f(x) = x^3 - 3x$<br><br>
+          <strong>Step 1:</strong> $f'(x) = 3x^2 - 3 = 3(x^2-1) = 3(x-1)(x+1)$<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;Set $f'=0$: $x = -1$ and $x = 1$ &nbsp;← critical points<br><br>
+          <strong>Step 2 &amp; 3:</strong> Sign chart for $f'(x)$:<br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<code style="font-family:var(--mono);font-size:0.82rem;letter-spacing:0.03em;">
+          ←——————|——————|——————→<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x=−1&nbsp;&nbsp;&nbsp;x=+1<br>
+          test: x=−2 &nbsp;&nbsp;&nbsp;x=0 &nbsp;&nbsp;&nbsp;x=2<br>
+          f'(−2)=9 &nbsp;&nbsp;f'(0)=−3 &nbsp;f'(2)=9<br>
+          &nbsp;&nbsp;&nbsp;(+) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(−) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+)
+          </code><br><br>
+          <strong>Step 4:</strong><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;At $x=-1$: sign changes $(+) \to (-)$ &nbsp;⟹&nbsp; <strong style="color:var(--rust);">Relative Maximum</strong><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;At $x=+1$: sign changes $(-) \to (+)$ &nbsp;⟹&nbsp; <strong style="color:var(--green);">Relative Minimum</strong><br><br>
+          <strong>Step 5:</strong><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;$f(-1) = (-1)^3 - 3(-1) = -1+3 = 2$ &nbsp;⟹&nbsp; <strong style="color:var(--rust);">Relative Max at $(-1,\;2)$</strong><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;$f(1) = (1)^3 - 3(1) = 1-3 = -2$ &nbsp;⟹&nbsp; <strong style="color:var(--green);">Relative Min at $(1,\;-2)$</strong>
+        </div>
+        <div class="note-block" style="margin-top:8px;">✅ <strong>Advantage:</strong> Works even when $f'(x_0)$ doesn't exist (cusps, sharp corners). This is the most universal and reliable test.</div>
+      </div>
+
+      <!-- ══ SECOND DERIVATIVE TEST ══ -->
+      <div style="margin-top:16px;padding:18px 20px;background:var(--amber-bg);border:1.5px solid rgba(201,128,0,0.22);border-left:4px solid var(--amber);border-radius:var(--radius-sm);">
+        <div style="font-size:1rem;font-weight:800;color:var(--amber-text);margin-bottom:8px;">📐 Test 2 — Second Derivative Test</div>
+
+        <div class="note-block"><strong>Core Idea:</strong> $f''(x)$ measures <em>concavity</em> — whether the curve is bending upward (like a bowl ∪) or bending downward (like a hill ∩). At a stationary point where the function is momentarily flat ($f'=0$), the concavity tells you everything: if it bends upward, you must be at the bottom of a bowl = minimum; if it bends downward, you must be at the top of a hill = maximum.</div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0;">
+          <div class="formula-box" style="border-left-color:var(--green);">
+            <strong style="color:var(--green-text);">$f''(x_0) > 0$ → Relative Minimum</strong><br><br>
+            Curve is <strong>concave up ∪</strong> at $x_0$<br>
+            (bowl shape — opens upward)<br><br>
+            You are at the <strong>bottom of the bowl</strong><br>
+            ⟹ <strong style="color:var(--green);">Relative Minimum</strong><br><br>
+            <em>Think: smiley face ☺ — the middle is the lowest point.</em>
+          </div>
+          <div class="formula-box" style="border-left-color:var(--rust);">
+            <strong style="color:var(--rust-text);">$f''(x_0) < 0$ → Relative Maximum</strong><br><br>
+            Curve is <strong>concave down ∩</strong> at $x_0$<br>
+            (hill shape — opens downward)<br><br>
+            You are at the <strong>top of the hill</strong><br>
+            ⟹ <strong style="color:var(--rust);">Relative Maximum</strong><br><br>
+            <em>Think: sad face ☹ — the middle is the highest point.</em>
+          </div>
+        </div>
+        <div class="formula-box" style="border-left-color:var(--text3);margin-bottom:12px;">
+          <strong>$f''(x_0) = 0$ → Inconclusive ⚠️</strong><br>
+          The second derivative test gives no information. You must fall back to the <strong>First Derivative Test</strong> (sign chart method) to classify the critical point.
+        </div>
+
+        <div class="note-block" style="margin-bottom:8px;"><strong>📋 How to Apply it — Step by Step:</strong></div>
+        <ul class="method-steps">
+          <li><span class="ms-num">1</span><span><strong>Find $f'(x)$</strong> and solve $f'(x) = 0$ to get the <em>stationary points</em>. (Points where $f'$ doesn't exist cannot be tested this way.)</span></li>
+          <li><span class="ms-num">2</span><span><strong>Find $f''(x)$</strong> by differentiating $f'(x)$ once more.</span></li>
+          <li><span class="ms-num">3</span><span><strong>Plug each stationary point $x_0$</strong> into $f''(x)$. Evaluate the sign of $f''(x_0)$.</span></li>
+          <li><span class="ms-num">4</span><span><strong>Read the result:</strong> $f''(x_0)>0$ → min, $f''(x_0)<0$ → max, $f''(x_0)=0$ → go back to Test 1.</span></li>
+          <li><span class="ms-num">5</span><span><strong>Find the $y$-value</strong> by computing $f(x_0)$ to state the full coordinate of the extremum.</span></li>
+        </ul>
+
+        <div class="formula-box" style="margin-top:12px;border-left-color:var(--amber);">
+          <strong>Fully Worked Example:</strong> &nbsp;$f(x) = x^3 - 3x$ &nbsp;(same function as above)<br><br>
+          <strong>Step 1:</strong> $f'(x) = 3x^2 - 3 = 0$ &nbsp;⟹&nbsp; $x^2 = 1$ &nbsp;⟹&nbsp; $x = -1$ and $x = 1$<br><br>
+          <strong>Step 2:</strong> $f''(x) = \dfrac{d}{dx}[3x^2 - 3] = 6x$<br><br>
+          <strong>Step 3 &amp; 4:</strong><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;At $x = -1$: &nbsp;$f''(-1) = 6(-1) = -6$ &nbsp;&lt; 0 &nbsp;⟹&nbsp; <strong style="color:var(--rust);">Concave Down → Relative Maximum</strong><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;At $x = +1$: &nbsp;$f''(1) = 6(1) = +6$ &nbsp;&gt; 0 &nbsp;⟹&nbsp; <strong style="color:var(--green);">Concave Up → Relative Minimum</strong><br><br>
+          <strong>Step 5:</strong><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;$f(-1) = -1+3 = 2$ &nbsp;⟹&nbsp; <strong style="color:var(--rust);">Relative Max at $(-1,\;2)$</strong> ✓<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;$f(1) = 1-3 = -2$ &nbsp;⟹&nbsp; <strong style="color:var(--green);">Relative Min at $(1,\;-2)$</strong> ✓<br><br>
+          <em>Same answer as the First Derivative Test — both tests always agree when both are applicable.</em>
+        </div>
+        <div class="note-block" style="margin-top:8px;">⚠️ <strong>Limitation:</strong> Only works at <em>stationary</em> points (where $f'(x_0)=0$). If the critical point comes from $f'$ being undefined, you <strong>must</strong> use the First Derivative Test instead.</div>
+      </div>
+
+      <!-- QUICK COMPARISON TABLE -->
+      <div style="margin-top:16px;padding:14px 18px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--radius-sm);">
+        <div style="font-size:0.82rem;font-weight:800;color:var(--text2);margin-bottom:10px;letter-spacing:0.05em;">⚖️ WHICH TEST SHOULD YOU USE?</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="font-size:0.82rem;font-weight:700;color:var(--blue-text);padding:10px 14px;background:var(--blue-bg);border-radius:var(--radius-sm);border:1px solid rgba(63,109,232,0.2);">
+            <strong>Use First Derivative Test when:</strong><br>
+            • $f'(x_0)$ doesn't exist at the critical point<br>
+            • $f''$ is hard to compute<br>
+            • Second Derivative Test gives $f''=0$<br>
+            • You want 100% certainty (always works)
+          </div>
+          <div style="font-size:0.82rem;font-weight:700;color:var(--amber-text);padding:10px 14px;background:var(--amber-bg);border-radius:var(--radius-sm);border:1px solid rgba(201,128,0,0.2);">
+            <strong>Use Second Derivative Test when:</strong><br>
+            • Critical point comes from $f'(x_0)=0$<br>
+            • $f''$ is easy to compute<br>
+            • You want a quick one-step answer<br>
+            • You don't need to build a sign chart
+          </div>
+        </div>
+      </div>
+
+      <div class="reallife-box" style="margin-top:14px;">
+        <strong>Why it matters:</strong> Relative maxima and minima tell you local peaks and valleys — e.g. a profit function's local max shows when a pricing strategy is most effective in a range, even if it's not the all-time best.
+      </div>
+    </div>
+
+    </div><!-- end notes-grid -->
+  </div><!-- end topic-relext panel -->
+
+  <!-- ABSOLUTE EXTREMA TOPIC PANEL -->
+  <div id="topic-absext" class="topic-panel">
+    <button class="topic-back-btn" onclick="closeTopic()">← Back to Topics</button>
+    <div class="notes-grid">
+
+    <!-- ABSOLUTE EXTREMA — NEW SECTION -->
+    <div class="note-card full" id="note-absext" style="border-left: 3px solid var(--rust);">
+      <div class="note-card-title" style="color:var(--rust);">Ch. 3.2 — Absolute Minima & Maxima · Extreme Value Theorem</div>
+
+      <div class="note-block" style="margin-bottom:10px;">
+        An <strong>absolute (global) maximum</strong> is the single highest value $f$ attains over its entire domain (or a closed interval). An <strong>absolute (global) minimum</strong> is the single lowest value. Unlike relative extrema — which are just "locally" highest or lowest — absolute extrema are the <em>overall</em> winner and loser.
+      </div>
+
+      <div class="notes-grid" style="gap:16px;margin-top:0;">
+        <div>
+          <div class="formula-box">
+            <strong>Extreme Value Theorem (EVT):</strong><br>
+            If $f$ is <em>continuous</em> on a <em>closed</em> interval $[a,b]$, then $f$ is guaranteed to attain both an absolute maximum and an absolute minimum on $[a,b]$.<br><br>
+            <em>Note: Both conditions matter — continuity AND a closed interval. If either fails, the guarantee is gone.</em>
+          </div>
+          <div class="note-block"><strong>Where do absolute extrema live?</strong> On a closed interval $[a,b]$, the absolute max/min must be at one of:</div>
+          <ul class="method-steps" style="margin-top:6px;">
+            <li><span class="ms-num">①</span><span>A <strong>critical point</strong> inside $(a,b)$ (where $f'=0$ or $f'$ doesn't exist)</span></li>
+            <li><span class="ms-num">②</span><span>An <strong>endpoint</strong>: $x=a$ or $x=b$</span></li>
+          </ul>
+          <div class="note-block" style="margin-top:8px;">This is called the <strong>Closed Interval Method</strong>. You simply evaluate $f$ at all critical points + endpoints, then compare.</div>
+        </div>
+        <div>
+          <div class="note-block" style="color:var(--rust-text);font-size:0.95rem;"><strong>📋 Step-by-Step: Finding Absolute Extrema on $[a,b]$</strong></div>
+          <ul class="method-steps" style="margin-top:6px;">
+            <li><span class="ms-num">1</span><span>Compute $f'(x)$ and find all critical points in the <em>open</em> interval $(a,b)$ — solve $f'(x)=0$ and find where $f'$ is undefined.</span></li>
+            <li><span class="ms-num">2</span><span>Evaluate $f$ at every critical point found in step 1.</span></li>
+            <li><span class="ms-num">3</span><span>Evaluate $f$ at the two endpoints: $f(a)$ and $f(b)$.</span></li>
+            <li><span class="ms-num">4</span><span>Compare all the values from steps 2–3. The <strong>largest</strong> is the absolute maximum; the <strong>smallest</strong> is the absolute minimum.</span></li>
+          </ul>
+
+          <div class="formula-box" style="margin-top:10px;">
+            <strong>Example:</strong> Find abs. extrema of $f(x)=x^3-3x$ on $[-2,\,3]$.<br><br>
+            <strong>Step 1:</strong> $f'(x)=3x^2-3=0 \Rightarrow x=\pm 1$. Both in $(-2,3)$ ✓<br>
+            <strong>Step 2:</strong> $f(-1)=2$, $\;f(1)=-2$<br>
+            <strong>Step 3:</strong> $f(-2)=(-2)^3-3(-2)=-8+6=-2$, $\;f(3)=27-9=18$<br>
+            <strong>Step 4:</strong> Values: $\{2,\,-2,\,-2,\,18\}$<br>
+            ⟹ <strong style="color:var(--rust);">Absolute Max = 18</strong> at $x=3$ (endpoint!)<br>
+            ⟹ <strong style="color:var(--green);">Absolute Min = −2</strong> at $x=1$ and $x=-2$
+          </div>
+        </div>
+      </div>
+
+      <div class="notes-grid" style="gap:12px;margin-top:12px;">
+        <div class="formula-box" style="border-left-color:var(--rust);">
+          <strong>Relative vs Absolute — Key Difference:</strong><br>
+          A relative max is just the highest point <em>nearby</em> — like a small hill. An absolute max is the highest point <em>everywhere</em> on the domain — like the tallest mountain. Every absolute extremum is also a relative extremum (unless it's an endpoint), but a relative extremum is NOT necessarily absolute.
+        </div>
+        <div class="reallife-box" style="margin:0;">
+          <strong>Why it matters:</strong> Real optimisation always asks for the <em>absolute</em> best — max profit over a quarter, min cost over a production run, highest/lowest temperature over a day. The closed interval method gives you a reliable, mechanical algorithm that never misses the answer.
+        </div>
+      </div>
+    </div>
+
+    </div><!-- end notes-grid -->
+  </div><!-- end topic-absext panel -->
+
+  <!-- AREA TOPIC PANEL -->
+  <div id="topic-area" class="topic-panel">
+    <button class="topic-back-btn" onclick="closeTopic()">← Back to Topics</button>
+    <div class="notes-grid">
+
+    <!-- §4.1 CONCEPT -->
+    <div class="note-card full" id="note-area">
+      <div class="note-card-title">Ch. 4.1 — The Area Problem & Why We Need Integration</div>
+
+      <div class="note-block" style="font-size:0.97rem;line-height:1.8;"><strong>The Big Question:</strong> Differentiation tells us the <em>rate</em> at which things change (velocity, slope, growth rate). But what if we know the rate and want the <em>total</em>? That's where integration comes in — it is the mathematical tool for <strong>accumulation</strong>.</div>
+
+      <div class="notes-grid" style="gap:14px;margin-top:10px;">
+        <div>
+          <div class="note-block" style="color:var(--amber-text);font-size:0.92rem;"><strong>🤔 The Problem Differentiation Can't Solve</strong></div>
+          <div class="note-block">Suppose a car travels at a <em>changing</em> speed — say $v(t) = t^2$ m/s. How far did it travel from $t=0$ to $t=3$? You can't just multiply speed × time, because the speed isn't constant. You need to <strong>add up infinitely many tiny distances</strong> over infinitely small time intervals. That process <em>is</em> integration.</div>
+          <div class="formula-box">
+            <strong>The geometric version:</strong> Find the area under the curve $y = f(x)$ between $x=a$ and $x=b$.<br><br>
+            We can't use simple geometry (the shape isn't a rectangle or triangle) — so we approximate with many thin rectangles, then take the limit:<br><br>
+            $A = \displaystyle\lim_{n\to+\infty}\sum_{k=1}^{n} f(x_k^*)\,\Delta x$<br><br>
+            This limit, when it exists, is <strong>the definite integral</strong> $\displaystyle\int_a^b f(x)\,dx$.
+          </div>
+        </div>
+        <div>
+          <div class="note-block" style="color:var(--amber-text);font-size:0.92rem;"><strong>💡 Why Integration Solves So Much</strong></div>
+          <div class="note-block">Integration isn't just about area — it's the universal tool for any problem involving <strong>total accumulated change</strong>:</div>
+          <ul class="method-steps" style="margin-top:6px;">
+            <li><span class="ms-num" style="background:var(--amber-bg);color:var(--amber-text);border-color:rgba(201,128,0,0.3);">→</span><span><strong>Physics:</strong> Know velocity? Integrate to get <em>position</em>. Know acceleration? Integrate twice to get position.</span></li>
+            <li><span class="ms-num" style="background:var(--amber-bg);color:var(--amber-text);border-color:rgba(201,128,0,0.3);">→</span><span><strong>Engineering:</strong> Know force as a function of distance? Integrate to get total <em>work done</em>.</span></li>
+            <li><span class="ms-num" style="background:var(--amber-bg);color:var(--amber-text);border-color:rgba(201,128,0,0.3);">→</span><span><strong>Economics:</strong> Know a marginal cost function? Integrate to get total <em>cost</em> over a production range.</span></li>
+            <li><span class="ms-num" style="background:var(--amber-bg);color:var(--amber-text);border-color:rgba(201,128,0,0.3);">→</span><span><strong>Biology:</strong> Know a population growth rate? Integrate to find the <em>total population</em> over time.</span></li>
+            <li><span class="ms-num" style="background:var(--amber-bg);color:var(--amber-text);border-color:rgba(201,128,0,0.3);">→</span><span><strong>Electricity:</strong> Know electric current (charge per second)? Integrate to get total <em>charge</em> delivered.</span></li>
+          </ul>
+          <div class="formula-box" style="margin-top:10px;border-left-color:var(--amber);">
+            <strong>The Fundamental Bridge (Newton–Leibniz):</strong><br>
+            If $A(x)$ = area accumulated from $a$ to $x$, then:<br>
+            $A'(x) = f(x)$<br><br>
+            Meaning: <em>area and antiderivative are the same thing.</em> To find exact area, just find an antiderivative! Integration suddenly becomes powerful — instead of computing millions of rectangles, you find $F(b)-F(a)$.
+          </div>
+        </div>
+      </div>
+
+      <div class="reallife-box" style="margin-top:12px;">
+        <strong>The core insight:</strong> Differentiation and integration are <strong>opposites</strong> of each other (Fundamental Theorem of Calculus). Differentiation breaks things into rates; integration rebuilds the total from the rates. Together, they let us model essentially <em>any</em> continuous process in science and engineering — which is why calculus is the language of the universe.
+      </div>
+    </div>
+
+    </div><!-- end notes-grid -->
+  </div><!-- end topic-area panel -->
+
+  <!-- INDEFINITE INTEGRALS TOPIC PANEL -->
+  <div id="topic-indef" class="topic-panel">
+    <button class="topic-back-btn" onclick="closeTopic()">← Back to Topics</button>
+    <div class="notes-grid">
+
+    <!-- Ch.4.2 FORMULAS -->
+    <div class="note-card full" id="note-indef">
+      <div class="note-card-title">Ch. 4.2 — The Indefinite Integral · All Formulas</div>
+      <div class="notes-grid" style="gap:12px;margin-top:0;">
+        <div>
+          <div class="note-block"><strong>Antiderivative:</strong> $F$ is an antiderivative of $f$ on an interval if $F'(x)=f(x)$ for all $x$ there.</div>
+          <div class="note-block"><strong>General antiderivative (Theorem 4.2.2):</strong> If $F(x)$ is any antiderivative of $f$, then all antiderivatives have the form $F(x)+C$ for some constant $C$.</div>
+          <div class="formula-box">
+            <strong>Notation:</strong> $\displaystyle\int f(x)\,dx = F(x) + C$<br><br>
+            $\displaystyle\int x^r\,dx = \frac{x^{r+1}}{r+1}+C \quad (r\ne -1)$<br>
+            $\displaystyle\int \frac{1}{x}\,dx = \ln|x| + C$<br>
+            $\displaystyle\int e^x\,dx = e^x + C$<br>
+            $\displaystyle\int b^x\,dx = \frac{b^x}{\ln b} + C$<br>
+            $\displaystyle\int \cos x\,dx = \sin x + C$<br>
+            $\displaystyle\int \sin x\,dx = -\cos x + C$<br>
+            $\displaystyle\int \sec^2 x\,dx = \tan x + C$<br>
+            $\displaystyle\int \csc^2 x\,dx = -\cot x + C$<br>
+            $\displaystyle\int \sec x\tan x\,dx = \sec x + C$<br>
+            $\displaystyle\int \csc x\cot x\,dx = -\csc x + C$
+          </div>
+        </div>
+        <div>
+          <div class="note-block"><strong>Properties (Theorem 4.2.3):</strong></div>
+          <div class="formula-box">
+            $\displaystyle\int cf(x)\,dx = c\int f(x)\,dx$<br><br>
+            $\displaystyle\int [f+g]\,dx = \int f\,dx + \int g\,dx$<br><br>
+            $\displaystyle\int [f-g]\,dx = \int f\,dx - \int g\,dx$
+          </div>
+          <div class="note-block"><strong>Initial-Value Problem:</strong> Solve $\dfrac{dy}{dx}=f(x),\; y(x_0)=y_0$. Integrate to get $y=F(x)+C$, then substitute $(x_0,y_0)$ to find $C$.</div>
+        </div>
+      </div>
+      <div class="reallife-box" style="margin-top:10px;">
+        <strong>Why it matters:</strong> Integration "undoes" differentiation — given a rate of change (velocity, growth rate, power), integration recovers the total (position, population, energy). It's essential in physics, biology, and engineering.
+      </div>
+      <div class="note-block" style="margin-top:10px;"><strong>Method — evaluating indefinite integrals:</strong></div>
+      <ul class="method-steps" style="margin-top:6px;">
+        <li><span class="ms-num">1</span><span>Break the integrand using sum/difference and constant-multiple rules.</span></li>
+        <li><span class="ms-num">2</span><span>Apply the power rule: $\int x^r\,dx = \frac{x^{r+1}}{r+1}+C$ (rewrite roots and negative powers first).</span></li>
+        <li><span class="ms-num">3</span><span>Apply trig formulas directly for $\sin,\cos,\sec^2$, etc.</span></li>
+        <li><span class="ms-num">4</span><span>Always add $+C$. Check by differentiating your answer.</span></li>
+      </ul>
+    </div>
+
+    </div><!-- end notes-grid -->
+  </div><!-- end topic-indef panel -->
+
+  <!-- U-SUBSTITUTION TOPIC PANEL -->
+  <div id="topic-usub" class="topic-panel">
+    <button class="topic-back-btn" onclick="closeTopic()">← Back to Topics</button>
+    <div class="notes-grid">
+
+    <!-- Ch.4.3 FORMULAS -->
+    <div class="note-card full" id="note-usub">
+      <div class="note-card-title">Ch. 4.3 — Integration by Substitution (u-Sub) · Easy Step-by-Step Guide</div>
+
+      <div class="note-block" style="font-size:0.97rem;line-height:1.8;margin-bottom:8px;">
+        <strong>What is u-Substitution?</strong> Think of it as the <em>reverse of the Chain Rule</em>. When you differentiated $f(g(x))$ you got $f'(g(x))\cdot g'(x)$. U-substitution undoes exactly that: you spot that pattern in an integral and simplify it by introducing a single variable $u$ to replace the "inside" part. The goal is always to turn a complicated integral into a simple one.
+      </div>
+
+      <!-- THE MASTER FORMULA -->
+      <div class="formula-box" style="border-left-color:var(--amber);margin-bottom:14px;">
+        <strong>The Core Formula (you must memorise this):</strong><br><br>
+        If $u = g(x)$, then $du = g'(x)\,dx$, and:<br><br>
+        $\displaystyle\int f\!\left(g(x)\right)\cdot g'(x)\,dx \;=\; \int f(u)\,du \;=\; F(u)+C \;=\; F(g(x))+C$<br><br>
+        <em>In plain English: swap the inside function for $u$, swap $g'(x)\,dx$ for $du$, integrate simply, then swap back.</em>
+      </div>
+
+      <!-- 6 EASY STEPS -->
+      <div class="note-block" style="color:var(--amber-text);font-size:0.95rem;margin-bottom:6px;"><strong>🪜 The 6 Steps (follow these every single time)</strong></div>
+      <ul class="method-steps" style="margin-top:0;">
+        <li><span class="ms-num" style="background:var(--amber-bg);color:var(--amber-text);border-color:rgba(201,128,0,0.3);">1</span><span><strong>Spot the "inside" function.</strong> Look for something being raised to a power, or inside a trig function, or under a root. That's your $u$. Set $u = g(x)$.</span></li>
+        <li><span class="ms-num" style="background:var(--amber-bg);color:var(--amber-text);border-color:rgba(201,128,0,0.3);">2</span><span><strong>Differentiate $u$ to get $du$.</strong> Compute $\dfrac{du}{dx} = g'(x)$, then write $du = g'(x)\,dx$. This tells you what to replace $g'(x)\,dx$ with.</span></li>
+        <li><span class="ms-num" style="background:var(--amber-bg);color:var(--amber-text);border-color:rgba(201,128,0,0.3);">3</span><span><strong>Check that $g'(x)$ is in the integrand.</strong> If it's there (maybe with a different constant in front), great! If it's missing entirely, u-sub probably won't work here — try a different $u$.</span></li>
+        <li><span class="ms-num" style="background:var(--amber-bg);color:var(--amber-text);border-color:rgba(201,128,0,0.3);">4</span><span><strong>Substitute everything.</strong> Replace the inside function with $u$ and replace $g'(x)\,dx$ with $du$. The integral should now be <em>entirely in terms of $u$</em> — no $x$'s left.</span></li>
+        <li><span class="ms-num" style="background:var(--amber-bg);color:var(--amber-text);border-color:rgba(201,128,0,0.3);">5</span><span><strong>Integrate in $u$.</strong> This should now be a simple integral — use the power rule, trig formulas, etc. Get $F(u) + C$.</span></li>
+        <li><span class="ms-num" style="background:var(--amber-bg);color:var(--amber-text);border-color:rgba(201,128,0,0.3);">6</span><span><strong>Back-substitute.</strong> Replace $u$ with $g(x)$ to write your final answer in terms of $x$. Always add $+C$. Optionally, check by differentiating.</span></li>
+      </ul>
+
+      <!-- THREE WORKED EXAMPLES -->
+      <div class="note-block" style="color:var(--amber-text);font-size:0.95rem;margin-top:14px;margin-bottom:8px;"><strong>📝 Three Worked Examples (Easy → Medium → Tricky)</strong></div>
+      <div class="notes-grid" style="gap:14px;margin-top:0;">
+
+        <!-- Example 1 -->
+        <div>
+          <div class="formula-box" style="border-left-color:var(--green);">
+            <strong>Example 1 (Easy) — Perfect match:</strong><br>
+            $\displaystyle\int (x^2+1)^{50}\cdot 2x\,dx$<br><br>
+            <strong>Step 1:</strong> Inside = $x^2+1$. Set $u = x^2+1$.<br>
+            <strong>Step 2:</strong> $du = 2x\,dx$<br>
+            <strong>Step 3:</strong> $2x\,dx$ is right there ✓<br>
+            <strong>Step 4:</strong> $\displaystyle\int u^{50}\,du$<br>
+            <strong>Step 5:</strong> $= \dfrac{u^{51}}{51} + C$<br>
+            <strong>Step 6:</strong> $= \dfrac{(x^2+1)^{51}}{51} + C$ ✅
+          </div>
+        </div>
+
+        <!-- Example 2 -->
+        <div>
+          <div class="formula-box" style="border-left-color:var(--amber);">
+            <strong>Example 2 (Medium) — Adjusting a constant:</strong><br>
+            $\displaystyle\int x^2(x^3+5)^8\,dx$<br><br>
+            <strong>Step 1:</strong> Inside = $x^3+5$. Set $u = x^3+5$.<br>
+            <strong>Step 2:</strong> $du = 3x^2\,dx \;\Rightarrow\; x^2\,dx = \dfrac{du}{3}$<br>
+            <strong>Step 3:</strong> $x^2\,dx$ is there, just off by factor of 3 ✓<br>
+            <strong>Step 4:</strong> $\displaystyle\int u^8\cdot\frac{du}{3} = \frac{1}{3}\int u^8\,du$<br>
+            <strong>Step 5:</strong> $= \dfrac{1}{3}\cdot\dfrac{u^9}{9}+C = \dfrac{u^9}{27}+C$<br>
+            <strong>Step 6:</strong> $= \dfrac{(x^3+5)^9}{27}+C$ ✅
+          </div>
+        </div>
+
+        <!-- Example 3 -->
+        <div class="full">
+          <div class="formula-box" style="border-left-color:var(--blue);">
+            <strong>Example 3 (Trig) — u-sub with trig functions:</strong><br>
+            $\displaystyle\int \cos(5x)\,dx$<br><br>
+            <strong>Step 1:</strong> Inside of $\cos(\,)$ is $5x$. Set $u = 5x$.<br>
+            <strong>Step 2:</strong> $du = 5\,dx \;\Rightarrow\; dx = \dfrac{du}{5}$<br>
+            <strong>Step 3:</strong> $dx$ is in the integrand (as the $dx$ itself) ✓<br>
+            <strong>Step 4:</strong> $\displaystyle\int \cos(u)\cdot\frac{du}{5} = \frac{1}{5}\int\cos(u)\,du$<br>
+            <strong>Step 5:</strong> $= \dfrac{1}{5}\sin(u)+C$<br>
+            <strong>Step 6:</strong> $= \dfrac{1}{5}\sin(5x)+C$ ✅<br><br>
+            <em>✔ Check: $\dfrac{d}{dx}\!\left[\dfrac{1}{5}\sin(5x)\right] = \dfrac{1}{5}\cdot\cos(5x)\cdot 5 = \cos(5x)$ ✓</em>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMMON MISTAKES -->
+      <div class="note-block" style="color:var(--rust-text);font-size:0.95rem;margin-top:14px;margin-bottom:6px;"><strong>⚠️ Common Mistakes to Avoid</strong></div>
+      <div class="notes-grid" style="gap:12px;margin-top:0;">
+        <div class="formula-box" style="border-left-color:var(--rust);">
+          <strong>❌ Forgetting to change $dx$:</strong><br>
+          Don't just replace $u$ and leave $dx$. You must always express $dx$ in terms of $du$ and fully substitute.
+        </div>
+        <div class="formula-box" style="border-left-color:var(--rust);">
+          <strong>❌ Leaving $x$ in the final answer:</strong><br>
+          After integrating in $u$, you must back-substitute $u = g(x)$. The final answer must be in $x$, not $u$.
+        </div>
+        <div class="formula-box" style="border-left-color:var(--rust);">
+          <strong>❌ Forgetting the constant multiplier:</strong><br>
+          If $du = 3x^2\,dx$ but you only have $x^2\,dx$, you must bring out the $\tfrac{1}{3}$ in front of the integral.
+        </div>
+        <div class="formula-box" style="border-left-color:var(--rust);">
+          <strong>❌ Choosing the wrong $u$:</strong><br>
+          A good $u$ is the "inside" function whose derivative also appears in the integrand. If after substituting you still have $x$'s left, you chose the wrong $u$.
+        </div>
+      </div>
+
+      <div class="reallife-box" style="margin-top:12px;">
+        <strong>Why it matters:</strong> The basic integration formulas only handle simple functions like $x^r$, $\sin x$, $\cos x$. Real-world integrals almost always involve compositions — $\sin(3x^2)$, $(t^2+1)^{10}$, etc. U-substitution is the key that unlocks all of them. Master these 6 steps and you can handle the vast majority of integrals you'll encounter.
+      </div>
+    </div>
+
+    </div><!-- end notes-grid -->
+  </div><!-- end topic-usub panel -->
+
+</section>
+
+
+<!-- ══════════════════════════ §2.5 QUIZ ══════════════════════════ -->
+<section class="quiz-section" id="sect-trig">
+  <div class="sec-head">
+    <h2>Ch. 2.5 — Derivatives of Trigonometric Functions</h2>
+    <p class="sec-intro si-blue">Odd-numbered exercises from Exercise Set 2.5. 5 questions drawn randomly.</p>
+  </div>
+  <div class="score-panel">
+    <div class="score-circle sc-blue" id="circle-trig">0/5</div>
+    <div class="score-info">
+      <h3>Ch. 2.5 Score</h3>
+      <p>Trig derivatives, product/quotient rule with trig</p>
+      <div class="score-nums" id="nums-trig">0 / 5 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('trig')">↺ Reset</button>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-blue" id="pb-trig" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-trig">Q 1 of 5</span>
+  </div>
+  <div id="trig-questions-container"></div>
+  <div class="section-complete" id="complete-trig">
+    <div class="complete-icon">🎉</div>
+    <div class="complete-title">Ch. 2.5 Complete!</div>
+    <div class="complete-grade" id="grade-trig"></div>
+    <div class="complete-sub">Derivatives of Trigonometric Functions.</div>
+    <button class="reset-btn" onclick="resetSection('trig')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════ §2.6 QUIZ ══════════════════════════ -->
+<section class="quiz-section" id="sect-chain">
+  <div class="sec-head">
+    <h2>Ch. 2.6 — The Chain Rule</h2>
+    <p class="sec-intro si-rust">Odd-numbered exercises from Exercise Set 2.6. 5 questions drawn randomly.</p>
+  </div>
+  <div class="score-panel">
+    <div class="score-circle sc-rust" id="circle-chain">0/5</div>
+    <div class="score-info">
+      <h3>Ch. 2.6 Score</h3>
+      <p>Chain rule, generalized derivatives, nested compositions</p>
+      <div class="score-nums" id="nums-chain">0 / 5 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('chain')">↺ Reset</button>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-rust" id="pb-chain" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-chain">Q 1 of 5</span>
+  </div>
+  <div id="chain-questions-container"></div>
+  <div class="section-complete" id="complete-chain">
+    <div class="complete-icon">🎉</div>
+    <div class="complete-title">Ch. 2.6 Complete!</div>
+    <div class="complete-grade" id="grade-chain"></div>
+    <div class="complete-sub">The Chain Rule.</div>
+    <button class="reset-btn" onclick="resetSection('chain')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════ §6.2 QUIZ ══════════════════════════ -->
+<section class="quiz-section" id="sect-log">
+  <div class="sec-head">
+    <h2>Ch. 6.2 — Derivatives of Logarithmic Functions</h2>
+    <p class="sec-intro si-blue">Practice differentiating ln and log functions. 5 questions drawn randomly.</p>
+  </div>
+  <div class="score-panel">
+    <div class="score-circle sc-blue" id="circle-log">0/5</div>
+    <div class="score-info">
+      <h3>Ch. 6.2 Score</h3>
+      <p>Derivatives of ln x, log_b x, with chain rule</p>
+      <div class="score-nums" id="nums-log">0 / 5 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('log')">↺ Reset</button>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-blue" id="pb-log" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-log">Q 1 of 5</span>
+  </div>
+  <div id="log-questions-container"></div>
+  <div class="section-complete" id="complete-log">
+    <div class="complete-icon">🎉</div>
+    <div class="complete-title">Ch. 6.2 Complete!</div>
+    <div class="complete-grade" id="grade-log"></div>
+    <div class="complete-sub">Derivatives of Logarithmic Functions.</div>
+    <button class="reset-btn" onclick="resetSection('log')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════ §6.3 QUIZ ══════════════════════════ -->
+<section class="quiz-section" id="sect-exp">
+  <div class="sec-head">
+    <h2>Ch. 6.3 — Derivatives of Exponential Functions</h2>
+    <p class="sec-intro si-rust">Practice differentiating eˣ, aˣ and composite exponentials. 5 questions drawn randomly.</p>
+  </div>
+  <div class="score-panel">
+    <div class="score-circle sc-rust" id="circle-exp">0/5</div>
+    <div class="score-info">
+      <h3>Ch. 6.3 Score</h3>
+      <p>Derivatives of eˣ, aˣ, with chain rule and product rule</p>
+      <div class="score-nums" id="nums-exp">0 / 5 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('exp')">↺ Reset</button>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-rust" id="pb-exp" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-exp">Q 1 of 5</span>
+  </div>
+  <div id="exp-questions-container"></div>
+  <div class="section-complete" id="complete-exp">
+    <div class="complete-icon">🎉</div>
+    <div class="complete-title">Ch. 6.3 Complete!</div>
+    <div class="complete-grade" id="grade-exp"></div>
+    <div class="complete-sub">Derivatives of Exponential Functions.</div>
+    <button class="reset-btn" onclick="resetSection('exp')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════ §3.2 QUIZ ══════════════════════════ -->
+<section class="quiz-section" id="sect-extrema">
+  <div class="sec-head">
+    <h2>Ch. 3.2 — Relative Extrema; Graphing Polynomials</h2>
+    <p class="sec-intro si-green">Odd-numbered exercises from Exercise Set 3.2. 5 questions drawn randomly.</p>
+  </div>
+  <div class="score-panel">
+    <div class="score-circle sc-green" id="circle-extrema">0/5</div>
+    <div class="score-info">
+      <h3>Ch. 3.2 Score</h3>
+      <p>Critical points, first/second derivative tests, extrema</p>
+      <div class="score-nums" id="nums-extrema">0 / 5 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('extrema')">↺ Reset</button>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-green" id="pb-extrema" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-extrema">Q 1 of 5</span>
+  </div>
+  <div id="extrema-questions-container"></div>
+  <div class="section-complete" id="complete-extrema">
+    <div class="complete-icon">🎉</div>
+    <div class="complete-title">Ch. 3.2 Complete!</div>
+    <div class="complete-grade" id="grade-extrema"></div>
+    <div class="complete-sub">Relative Extrema &amp; Graphing Polynomials.</div>
+    <button class="reset-btn" onclick="resetSection('extrema')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════ §4.2–4.3 QUIZ ══════════════════════════ -->
+<section class="quiz-section" id="sect-integral">
+  <div class="sec-head">
+    <h2>Ch. 4.2 & 4.3 — Indefinite Integrals & Substitution</h2>
+    <p class="sec-intro si-amber">Odd-numbered exercises from Exercise Sets 4.2 and 4.3. 5 questions drawn randomly.</p>
+  </div>
+  <div class="score-panel">
+    <div class="score-circle sc-amber" id="circle-integral">0/5</div>
+    <div class="score-info">
+      <h3>Ch. 4.2–4.3 Score</h3>
+      <p>Antiderivatives, indefinite integrals, u-substitution</p>
+      <div class="score-nums" id="nums-integral">0 / 5 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('integral')">↺ Reset</button>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-amber" id="pb-integral" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-integral">Q 1 of 5</span>
+  </div>
+  <div id="integral-questions-container"></div>
+  <div class="section-complete" id="complete-integral">
+    <div class="complete-icon">🎉</div>
+    <div class="complete-title">Ch. 4.2–4.3 Complete!</div>
+    <div class="complete-grade" id="grade-integral"></div>
+    <div class="complete-sub">Indefinite Integrals &amp; Substitution.</div>
+    <button class="reset-btn" onclick="resetSection('integral')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════ OVERALL QUIZ ══════════════════════════ -->
+<section class="quiz-section" id="sect-overall">
+  <div class="sec-head">
+    <h2>Overall Quiz</h2>
+    <p class="sec-intro si-blue">10 questions drawn randomly from all four topic areas. Perfect for final review.</p>
+  </div>
+  <div class="score-panel">
+    <div class="score-circle sc-blue" id="circle-overall">0/10</div>
+    <div class="score-info">
+      <h3>Overall Score</h3>
+      <p>Mixed questions — Ch. 2.5, 2.6, 3.2, 4.2–4.3</p>
+      <div class="score-nums" id="nums-overall">0 / 10 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('overall')">↺ Reset</button>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-blue" id="pb-overall" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-overall">Q 1 of 10</span>
+  </div>
+  <div id="overall-questions-container"></div>
+  <div class="section-complete" id="complete-overall">
+    <div class="complete-icon">🏆</div>
+    <div class="complete-title">Overall Quiz Complete!</div>
+    <div class="complete-grade" id="grade-overall"></div>
+    <div class="complete-sub">Well done across all topics!</div>
+    <button class="reset-btn" onclick="resetSection('overall')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Calculus &amp; Analytical Geometry · Anton, Bivens &amp; Davis, 10th Edition &nbsp;·&nbsp; Made by Hanan Shafay &amp; Mohid Ahmed
+</footer>
+
+<script>
+// ══════════════════════════════════════
+// QUESTION BANKS
+// ══════════════════════════════════════
+
+const questionBanks = {
+
+  // ── §2.5 ODD-NUMBERED EXERCISES ──
+  trig: [
+    {
+      id:'trig-1', section:'§2.5', badge:'Trig Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = x^3 \\sin x$.',
+      hint:'Use the product rule: $(fg)\'=f\'g+fg\'$ with $f=x^3$ and $g=\\sin x$.',
+      ph:'dy/dx = …',
+      accepted:['3x²sinx+x³cosx','3x^2sinx+x^3cosx','3x²sin(x)+x³cos(x)'],
+      steps:[
+        'Let $f=x^3$ and $g=\\sin x$, so $f\'=3x^2$ and $g\'=\\cos x$.',
+        'Product rule: $\\dfrac{dy}{dx}=f\'g+fg\'=3x^2\\sin x+x^3\\cos x$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=3x^2\\sin x+x^3\\cos x$'
+    },
+    {
+      id:'trig-3', section:'§2.5', badge:'Trig Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\dfrac{\\sin x}{1+\\cos x}$.',
+      hint:'Use the quotient rule with $f=\\sin x$, $g=1+\\cos x$. Simplify using $\\sin^2 x+\\cos^2 x=1$.',
+      ph:'dy/dx = …',
+      accepted:['1/(1+cosx)','\\frac{1}{1+\\cos x}'],
+      steps:[
+        'Quotient rule: $\\dfrac{(1+\\cos x)\\cos x - \\sin x(-\\sin x)}{(1+\\cos x)^2}$.',
+        'Numerator: $\\cos x + \\cos^2 x + \\sin^2 x = \\cos x + 1$.',
+        'So $\\dfrac{dy}{dx}=\\dfrac{1+\\cos x}{(1+\\cos x)^2}=\\dfrac{1}{1+\\cos x}$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=\\dfrac{1}{1+\\cos x}$'
+    },
+    {
+      id:'trig-5', section:'§2.5', badge:'Trig Deriv.', bc:'qb-blue',
+      text:'Find $f\'(x)$ if $f(x) = \\sec x \\tan x$.',
+      hint:'Product rule with $f=\\sec x$ and $g=\\tan x$. Recall $\\frac{d}{dx}[\\sec x]=\\sec x\\tan x$ and $\\frac{d}{dx}[\\tan x]=\\sec^2 x$.',
+      ph:'f\'(x) = …',
+      accepted:['sec x tan²x + sec³x','secx(tan²x+sec²x)','sec(x)(tan²(x)+sec²(x))'],
+      steps:[
+        '$f\'(x) = \\sec x \\tan x \\cdot \\tan x + \\sec x \\cdot \\sec^2 x$',
+        '$= \\sec x \\tan^2 x + \\sec^3 x = \\sec x(\\tan^2 x + \\sec^2 x)$.'
+      ],
+      final:'$f\'(x) = \\sec x(\\tan^2 x + \\sec^2 x)$'
+    },
+    {
+      id:'trig-7', section:'§2.5', badge:'Trig Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{d}{dx}[\\csc x - \\cot x]$.',
+      hint:'Differentiate term by term using $\\frac{d}{dx}[\\csc x]=-\\csc x\\cot x$ and $\\frac{d}{dx}[\\cot x]=-\\csc^2 x$.',
+      ph:'Derivative = …',
+      accepted:['-cscxcotx+csc²x','csc²x-cscxcotx','-csc(x)cot(x)+csc²(x)'],
+      steps:[
+        '$\\dfrac{d}{dx}[\\csc x] = -\\csc x\\cot x$.',
+        '$\\dfrac{d}{dx}[-\\cot x] = \\csc^2 x$.',
+        'Combined: $-\\csc x\\cot x + \\csc^2 x$.'
+      ],
+      final:'$\\dfrac{d}{dx}[\\csc x - \\cot x] = -\\csc x\\cot x + \\csc^2 x$'
+    },
+    {
+      id:'trig-9', section:'§2.5', badge:'Trig Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = x^2 \\cos x + 2x\\sin x - 2\\cos x$.',
+      hint:'Differentiate term by term; apply the product rule to $x^2\\cos x$ and $2x\\sin x$.',
+      ph:'dy/dx = …',
+      accepted:['x²sinx','x^2sin(x)','-x^2sinx+2xcosx+2sinx-2sinx+2xcosx'],
+      steps:[
+        '$\\dfrac{d}{dx}[x^2\\cos x]=2x\\cos x - x^2\\sin x$.',
+        '$\\dfrac{d}{dx}[2x\\sin x]=2\\sin x + 2x\\cos x$.',
+        '$\\dfrac{d}{dx}[-2\\cos x]=2\\sin x$.',
+        'Sum: $2x\\cos x - x^2\\sin x + 2\\sin x + 2x\\cos x + 2\\sin x$.',
+        'After simplifying: $-x^2\\sin x + 4x\\cos x + 4\\sin x$... Actually the expression simplifies nicely: factor out terms and recognize $\\dfrac{d}{dx}[x^2\\sin x]=2x\\sin x+x^2\\cos x$.',
+        'Notice $y=x^2\\cos x+2x\\sin x-2\\cos x$; its derivative is $x^2\\cos x\\cdot(-)+ \\ldots = x^2\\sin x$... The key is that $\\dfrac{d}{dx}[x^2\\sin x]=2x\\sin x+x^2\\cos x$, so the answer simplifies to $x^2\\cos x$.',
+        'Correct computation: $y\' = (2x\\cos x - x^2\\sin x)+(2\\sin x+2x\\cos x)+(2\\sin x) = 4x\\cos x - x^2\\sin x + 4\\sin x$. Further grouping reveals this equals $x^2 \\cos x$ only if grouped differently; the final unsimplified result is $-x^2\\sin x + 4x\\cos x + 4\\sin x$.'
+      ],
+      final:'$\\dfrac{dy}{dx} = -x^2\\sin x + 4x\\cos x + 4\\sin x$'
+    },
+    {
+      id:'trig-11', section:'§2.5', badge:'Specific Value', bc:'qb-blue',
+      text:'Find $f\'\\!\\left(\\dfrac{\\pi}{4}\\right)$ if $f(x) = \\tan x$.',
+      hint:'$\\frac{d}{dx}[\\tan x]=\\sec^2 x$. Evaluate at $x=\\pi/4$: $\\cos(\\pi/4)=1/\\sqrt{2}$.',
+      ph:'f\'(π/4) = …',
+      accepted:['2'],
+      steps:[
+        '$f\'(x) = \\sec^2 x$.',
+        '$f\'(\\pi/4) = \\sec^2(\\pi/4) = (\\sqrt{2})^2 = 2$.'
+      ],
+      final:'$f\'(\\pi/4) = 2$'
+    },
+    {
+      id:'trig-13', section:'§2.5', badge:'Trig Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\dfrac{1 - \\sin x}{1 + \\sin x}$.',
+      hint:'Quotient rule with $f=1-\\sin x$, $g=1+\\sin x$, $f\'=-\\cos x$, $g\'=\\cos x$.',
+      ph:'dy/dx = …',
+      accepted:['-2cosx/(1+sinx)²','\\frac{-2\\cos x}{(1+\\sin x)^2}'],
+      steps:[
+        'Quotient rule: $\\dfrac{-\\cos x(1+\\sin x)-(1-\\sin x)\\cos x}{(1+\\sin x)^2}$.',
+        'Numerator: $-\\cos x - \\sin x\\cos x - \\cos x + \\sin x\\cos x = -2\\cos x$.',
+        '$\\dfrac{dy}{dx} = \\dfrac{-2\\cos x}{(1+\\sin x)^2}$.'
+      ],
+      final:'$\\dfrac{dy}{dx} = \\dfrac{-2\\cos x}{(1+\\sin x)^2}$'
+    },
+    {
+      id:'trig-15', section:'§2.5', badge:'Trig Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\cos x - x\\sin x$.',
+      hint:'Differentiate term by term. For $x\\sin x$, use the product rule.',
+      ph:'dy/dx = …',
+      accepted:['-2sinx-xcosx','-\\sin x - x\\cos x - \\sin x'],
+      steps:[
+        '$\\dfrac{d}{dx}[\\cos x] = -\\sin x$.',
+        '$\\dfrac{d}{dx}[x\\sin x] = \\sin x + x\\cos x$ (product rule).',
+        '$\\dfrac{dy}{dx} = -\\sin x - (\\sin x + x\\cos x) = -2\\sin x - x\\cos x$.'
+      ],
+      final:'$\\dfrac{dy}{dx} = -2\\sin x - x\\cos x$'
+    },
+    {
+      id:'trig-17', section:'§2.5', badge:'Tangent Line', bc:'qb-blue',
+      text:'Find an equation of the tangent line to $y = \\tan x$ at $x = \\pi/4$.',
+      hint:'Slope $= f\'(\\pi/4)=\\sec^2(\\pi/4)=2$. Point: $(\\pi/4, 1)$. Use point-slope form.',
+      ph:'y = …',
+      accepted:['y=2x-π/2+1','y=2(x-π/4)+1','y=2x+1-π/2'],
+      steps:[
+        '$f\'(x)=\\sec^2 x$, so slope $m=\\sec^2(\\pi/4)=2$.',
+        'Point: $(\\pi/4,\\,\\tan(\\pi/4))=(\\pi/4,\\,1)$.',
+        'Tangent: $y - 1 = 2(x - \\pi/4)$, i.e., $y = 2x - \\dfrac{\\pi}{2} + 1$.'
+      ],
+      final:'$y = 2x - \\dfrac{\\pi}{2} + 1$'
+    },
+    {
+      id:'trig-19', section:'§2.5', badge:'Second Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{d^2y}{dx^2}$ if $y = \\sin x$.',
+      hint:'Differentiate $\\sin x$ twice.',
+      ph:'d²y/dx² = …',
+      accepted:['-sinx','-\\sin x'],
+      steps:[
+        '$\\dfrac{dy}{dx} = \\cos x$.',
+        '$\\dfrac{d^2y}{dx^2} = -\\sin x$.'
+      ],
+      final:'$\\dfrac{d^2y}{dx^2} = -\\sin x$'
+    }
+  ],
+
+  // ── §2.6 ODD-NUMBERED EXERCISES ──
+  chain: [
+    {
+      id:'chain-1', section:'§2.6', badge:'Chain Rule', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\sin(x^3)$.',
+      hint:'Outside: $\\sin(\\,)$, inside: $x^3$. Apply the chain rule.',
+      ph:'dy/dx = …',
+      accepted:['3x²cos(x³)','3x^2cos(x^3)'],
+      steps:[
+        'Let $u = x^3$, so $y = \\sin u$.',
+        '$\\dfrac{dy}{dx} = \\cos u \\cdot \\dfrac{du}{dx} = \\cos(x^3)\\cdot 3x^2$.'
+      ],
+      final:'$\\dfrac{dy}{dx} = 3x^2\\cos(x^3)$'
+    },
+    {
+      id:'chain-3', section:'§2.6', badge:'Chain Rule', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = (x^2 + 5)^{10}$.',
+      hint:'Power $\\times$ chain rule: $\\frac{d}{dx}[u^{10}]=10u^9 u\'$ where $u=x^2+5$.',
+      ph:'dy/dx = …',
+      accepted:['20x(x²+5)⁹','20x(x^2+5)^9'],
+      steps:[
+        '$u = x^2+5$, $\\dfrac{du}{dx}=2x$.',
+        '$\\dfrac{dy}{dx}=10(x^2+5)^9\\cdot 2x=20x(x^2+5)^9$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=20x(x^2+5)^9$'
+    },
+    {
+      id:'chain-5', section:'§2.6', badge:'Chain Rule', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\cos(5x)$.',
+      hint:'Outside: $\\cos(\\,)$, inside: $5x$. Derivative of inside is 5.',
+      ph:'dy/dx = …',
+      accepted:['-5sin(5x)','-5\\sin(5x)'],
+      steps:[
+        '$\\dfrac{d}{dx}[\\cos u] = -\\sin u \\cdot u\'$ with $u=5x$.',
+        '$\\dfrac{dy}{dx}=-\\sin(5x)\\cdot 5=-5\\sin(5x)$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=-5\\sin(5x)$'
+    },
+    {
+      id:'chain-7', section:'§2.6', badge:'Chain Rule', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\tan^2 x$.',
+      hint:'Write as $(\\tan x)^2$. Outside: $u^2$, inside: $\\tan x$.',
+      ph:'dy/dx = …',
+      accepted:['2tanxsec²x','2\\tan x\\sec^2 x'],
+      steps:[
+        '$y=(\\tan x)^2$; let $u=\\tan x$.',
+        '$\\dfrac{dy}{dx}=2u\\cdot u\'=2\\tan x\\cdot\\sec^2 x$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=2\\tan x\\sec^2 x$'
+    },
+    {
+      id:'chain-9', section:'§2.6', badge:'Chain Rule', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\sqrt{x^2+1}$.',
+      hint:'Write as $(x^2+1)^{1/2}$. Power rule + chain rule.',
+      ph:'dy/dx = …',
+      accepted:['x/√(x²+1)','x/sqrt(x^2+1)','\\frac{x}{\\sqrt{x^2+1}}'],
+      steps:[
+        '$y=(x^2+1)^{1/2}$, $u=x^2+1$.',
+        '$\\dfrac{dy}{dx}=\\dfrac{1}{2}(x^2+1)^{-1/2}\\cdot 2x=\\dfrac{x}{\\sqrt{x^2+1}}$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=\\dfrac{x}{\\sqrt{x^2+1}}$'
+    },
+    {
+      id:'chain-11', section:'§2.6', badge:'Chain Rule', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\sec(x^2)$.',
+      hint:'$\\dfrac{d}{dx}[\\sec u]=\\sec u\\tan u\\cdot u\'$ with $u=x^2$.',
+      ph:'dy/dx = …',
+      accepted:['2xsec(x²)tan(x²)','2x\\sec(x^2)\\tan(x^2)'],
+      steps:[
+        '$\\dfrac{d}{dx}[\\sec u]=\\sec u\\tan u\\cdot u\'$, $u=x^2$, $u\'=2x$.',
+        '$\\dfrac{dy}{dx}=\\sec(x^2)\\tan(x^2)\\cdot 2x=2x\\sec(x^2)\\tan(x^2)$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=2x\\sec(x^2)\\tan(x^2)$'
+    },
+    {
+      id:'chain-13', section:'§2.6', badge:'Nested Chain', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\sin(\\cos x)$.',
+      hint:'Outside: $\\sin(\\,)$, inside: $\\cos x$. Derivative of $\\cos x$ is $-\\sin x$.',
+      ph:'dy/dx = …',
+      accepted:['cos(cosx)(-sinx)','-sinxcos(cosx)','-\\sin x\\cos(\\cos x)'],
+      steps:[
+        '$u=\\cos x$, $y=\\sin u$.',
+        '$\\dfrac{dy}{dx}=\\cos(\\cos x)\\cdot(-\\sin x)=-\\sin x\\cos(\\cos x)$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=-\\sin x\\cos(\\cos x)$'
+    },
+    {
+      id:'chain-15', section:'§2.6', badge:'Chain Rule', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = (1+\\csc x)^3$.',
+      hint:'Power rule + chain rule. Derivative of $\\csc x$ is $-\\csc x\\cot x$.',
+      ph:'dy/dx = …',
+      accepted:['3(1+cscx)²(-cscxcotx)','-3cscxcotx(1+cscx)²'],
+      steps:[
+        '$u=1+\\csc x$, $u\'=-\\csc x\\cot x$.',
+        '$\\dfrac{dy}{dx}=3(1+\\csc x)^2\\cdot(-\\csc x\\cot x)$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=-3\\csc x\\cot x(1+\\csc x)^2$'
+    },
+    {
+      id:'chain-17', section:'§2.6', badge:'Chain Rule', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = (x^3 - x + 1)^4$.',
+      hint:'$u=x^3-x+1$, $u\'=3x^2-1$. Apply power $\\times$ chain rule.',
+      ph:'dy/dx = …',
+      accepted:['4(3x²-1)(x³-x+1)³','4(x^3-x+1)^3(3x^2-1)'],
+      steps:[
+        '$u=x^3-x+1$, $u\'=3x^2-1$.',
+        '$\\dfrac{dy}{dx}=4(x^3-x+1)^3\\cdot(3x^2-1)$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=4(3x^2-1)(x^3-x+1)^3$'
+    },
+    {
+      id:'chain-19', section:'§2.6', badge:'Chain Rule', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\cos^3(x^2)$.',
+      hint:'This requires two applications of the chain rule: outer $u^3$, middle $\\cos(\\,)$, inner $x^2$.',
+      ph:'dy/dx = …',
+      accepted:['-6xcos²(x²)sin(x²)','-6x\\cos^2(x^2)\\sin(x^2)'],
+      steps:[
+        'Let $v=\\cos(x^2)$, so $y=v^3$.',
+        '$\\dfrac{dv}{dx}=-\\sin(x^2)\\cdot 2x=-2x\\sin(x^2)$ (chain rule on $v$).',
+        '$\\dfrac{dy}{dx}=3v^2\\cdot\\dfrac{dv}{dx}=3\\cos^2(x^2)\\cdot(-2x\\sin(x^2))=-6x\\cos^2(x^2)\\sin(x^2)$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=-6x\\cos^2(x^2)\\sin(x^2)$'
+    }
+  ],
+
+  // ── §6.2 LOGARITHMIC DERIVATIVE EXERCISES ──
+  log: [
+    {
+      id:'log-1', section:'§6.2', badge:'ln Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\ln(x^2+3)$.',
+      hint:'Use $\\dfrac{d}{dx}[\\ln u]=\\dfrac{u\'}{u}$ with $u=x^2+3$.',
+      ph:'dy/dx = …',
+      accepted:['2x/(x²+3)','2x/(x^2+3)','\\frac{2x}{x^2+3}'],
+      steps:[
+        '$u=x^2+3$, $u\'=2x$.',
+        '$\\dfrac{dy}{dx}=\\dfrac{2x}{x^2+3}$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=\\dfrac{2x}{x^2+3}$'
+    },
+    {
+      id:'log-2', section:'§6.2', badge:'ln Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\ln(\\sin x)$.',
+      hint:'Use $\\dfrac{d}{dx}[\\ln u]=\\dfrac{u\'}{u}$ with $u=\\sin x$, $u\'=\\cos x$.',
+      ph:'dy/dx = …',
+      accepted:['cosx/sinx','cot x','cotx','\\cot x'],
+      steps:[
+        '$u=\\sin x$, $u\'=\\cos x$.',
+        '$\\dfrac{dy}{dx}=\\dfrac{\\cos x}{\\sin x}=\\cot x$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=\\cot x$'
+    },
+    {
+      id:'log-3', section:'§6.2', badge:'log_b Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\log_{10}(x^3)$.',
+      hint:'$\\dfrac{d}{dx}[\\log_b u]=\\dfrac{u\'}{u\\ln b}$. Use $u=x^3$, $b=10$.',
+      ph:'dy/dx = …',
+      accepted:['3/(xln10)','3/(x ln 10)','\\frac{3}{x\\ln 10}'],
+      steps:[
+        '$u=x^3$, $u\'=3x^2$, $b=10$.',
+        '$\\dfrac{dy}{dx}=\\dfrac{3x^2}{x^3\\ln 10}=\\dfrac{3}{x\\ln 10}$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=\\dfrac{3}{x\\ln 10}$'
+    },
+    {
+      id:'log-4', section:'§6.2', badge:'ln Laws', bc:'qb-blue',
+      text:'Differentiate $y = \\ln\\!\\left(\\dfrac{x^2}{x+1}\\right)$ by simplifying with log laws first.',
+      hint:'Use $\\ln(a/b)=\\ln a - \\ln b$ and $\\ln(x^2)=2\\ln x$ before differentiating.',
+      ph:'dy/dx = …',
+      accepted:['2/x-1/(x+1)','\\frac{2}{x}-\\frac{1}{x+1}'],
+      steps:[
+        'Simplify: $y=\\ln(x^2)-\\ln(x+1)=2\\ln x-\\ln(x+1)$.',
+        '$\\dfrac{dy}{dx}=\\dfrac{2}{x}-\\dfrac{1}{x+1}$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=\\dfrac{2}{x}-\\dfrac{1}{x+1}$'
+    },
+    {
+      id:'log-5', section:'§6.2', badge:'ln Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = x^2\\ln x$.',
+      hint:'Product rule: $(fg)\'=f\'g+fg\'$ with $f=x^2$ and $g=\\ln x$.',
+      ph:'dy/dx = …',
+      accepted:['2xlnx+x','x(2lnx+1)','2x\\ln x+x'],
+      steps:[
+        '$f=x^2$, $f\'=2x$; $g=\\ln x$, $g\'=\\dfrac{1}{x}$.',
+        '$\\dfrac{dy}{dx}=2x\\ln x+x^2\\cdot\\dfrac{1}{x}=2x\\ln x+x=x(2\\ln x+1)$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=x(2\\ln x+1)$'
+    },
+    {
+      id:'log-6', section:'§6.2', badge:'ln Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\ln(x^4+5x)$.',
+      hint:'$u=x^4+5x$, find $u\'$ then apply $\\dfrac{d}{dx}[\\ln u]=\\dfrac{u\'}{u}$.',
+      ph:'dy/dx = …',
+      accepted:['(4x³+5)/(x⁴+5x)','(4x^3+5)/(x^4+5x)'],
+      steps:[
+        '$u=x^4+5x$, $u\'=4x^3+5$.',
+        '$\\dfrac{dy}{dx}=\\dfrac{4x^3+5}{x^4+5x}$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=\\dfrac{4x^3+5}{x^4+5x}$'
+    },
+    {
+      id:'log-7', section:'§6.2', badge:'log_b Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = \\log_2(x^2+1)$.',
+      hint:'$\\dfrac{d}{dx}[\\log_b u]=\\dfrac{u\'}{u\\ln b}$ with $b=2$.',
+      ph:'dy/dx = …',
+      accepted:['2x/((x²+1)ln2)','2x/((x^2+1)ln 2)','\\frac{2x}{(x^2+1)\\ln 2}'],
+      steps:[
+        '$u=x^2+1$, $u\'=2x$, $b=2$.',
+        '$\\dfrac{dy}{dx}=\\dfrac{2x}{(x^2+1)\\ln 2}$.'
+      ],
+      final:'$\\dfrac{dy}{dx}=\\dfrac{2x}{(x^2+1)\\ln 2}$'
+    },
+    {
+      id:'log-8', section:'§6.2', badge:'ln Deriv.', bc:'qb-blue',
+      text:'Find $\\dfrac{d}{dx}[\\ln(\\cos x)]$.',
+      hint:'$u=\\cos x$, $u\'=-\\sin x$.',
+      ph:'Derivative = …',
+      accepted:['-sinx/cosx','-tanx','-tan x','-\\tan x'],
+      steps:[
+        '$u=\\cos x$, $u\'=-\\sin x$.',
+        '$\\dfrac{d}{dx}[\\ln(\\cos x)]=\\dfrac{-\\sin x}{\\cos x}=-\\tan x$.'
+      ],
+      final:'$-\\tan x$'
+    }
+  ],
+
+  // ── §6.3 EXPONENTIAL DERIVATIVE EXERCISES ──
+  exp: [
+    {
+      id:'exp-1', section:'§6.3', badge:'Exp Deriv.', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = e^{3x}$.',
+      hint:'$\\dfrac{d}{dx}[e^u]=e^u\\cdot u\'$ with $u=3x$.',
+      ph:'dy/dx = …',
+      accepted:['3e^(3x)','3e^{3x}'],
+      steps:[
+        '$u=3x$, $u\'=3$.',
+        '$\\dfrac{dy}{dx}=e^{3x}\\cdot 3=3e^{3x}$.'
+      ],
+      final:'$3e^{3x}$'
+    },
+    {
+      id:'exp-2', section:'§6.3', badge:'a^x Deriv.', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = 2^x$.',
+      hint:'$\\dfrac{d}{dx}[a^x]=a^x\\ln a$ with $a=2$.',
+      ph:'dy/dx = …',
+      accepted:['2^x ln2','2^x ln 2','2^x\\ln 2'],
+      steps:[
+        '$a=2$; the formula is $\\dfrac{d}{dx}[a^x]=a^x\\ln a$.',
+        '$\\dfrac{dy}{dx}=2^x\\ln 2$.'
+      ],
+      final:'$2^x\\ln 2$'
+    },
+    {
+      id:'exp-3', section:'§6.3', badge:'Exp + Chain', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = e^{x^2}$.',
+      hint:'$\\dfrac{d}{dx}[e^u]=e^u\\cdot u\'$ with $u=x^2$.',
+      ph:'dy/dx = …',
+      accepted:['2xe^(x²)','2xe^{x^2}','2x e^{x^2}'],
+      steps:[
+        '$u=x^2$, $u\'=2x$.',
+        '$\\dfrac{dy}{dx}=e^{x^2}\\cdot 2x=2xe^{x^2}$.'
+      ],
+      final:'$2xe^{x^2}$'
+    },
+    {
+      id:'exp-4', section:'§6.3', badge:'a^u Deriv.', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = 5^{x^2}$.',
+      hint:'$\\dfrac{d}{dx}[a^u]=a^u\\ln a\\cdot u\'$ with $a=5$, $u=x^2$.',
+      ph:'dy/dx = …',
+      accepted:['2xln5 5^(x²)','2x ln5 · 5^(x^2)','2x\\ln5\\cdot 5^{x^2}'],
+      steps:[
+        '$a=5$, $u=x^2$, $u\'=2x$.',
+        '$\\dfrac{dy}{dx}=5^{x^2}\\cdot\\ln 5\\cdot 2x=2x\\ln 5\\cdot 5^{x^2}$.'
+      ],
+      final:'$2x\\ln 5\\cdot 5^{x^2}$'
+    },
+    {
+      id:'exp-5', section:'§6.3', badge:'Product + Exp', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = x^2 e^x$.',
+      hint:'Product rule with $f=x^2$, $g=e^x$.',
+      ph:'dy/dx = …',
+      accepted:['2xe^x+x²e^x','xe^x(2+x)','x e^x(x+2)','(x^2+2x)e^x'],
+      steps:[
+        '$f=x^2$, $f\'=2x$; $g=e^x$, $g\'=e^x$.',
+        '$\\dfrac{dy}{dx}=2xe^x+x^2e^x=xe^x(2+x)$.'
+      ],
+      final:'$xe^x(x+2)$'
+    },
+    {
+      id:'exp-6', section:'§6.3', badge:'Exp Deriv.', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = e^{\\sin x}$.',
+      hint:'$u=\\sin x$, $u\'=\\cos x$. Apply $\\dfrac{d}{dx}[e^u]=e^u u\'$.',
+      ph:'dy/dx = …',
+      accepted:['cosx e^(sinx)','\\cos x\\cdot e^{\\sin x}','e^{sinx}cosx'],
+      steps:[
+        '$u=\\sin x$, $u\'=\\cos x$.',
+        '$\\dfrac{dy}{dx}=e^{\\sin x}\\cdot\\cos x$.'
+      ],
+      final:'$\\cos x\\cdot e^{\\sin x}$'
+    },
+    {
+      id:'exp-7', section:'§6.3', badge:'a^x Deriv.', bc:'qb-rust',
+      text:'Find $\\dfrac{dy}{dx}$ if $y = 3^{2x}$.',
+      hint:'Write as $a^u$ with $a=3$, $u=2x$. Or rewrite as $9^x$.',
+      ph:'dy/dx = …',
+      accepted:['2ln3 3^(2x)','2\\ln 3\\cdot 3^{2x}','2(ln3)3^{2x}','2ln(3)·3^(2x)'],
+      steps:[
+        '$a=3$, $u=2x$, $u\'=2$.',
+        '$\\dfrac{dy}{dx}=3^{2x}\\cdot\\ln 3\\cdot 2=2\\ln 3\\cdot 3^{2x}$.'
+      ],
+      final:'$2\\ln 3\\cdot 3^{2x}$'
+    },
+    {
+      id:'exp-8', section:'§6.3', badge:'Exp Deriv.', bc:'qb-rust',
+      text:'Find $\\dfrac{d}{dx}[e^{-x}]$.',
+      hint:'$u=-x$, $u\'=-1$.',
+      ph:'Derivative = …',
+      accepted:['-e^(-x)','-e^{-x}','-e^-x'],
+      steps:[
+        '$u=-x$, $u\'=-1$.',
+        '$\\dfrac{d}{dx}[e^{-x}]=e^{-x}\\cdot(-1)=-e^{-x}$.'
+      ],
+      final:'$-e^{-x}$'
+    }
+  ],
+
+  // ── §3.2 ODD-NUMBERED EXERCISES ──
+  extrema: [
+    {
+      id:'ext-1', section:'§3.2', badge:'Critical Pts', bc:'qb-green',
+      text:'Find all critical points of $f(x)=x^3-12x+2$ and classify each as a relative max, min, or neither using the First Derivative Test.',
+      hint:'Set $f\'(x)=0$. Factor and find sign changes of $f\'$ around the critical points.',
+      ph:'Critical points and classification…',
+      accepted:['x=2 min, x=-2 max','relative max at x=-2, relative min at x=2','max -2 min 2'],
+      steps:[
+        '$f\'(x)=3x^2-12=3(x^2-4)=3(x-2)(x+2)$.',
+        'Critical points: $x=-2$ and $x=2$.',
+        'Sign chart: $f\'(-3)=15>0$, $f\'(0)=-12<0$, $f\'(3)=15>0$.',
+        '$f\'$ changes $+\\to-$ at $x=-2$ → <strong>relative maximum</strong>.',
+        '$f\'$ changes $-\\to+$ at $x=2$ → <strong>relative minimum</strong>.',
+        '$f(-2)=18$; $f(2)=-14$.'
+      ],
+      final:'Relative max at $x=-2$; relative min at $x=2$.'
+    },
+    {
+      id:'ext-3', section:'§3.2', badge:'Second Deriv.', bc:'qb-green',
+      text:'Use the Second Derivative Test to find and classify the relative extrema of $f(x)=x^4-4x^3+4$.',
+      hint:'Find $f\'(x)$, set equal to 0. Then compute $f\'\'$ at each stationary point.',
+      ph:'Relative extrema…',
+      accepted:['relative min at x=3','x=3 minimum','min at x=3'],
+      steps:[
+        '$f\'(x)=4x^3-12x^2=4x^2(x-3)$.',
+        'Stationary points: $x=0$ and $x=3$.',
+        '$f\'\'(x)=12x^2-24x$.',
+        '$f\'\'(0)=0$ → second derivative test inconclusive. Check first derivative: $f\'(-1)<0$, $f\'(1)<0$ → same sign; no extremum at $x=0$.',
+        '$f\'\'(3)=12(9)-24(3)=108-72=36>0$ → <strong>relative minimum</strong> at $x=3$.',
+        '$f(3)=81-108+4=-23$.'
+      ],
+      final:'Relative minimum at $x=3$, $f(3)=-23$. No extremum at $x=0$.'
+    },
+    {
+      id:'ext-5', section:'§3.2', badge:'Critical Pts', bc:'qb-green',
+      text:'Find all critical points of $f(x)=x^{2/3}(2-x)$ and identify which are relative extrema.',
+      hint:'Differentiate using product rule plus chain rule for $x^{2/3}$. Note $f\'$ may be undefined at $x=0$.',
+      ph:'Critical points and type…',
+      accepted:['x=0 and x=4/5','x=4/5 max','critical at 0 and 4/5'],
+      steps:[
+        '$f(x)=2x^{2/3}-x^{5/3}$.',
+        '$f\'(x)=\\dfrac{4}{3}x^{-1/3}-\\dfrac{5}{3}x^{2/3}=\\dfrac{x^{-1/3}}{3}(4-5x)$.',
+        '$f\'=0$ when $x=4/5$; $f\'$ undefined at $x=0$. Critical points: $x=0$ and $x=4/5$.',
+        'Sign: $f\'(x)>0$ for $0<x<4/5$, $f\'(x)<0$ for $x>4/5$.',
+        'At $x=0$: $f\'$ changes from $-$ (for $x<0$) to $+$ → <strong>relative minimum</strong>.',
+        'At $x=4/5$: $f\'$ changes $+\\to-$ → <strong>relative maximum</strong>.'
+      ],
+      final:'Relative min at $x=0$; relative max at $x=\\tfrac{4}{5}$.'
+    },
+    {
+      id:'ext-7', section:'§3.2', badge:'Graphing Poly', bc:'qb-green',
+      text:'Find the relative extrema of $f(x)=3x^5-5x^3$ and describe the function\'s behaviour.',
+      hint:'Find and sign-test the derivative $f\'(x)=15x^4-15x^2=15x^2(x^2-1)$.',
+      ph:'Relative extrema at x = …',
+      accepted:['rel max x=-1, rel min x=1','maximum at -1 minimum at 1','max -1 min 1'],
+      steps:[
+        '$f\'(x)=15x^4-15x^2=15x^2(x^2-1)=15x^2(x-1)(x+1)$.',
+        'Critical points: $x=-1,0,1$.',
+        'Sign chart: $f\'(-2)=15(4)(3)>0$; $f\'(-0.5)=15(0.25)(-0.75)<0$; $f\'(0.5)<0$; $f\'(2)>0$.',
+        'At $x=-1$: $+\\to-$ → <strong>relative maximum</strong>, $f(-1)=2$.',
+        'At $x=0$: $-\\to-$ → <strong>no extremum</strong>.',
+        'At $x=1$: $-\\to+$ → <strong>relative minimum</strong>, $f(1)=-2$.'
+      ],
+      final:'Relative max at $x=-1$, $f(-1)=2$; relative min at $x=1$, $f(1)=-2$.'
+    },
+    {
+      id:'ext-9', section:'§3.2', badge:'Second Deriv.', bc:'qb-green',
+      text:'Use the Second Derivative Test to find the relative extrema of $f(x)=x^2e^x$. (Treat $e^x$ as known; $\\frac{d}{dx}[e^x]=e^x$.)',
+      hint:'$f\'(x)=e^x(x^2+2x)=xe^x(x+2)$. Stationary points at $x=0,-2$.',
+      ph:'Relative extrema…',
+      accepted:['min at x=0, max at x=-2','relative max x=-2, relative min x=0','max -2 min 0'],
+      steps:[
+        '$f\'(x)=2xe^x+x^2e^x=xe^x(x+2)$.',
+        'Stationary points: $x=0$ and $x=-2$.',
+        '$f\'\'(x)=e^x(x^2+4x+2)$.',
+        '$f\'\'(-2)=e^{-2}(4-8+2)=e^{-2}(-2)<0$ → <strong>relative maximum</strong> at $x=-2$.',
+        '$f\'\'(0)=e^0(0+0+2)=2>0$ → <strong>relative minimum</strong> at $x=0$.'
+      ],
+      final:'Relative max at $x=-2$, $f(-2)=4e^{-2}$; relative min at $x=0$, $f(0)=0$.'
+    },
+    {
+      id:'ext-11', section:'§3.2', badge:'Critical Pts', bc:'qb-green',
+      text:'Find all critical points of $f(x)=\\sin x + \\cos x$ on $[0,2\\pi]$ and classify them.',
+      hint:'$f\'(x)=\\cos x-\\sin x=0$ when $\\tan x=1$. Solutions on $[0,2\\pi]$.',
+      ph:'Critical points and type…',
+      accepted:['max at π/4, min at 5π/4','relative max π/4 min 5π/4','max x=π/4'],
+      steps:[
+        '$f\'(x)=\\cos x-\\sin x=0\\Rightarrow\\tan x=1\\Rightarrow x=\\pi/4,\\,5\\pi/4$.',
+        '$f\'\'(x)=-\\sin x-\\cos x$.',
+        '$f\'\'(\\pi/4)=-\\tfrac{\\sqrt{2}}{2}-\\tfrac{\\sqrt{2}}{2}=-\\sqrt{2}<0$ → <strong>relative max</strong> at $x=\\pi/4$.',
+        '$f\'\'(5\\pi/4)=\\tfrac{\\sqrt{2}}{2}+\\tfrac{\\sqrt{2}}{2}=\\sqrt{2}>0$ → <strong>relative min</strong> at $x=5\\pi/4$.',
+        '$f(\\pi/4)=\\sqrt{2}$; $f(5\\pi/4)=-\\sqrt{2}$.'
+      ],
+      final:'Relative max $\\sqrt{2}$ at $x=\\pi/4$; relative min $-\\sqrt{2}$ at $x=5\\pi/4$.'
+    },
+    {
+      id:'ext-13', section:'§3.2', badge:'Sign Chart', bc:'qb-green',
+      text:'Analyze the sign of $f\'(x)=x^2(x-1)^3(x+1)$ and identify the nature of critical points of $f$.',
+      hint:'Critical points where $f\'=0$: $x=-1,0,1$. Test signs in intervals between them.',
+      ph:'Nature of each critical point…',
+      accepted:['x=-1 max, x=0 neither, x=1 min','rel max -1 rel min 1 neither 0'],
+      steps:[
+        '$f\'(x)=x^2(x-1)^3(x+1)=0$ at $x=-1,0,1$.',
+        'Interval $(-\\infty,-1)$: $x^2>0$, $(x-1)^3<0$, $(x+1)<0$ → $f\'=$ positive.',
+        'Interval $(-1,0)$: $x^2>0$, $(x-1)^3<0$, $(x+1)>0$ → $f\'=$ negative.',
+        'Interval $(0,1)$: same signs as $(-1,0)$ → $f\'<0$.',
+        'Interval $(1,\\infty)$: all factors positive → $f\'>0$.',
+        'At $x=-1$: $+\\to-$ → <strong>relative maximum</strong>.',
+        'At $x=0$: $-\\to-$ → <strong>no extremum</strong>.',
+        'At $x=1$: $-\\to+$ → <strong>relative minimum</strong>.'
+      ],
+      final:'Relative max at $x=-1$; no extremum at $x=0$; relative min at $x=1$.'
+    }
+  ],
+
+  // ── §4.2 & §4.3 ODD-NUMBERED EXERCISES ──
+  integral: [
+    // §4.2 exercises
+    {
+      id:'int-1', section:'§4.2', badge:'Power Rule', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int x^8\\,dx$.',
+      hint:'Power rule: $\\int x^r\\,dx=\\dfrac{x^{r+1}}{r+1}+C$ with $r=8$.',
+      ph:'Answer + C …',
+      accepted:['x⁹/9+C','x^9/9+C','(1/9)x^9+C'],
+      steps:[
+        '$\\displaystyle\\int x^8\\,dx=\\dfrac{x^{8+1}}{8+1}+C=\\dfrac{x^9}{9}+C$.'
+      ],
+      final:'$\\dfrac{x^9}{9}+C$'
+    },
+    {
+      id:'int-3', section:'§4.2', badge:'Power Rule', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int x^{5/7}\\,dx$.',
+      hint:'Add 1 to exponent: $5/7+1=12/7$. Divide by $12/7$.',
+      ph:'Answer + C …',
+      accepted:['(7/12)x^(12/7)+C','7x^(12/7)/12+C'],
+      steps:[
+        '$\\displaystyle\\int x^{5/7}\\,dx=\\dfrac{x^{5/7+1}}{5/7+1}+C=\\dfrac{x^{12/7}}{12/7}+C=\\dfrac{7}{12}x^{12/7}+C$.'
+      ],
+      final:'$\\dfrac{7}{12}x^{12/7}+C$'
+    },
+    {
+      id:'int-5', section:'§4.2', badge:'Expand & Integrate', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int x(1+x^3)\\,dx$.',
+      hint:'Distribute first: $x+x^4$, then integrate term by term.',
+      ph:'Answer + C …',
+      accepted:['x²/2+x⁵/5+C','x^2/2+x^5/5+C'],
+      steps:[
+        'Expand: $x(1+x^3)=x+x^4$.',
+        '$\\displaystyle\\int(x+x^4)\\,dx=\\dfrac{x^2}{2}+\\dfrac{x^5}{5}+C$.'
+      ],
+      final:'$\\dfrac{x^2}{2}+\\dfrac{x^5}{5}+C$'
+    },
+    {
+      id:'int-7', section:'§4.2', badge:'Trig Integral', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int [3\\sin x - 2\\sec^2 x]\\,dx$.',
+      hint:'Integrate term by term: $\\int\\sin x\\,dx=-\\cos x$; $\\int\\sec^2 x\\,dx=\\tan x$.',
+      ph:'Answer + C …',
+      accepted:['-3cosx-2tanx+C','-3\\cos x-2\\tan x+C'],
+      steps:[
+        '$\\displaystyle\\int 3\\sin x\\,dx=3(-\\cos x)=-3\\cos x$.',
+        '$\\displaystyle\\int -2\\sec^2 x\\,dx=-2\\tan x$.',
+        'Combined: $-3\\cos x-2\\tan x+C$.'
+      ],
+      final:'$-3\\cos x-2\\tan x+C$'
+    },
+    {
+      id:'int-9', section:'§4.2', badge:'Simplify & Integrate', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int\\dfrac{x^5+2x^2-1}{x^4}\\,dx$.',
+      hint:'Divide each term by $x^4$ first, then integrate.',
+      ph:'Answer + C …',
+      accepted:['x²/2+2x-x^(-3)/3+C','x^2/2+2x+1/(3x^3)+C'],
+      steps:[
+        '$\\dfrac{x^5+2x^2-1}{x^4}=x-2x^{-2}+x^{-4}$. Oops — let me redo: $x^5/x^4+2x^2/x^4-1/x^4 = x+2x^{-2}-x^{-4}$.',
+        'Actually: $x^5/x^4=x^1$; $2x^2/x^4=2x^{-2}$; $1/x^4=x^{-4}$. So integrand $= x + 2x^{-2} - x^{-4}$.',
+        '$\\displaystyle\\int(x+2x^{-2}-x^{-4})\\,dx=\\dfrac{x^2}{2}+2\\cdot\\dfrac{x^{-1}}{-1}-\\dfrac{x^{-3}}{-3}+C$.',
+        '$=\\dfrac{x^2}{2}-\\dfrac{2}{x}+\\dfrac{1}{3x^3}+C$.'
+      ],
+      final:'$\\dfrac{x^2}{2}-\\dfrac{2}{x}+\\dfrac{1}{3x^3}+C$'
+    },
+    {
+      id:'int-11', section:'§4.2', badge:'Trig Integral', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int\\sec x(\\sec x+\\tan x)\\,dx$.',
+      hint:'Expand: $\\sec^2 x + \\sec x\\tan x$. Integrate term by term.',
+      ph:'Answer + C …',
+      accepted:['tanx+secx+C','\\tan x+\\sec x+C'],
+      steps:[
+        'Expand: $\\sec x(\\sec x+\\tan x)=\\sec^2 x+\\sec x\\tan x$.',
+        '$\\displaystyle\\int\\sec^2 x\\,dx=\\tan x$.',
+        '$\\displaystyle\\int\\sec x\\tan x\\,dx=\\sec x$.',
+        'Answer: $\\tan x+\\sec x+C$.'
+      ],
+      final:'$\\tan x+\\sec x+C$'
+    },
+    {
+      id:'int-13', section:'§4.2', badge:'Initial Value', bc:'qb-amber',
+      text:'Solve the initial-value problem: $\\dfrac{dy}{dx}=\\sqrt{x},\\; y(1)=2$.',
+      hint:'Integrate to get $y$. Then use the initial condition $y(1)=2$ to find $C$.',
+      ph:'y = …',
+      accepted:['y=(2/3)x^(3/2)+4/3','y=2/3*x^(3/2)+4/3'],
+      steps:[
+        '$y=\\displaystyle\\int\\sqrt{x}\\,dx=\\displaystyle\\int x^{1/2}\\,dx=\\dfrac{x^{3/2}}{3/2}+C=\\dfrac{2}{3}x^{3/2}+C$.',
+        'Apply $y(1)=2$: $2=\\dfrac{2}{3}(1)+C\\Rightarrow C=2-\\dfrac{2}{3}=\\dfrac{4}{3}$.',
+        '$y=\\dfrac{2}{3}x^{3/2}+\\dfrac{4}{3}$.'
+      ],
+      final:'$y=\\dfrac{2}{3}x^{3/2}+\\dfrac{4}{3}$'
+    },
+    {
+      id:'int-15', section:'§4.2', badge:'Curve Equation', bc:'qb-amber',
+      text:'Find the equation of the curve that passes through $(−3,\\,0)$ and has slope $2x+1$ at every point $(x,y)$.',
+      hint:'Integrate the slope to get $y$. Then use the given point to find $C$.',
+      ph:'y = …',
+      accepted:['y=x²+x+6','y=x^2+x+6'],
+      steps:[
+        '$y=\\displaystyle\\int(2x+1)\\,dx=x^2+x+C$.',
+        'Use $(-3,0)$: $0=9-3+C\\Rightarrow C=-6$. Wait: $9+(-3)+C=0\\Rightarrow C=-6$.',
+        '$y=x^2+x-6$. Verify: $(-3)^2+(-3)-6=9-3-6=0$. ✓'
+      ],
+      final:'$y=x^2+x-6$'
+    },
+    // §4.3 exercises
+    {
+      id:'sub-1', section:'§4.3', badge:'u-Substitution', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int(x^2+1)^{50}\\cdot 2x\\,dx$.',
+      hint:'Let $u=x^2+1$, then $du=2x\\,dx$.',
+      ph:'Answer + C …',
+      accepted:['(x²+1)^51/51+C','(x^2+1)^51/51+C'],
+      steps:[
+        '$u=x^2+1$, $du=2x\\,dx$.',
+        '$\\displaystyle\\int u^{50}\\,du=\\dfrac{u^{51}}{51}+C=\\dfrac{(x^2+1)^{51}}{51}+C$.'
+      ],
+      final:'$\\dfrac{(x^2+1)^{51}}{51}+C$'
+    },
+    {
+      id:'sub-3', section:'§4.3', badge:'u-Substitution', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int\\sin(5x)\\,dx$.',
+      hint:'Let $u=5x$, $du=5\\,dx$, so $dx=du/5$.',
+      ph:'Answer + C …',
+      accepted:['-cos(5x)/5+C','(-1/5)cos(5x)+C','-\\cos(5x)/5+C'],
+      steps:[
+        '$u=5x$, $du=5\\,dx\\Rightarrow dx=du/5$.',
+        '$\\dfrac{1}{5}\\displaystyle\\int\\sin u\\,du=\\dfrac{1}{5}(-\\cos u)+C=-\\dfrac{\\cos(5x)}{5}+C$.'
+      ],
+      final:'$-\\dfrac{\\cos(5x)}{5}+C$'
+    },
+    {
+      id:'sub-5', section:'§4.3', badge:'u-Substitution', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int x^2(x^3+5)^8\\,dx$.',
+      hint:'Let $u=x^3+5$, $du=3x^2\\,dx$, so $x^2\\,dx=du/3$.',
+      ph:'Answer + C …',
+      accepted:['(x³+5)^9/27+C','(x^3+5)^9/27+C'],
+      steps:[
+        '$u=x^3+5$, $du=3x^2\\,dx\\Rightarrow x^2\\,dx=du/3$.',
+        '$\\dfrac{1}{3}\\displaystyle\\int u^8\\,du=\\dfrac{u^9}{27}+C=\\dfrac{(x^3+5)^9}{27}+C$.'
+      ],
+      final:'$\\dfrac{(x^3+5)^9}{27}+C$'
+    },
+    {
+      id:'sub-7', section:'§4.3', badge:'u-Substitution', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int\\cos(x^2)\\cdot 2x\\,dx$.',
+      hint:'Let $u=x^2$, $du=2x\\,dx$.',
+      ph:'Answer + C …',
+      accepted:['sin(x²)+C','sin(x^2)+C','\\sin(x^2)+C'],
+      steps:[
+        '$u=x^2$, $du=2x\\,dx$.',
+        '$\\displaystyle\\int\\cos u\\,du=\\sin u+C=\\sin(x^2)+C$.'
+      ],
+      final:'$\\sin(x^2)+C$'
+    },
+    {
+      id:'sub-9', section:'§4.3', badge:'u-Substitution', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int\\dfrac{x}{(x^2+3)^5}\\,dx$.',
+      hint:'Let $u=x^2+3$, $du=2x\\,dx$. Rewrite $x\\,dx=du/2$.',
+      ph:'Answer + C …',
+      accepted:['-1/(8(x²+3)⁴)+C','-1/(8(x^2+3)^4)+C'],
+      steps:[
+        '$u=x^2+3$, $du=2x\\,dx\\Rightarrow x\\,dx=du/2$.',
+        '$\\dfrac{1}{2}\\displaystyle\\int u^{-5}\\,du=\\dfrac{1}{2}\\cdot\\dfrac{u^{-4}}{-4}+C=-\\dfrac{1}{8(x^2+3)^4}+C$.'
+      ],
+      final:'$-\\dfrac{1}{8(x^2+3)^4}+C$'
+    },
+    {
+      id:'sub-11', section:'§4.3', badge:'u-Substitution', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int\\sec^2(3x)\\,dx$.',
+      hint:'Let $u=3x$, $du=3\\,dx$.',
+      ph:'Answer + C …',
+      accepted:['tan(3x)/3+C','(1/3)tan(3x)+C'],
+      steps:[
+        '$u=3x$, $du=3\\,dx\\Rightarrow dx=du/3$.',
+        '$\\dfrac{1}{3}\\displaystyle\\int\\sec^2 u\\,du=\\dfrac{\\tan u}{3}+C=\\dfrac{\\tan(3x)}{3}+C$.'
+      ],
+      final:'$\\dfrac{\\tan(3x)}{3}+C$'
+    },
+    {
+      id:'sub-13', section:'§4.3', badge:'u-Substitution', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int x\\sqrt{x^2+1}\\,dx$.',
+      hint:'Let $u=x^2+1$. Then $x\\,dx=du/2$.',
+      ph:'Answer + C …',
+      accepted:['(x²+1)^(3/2)/3+C','(1/3)(x^2+1)^(3/2)+C'],
+      steps:[
+        '$u=x^2+1$, $du=2x\\,dx\\Rightarrow x\\,dx=du/2$.',
+        '$\\dfrac{1}{2}\\displaystyle\\int u^{1/2}\\,du=\\dfrac{1}{2}\\cdot\\dfrac{u^{3/2}}{3/2}+C=\\dfrac{u^{3/2}}{3}+C=\\dfrac{(x^2+1)^{3/2}}{3}+C$.'
+      ],
+      final:'$\\dfrac{(x^2+1)^{3/2}}{3}+C$'
+    },
+    {
+      id:'ln-int-1', section:'§4.2', badge:'ln Integral', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int \\dfrac{1}{x}\\,dx$.',
+      hint:'This is the special case $r=-1$ excluded from the power rule. The antiderivative is $\\ln|x|$.',
+      ph:'Answer + C …',
+      accepted:['ln|x|+C','ln(|x|)+C','\\ln|x|+C'],
+      steps:[
+        'The power rule $\\int x^r dx$ requires $r\\ne -1$.',
+        'The special formula: $\\displaystyle\\int\\dfrac{1}{x}\\,dx = \\ln|x|+C$.'
+      ],
+      final:'$\\ln|x|+C$'
+    },
+    {
+      id:'ln-int-2', section:'§4.3', badge:'ln + u-Sub', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int \\dfrac{2x}{x^2+5}\\,dx$.',
+      hint:'Let $u=x^2+5$. Notice $du=2x\\,dx$ is already in the numerator.',
+      ph:'Answer + C …',
+      accepted:['ln(x²+5)+C','ln|x²+5|+C','ln(x^2+5)+C'],
+      steps:[
+        '$u=x^2+5$, $du=2x\\,dx$.',
+        '$\\displaystyle\\int\\dfrac{du}{u}=\\ln|u|+C=\\ln(x^2+5)+C$ (since $x^2+5>0$).'
+      ],
+      final:'$\\ln(x^2+5)+C$'
+    },
+    {
+      id:'ln-int-3', section:'§4.2', badge:'Exp. Integral', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int e^x\\,dx$.',
+      hint:'$e^x$ is its own antiderivative.',
+      ph:'Answer + C …',
+      accepted:['e^x+C','eˣ+C'],
+      steps:[
+        '$\\dfrac{d}{dx}[e^x]=e^x$, so $e^x$ is its own antiderivative.',
+        '$\\displaystyle\\int e^x\\,dx = e^x+C$.'
+      ],
+      final:'$e^x+C$'
+    }
+  ]
+};
+
+const overallPool = [
+  ...questionBanks.trig.map(q=>({...q, overallBadge:'§2.5', overallBC:'qb-blue'})),
+  ...questionBanks.chain.map(q=>({...q, overallBadge:'§2.6', overallBC:'qb-rust'})),
+  ...questionBanks.extrema.map(q=>({...q, overallBadge:'§3.2', overallBC:'qb-green'})),
+  ...questionBanks.integral.map(q=>({...q, overallBadge:'§4.2–4.3', overallBC:'qb-amber'}))
+];
+
+const CHAPTER_SHOW = 5;
+const OVERALL_SHOW = 10;
+const activeQs = { trig:[], chain:[], extrema:[], integral:[], overall:[] };
+const totals = { trig:CHAPTER_SHOW, chain:CHAPTER_SHOW, extrema:CHAPTER_SHOW, integral:CHAPTER_SHOW, overall:OVERALL_SHOW };
+const state = {
+  trig:{ correct:0, answered:0 },
+  chain:{ correct:0, answered:0 },
+  extrema:{ correct:0, answered:0 },
+  integral:{ correct:0, answered:0 },
+  overall:{ correct:0, answered:0 }
+};
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+function normalize(str) {
+  return str.toLowerCase()
+    .replace(/\s+/g,'')
+    .replace(/[×*]/g,'*')
+    .replace(/−/g,'-')
+    .replace(/\u00b2/g,'^2')
+    .replace(/\u00b3/g,'^3')
+    .replace(/infinity|∞|inf\b/g,'inf')
+    .replace(/union|∪/g,'u')
+    .replace(/\u221a/g,'sqrt');
+}
+
+function colForSec(sec) {
+  const m={trig:'blue',chain:'rust',extrema:'green',integral:'amber',overall:'blue'};
+  return m[sec]||'blue';
+}
+
+function buildSection(sec) {
+  let pool, count, useOverall;
+  if (sec==='overall'){pool=overallPool;count=OVERALL_SHOW;useOverall=true;}
+  else{pool=questionBanks[sec];count=CHAPTER_SHOW;useOverall=false;}
+
+  const selected = shuffle(pool).slice(0,count);
+  activeQs[sec] = selected;
+
+  const container = document.getElementById(`${sec}-questions-container`);
+  if (!container) return;
+  container.innerHTML = '';
+
+  const col = colForSec(sec);
+
+  selected.forEach((q,i)=>{
+    const pos = i+1;
+    const isFirst = i===0, isLast = i===count-1;
+    const uid = `${sec}-${pos}`;
+    const badge = useOverall ? q.overallBadge : q.badge;
+    const bc    = useOverall ? q.overallBC    : q.bc;
+
+    const stepsHtml = q.steps.map((s,si)=>
+      `<li class="step-item"><span class="step-num">${si+1}</span><span>${s}</span></li>`
+    ).join('');
+
+    const prevBtn = !isFirst ? `<button class="nav-ctrl-btn" onclick="prevQ('${sec}',${pos})">← Prev</button>` : '';
+    const nextBtn = !isLast  ? `<button class="nav-ctrl-btn primary" onclick="nextQ('${sec}',${pos})">Next →</button>` : '';
+
+    const card = document.createElement('div');
+    card.className = isFirst ? 'quiz-card' : 'quiz-card hidden';
+    card.id = `q-${uid}`;
+    card.innerHTML = `
+      <div class="q-meta">
+        <span class="q-label">Q ${pos} of ${count} &nbsp;·&nbsp; ${q.section}</span>
+        <span class="q-badge ${bc}">${badge}</span>
+      </div>
+      <div class="q-text">${q.text}</div>
+      ${q.hint ? `<p class="q-hint">💡 ${q.hint}</p>` : ''}
+      <div>
+        <textarea class="answer-field" id="ans-${uid}" placeholder="${q.ph||'Your answer…'}" rows="2"></textarea>
+        <div class="submit-row">
+          <button class="submit-btn submit-btn-${col}" onclick="checkAnswer('${sec}',${pos})">Check Answer</button>
+          <button class="skip-btn" onclick="skipQ('${sec}',${pos})">Skip</button>
+        </div>
+      </div>
+      <div class="result-panel" id="rp-${uid}">
+        <div class="result-verdict" id="rv-${uid}"></div>
+        <div class="result-your-answer" id="rya-${uid}"></div>
+        <div class="result-steps">
+          <h4>Solution</h4>
+          <ul class="step-list">${stepsHtml}</ul>
+          <div class="final-answer">${q.final}</div>
+        </div>
+      </div>
+      <div class="nav-controls">${prevBtn}${nextBtn}</div>
+    `;
+    container.appendChild(card);
+  });
+
+  document.getElementById(`pb-${sec}`).style.width='0%';
+  document.getElementById(`pt-${sec}`).textContent=`Q 1 of ${count}`;
+  document.getElementById(`nums-${sec}`).textContent=`0 / ${count} correct`;
+  document.getElementById(`circle-${sec}`).textContent=`0/${count}`;
+
+  // typeset newly added cards
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([container]);
+}
+
+function checkAnswer(sec, idx) {
+  const uid=`${sec}-${idx}`;
+  const raw=document.getElementById(`ans-${uid}`).value.trim();
+  if (!raw) return;
+  const card=document.getElementById(`q-${uid}`);
+  if (card.dataset.done) return;
+
+  const q = activeQs[sec][idx-1];
+  const norm = normalize(raw);
+  const correct = q.accepted.some(a=>norm.includes(normalize(a)));
+
+  card.dataset.done='1';
+  card.querySelector('.submit-btn').disabled=true;
+  card.querySelector('.skip-btn').disabled=true;
+
+  const rp=document.getElementById(`rp-${uid}`);
+  const rv=document.getElementById(`rv-${uid}`);
+  const rya=document.getElementById(`rya-${uid}`);
+
+  rp.classList.add('show');
+  rya.textContent=`Your answer: "${raw}"`;
+  if (correct){
+    rv.className='result-verdict verdict-correct';
+    rv.innerHTML='<span>✓</span> Correct!';
+    state[sec].correct++;
+  } else {
+    rv.className='result-verdict verdict-wrong';
+    rv.innerHTML='<span>✗</span> Not quite — see the solution below.';
+  }
+  state[sec].answered++;
+  updateProgress(sec);
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([rp]);
+}
+
+function skipQ(sec, idx) {
+  const uid=`${sec}-${idx}`;
+  const card=document.getElementById(`q-${uid}`);
+  if (card.dataset.done) return;
+  card.dataset.done='skipped';
+  card.querySelector('.submit-btn').disabled=true;
+  card.querySelector('.skip-btn').disabled=true;
+  const rp=document.getElementById(`rp-${uid}`);
+  const rv=document.getElementById(`rv-${uid}`);
+  const rya=document.getElementById(`rya-${uid}`);
+  rp.classList.add('show');
+  rv.className='result-verdict verdict-wrong';
+  rv.innerHTML='<span>→</span> Skipped — review the solution.';
+  rya.textContent='No answer submitted.';
+  state[sec].answered++;
+  updateProgress(sec);
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([rp]);
+}
+
+function nextQ(sec, idx) {
+  const cur=document.getElementById(`q-${sec}-${idx}`);
+  const next=document.getElementById(`q-${sec}-${idx+1}`);
+  if (cur) cur.classList.add('hidden');
+  if (next){
+    next.classList.remove('hidden');
+    next.scrollIntoView({behavior:'smooth',block:'center'});
+    if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([next]);
+  } else {
+    const comp=document.getElementById(`complete-${sec}`);
+    if (comp){comp.classList.add('show');comp.scrollIntoView({behavior:'smooth',block:'center'});}
+  }
+}
+
+function prevQ(sec, idx) {
+  const cur=document.getElementById(`q-${sec}-${idx}`);
+  const prev=document.getElementById(`q-${sec}-${idx-1}`);
+  if (cur) cur.classList.add('hidden');
+  if (prev){prev.classList.remove('hidden');prev.scrollIntoView({behavior:'smooth',block:'center'});}
+}
+
+function updateProgress(sec) {
+  const s=state[sec], total=totals[sec];
+  const pct=Math.round(s.correct/total*100);
+  document.getElementById(`pb-${sec}`).style.width=(s.answered/total*100)+'%';
+  document.getElementById(`pt-${sec}`).textContent=s.answered<total?`Q ${s.answered+1} of ${total}`:'Complete!';
+  document.getElementById(`nums-${sec}`).textContent=`${s.correct} / ${total} correct`;
+  document.getElementById(`circle-${sec}`).textContent=s.answered===total?pct+'%':`${s.correct}/${s.answered}`;
+
+  if (s.answered===total){
+    const gradeEl=document.getElementById(`grade-${sec}`);
+    if (gradeEl){
+      gradeEl.textContent=`${s.correct} / ${total}  (${pct}%)`;
+      gradeEl.style.color=pct>=70?'var(--green)':'var(--rust)';
+    }
+  }
+}
+
+function resetSection(sec) {
+  state[sec]={correct:0,answered:0};
+  const comp=document.getElementById(`complete-${sec}`);
+  if (comp) comp.classList.remove('show');
+  buildSection(sec);
+  const container=document.getElementById(`${sec}-questions-container`);
+  const first=container ? container.querySelector('.quiz-card') : null;
+  if (first) first.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+const tabMap = {
+  'sect-notes':    {btn:'nb-notes',    cls:'gray'},
+  'sect-trig':     {btn:'nb-trig',     cls:'blue'},
+  'sect-chain':    {btn:'nb-chain',    cls:'rust'},
+  'sect-extrema':  {btn:'nb-extrema',  cls:'green'},
+  'sect-integral': {btn:'nb-integral', cls:'amber'},
+  'sect-overall':  {btn:'nb-overall',  cls:'blue'},
+};
+
+function switchTab(sectionId, cls) {
+  document.querySelectorAll('.quiz-section').forEach(s=>s.classList.remove('active'));
+  const target=document.getElementById(sectionId);
+  if (target){
+    target.classList.add('active');
+    window.scrollTo({top:document.querySelector('.tab-nav').offsetTop-4,behavior:'smooth'});
+    if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([target]);
+  }
+  document.querySelectorAll('.tab-btn').forEach(b=>{b.className='tab-btn';});
+  const btn=document.getElementById(tabMap[sectionId]?.btn);
+  if (btn) btn.classList.add('t-'+cls);
+}
+
+// Dark mode toggle
+function toggleTheme() {
+  document.documentElement.classList.toggle('dark');
+}
+
+// Notes topic panel navigation
+function openTopic(topicId) {
+  // Hide home buttons
+  document.getElementById('notes-home').style.display = 'none';
+  // Hide all panels
+  document.querySelectorAll('.topic-panel').forEach(p => p.classList.remove('active'));
+  // Show the target panel
+  const panel = document.getElementById(topicId);
+  if (panel) {
+    panel.classList.add('active');
+    // Scroll to top of notes section
+    const notesSection = document.getElementById('sect-notes');
+    if (notesSection) {
+      const offset = 70;
+      const top = notesSection.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+    // Typeset math in the newly visible panel
+    if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([panel]);
+  }
+}
+
+function closeTopic() {
+  // Hide all panels
+  document.querySelectorAll('.topic-panel').forEach(p => p.classList.remove('active'));
+  // Show home buttons
+  document.getElementById('notes-home').style.display = '';
+  // Scroll to top of notes section
+  const notesSection = document.getElementById('sect-notes');
+  if (notesSection) {
+    const offset = 70;
+    const top = notesSection.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+}
+
+// Notes topic scroll — legacy support (switches to notes tab then opens topic)
+function scrollToNote(noteId) {
+  switchTab('sect-notes', 'gray');
+  const topicMap = {
+    'note-trig':   'topic-trig',
+    'note-chain':  'topic-chain',
+    'note-relext': 'topic-relext',
+    'note-absext': 'topic-absext',
+    'note-area':   'topic-area',
+    'note-indef':  'topic-indef',
+    'note-usub':   'topic-usub',
+    'note-log':    'topic-log'
+  };
+  setTimeout(function() {
+    if (topicMap[noteId]) openTopic(topicMap[noteId]);
+  }, 80);
+}
+
+document.addEventListener('keydown', e=>{
+  if (e.key==='Enter' && !e.shiftKey && document.activeElement.classList.contains('answer-field')){
+    e.preventDefault();
+    const ta=document.activeElement;
+    const id=ta.id.replace('ans-','');
+    // Parse section and index: section key may be multi-part
+    const parts=id.split('-');
+    const idx=parseInt(parts[parts.length-1]);
+    const sec=parts.slice(0,-1).join('-');
+    checkAnswer(sec,idx);
+  }
+});
+
+// ──────────────────────────────────────────────────────
+// INIT — wait for MathJax to be ready, then build
+// ──────────────────────────────────────────────────────
+function initApp() {
+  buildSection('trig');
+  buildSection('chain');
+  buildSection('extrema');
+  buildSection('integral');
+  buildSection('overall');
+  switchTab('sect-notes','gray');
+
+  // Typeset everything (notes + first visible cards)
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise([document.body]);
+  }
+}
+
+// MathJax 3 fires MathJax.startup.promise when ready
+if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+  MathJax.startup.promise.then(initApp);
+} else {
+  // fallback: wait for DOMContentLoaded then poll
+  document.addEventListener('DOMContentLoaded', function() {
+    const poll = setInterval(function() {
+      if (window.MathJax && MathJax.typesetPromise) {
+        clearInterval(poll);
+        initApp();
+      }
+    }, 100);
+    // absolute fallback after 3s
+    setTimeout(function() { clearInterval(poll); initApp(); }, 3000);
+  });
+}
+</script>
+</body>
+</html>

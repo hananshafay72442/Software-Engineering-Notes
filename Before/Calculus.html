@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculus & Analytical Geometry — Study Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'none'
+      },
+      svg: { fontCache: 'global', scale: 1.05 },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea'] },
+      startup: {
+        ready() {
+          MathJax.startup.defaultReady();
+          MathJax.startup.promise.then(() => {
+            if (!MathJax.typesetPromise) {
+              MathJax.typesetPromise = (els) => MathJax.startup.document.render().then(() => {});
+            }
+          });
+        }
+      }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #f8f6f2;
+      --surface:  #ffffff;
+      --paper:    #fdfcfa;
+      --border:   #e4e0d8;
+      --border2:  #d0cbc0;
+      --ink:      #2c2926;
+      --ink2:     #5c5550;
+      --ink3:     #9e9890;
+      --accent:   #5b6fa6;
+      --accent-l: #7b8ec4;
+      --accent-bg:#edf0f8;
+      --rust:     #b85c3a;
+      --rust-bg:  #fdf0eb;
+      --green:    #3d7a5b;
+      --green-bg: #eaf4ee;
+      --amber:    #8a6a1a;
+      --amber-bg: #fdf5e0;
+      --correct:  #3d7a5b;
+      --wrong:    #b85c3a;
+      --mono:     'JetBrains Mono', monospace;
+      --sans:     'Inter', system-ui, sans-serif;
+      --serif:    'Lora', Georgia, serif;
+      --radius:   10px;
+      --shadow-sm: 0 1px 4px rgba(0,0,0,0.07);
+      --shadow:    0 2px 12px rgba(0,0,0,0.09);
+      --shadow-md: 0 4px 24px rgba(0,0,0,0.11);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 24px 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .header-title-group { flex: 1; min-width: 200px; }
+
+    .header-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .header-h1 {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 5px;
+    }
+
+    .header-sub {
+      font-size: 0.84rem;
+      color: var(--ink3);
+      letter-spacing: 0.02em;
+    }
+
+    /* Book button */
+    .book-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--sans);
+      font-size: 0.84rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.18s, box-shadow 0.18s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(91,111,166,0.25);
+    }
+
+    .book-btn:hover {
+      background: var(--accent-l);
+      box-shadow: 0 4px 14px rgba(91,111,166,0.32);
+    }
+
+    .book-btn svg {
+      width: 16px; height: 16px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* Chapter pills */
+    .chapter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding-bottom: 1px;
+    }
+
+    .cpill {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      padding: 4px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--border2);
+      color: var(--ink3);
+      background: var(--bg);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .cpill.cp-blue  { border-color: #c5cfe8; color: var(--accent);  background: var(--accent-bg); }
+    .cpill.cp-rust  { border-color: #e8c9bb; color: var(--rust);    background: var(--rust-bg); }
+    .cpill.cp-green { border-color: #b8d8c8; color: var(--green);   background: var(--green-bg); }
+    .cpill.cp-amber { border-color: #e0d0a0; color: var(--amber);   background: var(--amber-bg); }
+
+    /* ── TAB NAV ── */
+    .tab-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tab-nav::-webkit-scrollbar { display: none; }
+
+    .tab-inner {
+      display: flex;
+      min-width: max-content;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--ink3);
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      padding: 13px 18px 11px;
+      cursor: pointer;
+      transition: color 0.18s, border-color 0.18s;
+      white-space: nowrap;
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--ink2); }
+    .tab-btn.t-blue  { color: var(--accent);  border-bottom-color: var(--accent); }
+    .tab-btn.t-rust  { color: var(--rust);    border-bottom-color: var(--rust); }
+    .tab-btn.t-green { color: var(--green);   border-bottom-color: var(--green); }
+    .tab-btn.t-amber { color: var(--amber);   border-bottom-color: var(--amber); }
+    .tab-btn.t-gray  { color: var(--ink2);    border-bottom-color: var(--border2); }
+    .tab-btn.t-purple { color: #7c6fb8;       border-bottom-color: #7c6fb8; }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 36px 24px 80px;
+    }
+
+    .quiz-section { display: none; }
+    .quiz-section.active {
+      display: block;
+      animation: sectionIn 0.28s ease both;
+    }
+    @keyframes sectionIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION HEADER ── */
+    .sec-head {
+      margin-bottom: 24px;
+    }
+
+    .sec-head h2 {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .sec-intro {
+      font-size: 0.88rem;
+      color: var(--ink3);
+      line-height: 1.6;
+      border-left: 3px solid var(--border2);
+      padding-left: 14px;
+      margin-top: 10px;
+    }
+    .si-blue  { border-left-color: var(--accent); }
+    .si-rust  { border-left-color: var(--rust); }
+    .si-green { border-left-color: var(--green); }
+    .si-amber { border-left-color: var(--amber); }
+
+    /* ── SCORE PANEL ── */
+    .score-panel {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .score-circle {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 500;
+      flex-shrink: 0;
+      border: 2px solid var(--border2);
+      color: var(--ink2);
+      background: var(--bg);
+    }
+    .sc-blue  { border-color: var(--accent);  color: var(--accent); }
+    .sc-rust  { border-color: var(--rust);    color: var(--rust); }
+    .sc-green { border-color: var(--green);   color: var(--green); }
+    .sc-amber { border-color: var(--amber);   color: var(--amber); }
+
+    .score-info { flex: 1; }
+    .score-info h3 { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+    .score-info p  { font-size: 0.8rem; color: var(--ink3); }
+    .score-nums {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--ink2);
+      margin-top: 3px;
+    }
+
+    .reset-btn {
+      padding: 7px 16px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      border: 1px solid var(--border2);
+      background: var(--bg);
+      color: var(--ink3);
+      cursor: pointer;
+      transition: all 0.18s;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+    .reset-btn:hover {
+      background: var(--surface);
+      border-color: var(--ink3);
+      color: var(--ink2);
+    }
+
+    /* ── PROGRESS ── */
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 100px;
+      transition: width 0.5s cubic-bezier(0.34,1.4,0.64,1);
+      background: var(--border2);
+    }
+    .pf-blue  { background: var(--accent); }
+    .pf-rust  { background: var(--rust); }
+    .pf-green { background: var(--green); }
+    .pf-amber { background: var(--amber); }
+
+    .progress-text {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--ink3);
+      white-space: nowrap;
+    }
+
+    /* ── QUIZ CARD ── */
+    .quiz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      animation: cardIn 0.3s ease both;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .quiz-card.hidden { display: none; }
+
+    .q-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .q-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink3);
+    }
+
+    .q-badge {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+      border: 1px solid var(--border2);
+      color: var(--ink3);
+      background: var(--bg);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .qb-blue  { border-color: #c5cfe8; color: var(--accent);  background: var(--accent-bg); }
+    .qb-rust  { border-color: #e8c9bb; color: var(--rust);    background: var(--rust-bg); }
+    .qb-green { border-color: #b8d8c8; color: var(--green);   background: var(--green-bg); }
+    .qb-amber { border-color: #e0d0a0; color: var(--amber);   background: var(--amber-bg); }
+
+    .q-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .q-hint {
+      font-size: 0.82rem;
+      color: var(--ink3);
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    /* ── ANSWER ── */
+    .answer-field {
+      width: 100%;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      resize: vertical;
+      min-height: 50px;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+    .answer-field:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(91,111,166,0.1);
+      background: var(--surface);
+    }
+    .answer-field::placeholder { color: var(--ink3); opacity: 0.6; }
+
+    .submit-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .submit-btn {
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.18s;
+      color: #fff;
+    }
+    .submit-btn-blue  { background: var(--accent); }
+    .submit-btn-rust  { background: var(--rust); }
+    .submit-btn-green { background: var(--green); }
+    .submit-btn-amber { background: var(--amber); }
+    .submit-btn:hover:not(:disabled) { filter: brightness(1.08); box-shadow: var(--shadow); }
+    .submit-btn:disabled { opacity: 0.45; cursor: default; }
+
+    .skip-btn {
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--ink3);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .skip-btn:hover { background: var(--bg); color: var(--ink2); }
+
+    /* ── RESULT ── */
+    .result-panel { display: none; margin-top: 20px; }
+    .result-panel.show { display: block; }
+
+    .result-verdict {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 8px 8px 0 0;
+    }
+    .verdict-correct {
+      background: var(--green-bg);
+      color: var(--green);
+      border: 1px solid #b8d8c8;
+    }
+    .verdict-wrong {
+      background: var(--rust-bg);
+      color: var(--rust);
+      border: 1px solid #e8c9bb;
+    }
+
+    .result-your-answer {
+      padding: 8px 16px;
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--ink3);
+      font-style: italic;
+    }
+
+    .result-steps {
+      padding: 18px 20px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .result-steps h4 {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 12px;
+    }
+
+    .step-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+    .step-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .step-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--amber-bg);
+      color: var(--amber);
+      border: 1px solid #e0d0a0;
+      flex-shrink: 0;
+      margin-top: 3px;
+      font-weight: 500;
+    }
+
+    .final-answer {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: var(--amber-bg);
+      border: 1px solid #e0d0a0;
+      border-radius: 6px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ── NAV CONTROLS ── */
+    .nav-controls {
+      display: flex;
+      gap: 8px;
+      margin-top: 18px;
+      justify-content: flex-end;
+    }
+
+    .nav-ctrl-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--ink2);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .nav-ctrl-btn:hover { background: var(--surface); border-color: var(--border2); }
+    .nav-ctrl-btn.primary {
+      background: var(--surface);
+      border-color: var(--border2);
+      color: var(--ink);
+    }
+
+    /* ── COMPLETE STATE ── */
+    .section-complete {
+      display: none;
+      text-align: center;
+      padding: 44px 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+    .section-complete.show { display: block; }
+    .complete-icon { font-size: 2rem; margin-bottom: 10px; }
+    .complete-title {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .complete-sub { font-size: 0.88rem; color: var(--ink3); margin-bottom: 16px; }
+    .complete-grade {
+      font-family: var(--mono);
+      font-size: 1.8rem;
+      margin: 14px 0;
+    }
+
+    /* ── NOTES ── */
+    .notes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 600px) {
+      .notes-grid { grid-template-columns: 1fr; }
+    }
+
+    .note-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .note-card.full { grid-column: 1 / -1; }
+
+    .note-card-title {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .note-block {
+      padding: 7px 0;
+      font-size: 0.9rem;
+      line-height: 1.75;
+      border-bottom: 1px solid var(--bg);
+    }
+    .note-block:last-child { border-bottom: none; }
+
+    .note-block strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .note-block.header-row {
+      font-weight: 600;
+      font-size: 0.82rem;
+      color: var(--ink2);
+      background: var(--bg);
+      padding: 6px 10px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+    }
+
+    .formula-box {
+      background: var(--amber-bg);
+      border: 1px solid #e0d0a0;
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin: 6px 0;
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .note-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 12px 0;
+    }
+
+    /* ── SAMPLE PAPER ── */
+    .paper-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid #7c6fb8;
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .paper-banner .pb-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #7c6fb8;
+      margin-bottom: 6px;
+    }
+    .paper-banner .pb-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--ink);
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+    .paper-banner .pb-meta { font-size: 0.82rem; color: var(--ink3); }
+
+    .paper-image-wrap {
+      margin-bottom: 36px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .paper-image-wrap img { width: 100%; display: block; }
+    .paper-img-caption {
+      background: var(--bg);
+      padding: 8px 16px;
+      font-size: 0.78rem;
+      color: var(--ink3);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .solutions-title {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 22px;
+    }
+    .solutions-title h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .solutions-title .sl { flex: 1; height: 1px; background: var(--border); }
+
+    .sol-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sol-card-head {
+      display: flex; align-items: center; gap: 10px;
+      padding: 13px 20px 11px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      background: var(--bg);
+    }
+    .sol-q-num { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: #7c6fb8; font-weight: 500; }
+    .sol-marks { font-family: var(--mono); font-size: 0.58rem; background: #f0edfb; border: 1px solid #c8c0e8; color: #7c6fb8; padding: 2px 10px; border-radius: 100px; }
+    .sol-concept { font-family: var(--mono); font-size: 0.58rem; background: var(--accent-bg); border: 1px solid #c5cfe8; color: var(--accent); padding: 2px 10px; border-radius: 100px; }
+
+    .sol-part {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--bg);
+    }
+    .sol-part:last-child { border-bottom: none; }
+
+    .sol-part-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sol-part-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .sol-question {
+      font-size: 0.92rem;
+      color: var(--ink2);
+      margin-bottom: 14px;
+      line-height: 1.75;
+      padding: 10px 14px;
+      background: var(--bg);
+      border-radius: 6px;
+      border-left: 3px solid #c8c0e8;
+    }
+
+    .sol-steps-list { list-style: none; padding: 0; margin: 0 0 12px; }
+    .sol-step {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--bg);
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--ink2);
+    }
+    .sol-step:last-child { border-bottom: none; }
+    .sol-step-num {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #f0edfb;
+      border: 1px solid #c8c0e8;
+      color: #7c6fb8;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 3px;
+    }
+    .sol-final {
+      background: var(--green-bg);
+      border: 1px solid #b8d8c8;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      color: var(--green);
+      font-weight: 500;
+    }
+    .sol-final .sf-lbl {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 3px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 28px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--ink3);
+      font-size: 0.8rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .quiz-card { padding: 20px 16px; }
+      main { padding: 24px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="header-title-group">
+        <span class="header-eyebrow">📐 Exam Preparation</span>
+        <h1 class="header-h1">Calculus &amp; Analytical Geometry</h1>
+        <p class="header-sub">Anton, Bivens &amp; Davis — 10th Edition &nbsp;·&nbsp; Mid-Term Scope (Ch 0–2, up to §2.4)</p>
+      </div>
+      <a href="CalculusBook.pdf" target="_blank" class="book-btn">
+        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Open Textbook
+      </a>
+    </div>
+    <div class="chapter-pills">
+      <span class="cpill cp-blue">Ch 0 · Before Calculus</span>
+      <span class="cpill cp-rust">Ch 1 · Limits &amp; Continuity</span>
+      <span class="cpill cp-green">Ch 2 · The Derivative (§2.1–2.4)</span>
+      <span class="cpill cp-amber">Overall Quiz</span>
+      <span class="cpill">📒 Notes</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══ TAB NAV ══ -->
+<nav class="tab-nav">
+  <div class="tab-inner">
+    <button class="tab-btn" id="nb-notes"   onclick="switchTab('sect-notes','gray')">📒 Formula Notes</button>
+    <button class="tab-btn" id="nb-ch0"     onclick="switchTab('sect-ch0','blue')">Ch 0 — Before Calculus</button>
+    <button class="tab-btn" id="nb-ch1"     onclick="switchTab('sect-ch1','rust')">Ch 1 — Limits</button>
+    <button class="tab-btn" id="nb-ch2"     onclick="switchTab('sect-ch2','green')">Ch 2 — Derivative</button>
+    <button class="tab-btn" id="nb-overall" onclick="switchTab('sect-overall','amber')">Overall Quiz</button>
+    <button class="tab-btn" id="nb-paper"   onclick="switchTab('sect-paper','purple')">📄 Sample Paper</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════
+ NOTES
+══════════════════════════ -->
+<section class="quiz-section" id="sect-notes">
+  <div class="sec-head">
+    <h2>Formula Notes &amp; Key Concepts</h2>
+    <p class="sec-intro">Core formulas, definitions, and theorems for all three chapters. Use this for quick review before practicing.</p>
+  </div>
+
+  <div class="notes-grid">
+
+    <!-- Functions -->
+    <div class="note-card">
+      <div class="note-card-title">Chapter 0 — Functions</div>
+      <div class="note-block"><strong>Function:</strong> A rule assigning exactly one output $f(x)$ to each input $x$ in the domain.</div>
+      <div class="note-block"><strong>Domain:</strong> All valid inputs. <strong>Range:</strong> All possible outputs.</div>
+      <div class="note-block"><strong>Vertical Line Test:</strong> A curve is a function $\iff$ every vertical line meets it at most once.</div>
+      <div class="note-block"><strong>Even:</strong> $f(-x)=f(x)$ — symmetric about $y$-axis. <strong>Odd:</strong> $f(-x)=-f(x)$ — symmetric about origin.</div>
+      <div class="note-block"><strong>Composition:</strong> $(f \circ g)(x) = f(g(x))$. Domain: all $x$ in domain of $g$ where $g(x)$ is in domain of $f$.</div>
+      <div class="note-block"><strong>Inverse $f^{-1}$:</strong> Exists $\iff$ $f$ is one-to-one. If $y=f(x)$ then $x=f^{-1}(y)$. To find: swap $x$ and $y$, solve for $y$.</div>
+      <div class="note-block"><strong>Horizontal Line Test:</strong> $f$ is one-to-one $\iff$ no horizontal line meets the graph more than once.</div>
+    </div>
+
+    <!-- Transformations -->
+    <div class="note-card">
+      <div class="note-card-title">Transformations &amp; Families (Ch 0)</div>
+      <div class="note-block">Starting from $y = f(x)$:</div>
+      <div class="formula-box">
+        $y = f(x) + c$ — shift <strong>up</strong> $c$<br>
+        $y = f(x) - c$ — shift <strong>down</strong> $c$<br>
+        $y = f(x + c)$ — shift <strong>left</strong> $c$<br>
+        $y = f(x - c)$ — shift <strong>right</strong> $c$<br>
+        $y = -f(x)$ — reflect over $x$-axis<br>
+        $y = f(-x)$ — reflect over $y$-axis<br>
+        $y = cf(x)$, $c>1$ — vertical stretch<br>
+        $y = f(cx)$, $c>1$ — horizontal compression by $\tfrac{1}{c}$
+      </div>
+      <div class="note-block"><strong>Parabola vertex form:</strong> $y=a(x-h)^2+k$, vertex $(h,k)$, opens up if $a>0$.</div>
+      <div class="note-block"><strong>Trig period:</strong> $A\sin(Bx+C)$ has amplitude $|A|$ and period $\tfrac{2\pi}{|B|}$.</div>
+    </div>
+
+    <!-- Limits -->
+    <div class="note-card">
+      <div class="note-card-title">Chapter 1 — Limits</div>
+      <div class="note-block"><strong>Intuitive definition:</strong> $\lim_{x \to a} f(x) = L$ means $f(x) \to L$ as $x \to a$ (without ever reaching $a$).</div>
+      <div class="note-block"><strong>One-sided limits:</strong> $\lim_{x\to a^-}$ (from left), $\lim_{x\to a^+}$ (from right). Two-sided limit exists $\iff$ both one-sided limits are equal.</div>
+      <div class="note-block"><strong>$\varepsilon$–$\delta$ definition:</strong> For every $\varepsilon > 0$ there exists $\delta > 0$ such that $0 < |x-a| < \delta \Rightarrow |f(x)-L| < \varepsilon$.</div>
+      <div class="formula-box">
+        <strong>Standard trig limits ($x \to 0$):</strong><br>
+        $\displaystyle\lim_{x\to 0}\frac{\sin x}{x} = 1$ &ensp;&ensp; $\displaystyle\lim_{x\to 0}\frac{1-\cos x}{x} = 0$
+      </div>
+      <div class="note-block"><strong>Limit at infinity:</strong> Divide by highest power; terms $\frac{c}{x^n} \to 0$.</div>
+      <div class="note-block"><strong>Infinite limit:</strong> $\lim_{x\to a} f(x) = \pm\infty$ — vertical asymptote at $x=a$.</div>
+    </div>
+
+    <!-- Limit Laws -->
+    <div class="note-card">
+      <div class="note-card-title">Limit Laws &amp; Continuity (Ch 1)</div>
+      <div class="note-block">If $\lim f = L$ and $\lim g = M$, then:</div>
+      <div class="formula-box">
+        $\lim[f \pm g] = L \pm M$<br>
+        $\lim[f \cdot g] = L \cdot M$<br>
+        $\lim\dfrac{f}{g} = \dfrac{L}{M}$ &ensp; (if $M \ne 0$)<br>
+        $\lim[cf] = cL$<br>
+        $\lim\sqrt[n]{f} = \sqrt[n]{L}$
+      </div>
+      <div class="note-block"><strong>Squeeze Theorem:</strong> If $g \le f \le h$ near $a$ and $\lim g = \lim h = L$, then $\lim f = L$.</div>
+      <div class="note-divider"></div>
+      <div class="note-block"><strong>Continuity at $a$:</strong> (1) $f(a)$ defined, (2) $\lim_{x\to a}f(x)$ exists, (3) $\lim_{x\to a}f(x) = f(a)$.</div>
+      <div class="note-block"><strong>Discontinuity types:</strong> <em>Removable</em> (hole — limit exists but $\ne f(a)$), <em>Jump</em> (one-sided limits differ), <em>Infinite</em> (asymptote).</div>
+      <div class="note-block"><strong>IVT:</strong> If $f$ is continuous on $[a,b]$ and $k$ is between $f(a)$ and $f(b)$, then $\exists\, c \in (a,b)$ with $f(c) = k$.</div>
+    </div>
+
+    <!-- Derivative -->
+    <div class="note-card">
+      <div class="note-card-title">Chapter 2 — The Derivative</div>
+      <div class="formula-box">
+        <strong>Definition:</strong><br>
+        $f'(x) = \displaystyle\lim_{h \to 0} \dfrac{f(x+h) - f(x)}{h}$
+      </div>
+      <div class="note-block"><strong>Alternate form:</strong> $f'(a) = \displaystyle\lim_{x \to a} \dfrac{f(x)-f(a)}{x-a}$</div>
+      <div class="note-block"><strong>Tangent line at $(a, f(a))$:</strong> $y - f(a) = f'(a)(x-a)$</div>
+      <div class="note-block"><strong>Differentiable $\Rightarrow$ Continuous.</strong> The converse is FALSE (e.g. $|x|$ at $x=0$).</div>
+      <div class="note-block"><strong>Not differentiable if:</strong> corner/cusp, vertical tangent, or discontinuity at that point.</div>
+      <div class="note-block"><strong>Average rate of change:</strong> $\dfrac{f(b)-f(a)}{b-a}$ = slope of secant line.</div>
+      <div class="note-block"><strong>Instantaneous rate:</strong> $f'(a)$ = slope of tangent = limit of secant slopes.</div>
+    </div>
+
+    <!-- Differentiation Rules -->
+    <div class="note-card full">
+      <div class="note-card-title">Differentiation Rules (Ch 2 — §2.3 &amp; §2.4, within scope)</div>
+      <div class="notes-grid" style="gap:10px;margin-top:0;">
+        <div>
+          <div class="formula-box">
+            $\dfrac{d}{dx}[c] = 0$ &ensp; (constant rule)<br><br>
+            $\dfrac{d}{dx}[x^n] = nx^{n-1}$ &ensp; (power rule)<br><br>
+            $\dfrac{d}{dx}[cf(x)] = cf'(x)$ &ensp; (constant multiple)<br><br>
+            $(f \pm g)' = f' \pm g'$ &ensp; (sum/difference)
+          </div>
+        </div>
+        <div>
+          <div class="formula-box">
+            $(fg)' = f'g + fg'$ &ensp; <strong>(Product Rule)</strong><br><br>
+            $\left(\dfrac{f}{g}\right)' = \dfrac{f'g - fg'}{g^2}$ &ensp; <strong>(Quotient Rule)</strong><br><br>
+            $\dfrac{d}{dx}[x^n] = nx^{n-1}$ also applies for fractions and negatives:<br>
+            e.g. $\dfrac{d}{dx}[x^{-2}] = -2x^{-3}$, $\;\dfrac{d}{dx}[\sqrt{x}] = \dfrac{1}{2\sqrt{x}}$
+          </div>
+        </div>
+      </div>
+      <div class="note-block" style="margin-top:10px;"><strong>Note on scope:</strong> Trig derivatives (§2.5) and Chain Rule (§2.6) are <em>not</em> in the mid-term scope (book page 140 cutoff). The product and quotient rules apply to polynomial/rational functions here.</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════
+ CHAPTER 0
+══════════════════════════ -->
+<section class="quiz-section" id="sect-ch0">
+  <div class="sec-head">
+    <h2>Chapter 0 — Before Calculus</h2>
+    <p class="sec-intro si-blue">Covers §0.1 Functions, §0.2 New Functions from Old, §0.3 Families of Functions, §0.4 Inverse Functions. 5 questions chosen randomly from the full bank.</p>
+  </div>
+
+  <div class="score-panel">
+    <div class="score-circle sc-blue" id="circle-ch0">0/5</div>
+    <div class="score-info">
+      <h3>Chapter 0 Score</h3>
+      <p>Functions, Families, Inverses, Transformations</p>
+      <div class="score-nums" id="nums-ch0">0 / 5 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('ch0')">↺ Reset</button>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-blue" id="pb-ch0" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-ch0">Q 1 of 5</span>
+  </div>
+
+  <div id="ch0-questions-container"></div>
+
+  <div class="section-complete" id="complete-ch0">
+    <div class="complete-icon">✓</div>
+    <div class="complete-title">Chapter 0 Complete</div>
+    <div class="complete-grade" id="grade-ch0"></div>
+    <div class="complete-sub">Functions, Families, and Inverses.</div>
+    <button class="reset-btn" onclick="resetSection('ch0')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════
+ CHAPTER 1
+══════════════════════════ -->
+<section class="quiz-section" id="sect-ch1">
+  <div class="sec-head">
+    <h2>Chapter 1 — Limits &amp; Continuity</h2>
+    <p class="sec-intro si-rust">Covers §1.1–1.6: Limits, Continuity, Asymptotes, ε–δ Definition, IVT. 5 questions chosen randomly from the full bank.</p>
+  </div>
+
+  <div class="score-panel">
+    <div class="score-circle sc-rust" id="circle-ch1">0/5</div>
+    <div class="score-info">
+      <h3>Chapter 1 Score</h3>
+      <p>Limits, Continuity, Asymptotes, IVT</p>
+      <div class="score-nums" id="nums-ch1">0 / 5 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('ch1')">↺ Reset</button>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-rust" id="pb-ch1" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-ch1">Q 1 of 5</span>
+  </div>
+
+  <div id="ch1-questions-container"></div>
+
+  <div class="section-complete" id="complete-ch1">
+    <div class="complete-icon">✓</div>
+    <div class="complete-title">Chapter 1 Complete</div>
+    <div class="complete-grade" id="grade-ch1"></div>
+    <div class="complete-sub">Limits and Continuity.</div>
+    <button class="reset-btn" onclick="resetSection('ch1')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════
+ CHAPTER 2
+══════════════════════════ -->
+<section class="quiz-section" id="sect-ch2">
+  <div class="sec-head">
+    <h2>Chapter 2 — The Derivative</h2>
+    <p class="sec-intro si-green">Covers §2.1 Tangent Lines &amp; Rates of Change, §2.2 The Derivative Function, §2.3 Differentiation Techniques (polynomial/power/product/quotient only), §2.4 Product &amp; Quotient Rules. No trig derivatives or chain rule (beyond mid-term scope). 5 questions chosen randomly.</p>
+  </div>
+
+  <div class="score-panel">
+    <div class="score-circle sc-green" id="circle-ch2">0/5</div>
+    <div class="score-info">
+      <h3>Chapter 2 Score</h3>
+      <p>Tangent Lines, Derivative Rules, Rates of Change</p>
+      <div class="score-nums" id="nums-ch2">0 / 5 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('ch2')">↺ Reset</button>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-green" id="pb-ch2" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-ch2">Q 1 of 5</span>
+  </div>
+
+  <div id="ch2-questions-container"></div>
+
+  <div class="section-complete" id="complete-ch2">
+    <div class="complete-icon">✓</div>
+    <div class="complete-title">Chapter 2 Complete</div>
+    <div class="complete-grade" id="grade-ch2"></div>
+    <div class="complete-sub">The Derivative — within mid-term scope.</div>
+    <button class="reset-btn" onclick="resetSection('ch2')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════
+ OVERALL QUIZ
+══════════════════════════ -->
+<section class="quiz-section" id="sect-overall">
+  <div class="sec-head">
+    <h2>Overall Quiz</h2>
+    <p class="sec-intro si-amber">10 questions drawn randomly from all three chapters. Ideal for final review before the exam.</p>
+  </div>
+
+  <div class="score-panel">
+    <div class="score-circle sc-amber" id="circle-overall">0/10</div>
+    <div class="score-info">
+      <h3>Overall Score</h3>
+      <p>Mixed questions — all chapters</p>
+      <div class="score-nums" id="nums-overall">0 / 10 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('overall')">↺ Reset</button>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-amber" id="pb-overall" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-overall">Q 1 of 10</span>
+  </div>
+
+  <div id="overall-questions-container"></div>
+
+  <div class="section-complete" id="complete-overall">
+    <div class="complete-icon">✓</div>
+    <div class="complete-title">Overall Quiz Complete!</div>
+    <div class="complete-grade" id="grade-overall"></div>
+    <div class="complete-sub">Well done across all three chapters.</div>
+    <button class="reset-btn" onclick="resetSection('overall')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════
+ SAMPLE PAPER
+══════════════════════════ -->
+<section class="quiz-section" id="sect-paper">
+  <div class="sec-head">
+    <h2>Sample Paper</h2>
+  </div>
+
+  <div class="paper-banner">
+    <div class="pb-eyebrow">📋 Official Examination Paper</div>
+    <div class="pb-title">Mid-Term Paper by <strong>Dr. M. Yaqub Khan</strong> — Second Section, 2nd Semester (Thanks to Abdullah for sharing)</div>
+    <div class="pb-meta">Riphah International University Islamabad &nbsp;·&nbsp; Spring 2026 &nbsp;·&nbsp; MT1313 — Calculus &amp; Analytical Geometry &nbsp;·&nbsp; 30 Marks &nbsp;·&nbsp; 30 March 2026</div>
+  </div>
+
+  <div class="paper-image-wrap">
+    <img src="Calculus.jpg" alt="Mid-Term Examination Paper" onerror="this.parentElement.style.display='none';document.getElementById('img-missing').style.display='block';" />
+    <div class="paper-img-caption">Mid-Term Examination Paper · Calculus &amp; Analytical Geometry · Spring 2026</div>
+  </div>
+  <p id="img-missing" style="display:none;color:var(--rust);font-size:0.84rem;font-style:italic;margin-bottom:22px;padding:10px 16px;background:var(--rust-bg);border:1px solid #e8c9bb;border-radius:8px;">⚠ Paper image (Calculus.jpg) not found — place it in the same folder as this HTML file.</p>
+
+  <div class="solutions-title"><h3>Complete Solutions</h3><div class="sl"></div></div>
+
+  <!-- Q1 -->
+  <div class="sol-card">
+    <div class="sol-card-head">
+      <span class="sol-q-num">Question 1</span>
+      <span class="sol-marks">[3 + 3 Marks]</span>
+      <span class="sol-concept">Limits · Composition · Domain</span>
+    </div>
+    <div class="sol-part">
+      <div class="sol-part-label">Part (a)</div>
+      <div class="sol-question">Find $\displaystyle\lim_{x \to 0} \dfrac{\sin 3x}{\sin 5x}$</div>
+      <ul class="sol-steps-list">
+        <li class="sol-step"><span class="sol-step-num">1</span><span>Direct substitution gives $\tfrac{0}{0}$. Use $\lim_{\theta\to 0}\tfrac{\sin\theta}{\theta}=1$.</span></li>
+        <li class="sol-step"><span class="sol-step-num">2</span><span>Rewrite: $\dfrac{\sin 3x}{\sin 5x} = \dfrac{\sin 3x}{3x}\cdot\dfrac{3x}{5x}\cdot\dfrac{5x}{\sin 5x}$</span></li>
+        <li class="sol-step"><span class="sol-step-num">3</span><span>Each factor: $\lim\tfrac{\sin 3x}{3x}=1$, &ensp; $\tfrac{3x}{5x}=\tfrac{3}{5}$, &ensp; $\lim\tfrac{5x}{\sin 5x}=1$.</span></li>
+        <li class="sol-step"><span class="sol-step-num">4</span><span>Product: $1\cdot\tfrac{3}{5}\cdot 1 = \tfrac{3}{5}$.</span></li>
+      </ul>
+      <div class="sol-final"><div class="sf-lbl">Answer</div>$\displaystyle\lim_{x\to 0}\dfrac{\sin 3x}{\sin 5x} = \dfrac{3}{5}$</div>
+    </div>
+    <div class="sol-part">
+      <div class="sol-part-label">Part (b)</div>
+      <div class="sol-question">Let $f(x)=x^2+3$ and $g(x)=\sqrt{x}$. Find $(f\circ g)(x)$ and its domain.</div>
+      <ul class="sol-steps-list">
+        <li class="sol-step"><span class="sol-step-num">1</span><span>$(f\circ g)(x)=f(g(x))=f(\sqrt{x})=(\sqrt{x})^2+3=x+3$.</span></li>
+        <li class="sol-step"><span class="sol-step-num">2</span><span>Domain: $g(x)=\sqrt{x}$ requires $x\ge 0$. The output $\sqrt{x}\ge 0$ is in the domain of $f$. So domain of $f\circ g$ is $[0,\infty)$.</span></li>
+      </ul>
+      <div class="sol-final"><div class="sf-lbl">Answer</div>$(f\circ g)(x)=x+3$, &ensp; Domain $=[0,\infty)$</div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="sol-card">
+    <div class="sol-card-head">
+      <span class="sol-q-num">Question 2</span>
+      <span class="sol-marks">[3 + 3 Marks]</span>
+      <span class="sol-concept">Tangent Lines · Limits</span>
+    </div>
+    <div class="sol-part">
+      <div class="sol-part-label">Part (a)</div>
+      <div class="sol-question">Find the equation of the tangent line to $y=x^2$ at $P(1,1)$.</div>
+      <ul class="sol-steps-list">
+        <li class="sol-step"><span class="sol-step-num">1</span><span>Slope: $m=\lim_{h\to 0}\dfrac{(1+h)^2-1}{h}=\lim_{h\to 0}\dfrac{2h+h^2}{h}=\lim_{h\to 0}(2+h)=2$.</span></li>
+        <li class="sol-step"><span class="sol-step-num">2</span><span>Point-slope form through $(1,1)$: $y-1=2(x-1)$.</span></li>
+        <li class="sol-step"><span class="sol-step-num">3</span><span>Simplify: $y=2x-1$.</span></li>
+      </ul>
+      <div class="sol-final"><div class="sf-lbl">Answer</div>$y = 2x - 1$</div>
+    </div>
+    <div class="sol-part">
+      <div class="sol-part-label">Part (b)</div>
+      <div class="sol-question">Find $\displaystyle\lim_{x\to 1}\dfrac{x-1}{\sqrt{x}-1}$.</div>
+      <ul class="sol-steps-list">
+        <li class="sol-step"><span class="sol-step-num">1</span><span>Direct substitution gives $\tfrac{0}{0}$. Rationalise by multiplying by $\dfrac{\sqrt{x}+1}{\sqrt{x}+1}$.</span></li>
+        <li class="sol-step"><span class="sol-step-num">2</span><span>$\dfrac{(x-1)(\sqrt{x}+1)}{(\sqrt{x}-1)(\sqrt{x}+1)}=\dfrac{(x-1)(\sqrt{x}+1)}{x-1}=\sqrt{x}+1$ &ensp; (for $x\ne 1$).</span></li>
+        <li class="sol-step"><span class="sol-step-num">3</span><span>$\lim_{x\to 1}(\sqrt{x}+1)=\sqrt{1}+1=2$.</span></li>
+      </ul>
+      <div class="sol-final"><div class="sf-lbl">Answer</div>$\displaystyle\lim_{x\to 1}\dfrac{x-1}{\sqrt{x}-1}=2$</div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="sol-card">
+    <div class="sol-card-head">
+      <span class="sol-q-num">Question 3</span>
+      <span class="sol-marks">[3 + 3 Marks]</span>
+      <span class="sol-concept">Differentiation · Higher-Order Derivatives</span>
+    </div>
+    <div class="sol-part">
+      <div class="sol-part-label">Part (a)</div>
+      <div class="sol-question">Find the derivative of $y=3x^8-2x^5+6x+1$ at $x=1$.</div>
+      <ul class="sol-steps-list">
+        <li class="sol-step"><span class="sol-step-num">1</span><span>Apply power rule term by term: $\dfrac{dy}{dx}=24x^7-10x^4+6$.</span></li>
+        <li class="sol-step"><span class="sol-step-num">2</span><span>Evaluate at $x=1$: $24(1)-10(1)+6=24-10+6=20$.</span></li>
+      </ul>
+      <div class="sol-final"><div class="sf-lbl">Answer</div>$y'=24x^7-10x^4+6$; &ensp; $y'(1)=20$</div>
+    </div>
+    <div class="sol-part">
+      <div class="sol-part-label">Part (b)</div>
+      <div class="sol-question">Find $f'(x)$ for $f(x)=3x^4-2x^3+x^2-x-6$ and prove that $f^{(n)}(x)=0$ for $n\ge 5$.</div>
+      <ul class="sol-steps-list">
+        <li class="sol-step"><span class="sol-step-num">1</span><span>$f'(x)=12x^3-6x^2+2x-1$</span></li>
+        <li class="sol-step"><span class="sol-step-num">2</span><span>$f''(x)=36x^2-12x+2$</span></li>
+        <li class="sol-step"><span class="sol-step-num">3</span><span>$f'''(x)=72x-12$</span></li>
+        <li class="sol-step"><span class="sol-step-num">4</span><span>$f^{(4)}(x)=72$ &ensp; (a constant)</span></li>
+        <li class="sol-step"><span class="sol-step-num">5</span><span><strong>Proof:</strong> $f(x)$ has degree 4. Each differentiation reduces degree by 1. After 4 steps we get the constant $72$. Differentiating a constant gives 0. For all $n\ge 5$: $f^{(n)}(x)=\dfrac{d^{n-4}}{dx^{n-4}}[72]=0$. $\square$</span></li>
+      </ul>
+      <div class="sol-final"><div class="sf-lbl">Answer</div>$f'(x)=12x^3-6x^2+2x-1$. Since $\deg(f)=4$, we get $f^{(4)}(x)=72$ and $f^{(n)}(x)=0$ for all $n\ge 5$. $\blacksquare$</div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  Calculus &amp; Analytical Geometry · Anton, Bivens &amp; Davis, 10th Edition &nbsp;·&nbsp; Made by Hanan Shafay &amp; Mohid Ahmed
+</footer>
+
+<script>
+// ══════════════════════════════════════
+// QUESTION BANKS
+// ══════════════════════════════════════
+
+const questionBanks = {
+  ch0: [
+    {
+      id:'ch0-1', section:'§0.1', badge:'Functions', bc:'qb-blue',
+      text:'Given $f(x)=3x^2-4x+2$, find $f(-2)$.',
+      hint:'Substitute $x=-2$ and simplify.',
+      ph:'Type your answer…',
+      accepted:['22'],
+      steps:['Substitute: $f(-2)=3(-2)^2-4(-2)+2$','Compute: $3(4)+8+2=12+8+2$','Result: $22$.'],
+      final:'$f(-2)=22$'
+    },
+    {
+      id:'ch0-2', section:'§0.1', badge:'Domain', bc:'qb-blue',
+      text:'Find the domain of $\\displaystyle f(x)=\\frac{\\sqrt{x-3}}{x-5}$.',
+      hint:'Two restrictions: square root requires $x-3\\ge 0$; denominator $\\ne 0$.',
+      ph:'Interval notation, e.g. [3, 5) ∪ (5, ∞)',
+      accepted:['[3,5)∪(5,∞)','[3,5) U (5,infinity)','x≥3 and x≠5','[3,5) union (5,inf)','[3, 5) ∪ (5, ∞)'],
+      steps:['Square root: $x-3\\ge 0\\Rightarrow x\\ge 3$.','Denominator: $x-5\\ne 0\\Rightarrow x\\ne 5$.','Combine: $x\\ge 3$ and $x\\ne 5$, giving $[3,5)\\cup(5,\\infty)$.'],
+      final:'Domain $=[3,\\,5)\\cup(5,\\,\\infty)$'
+    },
+    {
+      id:'ch0-3', section:'§0.2', badge:'Composition', bc:'qb-blue',
+      text:'If $f(x)=x^2+1$ and $g(x)=2x-3$, find $(f\\circ g)(x)$.',
+      hint:'$(f\\circ g)(x)=f(g(x))$ — substitute $g(x)$ into $f$.',
+      ph:'Simplify completely…',
+      accepted:['4x²-12x+10','4x^2-12x+10'],
+      steps:['$(f\\circ g)(x)=f(2x-3)=(2x-3)^2+1$','Expand: $4x^2-12x+9+1=4x^2-12x+10$.'],
+      final:'$(f\\circ g)(x)=4x^2-12x+10$'
+    },
+    {
+      id:'ch0-4', section:'§0.2', badge:'Transformations', bc:'qb-blue',
+      text:'Describe how to obtain $y=-\\sqrt{x+2}+3$ from $y=\\sqrt{x}$. State domain and range.',
+      hint:'Inside: horizontal shift. Negative sign: reflection. Outside constant: vertical shift.',
+      ph:'List transformations, domain, range…',
+      accepted:['left 2','shift left 2','left by 2'],
+      steps:['$x+2$ inside: shift <strong>left 2</strong> → $y=\\sqrt{x+2}$.','Negative: reflect over $x$-axis → $y=-\\sqrt{x+2}$.','$+3$ outside: shift <strong>up 3</strong> → $y=-\\sqrt{x+2}+3$.','Domain: $x+2\\ge 0\\Rightarrow x\\ge -2$. Domain $=[-2,\\infty)$.','Range: $-\\sqrt{x+2}\\le 0$, so $-\\sqrt{x+2}+3\\le 3$. Range $=(-\\infty,3]$.'],
+      final:'Left 2, reflect over $x$-axis, up 3. Domain $=[-2,\\infty)$, Range $=(-\\infty,3]$.'
+    },
+    {
+      id:'ch0-5', section:'§0.3', badge:'Even / Odd', bc:'qb-blue',
+      text:'Determine whether $f(x)=x^4-3x^2+5$ is even, odd, or neither.',
+      hint:'Compute $f(-x)$ and compare with $f(x)$ and $-f(x)$.',
+      ph:'Even, odd, or neither — explain.',
+      accepted:['even'],
+      steps:['$f(-x)=(-x)^4-3(-x)^2+5=x^4-3x^2+5=f(x)$','Since $f(-x)=f(x)$, the function is <strong>even</strong>.'],
+      final:'$f$ is <strong>even</strong> because $f(-x)=f(x)$.'
+    },
+    {
+      id:'ch0-6', section:'§0.4', badge:'Inverse Functions', bc:'qb-blue',
+      text:'Find the inverse of $f(x)=\\dfrac{2x+1}{x-3}$ and state its domain.',
+      hint:'Replace $f(x)$ with $y$, swap $x\\leftrightarrow y$, solve for $y$.',
+      ph:'Write f⁻¹(x) and its domain…',
+      accepted:['(3x+1)/(x-2)','3x+1 over x-2'],
+      steps:['Write $y=\\dfrac{2x+1}{x-3}$; swap: $x=\\dfrac{2y+1}{y-3}$.','Multiply: $x(y-3)=2y+1\\Rightarrow xy-3x=2y+1$.','Collect $y$: $y(x-2)=3x+1\\Rightarrow y=\\dfrac{3x+1}{x-2}$.','Domain of $f^{-1}$: $x\\ne 2$.'],
+      final:'$f^{-1}(x)=\\dfrac{3x+1}{x-2}$, Domain: $x\\ne 2$.'
+    },
+    {
+      id:'ch0-7', section:'§0.2', badge:'Piecewise', bc:'qb-blue',
+      text:'Given $f(x)=\\begin{cases}x^2+1&x\\le 0\\\\2x-1&x>0\\end{cases}$, find $f(-3)$, $f(0)$, $f(4)$.',
+      hint:'Use the correct piece for each value.',
+      ph:'f(−3) = ?, f(0) = ?, f(4) = ?',
+      accepted:['10, 1, 7','10 1 7','f(-3)=10'],
+      steps:['$f(-3)$: $-3\\le 0$, use $x^2+1$: $9+1=10$.','$f(0)$: $0\\le 0$, use $x^2+1$: $0+1=1$.','$f(4)$: $4>0$, use $2x-1$: $8-1=7$.'],
+      final:'$f(-3)=10,\\quad f(0)=1,\\quad f(4)=7$'
+    },
+    {
+      id:'ch0-8', section:'§0.4', badge:'One-to-One', bc:'qb-blue',
+      text:'Does $f(x)=x^2$ have an inverse on $(-\\infty,\\infty)$? If not, what restriction makes it invertible? Find the inverse.',
+      hint:'Use the horizontal line test.',
+      ph:'Explain and find the inverse…',
+      accepted:['no','x≥0','restrict to [0,∞)','√x'],
+      steps:['$f(-2)=f(2)=4$: fails horizontal line test. Not one-to-one on $\\mathbb{R}$.','Restrict to $[0,\\infty)$ where $f$ is strictly increasing.','Solve $y=x^2$: $x=\\sqrt{y}$. So $f^{-1}(x)=\\sqrt{x}$, domain $[0,\\infty)$.'],
+      final:'No inverse on $\\mathbb{R}$. Restrict to $[0,\\infty)$: $f^{-1}(x)=\\sqrt{x}$.'
+    },
+    {
+      id:'ch0-9', section:'§0.1', badge:'Function Values', bc:'qb-blue',
+      text:'If $g(x)=\\dfrac{x+1}{x-2}$, find $g(0)$, $g(3)$, and $g(-1)$.',
+      hint:'Substitute each value; note the restriction $x\\ne 2$.',
+      ph:'g(0)=?, g(3)=?, g(-1)=?',
+      accepted:['-1/2, 4, 0','-0.5 4 0','g(0)=-0.5'],
+      steps:['$g(0)=\\dfrac{1}{-2}=-\\dfrac{1}{2}$.','$g(3)=\\dfrac{4}{1}=4$.','$g(-1)=\\dfrac{0}{-3}=0$.'],
+      final:'$g(0)=-\\tfrac{1}{2},\\quad g(3)=4,\\quad g(-1)=0$.'
+    },
+    {
+      id:'ch0-10', section:'§0.1', badge:'Domain', bc:'qb-blue',
+      text:'Find the domain of $f(x)=\\ln(2x-6)$.',
+      hint:'Argument of $\\ln$ must be strictly positive.',
+      ph:'Interval notation…',
+      accepted:['(3,∞)','x>3'],
+      steps:['Need $2x-6>0\\Rightarrow x>3$.','Domain $=(3,\\infty)$.'],
+      final:'Domain $=(3,\\infty)$.'
+    },
+    {
+      id:'ch0-11', section:'§0.2', badge:'Function Arithmetic', bc:'qb-blue',
+      text:'Let $f(x)=x^2$ and $g(x)=3x+1$. Find $(f\\cdot g)(x)$ and $(f-g)(x)$.',
+      hint:'Multiply / subtract the formulas directly.',
+      ph:'(f·g)(x) and (f−g)(x)…',
+      accepted:['3x³+x²','x²-3x-1'],
+      steps:['$(f\\cdot g)(x)=x^2(3x+1)=3x^3+x^2$.','$(f-g)(x)=x^2-(3x+1)=x^2-3x-1$.'],
+      final:'$(f\\cdot g)(x)=3x^3+x^2$; $(f-g)(x)=x^2-3x-1$.'
+    },
+    {
+      id:'ch0-12', section:'§0.3', badge:'Families', bc:'qb-blue',
+      text:'Identify the type and key features of $f(x)=-2(x-1)^2+4$.',
+      hint:'Vertex form $a(x-h)^2+k$.',
+      ph:'Type, vertex, direction…',
+      accepted:['quadratic','parabola','vertex (1,4)','opens down'],
+      steps:['Downward-opening parabola in vertex form.','Vertex $(h,k)=(1,4)$.','$a=-2<0$: opens <strong>downward</strong>, stretched by factor 2.'],
+      final:'Downward parabola, vertex $(1,4)$, stretched by 2.'
+    },
+    {
+      id:'ch0-13', section:'§0.4', badge:'Inverse', bc:'qb-blue',
+      text:'Find the inverse of $f(x)=3x-7$ and verify $f(f^{-1}(x))=x$.',
+      hint:'Solve $y=3x-7$ for $x$, then swap variables.',
+      ph:'Write f⁻¹(x)…',
+      accepted:['(x+7)/3','x+7 over 3'],
+      steps:['Swap: $x=3y-7\\Rightarrow y=\\dfrac{x+7}{3}$.','Verify: $f\\!\\left(\\dfrac{x+7}{3}\\right)=3\\cdot\\dfrac{x+7}{3}-7=x+7-7=x$. ✓'],
+      final:'$f^{-1}(x)=\\dfrac{x+7}{3}$.'
+    },
+    {
+      id:'ch0-14', section:'§0.3', badge:'Exponential', bc:'qb-blue',
+      text:'Solve for $x$: $2^{x+1}=32$.',
+      hint:'Write 32 as a power of 2.',
+      ph:'x = ?',
+      accepted:['4','x=4'],
+      steps:['$32=2^5$.','$2^{x+1}=2^5\\Rightarrow x+1=5\\Rightarrow x=4$.'],
+      final:'$x=4$.'
+    },
+    {
+      id:'ch0-15', section:'§0.2', badge:'Symmetry', bc:'qb-blue',
+      text:'Is $g(x)=x^3-5x$ even, odd, or neither?',
+      hint:'Test $g(-x)$ vs $g(x)$ and $-g(x)$.',
+      ph:'Even, odd, or neither — show work.',
+      accepted:['odd'],
+      steps:['$g(-x)=(-x)^3-5(-x)=-x^3+5x=-(x^3-5x)=-g(x)$.','Since $g(-x)=-g(x)$: <strong>odd</strong>.'],
+      final:'$g$ is <strong>odd</strong>.'
+    },
+    {
+      id:'ch0-16', section:'§0.1', badge:'Difference Quotient', bc:'qb-blue',
+      text:'For $f(x)=x^2+3x$, compute $\\dfrac{f(x+h)-f(x)}{h}$ and simplify.',
+      hint:'Expand $(x+h)^2$, cancel $h$.',
+      ph:'Simplified expression…',
+      accepted:['2x+h+3'],
+      steps:['$f(x+h)=(x+h)^2+3(x+h)=x^2+2xh+h^2+3x+3h$.','$f(x+h)-f(x)=2xh+h^2+3h=h(2x+h+3)$.','Divide by $h$: $2x+h+3$.'],
+      final:'Difference quotient $=2x+h+3$.'
+    },
+    {
+      id:'ch0-17', section:'§0.1', badge:'Range', bc:'qb-blue',
+      text:'Find the range of $f(x)=\\sqrt{9-x^2}$.',
+      hint:'Upper semicircle of radius 3.',
+      ph:'Interval notation…',
+      accepted:['[0,3]','0 to 3'],
+      steps:['Domain: $9-x^2\\ge 0\\Rightarrow x\\in[-3,3]$.','At $x=\\pm 3$: $f=0$. At $x=0$: $f=3$.','Range $=[0,3]$.'],
+      final:'Range $=[0,3]$.'
+    }
+  ],
+
+  ch1: [
+    {
+      id:'ch1-1', section:'§1.1', badge:'Direct Sub', bc:'qb-rust',
+      text:'Evaluate $\\displaystyle\\lim_{x\\to 2}(3x^2-x+1)$.',
+      hint:'Polynomial — substitute directly.',
+      ph:'Your answer…',
+      accepted:['11'],
+      steps:['Polynomial: substitute $x=2$.','$3(4)-2+1=12-2+1=11$.'],
+      final:'$11$.'
+    },
+    {
+      id:'ch1-2', section:'§1.1', badge:'0/0 Form', bc:'qb-rust',
+      text:'Evaluate $\\displaystyle\\lim_{x\\to 3}\\frac{x^2-9}{x-3}$.',
+      hint:'Factor the numerator.',
+      ph:'Factor and simplify…',
+      accepted:['6'],
+      steps:['$x^2-9=(x-3)(x+3)$.','Cancel: $\\dfrac{(x-3)(x+3)}{x-3}=x+3$.','$\\lim_{x\\to 3}(x+3)=6$.'],
+      final:'$6$.'
+    },
+    {
+      id:'ch1-3', section:'§1.2', badge:'Limit Laws', bc:'qb-rust',
+      text:'Given $\\lim_{x\\to a}f(x)=2$ and $\\lim_{x\\to a}g(x)=3$, find $\\lim_{x\\to a}[2f(x)-g(x)]$.',
+      hint:'$\\lim(2f-g)=2\\lim f-\\lim g$.',
+      ph:'Your answer…',
+      accepted:['1'],
+      steps:['$2\\cdot 2-3=4-3=1$.'],
+      final:'$1$.'
+    },
+    {
+      id:'ch1-4', section:'§1.5', badge:'Continuity', bc:'qb-rust',
+      text:'State the three conditions for $f$ to be continuous at $x=a$.',
+      hint:'Defined, limit exists, they match.',
+      ph:'List the three conditions…',
+      accepted:['f(a) defined','limit exists','limit equals f(a)'],
+      steps:['(1) $f(a)$ must be defined.','(2) $\\lim_{x\\to a}f(x)$ must exist.','(3) $\\lim_{x\\to a}f(x)=f(a)$.'],
+      final:'$f(a)$ defined; limit exists; limit $=f(a)$.'
+    },
+    {
+      id:'ch1-5', section:'§1.4', badge:'ε–δ', bc:'qb-rust',
+      text:'Using ε–δ, prove $\\lim_{x\\to 1}(3x+2)=5$. Find $\\delta$ in terms of $\\varepsilon$.',
+      hint:'$|f(x)-L|=|3x-3|=3|x-1|<\\varepsilon$.',
+      ph:'δ = ?',
+      accepted:['δ=ε/3','ε/3','epsilon/3'],
+      steps:['$|f(x)-5|=|3x-3|=3|x-1|$.','Need $3|x-1|<\\varepsilon$, so $|x-1|<\\varepsilon/3$.','Choose $\\delta=\\varepsilon/3$.'],
+      final:'$\\delta=\\varepsilon/3$.'
+    },
+    {
+      id:'ch1-6', section:'§1.2', badge:'Rationalisation', bc:'qb-rust',
+      text:'Evaluate $\\displaystyle\\lim_{x\\to 0}\\frac{\\sqrt{x+1}-1}{x}$.',
+      hint:'Multiply by conjugate $\\dfrac{\\sqrt{x+1}+1}{\\sqrt{x+1}+1}$.',
+      ph:'Your answer…',
+      accepted:['1/2','0.5'],
+      steps:['Multiply: numerator becomes $(x+1)-1=x$.','$\\dfrac{x}{x(\\sqrt{x+1}+1)}=\\dfrac{1}{\\sqrt{x+1}+1}$.','Limit as $x\\to 0$: $\\dfrac{1}{2}$.'],
+      final:'$\\dfrac{1}{2}$.'
+    },
+    {
+      id:'ch1-7', section:'§1.5', badge:'IVT', bc:'qb-rust',
+      text:'Show $f(x)=x^3+x-1$ has a root in $(0,1)$ using the IVT.',
+      hint:'Check signs of $f(0)$ and $f(1)$.',
+      ph:'Verify sign change and apply IVT…',
+      accepted:['ivt','sign change','f(0)<0 f(1)>0'],
+      steps:['$f(0)=-1<0$.','$f(1)=1>0$.','$f$ is continuous. By IVT: $\\exists\\, c\\in(0,1)$ with $f(c)=0$.'],
+      final:'$f(0)<0$ and $f(1)>0$; by IVT a root exists in $(0,1)$.'
+    },
+    {
+      id:'ch1-8', section:'§1.3', badge:'Squeeze Thm', bc:'qb-rust',
+      text:'Evaluate $\\displaystyle\\lim_{x\\to 0}x^2\\cos\\!\\left(\\tfrac{1}{x}\\right)$.',
+      hint:'Use $-1\\le\\cos(1/x)\\le 1$ and squeeze.',
+      ph:'Your answer…',
+      accepted:['0'],
+      steps:['$-x^2\\le x^2\\cos(1/x)\\le x^2$ (since $-1\\le\\cos\\le 1$ and $x^2\\ge 0$).','Both bounds $\\to 0$ as $x\\to 0$. By Squeeze: limit $=0$.'],
+      final:'$0$.'
+    },
+    {
+      id:'ch1-9', section:'§1.1', badge:'One-Sided', bc:'qb-rust',
+      text:'Find $\\lim_{x\\to 0^+}\\dfrac{|x|}{x}$ and $\\lim_{x\\to 0^-}\\dfrac{|x|}{x}$. Does the two-sided limit exist?',
+      hint:'For $x>0$: $|x|=x$; for $x<0$: $|x|=-x$.',
+      ph:'Right, left, two-sided…',
+      accepted:['1 and -1','does not exist','dne'],
+      steps:['$x>0$: $|x|/x=1$. Right limit $=1$.','$x<0$: $|x|/x=-1$. Left limit $=-1$.','One-sided limits differ → two-sided limit <strong>does not exist</strong>.'],
+      final:'Right $=1$, left $=-1$; two-sided limit DNE.'
+    },
+    {
+      id:'ch1-10', section:'§1.6', badge:'Asymptotes', bc:'qb-rust',
+      text:'Find all vertical asymptotes of $f(x)=\\dfrac{x+2}{x^2-4}$.',
+      hint:'Factor denominator; check which zeros cancel.',
+      ph:'x = ?',
+      accepted:['x=2','VA: x=2'],
+      steps:['$x^2-4=(x-2)(x+2)$.','Cancel $(x+2)$: $f(x)=\\dfrac{1}{x-2}$ for $x\\ne -2$.','$x=-2$ is a <em>hole</em>. VA: $x=2$.'],
+      final:'VA: $x=2$ (hole at $x=-2$).'
+    },
+    {
+      id:'ch1-11', section:'§1.6', badge:'Limit at ∞', bc:'qb-rust',
+      text:'Evaluate $\\displaystyle\\lim_{x\\to\\infty}\\frac{3x^2+5}{2x^2-1}$.',
+      hint:'Divide by $x^2$.',
+      ph:'Your answer…',
+      accepted:['3/2','1.5'],
+      steps:['Divide by $x^2$: $\\dfrac{3+5/x^2}{2-1/x^2}$.','As $x\\to\\infty$: $\\to\\dfrac{3}{2}$.'],
+      final:'$\\dfrac{3}{2}$.'
+    },
+    {
+      id:'ch1-12', section:'§1.5', badge:'Continuity', bc:'qb-rust',
+      text:'Is $f(x)=\\dfrac{x^2-1}{x-1}$ continuous at $x=1$? Explain.',
+      hint:'Check if $f(1)$ is defined.',
+      ph:'Continuous or not, and why?',
+      accepted:['no','not continuous','removable'],
+      steps:['$f(1)=0/0$: undefined.','Not continuous. It has a <strong>removable discontinuity</strong> (hole) at $x=1$.','The limit $\\lim_{x\\to 1}(x+1)=2$ exists but $f(1)$ is not defined.'],
+      final:'Not continuous at $x=1$: removable discontinuity.'
+    },
+    {
+      id:'ch1-13', section:'§1.1', badge:'0/0 Form', bc:'qb-rust',
+      text:'Evaluate $\\displaystyle\\lim_{x\\to 4}\\frac{\\sqrt{x}-2}{x-4}$.',
+      hint:'Multiply by conjugate $(\\sqrt{x}+2)$.',
+      ph:'Your answer…',
+      accepted:['1/4','0.25'],
+      steps:['Multiply by $\\dfrac{\\sqrt{x}+2}{\\sqrt{x}+2}$: numerator $=x-4$.','$\\dfrac{x-4}{(x-4)(\\sqrt{x}+2)}=\\dfrac{1}{\\sqrt{x}+2}$.','At $x=4$: $\\dfrac{1}{4}$.'],
+      final:'$\\dfrac{1}{4}$.'
+    },
+    {
+      id:'ch1-14', section:'§1.3', badge:'Trig Limit', bc:'qb-rust',
+      text:'Evaluate $\\displaystyle\\lim_{x\\to 0}\\frac{\\sin(5x)}{x}$.',
+      hint:'Use $\\lim_{u\\to 0}\\dfrac{\\sin u}{u}=1$ with $u=5x$.',
+      ph:'Your answer…',
+      accepted:['5'],
+      steps:['$\\dfrac{\\sin 5x}{x}=5\\cdot\\dfrac{\\sin 5x}{5x}$.','As $x\\to 0$: $\\dfrac{\\sin 5x}{5x}\\to 1$. Limit $=5$.'],
+      final:'$5$.'
+    },
+    {
+      id:'ch1-15', section:'§1.5', badge:'Continuity', bc:'qb-rust',
+      text:'Where is $f(x)=\\dfrac{1}{x^2-x-2}$ continuous?',
+      hint:'Factor denominator and exclude zeros.',
+      ph:'Interval(s)…',
+      accepted:['x≠2 and x≠-1','(-∞,-1)∪(-1,2)∪(2,∞)'],
+      steps:['$x^2-x-2=(x-2)(x+1)$.','Zeros: $x=2$ and $x=-1$.','$f$ is continuous on $(-\\infty,-1)\\cup(-1,2)\\cup(2,\\infty)$.'],
+      final:'Continuous everywhere except $x=-1$ and $x=2$.'
+    },
+    {
+      id:'ch1-16', section:'§1.5', badge:'Removable Disc', bc:'qb-rust',
+      text:'Define $g(x)=\\begin{cases}\\dfrac{x^2-4}{x-2}&x\\ne 2\\\\k&x=2\\end{cases}$. Find $k$ so $g$ is continuous at $x=2$.',
+      hint:'Find the limit as $x\\to 2$, set $k$ equal to it.',
+      ph:'k = ?',
+      accepted:['4','k=4'],
+      steps:['For $x\\ne 2$: $\\dfrac{(x-2)(x+2)}{x-2}=x+2$.','$\\lim_{x\\to 2}(x+2)=4$.','$k=4$.'],
+      final:'$k=4$.'
+    },
+    {
+      id:'ch1-17', section:'§1.6', badge:'Infinite Limits', bc:'qb-rust',
+      text:'Find $\\lim_{x\\to 3^+}\\dfrac{1}{x-3}$ and $\\lim_{x\\to 3^-}\\dfrac{1}{x-3}$.',
+      hint:'Consider the sign of $x-3$ on each side.',
+      ph:'Right and left limits…',
+      accepted:['+∞ and -∞','right +inf left -inf'],
+      steps:['$x\\to 3^+$: $x-3\\to 0^+$, so $\\dfrac{1}{x-3}\\to+\\infty$.','$x\\to 3^-$: $x-3\\to 0^-$, so $\\dfrac{1}{x-3}\\to-\\infty$.'],
+      final:'Right $=+\\infty$; Left $=-\\infty$.'
+    },
+    {
+      id:'ch1-18', section:'§1.5', badge:'IVT Application', bc:'qb-rust',
+      text:'Show $\\cos x=x$ has a solution in $(0,1)$ using the IVT.',
+      hint:'Define $h(x)=\\cos x-x$; find sign change.',
+      ph:'Apply IVT to h(x)=cos x − x…',
+      accepted:['h(0)>0','sign change','ivt'],
+      steps:['Let $h(x)=\\cos x-x$. Continuous on $[0,1]$.','$h(0)=1>0$; $h(1)=\\cos 1-1\\approx -0.46<0$.','By IVT: $\\exists c\\in(0,1)$ with $h(c)=0$, i.e. $\\cos c=c$.'],
+      final:'Sign change confirmed; by IVT a solution exists in $(0,1)$.'
+    }
+  ],
+
+  ch2: [
+    // Within scope: §2.1, §2.2, §2.3 (polynomial only), §2.4 (product/quotient, no trig)
+    {
+      id:'ch2-1', section:'§2.1', badge:'Tangent Line', bc:'qb-green',
+      text:'Find the equation of the tangent to $y=x^2$ at $(3,9)$.',
+      hint:'Use the limit definition to find slope, then point-slope form.',
+      ph:'Equation of tangent…',
+      accepted:['y=6x-9','6x-9'],
+      steps:['$m=\\lim_{h\\to 0}\\dfrac{(3+h)^2-9}{h}=\\lim_{h\\to 0}(6+h)=6$.','Point-slope: $y-9=6(x-3)\\Rightarrow y=6x-9$.'],
+      final:'$y=6x-9$.'
+    },
+    {
+      id:'ch2-2', section:'§2.2', badge:'Definition', bc:'qb-green',
+      text:'Using the limit definition, find $f\'(x)$ for $f(x)=\\dfrac{1}{x}$.',
+      hint:'Find a common denominator in the difference quotient.',
+      ph:'Show work and state f\'(x)…',
+      accepted:['-1/x²','-1/x^2'],
+      steps:['$\\dfrac{f(x+h)-f(x)}{h}=\\dfrac{\\frac{1}{x+h}-\\frac{1}{x}}{h}=\\dfrac{-h}{hx(x+h)}=\\dfrac{-1}{x(x+h)}$.','Take limit: $f\'(x)=\\dfrac{-1}{x^2}$.'],
+      final:'$f\'(x)=-\\dfrac{1}{x^2}$.'
+    },
+    {
+      id:'ch2-3', section:'§2.4', badge:'Product Rule', bc:'qb-green',
+      text:'Differentiate $f(x)=(x^3+2)(5x-1)$ using the product rule.',
+      hint:'$(fg)\'=f\'g+fg\'$. Expand and simplify.',
+      ph:'Your answer…',
+      accepted:['20x³-3x²+10','20x^3-3x^2+10'],
+      steps:['$u=x^3+2$, $v=5x-1$; $u\'=3x^2$, $v\'=5$.','$f\'=3x^2(5x-1)+(x^3+2)(5)=15x^3-3x^2+5x^3+10=20x^3-3x^2+10$.'],
+      final:'$f\'(x)=20x^3-3x^2+10$.'
+    },
+    {
+      id:'ch2-4', section:'§2.4', badge:'Quotient Rule', bc:'qb-green',
+      text:'Differentiate $g(x)=\\dfrac{x^2+3}{2x-1}$.',
+      hint:'Quotient rule: $\\left(\\dfrac{f}{g}\\right)\'=\\dfrac{f\'g-fg\'}{g^2}$.',
+      ph:'Your answer…',
+      accepted:['(2x²-2x-6)/(2x-1)²'],
+      steps:['$f=x^2+3$, $f\'=2x$; $g_d=2x-1$, $g_d\'=2$.','Numerator: $2x(2x-1)-(x^2+3)(2)=4x^2-2x-2x^2-6=2x^2-2x-6$.','$g\'=\\dfrac{2x^2-2x-6}{(2x-1)^2}$.'],
+      final:'$g\'(x)=\\dfrac{2x^2-2x-6}{(2x-1)^2}$.'
+    },
+    {
+      id:'ch2-5', section:'§2.1', badge:'Average Rate', bc:'qb-green',
+      text:'A particle moves with $s(t)=t^3-6t$. Find the average rate of change from $t=1$ to $t=3$.',
+      hint:'Average rate $=\\dfrac{s(3)-s(1)}{3-1}$.',
+      ph:'Compute and interpret…',
+      accepted:['7'],
+      steps:['$s(1)=1-6=-5$; $s(3)=27-18=9$.','Average $=\\dfrac{9-(-5)}{2}=7$ m/s.'],
+      final:'Average rate $=7$ m/s.'
+    },
+    {
+      id:'ch2-6', section:'§2.2', badge:'Differentiability', bc:'qb-green',
+      text:'Is $f(x)=|x|$ differentiable at $x=0$? Use the definition.',
+      hint:'Compute left and right derivatives separately.',
+      ph:'Use the limit definition…',
+      accepted:['no','not differentiable','corner','does not exist'],
+      steps:['Right: $\\lim_{h\\to 0^+}\\dfrac{|h|}{h}=1$.','Left: $\\lim_{h\\to 0^-}\\dfrac{|h|}{h}=-1$.','$1\\ne -1$: limit DNE → <strong>not differentiable</strong> at $x=0$.'],
+      final:'Not differentiable: left derivative $=-1$, right $=+1$.'
+    },
+    {
+      id:'ch2-7', section:'§2.3', badge:'Higher Deriv.', bc:'qb-green',
+      text:'If $f(x)=4x^4-3x^3+2x-7$, find $f\'\'(x)$.',
+      hint:'Differentiate twice.',
+      ph:'Second derivative…',
+      accepted:['48x²-18x','48x^2-18x'],
+      steps:['$f\'(x)=16x^3-9x^2+2$.','$f\'\'(x)=48x^2-18x$.'],
+      final:'$f\'\'(x)=48x^2-18x$.'
+    },
+    {
+      id:'ch2-8', section:'§2.1', badge:'Instantaneous Rate', bc:'qb-green',
+      text:'Find the instantaneous rate of change of $f(x)=x^3$ at $x=2$ using the limit definition.',
+      hint:'$f\'(2)=\\lim_{h\\to 0}\\dfrac{(2+h)^3-8}{h}$.',
+      ph:'Your answer…',
+      accepted:['12'],
+      steps:['$(2+h)^3=8+12h+6h^2+h^3$.','$\\dfrac{12h+6h^2+h^3}{h}=12+6h+h^2$.','Limit $=12$.'],
+      final:'$f\'(2)=12$.'
+    },
+    {
+      id:'ch2-9', section:'§2.3', badge:'Power Rule', bc:'qb-green',
+      text:'Differentiate $y=7x^5-4x^3+\\sqrt{x}-9$.',
+      hint:'Write $\\sqrt{x}=x^{1/2}$ and apply the power rule.',
+      ph:'Your answer…',
+      accepted:['35x⁴-12x²+1/(2√x)','35x^4-12x^2+1/(2sqrt(x))'],
+      steps:['$\\dfrac{d}{dx}[7x^5]=35x^4$.','$\\dfrac{d}{dx}[-4x^3]=-12x^2$.','$\\dfrac{d}{dx}[x^{1/2}]=\\dfrac{1}{2\\sqrt{x}}$.','$\\dfrac{d}{dx}[-9]=0$.'],
+      final:'$y\'=35x^4-12x^2+\\dfrac{1}{2\\sqrt{x}}$.'
+    },
+    {
+      id:'ch2-10', section:'§2.2', badge:'Definition', bc:'qb-green',
+      text:'Using the limit definition, find $f\'(x)$ for $f(x)=x^2-4x$.',
+      hint:'Expand $(x+h)^2$, cancel, divide by $h$.',
+      ph:'Your answer…',
+      accepted:['2x-4'],
+      steps:['$f(x+h)=x^2+2xh+h^2-4x-4h$.','$f(x+h)-f(x)=h(2x+h-4)$.','Divide by $h$, take limit: $f\'(x)=2x-4$.'],
+      final:'$f\'(x)=2x-4$.'
+    },
+    {
+      id:'ch2-11', section:'§2.4', badge:'Product Rule', bc:'qb-green',
+      text:'Differentiate $h(x)=(x^2+1)(x^3-3x)$ using the product rule.',
+      hint:'$(fg)\'=f\'g+fg\'$ with $f=x^2+1$, $g=x^3-3x$.',
+      ph:'Your answer…',
+      accepted:['5x⁴-6x²-3','5x^4-6x^2-3','5x^4 - 6x^2 - 3'],
+      steps:['$f\'=2x$, $g\'=3x^2-3$.','$h\'=2x(x^3-3x)+(x^2+1)(3x^2-3)$.','$=2x^4-6x^2+3x^4-3x^2+3x^2-3$.','$=5x^4-6x^2-3$.'],
+      final:'$h\'(x)=5x^4-6x^2-3$.'
+    },
+    {
+      id:'ch2-12', section:'§2.3', badge:'Power Rule', bc:'qb-green',
+      text:'Differentiate $y=x^{-3}+4x^{1/2}-2$.',
+      hint:'Apply power rule to each term.',
+      ph:'Your answer…',
+      accepted:['-3x⁻⁴+2/√x','-3/x⁴+2/√x','-3x^-4+2x^(-1/2)'],
+      steps:['$\\dfrac{d}{dx}[x^{-3}]=-3x^{-4}$.','$\\dfrac{d}{dx}[4x^{1/2}]=2x^{-1/2}=\\dfrac{2}{\\sqrt{x}}$.','$\\dfrac{d}{dx}[-2]=0$.'],
+      final:'$y\'=-\\dfrac{3}{x^4}+\\dfrac{2}{\\sqrt{x}}$.'
+    },
+    {
+      id:'ch2-13', section:'§2.2', badge:'Continuity', bc:'qb-green',
+      text:'If $f$ is differentiable at $x=a$, must it be continuous there? Explain.',
+      hint:'Recall the theorem.',
+      ph:'Yes or No, with justification…',
+      accepted:['yes','differentiable implies continuous'],
+      steps:['Yes. If $f\'(a)$ exists, then $\\lim_{x\\to a}[f(x)-f(a)]=f\'(a)\\cdot 0=0$.','So $\\lim_{x\\to a}f(x)=f(a)$: $f$ is continuous.'],
+      final:'Yes — differentiability implies continuity.'
+    },
+    {
+      id:'ch2-14', section:'§2.1', badge:'Secant Slope', bc:'qb-green',
+      text:'For $f(x)=x^2$, find the slope of the secant line between $x=1$ and $x=4$.',
+      hint:'$\\dfrac{f(4)-f(1)}{4-1}$.',
+      ph:'Slope = ?',
+      accepted:['5'],
+      steps:['$f(1)=1$, $f(4)=16$.','Slope $=\\dfrac{16-1}{3}=5$.'],
+      final:'Slope of secant $=5$.'
+    },
+    {
+      id:'ch2-15', section:'§2.3', badge:'Power Rule', bc:'qb-green',
+      text:'Find $y\'\'$ for $y=x^4-2x^3+5x-1$.',
+      hint:'Differentiate twice.',
+      ph:'Second derivative…',
+      accepted:['12x²-12x','12x^2-12x'],
+      steps:['$y\'=4x^3-6x^2+5$.','$y\'\'=12x^2-12x$.'],
+      final:'$y\'\'=12x^2-12x$.'
+    },
+    {
+      id:'ch2-16', section:'§2.4', badge:'Quotient Rule', bc:'qb-green',
+      text:'Differentiate $y=\\dfrac{x^3-1}{x+2}$.',
+      hint:'Quotient rule: $\\dfrac{f\'g-fg\'}{g^2}$.',
+      ph:'Your answer…',
+      accepted:['(2x³+6x²+1)/(x+2)²','(2x^3+6x^2+1)/(x+2)^2'],
+      steps:['$f=x^3-1$, $f\'=3x^2$; $g=x+2$, $g\'=1$.','Numerator: $3x^2(x+2)-(x^3-1)(1)=3x^3+6x^2-x^3+1=2x^3+6x^2+1$.','$y\'=\\dfrac{2x^3+6x^2+1}{(x+2)^2}$.'],
+      final:'$y\'=\\dfrac{2x^3+6x^2+1}{(x+2)^2}$.'
+    },
+    {
+      id:'ch2-17', section:'§2.1', badge:'Applied Rates', bc:'qb-green',
+      text:'Height $h(t)=40t-5t^2$ m. Find: (a) velocity at $t=3$, (b) time of max height.',
+      hint:'$v(t)=h\'(t)$. Max height when $v=0$.',
+      ph:'v(3) = ?, max at t = ?',
+      accepted:['10','t=4','v(3)=10'],
+      steps:['$h\'(t)=40-10t$.','(a) $v(3)=40-30=10$ m/s.','(b) $40-10t=0\\Rightarrow t=4$ s.'],
+      final:'(a) $v(3)=10$ m/s; (b) max at $t=4$ s.'
+    }
+  ]
+};
+
+// Overall pool
+const overallPool = [
+  ...questionBanks.ch0.map(q=>({...q, overallBadge:'Ch 0', overallBC:'qb-blue'})),
+  ...questionBanks.ch1.map(q=>({...q, overallBadge:'Ch 1', overallBC:'qb-rust'})),
+  ...questionBanks.ch2.map(q=>({...q, overallBadge:'Ch 2', overallBC:'qb-green'}))
+];
+
+const CHAPTER_SHOW = 5;
+const OVERALL_SHOW = 10;
+const activeQs = { ch0:[], ch1:[], ch2:[], overall:[] };
+const totals = { ch0:CHAPTER_SHOW, ch1:CHAPTER_SHOW, ch2:CHAPTER_SHOW, overall:OVERALL_SHOW };
+const state = {
+  ch0:{ correct:0, answered:0 },
+  ch1:{ correct:0, answered:0 },
+  ch2:{ correct:0, answered:0 },
+  overall:{ correct:0, answered:0 }
+};
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+function normalize(str) {
+  return str.toLowerCase()
+    .replace(/\s+/g,'')
+    .replace(/[×*]/g,'*')
+    .replace(/−/g,'-')
+    .replace(/\u00b2/g,'^2')
+    .replace(/\u00b3/g,'^3')
+    .replace(/infinity|∞|inf\b/g,'inf')
+    .replace(/union|∪/g,'u')
+    .replace(/\u221a/g,'sqrt');
+}
+
+// Determine submit button color class from badge class
+function submitClass(bc) {
+  if (bc==='qb-blue'||bc==='qb-amber') return 'submit-btn-'+bc.split('-')[1];
+  const map={'qb-rust':'rust','qb-green':'green','qb-amber':'amber','qb-blue':'blue'};
+  return 'submit-btn-'+(map[bc]||'blue');
+}
+
+function buildSection(sec) {
+  let pool, count, useOverall;
+  if (sec==='overall'){pool=overallPool;count=OVERALL_SHOW;useOverall=true;}
+  else{pool=questionBanks[sec];count=CHAPTER_SHOW;useOverall=false;}
+
+  const selected = shuffle(pool).slice(0,count);
+  activeQs[sec] = selected;
+
+  const container = document.getElementById(`${sec}-questions-container`);
+  if (!container) return;
+  container.innerHTML = '';
+
+  const colMap = {ch0:'blue',ch1:'rust',ch2:'green',overall:'amber'};
+  const col = colMap[sec]||'blue';
+
+  selected.forEach((q,i)=>{
+    const pos = i+1;
+    const isFirst = i===0, isLast = i===count-1;
+    const uid = `${sec}-${pos}`;
+    const badge = useOverall ? q.overallBadge : q.badge;
+    const bc    = useOverall ? q.overallBC    : q.bc;
+
+    const stepsHtml = q.steps.map((s,si)=>
+      `<li class="step-item"><span class="step-num">${si+1}</span><span>${s}</span></li>`
+    ).join('');
+
+    const prevBtn = !isFirst ? `<button class="nav-ctrl-btn" onclick="prevQ('${sec}',${pos})">← Prev</button>` : '';
+    const nextBtn = !isLast  ? `<button class="nav-ctrl-btn primary" onclick="nextQ('${sec}',${pos})">Next →</button>` : '';
+
+    const card = document.createElement('div');
+    card.className = isFirst ? 'quiz-card' : 'quiz-card hidden';
+    card.id = `q-${uid}`;
+    card.innerHTML = `
+      <div class="q-meta">
+        <span class="q-label">Q ${pos} of ${count} &nbsp;·&nbsp; ${q.section}</span>
+        <span class="q-badge ${bc}">${badge}</span>
+      </div>
+      <div class="q-text">${q.text}</div>
+      ${q.hint ? `<p class="q-hint">Hint: ${q.hint}</p>` : ''}
+      <div>
+        <textarea class="answer-field" id="ans-${uid}" placeholder="${q.ph||'Your answer…'}" rows="2"></textarea>
+        <div class="submit-row">
+          <button class="submit-btn submit-btn-${col}" onclick="checkAnswer('${sec}',${pos})">Check Answer</button>
+          <button class="skip-btn" onclick="skipQ('${sec}',${pos})">Skip</button>
+        </div>
+      </div>
+      <div class="result-panel" id="rp-${uid}">
+        <div class="result-verdict" id="rv-${uid}"></div>
+        <div class="result-your-answer" id="rya-${uid}"></div>
+        <div class="result-steps">
+          <h4>Solution</h4>
+          <ul class="step-list">${stepsHtml}</ul>
+          <div class="final-answer">${q.final}</div>
+        </div>
+      </div>
+      <div class="nav-controls">${prevBtn}${nextBtn}</div>
+    `;
+    container.appendChild(card);
+  });
+
+  document.getElementById(`pb-${sec}`).style.width='0%';
+  document.getElementById(`pt-${sec}`).textContent=`Q 1 of ${count}`;
+  document.getElementById(`nums-${sec}`).textContent=`0 / ${count} correct`;
+  document.getElementById(`circle-${sec}`).textContent=`0/${count}`;
+}
+
+function checkAnswer(sec, idx) {
+  const uid=`${sec}-${idx}`;
+  const raw=document.getElementById(`ans-${uid}`).value.trim();
+  if (!raw) return;
+  const card=document.getElementById(`q-${uid}`);
+  if (card.dataset.done) return;
+
+  const q = activeQs[sec][idx-1];
+  const norm = normalize(raw);
+  const correct = q.accepted.some(a=>norm.includes(normalize(a)));
+
+  card.dataset.done='1';
+  card.querySelector('.submit-btn').disabled=true;
+  card.querySelector('.skip-btn').disabled=true;
+
+  const rp=document.getElementById(`rp-${uid}`);
+  const rv=document.getElementById(`rv-${uid}`);
+  const rya=document.getElementById(`rya-${uid}`);
+
+  rp.classList.add('show');
+  rya.textContent=`Your answer: "${raw}"`;
+  if (correct){
+    rv.className='result-verdict verdict-correct';
+    rv.innerHTML='<span>✓</span> Correct!';
+    state[sec].correct++;
+  } else {
+    rv.className='result-verdict verdict-wrong';
+    rv.innerHTML='<span>✗</span> Not quite — see the solution below.';
+  }
+  state[sec].answered++;
+  updateProgress(sec);
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([rp]);
+}
+
+function skipQ(sec, idx) {
+  const uid=`${sec}-${idx}`;
+  const card=document.getElementById(`q-${uid}`);
+  if (card.dataset.done) return;
+  card.dataset.done='skipped';
+  card.querySelector('.submit-btn').disabled=true;
+  card.querySelector('.skip-btn').disabled=true;
+  const rp=document.getElementById(`rp-${uid}`);
+  const rv=document.getElementById(`rv-${uid}`);
+  const rya=document.getElementById(`rya-${uid}`);
+  rp.classList.add('show');
+  rv.className='result-verdict verdict-wrong';
+  rv.innerHTML='<span>→</span> Skipped — review the solution.';
+  rya.textContent='No answer submitted.';
+  state[sec].answered++;
+  updateProgress(sec);
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([rp]);
+}
+
+function nextQ(sec, idx) {
+  const cur=document.getElementById(`q-${sec}-${idx}`);
+  const next=document.getElementById(`q-${sec}-${idx+1}`);
+  if (cur) cur.classList.add('hidden');
+  if (next){
+    next.classList.remove('hidden');
+    next.scrollIntoView({behavior:'smooth',block:'center'});
+    if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([next]);
+  } else {
+    const comp=document.getElementById(`complete-${sec}`);
+    if (comp){comp.classList.add('show');comp.scrollIntoView({behavior:'smooth',block:'center'});}
+  }
+}
+
+function prevQ(sec, idx) {
+  const cur=document.getElementById(`q-${sec}-${idx}`);
+  const prev=document.getElementById(`q-${sec}-${idx-1}`);
+  if (cur) cur.classList.add('hidden');
+  if (prev){prev.classList.remove('hidden');prev.scrollIntoView({behavior:'smooth',block:'center'});}
+}
+
+function updateProgress(sec) {
+  const s=state[sec], total=totals[sec];
+  const pct=Math.round(s.correct/total*100);
+  document.getElementById(`pb-${sec}`).style.width=(s.answered/total*100)+'%';
+  document.getElementById(`pt-${sec}`).textContent=s.answered<total?`Q ${s.answered+1} of ${total}`:'Complete!';
+  document.getElementById(`nums-${sec}`).textContent=`${s.correct} / ${total} correct`;
+  document.getElementById(`circle-${sec}`).textContent=s.answered===total?pct+'%':`${s.correct}/${s.answered}`;
+
+  if (s.answered===total){
+    const gradeEl=document.getElementById(`grade-${sec}`);
+    if (gradeEl){
+      gradeEl.textContent=`${s.correct} / ${total}  (${pct}%)`;
+      gradeEl.style.color=pct>=70?'var(--green)':'var(--rust)';
+    }
+  }
+}
+
+function resetSection(sec) {
+  state[sec]={correct:0,answered:0};
+  const comp=document.getElementById(`complete-${sec}`);
+  if (comp) comp.classList.remove('show');
+  buildSection(sec);
+  const container=document.getElementById(`${sec}-questions-container`);
+  if (window.MathJax && MathJax.typesetPromise && container) MathJax.typesetPromise([container]);
+  const first=container.querySelector('.quiz-card');
+  if (first) first.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+const tabMap = {
+  'sect-notes':  {btn:'nb-notes',  cls:'gray'},
+  'sect-ch0':    {btn:'nb-ch0',    cls:'blue'},
+  'sect-ch1':    {btn:'nb-ch1',    cls:'rust'},
+  'sect-ch2':    {btn:'nb-ch2',    cls:'green'},
+  'sect-overall':{btn:'nb-overall',cls:'amber'},
+  'sect-paper':  {btn:'nb-paper',  cls:'purple'},
+};
+
+function switchTab(sectionId, cls) {
+  document.querySelectorAll('.quiz-section').forEach(s=>s.classList.remove('active'));
+  const target=document.getElementById(sectionId);
+  if (target){
+    target.classList.add('active');
+    window.scrollTo({top:document.querySelector('.tab-nav').offsetTop-4,behavior:'smooth'});
+    if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([target]);
+  }
+  document.querySelectorAll('.tab-btn').forEach(b=>{b.className='tab-btn';});
+  const btn=document.getElementById(tabMap[sectionId]?.btn);
+  if (btn) btn.classList.add('t-'+cls);
+}
+
+document.addEventListener('keydown', e=>{
+  if (e.key==='Enter' && !e.shiftKey && document.activeElement.classList.contains('answer-field')){
+    e.preventDefault();
+    const ta=document.activeElement;
+    const id=ta.id.replace('ans-','');
+    const parts=id.split('-');
+    const sec=parts.slice(0,-1).join('');
+    const idx=parseInt(parts[parts.length-1]);
+    checkAnswer(sec,idx);
+  }
+});
+
+// Init
+buildSection('ch0');
+buildSection('ch1');
+buildSection('ch2');
+buildSection('overall');
+switchTab('sect-notes','gray');
+</script>
+</body>
+</html>

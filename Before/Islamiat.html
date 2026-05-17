@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl" data-lang="ur">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Islamic Studies — Riphah University</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Scheherazade+New:wght@400;500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --bg-card: #131720;
+      --bg-card2: #181e2d;
+      --bg-topic: #0f1520;
+      --gold: #c9a84c;
+      --gold-light: #e8cc80;
+      --gold-dim: #7a6130;
+      --gold-glow: rgba(201,168,76,0.12);
+      --teal: #1a6070;
+      --teal-light: #2fa0b8;
+      --emerald: #1a5e3a;
+      --emerald-light: #2db870;
+      --text-main: #ede7d6;
+      --text-soft: #8a7f72;
+      --text-arabic: #f8f0e0;
+      --text-urdu: #e8ddc8;
+      --text-en: #c4d4e6;
+      --border: rgba(201,168,76,0.15);
+      --border-strong: rgba(201,168,76,0.38);
+      --radius: 14px;
+      --font-arabic: 'Scheherazade New', serif;
+      --font-urdu: 'Noto Nastaliq Urdu', serif;
+      --font-en: 'IBM Plex Sans', sans-serif;
+      --font-serif: 'Lora', serif;
+      --font-display: 'Cinzel', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-urdu);
+      line-height: 2;
+      direction: rtl;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body[data-lang="en"] { font-family: var(--font-en); direction: ltr; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 15% 15%, rgba(201,168,76,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 85%, rgba(26,96,112,0.07) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      text-align: center;
+      padding: 60px 24px 48px;
+      border-bottom: 1px solid var(--border);
+      z-index: 1;
+    }
+    .header-bismillah {
+      font-family: var(--font-arabic);
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--gold-light);
+      text-shadow: 0 0 40px rgba(201,168,76,0.3);
+      margin-bottom: 18px;
+      line-height: 1.8;
+      direction: rtl;
+    }
+    header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      font-weight: 600;
+      color: var(--text-main);
+      letter-spacing: 2px;
+      direction: ltr;
+      margin-bottom: 6px;
+    }
+    .header-sub {
+      font-family: var(--font-en);
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      direction: ltr;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .header-divider {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 20px auto;
+    }
+    .creator-badge {
+      display: inline-block;
+      font-family: var(--font-en);
+      font-size: 0.72rem;
+      color: var(--gold-dim);
+      border: 1px solid var(--border);
+      padding: 4px 14px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+      direction: ltr;
+    }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle-wrap {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 300;
+    }
+    .lang-toggle {
+      display: flex;
+      background: rgba(11,14,20,0.92);
+      border: 1px solid var(--border-strong);
+      border-radius: 30px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    .lang-btn {
+      padding: 7px 18px;
+      font-family: var(--font-en);
+      font-size: 0.78rem;
+      font-weight: 500;
+      border: none;
+      background: transparent;
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .lang-btn.active { background: var(--gold); color: #0b0e14; }
+
+    /* ── LECTURE SELECTOR (home screen) ── */
+    #lecture-selector {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 18px 80px;
+    }
+    .selector-title {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      color: var(--teal-light);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      direction: ltr;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .lecture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .lec-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .lec-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .lec-card:hover {
+      border-color: var(--border-strong);
+      box-shadow: 0 6px 30px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.08);
+      transform: translateY(-2px);
+    }
+    .lec-card:hover::before { opacity: 1; }
+    .lec-num {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      direction: ltr;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lec-num::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .lec-title-ur {
+      font-family: var(--font-urdu);
+      font-size: 1.05rem;
+      color: var(--gold-light);
+      line-height: 1.9;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .lec-title-en {
+      font-family: var(--font-serif);
+      font-size: 0.83rem;
+      color: var(--text-soft);
+      font-style: italic;
+      direction: ltr;
+      display: block;
+    }
+    .lec-topics-count {
+      font-family: var(--font-en);
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      direction: ltr;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    body[data-lang="en"] .lec-title-ur { display: none; }
+    body[data-lang="en"] .lec-title-en {
+      font-size: 0.93rem;
+      color: var(--gold-light);
+      font-style: normal;
+      font-family: var(--font-serif);
+      margin-bottom: 6px;
+    }
+
+    /* ── LECTURE VIEW ── */
+    #lecture-view { display: none; position: relative; z-index: 1; }
+
+    .back-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11,14,20,0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      height: 52px;
+    }
+    .back-btn {
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      color: var(--gold);
+      font-family: var(--font-en);
+      font-size: 0.78rem;
+      padding: 5px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .back-btn:hover { background: var(--gold-glow); }
+    .back-title {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      color: var(--text-soft);
+      letter-spacing: 1.5px;
+      direction: ltr;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 18px 80px;
+    }
+
+    /* ── LECTURE HEADER ── */
+    .lecture-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .lecture-num-badge {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      border: 1px solid var(--border-strong);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      direction: ltr;
+      letter-spacing: 0.5px;
+    }
+    .lecture-title-wrap h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      line-height: 1.6;
+    }
+    .lecture-title-wrap .en-title {
+      font-family: var(--font-serif);
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      direction: ltr;
+      display: block;
+      margin-top: 3px;
+      font-style: italic;
+    }
+    .title-ur { display: block; }
+    .title-en { display: none; }
+    body[data-lang="en"] .title-ur { display: none; }
+    body[data-lang="en"] .title-en { display: block; }
+    body[data-lang="en"] .lecture-title-wrap h2 { font-family: var(--font-serif); }
+
+    /* ── OVERALL SUMMARY BOX ── */
+    .overall-summary {
+      background: rgba(26,96,112,0.08);
+      border: 1px solid rgba(26,96,112,0.25);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 36px;
+    }
+    .summary-label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      color: var(--teal-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      direction: ltr;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .summary-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(26,96,112,0.3);
+    }
+    .summary-text-ur {
+      font-family: var(--font-urdu);
+      font-size: 1.05rem;
+      color: var(--text-urdu);
+      line-height: 2.5;
+      direction: rtl;
+    }
+    .summary-text-en {
+      font-family: var(--font-en);
+      font-size: 0.93rem;
+      color: var(--text-en);
+      line-height: 1.8;
+      direction: ltr;
+      display: none;
+    }
+    body[data-lang="en"] .summary-text-ur { display: none; }
+    body[data-lang="en"] .summary-text-en { display: block; }
+
+    /* ── TOPIC BLOCK ── */
+    .topic-block {
+      margin-bottom: 40px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--bg-topic);
+    }
+    .topic-header {
+      background: rgba(201,168,76,0.06);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .topic-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .topic-title-ur {
+      font-family: var(--font-urdu);
+      font-size: 1.08rem;
+      color: var(--gold-light);
+      line-height: 1.8;
+      font-weight: 600;
+    }
+    .topic-title-en {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      color: var(--gold-light);
+      font-weight: 600;
+      display: none;
+    }
+    body[data-lang="en"] .topic-title-ur { display: none; }
+    body[data-lang="en"] .topic-title-en { display: block; }
+
+    .topic-body { padding: 20px 22px 22px; }
+
+    /* topic summary */
+    .topic-summary {
+      background: rgba(201,168,76,0.04);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      border-right: 3px solid var(--gold-dim);
+    }
+    body[data-lang="en"] .topic-summary { border-right: none; border-left: 3px solid var(--gold-dim); }
+    .ts-ur {
+      font-family: var(--font-urdu);
+      font-size: 1rem;
+      color: var(--text-urdu);
+      line-height: 2.4;
+      direction: rtl;
+    }
+    .ts-en {
+      font-family: var(--font-en);
+      font-size: 0.9rem;
+      color: var(--text-en);
+      line-height: 1.75;
+      direction: ltr;
+      display: none;
+    }
+    body[data-lang="en"] .ts-ur { display: none; }
+    body[data-lang="en"] .ts-en { display: block; }
+
+    /* ── SUBSECTION PILLS ── */
+    .subsection-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0 14px;
+    }
+    .pill {
+      font-family: var(--font-en);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+    .pill-ayat { background: rgba(26,94,58,0.2); color: var(--emerald-light); border: 1px solid rgba(26,94,58,0.45); }
+    .pill-hadith { background: rgba(26,96,112,0.2); color: var(--teal-light); border: 1px solid rgba(26,96,112,0.45); }
+    .subsection-line { flex: 1; height: 1px; background: var(--border); }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      border-color: var(--border-strong);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 3px;
+      border-radius: 0 12px 12px 0;
+    }
+    body[data-lang="en"] .card::before { right: auto; left: 0; border-radius: 12px 0 0 12px; }
+    .card-ayat::before { background: linear-gradient(180deg, #2db870, #1a5e3a); }
+    .card-hadith::before { background: linear-gradient(180deg, #2fa0b8, #1a6070); }
+
+    .card-ref {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .ref-badge { font-family: var(--font-en); font-size: 0.78rem; letter-spacing: 0.5px; direction: ltr; }
+    .ayat-ref { color: #6fcf97; }
+    .hadith-ref { color: #56cfe1; }
+    .card-num {
+      font-family: var(--font-display);
+      font-size: 0.58rem;
+      color: var(--text-soft);
+      direction: ltr;
+      opacity: 0.6;
+    }
+    .card-body { padding: 18px 22px 20px; }
+
+    /* Arabic text */
+    .arabic-text {
+      font-family: var(--font-arabic);
+      font-size: clamp(1.25rem, 3vw, 1.7rem);
+      color: var(--text-arabic);
+      line-height: 2.2;
+      text-align: right;
+      direction: rtl;
+      margin-bottom: 14px;
+    }
+
+    /* Urdu translation */
+    .tr-ur {
+      font-family: var(--font-urdu);
+      font-size: clamp(0.95rem, 2.2vw, 1.08rem);
+      color: var(--text-urdu);
+      line-height: 2.5;
+      text-align: right;
+      direction: rtl;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .tr-en {
+      font-family: var(--font-en);
+      font-size: 0.9rem;
+      color: var(--text-en);
+      line-height: 1.78;
+      text-align: left;
+      direction: ltr;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: none;
+    }
+    body[data-lang="en"] .tr-ur { display: none; }
+    body[data-lang="en"] .tr-en { display: block; }
+
+    .tr-label {
+      display: inline-block;
+      font-size: 0.67rem;
+      font-family: var(--font-en);
+      padding: 2px 10px;
+      border-radius: 10px;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+      direction: ltr;
+    }
+    .tr-label-ur { color: var(--gold-dim); background: rgba(201,168,76,0.08); }
+    .tr-label-en { color: var(--teal-light); background: rgba(26,96,112,0.1); }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-soft);
+    }
+    .footer-arabic {
+      font-family: var(--font-arabic);
+      font-size: 1.5rem;
+      color: var(--gold-dim);
+      margin-bottom: 10px;
+    }
+    .footer-text { font-family: var(--font-en); font-size: 0.8rem; direction: ltr; letter-spacing: 1px; opacity: 0.55; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-in { animation: fadeUp 0.45s ease both; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+
+    @media (max-width: 600px) {
+      .card-body { padding: 14px 14px 16px; }
+      .arabic-text { font-size: 1.15rem; }
+      .lang-toggle-wrap { top: 10px; left: 10px; }
+      .lecture-grid { grid-template-columns: 1fr; }
+      .topic-body { padding: 16px 14px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LANGUAGE TOGGLE -->
+<div class="lang-toggle-wrap">
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-ur" onclick="setLang('ur')">اردو</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="creator-badge">Made by Mohid Ahmed &amp; Hanan Shafay</div>
+  <div class="header-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+  <div class="header-divider"></div>
+  <h1>Islamic Studies — Life &amp; Living</h1>
+  <p class="header-sub">Riphah International University · Islamic Studies Course</p>
+</header>
+
+<!-- ══════════ LECTURE SELECTOR ══════════ -->
+<div id="lecture-selector">
+  <p class="selector-title">Select a Lecture to Begin</p>
+  <div class="lecture-grid">
+    <div class="lec-card" onclick="showLecture(1)">
+      <div class="lec-num">LECTURE 01</div>
+      <span class="lec-title-ur">اسلامی نظریۂ حیات کا تعارف</span>
+      <span class="lec-title-en">An Introduction to Islamic Vision of Life</span>
+      <div class="lec-topics-count">5 Topics · 6 Ayat · 2 Ahadith</div>
+    </div>
+    <div class="lec-card" onclick="showLecture(2)">
+      <div class="lec-num">LECTURE 02</div>
+      <span class="lec-title-ur">اخلاقیات اور کردار سازی</span>
+      <span class="lec-title-en">Ethics &amp; Building a Holistic Personality</span>
+      <div class="lec-topics-count">4 Topics · 5 Ayat · 4 Ahadith</div>
+    </div>
+    <div class="lec-card" onclick="showLecture(3)">
+      <div class="lec-num">LECTURE 03</div>
+      <span class="lec-title-ur">اسلامی نظریہ اور اس کی اہمیت</span>
+      <span class="lec-title-en">Islamic Ideology &amp; Its Importance</span>
+      <div class="lec-topics-count">4 Topics · 6 Ayat · 2 Ahadith</div>
+    </div>
+    <div class="lec-card" onclick="showLecture(4)">
+      <div class="lec-num">LECTURE 04</div>
+      <span class="lec-title-ur">اسلام کے بنیادی عقائد</span>
+      <span class="lec-title-en">Fundamental Beliefs of Islam</span>
+      <div class="lec-topics-count">5 Topics · 6 Ayat · 3 Ahadith</div>
+    </div>
+    <div class="lec-card" onclick="showLecture(5)">
+      <div class="lec-num">LECTURE 05</div>
+      <span class="lec-title-ur">عبادت کا تصور اور اسلامی رسوم</span>
+      <span class="lec-title-en">Concept of Worship &amp; Rituals in Islam</span>
+      <div class="lec-topics-count">4 Topics · 5 Ayat · 2 Ahadith</div>
+    </div>
+    <div class="lec-card" onclick="showLecture(6)">
+      <div class="lec-num">LECTURE 06</div>
+      <span class="lec-title-ur">ارکانِ اسلام</span>
+      <span class="lec-title-en">Pillars of Islam: Kalimah, Salah, Sawm, Zakah, Hajj</span>
+      <div class="lec-topics-count">5 Topics · 7 Ayat · 2 Ahadith</div>
+    </div>
+    <div class="lec-card" onclick="showLecture(7)">
+      <div class="lec-num">LECTURE 07</div>
+      <span class="lec-title-ur">جدید نظریات کی خصوصیات (۱)</span>
+      <span class="lec-title-en">Modern Ideologies: Humanism, Materialism, Liberalism &amp; Atheism</span>
+      <div class="lec-topics-count">4 Topics · 6 Ayat · 2 Ahadith</div>
+    </div>
+    <div class="lec-card" onclick="showLecture(8)">
+      <div class="lec-num">LECTURE 08</div>
+      <span class="lec-title-ur">جدید نظریات کی خصوصیات (۲)</span>
+      <span class="lec-title-en">Modern Ideologies: Materialism, Secularism, Democracy &amp; Nationalism</span>
+      <div class="lec-topics-count">4 Topics · 6 Ayat · 1 Hadith</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ LECTURE VIEW ══════════ -->
+<div id="lecture-view">
+  <div class="back-bar">
+    <button class="back-btn" onclick="showSelector()">← All Lectures</button>
+    <span class="back-title" id="back-title-text">LECTURE</span>
+  </div>
+  <main id="lecture-content"></main>
+</div>
+
+<footer>
+  <div class="footer-arabic">وَعَلَّمَكَ مَا لَمْ تَكُنْ تَعْلَمُ</div>
+  <p class="footer-text">Riphah International University · Islamic Studies · Life &amp; Living</p>
+</footer>
+
+<script>
+// ─── LANGUAGE TOGGLE ───
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  document.body.dataset.lang = lang;
+  document.getElementById('btn-ur').classList.toggle('active', lang === 'ur');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+}
+
+// ─── NAVIGATION ───
+function showSelector() {
+  document.getElementById('lecture-selector').style.display = 'block';
+  document.getElementById('lecture-view').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function showLecture(num) {
+  document.getElementById('lecture-selector').style.display = 'none';
+  const view = document.getElementById('lecture-view');
+  view.style.display = 'block';
+  const titles = ['', 'LECTURE 01', 'LECTURE 02', 'LECTURE 03', 'LECTURE 04', 'LECTURE 05', 'LECTURE 06', 'LECTURE 07', 'LECTURE 08'];
+  document.getElementById('back-title-text').textContent = titles[num];
+  const content = document.getElementById('lecture-content');
+  content.innerHTML = getLectureHTML(num);
+  content.classList.remove('animate-in');
+  void content.offsetWidth;
+  content.classList.add('animate-in');
+  window.scrollTo(0, 0);
+}
+
+// ─── HELPERS ───
+function card_ayat(ref, num, arabic, trUr, trEn) {
+  return `<div class="card card-ayat">
+    <div class="card-ref"><span class="ref-badge ayat-ref">${ref}</span><span class="card-num">${num}</span></div>
+    <div class="card-body">
+      <div class="arabic-text">${arabic}</div>
+      <div class="tr-ur"><span class="tr-label tr-label-ur">ترجمہ</span><br>${trUr}</div>
+      <div class="tr-en"><span class="tr-label tr-label-en">Translation</span><br>${trEn}</div>
+    </div>
+  </div>`;
+}
+function card_hadith(ref, num, arabic, trUr, trEn) {
+  return `<div class="card card-hadith">
+    <div class="card-ref"><span class="ref-badge hadith-ref">${ref}</span><span class="card-num">${num}</span></div>
+    <div class="card-body">
+      <div class="arabic-text">${arabic}</div>
+      <div class="tr-ur"><span class="tr-label tr-label-ur">ترجمہ</span><br>${trUr}</div>
+      <div class="tr-en"><span class="tr-label tr-label-en">Translation</span><br>${trEn}</div>
+    </div>
+  </div>`;
+}
+function topic(icon, titleUr, titleEn, summaryUr, summaryEn, ayatCards, hadithCards) {
+  const ayatSec = ayatCards ? `
+    <div class="subsection-label"><span class="pill pill-ayat">📖 قرآنی آیات</span><div class="subsection-line"></div></div>
+    ${ayatCards}` : '';
+  const hadithSec = hadithCards ? `
+    <div class="subsection-label"><span class="pill pill-hadith">📜 احادیثِ نبویؐ</span><div class="subsection-line"></div></div>
+    ${hadithCards}` : '';
+  return `<div class="topic-block">
+    <div class="topic-header">
+      <span class="topic-icon">${icon}</span>
+      <span class="topic-title-ur">${titleUr}</span>
+      <span class="topic-title-en">${titleEn}</span>
+    </div>
+    <div class="topic-body">
+      <div class="topic-summary">
+        <div class="ts-ur">${summaryUr}</div>
+        <div class="ts-en">${summaryEn}</div>
+      </div>
+      ${ayatSec}
+      ${hadithSec}
+    </div>
+  </div>`;
+}
+function lectureHeader(num, titleUr, titleEn, summaryUr, summaryEn) {
+  return `<div class="lecture-header">
+    <div class="lecture-num-badge">L${num}</div>
+    <div class="lecture-title-wrap">
+      <h2>
+        <span class="title-ur">${titleUr}</span>
+        <span class="title-en">${titleEn}</span>
+      </h2>
+    </div>
+  </div>
+  <div class="overall-summary">
+    <div class="summary-label">📋 Lecture Overview</div>
+    <div class="summary-text-ur">${summaryUr}</div>
+    <div class="summary-text-en">${summaryEn}</div>
+  </div>`;
+}
+
+// ─── ALL LECTURES DATA ───
+function getLectureHTML(num) {
+  if (num === 1) return lecture1();
+  if (num === 2) return lecture2();
+  if (num === 3) return lecture3();
+  if (num === 4) return lecture4();
+  if (num === 5) return lecture5();
+  if (num === 6) return lecture6();
+  if (num === 7) return lecture7();
+  if (num === 8) return lecture8();
+  return '';
+}
+
+// ══════════ LECTURE 1 ══════════
+function lecture1() {
+  return lectureHeader(1,
+    'اسلامی نظریۂ حیات کا تعارف',
+    'An Introduction to Islamic Vision of Life',
+    'اس لیکچر میں زندگی کا مقصد اور اسلامی نظریۂ حیات بیان کیا گیا ہے۔ دنیاوی زندگی عارضی ہے اور اصل زندگی آخرت ہے۔ انسان کو اللہ کی عبادت (عبودیت) اور خلافت کے لیے پیدا کیا گیا ہے۔ توحید (اللہ کی وحدانیت) انسانی زندگی کے ہر شعبے — سیاست، معیشت، قانون اور معاشرت — پر اثر انداز ہوتی ہے۔ اسلام ایک مکمل ضابطۂ حیات (دین) ہے۔',
+    'This lecture introduces the Islamic vision of life and its purpose. Worldly life is temporary — a test — while the real, permanent life is the Hereafter. Humans were created for Ubudiyyah (servitude) and Khilafah (vicegerency). Tawhid (oneness of Allah) shapes every domain of life: governance, economics, law, and social dealings. Islam is a complete and comprehensive Deen, not merely a set of rituals.'
+  ) +
+
+  topic('🌍', 'زندگی کیا ہے؟', 'What is Life?',
+    'دنیاوی زندگی ایک امتحان ہے۔ یہ کھیل، تماشا، آرائش اور فخر کا نام ہے — عارضی اور فانی۔ اصل گھر آخرت ہے۔ اسی لیے مسلمان دنیا میں رہتے ہوئے آخرت کی تیاری کرتا ہے۔',
+    'Worldly life is a temporary test — characterized by play, adornment, and competition. The real, permanent home is the Hereafter. A Muslim lives in this world while preparing for the next.',
+    card_ayat('Al-Hadid 57:20', 'A1',
+      'اعْلَمُوا أَنَّمَا الْحَيَاةُ الدُّنْيَا لَعِبٌ وَلَهْوٌ وَزِينَةٌ وَتَفَاخُرٌ بَيْنَكُمْ … وَمَا الْحَيَاةُ الدُّنْيَا إِلَّا مَتَاعُ الْغُرُورِ',
+      'جان لو کہ دنیاوی زندگی محض کھیل تماشا، دل بہلاوا، آرائش اور فخر و مباہات ہے … دنیا کی زندگی تو محض دھوکے کا سامان ہے۔',
+      'Know that the life of this world is only play, amusement, adornment, and mutual boasting … The life of this world is nothing but the enjoyment of delusion.'
+    ) +
+    card_ayat('Al-Mulk 67:2', 'A2',
+      'الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا',
+      'جس نے موت اور زندگی کو پیدا کیا تاکہ تمہیں آزمائے کہ تم میں سے کون بہترین عمل کرتا ہے۔',
+      'He who created death and life that He may test you — which of you is best in deed.'
+    ),
+    null
+  ) +
+
+  topic('🎯', 'زندگی کا مقصد', 'Purpose of Life',
+    'اسلام میں زندگی کا مقصد اللہ کی عبادت (عبودیت) اور زمین پر خلافت کا فریضہ ادا کرنا ہے۔ عبودیت کا مطلب محبت اور اللہ کی رضا کے لیے مکمل اطاعت ہے۔ خلافت کا مطلب یہ ہے کہ انسان زمین پر اللہ کا نائب بن کر انصاف اور امانت کے ساتھ کام کرے۔',
+    'The purpose of life in Islam is Ubudiyyah (servitude to Allah) and Khilafah (vicegerency on earth). Ubudiyyah means complete obedience driven by love and reverence. Khilafah means acting as Allah\'s trustee on earth — with justice and responsibility.',
+    card_ayat('Al-Dhariyat 51:56', 'A1',
+      'وَمَا خَلَقْتُ الْجِنَّ وَالْاِنْسَ اِلَّا لِيَعْبُدُوْنِ',
+      'اور میں نے جنوں اور انسانوں کو صرف اسی لیے پیدا کیا کہ وہ میری عبادت کریں۔',
+      'I did not create the jinn and humans except to worship Me.'
+    ) +
+    card_ayat('Al-Baqarah 2:30', 'A2',
+      'وَاِذۡ قَالَ رَبُّكَ لِلۡمَلٰٓـئِكَةِ اِنِّىۡ جَاعِلٌ فِى الۡاَرۡضِ خَلِيۡفَةً',
+      'اور جب تمہارے رب نے فرشتوں سے فرمایا: میں زمین میں ایک خلیفہ بنانے والا ہوں۔',
+      'When your Lord said to the angels: I am placing a vicegerent on earth.'
+    ) +
+    card_ayat('Al-Baqarah 2:201', 'A3',
+      'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',
+      'اے ہمارے رب! ہمیں دنیا میں بھی بھلائی دے اور آخرت میں بھی بھلائی دے، اور ہمیں آگ کے عذاب سے بچا۔',
+      'Our Lord! Give us good in this world and good in the Hereafter and save us from the punishment of the Fire.'
+    ),
+    card_hadith('Sunan Abi Dawud — Book 43, Hadith 172', 'H1',
+      'الدِّينُ النَّصِيحَةُ … لِلَّهِ وَلِكِتَابِهِ وَلِرَسُولِهِ وَلِأَئِمَّةِ الْمُسْلِمِينَ وَعَامَّتِهِمْ',
+      'دین خیرخواہی کا نام ہے۔ کس کے لیے؟ اللہ کے لیے، اس کی کتاب کے لیے، اس کے رسول ﷺ کے لیے، مسلمانوں کے حکمرانوں اور عام مسلمانوں کے لیے۔',
+      'The Prophet ﷺ said: Religion is sincere well-wishing — for Allah, His Book, His Messenger, the leaders of Muslims, and the general body of Muslims.'
+    )
+  ) +
+
+  topic('☝️', 'توحید اور اس کے اثرات', 'Tawhid &amp; Its Impacts',
+    'توحید یعنی اللہ کی وحدانیت — اسلام کی بنیادی سچائی ہے۔ توحید کا اثر صرف عقیدے تک محدود نہیں بلکہ یہ حکومت، قانون، معیشت اور عدل و انصاف سب پر محیط ہے۔ ایک مسلمان اپنی تمام زندگی اللہ کی رضا کے لیے وقف کرتا ہے۔',
+    'Tawhid — the oneness of Allah — is the cornerstone of Islam. Its influence extends beyond belief to governance, law, economics, and justice. A Muslim dedicates all of their life to the pleasure of Allah.',
+    card_ayat('Al-An\'am 6:162', 'A1',
+      'قُلْ إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ',
+      'کہہ دیجیے: بے شک میری نماز، میری قربانی، میرا جینا اور میرا مرنا سب اللہ کے لیے ہے۔',
+      'Say: My prayer, my sacrifice, my life and my death are all for Allah, Lord of all the worlds.'
+    ) +
+    card_ayat('Yusuf 12:40', 'A2',
+      'إِنِ الْحُكْمُ إِلَّا لِلَّهِ أَمَرَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ ذَلِكَ الدِّينُ الْقَيِّمُ',
+      'حکم صرف اللہ کا ہے۔ اس نے حکم دیا کہ اس کے سوا کسی کی عبادت نہ کرو — یہی سیدھا دین ہے۔',
+      'All sovereignty belongs to Allah. He has commanded that you serve none but Him — that is the right way of life.'
+    ) +
+    card_ayat('Al-Nisa 4:29', 'A3',
+      'يَاأَيُّهَا الَّذِينَ آمَنُوا لَا تَأْكُلُوا أَمْوَالَكُمْ بَيْنَكُمْ بِالْبَاطِلِ إِلَّا أَنْ تَكُونَ تِجَارَةً عَنْ تَرَاضٍ مِنْكُمْ',
+      'اے ایمان والو! آپس میں ایک دوسرے کا مال ناحق نہ کھاؤ سوائے اس کے کہ آپس کی رضامندی سے تجارت ہو۔',
+      'O believers! Do not consume each other\'s wealth unjustly — only through mutually agreed trade.'
+    ),
+    null
+  ) +
+
+  topic('🕌', 'اسلام: مکمل ضابطۂ حیات', 'Islam: A Complete Way of Life',
+    'اسلام صرف عبادات کا مجموعہ نہیں بلکہ یہ زندگی کے ہر پہلو — سماجی، معاشی، سیاسی، اخلاقی اور روحانی — کے لیے مکمل رہنمائی فراہم کرتا ہے۔ اسلام "دین" یعنی ایک مکمل نظامِ حیات ہے۔',
+    'Islam is not merely a collection of rituals — it provides comprehensive guidance for every aspect of life: social, economic, political, moral, and spiritual. Islam is a complete Deen (way of life).',
+    card_ayat('Al-Baqarah 2:208', 'A1',
+      'يَاأَيُّهَا الَّذِينَ آمَنُوا ادْخُلُوا فِي السِّلْمِ كَافَّةً وَلَا تَتَّبِعُوا خُطُوَاتِ الشَّيْطَانِ',
+      'اے ایمان والو! اسلام میں پورے کے پورے داخل ہو جاؤ اور شیطان کے قدموں کی پیروی مت کرو۔',
+      'O believers! Enter Islam completely and do not follow the footsteps of Satan.'
+    ),
+    card_hadith('Al-Mu\'jam Al-Awsat — Tabarani, No. 5787', 'H1',
+      'وَخَيْرُ النَّاسِ أَنْفَعُهُمْ لِلنَّاسِ',
+      'لوگوں میں سب سے بہتر وہ ہے جو لوگوں کو سب سے زیادہ نفع پہنچائے۔',
+      'The best of people are those who are most beneficial to people.'
+    )
+  );
+}
+
+// ══════════ LECTURE 2 ══════════
+function lecture2() {
+  return lectureHeader(2,
+    'اخلاقیات اور کردار سازی',
+    'Ethics &amp; Building a Holistic Personality',
+    'اخلاق (Ethics) انسانی کردار کی بنیاد ہے۔ اسلام میں اخلاقیات کا لفظ "خُلُق" ہے جو انسان کی عادات، طبیعت اور برتاؤ کو ظاہر کرتا ہے۔ کامل شخصیت کے لیے ضروری اخلاقی اوصاف یہ ہیں: سچائی، علم، حیا، صبر، رحم اور عدل۔ اسلام سماجی زندگی میں بھی انصاف، ایمانداری اور دوسروں کا احترام سکھاتا ہے۔',
+    'Ethics (Akhlaq) is the foundation of a complete personality. The Islamic term is Khuluq — encompassing one\'s habits, nature, and conduct. Key ethical qualities include truthfulness, knowledge, modesty (Haya), patience (Sabr), mercy, and justice. Islam also emphasizes social ethics: respecting others, avoiding backbiting, and caring for community.'
+  ) +
+
+  topic('📚', 'اخلاق کا معنی اور ماخذ', 'Meaning &amp; Origin of Ethics',
+    'لفظ "اخلاق" عربی میں "خُلُق" (khuluq) سے نکلا ہے جس کا مطلب ہے انسانی فطرت، عادت اور طرزِ عمل۔ اخلاق انسانی شخصیت کا وہ پہلو ہے جو اس کے اندر اور باہر — دونوں کو ظاہر کرتا ہے۔ اسلامی اخلاق کا ماخذ قرآن و سنت ہے۔',
+    'The word Akhlaq derives from the Arabic Khuluq — meaning human nature, habits, and conduct. Ethics is that dimension of personality which reflects both inner disposition and outward behaviour. The source of Islamic ethics is the Quran and Sunnah.',
+    card_ayat('Al-Qalam 68:4', 'A1',
+      'وَإِنَّكَ لَعَلَى خُلُقٍ عَظِيمٍ',
+      'اور بے شک آپ اخلاق کے اعلیٰ مرتبے پر ہیں۔',
+      'And indeed, you are of a great moral character.'
+    ),
+    card_hadith('Muwatta Imam Malik, No. 1645', 'H1',
+      'إِنَّمَا بُعِثْتُ لِأُتَمِّمَ مَكَارِمَ الْأَخْلَاقِ',
+      'مجھے صرف اس لیے بھیجا گیا ہے کہ میں اخلاقِ حسنہ کی تکمیل کروں۔',
+      'I was sent only to perfect noble character.'
+    )
+  ) +
+
+  topic('🌟', 'فردی اخلاق: سچائی، حیا اور صبر', 'Individual Ethics: Truth, Modesty &amp; Patience',
+    'کامل شخصیت کے لیے سچائی، علم، حیا اور صبر بنیادی اخلاقی اوصاف ہیں۔ سچ بولنا ایمان کی علامت ہے۔ حیا انسان کو برائی سے روکتی ہے۔ صبر مصیبت میں ثابت قدمی کا نام ہے۔',
+    'For a holistic personality, truthfulness, knowledge, modesty (Haya), and patience (Sabr) are essential. Truthfulness is a sign of faith. Modesty guards against evil. Patience is steadfastness through hardship.',
+    card_ayat('Al-Tawbah 9:119', 'A1',
+      'يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ',
+      'اے ایمان والو! اللہ سے ڈرو اور سچے لوگوں کے ساتھ ہو جاؤ۔',
+      'O believers! Fear Allah and be with the truthful.'
+    ) +
+    card_ayat('Al-Baqarah 2:153', 'A2',
+      'يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ',
+      'اے ایمان والو! صبر اور نماز سے مدد لو، بے شک اللہ صبر کرنے والوں کے ساتھ ہے۔',
+      'O believers! Seek help through patience and prayer. Indeed Allah is with the patient.'
+    ),
+    card_hadith('Sahih Bukhari, No. 3483', 'H1',
+      'إِذَا لَمْ تَسْتَحْيِ فَاصْنَعْ مَا شِئْتَ',
+      'اگر تجھے شرم نہیں آتی تو جو چاہے کر۔',
+      'If you have no shame (Haya), then do as you wish.'
+    )
+  ) +
+
+  topic('⚖️', 'سماجی اخلاق: عدل اور احسان', 'Social Ethics: Justice &amp; Excellence',
+    'اسلامی اخلاق فرد تک محدود نہیں — یہ سماج میں بھی عدل، احسان، ایمانداری اور دوسروں کے احترام کا حکم دیتا ہے۔ غیبت، تمسخر اور جاسوسی سختی سے منع ہے۔',
+    'Islamic ethics is not only personal — it also commands justice, excellence (Ihsan), honesty, and respect for others in society. Backbiting, mockery, and spying are strictly forbidden.',
+    card_ayat('Al-Nahl 16:90', 'A1',
+      'إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ وَإِيتَاءِ ذِي الْقُرْبَى وَيَنْهَى عَنِ الْفَحْشَاءِ وَالْمُنْكَرِ وَالْبَغْيِ',
+      'بے شک اللہ عدل، احسان اور رشتہ داروں کو دینے کا حکم دیتا ہے، اور بے حیائی، برائی اور ظلم سے منع فرماتا ہے۔',
+      'Allah commands justice, excellence, and giving to relatives; and He forbids immorality, wrongdoing, and oppression.'
+    ) +
+    card_ayat('Al-Hujurat 49:11-12', 'A2',
+      'يَا أَيُّهَا الَّذِينَ آمَنُوا لَا يَسْخَرْ قَوْمٌ مِنْ قَوْمٍ … وَلَا تَجَسَّسُوا وَلَا يَغْتَبْ بَعْضُكُمْ بَعْضًا',
+      'اے ایمان والو! کوئی قوم دوسری کا مذاق نہ اڑائے … اور جاسوسی نہ کرو اور نہ ایک دوسرے کی غیبت کرو۔',
+      'O believers! Let no people mock another … do not spy on one another, nor backbite one another.'
+    ),
+    card_hadith('Sahih Muslim, No. 2699', 'H1',
+      'مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ طَرِيقًا إِلَى الْجَنَّةِ',
+      'جو شخص علم حاصل کرنے کے لیے کوئی راستہ اختیار کرتا ہے، اللہ اس کے لیے جنت کا راستہ آسان کردیتا ہے۔',
+      'Whoever travels a path seeking knowledge, Allah will make easy for him the path to Paradise.'
+    )
+  ) +
+
+  topic('💛', 'رحم اور نرم مزاجی', 'Mercy &amp; Gentleness',
+    'رحم اور نرم مزاجی اسلامی اخلاق کے اہم ستون ہیں۔ آنحضرت ﷺ رحمۃ للعالمین تھے اور آپ ﷺ کا اسوۂ حسنہ ہمارے لیے مشعلِ راہ ہے۔ سخت دلی اور تکبر سے لوگ دور ہو جاتے ہیں۔',
+    'Mercy and gentleness are central pillars of Islamic ethics. The Prophet ﷺ was mercy for all worlds — his example is our guiding light. Harshness and arrogance push people away.',
+    card_ayat('Al-Imran 3:159', 'A1',
+      'فَبِمَا رَحْمَةٍ مِنَ اللَّهِ لِنْتَ لَهُمْ وَلَوْ كُنْتَ فَظًّا غَلِيظَ الْقَلْبِ لَانْفَضُّوا مِنْ حَوْلِكَ',
+      'اللہ کی رحمت کی وجہ سے آپ ان کے ساتھ نرم رہے۔ اگر آپ تند مزاج اور سخت دل ہوتے تو وہ آپ کے گرد سے چھٹ جاتے۔',
+      'By Allah\'s mercy you were gentle with them. Had you been harsh and hard-hearted, they would have dispersed from around you.'
+    ),
+    card_hadith('Sahih Bukhari, No. 71', 'H1',
+      'مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ',
+      'اللہ جس کے ساتھ بھلائی کا ارادہ فرماتا ہے اسے دین کی سمجھ عطا فرماتا ہے۔',
+      'Whoever Allah wishes good for, He gives them deep understanding of religion.'
+    )
+  );
+}
+
+// ══════════ LECTURE 3 ══════════
+function lecture3() {
+  return lectureHeader(3,
+    'اسلامی نظریہ اور اس کی اہمیت',
+    'Islamic Ideology &amp; Its Importance',
+    'اسلامی نظریہ کے تین بنیادی ستون ہیں: اللہ کا تصور، کائنات کا تصور اور انسان کا تصور۔ یہ نظریہ انسانی زندگی کو ایک منظم اور بامقصد ڈھانچہ دیتا ہے۔ توحید اس کا مرکزی خیال ہے۔ اسلامی نظریے کی خصوصیات میں مکملیت، اعتدال اور عالمگیریت شامل ہیں۔',
+    'Islamic ideology rests on three pillars: the concept of Allah, of the Universe, and of Man. This ideology gives human life a structured, purposeful framework. Tawhid is its central concept. Its characteristics include comprehensiveness, balance, and universality.'
+  ) +
+
+  topic('🌌', 'اللہ کا اسلامی تصور', 'Islamic View of Allah',
+    'اسلام میں اللہ کا تصور توحید پر مبنی ہے — وہ اکیلا خالق، رازق اور مالکِ کائنات ہے۔ اس کے اسماء الحسنیٰ — یعنی اللہ کے بہترین نام — اس کی کامل اور بے مثل ذات کو بیان کرتے ہیں۔',
+    'The Islamic concept of Allah is founded on Tawhid — He is the sole Creator, Sustainer, and Master of the universe. His beautiful names (Al-Asma Al-Husna) describe His perfect and matchless essence.',
+    card_ayat('Al-Ikhlas 112:1-4', 'A1',
+      'قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ',
+      'کہو: وہ اللہ ہے، ایک ہے۔ اللہ بے نیاز ہے۔ نہ اس نے کسی کو جنا، نہ وہ جنا گیا۔ اور کوئی اس کا ہمسر نہیں۔',
+      'Say: He is Allah, the One. Allah the Eternal. He begets not, nor was He begotten. And none is comparable to Him.'
+    ) +
+    card_ayat('Al-A\'raf 7:180', 'A2',
+      'وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَى فَادْعُوهُ بِهَا',
+      'اللہ کے بہترین نام ہیں، پس انہی سے اسے پکارو۔',
+      'To Allah belong the most beautiful names, so call upon Him by them.'
+    ) +
+    card_ayat('Al-Zumur 39:62', 'A3',
+      'اللَّهُ خَالِقُ كُلِّ شَيْءٍ وَهُوَ عَلَى كُلِّ شَيْءٍ وَكِيلٌ',
+      'اللہ ہر چیز کا خالق ہے اور وہ ہر چیز پر نگہبان ہے۔',
+      'Allah is the Creator of all things, and He is the Guardian over all things.'
+    ),
+    null
+  ) +
+
+  topic('🌏', 'کائنات کا اسلامی تصور', 'Islamic View of the Universe',
+    'اسلام کے مطابق کائنات اللہ کی مخلوق ہے، آزاد اور خود مختار نہیں۔ یہ اللہ کی قدرت اور حکمت کی نشانی ہے۔ انسان کو اس کائنات میں اللہ کا امین (trustee) بنایا گیا ہے، نہ کہ مالک۔',
+    'According to Islam, the universe is Allah\'s creation — not independent or autonomous. It is a sign of Allah\'s power and wisdom. Humanity has been appointed as trustee (amin) of this universe, not its owner.',
+    card_ayat('Al-Toor 52:35-36', 'A1',
+      'أَمْ خُلِقُوا مِنْ غَيْرِ شَيْءٍ أَمْ هُمُ الْخَالِقُونَ ۝ أَمْ خَلَقُوا السَّمَاوَاتِ وَالْأَرْضَ',
+      'کیا وہ بغیر کسی شے کے پیدا ہوگئے؟ یا وہ خود پیدا کرنے والے ہیں؟ کیا انہوں نے آسمانوں اور زمین کو پیدا کیا؟',
+      'Were they created by nothing, or are they themselves the creators? Or did they create the heavens and the earth?'
+    ),
+    null
+  ) +
+
+  topic('👤', 'انسان بطور خلیفہ', 'Man as Allah\'s Vicegerent',
+    'انسان اللہ کا خلیفہ (نائب) ہے۔ اسے عقل، ارادہ اور انتخاب کی صلاحیت دی گئی ہے۔ اسلامی نظریے میں انسان نہ تو فرشتہ ہے نہ حیوان — وہ ایک خاص مخلوق ہے جو اللہ کی امانت اٹھانے کی اہلیت رکھتا ہے۔',
+    'Man is Allah\'s vicegerent (khalifah). He has been endowed with reason, will, and the capacity for choice. In Islamic ideology, man is neither angel nor animal — he is a unique creation capable of bearing Allah\'s trust (amanah).',
+    card_ayat('Al-Baqarah 2:30', 'A1',
+      'وَإِذْ قَالَ رَبُّكَ لِلْمَلَائِكَةِ إِنِّي جَاعِلٌ فِي الْأَرْضِ خَلِيفَةً',
+      'اور جب آپ کے رب نے فرشتوں سے فرمایا: میں زمین میں ایک خلیفہ بنانے والا ہوں۔',
+      'And when your Lord said to the angels: I am placing a vicegerent on earth.'
+    ) +
+    card_ayat('Al-Isra 17:70', 'A2',
+      'وَلَقَدْ كَرَّمْنَا بَنِي آدَمَ وَحَمَلْنَاهُمْ فِي الْبَرِّ وَالْبَحْرِ',
+      'اور ہم نے بنی آدم کو عزت دی اور انہیں خشکی اور سمندر میں سوار کیا۔',
+      'We have honored the sons of Adam and carried them on land and sea.'
+    ),
+    card_hadith('Sahih Bukhari, No. 2442', 'H1',
+      'كُلُّكُمْ رَاعٍ وَكُلُّكُمْ مَسْئُولٌ عَنْ رَعِيَّتِهِ',
+      'تم میں سے ہر شخص ذمہ دار ہے اور ہر ایک سے اس کی ذمہ داری کے بارے میں پوچھا جائے گا۔',
+      'Each of you is a shepherd and each of you will be asked about those under his care.'
+    )
+  ) +
+
+  topic('✨', 'اسلامی نظریے کی خصوصیات', 'Characteristics of Islamic Ideology',
+    'اسلامی نظریے کی خصوصیات یہ ہیں: (۱) توحید پر مبنی، (۲) مکمل اور جامع — زندگی کے ہر پہلو پر رہنمائی دیتا ہے، (۳) معتدل اور متوازن، (۴) عالمگیر — تمام انسانیت کے لیے، (۵) عقل اور وحی دونوں پر مبنی۔',
+    'Islamic ideology is: (1) Based on Tawhid, (2) Comprehensive — guiding every aspect of life, (3) Balanced and moderate, (4) Universal — for all of humanity, (5) Founded on both reason and divine revelation (wahy).',
+    card_ayat('Al-Baqarah 2:143', 'A1',
+      'وَكَذَلِكَ جَعَلْنَاكُمْ أُمَّةً وَسَطًا',
+      'اور اسی طرح ہم نے تمہیں ایک معتدل امت بنایا ہے۔',
+      'And thus We have made you a moderate (balanced) nation.'
+    ),
+    card_hadith('Sahih Muslim, No. 1017', 'H1',
+      'مَنْ دَعَا إِلَى هُدًى كَانَ لَهُ مِنَ الْأَجْرِ مِثْلُ أُجُورِ مَنْ تَبِعَهُ',
+      'جو کوئی ہدایت کی طرف بلائے، اسے اپنے پیروکاروں کے برابر اجر ملتا ہے۔',
+      'Whoever calls to guidance will receive a reward equal to those who follow him.'
+    )
+  );
+}
+
+// ══════════ LECTURE 4 ══════════
+function lecture4() {
+  return lectureHeader(4,
+    'اسلام کے بنیادی عقائد',
+    'Fundamental Beliefs of Islam',
+    'اسلام کے بنیادی عقائد میں ایمان بالله، ملائکہ، کتب، انبیاء، آخرت اور تقدیر شامل ہیں۔ ایمان دل سے تصدیق، زبان سے اقرار اور اعمال سے ثابت ہوتا ہے۔ ان عقائد کا اثر انسانی رویے، کردار اور اخلاق پر پڑتا ہے۔',
+    'The fundamental beliefs of Islam — Iman — include faith in Allah, angels, divine books, prophets, the Day of Judgement, and divine decree (Qadar). Iman is affirmed in the heart, declared by the tongue, and demonstrated through actions. These beliefs shape human behaviour, character, and ethics.'
+  ) +
+
+  topic('🌙', 'ایمان کا تعریف اور ارکان', 'Definition &amp; Articles of Iman',
+    'ایمان کا مطلب اللہ پر، اس کے فرشتوں پر، اس کی کتابوں پر، اس کے رسولوں پر، آخرت کے دن پر اور تقدیر کے خیر و شر پر مکمل یقین رکھنا ہے۔ ایمان صرف زبانی دعویٰ نہیں — دل کی گہرائی سے اقرار اور عمل سے ثابت ہوتا ہے۔',
+    'Iman means firm belief in Allah, His angels, His Books, His Messengers, the Day of Judgement, and divine decree (Qadar) — both good and bad. Iman is not a verbal claim alone — it is affirmed from the heart\'s depth and proven through actions.',
+    card_ayat('Al-Baqarah 2:177', 'A1',
+      'مَنۡ اٰمَنَ بِاللّٰهِ وَالۡيَوۡمِ الۡاٰخِرِ وَالۡمَلٰٓـئِکَةِ وَالۡكِتٰبِ وَالنَّبِيّٖنَ',
+      'جو اللہ پر، قیامت کے دن پر، فرشتوں پر، کتاب پر اور نبیوں پر ایمان رکھتا ہو۔',
+      'Who believes in Allah, the Last Day, the angels, the Book, and the Prophets.'
+    ),
+    card_hadith('Sahih Muslim — Hadith Jibreel, No. 8', 'H1',
+      'أَنْ تُؤْمِنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ وَالْيَوْمِ الْآخِرِ وَتُؤْمِنَ بِالْقَدَرِ',
+      'یہ کہ آپ اللہ، اس کے فرشتوں، اس کی کتابوں، اس کے رسولوں، آخرت کے دن اور تقدیر کے خیر و شر پر ایمان رکھیں۔',
+      'That you believe in Allah, His angels, His Books, His Messengers, the Last Day, and in divine decree — both its good and its evil.'
+    )
+  ) +
+
+  topic('🕊️', 'آخرت پر ایمان', 'Belief in the Hereafter',
+    'آخرت پر ایمان انسان کو اس دنیا میں جوابدہی کا احساس دیتا ہے۔ قیامت کے دن تمام انسانوں کو اکٹھا کیا جائے گا، ان کے اعمال کا حساب ہوگا اور انہیں جنت یا جہنم میں بھیجا جائے گا۔ یہ ایمان انسان کو نیکی پر آمادہ کرتا ہے۔',
+    'Belief in the Hereafter instills a sense of accountability in human life. On the Day of Judgement, all humans will be gathered, their deeds accounted, and they will be sent to Paradise or Hell. This belief motivates righteous action.',
+    card_ayat('Al-Nisa 4:87', 'A1',
+      'اللَّهُ لَا إِلَهَ إِلَّا هُوَ لَيَجْمَعَنَّكُمْ إِلَى يَوْمِ الْقِيَامَةِ لَا رَيْبَ فِيهِ',
+      'اللہ — اس کے سوا کوئی معبود نہیں — تمہیں یقیناً قیامت کے دن جمع کرے گا جس میں کوئی شک نہیں۔',
+      'Allah — there is no deity except Him. He will surely assemble you on the Day of Resurrection, about which there is no doubt.'
+    ) +
+    card_ayat('Ya-Sin 36:53', 'A2',
+      'إِنْ كَانَتْ إِلَّا صَيْحَةً وَاحِدَةً فَإِذَا هُمْ جَمِيعٌ لَدَيْنَا مُحْضَرُونَ',
+      'یہ تو بس ایک چیخ ہوگی اور اچانک وہ سب ہمارے سامنے حاضر ہوں گے۔',
+      'It will be but one blast — and at once they are all brought present before Us.'
+    ),
+    null
+  ) +
+
+  topic('📿', 'نبوت پر ایمان', 'Belief in Prophethood',
+    'نبوت اللہ کی ہدایت کا ذریعہ ہے۔ تمام انبیاء انسان تھے، معصوم تھے اور ان کا پیغام ایک ہی تھا: صرف اللہ کی عبادت کرو۔ نبی محمد ﷺ خاتم النبیین ہیں — آپ ﷺ کے بعد کوئی نبی نہیں آئے گا۔',
+    'Prophethood is the means of Allah\'s guidance. All prophets were human, infallible in conveying the message, and united in calling to one God. Prophet Muhammad ﷺ is the Seal of the Prophets — no prophet will come after him.',
+    card_ayat('Al-Ahzab 33:21', 'A1',
+      'لَقَدْ كَانَ لَكُمْ فِي رَسُولِ اللَّهِ أُسْوَةٌ حَسَنَةٌ',
+      'یقیناً تمہارے لیے رسول اللہ ﷺ کی زندگی میں بہترین نمونہ ہے۔',
+      'Indeed in the Messenger of Allah you have an excellent example to follow.'
+    ) +
+    card_ayat('Al-Imran 3:31', 'A2',
+      'قُلْ إِنْ كُنْتُمْ تُحِبُّونَ اللَّهَ فَاتَّبِعُونِي يُحْبِبْكُمُ اللَّهُ وَيَغْفِرْ لَكُمْ ذُنُوبَكُمْ',
+      'کہہ دیجیے: اگر تم اللہ سے محبت کرتے ہو تو میری پیروی کرو، اللہ تم سے محبت کرے گا اور تمہارے گناہ معاف فرمائے گا۔',
+      'Say: If you love Allah, then follow me; Allah will love you and forgive your sins.'
+    ),
+    card_hadith('Sunan Abi Dawud, No. 4596', 'H1',
+      'أَنَا خَاتَمُ النَّبِيِّينَ لَا نَبِيَّ بَعْدِي',
+      'میں خاتم النبیین ہوں، میرے بعد کوئی نبی نہیں۔',
+      'I am the Seal of the Prophets; there is no prophet after me.'
+    )
+  ) +
+
+  topic('💫', 'بنیادی عقائد کا انسانی رویے پر اثر', 'Impact of Beliefs on Human Behaviour',
+    'یہ بنیادی عقائد انسانی رویے کو گہرائی سے متاثر کرتے ہیں۔ آخرت پر ایمان انسان کو سرکشی سے روکتا ہے۔ توحید کا ایمان انسان میں تکبر ختم کرتا ہے۔ نبوت پر ایمان انسان کو ایک آدرش عملی نمونہ دیتا ہے۔',
+    'These fundamental beliefs deeply shape human behaviour. Belief in the Hereafter prevents rebellion and wrongdoing. Faith in Tawhid removes arrogance. Belief in prophethood provides an ideal practical model to follow.',
+    card_ayat('Al-Zalzalah 99:7-8', 'A1',
+      'فَمَنْ يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ ۝ وَمَنْ يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ',
+      'جس نے ذرہ برابر نیکی کی وہ اسے دیکھ لے گا اور جس نے ذرہ برابر برائی کی وہ اسے دیکھ لے گا۔',
+      'Whoever does an atom\'s weight of good will see it, and whoever does an atom\'s weight of evil will see it.'
+    ),
+    card_hadith('Sahih Bukhari, No. 6502', 'H1',
+      'إِنَّ اللَّهَ لَا يَنْظُرُ إِلَى صُوَرِكُمْ وَأَمْوَالِكُمْ وَلَكِنْ يَنْظُرُ إِلَى قُلُوبِكُمْ وَأَعْمَالِكُمْ',
+      'بے شک اللہ تمہاری صورتوں اور مالوں کو نہیں دیکھتا بلکہ تمہارے دلوں اور اعمال کو دیکھتا ہے۔',
+      'Verily Allah does not look at your faces and wealth but He looks at your hearts and deeds.'
+    )
+  );
+}
+
+// ══════════ LECTURE 5 ══════════
+function lecture5() {
+  return lectureHeader(5,
+    'عبادت کا تصور اور اسلامی رسوم',
+    'Concept of Worship &amp; Rituals in Islam',
+    'اسلام میں عبادت (\'إبادة) صرف نماز یا روزے تک محدود نہیں — یہ ایک جامع تصور ہے۔ ہر وہ قول اور فعل جو اللہ کی رضا کے لیے کیا جائے عبادت ہے۔ اسلام رہبانیت (دنیا ترک کرنا) کو رد کرتا ہے اور دنیاوی زندگی میں اللہ کی یاد کے ساتھ رہنے کا حکم دیتا ہے۔',
+    'In Islam, worship (Ibadah) is not limited to prayer or fasting — it is a comprehensive concept. Every word and deed done for the pleasure of Allah is worship. Islam rejects monasticism (abandoning the world) and commands remembrance of Allah while living fully in it.'
+  ) +
+
+  topic('🤲', 'عبادت کا معنی اور اسلام میں اس کا تصور', 'Meaning of Worship in Islam',
+    'عربی میں "عبادت" کا لفظ "عبد" سے نکلا ہے جس کا مطلب ہے غلام یا خادم۔ عبادت یعنی اللہ کی خوشنودی کے لیے اطاعت، محبت اور احترام۔ اسلامی عبادت تین ستونوں پر قائم ہے: وفاداری، اطاعت اور تعظیم۔',
+    'The Arabic word "Ibadah" derives from "Abd" — meaning servant or slave. Worship means obedience, love, and reverence for Allah\'s pleasure. Islamic worship rests on three pillars: loyalty to the Master, obedience, and reverence.',
+    card_ayat('Al-Dhariyat 51:56', 'A1',
+      'وَمَا خَلَقْتُ الْجِنَّ وَالْإِنْسَ إِلَّا لِيَعْبُدُونِ',
+      'اور میں نے جنوں اور انسانوں کو صرف اسی لیے پیدا کیا کہ وہ میری عبادت کریں۔',
+      'I did not create the jinn and mankind except to worship Me.'
+    ) +
+    card_ayat('Yusuf 12:40', 'A2',
+      'إِنِ الْحُكْمُ إِلَّا لِلَّهِ أَمَرَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ',
+      'حکم صرف اللہ کا ہے جس نے فرمایا کہ اس کے سوا کسی کی عبادت نہ کرو۔',
+      'He has commanded that you serve none but Him.'
+    ),
+    null
+  ) +
+
+  topic('🚫', 'رہبانیت کا رد', 'Rejection of Monasticism',
+    'اسلام رہبانیت یعنی دنیا سے بھاگ کر جنگلوں میں رہنے کو رد کرتا ہے۔ یہ طریقہ اللہ نے مقرر نہیں کیا۔ اسلام دنیاوی زندگی میں رہتے ہوئے اللہ کی اطاعت کا حکم دیتا ہے۔',
+    'Islam rejects monasticism — abandoning the world and retreating to jungles or isolation. This was not prescribed by Allah. Islam commands obedience to Allah while living fully within the world.',
+    card_ayat('Al-Hadid 57:27', 'A1',
+      'وَرَهْبَانِيَّةً ابْتَدَعُوهَا مَا كَتَبْنَاهَا عَلَيْهِمْ',
+      'اور رہبانیت انہوں نے خود ایجاد کی، ہم نے انہیں اس کا حکم نہیں دیا تھا۔',
+      'As for monasticism, it is they who invented it; We did not prescribe it for them.'
+    ),
+    null
+  ) +
+
+  topic('🌿', 'عبادت کی جامعیت', 'Comprehensiveness of Worship',
+    'اسلامی عبادت صرف مخصوص اوقات تک محدود نہیں۔ جب انسان اللہ کی حلال و حرام کی حدود کے اندر رہتے ہوئے سوتا ہے، کھاتا ہے، کام کرتا ہے یا اپنے گھر والوں کے ساتھ وقت گزارتا ہے — یہ سب اللہ کی عبادت ہے۔',
+    'Islamic worship is not confined to specific times. When a person sleeps, eats, works, or spends time with family within Allah\'s permitted limits, while remaining conscious of Him — all of this becomes worship.',
+    card_ayat('Al-Baqarah 2:177', 'A1',
+      'لَيْسَ الْبِرَّ أَنْ تُوَلُّوا وُجُوهَكُمْ قِبَلَ الْمَشْرِقِ وَالْمَغْرِبِ وَلَكِنَّ الْبِرَّ مَنْ آمَنَ بِاللَّهِ',
+      'نیکی یہ نہیں کہ تم مشرق یا مغرب کی طرف منہ کرو، بلکہ نیکی یہ ہے کہ اللہ، آخرت، فرشتوں، کتاب اور نبیوں پر ایمان لاؤ۔',
+      'Righteousness is not turning your faces east or west — but righteousness is believing in Allah, the Last Day, the angels, the Book, and the Prophets.'
+    ),
+    card_hadith('Sahih Muslim, No. 1006', 'H1',
+      'كُلُّ مَعْرُوفٍ صَدَقَةٌ',
+      'ہر نیکی صدقہ ہے۔',
+      'Every act of goodness is charity (Sadaqah).'
+    )
+  ) +
+
+  topic('🕌', 'عبادت کے مقاصد', 'Objectives of Islamic Worship',
+    'عبادت کے مقاصد میں شامل ہیں: (۱) اللہ کی رضا حاصل کرنا، (۲) نفس کی تربیت اور تزکیہ، (۳) برائی سے بچنا، (۴) سماجی اتحاد اور رابطہ، (۵) آخرت کی تیاری۔ ہر عبادت — نماز، روزہ، زکوٰۃ، حج — کے مخصوص مقاصد ہیں۔',
+    'The objectives of worship include: (1) Gaining Allah\'s pleasure, (2) Purification (Tazkiyyah) of the soul, (3) Protection from evil, (4) Social unity, (5) Preparation for the Hereafter. Each pillar — prayer, fasting, Zakat, Hajj — has its own specific objectives.',
+    card_ayat('Al-Ankabut 29:45', 'A1',
+      'إِنَّ الصَّلَاةَ تَنْهَى عَنِ الْفَحْشَاءِ وَالْمُنْكَرِ',
+      'بے شک نماز بے حیائی اور برائی سے روکتی ہے۔',
+      'Indeed, prayer prevents from immorality and evil.'
+    ) +
+    card_ayat('Al-Baqarah 2:183', 'A2',
+      'يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ … لَعَلَّكُمْ تَتَّقُونَ',
+      'اے ایمان والو! تم پر روزہ فرض کیا گیا … تاکہ تم متقی بن جاؤ۔',
+      'O believers! Fasting has been prescribed for you … so that you may become God-fearing.'
+    ),
+    card_hadith('Sahih Bukhari, Hadith Qudsi', 'H1',
+      'أَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ وَأَطِيعُوا اللَّهَ وَرَسُولَهُ',
+      'نماز قائم کرو، زکوٰۃ ادا کرو اور اللہ اور اس کے رسول ﷺ کی اطاعت کرو۔',
+      'Establish prayer, give Zakat, and obey Allah and His Messenger ﷺ.'
+    )
+  );
+}
+
+// ══════════ LECTURE 6 ══════════
+function lecture6() {
+  return lectureHeader(6,
+    'ارکانِ اسلام',
+    'Pillars of Islam: Kalimah, Salah, Sawm, Zakah, Hajj',
+    'اسلام کے پانچ بنیادی ارکان ہیں: کلمہ طیبہ (توحید کا اقرار)، نماز، روزہ، زکوٰۃ اور حج۔ یہ ارکان مسلمان کے کردار کی تعمیر کرتے ہیں، اخلاقی اوصاف کو پروان چڑھاتے ہیں اور فرد کو سماج سے جوڑتے ہیں۔ یہ سب ملکر ایسا ذہن و قلب بناتے ہیں جو صرف اللہ کی رضا طلب کرتا ہے۔',
+    'Islam has five fundamental pillars: Kalimah Tayyibah (declaration of faith), Salah, Sawm, Zakah, and Hajj. These pillars build Muslim character, develop moral qualities, and connect the individual to society. Together they forge a heart that seeks nothing but the pleasure of Allah.'
+  ) +
+
+  topic('🌳', 'کلمہ طیبہ', 'Kalimah Tayyibah',
+    'کلمہ طیبہ — لَا إِلَهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ — اسلام کی بنیاد ہے۔ قرآن نے اسے ایک اچھے درخت سے تشبیہ دی ہے جس کی جڑیں زمین میں مضبوط اور شاخیں آسمان تک ہیں اور جو ہر وقت پھل دیتا ہے۔',
+    'The Kalimah Tayyibah — "There is no god but Allah, Muhammad ﷺ is His Messenger" — is the foundation of Islam. The Quran likens it to a noble tree: its roots firmly fixed, its branches reaching the sky, bearing fruit at all times.',
+    card_ayat('Ibrahim 14:24-25', 'A1',
+      'أَلَمْ تَرَ كَيْفَ ضَرَبَ اللَّهُ مَثَلًا كَلِمَةً طَيِّبَةً كَشَجَرَةٍ طَيِّبَةٍ أَصْلُهَا ثَابِتٌ وَفَرْعُهَا فِي السَّمَاءِ',
+      'کیا تم نے نہیں دیکھا کہ اللہ نے پاکیزہ کلمے کی مثال پاکیزہ درخت سے دی جس کی جڑ مضبوط اور شاخیں آسمان میں ہیں۔',
+      'Have you not seen how Allah sets forth the parable of a good word as a good tree whose root is firmly fixed and whose branches are in the sky.'
+    ),
+    card_hadith('Sahih Bukhari — Hadith Jibreel, No. 47', 'H1',
+      'الْإِيمَانُ أَنْ تُؤْمِنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ وَالْيَوْمِ الْآخِرِ',
+      'ایمان یہ ہے کہ آپ اللہ، اس کے فرشتوں، اس کی کتابوں، اس کے رسولوں اور قیامت کے دن پر ایمان لائیں۔',
+      'Iman is to believe in Allah, His angels, His Books, His Messengers, and the Last Day.'
+    )
+  ) +
+
+  topic('🕋', 'نماز (صلوٰۃ)', 'Salah (Prayer)',
+    'نماز اسلام کا دوسرا رکن اور ایمان کا عملی اظہار ہے۔ دن میں پانچ بار نماز انسان کو یاد دلاتی ہے کہ وہ اللہ کا بندہ ہے۔ نماز فحاشی اور برائی سے روکتی ہے اور فرد کو اللہ سے قریب کرتی ہے۔',
+    'Salah is the second pillar and the practical expression of faith. Five daily prayers remind the believer of their servitude to Allah. Prayer guards against immorality and draws the individual closer to Allah.',
+    card_ayat('Al-Muminun 23:1-2', 'A1',
+      'قَدْ أَفْلَحَ الْمُؤْمِنُونَ ۝ الَّذِينَ هُمْ فِي صَلَاتِهِمْ خَاشِعُونَ',
+      'یقیناً کامیاب ہوگئے وہ مومن جو اپنی نمازوں میں عاجزی کرنے والے ہیں۔',
+      'Successful indeed are the believers — those who are humble in their prayers.'
+    ) +
+    card_ayat('Al-Baqarah 2:238', 'A2',
+      'حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَى وَقُومُوا لِلَّهِ قَانِتِينَ',
+      'اپنی نمازوں کی، خاص طور پر درمیانی نماز کی حفاظت کرو اور اللہ کے حضور اطاعت کے ساتھ کھڑے ہو۔',
+      'Maintain with care the obligatory prayers and stand before Allah devoutly obedient.'
+    ),
+    null
+  ) +
+
+  topic('🌙', 'روزہ (صوم) اور زکوٰۃ', 'Sawm (Fasting) &amp; Zakah (Charity)',
+    'روزہ تقوے کی تربیت ہے — محض کھانے پینے سے نہیں بلکہ برے اعمال سے بھی پرہیز کرنا روزہ ہے۔ زکوٰۃ مال کو پاک کرتی ہے، ہمدردی پیدا کرتی ہے اور سماجی ناہمواری کو کم کرتی ہے۔',
+    'Fasting trains taqwa — it is not merely abstaining from food and drink, but from evil deeds too. Zakah purifies wealth, cultivates compassion, and reduces social inequality.',
+    card_ayat('Al-Baqarah 2:183', 'A1',
+      'يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِنْ قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ',
+      'اے ایمان والو! تم پر روزہ اسی طرح فرض کیا گیا جیسے تم سے پہلے لوگوں پر فرض کیا گیا تھا — تاکہ تم پرہیزگار بن جاؤ۔',
+      'O believers! Fasting has been prescribed for you as it was for those before you — that you may become God-fearing.'
+    ) +
+    card_ayat('Al-Tawbah 9:103', 'A2',
+      'خُذْ مِنْ أَمْوَالِهِمْ صَدَقَةً تُطَهِّرُهُمْ وَتُزَكِّيهِمْ بِهَا',
+      'ان کے اموال سے صدقہ لے لو جو انہیں پاک کرے اور ان کا تزکیہ کرے۔',
+      'Take from their wealth a charity by which you purify them and cause them increase.'
+    ),
+    card_hadith('Sahih Bukhari', 'H1',
+      'الصَّوْمُ جُنَّةٌ',
+      'روزہ ڈھال ہے۔',
+      'Fasting is a shield.'
+    )
+  ) +
+
+  topic('🕌', 'حج اور اجتماعی فوائد', 'Hajj &amp; Collective Benefits',
+    'حج اسلام کا پانچواں رکن ہے جو استطاعت رکھنے والے ہر مسلمان پر زندگی میں ایک بار فرض ہے۔ حج دنیا کی محبت کو کمزور کرتا ہے، اللہ کی توحید کو دل میں راسخ کرتا ہے اور مسلمانوں کے عالمگیر اتحاد کا مظاہرہ ہے۔',
+    'Hajj is the fifth pillar — obligatory once in a lifetime for those able. It weakens attachment to the world, strengthens Tawhid in the heart, and is a manifestation of global Muslim unity.',
+    card_ayat('Al-Baqarah 2:197', 'A1',
+      'الْحَجُّ أَشْهُرٌ مَعْلُومَاتٌ … فَلَا رَفَثَ وَلَا فُسُوقَ وَلَا جِدَالَ فِي الْحَجِّ',
+      'حج کے مہینے معروف ہیں … پس حج میں نہ فحش کلامی، نہ گناہ اور نہ جھگڑا۔',
+      'The months of Hajj are well-known … during Hajj, no sexual relations, no wickedness, no arguing.'
+    ) +
+    card_ayat('Al-Hajj 22:27', 'A2',
+      'وَأَذِّنْ فِي النَّاسِ بِالْحَجِّ يَأْتُوكَ رِجَالًا وَعَلَى كُلِّ ضَامِرٍ يَأْتِينَ مِنْ كُلِّ فَجٍّ عَمِيقٍ',
+      'لوگوں میں حج کا اعلان کرو، وہ تمہارے پاس پیدل آئیں گے اور دور دراز راستوں سے دبلی اونٹنیوں پر آئیں گے۔',
+      'Proclaim the Hajj to people: they will come on foot and on lean camels from every distant pass.'
+    ),
+    null
+  );
+}
+
+// ══════════ LECTURE 7 ══════════
+function lecture7() {
+  return lectureHeader(7,
+    'جدید نظریات (۱): ہیومنزم، مادیت، لبرلزم اور لادینیت',
+    'Modern Ideologies I: Humanism, Materialism, Liberalism &amp; Atheism',
+    'یہ لیکچر جدید مغربی نظریات — ہیومنزم، مادیت (Materialism)، لبرلزم اور لادینیت (Atheism) — کا اسلامی نقطۂ نظر سے جائزہ لیتا ہے۔ اسلام انسانی وقار کا علمبردار ہے مگر خدا کو نظرانداز کر کے انسان کو مرکز بنانے کے فلسفے کو رد کرتا ہے۔',
+    'This lecture examines modern Western ideologies — Humanism, Materialism, Liberalism, and Atheism — from an Islamic perspective. Islam champions human dignity but rejects any philosophy that places man at the centre by ignoring or denying Allah.'
+  ) +
+
+  topic('🌍', 'ہیومنزم (انسان پرستی) اور اسلام', 'Humanism &amp; Islam',
+    'ہیومنزم ایک فلسفہ ہے جو انسانی اقدار اور وقار پر زور دیتا ہے اور مسائل کو سائنس اور عقل سے حل کرنے کی بات کرتا ہے۔ اسلام انسانی وقار کو تسلیم کرتا ہے لیکن "سیکولر ہیومنزم" کو رد کرتا ہے جو خدا کا انکار کر کے انسان کو کائنات کا مرکز بناتا ہے۔',
+    'Humanism is a philosophy emphasizing human values, dignity, and resolving problems through science and reason. Islam affirms human dignity but rejects secular humanism which denies Allah and places Man as the centre of the universe.',
+    card_ayat('Al-Isra 17:70', 'A1',
+      'وَلَقَدْ كَرَّمْنَا بَنِي آدَمَ وَحَمَلْنَاهُمْ فِي الْبَرِّ وَالْبَحْرِ وَرَزَقْنَاهُمْ مِنَ الطَّيِّبَاتِ',
+      'اور ہم نے بنی آدم کو عزت دی، انہیں خشکی اور سمندر میں سوار کیا اور انہیں پاکیزہ رزق دیا۔',
+      'We have honored the children of Adam, carried them on land and sea, and provided them with good things.'
+    ),
+    card_hadith('Sahih Muslim, No. 2162', 'H1',
+      'حَقُّ الْمُسْلِمِ عَلَى الْمُسْلِمِ سِتٌّ',
+      'مسلمان کے مسلمان پر چھ حق ہیں: سلام، دعوت قبول کرنا، خیرخواہی، چھینک پر رحمت کی دعا، بیمارپرسی اور جنازے میں شرکت۔',
+      'The rights of a Muslim over another Muslim are six: greet them, accept their invitation, give sincere advice, say mercy when they sneeze, visit the sick, and follow their bier.'
+    )
+  ) +
+
+  topic('💰', 'مادیت (Materialism) اور اسلامی نقطۂ نظر', 'Materialism &amp; Islamic Critique',
+    'مادیت وہ نظریہ ہے جو مادے کو واحد حقیقت مانتا ہے اور روح، خدا اور غیب کا انکار کرتا ہے۔ یہ نظریہ اسلام کے ساتھ متصادم ہے کیونکہ اسلام کے چھ ارکانِ ایمان میں سے پانچ (فرشتے، کتابیں، انبیاء، آخرت اور تقدیر) غیبی ہیں۔',
+    'Materialism holds that matter is the only reality, denying the soul, God, and the unseen. This ideology conflicts fundamentally with Islam, as five of the six articles of faith (angels, books, prophets, hereafter, and decree) are metaphysical (unseen).',
+    card_ayat('Al-Taghabun 64:15', 'A1',
+      'إِنَّمَا أَمْوَالُكُمْ وَأَوْلَادُكُمْ فِتْنَةٌ',
+      'تمہارے مال اور تمہاری اولاد تو صرف ایک آزمائش ہیں۔',
+      'Your wealth and your children are only a trial.'
+    ) +
+    card_ayat('Al-Munafiqun 63:9', 'A2',
+      'يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تُلْهِكُمْ أَمْوَالُكُمْ وَلَا أَوْلَادُكُمْ عَنْ ذِكْرِ اللَّهِ',
+      'اے ایمان والو! تمہارے مال اور تمہاری اولاد تمہیں اللہ کی یاد سے غافل نہ کریں۔',
+      'O believers! Do not let your wealth or children divert you from the remembrance of Allah.'
+    ),
+    null
+  ) +
+
+  topic('⚖️', 'لبرلزم اور اسلامی موقف', 'Liberalism &amp; Islamic Stance',
+    'لبرلزم فرد کی آزادی، آئینی حکومت اور شہری حقوق کو ترجیح دیتا ہے اور قانون سازی کا اختیار انسانوں کو دیتا ہے۔ اسلام فرد کی آزادی کو تسلیم کرتا ہے لیکن مطلق قانون سازی کا حق صرف اللہ کو دیتا ہے — کوئی انسانی قانون الٰہی حکم کے خلاف نہیں ہو سکتا۔',
+    'Liberalism prioritizes individual freedom, constitutional governance, and civil rights, giving legislative authority to humans. Islam recognizes individual freedom but reserves absolute legislative authority for Allah alone — no human law may contradict divine command.',
+    card_ayat('Ghafir 40:12', 'A1',
+      'فَالْحُكْمُ لِلَّهِ الْعَلِيِّ الْكَبِيرِ',
+      'پس فیصلہ اللہ ہی کا ہے جو بلند اور عظیم ہے۔',
+      'So judgment is only for Allah, the Most High, the Most Great.'
+    ) +
+    card_ayat('Yusuf 12:40', 'A2',
+      'إِنِ الْحُكْمُ إِلَّا لِلَّهِ أَمَرَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ',
+      'حکم صرف اللہ کا ہے، اس نے حکم دیا کہ اس کے سوا کسی کی عبادت نہ کرو — یہی سیدھا دین ہے۔',
+      'Judgment rests with Allah alone — He commanded that you worship none but Him: this is the true faith.'
+    ),
+    null
+  ) +
+
+  topic('🔮', 'لادینیت (Atheism) اور اسلامی جواب', 'Atheism &amp; Islamic Response',
+    'لادینیت خدا کے وجود کا انکار ہے۔ قرآن عقلی دلائل سے اس کا جواب دیتا ہے: اگر کوئی خالق نہیں تو یہ کائنات خود کیسے وجود میں آئی؟ اسلام کے مطابق انسان کی فطرت (فطرہ) میں خدا کی پہچان پیدائشی طور پر ودیعت کی گئی ہے۔',
+    'Atheism is the denial of Allah\'s existence. The Quran responds with rational arguments: if there is no Creator, how did the universe come into being? According to Islam, recognition of Allah (Fitrah) is innately embedded in human nature.',
+    card_ayat('Al-Toor 52:35-36', 'A1',
+      'أَمْ خُلِقُوا مِنْ غَيْرِ شَيْءٍ أَمْ هُمُ الْخَالِقُونَ ۝ أَمْ خَلَقُوا السَّمَاوَاتِ وَالْأَرْضَ',
+      'کیا وہ بغیر کسی شے کے پیدا ہوگئے یا وہ خود پیدا کرنے والے ہیں؟ کیا انہوں نے آسمانوں اور زمین کو پیدا کیا؟',
+      'Were they created by nothing, or are they themselves the creators? Or did they create the heavens and the earth?'
+    ) +
+    card_ayat('Al-Rum 30:30', 'A2',
+      'فِطْرَةَ اللَّهِ الَّتِي فَطَرَ النَّاسَ عَلَيْهَا لَا تَبْدِيلَ لِخَلْقِ اللَّهِ',
+      'یہ اللہ کی فطرت ہے جس پر اس نے لوگوں کو پیدا کیا۔ اللہ کی تخلیق میں کوئی تبدیلی نہیں ہونی چاہیے۔',
+      'The natural disposition upon which Allah created mankind. There is no change in the creation of Allah.'
+    ),
+    null
+  );
+}
+
+// ══════════ LECTURE 8 ══════════
+function lecture8() {
+  return lectureHeader(8,
+    'جدید نظریات (۲): مادیت، سیکولرزم، جمہوریت اور قوم پرستی',
+    'Modern Ideologies II: Materialism, Secularism, Democracy &amp; Nationalism',
+    'یہ لیکچر مزید جدید نظریات — مادیت، سیکولرزم، جمہوریت اور قوم پرستی — کا تفصیلی جائزہ لیتا ہے اور اسلامی تناظر میں ان کا تنقیدی تجزیہ پیش کرتا ہے۔ اسلام میں خودمختاری (sovereignty) اللہ کی ہے اور قومیت کی بنیاد نسل یا رنگ نہیں بلکہ تقویٰ ہے۔',
+    'This lecture examines Materialism, Secularism, Democracy, and Nationalism in detail — offering Islamic critique of each. In Islam, sovereignty belongs to Allah alone, and nationhood is based not on race or colour but on piety (taqwa).'
+  ) +
+
+  topic('🧱', 'مادیت: ماورائی دنیا اور اخلاق کا انکار', 'Materialism: Denying the Metaphysical',
+    'مادیت کے مطابق کوئی بھی غیر محسوس شے موجود نہیں — خدا، فرشتے، جنات وغیرہ کا وجود نہیں۔ یہ نظریہ اخلاقیات کو بھی صرف مادی بنیادوں پر کھڑا کرتا ہے۔ اسلام اسے رد کرتا ہے کیونکہ غیبی حقائق قرآن و سنت سے ثابت ہیں۔',
+    'According to Materialism, nothing imperceptible exists — no Allah, angels, or jinn. It grounds ethics solely in material factors. Islam rejects this because unseen realities are established through the Quran and Sunnah.',
+    card_ayat('Al-Imran 3:14', 'A1',
+      'زُيِّنَ لِلنَّاسِ حُبُّ الشَّهَوَاتِ مِنَ النِّسَاءِ وَالْبَنِينَ وَالْقَنَاطِيرِ الْمُقَنطَرَةِ مِنَ الذَّهَبِ وَالْفِضَّةِ',
+      'لوگوں کے لیے نفسانی خواہشات — عورتوں، بیٹوں، سونے چاندی کے ڈھیروں — کی محبت کو خوبصورت بنا دیا گیا ہے۔ یہ دنیاوی زندگی کا سامان ہے۔',
+      'Beautified for people is the love of desires — women, children, and hoards of gold and silver. That is the enjoyment of worldly life.'
+    ) +
+    card_ayat('Al-Jumu\'ah 62:2', 'A2',
+      'هُوَ الَّذِي بَعَثَ فِي الْأُمِّيِّينَ رَسُولًا مِنْهُمْ يَتْلُو عَلَيْهِمْ آيَاتِهِ وَيُزَكِّيهِمْ',
+      'وہی ہے جس نے ان پڑھوں میں انہیں میں سے رسول بھیجا جو انہیں اس کی آیات سناتا ہے اور انہیں پاک کرتا ہے۔',
+      'He is the one who raised among the unlettered a Messenger who recites His verses and purifies them.'
+    ),
+    null
+  ) +
+
+  topic('🏛️', 'سیکولرزم اور اسلامی موقف', 'Secularism &amp; Islamic Stance',
+    'سیکولرزم دین کو ریاست اور عوامی زندگی سے الگ کرنے کا نظریہ ہے۔ اسلام اس نقطۂ نظر کو رد کرتا ہے کیونکہ قرآن کریم زندگی کے ہر شعبے — مذہبی، سماجی، فوجداری، معاشی اور سیاسی — میں رہنمائی دیتا ہے۔',
+    'Secularism is the theory of separating religion from the state and public life. Islam rejects this view because the Quran provides guidance for every domain of life — religious, social, criminal, economic, and political.',
+    card_ayat('Al-An\'am 6:162', 'A1',
+      'قُلْ إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ',
+      'کہہ دیجیے: میری نماز، قربانی، میرا جینا اور مرنا سب اللہ کے لیے ہے۔',
+      'Say: My prayer, sacrifice, life, and death are all for Allah, Lord of all the worlds.'
+    ) +
+    card_ayat('Hud 11:87', 'A2',
+      'قَالُوا يَا شُعَيْبُ أَصَلَاتُكَ تَأْمُرُكَ أَنْ نَتْرُكَ مَا يَعْبُدُ آبَاؤُنَا',
+      'انہوں نے کہا: اے شعیب! کیا تمہاری نماز تمہیں یہ حکم دیتی ہے کہ ہم اپنے باپ دادا کے معبودوں کو چھوڑ دیں؟',
+      'They said: O Shu\'aib! Does your prayer command you that we abandon what our fathers worshipped?'
+    ),
+    null
+  ) +
+
+  topic('🗳️', 'جمہوریت اور اسلامی نقطۂ نظر', 'Democracy &amp; Islamic Perspective',
+    'جمہوریت میں قانون سازی کا اختیار عوام یا ان کے نمائندوں کو ہے اور اکثریت کی رائے قانون بنتی ہے۔ اسلام کے مطابق قانون سازی کا حق صرف اللہ کا ہے — کوئی انسانی قانون الٰہی حکم کے خلاف نہیں ہو سکتا۔ اسلامی سیاسی نظام میں مشاورت (Shura) ضروری ہے مگر اللہ کی حاکمیت اعلیٰ ہے۔',
+    'In democracy, legislative authority belongs to the people or their representatives, and majority opinion becomes law. In Islam, legislative authority belongs to Allah alone — no human law may contradict divine command. Consultation (Shura) is required in Islamic governance, but Allah\'s sovereignty is supreme.',
+    card_ayat('Yusuf 12:40', 'A1',
+      'إِنِ الْحُكْمُ إِلَّا لِلَّهِ أَمَرَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ ذَلِكَ الدِّينُ الْقَيِّمُ',
+      'حکم صرف اللہ کا ہے۔ اس نے حکم دیا کہ اس کے سوا کسی کی عبادت نہ کرو — یہی سیدھا دین ہے۔',
+      'Judgment is only for Allah. He has commanded that you worship none but Him — that is the right faith.'
+    ) +
+    card_ayat('Al-An\'am 6:57', 'A2',
+      'إِنِ الْحُكْمُ إِلَّا لِلَّهِ',
+      'فیصلہ صرف اللہ کا ہے۔',
+      'The decision belongs to none but Allah.'
+    ),
+    card_hadith('Sahih Bukhari, No. 7257', 'H1',
+      'إِنَّ اللَّهَ هُوَ الْحَكَمُ وَإِلَيْهِ الْحُكْمُ',
+      'بے شک اللہ ہی حاکم ہے اور فیصلہ اسی کی طرف ہے۔',
+      'Indeed Allah is the Judge and to Him belongs all judgment.'
+    )
+  ) +
+
+  topic('🌐', 'قوم پرستی اور اسلامی موقف', 'Nationalism &amp; Islamic View',
+    'قوم پرستی میں قومی ریاست سے وفاداری سب سے اعلیٰ ہوتی ہے — نسل، رنگ یا علاقے کی بنیاد پر۔ اسلام اس تصور کو رد کرتا ہے۔ اسلام میں انسانی برادری کی بنیاد ایمان اور تقوے پر ہے، نسل یا زبان پر نہیں۔ علامہ اقبال کے مطابق مسلمانوں کی قومیت روحانی یکجہتی پر مبنی ہے۔',
+    'Nationalism places loyalty to the nation-state — based on race, colour, or territory — above all else. Islam rejects this. In Islam, the basis of human brotherhood is faith and piety (taqwa), not race or language. Allama Iqbal argued that Muslim nationhood is based on spiritual homogeneity.',
+    card_ayat('Al-Hujurat 49:13', 'A1',
+      'يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُمْ مِنْ ذَكَرٍ وَأُنْثَى وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا إِنَّ أَكْرَمَكُمْ عِنْدَ اللَّهِ أَتْقَاكُمْ',
+      'اے لوگو! ہم نے تمہیں ایک مرد اور عورت سے پیدا کیا اور تمہیں قوموں اور قبائل میں بانٹا تاکہ تم ایک دوسرے کو پہچانو۔ اللہ کے نزدیک تم میں سب سے معزز وہ ہے جو سب سے زیادہ پرہیزگار ہے۔',
+      'O mankind! We created you from a single male and female, and made you into nations and tribes that you may know one another. The most noble of you in Allah\'s sight is the most pious of you.'
+    ) +
+    card_ayat('Al-Imran 3:103', 'A2',
+      'وَاعْتَصِمُوا بِحَبْلِ اللَّهِ جَمِيعًا وَلَا تَفَرَّقُوا',
+      'اور سب مل کر اللہ کی رسی کو مضبوطی سے تھام لو اور آپس میں تفرقہ نہ ڈالو۔',
+      'Hold firmly to the rope of Allah all together and do not become divided.'
+    ),
+    null
+  );
+}
+
+// Init
+showSelector();
+</script>
+</body>
+</html>
