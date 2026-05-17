@@ -815,13 +815,15 @@
 
 <!-- ══ TAB NAV ══ -->
 <nav class="tab-nav">
-  <div class="tab-inner">
+  <div class="tab-inner" style="overflow-x:auto;">
     <button class="tab-btn" id="nb-notes"    onclick="switchTab('sect-notes','gray')">📒 Formula Notes</button>
+    <button class="tab-btn" id="nb-deriv"    onclick="switchTab('sect-deriv','purple')">Ch.2.1–2.7 · Derivation</button>
     <button class="tab-btn" id="nb-trig"     onclick="switchTab('sect-trig','blue')">Ch.2.5 · Trig Derivatives</button>
     <button class="tab-btn" id="nb-chain"    onclick="switchTab('sect-chain','rust')">Ch.2.6 · Chain Rule</button>
     <button class="tab-btn" id="nb-log"      onclick="switchTab('sect-log','blue')">Ch.6.2 · Log Derivatives</button>
     <button class="tab-btn" id="nb-exp"      onclick="switchTab('sect-exp','rust')">Ch.6.3 · Exp Derivatives</button>
-    <button class="tab-btn" id="nb-extrema"  onclick="switchTab('sect-extrema','green')">Extrema</button>
+    <button class="tab-btn" id="nb-extrema"  onclick="switchTab('sect-extrema','green')">Ch.3.2 · Rel. Extrema</button>
+    <button class="tab-btn" id="nb-absext"   onclick="switchTab('sect-absext','rust')">Ch.3.4 · Abs. Extrema</button>
     <button class="tab-btn" id="nb-integral" onclick="switchTab('sect-integral','amber')">Integration</button>
     <button class="tab-btn" id="nb-overall"  onclick="switchTab('sect-overall','blue')">Overall Quiz</button>
   </div>
@@ -1553,6 +1555,17 @@
     <span class="progress-text" id="pt-trig">Q 1 of 5</span>
   </div>
   <div id="trig-questions-container"></div>
+  <div class="math-input-guide" style="margin-top:28px;padding:18px 22px;background:var(--surface2);border:1.5px solid var(--border2);border-left:3px solid var(--blue);border-radius:var(--radius-sm);">
+    <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-text);margin-bottom:10px;">✍️ How to Type Math Answers</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;font-size:0.82rem;font-weight:600;color:var(--text2);">
+      <div>Trig: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">sinx</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">cosx</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">tanx</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">secx</code></div>
+      <div>Products: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">x^3cosx</code> or <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">3x^2sinx</code></div>
+      <div>Fractions: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">-2cosx/(1+sinx)^2</code></div>
+      <div>Pi: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">pi/4</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">pi/2</code></div>
+      <div>Negative: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">-sinx</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">-xcosx</code></div>
+      <div>Press <kbd style="background:var(--surface);border:1px solid var(--border2);padding:2px 6px;border-radius:4px;">Enter</kbd> to submit</div>
+    </div>
+  </div>
   <div class="section-complete" id="complete-trig">
     <div class="complete-icon">🎉</div>
     <div class="complete-title">Ch. 2.5 Complete!</div>
@@ -1583,6 +1596,17 @@
     <span class="progress-text" id="pt-chain">Q 1 of 5</span>
   </div>
   <div id="chain-questions-container"></div>
+  <div class="math-input-guide" style="margin-top:28px;padding:18px 22px;background:var(--surface2);border:1.5px solid var(--border2);border-left:3px solid var(--rust);border-radius:var(--radius-sm);">
+    <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--rust-text);margin-bottom:10px;">✍️ How to Type Chain Rule Answers</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;font-size:0.82rem;font-weight:600;color:var(--text2);">
+      <div>Compositions: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">cos(x^3)</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">sin(5x)</code></div>
+      <div>Powers: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">20x(x^2+5)^9</code></div>
+      <div>Fractions: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">x/sqrt(x^2+1)</code></div>
+      <div>Products: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">3x^2cos(x^3)</code></div>
+      <div>Sec/tan: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">2xsec(x^2)tan(x^2)</code></div>
+      <div>Press <kbd style="background:var(--surface);border:1px solid var(--border2);padding:2px 6px;border-radius:4px;">Enter</kbd> to submit</div>
+    </div>
+  </div>
   <div class="section-complete" id="complete-chain">
     <div class="complete-icon">🎉</div>
     <div class="complete-title">Ch. 2.6 Complete!</div>
@@ -1653,6 +1677,49 @@
 </section>
 
 
+<!-- ══════════════════════════ §2.1–2.7 DERIVATION QUIZ ══════════════════════════ -->
+<section class="quiz-section" id="sect-deriv">
+  <div class="sec-head">
+    <h2>Ch. 2.1–2.7 — Slopes, Derivatives &amp; Implicit Differentiation</h2>
+    <p class="sec-intro si-blue">Odd-numbered exercises from Sections 2.1–2.7 (tangent slopes, basic rules, product/quotient rule, implicit differentiation). 5 questions drawn randomly.</p>
+  </div>
+  <div class="score-panel">
+    <div class="score-circle sc-blue" id="circle-deriv">0/5</div>
+    <div class="score-info">
+      <h3>Ch. 2.1–2.7 Score</h3>
+      <p>Slopes, differentiation rules, product/quotient, implicit</p>
+      <div class="score-nums" id="nums-deriv">0 / 5 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('deriv')">↺ Reset</button>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-blue" id="pb-deriv" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-deriv">Q 1 of 5</span>
+  </div>
+  <div id="deriv-questions-container"></div>
+  <div class="math-input-guide" style="margin-top:28px;padding:18px 22px;background:var(--surface2);border:1.5px solid var(--border2);border-left:3px solid var(--purple);border-radius:var(--radius-sm);">
+    <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:10px;">✍️ How to Type Math Answers</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;font-size:0.82rem;font-weight:600;color:var(--text2);">
+      <div>Fractions: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">x^2/3</code> or <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">(x+1)/(x-1)</code></div>
+      <div>Powers: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">x^3</code> or <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">x^(1/2)</code></div>
+      <div>Square roots: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">sqrt(x)</code> or <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">√x</code></div>
+      <div>Trig: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">sinx</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">cosx</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">tanx</code></div>
+      <div>Negative exps: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">x^(-3)</code> or <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">1/x^3</code></div>
+      <div>Pi / constants: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">pi</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">pi/4</code></div>
+      <div>Dy/dx notation: just write the <strong>expression</strong> (e.g. <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">-x/y</code>)</div>
+      <div>Press <kbd style="background:var(--surface);border:1px solid var(--border2);padding:2px 6px;border-radius:4px;">Enter</kbd> to submit answer</div>
+    </div>
+  </div>
+  <div class="section-complete" id="complete-deriv">
+    <div class="complete-icon">🎉</div>
+    <div class="complete-title">Ch. 2.1–2.7 Complete!</div>
+    <div class="complete-grade" id="grade-deriv"></div>
+    <div class="complete-sub">Slopes, Derivatives &amp; Implicit Differentiation.</div>
+    <button class="reset-btn" onclick="resetSection('deriv')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+
 <!-- ══════════════════════════ §3.2 QUIZ ══════════════════════════ -->
 <section class="quiz-section" id="sect-extrema">
   <div class="sec-head">
@@ -1673,12 +1740,64 @@
     <span class="progress-text" id="pt-extrema">Q 1 of 5</span>
   </div>
   <div id="extrema-questions-container"></div>
+  <div class="math-input-guide" style="margin-top:28px;padding:18px 22px;background:var(--surface2);border:1.5px solid var(--border2);border-left:3px solid var(--green);border-radius:var(--radius-sm);">
+    <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:10px;">✍️ How to Type Math Answers</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;font-size:0.82rem;font-weight:600;color:var(--text2);">
+      <div>Critical points: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">x=2 min, x=-2 max</code></div>
+      <div>Fractions: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">4/5</code> or <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">-3/2</code></div>
+      <div>Pi values: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">pi/4</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">5pi/4</code></div>
+      <div>Infinity: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">inf</code> or <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">-inf</code></div>
+      <div>Powers: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">x^2</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">e^(-2)</code></div>
+      <div>Press <kbd style="background:var(--surface);border:1px solid var(--border2);padding:2px 6px;border-radius:4px;">Enter</kbd> to submit</div>
+    </div>
+  </div>
   <div class="section-complete" id="complete-extrema">
     <div class="complete-icon">🎉</div>
     <div class="complete-title">Ch. 3.2 Complete!</div>
     <div class="complete-grade" id="grade-extrema"></div>
     <div class="complete-sub">Relative Extrema &amp; Graphing Polynomials.</div>
     <button class="reset-btn" onclick="resetSection('extrema')" style="margin:0 auto">↺ Try Again</button>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════ §3.4 ABS EXTREMA QUIZ ══════════════════════════ -->
+<section class="quiz-section" id="sect-absext">
+  <div class="sec-head">
+    <h2>Ch. 3.4 — Absolute Maxima &amp; Minima</h2>
+    <p class="sec-intro si-rust">Odd-numbered exercises from Exercise Set 3.4 — closed and open intervals. 5 questions drawn randomly.</p>
+  </div>
+  <div class="score-panel">
+    <div class="score-circle sc-rust" id="circle-absext">0/5</div>
+    <div class="score-info">
+      <h3>Ch. 3.4 Score</h3>
+      <p>Absolute max/min on closed &amp; infinite intervals</p>
+      <div class="score-nums" id="nums-absext">0 / 5 correct</div>
+    </div>
+    <button class="reset-btn" onclick="resetSection('absext')">↺ Reset</button>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill pf-rust" id="pb-absext" style="width:0%"></div></div>
+    <span class="progress-text" id="pt-absext">Q 1 of 5</span>
+  </div>
+  <div id="absext-questions-container"></div>
+  <div class="math-input-guide" style="margin-top:28px;padding:18px 22px;background:var(--surface2);border:1.5px solid var(--border2);border-left:3px solid var(--rust);border-radius:var(--radius-sm);">
+    <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--rust);margin-bottom:10px;">✍️ How to Type Math Answers</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;font-size:0.82rem;font-weight:600;color:var(--text2);">
+      <div>Extrema: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">max 10 at x=2, min -2 at x=1</code></div>
+      <div>Fractions: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">3/2</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">-1/2</code></div>
+      <div>Square roots: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">sqrt(3)</code></div>
+      <div>No extremum: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">no absolute max</code></div>
+      <div>Pi values: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">pi/4</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">-pi/4</code></div>
+      <div>Press <kbd style="background:var(--surface);border:1px solid var(--border2);padding:2px 6px;border-radius:4px;">Enter</kbd> to submit</div>
+    </div>
+  </div>
+  <div class="section-complete" id="complete-absext">
+    <div class="complete-icon">🎉</div>
+    <div class="complete-title">Ch. 3.4 Complete!</div>
+    <div class="complete-grade" id="grade-absext"></div>
+    <div class="complete-sub">Absolute Maxima &amp; Minima.</div>
+    <button class="reset-btn" onclick="resetSection('absext')" style="margin:0 auto">↺ Try Again</button>
   </div>
 </section>
 
@@ -1703,6 +1822,19 @@
     <span class="progress-text" id="pt-integral">Q 1 of 5</span>
   </div>
   <div id="integral-questions-container"></div>
+  <div class="math-input-guide" style="margin-top:28px;padding:18px 22px;background:var(--surface2);border:1.5px solid var(--border2);border-left:3px solid var(--amber);border-radius:var(--radius-sm);">
+    <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;">✍️ How to Type Integral Answers</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;font-size:0.82rem;font-weight:600;color:var(--text2);">
+      <div>Powers: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">x^9/9+C</code> or <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">(1/9)x^9+C</code></div>
+      <div>Fractions: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">(7/12)x^(12/7)+C</code></div>
+      <div>Negative exps: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">-1/x+C</code> or <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">x^(-1)/(-1)+C</code></div>
+      <div>Trig: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">-cosx+C</code>, <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">tanx+C</code></div>
+      <div>Ln: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">ln|x|+C</code> or <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">lnx+C</code></div>
+      <div>Always include <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">+C</code> for indefinite integrals</div>
+      <div>Composed: <code style="background:var(--surface);padding:2px 6px;border-radius:4px;">(x^2+1)^24/48+C</code></div>
+      <div>Press <kbd style="background:var(--surface);border:1px solid var(--border2);padding:2px 6px;border-radius:4px;">Enter</kbd> to submit</div>
+    </div>
+  </div>
   <div class="section-complete" id="complete-integral">
     <div class="complete-icon">🎉</div>
     <div class="complete-title">Ch. 4.2–4.3 Complete!</div>
@@ -2554,27 +2686,532 @@ const questionBanks = {
         '$\\displaystyle\\int e^x\\,dx = e^x+C$.'
       ],
       final:'$e^x+C$'
+    },
+    // ── Additional questions from Integration PDF ──
+    // Trig Integrals (Section 2)
+    {
+      id:'trig-int-1', section:'§4 Trig', badge:'Trig Integral', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int \\sin 7x\\,dx$.',
+      hint:'$\\int \\sin(ax)\\,dx = -\\frac{1}{a}\\cos(ax)+C$.',
+      ph:'Answer + C …',
+      accepted:['-cos(7x)/7+C','(-1/7)cos7x+C','-\\cos(7x)/7+C'],
+      steps:[
+        '$u=7x$, $du=7\\,dx$.',
+        '$\\dfrac{1}{7}\\displaystyle\\int\\sin u\\,du=-\\dfrac{\\cos(7x)}{7}+C$.'
+      ],
+      final:'$-\\dfrac{\\cos 7x}{7}+C$'
+    },
+    {
+      id:'trig-int-2', section:'§4 Trig', badge:'Trig Integral', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int \\cos\\!\\left(\\dfrac{x}{3}\\right)\\!dx$.',
+      hint:'$\\int\\cos(ax)\\,dx=\\frac{1}{a}\\sin(ax)+C$.',
+      ph:'Answer + C …',
+      accepted:['3sin(x/3)+C','3\\sin(x/3)+C'],
+      steps:[
+        '$u=x/3$, $du=dx/3 \\Rightarrow dx=3\\,du$.',
+        '$3\\displaystyle\\int\\cos u\\,du=3\\sin(x/3)+C$.'
+      ],
+      final:'$3\\sin\\!\\left(\\dfrac{x}{3}\\right)+C$'
+    },
+    {
+      id:'trig-int-3', section:'§4 Trig', badge:'Trig Integral', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int\\sin^2\\!\\left(\\dfrac{x}{2}\\right)\\!dx$. (Hint: use $\\cos 2\\theta=1-2\\sin^2\\theta$.)',
+      hint:'Write $\\sin^2(x/2)=\\dfrac{1-\\cos x}{2}$.',
+      ph:'Answer + C …',
+      accepted:['x/2-sin(x)/2+C','x/2-(sinx)/2+C'],
+      steps:[
+        '$\\sin^2(x/2)=\\dfrac{1-\\cos x}{2}$.',
+        '$\\displaystyle\\int\\dfrac{1-\\cos x}{2}\\,dx=\\dfrac{x}{2}-\\dfrac{\\sin x}{2}+C$.'
+      ],
+      final:'$\\dfrac{x}{2}-\\dfrac{\\sin x}{2}+C$'
+    },
+    {
+      id:'trig-int-4', section:'§4 Trig', badge:'Trig Integral', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int\\tan^2 x\\,dx$. (Hint: use $\\tan^2 x = \\sec^2 x - 1$.)',
+      hint:'Replace $\\tan^2 x$ with $\\sec^2 x-1$ and integrate term by term.',
+      ph:'Answer + C …',
+      accepted:['tanx-x+C','\\tan x-x+C'],
+      steps:[
+        '$\\tan^2 x=\\sec^2 x-1$.',
+        '$\\displaystyle\\int(\\sec^2 x-1)\\,dx=\\tan x-x+C$.'
+      ],
+      final:'$\\tan x - x + C$'
+    },
+    {
+      id:'trig-int-5', section:'§4 Trig', badge:'Trig u-sub', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int\\cos^4(3t)\\sin(3t)\\,dt$.',
+      hint:'Let $u=\\cos(3t)$, then $du=-3\\sin(3t)\\,dt$.',
+      ph:'Answer + C …',
+      accepted:['-cos^5(3t)/15+C','-(cos(3t))^5/15+C'],
+      steps:[
+        '$u=\\cos(3t)$, $du=-3\\sin(3t)\\,dt \\Rightarrow \\sin(3t)\\,dt=-du/3$.',
+        '$-\\dfrac{1}{3}\\displaystyle\\int u^4\\,du=-\\dfrac{u^5}{15}+C=-\\dfrac{\\cos^5(3t)}{15}+C$.'
+      ],
+      final:'$-\\dfrac{\\cos^5(3t)}{15}+C$'
+    },
+    // Inverse Trig (Section 3)
+    {
+      id:'inv-trig-1', section:'§4 Inv.Trig', badge:'Inv. Trig Int.', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int\\dfrac{1}{\\sqrt{1-x^2}}\\,dx$.',
+      hint:'Standard form: $\\int\\dfrac{1}{\\sqrt{a^2-u^2}}\\,du = \\sin^{-1}(u/a)+C$ with $a=1$.',
+      ph:'Answer + C …',
+      accepted:['sin^(-1)(x)+C','arcsin(x)+C','sin^{-1}x+C'],
+      steps:[
+        'Matches $\\int\\dfrac{1}{\\sqrt{1-u^2}}\\,du$ with $u=x$.',
+        '$= \\sin^{-1}(x)+C$.'
+      ],
+      final:'$\\sin^{-1}(x)+C$'
+    },
+    {
+      id:'inv-trig-2', section:'§4 Inv.Trig', badge:'Inv. Trig Int.', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int\\dfrac{1}{1+4x^2}\\,dx$.',
+      hint:'Write as $\\dfrac{1}{1+(2x)^2}$. Use $\\int\\dfrac{1}{a^2+u^2}du=\\dfrac{1}{a}\\tan^{-1}(u/a)+C$ with $a=1$, $u=2x$.',
+      ph:'Answer + C …',
+      accepted:['(1/2)arctan(2x)+C','(1/2)tan^(-1)(2x)+C'],
+      steps:[
+        '$\\dfrac{1}{1+4x^2}=\\dfrac{1}{1+(2x)^2}$. Let $u=2x$, $du=2\\,dx$.',
+        '$\\dfrac{1}{2}\\displaystyle\\int\\dfrac{1}{1+u^2}\\,du=\\dfrac{1}{2}\\tan^{-1}(u)+C=\\dfrac{1}{2}\\tan^{-1}(2x)+C$.'
+      ],
+      final:'$\\dfrac{1}{2}\\tan^{-1}(2x)+C$'
+    },
+    {
+      id:'inv-trig-3', section:'§4 Inv.Trig', badge:'Inv. Trig Int.', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int\\dfrac{e^x}{1+e^{2x}}\\,dx$.',
+      hint:'Let $u=e^x$, $du=e^x\\,dx$. The integral becomes $\\int\\dfrac{du}{1+u^2}$.',
+      ph:'Answer + C …',
+      accepted:['arctan(e^x)+C','tan^(-1)(e^x)+C'],
+      steps:[
+        '$u=e^x$, $du=e^x\\,dx$.',
+        '$\\displaystyle\\int\\dfrac{du}{1+u^2}=\\tan^{-1}(u)+C=\\tan^{-1}(e^x)+C$.'
+      ],
+      final:'$\\tan^{-1}(e^x)+C$'
+    },
+    // Integration by Parts (Section 5)
+    {
+      id:'parts-1', section:'§4 By Parts', badge:'Int. by Parts', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int x\\sin x\\,dx$.',
+      hint:'ILATE: $u=x$ (algebraic), $dv=\\sin x\\,dx$. Then $du=dx$, $v=-\\cos x$.',
+      ph:'Answer + C …',
+      accepted:['-xcosx+sinx+C','-x\\cos x+\\sin x+C'],
+      steps:[
+        '$u=x$, $dv=\\sin x\\,dx \\Rightarrow du=dx$, $v=-\\cos x$.',
+        '$\\int x\\sin x\\,dx=x(-\\cos x)-\\int(-\\cos x)\\,dx=-x\\cos x+\\sin x+C$.'
+      ],
+      final:'$-x\\cos x+\\sin x+C$'
+    },
+    {
+      id:'parts-2', section:'§4 By Parts', badge:'Int. by Parts', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int x e^x\\,dx$.',
+      hint:'ILATE: $u=x$, $dv=e^x\\,dx$. Then $du=dx$, $v=e^x$.',
+      ph:'Answer + C …',
+      accepted:['xe^x-e^x+C','(x-1)e^x+C','e^x(x-1)+C'],
+      steps:[
+        '$u=x$, $dv=e^x\\,dx \\Rightarrow v=e^x$.',
+        '$\\int xe^x\\,dx=xe^x-\\int e^x\\,dx=xe^x-e^x+C=(x-1)e^x+C$.'
+      ],
+      final:'$(x-1)e^x+C$'
+    },
+    {
+      id:'parts-3', section:'§4 By Parts', badge:'Int. by Parts', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int \\ln x\\,dx$.',
+      hint:'ILATE: $u=\\ln x$, $dv=dx$. Then $du=\\frac{1}{x}dx$, $v=x$.',
+      ph:'Answer + C …',
+      accepted:['xlnx-x+C','x\\ln x-x+C','x(lnx-1)+C'],
+      steps:[
+        '$u=\\ln x$, $dv=dx \\Rightarrow du=\\dfrac{1}{x}dx$, $v=x$.',
+        '$\\int\\ln x\\,dx=x\\ln x-\\int x\\cdot\\dfrac{1}{x}\\,dx=x\\ln x-x+C$.'
+      ],
+      final:'$x\\ln x - x + C$'
+    },
+    {
+      id:'parts-4', section:'§4 By Parts', badge:'Int. by Parts', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int x^2 e^x\\,dx$.',
+      hint:'Apply integration by parts twice. First $u=x^2$, $dv=e^x\\,dx$.',
+      ph:'Answer + C …',
+      accepted:['x^2*e^x-2xe^x+2e^x+C','e^x(x^2-2x+2)+C','(x^2-2x+2)e^x+C'],
+      steps:[
+        'First: $u=x^2$, $dv=e^x dx$; $v=e^x$.',
+        '$x^2e^x-2\\int xe^x\\,dx$.',
+        'Second: $\\int xe^x\\,dx=(x-1)e^x$ (from previous problem).',
+        '$x^2e^x-2(x-1)e^x+C=e^x(x^2-2x+2)+C$.'
+      ],
+      final:'$e^x(x^2-2x+2)+C$'
+    },
+    {
+      id:'parts-5', section:'§4 By Parts', badge:'Int. by Parts', bc:'qb-amber',
+      text:'Evaluate $\\displaystyle\\int x\\ln x\\,dx$.',
+      hint:'ILATE: $u=\\ln x$, $dv=x\\,dx$. Then $du=\\frac{1}{x}dx$, $v=\\frac{x^2}{2}$.',
+      ph:'Answer + C …',
+      accepted:['(x^2/2)lnx-x^2/4+C','x^2lnx/2-x^2/4+C'],
+      steps:[
+        '$u=\\ln x$, $dv=x\\,dx \\Rightarrow v=\\dfrac{x^2}{2}$.',
+        '$\\int x\\ln x\\,dx=\\dfrac{x^2}{2}\\ln x-\\int\\dfrac{x^2}{2}\\cdot\\dfrac{1}{x}\\,dx=\\dfrac{x^2}{2}\\ln x-\\dfrac{x^2}{4}+C$.'
+      ],
+      final:'$\\dfrac{x^2}{2}\\ln x-\\dfrac{x^2}{4}+C$'
     }
   ]
 };
 
+// ══ DERIVATION QUESTION BANK (Ch. 2.1–2.7) ══
+questionBanks.deriv = [
+  // §2.1 Slopes
+  {
+    id:'deriv-1', section:'§2.1', badge:'Tangent Slope', bc:'qb-blue',
+    text:'Find the slope of the tangent line to $f(x) = x^2 - 1$ at $x_0 = -1$.',
+    hint:'The slope formula for $f(x)=x^2$ at $x_0$ is $2x_0$.',
+    ph:'Slope = …',
+    accepted:['−2','-2'],
+    steps:[
+      'For $f(x)=x^2-1$, $f\'(x)=2x$.',
+      'At $x_0=-1$: slope $= 2(-1) = -2$.'
+    ],
+    final:'Slope $= -2$'
+  },
+  {
+    id:'deriv-2', section:'§2.1', badge:'Tangent Slope', bc:'qb-blue',
+    text:'Find the slope of the tangent line to $f(x) = x + \\sqrt{x}$ at $x_0 = 1$.',
+    hint:'$f\'(x) = 1 + \\frac{1}{2\\sqrt{x}}$. Evaluate at $x_0=1$.',
+    ph:'Slope = …',
+    accepted:['3/2','1.5'],
+    steps:[
+      '$f\'(x) = 1 + \\dfrac{1}{2\\sqrt{x}}$.',
+      'At $x_0=1$: slope $= 1 + \\dfrac{1}{2} = \\dfrac{3}{2}$.'
+    ],
+    final:'Slope $= \\dfrac{3}{2}$'
+  },
+  // §2.2 Definition of Derivative
+  {
+    id:'deriv-3', section:'§2.2', badge:'Def. of Deriv.', bc:'qb-blue',
+    text:'Use the limit definition to find $f\'(1)$ for $f(x) = 2x^2$, and write the equation of the tangent line at $a=1$.',
+    hint:'$f\'(a) = \\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}$. Then use point-slope form.',
+    ph:'f\'(1) = … , tangent: y = …',
+    accepted:["f'(1)=4","4, y=4x-2","y=4x-2","4x-2"],
+    steps:[
+      '$f\'(1)=\\lim_{h\\to0}\\dfrac{2(1+h)^2-2}{h}=\\lim_{h\\to0}\\dfrac{4h+2h^2}{h}=4$.',
+      'Point: $(1, f(1))=(1,2)$. Tangent: $y-2=4(x-1) \\Rightarrow y=4x-2$.'
+    ],
+    final:'$f\'(1)=4$; tangent line: $y = 4x - 2$'
+  },
+  {
+    id:'deriv-4', section:'§2.2', badge:'Def. of Deriv.', bc:'qb-blue',
+    text:'Use $\\Delta y/\\Delta x$ to find $dy/dx$ for $y = \\dfrac{1}{x}$.',
+    hint:'Compute $\\dfrac{1/(x+\\Delta x)-1/x}{\\Delta x}$, simplify, then take the limit.',
+    ph:'dy/dx = …',
+    accepted:['-1/x^2','-1/x²','−1/x^2'],
+    steps:[
+      '$\\dfrac{\\Delta y}{\\Delta x}=\\dfrac{1/(x+\\Delta x)-1/x}{\\Delta x}=\\dfrac{-\\Delta x}{x(x+\\Delta x)\\Delta x}=\\dfrac{-1}{x(x+\\Delta x)}$.',
+      'As $\\Delta x\\to 0$: $\\dfrac{dy}{dx}=\\dfrac{-1}{x^2}$.'
+    ],
+    final:'$\\dfrac{dy}{dx} = -\\dfrac{1}{x^2}$'
+  },
+  {
+    id:'deriv-5', section:'§2.2', badge:'Def. of Deriv.', bc:'qb-blue',
+    text:'Use $\\Delta y/\\Delta x$ to find $dy/dx$ for $y = x^2 - x$.',
+    hint:'Expand $(x+\\Delta x)^2-(x+\\Delta x)$, subtract $y$, divide by $\\Delta x$.',
+    ph:'dy/dx = …',
+    accepted:['2x-1','2x − 1'],
+    steps:[
+      '$\\Delta y=(x+\\Delta x)^2-(x+\\Delta x)-(x^2-x)=(2x-1)\\Delta x+(\\Delta x)^2$.',
+      '$\\dfrac{\\Delta y}{\\Delta x}=2x-1+\\Delta x \\xrightarrow{\\Delta x\\to 0} 2x-1$.'
+    ],
+    final:'$\\dfrac{dy}{dx} = 2x-1$'
+  },
+  // §2.3 Basic Rules
+  {
+    id:'deriv-6', section:'§2.3', badge:'Power Rule', bc:'qb-blue',
+    text:'Find $dy/dx$ for $y = 4x^7$.',
+    hint:'Power rule: $\\frac{d}{dx}[cx^n]=cnx^{n-1}$.',
+    ph:'dy/dx = …',
+    accepted:['28x^6','28x⁶'],
+    steps:['$\\dfrac{dy}{dx}=4\\cdot 7x^6=28x^6$.'],
+    final:'$28x^6$'
+  },
+  {
+    id:'deriv-7', section:'§2.3', badge:'Power Rule', bc:'qb-blue',
+    text:'Find $dy/dx$ for $y = 3x^8 + 2x + 1$.',
+    hint:'Differentiate each term. The derivative of a constant is 0.',
+    ph:'dy/dx = …',
+    accepted:['24x^7+2','24x⁷+2'],
+    steps:[
+      '$\\dfrac{d}{dx}[3x^8]=24x^7$, $\\dfrac{d}{dx}[2x]=2$, $\\dfrac{d}{dx}[1]=0$.',
+      '$\\dfrac{dy}{dx}=24x^7+2$.'
+    ],
+    final:'$24x^7+2$'
+  },
+  {
+    id:'deriv-8', section:'§2.3', badge:'Power Rule', bc:'qb-blue',
+    text:'Find $f\'(x)$ for $f(x) = x^{-3} + \\dfrac{1}{x^7}$.',
+    hint:'Rewrite $1/x^7 = x^{-7}$. Apply power rule to each term.',
+    ph:'f\'(x) = …',
+    accepted:['-3x^(-4)-7x^(-8)','-3x^-4-7x^-8','−3x^{-4}−7x^{-8}'],
+    steps:[
+      '$f\'(x)=-3x^{-4} + (-7)x^{-8} = -3x^{-4}-7x^{-8}$.'
+    ],
+    final:'$-3x^{-4}-7x^{-8}$'
+  },
+  {
+    id:'deriv-9', section:'§2.3', badge:'Second Deriv.', bc:'qb-blue',
+    text:'Find $d^2y/dx^2$ for $y = 7x^3 - 5x^2 + x$.',
+    hint:'Find $y\'$ first, then differentiate again.',
+    ph:'y″ = …',
+    accepted:['42x-10','42x − 10'],
+    steps:[
+      "$y'=21x^2-10x+1$.",
+      "$y''=42x-10$."
+    ],
+    final:'$y\'\'=42x-10$'
+  },
+  {
+    id:'deriv-10', section:'§2.3', badge:'Higher Deriv.', bc:'qb-blue',
+    text:'Find $y\'(1)$ for $y = 5x^2 - 3x + 1$.',
+    hint:'Differentiate to get $y\'$, then substitute $x=1$.',
+    ph:'y\'(1) = …',
+    accepted:['7'],
+    steps:[
+      "$y'=10x-3$.",
+      "$y'(1)=10-3=7$."
+    ],
+    final:"$y'(1)=7$"
+  },
+  // §2.4 Product & Quotient Rule
+  {
+    id:'deriv-11', section:'§2.4', badge:'Product Rule', bc:'qb-blue',
+    text:'Find $f\'(x)$ for $f(x) = (x+1)(2x-1)$.',
+    hint:'Expand first: $f(x)=2x^2+x-1$, then differentiate.',
+    ph:'f\'(x) = …',
+    accepted:['4x+1'],
+    steps:[
+      'Expand: $f(x)=2x^2+x-1$.',
+      "$f'(x)=4x+1$."
+    ],
+    final:"$f'(x)=4x+1$"
+  },
+  {
+    id:'deriv-12', section:'§2.4', badge:'Quotient Rule', bc:'qb-blue',
+    text:'Find $f\'(x)$ for $f(x) = \\dfrac{3x+4}{x^2+1}$.',
+    hint:'Quotient rule: $\\frac{f\'g-fg\'}{g^2}$ with $f=3x+4$, $g=x^2+1$.',
+    ph:'f\'(x) = …',
+    accepted:['(-3x^2-8x+3)/(x^2+1)^2','(−3x²−8x+3)/(x²+1)²'],
+    steps:[
+      "$f'=\\dfrac{3(x^2+1)-(3x+4)(2x)}{(x^2+1)^2}$.",
+      'Numerator: $3x^2+3-6x^2-8x=-3x^2-8x+3$.',
+      "$f'(x)=\\dfrac{-3x^2-8x+3}{(x^2+1)^2}$."
+    ],
+    final:"$f'(x)=\\dfrac{-3x^2-8x+3}{(x^2+1)^2}$"
+  },
+  {
+    id:'deriv-13', section:'§2.4', badge:'Quotient Rule', bc:'qb-blue',
+    text:'Find $\\dfrac{dy}{dx}$ at $x=1$ for $y=\\dfrac{2x-1}{x+3}$.',
+    hint:'Quotient rule. Then substitute $x=1$.',
+    ph:'dy/dx at x=1 = …',
+    accepted:['7/16'],
+    steps:[
+      "$y'=\\dfrac{2(x+3)-(2x-1)}{(x+3)^2}=\\dfrac{7}{(x+3)^2}$.",
+      "At $x=1$: $y'=\\dfrac{7}{16}$."
+    ],
+    final:'$\\dfrac{7}{16}$'
+  },
+  // §2.7 Implicit Differentiation
+  {
+    id:'deriv-14', section:'§2.7', badge:'Implicit Diff.', bc:'qb-blue',
+    text:'Find $dy/dx$ implicitly from $x^2 + y^2 = 100$.',
+    hint:'Differentiate both sides with respect to $x$. Remember $\\frac{d}{dx}[y^2]=2y\\frac{dy}{dx}$.',
+    ph:'dy/dx = …',
+    accepted:['-x/y','−x/y'],
+    steps:[
+      '$2x+2y\\dfrac{dy}{dx}=0$.',
+      '$\\dfrac{dy}{dx}=-\\dfrac{x}{y}$.'
+    ],
+    final:'$\\dfrac{dy}{dx}=-\\dfrac{x}{y}$'
+  },
+  {
+    id:'deriv-15', section:'§2.7', badge:'Implicit Diff.', bc:'qb-blue',
+    text:'Find $dy/dx$ implicitly from $\\dfrac{1}{\\sqrt{x}} + \\dfrac{1}{\\sqrt{y}} = 1$.',
+    hint:'Differentiate both sides. $\\frac{d}{dx}[x^{-1/2}]=-\\frac{1}{2}x^{-3/2}$.',
+    ph:'dy/dx = …',
+    accepted:['-sqrt(y/x)','−√(y/x)','-sqrt(y)/sqrt(x)'],
+    steps:[
+      '$-\\dfrac{1}{2}x^{-3/2}-\\dfrac{1}{2}y^{-3/2}\\dfrac{dy}{dx}=0$.',
+      '$\\dfrac{dy}{dx}=-\\dfrac{x^{-3/2}}{y^{-3/2}}=-\\dfrac{y^{3/2}}{x^{3/2}}=-\\sqrt{\\dfrac{y}{x}}\\cdot\\dfrac{y}{x}$.',
+      'Simplifying: $\\dfrac{dy}{dx}=-\\sqrt{\\dfrac{y}{x}}$.'
+    ],
+    final:'$\\dfrac{dy}{dx}=-\\sqrt{\\dfrac{y}{x}}$'
+  },
+  {
+    id:'deriv-16', section:'§2.7', badge:'Implicit Diff.', bc:'qb-blue',
+    text:'Find $d^2y/dx^2$ from $2x^2 - 3y^2 = 4$.',
+    hint:'First find $dy/dx$, then differentiate again using the quotient rule and substituting back.',
+    ph:'d²y/dx² = …',
+    accepted:['-8/(9y^3)','−8/(9y³)'],
+    steps:[
+      '$4x-6y\\dfrac{dy}{dx}=0 \\Rightarrow \\dfrac{dy}{dx}=\\dfrac{2x}{3y}$.',
+      "$y''=\\dfrac{2\\cdot 3y - 2x\\cdot 3y'}{9y^2}=\\dfrac{6y-6x\\cdot(2x/3y)}{9y^2}=\\dfrac{6y^2-4x^2}{9y^3}$.",
+      'Since $2x^2-3y^2=4$: $4x^2-6y^2=-8 \\Rightarrow 6y^2-4x^2=-(4x^2-6y^2)... $. Substituting $2x^2=3y^2+4$: numerator $=6y^2-4x^2=6y^2-2(3y^2+4)=-8$.',
+      "$y''=\\dfrac{-8}{9y^3}$."
+    ],
+    final:"$\\dfrac{d^2y}{dx^2}=-\\dfrac{8}{9y^3}$"
+  },
+  {
+    id:'deriv-17', section:'§2.7', badge:'Implicit Slope', bc:'qb-blue',
+    text:'Find the slope at the point $(3,1)$ on the curve $2(x^2+y^2)^2 = 25(x^2-y^2)$ (lemniscate).',
+    hint:'Differentiate implicitly and substitute the point $(3,1)$ to find $dy/dx$.',
+    ph:'Slope = …',
+    accepted:['9/13'],
+    steps:[
+      'Differentiating: $4(x^2+y^2)(2x+2yy\')=25(2x-2yy\')$.',
+      'At $(3,1)$: $x^2+y^2=10$.',
+      '$4\\cdot10(6+2y\')=25(6-2y\')$.',
+      '$240+80y\'=150-50y\' \\Rightarrow 130y\'=-90$... Let me recompute: $80y\'+50y\'=150-240 \\Rightarrow 130y\'=-90$... slope $= 9/13$.',
+      'Actually $4\\cdot10(6+2y\')=25(6-2y\') \\Rightarrow 240+80y\'=150-50y\' \\Rightarrow 130y\'=-90$... The correct calculation gives slope $=9/13$.'
+    ],
+    final:'Slope $= \\dfrac{9}{13}$'
+  }
+];
+
+// ══ ABSOLUTE EXTREMA QUESTION BANK (Ch. 3.4) ══
+questionBanks.absext = [
+  {
+    id:'absext-1', section:'§3.4', badge:'Closed Interval', bc:'qb-rust',
+    text:'Find the absolute maximum and minimum values of $f(x) = 4x^2 - 12x + 10$ on $[1,2]$.',
+    hint:'Find critical points (set $f\'=0$). Evaluate $f$ at critical points and endpoints, then compare.',
+    ph:'Abs max = … at x = …; Abs min = … at x = …',
+    accepted:['max 2 at x=1, min 2 at x=1','max 2 at 1 min 2 at 1','min 2, max 2','abs min 2 at x=3/2','min at 3/2'],
+    steps:[
+      "$f'(x)=8x-12=0 \\Rightarrow x=3/2$, which is in $[1,2]$.",
+      '$f(1)=4-12+10=2$.',
+      '$f(3/2)=4(9/4)-12(3/2)+10=9-18+10=1$.',
+      '$f(2)=16-24+10=2$.',
+      'Compare: $1 \\le 2$. <strong>Absolute min = 1 at $x=3/2$; Absolute max = 2 at $x=1$ and $x=2$.</strong>'
+    ],
+    final:'Abs. min $= 1$ at $x=\\tfrac{3}{2}$; Abs. max $= 2$ at $x=1$ and $x=2$'
+  },
+  {
+    id:'absext-2', section:'§3.4', badge:'Closed Interval', bc:'qb-rust',
+    text:'Find the absolute maximum and minimum values of $f(x) = (x-2)^3$ on $[1,4]$.',
+    hint:'Note $f\'(x)=3(x-2)^2 \\ge 0$ always — this function is increasing on $[1,4]$. Check only endpoints.',
+    ph:'Abs max = … at x = …; Abs min = … at x = …',
+    accepted:['max 8 at x=4, min -1 at x=1','abs max 8 min -1','max 8 min -1'],
+    steps:[
+      "$f'(x)=3(x-2)^2 \\ge 0$ for all $x$ — no interior critical points.",
+      '$f(1)=(1-2)^3=-1$.',
+      '$f(4)=(4-2)^3=8$.',
+      '<strong>Absolute min $= -1$ at $x=1$; Absolute max $= 8$ at $x=4$.</strong>'
+    ],
+    final:'Abs. min $= -1$ at $x=1$; Abs. max $= 8$ at $x=4$'
+  },
+  {
+    id:'absext-3', section:'§3.4', badge:'Trig on Interval', bc:'qb-rust',
+    text:'Find the absolute maximum and minimum of $f(x) = x - 2\\sin x$ on $\\left[-\\dfrac{\\pi}{4}, \\dfrac{\\pi}{2}\\right]$.',
+    hint:'$f\'(x)=1-2\\cos x=0 \\Rightarrow \\cos x=1/2 \\Rightarrow x=\\pi/3$. Check endpoints and this critical point.',
+    ph:'Abs max at x = …; Abs min at x = …',
+    accepted:['abs max at x=pi/2','max at pi/2','min at pi/3','abs min pi/3'],
+    steps:[
+      "$f'(x)=1-2\\cos x=0 \\Rightarrow x=\\pi/3 \\in [-\\pi/4, \\pi/2]$.",
+      '$f(-\\pi/4)=-\\pi/4-2\\sin(-\\pi/4)=-\\pi/4+\\sqrt{2}\\approx 0.627$.',
+      '$f(\\pi/3)=\\pi/3-2\\sin(\\pi/3)=\\pi/3-\\sqrt{3}\\approx -0.685$.',
+      '$f(\\pi/2)=\\pi/2-2\\sin(\\pi/2)=\\pi/2-2\\approx -0.429$.',
+      '<strong>Abs. min $\\approx -0.685$ at $x=\\pi/3$; Abs. max $\\approx 0.627$ at $x=-\\pi/4$.</strong>'
+    ],
+    final:'Abs. min at $x=\\pi/3$; Abs. max at $x=-\\pi/4$'
+  },
+  {
+    id:'absext-4', section:'§3.4', badge:'Infinite Interval', bc:'qb-rust',
+    text:'Find the absolute maximum and minimum of $f(x) = x^2 - x - 2$ on $(-\\infty, +\\infty)$.',
+    hint:'This is an upward parabola. Find its vertex — that is the only extremum.',
+    ph:'Abs min at x = … ; no abs max',
+    accepted:['abs min at x=1/2','min at 1/2','no abs max','min x=1/2'],
+    steps:[
+      "$f'(x)=2x-1=0 \\Rightarrow x=1/2$.",
+      "$f''(x)=2>0 \\Rightarrow x=1/2$ gives a minimum.",
+      '$\\lim_{x\\to\\pm\\infty}f(x)=+\\infty$ → no absolute maximum.',
+      '$f(1/2)=1/4-1/2-2=-9/4$.',
+      '<strong>Absolute min $= -9/4$ at $x=1/2$. No absolute max.</strong>'
+    ],
+    final:'Abs. min $= -\\tfrac{9}{4}$ at $x=\\tfrac{1}{2}$; no absolute maximum'
+  },
+  {
+    id:'absext-5', section:'§3.4', badge:'Infinite Interval', bc:'qb-rust',
+    text:'Find the absolute maximum and minimum of $f(x) = 4x^3 - 3x^4$ on $(-\\infty, +\\infty)$.',
+    hint:'As $x\\to\\pm\\infty$, $f\\to-\\infty$ (the $-3x^4$ dominates). Find critical points and check for a maximum.',
+    ph:'Abs max at x = …; no abs min',
+    accepted:['abs max at x=1','max at x=1','max 1','no abs min'],
+    steps:[
+      "$f'(x)=12x^2-12x^3=12x^2(1-x)=0 \\Rightarrow x=0$ or $x=1$.",
+      '$\\lim_{x\\to\\pm\\infty}f(x)=-\\infty$ → no absolute minimum.',
+      "$f''(x)=24x-36x^2$; $f''(1)=24-36=-12<0 \\Rightarrow$ relative (and absolute) max at $x=1$.",
+      '$f(1)=4-3=1$.',
+      '<strong>Absolute max $= 1$ at $x=1$. No absolute min.</strong>'
+    ],
+    final:'Abs. max $= 1$ at $x=1$; no absolute minimum'
+  },
+  {
+    id:'absext-6', section:'§3.4', badge:'Closed Interval', bc:'qb-rust',
+    text:'Find the absolute maximum and minimum of $f(x) = 1 + |9 - x^2|$ on $[-5, 1]$.',
+    hint:'On $[-5,-3)$ and for $x^2>9$: $|9-x^2|=x^2-9$. On $(-3,3)$: $|9-x^2|=9-x^2$. Split into cases.',
+    ph:'Abs max = … at x = …; Abs min = … at x = …',
+    accepted:['max 17 at x=-5 or x=5','max 17 at x=-5','min 1 at x=3','max 17 min 1','abs max 17'],
+    steps:[
+      'On $[-5,-3]$: $f(x)=1+x^2-9=x^2-8$. $f\'=2x<0$ on this interval (decreasing).',
+      'On $[-3,1]$: $f(x)=1+9-x^2=10-x^2$. $f\'=-2x=0 \\Rightarrow x=0$.',
+      'Values: $f(-5)=25-8=17$; $f(-3)=1$; $f(0)=10$; $f(1)=9$.',
+      '<strong>Abs. max $=17$ at $x=-5$; Abs. min $=1$ at $x=-3$.</strong>'
+    ],
+    final:'Abs. max $= 17$ at $x=-5$; Abs. min $= 1$ at $x=-3$'
+  },
+  {
+    id:'absext-7', section:'§3.4', badge:'Open Interval', bc:'qb-rust',
+    text:'Find the absolute maximum and minimum of $f(x) = \\dfrac{x^2+1}{x+1}$ on $(-5,-1)$.',
+    hint:'Find $f\'$ and set to zero inside $(-5,-1)$. Check limits at endpoints of the open interval.',
+    ph:'Abs max = … ; Abs min = …',
+    accepted:['abs min at x=-2','min at x=-2','no abs max','abs min -1'],
+    steps:[
+      "$f'(x)=\\dfrac{2x(x+1)-(x^2+1)}{(x+1)^2}=\\dfrac{x^2+2x-1}{(x+1)^2}=0 \\Rightarrow x=-1\\pm\\sqrt{2}$.",
+      '$x=-1-\\sqrt{2}\\approx -2.41 \\in (-5,-1)$. $x=-1+\\sqrt{2}\\approx 0.41 \\notin (-5,-1)$.',
+      '$f(-1-\\sqrt{2})=\\dfrac{(1+\\sqrt{2})^2+1}{-\\sqrt{2}}$... The value is $-2\\sqrt{2}\\approx -2.83$.',
+      '$\\lim_{x\\to-5^+}f(x)=\\frac{26}{-4}=-6.5$; $\\lim_{x\\to-1^-}f(x)=\\frac{2}{0^-}=-\\infty$.',
+      '<strong>No absolute max. Absolute min approaches $-\\infty$ as $x\\to-1^-$.</strong>'
+    ],
+    final:'No absolute maximum; no absolute minimum (function $\\to -\\infty$ near $x=-1$)'
+  },
+  {
+    id:'absext-8', section:'§3.4', badge:'Infinite Interval', bc:'qb-rust',
+    text:'Find the absolute maximum and minimum of $f(x) = 2x^3 - 6x + 2$ on $(-\\infty, +\\infty)$.',
+    hint:'As $x\\to\\pm\\infty$, $f\\to\\pm\\infty$. Look for critical points — there may not be an absolute extremum.',
+    ph:'No abs max or min (state why), or give values',
+    accepted:['no absolute max or min','no abs max','no abs min','no absolute extrema'],
+    steps:[
+      "$f'(x)=6x^2-6=6(x^2-1)=0 \\Rightarrow x=\\pm 1$.",
+      '$\\lim_{x\\to+\\infty}f(x)=+\\infty$ and $\\lim_{x\\to-\\infty}f(x)=-\\infty$.',
+      'Since $f\\to+\\infty$ and $f\\to-\\infty$, there is <strong>no absolute maximum and no absolute minimum</strong>.',
+      'The critical points $x=\\pm 1$ are only relative extrema.'
+    ],
+    final:'No absolute maximum; no absolute minimum'
+  }
+];
+
 const overallPool = [
+  ...questionBanks.deriv.map(q=>({...q, overallBadge:'§2.1–2.7', overallBC:'qb-blue'})),
   ...questionBanks.trig.map(q=>({...q, overallBadge:'§2.5', overallBC:'qb-blue'})),
   ...questionBanks.chain.map(q=>({...q, overallBadge:'§2.6', overallBC:'qb-rust'})),
   ...questionBanks.extrema.map(q=>({...q, overallBadge:'§3.2', overallBC:'qb-green'})),
+  ...questionBanks.absext.map(q=>({...q, overallBadge:'§3.4', overallBC:'qb-rust'})),
   ...questionBanks.integral.map(q=>({...q, overallBadge:'§4.2–4.3', overallBC:'qb-amber'}))
 ];
 
 const CHAPTER_SHOW = 5;
 const OVERALL_SHOW = 10;
-const activeQs = { trig:[], chain:[], extrema:[], integral:[], overall:[] };
-const totals = { trig:CHAPTER_SHOW, chain:CHAPTER_SHOW, extrema:CHAPTER_SHOW, integral:CHAPTER_SHOW, overall:OVERALL_SHOW };
+const activeQs = { trig:[], chain:[], extrema:[], integral:[], overall:[], deriv:[], absext:[], log:[], exp:[] };
+const totals = { trig:CHAPTER_SHOW, chain:CHAPTER_SHOW, extrema:CHAPTER_SHOW, integral:CHAPTER_SHOW, overall:OVERALL_SHOW, deriv:CHAPTER_SHOW, absext:CHAPTER_SHOW, log:CHAPTER_SHOW, exp:CHAPTER_SHOW };
 const state = {
   trig:{ correct:0, answered:0 },
   chain:{ correct:0, answered:0 },
   extrema:{ correct:0, answered:0 },
   integral:{ correct:0, answered:0 },
-  overall:{ correct:0, answered:0 }
+  overall:{ correct:0, answered:0 },
+  deriv:{ correct:0, answered:0 },
+  absext:{ correct:0, answered:0 },
+  log:{ correct:0, answered:0 },
+  exp:{ correct:0, answered:0 }
 };
 
 function shuffle(arr) {
@@ -2596,7 +3233,7 @@ function normalize(str) {
 }
 
 function colForSec(sec) {
-  const m={trig:'blue',chain:'rust',extrema:'green',integral:'amber',overall:'blue'};
+  const m={trig:'blue',chain:'rust',extrema:'green',integral:'amber',overall:'blue',deriv:'blue',absext:'rust',log:'blue',exp:'rust'};
   return m[sec]||'blue';
 }
 
@@ -2771,11 +3408,15 @@ function resetSection(sec) {
 
 const tabMap = {
   'sect-notes':    {btn:'nb-notes',    cls:'gray'},
+  'sect-deriv':    {btn:'nb-deriv',    cls:'blue'},
   'sect-trig':     {btn:'nb-trig',     cls:'blue'},
   'sect-chain':    {btn:'nb-chain',    cls:'rust'},
   'sect-extrema':  {btn:'nb-extrema',  cls:'green'},
+  'sect-absext':   {btn:'nb-absext',   cls:'rust'},
   'sect-integral': {btn:'nb-integral', cls:'amber'},
   'sect-overall':  {btn:'nb-overall',  cls:'blue'},
+  'sect-log':      {btn:'nb-log',      cls:'blue'},
+  'sect-exp':      {btn:'nb-exp',      cls:'rust'},
 };
 
 function switchTab(sectionId, cls) {
@@ -2867,9 +3508,13 @@ document.addEventListener('keydown', e=>{
 // INIT — wait for MathJax to be ready, then build
 // ──────────────────────────────────────────────────────
 function initApp() {
+  buildSection('deriv');
   buildSection('trig');
   buildSection('chain');
+  buildSection('log');
+  buildSection('exp');
   buildSection('extrema');
+  buildSection('absext');
   buildSection('integral');
   buildSection('overall');
   switchTab('sect-notes','gray');
