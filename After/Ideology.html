@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ideology & Constitution of Pakistan</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-dark: #1565C0;
+    --blue-mid: #1E88E5;
+    --blue-light: #42A5F5;
+    --blue-pale: #BBDEFB;
+    --teal: #00ACC1;
+    --white: #ffffff;
+    --text-dark: #1a2340;
+    --text-gray: #5a6a85;
+    --blob-blue: rgba(30,136,229,0.13);
+    --blob-teal: rgba(0,172,193,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #f0f6ff;
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ====== NAVBAR ====== */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 60px;
+    background: white;
+    box-shadow: 0 2px 20px rgba(30,136,229,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.35rem;
+    background: linear-gradient(135deg, var(--blue-dark), var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-gray);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue-mid); }
+  .nav-btn {
+    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    color: white;
+    border: none;
+    padding: 10px 26px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(30,136,229,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: 'Poppins', sans-serif;
+  }
+  .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(30,136,229,0.45); }
+
+  /* ====== HERO ====== */
+  .hero {
+    position: relative;
+    min-height: 56vh;
+    display: flex;
+    align-items: center;
+    padding: 44px 60px 44px 80px;
+    overflow: hidden;
+  }
+  /* Full-bleed Pakistan photo background */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1470756544705-1848092fbe5f?fm=jpg&q=85&w=1800&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center 40%;
+    z-index: 0;
+  }
+  /* Dark gradient overlay for text legibility */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      rgba(5, 18, 45, 0.82) 0%,
+      rgba(5, 18, 45, 0.70) 50%,
+      rgba(5, 18, 45, 0.30) 100%
+    );
+  }
+  /* hide old blobs/dots — not needed with photo bg */
+  .blob, .dot { display: none; }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(36px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+    animation: fadeSlideUp 0.9s ease both;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.95);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 900;
+    line-height: 1.15;
+    color: #ffffff;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .hero h1 span {
+    background: linear-gradient(135deg, #64b5f6, #4dd0e1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.82);
+    font-size: 0.92rem;
+    line-height: 1.72;
+    margin-bottom: 28px;
+    max-width: 440px;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-credit {
+    margin-top: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.3px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    color: white;
+    border: none;
+    padding: 13px 32px;
+    border-radius: 28px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(30,136,229,0.45);
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(30,136,229,0.55); }
+  .btn-outline {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    color: white;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    padding: 11px 28px;
+    border-radius: 28px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.6); }
+
+  /* Hero illustration card */
+  .hero-illustration {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    animation: fadeSlideUp 1s ease 0.2s both;
+  }
+  .hero-illus-card {
+    background: rgba(255,255,255,0.97);
+    border-radius: 24px;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+    padding: 28px 32px;
+    width: 340px;
+    position: relative;
+  }
+  .illus-stat { margin-bottom: 14px; }
+  .illus-stat-label { font-size: 0.75rem; color: var(--text-gray); margin-bottom: 5px; font-weight: 500; }
+  .illus-bar { height: 8px; border-radius: 10px; background: #e8f0fe; overflow: hidden; }
+  .illus-bar-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--blue-mid), var(--teal)); }
+  .illus-units {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;
+  }
+  .illus-unit-chip {
+    background: #e8f4ff;
+    color: var(--blue-mid);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .floating-badge {
+    position: absolute;
+    top: -16px; right: -16px;
+    background: linear-gradient(135deg, var(--blue-dark), var(--teal));
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 9px 14px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(30,136,229,0.45);
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 5px;
+  }
+  /* Photo credit strip at bottom of hero */
+  .hero-photo-credit {
+    position: absolute;
+    bottom: 10px; right: 14px;
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.35);
+    z-index: 3;
+    letter-spacing: 0.2px;
+  }
+  .hero-photo-credit a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  .hero-photo-credit a:hover { color: rgba(255,255,255,0.7); }
+
+  /* ====== SECTION: ABOUT COURSE ====== */
+  .section {
+    padding: 80px 60px;
+    position: relative;
+  }
+  .section-bg-wave {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #f0f6ff 0%, white 100%);
+    z-index: 0;
+  }
+  .section-inner { position: relative; z-index: 1; }
+
+  .about-row {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+  }
+  .about-illus {
+    flex: 0 0 380px;
+  }
+  .about-card {
+    background: white;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 12px 40px rgba(30,136,229,0.12);
+    position: relative;
+  }
+  .about-card::before {
+    content: '';
+    position: absolute;
+    top: -3px; left: 30px; right: 30px; height: 3px;
+    background: linear-gradient(90deg, var(--blue-mid), var(--teal));
+    border-radius: 0 0 3px 3px;
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+  }
+  .card-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; color: white;
+    box-shadow: 0 6px 15px rgba(30,136,229,0.35);
+  }
+  .card-title { font-weight: 700; font-size: 1rem; color: var(--text-dark); }
+  .card-subtitle { font-size: 0.78rem; color: var(--text-gray); }
+  .mini-unit-list { list-style: none; }
+  .mini-unit-list li {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #f0f4fa;
+    font-size: 0.84rem;
+    color: var(--text-gray);
+    font-weight: 500;
+  }
+  .mini-unit-list li:last-child { border-bottom: none; }
+  .mini-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    flex-shrink: 0;
+  }
+
+  .about-text { flex: 1; }
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--blue-mid);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.1rem; font-weight: 900; line-height: 1.25;
+    color: var(--text-dark);
+    margin-bottom: 18px;
+  }
+  .section-title span {
+    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .section-desc {
+    color: var(--text-gray);
+    font-size: 0.92rem;
+    line-height: 1.78;
+    margin-bottom: 28px;
+  }
+  .feature-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+  .pill {
+    display: flex; align-items: center; gap: 7px;
+    background: #e8f4ff; color: var(--blue-mid);
+    padding: 7px 16px; border-radius: 20px;
+    font-size: 0.8rem; font-weight: 600;
+  }
+  .pill .pill-icon { font-size: 1rem; }
+
+  /* ====== SERVICES / UNITS ICONS ====== */
+  .units-row {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 10px 0 50px;
+    position: relative;
+    z-index: 1;
+  }
+  .unit-icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 28px 32px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    text-align: center;
+    min-width: 140px;
+  }
+  .unit-icon-item:hover { transform: translateY(-4px); }
+  .unit-icon-bubble {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    background: white;
+    box-shadow: 0 8px 24px rgba(30,136,229,0.15);
+    transition: box-shadow 0.2s;
+    position: relative;
+  }
+  .unit-icon-item.active .unit-icon-bubble {
+    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    box-shadow: 0 12px 30px rgba(30,136,229,0.4);
+  }
+  .unit-icon-item.active .unit-icon-bubble svg { stroke: white; }
+  .unit-icon-item:hover .unit-icon-bubble { box-shadow: 0 12px 30px rgba(30,136,229,0.3); }
+  .unit-icon-label {
+    font-size: 0.78rem; font-weight: 700; color: var(--text-gray);
+    max-width: 110px; line-height: 1.3;
+  }
+  .unit-icon-item.active .unit-icon-label { color: var(--blue-mid); }
+
+  /* ====== PROMOTE / UNITS SECTION ====== */
+  .promote-section {
+    background: linear-gradient(135deg, #f5f9ff, #e8f4ff);
+    padding: 80px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .promote-blob-1 {
+    position: absolute;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(30,136,229,0.10) 0%, transparent 70%);
+    bottom: -100px; right: -80px;
+    z-index: 0;
+  }
+  .promote-blob-2 {
+    position: absolute;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,172,193,0.10) 0%, transparent 70%);
+    top: -60px; left: 200px;
+    z-index: 0;
+  }
+  .promote-row {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    position: relative; z-index: 1;
+  }
+  .promote-illus {
+    flex: 0 0 360px;
+  }
+  .promote-illus-card {
+    background: white;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 16px 50px rgba(30,136,229,0.14);
+    position: relative;
+  }
+  .promote-illus-img {
+    width: 100%; height: 200px;
+    background: linear-gradient(135deg, #e3f2fd, #e0f7fa);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .promote-illus-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 60px;
+    background: linear-gradient(0deg, rgba(30,136,229,0.08), transparent);
+  }
+  .promote-illus-details { display: flex; gap: 10px; flex-wrap: wrap; }
+  .promote-detail-chip {
+    background: #e8f4ff; color: var(--blue-dark);
+    font-size: 0.75rem; font-weight: 700;
+    padding: 6px 14px; border-radius: 20px;
+  }
+  .floating-card {
+    position: absolute;
+    bottom: -20px; left: -20px;
+    background: white;
+    border-radius: 16px;
+    padding: 12px 16px;
+    box-shadow: 0 8px 24px rgba(30,136,229,0.2);
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.8rem; font-weight: 600; color: var(--text-dark);
+  }
+  .fc-icon { font-size: 1.2rem; }
+
+  .units-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .unit-card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(30,136,229,0.09);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .unit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 35px rgba(30,136,229,0.2);
+  }
+  .unit-card-icon { font-size: 1.6rem; margin-bottom: 10px; }
+  .unit-card-num {
+    font-size: 0.7rem; font-weight: 700; color: var(--blue-mid);
+    text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px;
+  }
+  .unit-card-title {
+    font-weight: 700; font-size: 0.9rem; color: var(--text-dark); margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .unit-card-desc { font-size: 0.77rem; color: var(--text-gray); line-height: 1.5; }
+  .unit-card-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    margin-top: 12px;
+    font-size: 0.78rem; font-weight: 700; color: var(--blue-mid);
+  }
+  .unit-card-btn::after { content: '→'; }
+
+  /* ====== CONTACT SECTION ====== */
+  .contact-section {
+    background: linear-gradient(135deg, #1565C0, #0097A7);
+    padding: 80px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-blob {
+    position: absolute;
+    border-radius: 50%; z-index: 0;
+  }
+  .cb1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    top: -150px; right: -100px;
+  }
+  .cb2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+    bottom: -80px; left: 100px;
+  }
+  .contact-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 80px;
+    position: relative; z-index: 1;
+  }
+  .contact-info { flex: 1; }
+  .contact-info h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.2rem; font-weight: 900;
+    color: white; margin-bottom: 14px;
+  }
+  .contact-info p {
+    color: rgba(255,255,255,0.75); font-size: 0.92rem; line-height: 1.75;
+    margin-bottom: 30px;
+  }
+  .contact-stats {
+    display: flex; gap: 30px; flex-wrap: wrap;
+  }
+  .cstat {
+    text-align: center;
+    background: rgba(255,255,255,0.12);
+    padding: 16px 22px; border-radius: 16px;
+    backdrop-filter: blur(8px);
+  }
+  .cstat-num { font-family: 'Nunito', sans-serif; font-size: 1.8rem; font-weight: 900; color: white; }
+  .cstat-label { font-size: 0.75rem; color: rgba(255,255,255,0.7); font-weight: 500; }
+
+  .contact-form { flex: 0 0 400px; }
+  .form-card {
+    background: white;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+  .form-card h3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.3rem; font-weight: 800;
+    color: var(--text-dark); margin-bottom: 22px;
+  }
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block; font-size: 0.78rem; font-weight: 600;
+    color: var(--text-gray); margin-bottom: 7px;
+  }
+  .form-group input, .form-group select {
+    width: 100%; padding: 11px 16px;
+    border: 1.5px solid #e2e8f4;
+    border-radius: 12px;
+    font-size: 0.87rem; color: var(--text-dark);
+    font-family: 'Poppins', sans-serif;
+    background: #f8faff;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group select:focus {
+    border-color: var(--blue-light); background: white;
+  }
+  .form-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    color: white; border: none;
+    padding: 13px; border-radius: 14px;
+    font-size: 0.92rem; font-weight: 700;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 6px 20px rgba(30,136,229,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 6px;
+  }
+  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(30,136,229,0.45); }
+
+  footer {
+    background: #0a1a35;
+    color: rgba(255,255,255,0.7);
+    padding: 44px 60px 28px;
+  }
+  .footer-top {
+    display: flex; gap: 60px; flex-wrap: wrap; margin-bottom: 32px;
+    align-items: flex-start;
+  }
+  .footer-brand { flex: 1; min-width: 200px; }
+  .footer-logo {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900; font-size: 1.2rem;
+    color: white; margin-bottom: 10px;
+  }
+  .footer-brand p { font-size: 0.82rem; line-height: 1.65; }
+  .footer-col { min-width: 200px; }
+  .footer-col h4 { color: white; font-size: 0.85rem; font-weight: 700; margin-bottom: 12px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 8px; }
+  .footer-col ul li a {
+    color: rgba(255,255,255,0.55); text-decoration: none;
+    font-size: 0.82rem; transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--blue-light); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.78rem; flex-wrap: wrap; gap: 10px;
+  }
+
+  /* ====== NOTES PAGES (hidden by default) ====== */
+  .page { display: none; }
+  .page.active { display: block; }
+  #home.active { display: block; }
+
+  .notes-header {
+    background: linear-gradient(135deg, var(--blue-dark), var(--teal));
+    padding: 60px 60px 40px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .notes-header::before {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    top: -150px; right: -100px;
+  }
+  .notes-back-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; margin-bottom: 20px;
+    transition: color 0.2s;
+    background: none; border: none; font-family: 'Poppins', sans-serif;
+  }
+  .notes-back-btn:hover { color: white; }
+  .notes-header h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.4rem; font-weight: 900;
+    margin-bottom: 10px;
+  }
+  .notes-header p { opacity: 0.8; font-size: 0.92rem; }
+  .notes-unit-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 14px; border-radius: 20px;
+    font-size: 0.75rem; font-weight: 700;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .notes-body {
+    padding: 50px 60px;
+    background: #f5f9ff;
+    min-height: 60vh;
+  }
+  .notes-tabs {
+    display: flex; gap: 6px;
+    background: white; padding: 6px;
+    border-radius: 14px; box-shadow: 0 4px 14px rgba(30,136,229,0.1);
+    display: inline-flex; margin-bottom: 36px;
+  }
+  .notes-tab {
+    padding: 10px 24px; border-radius: 10px;
+    font-size: 0.87rem; font-weight: 600; cursor: pointer;
+    color: var(--text-gray);
+    border: none; background: none;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s;
+  }
+  .notes-tab.active {
+    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    color: white;
+    box-shadow: 0 4px 12px rgba(30,136,229,0.35);
+  }
+
+  .notes-content-area { display: none; }
+  .notes-content-area.active { display: block; }
+
+  .notes-card {
+    background: white; border-radius: 20px;
+    padding: 32px; box-shadow: 0 6px 24px rgba(30,136,229,0.09);
+    margin-bottom: 20px;
+  }
+  .notes-card h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.3rem; font-weight: 800; color: var(--text-dark);
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e8f0fe;
+  }
+  .notes-card h3 {
+    font-size: 1rem; font-weight: 700; color: var(--blue-dark);
+    margin: 18px 0 8px;
+  }
+  .notes-card p {
+    color: var(--text-gray); font-size: 0.88rem; line-height: 1.8;
+    margin-bottom: 10px;
+  }
+  .notes-card ul {
+    color: var(--text-gray); font-size: 0.87rem; line-height: 1.9;
+    padding-left: 20px; margin-bottom: 10px;
+  }
+  .notes-card ul li { margin-bottom: 4px; }
+  .notes-card .highlight-box {
+    background: linear-gradient(135deg, #e8f4ff, #e0f7fa);
+    border-left: 4px solid var(--blue-mid);
+    padding: 14px 18px; border-radius: 0 12px 12px 0;
+    margin: 14px 0; font-size: 0.86rem; color: var(--blue-dark); font-weight: 500;
+  }
+
+  /* Q&A */
+  .qa-item { margin-bottom: 24px; }
+  .qa-q {
+    background: linear-gradient(135deg, #e8f4ff, #e0f7fa);
+    border-radius: 12px 12px 0 0;
+    padding: 16px 20px;
+    font-weight: 700; font-size: 0.9rem; color: var(--blue-dark);
+    cursor: pointer;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .qa-q-num {
+    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    color: white; font-size: 0.75rem; font-weight: 800;
+    width: 24px; height: 24px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .qa-a {
+    background: white; border: 1px solid #e2ecfa;
+    border-top: none; border-radius: 0 0 12px 12px;
+    padding: 18px 20px; font-size: 0.86rem; color: var(--text-gray); line-height: 1.85;
+    display: none;
+  }
+  .qa-a.open { display: block; }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 900px) {
+    .hero { padding: 44px 22px; min-height: auto; }
+    .hero h1 { font-size: 1.9rem; }
+    .hero-illustration { display: none; }
+    .units-grid { grid-template-columns: 1fr; }
+    .units-grid a[style*="span 2"] { grid-column: span 1 !important; }
+    #units { padding: 44px 22px 54px !important; }
+    .notes-header { padding: 40px 22px 30px; }
+    .notes-header h1 { font-size: 1.6rem; }
+    .notes-body { padding: 30px 22px; }
+    footer { padding: 40px 22px 22px; }
+    .footer-top { flex-direction: column; gap: 24px; }
+    .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+
+
+<!-- ===== HOME PAGE ===== -->
+<div id="home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="dot d1"></div><div class="dot d2"></div><div class="dot d3"></div>
+    <div class="dot d4"></div><div class="dot d5"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px;margin-bottom:1px"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> Final Exam Preparation</div>
+      <h1>Ideology &<br><span>Constitution</span><br>of Pakistan</h1>
+      <p>Comprehensive notes, key concepts, and practice questions for your university final exam. Master all 5 units with structured study material.</p>
+      <div class="hero-btns">
+        <a href="#units" class="btn-primary" onclick="document.getElementById('units').scrollIntoView({behavior:'smooth'})">Start Studying</a>
+        <a href="#" class="btn-outline" onclick="showPage('unit1')">Quick Notes</a>
+      </div>
+    </div>
+
+    <div class="hero-illustration">
+      <div class="hero-illus-card">
+        <div class="floating-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:4px;margin-bottom:1px"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg> 5 Units Covered</div>
+        <div class="card-header">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          <div>
+            <div class="card-title">Course Overview</div>
+            <div class="card-subtitle">ICP — Final Exam</div>
+          </div>
+        </div>
+        <div class="illus-stat">
+          <div class="illus-stat-label">Unit 1: Political Ideologies</div>
+          <div class="illus-bar"><div class="illus-bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="illus-stat">
+          <div class="illus-stat-label">Unit 2: Constitution of Pakistan</div>
+          <div class="illus-bar"><div class="illus-bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="illus-stat">
+          <div class="illus-stat-label">Unit 3: 18th Amendment</div>
+          <div class="illus-bar"><div class="illus-bar-fill" style="width:78%"></div></div>
+        </div>
+        <div class="illus-stat">
+          <div class="illus-stat-label">Unit 4: Pakistan–US Relations</div>
+          <div class="illus-bar"><div class="illus-bar-fill" style="width:82%"></div></div>
+        </div>
+        <div class="illus-stat">
+          <div class="illus-stat-label">Unit 5: Current Affairs</div>
+          <div class="illus-bar"><div class="illus-bar-fill" style="width:75%"></div></div>
+        </div>
+        <div class="illus-units">
+          <span class="illus-unit-chip">Notes</span>
+          <span class="illus-unit-chip">Q&A</span>
+          <span class="illus-unit-chip">Key Terms</span>
+          <span class="illus-unit-chip">Examples</span>
+        </div>
+      </div>
+    </div>
+    <p class="hero-photo-credit">Photo: <a href="https://unsplash.com/@sbjshah" target="_blank">Syed Bilal Javaid</a> / Unsplash — Faisal Mosque, Islamabad</p>
+  </section>
+  <!-- UNITS GRID SECTION -->
+  <section id="units" style="background:#f5f9ff; padding: 60px 60px 70px;">
+    <div style="text-align:center; margin-bottom:40px;">
+      <div class="section-label">Course Units</div>
+      <h2 class="section-title" style="display:inline-block;">Select a <span>Unit</span> to Study</h2>
+    </div>
+    <div class="units-grid" style="max-width:860px; margin:0 auto;">
+      <a class="unit-card" href="#" onclick="showPage('unit1');return false;">
+        <div class="unit-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><rect x="5" y="10" width="3" height="12"/><rect x="10.5" y="10" width="3" height="12"/><rect x="16" y="10" width="3" height="12"/><polygon points="12 2 3 9 21 9"/></svg></div>
+        <div class="unit-card-num">Unit 1</div>
+        <div class="unit-card-title">Political Ideologies</div>
+        <div class="unit-card-desc">Major "isms", their meanings and basic ideological comparisons.</div>
+        <div class="unit-card-btn">Read Notes</div>
+      </a>
+      <a class="unit-card" href="#" onclick="showPage('unit2');return false;">
+        <div class="unit-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></div>
+        <div class="unit-card-num">Unit 2</div>
+        <div class="unit-card-title">Constitution of Pakistan</div>
+        <div class="unit-card-desc">Constitution-making, comparison of 1956, 1962, 1973, and federalism.</div>
+        <div class="unit-card-btn">Read Notes</div>
+      </a>
+      <a class="unit-card" href="#" onclick="showPage('unit3');return false;">
+        <div class="unit-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><path d="M3 6l9-3 9 3"/><path d="M3 6l4 8c0 1.1-1.8 2-4 2s-4-.9-4-2l4-8z"/><path d="M21 6l4 8c0 1.1-1.8 2-4 2s-4-.9-4-2l4-8z"/><line x1="7" y1="21" x2="17" y2="21"/></svg></div>
+        <div class="unit-card-num">Unit 3</div>
+        <div class="unit-card-title">18th Amendment</div>
+        <div class="unit-card-desc">Key features, provincial autonomy and impact on the federation.</div>
+        <div class="unit-card-btn">Read Notes</div>
+      </a>
+      <a class="unit-card" href="#" onclick="showPage('unit4');return false;">
+        <div class="unit-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="unit-card-num">Unit 4</div>
+        <div class="unit-card-title">Pakistan–US Relations</div>
+        <div class="unit-card-desc">Historical background from 1947 to present, major developments.</div>
+        <div class="unit-card-btn">Read Notes</div>
+      </a>
+      <a class="unit-card" href="#" onclick="showPage('unit5');return false;" style="grid-column: span 2;">
+        <div class="unit-card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1E88E5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div>
+        <div class="unit-card-num">Unit 5</div>
+        <div class="unit-card-title">Current Affairs &amp; Diplomacy</div>
+        <div class="unit-card-desc">Pakistan's foreign policy, US–Israel–Iran conflict, diplomatic position and impacts.</div>
+        <div class="unit-card-btn">Read Notes</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">ICP Study Hub</div>
+        <p>Ideology &amp; Constitution of Pakistan — university final exam study resource.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Units</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('unit1')">Unit 1 — Political Ideologies</a></li>
+          <li><a href="#" onclick="showPage('unit2')">Unit 2 — Constitution</a></li>
+          <li><a href="#" onclick="showPage('unit3')">Unit 3 — 18th Amendment</a></li>
+          <li><a href="#" onclick="showPage('unit4')">Unit 4 — Pak–US Relations</a></li>
+          <li><a href="#" onclick="showPage('unit5')">Unit 5 — Current Affairs</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ICP Study Hub — Ideology &amp; Constitution of Pakistan</span>
+      <span style="color:rgba(255,255,255,0.5); font-size:0.78rem; letter-spacing:0.2px;">Made by <strong style="color:rgba(255,255,255,0.75);">Hanan Shafay &amp; Mohid Ahmed</strong></span>
+    </div>
+  </footer>
+
+</div><!-- /#home -->
+
+
+<!-- ===== UNIT 1 NOTES PAGE ===== -->
+<div id="unit1" class="page">
+  <div class="notes-header">
+    <button class="notes-back-btn" onclick="showPage('home')">← Back to Home</button>
+    <div class="notes-unit-badge">UNIT 1</div>
+    <h1><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:10px;margin-bottom:3px"><line x1="3" y1="22" x2="21" y2="22"/><rect x="5" y="10" width="3" height="12"/><rect x="10.5" y="10" width="3" height="12"/><rect x="16" y="10" width="3" height="12"/><polygon points="12 2 3 9 21 9"/></svg>Political Ideologies</h1>
+    <p>Major "isms", their meanings, and basic ideological comparisons</p>
+  </div>
+  <div class="notes-body">
+    <div class="notes-tabs">
+      <button class="notes-tab active" onclick="switchTab(this,'tab-notes-1')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Notes</button>
+      <button class="notes-tab" onclick="switchTab(this,'tab-qa-1')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Q&amp;A</button>
+    </div>
+
+    <div id="tab-notes-1" class="notes-content-area active">
+      <div class="notes-card">
+        <h2>What is an Ideology?</h2>
+        <p>An ideology is a set of beliefs, values, and ideas that form the basis of a political, economic, or social system. It provides a framework through which individuals and societies understand and organize their world.</p>
+        <div class="highlight-box">Key Point: Every political system is grounded in an ideology — whether explicitly stated or implicitly practiced.</div>
+
+        <h3>Capitalism</h3>
+        <p>An economic and political system where private individuals or businesses own the means of production. Markets and prices are determined by supply and demand. Key features include private property rights, free markets, and profit motive.</p>
+
+        <h3>Socialism</h3>
+        <p>An ideology advocating collective or government ownership and administration of the means of production and distribution. It aims for equality and social welfare. Ranges from democratic socialism to Marxist socialism.</p>
+
+        <h3>Communism</h3>
+        <p>A classless society where the means of production are owned communally. Associated with Marx and Lenin. In practice: the state controls all means of production with the goal of eventual stateless, classless society.</p>
+
+        <h3>Fascism</h3>
+        <p>An authoritarian ultra-nationalist ideology characterized by dictatorial power, forcible suppression of opposition, and rigid socioeconomic control. Examples: Nazi Germany, Mussolini's Italy.</p>
+
+        <h3>Liberalism</h3>
+        <p>A political ideology centered on individual rights, freedoms, rule of law, democracy, and limited government. Two major strands: classical liberalism (emphasizes individual liberty) and social liberalism (emphasizes social justice).</p>
+
+        <h3>Conservatism</h3>
+        <p>An ideology that promotes traditional institutions, customs, and values, and skepticism toward rapid change. It favors gradual reform over revolutionary change.</p>
+
+        <h3>Nationalism</h3>
+        <p>The belief that a nation should be self-governed. Nations are defined by shared culture, language, history, or ethnicity. Can be civic or ethnic nationalism.</p>
+
+        <h3>Islamism / Islamic Ideology</h3>
+        <p>For Pakistan, Islamic ideology refers to the belief that Islam should guide all aspects of life including politics, law, and governance. Pakistan's founding was based on the Two-Nation Theory — that Muslims of the subcontinent are a separate nation requiring their own homeland.</p>
+        <div class="highlight-box">The Objectives Resolution (1949) declared that sovereignty belongs to Allah and that the state of Pakistan would be organized in accordance with Islamic principles.</div>
+      </div>
+
+      <div class="notes-card">
+        <h2>Ideological Comparisons</h2>
+        <p>Understanding key differences helps in exam comparisons:</p>
+        <ul>
+          <li><strong>Capitalism vs Socialism:</strong> Private vs collective ownership; market vs planned economy; profit-driven vs welfare-driven</li>
+          <li><strong>Liberalism vs Conservatism:</strong> Change vs tradition; individual rights vs community stability</li>
+          <li><strong>Communism vs Fascism:</strong> Both authoritarian, but communism is internationalist and leftist while fascism is nationalist and rightist</li>
+          <li><strong>Nationalism vs Cosmopolitanism:</strong> National sovereignty vs global unity and cooperation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="tab-qa-1" class="notes-content-area">
+      <div class="notes-card">
+        <h2>Sample Long Questions &amp; Model Answers</h2>
+
+        <div class="qa-item">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="qa-q-num">Q1</span>
+            <span>What is ideology? Discuss the major political ideologies of the world with their key characteristics.</span>
+          </div>
+          <div class="qa-a open">
+            <strong>Introduction:</strong> An ideology is a comprehensive set of beliefs, values, and principles that guide how a society should be organized politically, economically, and socially. Every state operates according to some ideology, whether acknowledged or not.<br><br>
+            <strong>Major Political Ideologies:</strong><br><br>
+            <strong>1. Capitalism:</strong> Based on private ownership of production, free market competition, and profit motive. Associated with Western democracies. The state plays a minimal role in the economy. Advocates argue it promotes innovation and efficiency; critics say it leads to inequality.<br><br>
+            <strong>2. Socialism:</strong> Advocates collective ownership and redistribution of wealth for social welfare. The state plays an active role in managing the economy. Examples include Scandinavian social democracies.<br><br>
+            <strong>3. Communism:</strong> A Marxist ideology calling for abolition of private property and class distinctions. The Communist Manifesto (1848) by Marx and Engels laid its theoretical foundation. Soviet Union and China adopted it in the 20th century.<br><br>
+            <strong>4. Liberalism:</strong> Prioritizes individual freedom, democratic governance, and rule of law. Classical liberalism opposes government interference; social liberalism endorses welfare programs to ensure genuine freedom for all.<br><br>
+            <strong>5. Conservatism:</strong> Values tradition, stability, and incremental change. Opposes radical reforms. Edmund Burke is considered its founding philosopher.<br><br>
+            <strong>Conclusion:</strong> Understanding these ideologies is crucial as they shape the policies, constitutions, and international relations of states. Pakistan, founded on Islamic ideology, combines elements of Islamic principles with modern democratic governance.
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="qa-q-num">Q2</span>
+            <span>Compare and contrast capitalism and socialism. Which system is more suitable for a developing country like Pakistan? Discuss.</span>
+          </div>
+          <div class="qa-a">
+            <strong>Introduction:</strong> Capitalism and socialism represent two fundamentally different approaches to organizing an economy and society. Their comparison is central to understanding global politics and development economics.<br><br>
+            <strong>Capitalism:</strong><br>
+            • Private ownership of means of production<br>
+            • Prices determined by market forces<br>
+            • Competition drives efficiency and innovation<br>
+            • Inequality is an accepted outcome<br>
+            • USA, UK, Germany are examples<br><br>
+            <strong>Socialism:</strong><br>
+            • State or collective ownership of key industries<br>
+            • Government plans and distributes resources<br>
+            • Focus on equality and social welfare<br>
+            • Can reduce innovation incentive<br>
+            • Cuba, Nordic mixed economies are examples<br><br>
+            <strong>Key Differences:</strong><br>
+            | Aspect | Capitalism | Socialism |<br>
+            | Ownership | Private | Public/Collective |<br>
+            | Goal | Profit | Social Welfare |<br>
+            | Economy | Market-driven | Planned/Mixed |<br><br>
+            <strong>For Pakistan:</strong> A mixed economy approach — combining market forces with state regulation and social programs — is most practical. Pakistan's Constitution reflects this balance: it allows private enterprise while ensuring state responsibility for social welfare (Article 38).<br><br>
+            <strong>Conclusion:</strong> No ideology is perfectly applicable in isolation. Developing countries benefit most from pragmatic hybrid systems that take the strengths of both while addressing local realities.
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="qa-q-num">Q3</span>
+            <span>What is the ideological basis of Pakistan? Explain the Two-Nation Theory and its significance.</span>
+          </div>
+          <div class="qa-a">
+            <strong>Introduction:</strong> Pakistan came into existence on August 14, 1947, based on the Two-Nation Theory (TNT) — the idea that Hindus and Muslims of the Indian subcontinent were two distinct nations who could not coexist in a single unified state.<br><br>
+            <strong>Two-Nation Theory:</strong> The TNT holds that religion forms the basis of nationhood. Muslims have their own culture, history, laws (Sharia), language traditions, and way of life that are fundamentally different from those of Hindus. Therefore, they deserve a separate sovereign state.<br><br>
+            <strong>Key Proponents:</strong><br>
+            • Sir Syed Ahmad Khan — First articulated the idea of Muslim separateness<br>
+            • Allama Iqbal — Provided its philosophical foundation (Allahabad Address, 1930)<br>
+            • Quaid-e-Azam Muhammad Ali Jinnah — Translated it into political reality<br><br>
+            <strong>Lahore Resolution (1940):</strong> The Muslim League formally demanded separate states for Muslims in the northwestern and eastern zones of India, which eventually became Pakistan.<br><br>
+            <strong>Significance:</strong><br>
+            • Provided the ideological justification for Pakistan's creation<br>
+            • Shaped Pakistan's Islamic constitution and legal system<br>
+            • Continues to influence Pakistan's foreign policy, particularly toward India<br>
+            • Guides national education and cultural identity<br><br>
+            <strong>Conclusion:</strong> The Two-Nation Theory remains the foundational ideology of Pakistan, embedded in its Constitution, national narrative, and state identity.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== UNIT 2 NOTES PAGE ===== -->
+<div id="unit2" class="page">
+  <div class="notes-header">
+    <button class="notes-back-btn" onclick="showPage('home')">← Back to Home</button>
+    <div class="notes-unit-badge">UNIT 2</div>
+    <h1><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:10px;margin-bottom:3px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>Constitution of Pakistan</h1>
+    <p>Constitution-making, comparison of 1956, 1962, 1973, federalism and system of government</p>
+  </div>
+  <div class="notes-body">
+    <div class="notes-tabs">
+      <button class="notes-tab active" onclick="switchTab(this,'tab-notes-2')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Notes</button>
+      <button class="notes-tab" onclick="switchTab(this,'tab-qa-2')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Q&amp;A</button>
+    </div>
+
+    <div id="tab-notes-2" class="notes-content-area active">
+      <div class="notes-card">
+        <h2>Constitution-Making Process</h2>
+        <p>Pakistan's constitution-making was a long and difficult journey. The first Constituent Assembly (1947–1954) was tasked with both making a constitution and functioning as the legislature.</p>
+        <div class="highlight-box">Objectives Resolution (March 12, 1949): Pakistan's first major constitutional document, declaring that sovereignty belongs to Allah and the state will exercise authority as His trustee. It became the preamble of all subsequent constitutions.</div>
+
+        <h3>Constitution of 1956</h3>
+        <p><strong>Pakistan's first constitution</strong>, enacted on March 23, 1956. Pakistan became an Islamic Republic. Key features:</p>
+        <ul>
+          <li>Federal parliamentary system of government</li>
+          <li>Unicameral legislature (National Assembly)</li>
+          <li>Islam declared state religion</li>
+          <li>Adult franchise for elections</li>
+          <li>Joint electorate system</li>
+          <li>Abrogated by Ayub Khan in 1958</li>
+        </ul>
+
+        <h3>Constitution of 1962</h3>
+        <p><strong>Ayub Khan's constitution</strong>, introduced a presidential system. Key features:</p>
+        <ul>
+          <li>Presidential form of government — President had vast powers</li>
+          <li>Basic Democracies system (indirect elections through 80,000 Basic Democrats)</li>
+          <li>One National Assembly (156 seats)</li>
+          <li>No fundamental rights at first (added later)</li>
+          <li>Name changed from "Islamic Republic" to just "Republic" (restored in 1963)</li>
+          <li>Abrogated by Yahya Khan in 1969</li>
+        </ul>
+
+        <h3>Constitution of 1973</h3>
+        <p><strong>Pakistan's current constitution</strong>, passed unanimously on April 10, 1973. Drafted under Z.A. Bhutto. Key features:</p>
+        <ul>
+          <li>Federal parliamentary system of government</li>
+          <li>Bicameral legislature: National Assembly + Senate</li>
+          <li>Islam declared state religion; Quran and Sunnah as supreme law</li>
+          <li>Fundamental rights guaranteed</li>
+          <li>Strong Prime Minister as head of government</li>
+          <li>President as constitutional head</li>
+          <li>Independent judiciary</li>
+          <li>Has been amended 26+ times</li>
+        </ul>
+        <div class="highlight-box">The 1973 Constitution is the only one unanimously passed by all parliamentary parties, giving it unique democratic legitimacy.</div>
+      </div>
+
+      <div class="notes-card">
+        <h2>Comparison of Constitutions</h2>
+        <p>Quick comparison table for exam:</p>
+        <ul>
+          <li><strong>System:</strong> 1956 — Parliamentary | 1962 — Presidential | 1973 — Parliamentary</li>
+          <li><strong>Legislature:</strong> 1956 — Unicameral | 1962 — Unicameral | 1973 — Bicameral</li>
+          <li><strong>Elections:</strong> 1956 — Direct | 1962 — Indirect | 1973 — Direct</li>
+          <li><strong>Islam:</strong> All three declared Islam as state religion</li>
+          <li><strong>Duration:</strong> 1956 — 2 years | 1962 — 7 years | 1973 — still in force</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h2>Federalism in Pakistan</h2>
+        <p>Pakistan is a federal state where powers are divided between the federal government and the four provinces (Punjab, Sindh, KPK, Balochistan). The 1973 Constitution establishes three legislative lists:</p>
+        <ul>
+          <li><strong>Federal Legislative List (Part I):</strong> Exclusive federal jurisdiction (defence, foreign affairs, currency)</li>
+          <li><strong>Federal Legislative List (Part II):</strong> Both federal and Council of Common Interests</li>
+          <li><strong>Concurrent List:</strong> Abolished by 18th Amendment (2010), transferring subjects to provinces</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="tab-qa-2" class="notes-content-area">
+      <div class="notes-card">
+        <h2>Sample Long Questions &amp; Model Answers</h2>
+        <div class="qa-item">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="qa-q-num">Q1</span>
+            <span>Compare the constitutions of 1956, 1962, and 1973. Which constitution best served Pakistan's interests?</span>
+          </div>
+          <div class="qa-a open">
+            <strong>Introduction:</strong> Pakistan has had three constitutions in its history — 1956, 1962, and 1973. Each reflected the political realities of its era and attempted to solve different governance challenges.<br><br>
+            <strong>Constitution of 1956:</strong> Pakistan's first constitution established a parliamentary federal democracy with Islam as the state religion. However, it was abrogated within two years due to political instability and Ayub Khan's military coup in 1958. Its key weakness was its failure to resolve the East-West Pakistan political tension and ensure stable governance.<br><br>
+            <strong>Constitution of 1962:</strong> Ayub Khan's constitution replaced parliamentary democracy with a presidential system and indirect elections (Basic Democracies). While it provided short-term stability, it was fundamentally undemocratic and concentrated power in the President. It failed to address regional grievances, contributing to the political crisis of 1969 and the eventual separation of East Pakistan.<br><br>
+            <strong>Constitution of 1973:</strong> The most successful constitution, passed unanimously. It restored parliamentary democracy, created a bicameral legislature (protecting smaller provinces through the Senate), and entrenched fundamental rights. Though frequently suspended or distorted through amendments, its basic structure remains Pakistan's governing document today.<br><br>
+            <strong>Best for Pakistan:</strong> The 1973 Constitution, despite its imperfections, best serves Pakistan's interests because: (1) it was passed with democratic consensus; (2) it protects provincial rights; (3) it balances Islamic principles with modern governance; (4) it provides a framework for civilian rule.<br><br>
+            <strong>Conclusion:</strong> The 1973 Constitution represents Pakistan's most mature and inclusive constitutional experiment, and its survival over 50+ years (with amendments) confirms its fundamental suitability.
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="qa-q-num">Q2</span>
+            <span>Explain the salient features of the 1973 Constitution of Pakistan.</span>
+          </div>
+          <div class="qa-a">
+            <strong>Introduction:</strong> The 1973 Constitution, passed on April 10, 1973 under Prime Minister Z.A. Bhutto, is Pakistan's third and current constitution. It was the first to be passed unanimously by all parties.<br><br>
+            <strong>Key Features:</strong><br><br>
+            <strong>1. Islamic Provisions:</strong> Islam is the state religion. The President and PM must be Muslim. Quran and Sunnah are declared supreme law. The Council of Islamic Ideology advises on legislation.<br><br>
+            <strong>2. Federal System:</strong> Power is distributed between the federal government and four provinces. The Senate protects smaller provinces by giving equal representation.<br><br>
+            <strong>3. Parliamentary System:</strong> The Prime Minister is the head of government with real executive power. The President is a constitutional figurehead. The government is accountable to parliament through a vote of no-confidence.<br><br>
+            <strong>4. Bicameral Legislature:</strong> National Assembly (lower house, 342 seats, elected directly) and Senate (upper house, 100 seats, representing provinces equally).<br><br>
+            <strong>5. Fundamental Rights:</strong> Chapter 1 guarantees rights including equality before law, freedom of expression, religion, assembly, and movement. Suspended during martial law but restored.<br><br>
+            <strong>6. Independent Judiciary:</strong> Supreme Court, High Courts, and subordinate courts. Judicial review of legislation. Judges appointed through a judicial commission.<br><br>
+            <strong>7. Emergency Provisions:</strong> President can declare national, provincial, or financial emergency under Articles 232, 234, 235.<br><br>
+            <strong>Conclusion:</strong> The 1973 Constitution combines Islamic principles, democratic governance, federalism, and fundamental rights, making it a comprehensive document that continues to guide Pakistan's political system.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== UNIT 3 NOTES PAGE ===== -->
+<div id="unit3" class="page">
+  <div class="notes-header">
+    <button class="notes-back-btn" onclick="showPage('home')">← Back to Home</button>
+    <div class="notes-unit-badge">UNIT 3</div>
+    <h1><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:10px;margin-bottom:3px"><line x1="12" y1="3" x2="12" y2="21"/><path d="M3 6l9-3 9 3"/><path d="M3 6l4 8c0 1.1-1.8 2-4 2s-4-.9-4-2l4-8z"/><path d="M21 6l4 8c0 1.1-1.8 2-4 2s-4-.9-4-2l4-8z"/><line x1="7" y1="21" x2="17" y2="21"/></svg>The 18th Amendment</h1>
+    <p>Key features, provincial autonomy, and impact on the federation</p>
+  </div>
+  <div class="notes-body">
+    <div class="notes-tabs">
+      <button class="notes-tab active" onclick="switchTab(this,'tab-notes-3')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Notes</button>
+      <button class="notes-tab" onclick="switchTab(this,'tab-qa-3')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Q&amp;A</button>
+    </div>
+
+    <div id="tab-notes-3" class="notes-content-area active">
+      <div class="notes-card">
+        <h2>Overview of the 18th Amendment (2010)</h2>
+        <p>The 18th Constitutional Amendment was passed on April 8, 2010 by Pakistan's parliament. It was one of the most significant constitutional reforms in Pakistan's history, making 97 changes to the 1973 Constitution.</p>
+        <div class="highlight-box">The 18th Amendment is considered a landmark in Pakistan's democratic history, reversing decades of centralization and military-era amendments.</div>
+
+        <h3>Key Features</h3>
+        <ul>
+          <li>Abolished the Concurrent Legislative List (transferring 47 subjects to provinces)</li>
+          <li>Restored the original parliamentary spirit of 1973 Constitution</li>
+          <li>Reversed most changes made by Zia ul-Haq and Musharraf</li>
+          <li>Renamed NWFP to Khyber Pakhtunkhwa (KPK)</li>
+          <li>Strengthened the role of the Prime Minister</li>
+          <li>Limited the President's power to dissolve the National Assembly (removed Article 58-2b)</li>
+          <li>Established independent Election Commission</li>
+          <li>Made constitutional amendments more difficult (required two-thirds majority)</li>
+        </ul>
+
+        <h3>Provincial Autonomy</h3>
+        <p>The most significant achievement of the 18th Amendment was the devolution of power to provinces:</p>
+        <ul>
+          <li>Education, health, agriculture, environment — transferred to provinces</li>
+          <li>Planning and Development Division divided between federal and provinces</li>
+          <li>National Finance Commission (NFC) Award revised to give more funds to provinces</li>
+          <li>Provinces gained right to enter into agreements with foreign governments directly</li>
+          <li>FATA (Federally Administered Tribal Areas) reforms initiated</li>
+        </ul>
+
+        <h3>Impact on Federation</h3>
+        <p><strong>Positive Impacts:</strong></p>
+        <ul>
+          <li>Provinces better equipped to address local needs and development</li>
+          <li>Reduced sense of alienation in smaller provinces (Sindh, KPK, Balochistan)</li>
+          <li>More democratic and representative governance</li>
+          <li>Strengthened federalism and national unity</li>
+        </ul>
+        <p><strong>Challenges:</strong></p>
+        <ul>
+          <li>Some provinces lacked capacity to manage devolved functions</li>
+          <li>Coordination issues between federal and provincial governments</li>
+          <li>Duplication of services in some sectors</li>
+          <li>Education and health service delivery remains uneven</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="tab-qa-3" class="notes-content-area">
+      <div class="notes-card">
+        <h2>Sample Long Questions &amp; Model Answers</h2>
+        <div class="qa-item">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="qa-q-num">Q1</span>
+            <span>What are the key features of the 18th Amendment? How did it strengthen provincial autonomy in Pakistan?</span>
+          </div>
+          <div class="qa-a open">
+            <strong>Introduction:</strong> The 18th Constitutional Amendment (2010), passed during President Asif Ali Zardari's government, is a watershed moment in Pakistan's constitutional history. It fundamentally restructured the relationship between the federal government and the provinces in favor of greater decentralization.<br><br>
+            <strong>Background:</strong> The 1973 Constitution had been repeatedly amended by military rulers — particularly the 8th Amendment (1985) by Zia ul-Haq and the 17th Amendment (2003) by Musharraf — which had concentrated power in the Presidency. The 18th Amendment reversed most of these changes and restored the original parliamentary balance.<br><br>
+            <strong>Key Features:</strong><br>
+            <strong>1. Abolition of Concurrent List:</strong> The 47-item Concurrent Legislative List was abolished, and these subjects were transferred to provinces, including education, health, labor, agriculture, and tourism.<br><br>
+            <strong>2. Removal of Article 58-2(b):</strong> The President lost the power to dissolve the National Assembly, restoring the supremacy of elected parliament.<br><br>
+            <strong>3. Renaming NWFP:</strong> The North-West Frontier Province was renamed Khyber Pakhtunkhwa, fulfilling a long-standing demand of the Pashtun population.<br><br>
+            <strong>4. Independent Election Commission:</strong> Strengthened electoral independence.<br><br>
+            <strong>Provincial Autonomy:</strong> Provinces now control education policy, health infrastructure, local government systems, and environmental regulations. The 7th NFC Award (2009) also increased provincial share of federal divisible pool from 47.5% to 57.5%.<br><br>
+            <strong>Significance:</strong> The amendment addressed the decades-old grievances of smaller provinces, reduced the trust deficit between the federation and provinces, and established a more genuine federal democracy.<br><br>
+            <strong>Conclusion:</strong> The 18th Amendment represents the most progressive constitutional reform in Pakistan's history, transforming Pakistan from a highly centralized state to a genuinely decentralized federation.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== UNIT 4 NOTES PAGE ===== -->
+<div id="unit4" class="page">
+  <div class="notes-header">
+    <button class="notes-back-btn" onclick="showPage('home')">← Back to Home</button>
+    <div class="notes-unit-badge">UNIT 4</div>
+    <h1><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:10px;margin-bottom:3px"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Pakistan–US Relations</h1>
+    <p>Historical background (1947–present), major developments, current status</p>
+  </div>
+  <div class="notes-body">
+    <div class="notes-tabs">
+      <button class="notes-tab active" onclick="switchTab(this,'tab-notes-4')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Notes</button>
+      <button class="notes-tab" onclick="switchTab(this,'tab-qa-4')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Q&amp;A</button>
+    </div>
+
+    <div id="tab-notes-4" class="notes-content-area active">
+      <div class="notes-card">
+        <h2>Historical Background of Pakistan–US Relations</h2>
+        <p>Pakistan–US relations have been described as "transactional" — based on mutual strategic interest rather than shared values. The relationship has gone through several phases of warm alliance and cold estrangement.</p>
+
+        <h3>Phase 1: Early Alliance (1947–1965)</h3>
+        <ul>
+          <li>Pakistan joined US-led alliances: SEATO (1954) and CENTO/Baghdad Pact (1955)</li>
+          <li>US provided economic and military aid to Pakistan</li>
+          <li>Pakistan gave US air base access (Peshawar air base used for U-2 spy missions)</li>
+          <li>Relations cooled during 1965 India-Pakistan War (US cut military aid to both)</li>
+        </ul>
+
+        <h3>Phase 2: Nixon Era &amp; Bangladesh Crisis (1969–1971)</h3>
+        <ul>
+          <li>Pakistan played key role in facilitating Nixon's opening to China (1971)</li>
+          <li>US was silent during Pakistan's crackdown in East Pakistan</li>
+          <li>Relations with India suffered as US tilted toward Pakistan</li>
+        </ul>
+
+        <h3>Phase 3: Soviet-Afghan War (1979–1989)</h3>
+        <ul>
+          <li>Pakistan became frontline state against Soviet Union in Afghanistan</li>
+          <li>US provided billions in military and economic aid to Pakistan</li>
+          <li>CIA worked with ISI to arm Afghan Mujahideen</li>
+          <li>After Soviet withdrawal, US abandoned the region (Pressler Amendment sanctions)</li>
+        </ul>
+        <div class="highlight-box">The Afghan Jihad created long-term consequences: blowback of extremism, drug trade, and regional instability that Pakistan continues to deal with.</div>
+
+        <h3>Phase 4: Post-9/11 War on Terror (2001–2014)</h3>
+        <ul>
+          <li>Pakistan joined US "War on Terror" as a "major non-NATO ally"</li>
+          <li>Pakistan received $33 billion+ in Coalition Support Funds</li>
+          <li>Relations strained by drone strikes on Pakistani territory</li>
+          <li>Bin Laden discovered in Abbottabad (2011) — major crisis</li>
+          <li>NATO attack on Pakistani soldiers (Salala incident, 2011)</li>
+          <li>Pakistan closed NATO supply routes for 7 months</li>
+        </ul>
+
+        <h3>Phase 5: Contemporary Relations (2014–Present)</h3>
+        <ul>
+          <li>US-Pakistan relations declined as US withdrew from Afghanistan (2021)</li>
+          <li>Taliban takeover of Afghanistan — US blamed Pakistan for supporting Taliban</li>
+          <li>Relations under Imran Khan: "Absolutely Not" policy on US bases</li>
+          <li>US-India strategic partnership competes with Pakistan</li>
+          <li>Economic relations: Pakistan is not a major US trading partner</li>
+          <li>FATF grey list affected Pakistani economy and US relations</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="tab-qa-4" class="notes-content-area">
+      <div class="notes-card">
+        <h2>Sample Long Questions &amp; Model Answers</h2>
+        <div class="qa-item">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="qa-q-num">Q1</span>
+            <span>Trace the historical evolution of Pakistan–US relations. What are the major factors that have shaped this relationship?</span>
+          </div>
+          <div class="qa-a open">
+            <strong>Introduction:</strong> Pakistan–US relations since 1947 have been characterized by strategic alliances during periods of mutual need and estrangement when those interests diverged. Analysts often call it a "transactional alliance" rather than a relationship based on shared democratic values.<br><br>
+            <strong>Cold War Alliance (1950s–1960s):</strong> Pakistan, seeking security against India and economic assistance, aligned with the US in the Cold War. Joining SEATO and CENTO brought military and economic aid but also drew Pakistan into Cold War commitments that limited its foreign policy flexibility. The U-2 incident (1960) — where an American spy plane was shot down after departing Pakistan's Peshawar base — demonstrated the risks of this alignment.<br><br>
+            <strong>Facilitating Sino-American Rapprochement (1971):</strong> Pakistan played an irreplaceable role in Henry Kissinger's secret visit to China (1971), facilitated through Pakistani channels. This cemented Nixon's support for Pakistan even during the East Pakistan crisis, though ultimately the US could not prevent Bangladesh's creation.<br><br>
+            <strong>Afghan Jihad Era (1979–1989):</strong> The most transformative period in Pakistan–US relations. Pakistan became the conduit for American support to Afghan Mujahideen fighting Soviet forces. The CIA-ISI cooperation during this period reshaped Pakistan's domestic security establishment and had long-lasting negative consequences in the form of extremism, drug trafficking, and the Afghan civil war that followed.<br><br>
+            <strong>Post-9/11 Alliance:</strong> After 9/11, President Musharraf made a strategic decision to join the US War on Terror, receiving substantial aid but also facing domestic backlash and sovereignty violations through drone strikes. The Abbottabad operation (2011) that killed Osama bin Laden was carried out without Pakistani knowledge, representing a severe breach of trust.<br><br>
+            <strong>Current Challenges:</strong> The US pivot to India as its primary South Asian partner, withdrawal from Afghanistan, and differences over China policy have created structural tensions. Pakistan's growing relationship with China (CPEC) increasingly puts it at odds with US strategic interests.<br><br>
+            <strong>Conclusion:</strong> Pakistan–US relations have historically been determined by strategic calculations rather than shared values or sustained commitment. The challenge for Pakistan is to develop a more balanced foreign policy that serves its long-term national interests rather than being dependent on any single power.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== UNIT 5 NOTES PAGE ===== -->
+<div id="unit5" class="page">
+  <div class="notes-header">
+    <button class="notes-back-btn" onclick="showPage('home')">← Back to Home</button>
+    <div class="notes-unit-badge">UNIT 5</div>
+    <h1><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:10px;margin-bottom:3px"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>Current Affairs &amp; Diplomacy</h1>
+    <p>Pakistan's foreign policy, US–Israel–Iran conflict, diplomatic positions and impacts</p>
+  </div>
+  <div class="notes-body">
+    <div class="notes-tabs">
+      <button class="notes-tab active" onclick="switchTab(this,'tab-notes-5')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Notes</button>
+      <button class="notes-tab" onclick="switchTab(this,'tab-qa-5')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Q&amp;A</button>
+    </div>
+
+    <div id="tab-notes-5" class="notes-content-area active">
+      <div class="notes-card">
+        <h2>Pakistan's Foreign Policy Role</h2>
+        <p>Pakistan's foreign policy is shaped by its geographic location (bordered by India, Afghanistan, China, Iran), its Islamic identity, its economic needs, and security concerns.</p>
+        <div class="highlight-box">Article 40 of Pakistan's Constitution: "The State shall endeavor to preserve and strengthen fraternal relations among Muslim countries based on Islamic unity."</div>
+
+        <h3>Principles of Pakistan's Foreign Policy</h3>
+        <ul>
+          <li>Non-interference in internal affairs of other states</li>
+          <li>Respect for sovereignty and territorial integrity</li>
+          <li>Support for Islamic solidarity (OIC membership)</li>
+          <li>Nuclear deterrence as strategic security policy</li>
+          <li>Strategic depth policy regarding Afghanistan</li>
+          <li>"Geo-economics" over "geo-politics" in recent years</li>
+        </ul>
+
+        <h3>Key Regional Relationships</h3>
+        <ul>
+          <li><strong>China:</strong> "All-weather strategic cooperative partnership" — CPEC ($62 billion investment), deepest bilateral relationship</li>
+          <li><strong>India:</strong> Hostile relations over Kashmir; two nuclear-armed states; peace process stalled</li>
+          <li><strong>Afghanistan:</strong> Complex relationship; Taliban government concerns about TTP (Pakistani Taliban)</li>
+          <li><strong>Saudi Arabia &amp; Gulf States:</strong> Religious solidarity, remittances, oil imports</li>
+          <li><strong>Turkey:</strong> Growing partnership; defence cooperation</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h2>US–Israel–Iran Conflict &amp; Pakistan's Position</h2>
+        <h3>Background of the Conflict</h3>
+        <p>The US–Israel–Iran triangle involves deep strategic, ideological, and nuclear dimensions. Iran's Islamic Revolution (1979) made it a sworn enemy of both the US and Israel. Iran's nuclear program and support for regional proxies (Hezbollah, Houthis, Hamas) are at the center of the conflict.</p>
+        <ul>
+          <li>Iran supports Shia militias across Iraq, Syria, Lebanon, Yemen</li>
+          <li>Israel views Iran's nuclear program as existential threat</li>
+          <li>US sanctions on Iran; nuclear deal (JCPOA) negotiations ongoing</li>
+          <li>Gaza conflict (2023–present) escalated regional tensions</li>
+        </ul>
+
+        <h3>Pakistan's Diplomatic Position</h3>
+        <p>Pakistan faces a delicate balancing act:</p>
+        <ul>
+          <li><strong>Islamic solidarity:</strong> Strong public sympathy for Palestinians; support for Gaza cause</li>
+          <li><strong>Saudi Arabia vs Iran:</strong> Pakistan avoids choosing between its Sunni Arab allies and Shia Iran (which it shares a long border with)</li>
+          <li><strong>Non-recognition of Israel:</strong> Pakistan does not recognize Israel; supports two-state solution</li>
+          <li><strong>Refused military involvement:</strong> Pakistan declined to join Saudi-led military coalition against Yemen's Houthis (2015 parliament vote)</li>
+          <li><strong>OIC platform:</strong> Uses Organization of Islamic Cooperation to advocate for Palestinian cause</li>
+        </ul>
+        <div class="highlight-box">Pakistan's position: Palestine is a core issue of the Muslim Ummah. Pakistan has consistently called for a two-state solution based on pre-1967 borders with East Jerusalem as the capital of Palestine.</div>
+
+        <h3>Impact on Pakistan</h3>
+        <ul>
+          <li>Regional instability affects Pakistan's economy and security</li>
+          <li>Oil price volatility impacts Pakistan's import bill</li>
+          <li>Pakistani diaspora in Gulf States vulnerable to regional conflicts</li>
+          <li>Pakistan must balance relations with both Saudi Arabia and Iran</li>
+          <li>Risk of being drawn into sectarian regional conflicts</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="tab-qa-5" class="notes-content-area">
+      <div class="notes-card">
+        <h2>Sample Long Questions &amp; Model Answers</h2>
+        <div class="qa-item">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="qa-q-num">Q1</span>
+            <span>What is Pakistan's foreign policy stance on the US–Israel–Iran conflict? Discuss the diplomatic challenges and Pakistan's position.</span>
+          </div>
+          <div class="qa-a open">
+            <strong>Introduction:</strong> The Middle East conflict involving the United States, Israel, and Iran represents one of the most complex geopolitical challenges of the 21st century. For Pakistan, a Muslim-majority nuclear state with interests in the Arab world, strong ties to China, and historical alliance with the US, navigating this conflict requires careful diplomatic balance.<br><br>
+            <strong>Context of the US–Israel–Iran Conflict:</strong> The United States and Israel share a strategic alliance cemented by shared democratic values, massive US aid to Israel ($3.8 billion annually), and common concerns over Iran's nuclear ambitions. Iran's Islamic Republic views both as enemies of the Muslim world. The conflict has been intensified by: Iran's nuclear program (potentially capable of producing a weapon); Iran's support for regional proxies like Hezbollah in Lebanon, Houthis in Yemen, and Hamas in Gaza; and Israeli military operations in Palestinian territories, particularly the 2023 Gaza war.<br><br>
+            <strong>Pakistan's Diplomatic Position:</strong><br>
+            <strong>1. Palestine:</strong> Pakistan consistently supports the Palestinian cause through the UN, OIC, and bilateral diplomacy. Pakistan does not recognize Israel and calls for a two-state solution with East Jerusalem as the Palestinian capital.<br><br>
+            <strong>2. Iran Policy:</strong> Despite sectarian differences, Pakistan maintains diplomatic relations with Iran. Both share a 900-km border. Economic ties include the IP (Iran-Pakistan) gas pipeline project, though US sanctions have hindered it. Pakistan cannot afford to alienate Iran.<br><br>
+            <strong>3. Saudi Arabia Policy:</strong> Saudi Arabia is Pakistan's largest source of foreign remittances and oil imports. Pakistan-Saudi relations are built on Islamic solidarity and economic dependence. This creates tension when Saudi-Iran rivalry heats up.<br><br>
+            <strong>4. Neutrality in Arab Conflicts:</strong> Pakistan's parliament voted to stay out of the Saudi military coalition in Yemen (2015), reflecting Pakistan's preference for diplomatic neutrality over military involvement in Arab sectarian conflicts.<br><br>
+            <strong>Challenges:</strong><br>
+            • Balancing US alliance with non-recognition of Israel<br>
+            • Maintaining Iran relations while preserving Saudi ties<br>
+            • Domestic public opinion strongly pro-Palestinian<br>
+            • Risk of domestic extremist groups exploiting sectarian tensions<br><br>
+            <strong>Conclusion:</strong> Pakistan's foreign policy on the US–Israel–Iran conflict reflects its broader challenge: a Muslim state with complex ties to all major powers, seeking to preserve its sovereignty, economic interests, and Islamic identity simultaneously. A policy of principled neutrality combined with active diplomacy through multilateral forums best serves Pakistan's national interest.
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="qa-q-num">Q2</span>
+            <span>Discuss the salient features of Pakistan's foreign policy. What challenges does Pakistan face in the current global order?</span>
+          </div>
+          <div class="qa-a">
+            <strong>Introduction:</strong> Pakistan's foreign policy is shaped by its unique geostrategic location at the crossroads of South Asia, Central Asia, and the Middle East, as well as its status as the world's fifth-largest nation and only Muslim nuclear power.<br><br>
+            <strong>Constitutional Basis:</strong> Articles 40 and 27 of the 1973 Constitution provide the framework for foreign policy, emphasizing peaceful coexistence, Islamic solidarity, and non-interference in others' internal affairs.<br><br>
+            <strong>Key Features:</strong><br>
+            <strong>1. Security-centric approach:</strong> India remains the primary security concern, driving Pakistan's nuclear posture, military budget, and strategic alignment decisions.<br><br>
+            <strong>2. China-Pakistan partnership:</strong> CPEC ($62bn) has made China Pakistan's closest partner. The China-Pakistan Economic Corridor connects Gwadar port to Xinjiang, giving China access to warm waters while giving Pakistan infrastructure and investment.<br><br>
+            <strong>3. Nuclear deterrence:</strong> Pakistan's minimum credible deterrence posture ensures that no regional power can threaten its sovereignty. Pakistan refuses to sign the NPT but maintains a no-first-use policy discussions ongoing.<br><br>
+            <strong>4. Islamic solidarity:</strong> Pakistan plays an active role in the OIC, supports Palestinian cause, and positions itself as a voice for the Muslim world.<br><br>
+            <strong>5. Economic diplomacy:</strong> Under the "Geo-economics" framework, recent governments have prioritized trade, investment, and connectivity over pure strategic considerations.<br><br>
+            <strong>Current Challenges:</strong><br>
+            • US-China rivalry forcing Pakistan to navigate between its two most important partners<br>
+            • Economic crisis undermining diplomatic leverage<br>
+            • Afghanistan instability and TTP threat<br>
+            • Kashmir dispute remains unresolved despite 75+ years<br>
+            • Climate change threatening water security (Pakistan is among most climate-vulnerable states)<br><br>
+            <strong>Conclusion:</strong> Pakistan's foreign policy must evolve from a security-dominated paradigm to one that prioritizes economic integration, regional connectivity, and human development to ensure stability and prosperity in the 21st century.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function switchTab(btn, tabId) {
+    const body = btn.closest('.notes-body');
+    body.querySelectorAll('.notes-tab').forEach(t => t.classList.remove('active'));
+    body.querySelectorAll('.notes-content-area').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+  }
+
+  function toggleQA(qEl) {
+    const ans = qEl.nextElementSibling;
+    ans.classList.toggle('open');
+  }
+</script>
+</body>
+</html>

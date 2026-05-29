@@ -52,16 +52,6 @@
       min-height: 100vh;
     }
 
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 999;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      opacity: 1;
-    }
-
     .wrap {
       max-width: 780px;
       margin: 0 auto;
@@ -565,6 +555,7 @@
 
     .btn-p:hover {
       background: #7a4f1e;
+      color: #fff;
     }
 
     .btn-g {
@@ -1088,12 +1079,6 @@
       --sh2: 0 4px 24px rgba(0, 0, 0, 0.45);
     }
 
-    body.dark::after {
-      background-image: linear-gradient(rgba(155, 109, 232, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(155, 109, 232, 0.025) 1px, transparent 1px);
-      background-size: 60px 60px;
-      opacity: 1;
-    }
 
     body.dark .opt.correct {
       background: rgba(62, 207, 168, 0.12);
@@ -1264,7 +1249,7 @@
     }
 
     .syllabus-list li::before {
-      content: '✦';
+      content: '◆';
       color: var(--gold);
       font-size: 0.6rem;
       margin-top: 1px;
@@ -1283,10 +1268,487 @@
       direction: rtl;
       display: inline;
     }
+    /* ── AYATS ── */
+    .ayat-ar {
+      font-family: var(--arabic);
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      direction: rtl;
+      text-align: right;
+      line-height: 2.2;
+      color: var(--text);
+      background: var(--gold-lt);
+      border: 1px solid #e0c88a;
+      border-radius: var(--r);
+      padding: 22px 26px;
+      margin-bottom: 10px;
+    }
+    .ayat-inp {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r2);
+      padding: 14px 18px;
+      font-family: var(--urdu);
+      font-size: 1.1rem;
+      direction: rtl;
+      color: var(--text);
+      outline: none;
+      resize: vertical;
+      min-height: 90px;
+      transition: border-color .18s;
+      margin-bottom: 16px;
+      line-height: 2;
+    }
+    .ayat-inp:focus { border-color: var(--accent); }
+    .ayat-result-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .badge-ayat {
+      background: #e8f5f0;
+      color: #2a7a5a;
+    }
+    body.dark .badge-ayat {
+      background: rgba(62, 207, 168, 0.12);
+      color: #3ecfa8;
+    }
+
+    /* ── SAVE BUTTON ── */
+    .save-btn {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      padding: 5px 12px 5px 9px;
+      font-family: var(--ui);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text3);
+      cursor: pointer;
+      transition: all .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    .save-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .save-btn.saved {
+      background: var(--gold-lt);
+      border-color: var(--gold);
+      color: var(--accent);
+    }
+    .save-btn .save-icon { font-size: 0.9rem; line-height: 1; }
+
+    /* ── SAVED WORDS PANEL ── */
+    .saved-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .saved-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r2);
+      padding: 13px 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.04);
+      position: relative;
+    }
+    .saved-item .ref-ar { font-family: var(--arabic); font-size: 1.55rem; color: var(--gold); direction: rtl; min-width: 70px; text-align: right; }
+    .saved-item .ref-ur { font-family: var(--arabic); font-size: 0.93rem; color: var(--text2); direction: rtl; line-height: 1.6; }
+    .saved-item .ref-nt { font-size: 0.7rem; color: var(--text3); margin-top: 1px; }
+    .remove-saved-btn {
+      margin-left: auto;
+      flex-shrink: 0;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      padding: 4px 10px;
+      font-size: 0.73rem;
+      color: var(--err);
+      cursor: pointer;
+      transition: all .15s;
+      font-family: var(--ui);
+      font-weight: 600;
+    }
+    .remove-saved-btn:hover { background: var(--err-bg); border-color: var(--err); }
+    .saved-empty {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--text3);
+      font-size: 0.9rem;
+    }
+    .saved-empty .empty-icon { font-size: 2.5rem; margin-bottom: 10px; display: block; }
+    .badge-saved { background: #fff5e0; color: #b8660a; }
+    body.dark .badge-saved { background: rgba(200,147,42,.15); color: var(--gold); }
+
+    /* sub-panel toggles for saved */
+    .sub-toggle-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    /* ══════════════════════════════════════════
+       LIGHT MODE POLISH & ANIMATIONS
+       (no :root override — variables set above)
+    ══════════════════════════════════════════ */
+
+    /* ── ANIMATED BACKGROUND ── */
+    body { position: relative; }
+
+    /* Drifting grid overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(139,94,42,0.025) 59px, rgba(139,94,42,0.025) 60px),
+        repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(139,94,42,0.025) 59px, rgba(139,94,42,0.025) 60px);
+      background-size: 60px 60px;
+      animation: grid-drift 40s linear infinite;
+    }
+    body.dark::before {
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(155,109,232,0.035) 59px, rgba(155,109,232,0.035) 60px),
+        repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(155,109,232,0.035) 59px, rgba(155,109,232,0.035) 60px);
+    }
+
+    @keyframes grid-drift {
+      0%   { background-position: 0 0, 0 0; }
+      100% { background-position: 60px 60px, 60px 60px; }
+    }
+
+    /* Floating orb overlay — replaces original body::after noise texture */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle 350px at 15% 20%, rgba(200,147,42,0.055) 0%, transparent 70%),
+        radial-gradient(circle 280px at 88% 75%, rgba(45,106,143,0.045) 0%, transparent 70%),
+        radial-gradient(circle 220px at 55% 55%, rgba(139,94,42,0.03) 0%, transparent 70%);
+      animation: orb-float 22s ease-in-out infinite alternate;
+    }
+    body.dark::after {
+      background:
+        radial-gradient(circle 350px at 15% 20%, rgba(155,109,232,0.06) 0%, transparent 70%),
+        radial-gradient(circle 280px at 88% 75%, rgba(45,106,143,0.07) 0%, transparent 70%),
+        radial-gradient(circle 220px at 55% 55%, rgba(200,147,42,0.04) 0%, transparent 70%);
+    }
+    @keyframes orb-float {
+      0%   { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(14px, -18px) scale(1.04); }
+      66%  { transform: translate(-10px, 14px) scale(0.97); }
+      100% { transform: translate(18px, 8px) scale(1.03); }
+    }
+
+    .wrap { position: relative; z-index: 1; }
+
+    /* ── HEADER ── */
+    header {
+      padding: 56px 0 40px;
+      border-bottom: none;
+      position: relative;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 200px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border2), transparent);
+    }
+
+    .hdr-ar {
+      font-size: 2.4rem;
+      animation: shimmer-text 4s ease-in-out infinite;
+    }
+    @keyframes shimmer-text {
+      0%, 100% { filter: brightness(1); }
+      50%       { filter: brightness(1.25); }
+    }
+    header h1 { font-size: 1.9rem; letter-spacing: -0.02em; }
+
+    /* ── HERO CHIP ── */
+    .hero-chip {
+      background: linear-gradient(135deg, rgba(139,94,42,0.06), rgba(200,147,42,0.08));
+      border: 1px solid rgba(139,94,42,0.22);
+      color: var(--accent);
+    }
+    body.dark .hero-chip {
+      background: linear-gradient(135deg, rgba(200,147,42,0.1), rgba(212,168,67,0.06));
+      border-color: rgba(200,147,42,0.3);
+    }
+
+    /* ── SCORE PILLS ── */
+    .sc { transition: transform 0.2s, box-shadow 0.2s; }
+    .sc:hover { transform: translateY(-1px); box-shadow: var(--sh2); }
+
+    /* ── TABS ── */
+    .tabs {
+      background: rgba(255,255,255,0.88);
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+    }
+    body.dark .tabs { background: rgba(23,21,31,0.92); }
+
+    .tab { border-radius: 12px; transition: all .2s cubic-bezier(.4,0,.2,1); }
+    .tab.active {
+      background: linear-gradient(135deg, var(--accent) 0%, #a0712f 100%);
+      box-shadow: 0 2px 8px rgba(139,94,42,0.3);
+    }
+    body.dark .tab.active { box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+    .tab:hover:not(.active) { background: rgba(139,94,42,0.07); color: var(--accent); }
+    body.dark .tab:hover:not(.active) { background: rgba(200,147,42,0.1); color: var(--gold); }
+
+    /* ── QUIZ CARD ── */
+    .qcard {
+      background: var(--card);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      animation: card-in .35s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes card-in {
+      from { opacity: 0; transform: translateY(12px) scale(0.99); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .qcard::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--gold), var(--accent2));
+      border-radius: 20px 20px 0 0;
+    }
+
+    /* ── MCQ OPTIONS ── */
+    .opt {
+      background: var(--surface);
+      border-radius: 14px;
+      transition: all .18s cubic-bezier(.4,0,.2,1);
+    }
+    .opt:hover:not(:disabled) {
+      border-color: var(--accent);
+      background: var(--gold-lt);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(139,94,42,0.1);
+    }
+    body.dark .opt:hover:not(:disabled) { box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .opt.correct {
+      border-color: var(--ok);
+      background: var(--ok-bg);
+      animation: opt-correct .4s cubic-bezier(.4,0,.2,1);
+    }
+    body.dark .opt.correct { background: rgba(62,207,168,0.12); }
+    .opt.wrong {
+      border-color: var(--err);
+      background: var(--err-bg);
+      animation: opt-wrong .35s ease;
+    }
+    body.dark .opt.wrong { background: rgba(224,90,122,0.12); }
+    @keyframes opt-correct {
+      0%   { transform: scale(1); }
+      40%  { transform: scale(1.025); }
+      100% { transform: scale(1); }
+    }
+    @keyframes opt-wrong {
+      0%, 100% { transform: translateX(0); }
+      25%       { transform: translateX(-5px); }
+      75%       { transform: translateX(5px); }
+    }
+
+    /* ── BUTTONS ── */
+    .btn-p {
+      background: linear-gradient(135deg, var(--accent) 0%, #a0712f 100%);
+      box-shadow: 0 2px 8px rgba(139,94,42,0.22);
+      transition: all .18s;
+    }
+    .btn-p:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(139,94,42,0.3); background: linear-gradient(135deg, #7a4f1e 0%, #8a5e22 100%); color: #fff; }
+    .btn-p:active { transform: translateY(0); }
+    .btn-g { transition: all .18s; }
+    .btn-g:hover { background: rgba(139,94,42,0.06); transform: translateY(-1px); }
+    body.dark .btn-g:hover { background: rgba(200,147,42,0.1); }
+
+    /* ── PROGRESS BAR SHIMMER ── */
+    .prog-fill {
+      background: linear-gradient(90deg, var(--gold), var(--accent), var(--accent2), var(--gold));
+      background-size: 200% 100%;
+      box-shadow: 0 0 6px rgba(200,147,42,0.35);
+      animation: prog-shimmer 3s linear infinite;
+    }
+    @keyframes prog-shimmer {
+      0%   { background-position: 0% 0%; }
+      100% { background-position: 200% 0%; }
+    }
+
+    /* ── FLASHCARD ── */
+    .fc-face {
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: var(--sh2);
+    }
+    .fc-face.back { background: var(--surface); }
+    body.dark .fc-face { background: linear-gradient(145deg, #1a1826, #17151f); }
+    body.dark .fc-face.back {
+      background: linear-gradient(145deg, #141e2a, #111826);
+      border-color: #2a3545;
+    }
+
+    /* ── REFERENCE ITEMS ── */
+    .ref-item {
+      border-radius: 12px;
+      transition: all .18s;
+    }
+    .ref-item:hover {
+      border-color: rgba(200,147,42,0.4);
+      background: var(--gold-lt);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(139,94,42,0.08);
+    }
+    body.dark .ref-item:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+
+    /* ── SYLLABUS BUBBLE ── */
+    .syllabus-bubble { border-radius: 18px; }
+    body.dark .syllabus-bubble {
+      background: linear-gradient(135deg, rgba(200,147,42,0.06), rgba(139,94,42,0.04));
+      border-color: rgba(200,147,42,0.25);
+    }
+
+    /* ── NOTE CARDS ── */
+    .note-card { border-radius: 16px; transition: all .2s cubic-bezier(.4,0,.2,1); }
+    .note-card:hover { transform: translateY(-2px); box-shadow: var(--sh2); }
+    .note-card-head { background: var(--surface); }
+    body.dark .note-card-head { background: rgba(255,255,255,0.03); }
+
+    /* ── RESULT CARD ── */
+    .res-card {
+      background: var(--card);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .res-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--accent), var(--accent2));
+    }
+
+    /* ── TOAST ── */
+    .toast { box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+    /* ── SAVE BUTTON ANIMATIONS ── */
+    .save-btn .save-icon svg { transition: transform .2s; display: inline-block; vertical-align: -1px; }
+    .save-btn:hover .save-icon svg { transform: scale(1.2); }
+    .save-btn.saved .save-icon svg { animation: star-pop .35s cubic-bezier(.4,0,.2,1); }
+    @keyframes star-pop {
+      0%  { transform: scale(1); }
+      50% { transform: scale(1.5) rotate(18deg); }
+      100%{ transform: scale(1); }
+    }
+
+    /* ── THEME TOGGLE ── */
+    .theme-toggle {
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      box-shadow: var(--sh);
+    }
+
+    /* ── MATCH / FB SVG ICONS ── */
+    .match-icon svg { display: inline-block; vertical-align: -2px; }
+    .fb-lbl svg { display: inline-block; vertical-align: -2px; margin-right: 4px; }
+
+    /* ── BOOK PAGE FLIP ANIMATION ── */
+    .book-anim {
+      display: inline-block;
+      position: relative;
+      width: 48px; height: 38px;
+      margin: 0 auto 14px;
+      perspective: 200px;
+    }
+    .book-anim .book-page {
+      position: absolute;
+      top: 0; right: 0;
+      width: 24px; height: 38px;
+      background: linear-gradient(135deg, #fdf4e3, #f0dfc0);
+      border: 1px solid rgba(200,147,42,0.3);
+      border-radius: 1px 4px 4px 1px;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      animation: page-flip 3s cubic-bezier(.4,0,.6,1) infinite;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.07);
+    }
+    body.dark .book-anim .book-page {
+      background: linear-gradient(135deg, #2a2535, #1e1a2a);
+      border-color: rgba(200,147,42,0.25);
+    }
+    .book-anim .book-page::before {
+      content: '';
+      position: absolute;
+      top: 7px; left: 4px; right: 4px; height: 1.5px;
+      background: rgba(139,94,42,0.18);
+      border-radius: 1px;
+      box-shadow: 0 5px 0 rgba(139,94,42,0.13), 0 10px 0 rgba(139,94,42,0.1), 0 15px 0 rgba(139,94,42,0.07), 0 20px 0 rgba(139,94,42,0.05);
+    }
+    body.dark .book-anim .book-page::before {
+      background: rgba(200,147,42,0.2);
+      box-shadow: 0 5px 0 rgba(200,147,42,0.15), 0 10px 0 rgba(200,147,42,0.1), 0 15px 0 rgba(200,147,42,0.07), 0 20px 0 rgba(200,147,42,0.04);
+    }
+    .book-anim .book-page.p2 { animation-delay: -1.5s; opacity: 0.65; }
+    .book-anim .book-spine {
+      position: absolute;
+      top: 0; left: 0;
+      width: 24px; height: 38px;
+      background: linear-gradient(135deg, #fff8ed, #fdf4e3);
+      border: 1px solid rgba(200,147,42,0.3);
+      border-radius: 4px 1px 1px 4px;
+      box-shadow: inset -2px 0 4px rgba(0,0,0,0.04);
+    }
+    body.dark .book-anim .book-spine {
+      background: linear-gradient(135deg, #211d2e, #1a1626);
+      border-color: rgba(200,147,42,0.2);
+    }
+    @keyframes page-flip {
+      0%   { transform: rotateY(0deg); }
+      40%  { transform: rotateY(-160deg); }
+      55%  { transform: rotateY(-160deg); }
+      100% { transform: rotateY(0deg); }
+    }
+
+    /* ── FLOATING PARTICLES ── */
+    .bg-particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: particle-float linear infinite;
+    }
+    @keyframes particle-float {
+      0%   { opacity: 0; transform: translateY(100vh) scale(0.3); }
+      8%   { opacity: 0.7; }
+      92%  { opacity: 0.4; }
+      100% { opacity: 0; transform: translateY(-40px) scale(1); }
+    }
   </style>
 </head>
 
 <body>
+  <!-- Background floating particles -->
+  <div class="bg-particles" id="bg-particles"></div>
+
   <div class="wrap">
 
     <!-- THEME TOGGLE -->
@@ -1300,13 +1762,19 @@
     </div>
 
     <header>
+      <!-- Animated book icon -->
+      <div class="book-anim">
+        <div class="book-spine"></div>
+        <div class="book-page"></div>
+        <div class="book-page p2"></div>
+      </div>
       <span class="hdr-ar">القرآن الكريم</span>
       <h1>Quranic Arabic Quiz</h1>
 
       <!-- here -->
       <div class="section active" id="sect-home">
         <div class="hero">
-          <div class="hero-chip">Made by Hanan Shafay & Mohid Ahmed</div>
+          <div class="hero-chip">Made by Umair Hassan, Mohid Ahmed & Hanan Shafay</div>
         </div>
       </div>
       <!-- here -->
@@ -1317,20 +1785,31 @@
     <!-- SYLLABUS BUBBLE -->
     <div class="syllabus-bubble">
       <div class="syllabus-header">
-        <span class="syllabus-icon">&#x1F4D6;</span>
+        <span class="syllabus-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
         <span class="syllabus-eyebrow">Syllabus Topics</span>
         <div class="syllabus-divider"></div>
       </div>
 
 
-      <div class="hero-chip"><strong>Unit no. 05</strong> &#x2014; Lesson 01 - Lesson 18 (Page no. 42 - Page no. 91)
+      <div class="hero-chip"><strong>Unit no. 05</strong> &#x2014; Complete (Page no. 42 - Page no. 112)
       </div>
 
       <ul class="syllabus-list">
         <li><strong>Difficult Words</strong> &#x2014; Less common words requiring deeper study</li>
-        <li><strong>Groups</strong> &#x2014; Words categorised by grammatical or thematic groups</li>
         <li><strong>Basic Word Notes</strong> &#x2014; Grammar rules, usage notes, and key observations</li>
       </ul>
+    </div>
+
+    <!-- QUICK ACCESS BUTTONS -->
+    <div style="display:flex;gap:10px;justify-content:center;margin-bottom:26px;flex-wrap:wrap;">
+      <button class="btn btn-g" style="font-size:0.88rem;padding:10px 24px;border-radius:40px;display:flex;align-items:center;gap:7px;" onclick="quickNav('reference')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Reference Guide
+      </button>
+      <button class="btn btn-g" style="font-size:0.88rem;padding:10px 24px;border-radius:40px;display:flex;align-items:center;gap:7px;" onclick="quickNav('notes')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Basic Word Notes
+      </button>
     </div>
 
     <div class="score-row">
@@ -1343,11 +1822,10 @@
       <button class="tab active" onclick="switchTab('basic',this)">Basic Words</button>
       <button class="tab" onclick="switchTab('difficult',this)">Difficult Words</button>
       <button class="tab" onclick="switchTab('allah',this)">Names of Allah</button>
-      <button class="tab" onclick="switchTab('groups',this)">Groups</button>
       <button class="tab" onclick="switchTab('overall',this)">Overall Quiz</button>
-      <button class="tab" onclick="switchTab('notes',this)">Basic Word Notes</button>
       <button class="tab" onclick="switchTab('flashcards',this)">Flashcards</button>
-      <button class="tab" onclick="switchTab('reference',this)">Reference</button>
+      <button class="tab" onclick="switchTab('ayats',this)">Ayats</button>
+      <button class="tab" onclick="switchTab('saved',this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" style="vertical-align:-1px;margin-right:4px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Saved Words</button>
     </div>
 
     <!-- BASIC -->
@@ -1405,25 +1883,6 @@
         <div class="prog-fill" id="prog-allah" style="width:0"></div>
       </div>
       <div id="quiz-allah"></div>
-    </div>
-
-    <!-- GROUPS -->
-    <div class="panel" id="panel-groups">
-      <div class="sec-head">
-        <div>
-          <h2>Groups (جمع)</h2>
-          <p>Plural forms and group nouns</p>
-        </div>
-        <div class="type-btns">
-          <button class="tbtn active" onclick="startQuiz('groups','mcq',this)">Multiple Choice</button>
-          <button class="tbtn" onclick="startQuiz('groups','fill',this)">Write Answer</button>
-          <button class="tbtn" onclick="startQuiz('groups','match',this)">Match Pairs</button>
-        </div>
-      </div>
-      <div class="prog-track">
-        <div class="prog-fill" id="prog-groups" style="width:0"></div>
-      </div>
-      <div id="quiz-groups"></div>
     </div>
 
     <!-- OVERALL -->
@@ -1488,7 +1947,6 @@
           <button class="tbtn" onclick="loadFC('basic',this)">Basic</button>
           <button class="tbtn" onclick="loadFC('difficult',this)">Difficult</button>
           <button class="tbtn" onclick="loadFC('allah',this)">Allah</button>
-          <button class="tbtn" onclick="loadFC('groups',this)">Groups</button>
         </div>
       </div>
       <div class="fc-note" id="fc-note">—</div>
@@ -1511,6 +1969,25 @@
         <span class="fc-ctr" id="fc-ctr">1 / 1</span>
         <button class="btn btn-g" onclick="fcNext()">Next →</button>
       </div>
+      <div style="text-align:center;margin-bottom:10px">
+        <button class="save-btn" id="fc-save-btn" onclick="toggleSaveFC()">
+          <span class="save-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span> Save Word
+        </button>
+      </div>
+    </div>
+
+    <!-- AYATS -->
+    <div class="panel" id="panel-ayats">
+      <div class="sec-head">
+        <div>
+          <h2>Ayat Translation</h2>
+          <p>Read the ayah and write its Urdu meaning — key words are checked</p>
+        </div>
+      </div>
+      <div class="prog-track">
+        <div class="prog-fill" id="prog-ayats" style="width:0"></div>
+      </div>
+      <div id="quiz-ayats"></div>
     </div>
 
     <!-- REFERENCE -->
@@ -1533,9 +2010,32 @@
         <div class="ref-title">Difficult Words</div>
         <div class="ref-grid" id="ref-difficult"></div>
       </div>
-      <div class="ref-sec">
-        <div class="ref-title">Groups (جمع الفاظ)</div>
-        <div class="ref-grid" id="ref-groups"></div>
+    </div>
+
+    <!-- SAVED WORDS -->
+    <div class="panel" id="panel-saved">
+      <div class="sec-head">
+        <div>
+          <h2><svg width="16" height="16" viewBox="0 0 24 24" fill="var(--gold)" stroke="var(--gold)" stroke-width="1" style="vertical-align:-2px;margin-right:6px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Saved Words</h2>
+          <p>Words you bookmarked for extra practice</p>
+        </div>
+      </div>
+      <div class="sub-toggle-row">
+        <button class="tbtn active" id="saved-view-btn" onclick="showSavedView()">View Saved</button>
+        <button class="tbtn" id="saved-quiz-btn" onclick="startSavedQuiz()">Quiz Me</button>
+      </div>
+
+      <!-- View sub-panel -->
+      <div id="saved-view-panel">
+        <div id="saved-words-grid"></div>
+      </div>
+
+      <!-- Quiz sub-panel -->
+      <div id="saved-quiz-panel" style="display:none">
+        <div class="prog-track">
+          <div class="prog-fill" id="prog-saved" style="width:0"></div>
+        </div>
+        <div id="quiz-saved"></div>
       </div>
     </div>
 
@@ -1543,11 +2043,25 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    // ── SVG ICON HELPERS ──
+    const SVG = {
+      starFilled: `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" style="flex-shrink:0"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+      starEmpty: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+      check: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+      cross: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
+      remove: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`,
+      starLg: `<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+    };
+    function saveBtnHtml(isSaved, label) {
+      return `<span class="save-icon">${isSaved ? SVG.starFilled : SVG.starEmpty}</span> ${label}`;
+    }
+
     // ══════════════════════════════
     //  DATA
     // ══════════════════════════════
     const DATA = {
       basic: [
+        // ── original quiz entries ──
         { ar: 'ھُمْ (شروع میں)', ur: 'وہ لوگ', note: 'They (masculine plural pronoun)' },
         { ar: 'ـھُمْ (آخر میں) / ھُمْ (آخر میں)', ur: 'ان کا / ان کی', note: 'Their / Them (suffix pronoun)' },
         { ar: 'نَحْنُ', ur: 'ہم لوگ', note: 'We' },
@@ -1562,18 +2076,67 @@
         { ar: 'مَعَ', ur: 'ساتھ', note: 'With' },
         { ar: 'کیف', ur: 'کیسے', note: 'How' },
         { ar: 'لَیْسَ', ur: 'نہیں', note: 'Is not' },
-        { ar: 'أَنَّ', ur: 'کہ / یہ کہ', note: 'That' },
+        { ar: 'أَنَّ', ur: 'کہ / یہ کہ', note: 'That' },
         { ar: 'ذُو', ur: 'والا', note: 'Possessor of' },
         { ar: 'عِنْدَ', ur: 'پاس', note: 'Near / with' },
         { ar: 'بَیْنَ', ur: 'درمیان', note: 'Between' },
-        { ar: 'أَيُّ', ur: 'کون', note: 'Which' },
-        { ar: 'ثُمَّ', ur: 'پھر', note: 'Then' },
-        { ar: 'إِنَّمَا', ur: 'بس / درحقیقت / محض', note: 'Only / Indeed / Surely' },
+        { ar: 'أَيُّ', ur: 'کون', note: 'Which' },
+        { ar: 'ثُمَّ', ur: 'پھر', note: 'Then' },
+        { ar: 'إِنَّمَا', ur: 'بس / درحقیقت / محض', note: 'Only / Indeed / Surely' },
         { ar: 'يَا', ur: 'اے', note: 'O / Oh' },
         { ar: 'و', ur: 'اور / قسم (اگر اگلے لفظ کے آخر میں زیر ہو)', note: 'And / Promise (used for oath if next word ends with زیر)' },
         { ar: 'إِذَا', ur: 'اگر / جب / تب', note: 'If / When / Then' },
         { ar: 'بَلْ', ur: 'بلکہ', note: 'Rather / Instead' },
         { ar: 'هُمَا', ur: 'وہ دونوں', note: 'They both' },
+
+        // ── added from notes (missing from quiz) ──
+        { ar: 'مَا ... إِلَّا / إِنْ ... إِلَّا', ur: 'نہیں ... مگر', note: 'Negation + exception — emphasis (not...except)' },
+        { ar: 'مَا (نفی)', ur: 'نہیں', note: 'Negation — absolute denial' },
+        { ar: 'أَ / هَلْ', ur: 'کیا', note: 'Interrogative particle — yes/no question' },
+        { ar: 'أَمْ', ur: 'یا', note: 'Or — for second part of a double question' },
+        { ar: 'نِعْمَ', ur: 'انتہائی شاندار ہے', note: 'Praise — what an excellent...' },
+        { ar: 'كَلَّا', ur: 'ہرگز نہیں', note: 'Strong refusal / rebuke' },
+        { ar: 'مَا أَدْرَاكَ مَا', ur: 'تمہیں کیا پتا کہ کیا ہے؟', note: 'What could make you know what it is? (draws attention)' },
+        { ar: 'حَسْبُ', ur: 'کافی ہے', note: 'Sufficient / enough (takes suffix pronouns)' },
+        { ar: 'أَعْلَمُ', ur: 'سب سے بہتر آگاہ ہے', note: 'Most knowing / best aware (superlative)' },
+        { ar: 'سُبْحَانَ', ur: 'شایانِ شان عظمت کا اعتراف', note: 'Glory be to / exalted is (only for Allah)' },
+        { ar: 'قُلْ', ur: 'آپ کہہ دیجیے', note: 'Say (command to the Prophet ﷺ)' },
+        { ar: 'إِذًا', ur: 'تب تو / پھر تو / اس صورت میں تو', note: 'Then / In that case (consequence)' },
+        { ar: 'بِئْسَ', ur: 'وہ انتہائی برا ہے', note: 'How evil / wretched is...' },
+        { ar: 'أَلَيْسَ', ur: 'کیا نہیں ہے', note: 'Is it not? (rhetorical question based on truth)' },
+        { ar: 'الْيَوْمُ', ur: 'آج کے روز', note: 'Today / The Day (Quranic idiom for Day of Judgment)' },
+        { ar: 'يَوْمَئِذٍ', ur: 'اس روز', note: 'On that Day (Day of Judgment)' },
+        { ar: 'أَنّٰى', ur: 'آخر کیسے / کیونکر / کہاں سے', note: 'How / From where (expression of wonder)' },
+        { ar: 'كَأَنَّ', ur: 'گویا کہ', note: 'As if / as though (simile)' },
+        { ar: 'أَلَا', ur: 'خبردار / آگاہ رہو / توجہ کرو', note: 'Beware / Verily — draws full attention' },
+        { ar: 'تمیز (ً / ٍ)', ur: 'اعتبار سے / بطور', note: 'Tamyiz — double fatha/kasra expressing "in terms of"' },
+        { ar: 'مِنْ (نفی)', ur: 'کوئی بھی', note: 'Negation of any possibility — "not a single one"' },
+        { ar: 'ھٰذَا', ur: 'یہ (مذکر)', note: 'This (masculine — near demonstrative)' },
+        { ar: 'ھٰذِہِ', ur: 'یہ (مؤنث)', note: 'This (feminine — near demonstrative)' },
+        { ar: 'ذٰلِكَ', ur: 'وہ (مذکر)', note: 'That (masculine — far demonstrative)' },
+        { ar: 'تِلْكَ', ur: 'وہ (مؤنث)', note: 'That (feminine — far demonstrative)' },
+        { ar: 'لَہٗ', ur: 'یقیناً / بیشک', note: 'Particle of emphasis (with لام)' },
+        { ar: 'لِـ', ur: 'کے لیے', note: 'Preposition — for / belonging to' },
+        { ar: 'أَ (صیغۂ تفضیل)', ur: 'سب سے زیادہ', note: 'Superlative prefix — most / -est' },
+        { ar: 'إِنَّ', ur: 'بے شک / یقیناً', note: 'Indeed / Verily — emphasis at start of sentence' },
+        { ar: 'فِيْ', ur: 'میں', note: 'Preposition — in / within' },
+        { ar: 'عَلَىٰ', ur: 'پر', note: 'Preposition — on / upon' },
+        { ar: 'مِنَ', ur: 'سے', note: 'Preposition — from / of' },
+        { ar: 'إِلَىٰ', ur: 'کی طرف / تک', note: 'Preposition — towards / until' },
+        { ar: 'بِـ', ur: 'پر / سے / کو', note: 'Preposition — by / with / in' },
+        { ar: 'لَا', ur: 'بلکل نہیں / قطعاً نہیں / ہرگز نہیں', note: 'Absolute negation' },
+        { ar: 'اِلَّا', ur: 'مگر / سوائے', note: 'Except / but (exception particle)' },
+        { ar: 'ھُوَ', ur: 'وہ (مذکر)', note: 'He / It (masculine pronoun)' },
+        { ar: 'ھِيَ', ur: 'وہ (مؤنث)', note: 'She / It (feminine pronoun)' },
+        { ar: 'كَـ (شروع میں)', ur: 'کی طرح', note: 'Like / as — simile prefix' },
+        { ar: 'كَـ (آخر میں)', ur: 'تمہارا / تیرا', note: 'Your (singular suffix pronoun)' },
+        { ar: 'ـہُ', ur: 'اس کا / اس کے', note: 'His / its (masculine suffix pronoun)' },
+        { ar: 'ـھَا', ur: 'اس (مؤنث) کا', note: 'Her / its (feminine suffix pronoun)' },
+        { ar: 'أَنْتَ', ur: 'تم / آپ', note: 'You (singular masculine pronoun)' },
+        { ar: 'عَنِ', ur: 'بارے میں / سے', note: 'Preposition — about / from' },
+        { ar: 'أَنَا', ur: 'میں', note: 'I (first person singular pronoun)' },
+        { ar: 'ـيِ', ur: 'میرا / میری', note: 'My (first person suffix pronoun)' },
+        { ar: 'مُجْرِمًا ← مُجْرِم', ur: 'بن کر / ہوتے ہوئے / بحیثیت', note: 'Hal (state) — double fatha showing "while being / as"' },
       ],
       difficult: [
         { ar: 'شِرْذِمَةٌ', ur: 'چھوٹا گروہ', note: 'A small band or insignificant group' },
@@ -1582,7 +2145,7 @@
         { ar: 'تَبَابٍ', ur: 'تباہی', note: 'Destruction or ruin' },
         { ar: 'لَعِبٌ', ur: 'کھیل', note: 'Play or amusement' },
         { ar: 'لَهْوٌ', ur: 'تماشا / غفلت میں ڈالنے والی چیز', note: 'Idle amusement or diversion' },
-        { ar: 'السَّاعَةِ', ur: 'قیامت / وقت مقررہ', note: 'The Hour (often refers to the Day of Judgment)' },
+        { ar: 'السَّاعَةِ', ur: 'قیامت / وقت مقررہ', note: 'The Hour (often refers to the Day of Judgment)' },
         { ar: 'كَلَمْحِ الْبَصَرِ', ur: 'آنکھ جھپکنے کی طرح', note: 'In the blink of an eye' },
         { ar: 'إِفْكٌ', ur: 'بڑا جھوٹ / بہتان', note: 'Great lie or slander' },
         { ar: 'مَلَكٌ كَرِيمٌ', ur: 'عزت والا فرشتہ', note: 'A noble angel' },
@@ -1590,7 +2153,7 @@
         { ar: 'أَنْعَامٌ', ur: 'مویشی / چوپائے', note: 'Cattle or livestock' },
         { ar: 'مُفْتَرُونَ', ur: 'جھوٹ گھڑنے والے', note: 'Fabricators or inventors of lies' },
         { ar: 'كَمَاءٍ', ur: 'پانی کی طرح', note: 'Like water' },
-        { ar: 'النَّجْوَىٰ', ur: 'سرگوشی', note: 'Secret talk or whispering' },
+        { ar: 'النَّجْوَىٰ', ur: 'سرگوشی', note: 'Secret talk or whispering' },
         { ar: 'دَارُ الْقَرَارِ', ur: 'ہمیشہ رہنے کا گھر', note: 'The abode of permanence' },
         { ar: 'مُسْتَهْزِئُونَ', ur: 'مذاق اڑانے والے', note: 'Mockers or those who ridicule' },
         { ar: 'شِقَاقٍ', ur: 'مخالفت / ضد', note: 'Dissension or opposition' },
@@ -1620,28 +2183,322 @@
         { ar: 'مُهِينٌ', ur: 'ذلیل کرنے والا / رسوا کن', note: 'Humiliating or disgraceful' },
         { ar: 'أَقْفَالُهَا', ur: 'ان کے تالے', note: 'Its locks' },
         { ar: 'الْمُسَيْطِرُونَ', ur: 'قابو رکھنے والے', note: 'Controllers or those in authority' },
-        { ar: 'الْوَهَّابُ', ur: 'بہت زیادہ عطا کرنے والا', note: 'The Bestower (one who gives abundantly)' },
+        { ar: 'الْوَهَّابُ', ur: 'بہت زیادہ عطا کرنے والا', note: 'The Bestower (one who gives abundantly)' },
         { ar: 'بَيْنَهُمَا', ur: 'ان دونوں کے درمیان', note: 'Between the two' },
         { ar: 'أَشِرٌ', ur: 'اکڑنے والا / سرکش خوشحال', note: 'Arrogant and self-deluded in prosperity' },
-        { ar: 'ظَلَّتْ', ur: 'سایہ کیا / چھا گئی', note: 'To remain or become (in a state); contextually “to cast shade / remain under” — not “سائبان” itself' },
-        { ar: 'جَانٌّ', ur: 'جن', note: 'A type of jinn (often refers to the original jinn or a serpent-like creature)' },
-        { ar: 'وَلِيٌّ حَمِيمٌ', ur: 'گہرا دوست / جگری ساتھی', note: 'A close, devoted friend' },
+        { ar: 'ظَلَّتْ', ur: 'سایہ کیا / چھا گئی', note: 'To remain or become (in a state); contextually "to cast shade / remain under" — not "سائبان" itself' },
+        { ar: 'جَانٌّ', ur: 'جن', note: 'A type of jinn (often refers to the original jinn or a serpent-like creature)' },
+        { ar: 'وَلِيٌّ حَمِيمٌ', ur: 'گہرا دوست / جگری ساتھی', note: 'A close, devoted friend' },
         { ar: 'أَعْجَازُ نَخْلٍ', ur: 'کھجور کے تنے', note: 'Trunks/stumps of date palms' },
         { ar: 'حُمُرٌ', ur: 'گدھے', note: 'Donkeys' },
         { ar: 'مُسْتَنْفِرَةٌ', ur: 'بدکے ہوئے / ڈرے ہوئے', note: 'Startled and fleeing in fear' },
-        { ar: 'خُشُبٌ مُسَنَّدَةٌ', ur: 'دیوار سے ٹیک لگائی ہوئی لکڑیاں', note: 'Propped-up pieces of wood (hypocrisy metaphor)' },
+        { ar: 'خُشُبٌ مُسَنَّدَةٌ', ur: 'دیوار سے ٹیک لگائی ہوئی لکڑیاں', note: 'Propped-up pieces of wood (hypocrisy metaphor)' },
         { ar: 'عَنْهَا', ur: 'اس سے / اس کے بارے میں', note: 'From it / about it (context-dependent)' },
         { ar: 'لُؤْلُؤٌ مَكْنُونٌ', ur: 'چھپایا ہوا موتی', note: 'Well-protected or hidden pearls' },
         { ar: 'بُنْيَانٌ مَرْصُوصٌ', ur: 'سیسہ پلائی ہوئی دیوار', note: 'A firmly joined, solid structure (like a reinforced wall)' },
         { ar: 'جَرَادٌ مُنْتَشِرٌ', ur: 'پھیلی ہوئی ٹڈیاں', note: 'Scattered/spread-out locusts' },
-        { ar: 'كَوْكَبٌ دُرِّيٌّ', ur: 'چمکتا ہوا ستارہ', note: 'A brilliantly shining star' },
+        { ar: 'كَوْكَبٌ دُرِّيٌّ', ur: 'چمکتا ہوا ستارہ', note: 'A brilliantly shining star' },
         { ar: 'حَدِيدٌ', ur: 'لوہا', note: 'Iron' },
         { ar: 'نَاضِرَةٌ', ur: 'تروتازہ / شاداب', note: 'Fresh, radiant (often for faces in the Hereafter)' },
         { ar: 'نَاعِمَةٌ', ur: 'نرم / آسودہ', note: 'Soft, comfortable, in ease' },
         { ar: 'مُسْفِرَةٌ', ur: 'روشن / چمکتی ہوئی', note: 'Bright, shining (faces full of light)' },
         { ar: 'بَاسِرَةٌ', ur: 'اداس / سیاہ چہرہ', note: 'Gloomy, distressed (faces darkened with grief)' },
         { ar: 'وَاجِفَةٌ', ur: 'کانپنے والی / خوف زدہ', note: 'Trembling or palpitating (hearts filled with fear)' },
+        { ar: 'حِزْبٌ', ur: 'جماعت / گروہ', note: 'Party, group, or faction' },
+        { ar: 'رَشِيدٌ', ur: 'ہدایت یافتہ / سمجھدار', note: 'Rightly guided, wise' },
+        { ar: 'مَثْوًى', ur: 'ٹھکانا / رہنے کی جگہ', note: 'Abode or dwelling place' },
+        { ar: 'سَرِيعُ الْحِسَابِ', ur: 'جلد حساب لینے والا', note: 'Swift in taking account' },
+        { ar: 'السُّوءُ', ur: 'برائی / بدی / تکلیف', note: 'Evil, harm, or misfortune (context-dependent)' },
+        { ar: 'ذَهَبٌ', ur: 'سونا', note: 'Gold' },
+        { ar: 'فِضَّةٌ', ur: 'چاندی', note: 'Silver' },
+        { ar: 'حَجَرٌ', ur: 'پتھر', note: 'Stone' },
+        { ar: 'تَثْرِيبَ', ur: 'ملامت / سرزنش', note: 'Blame or reproach' },
+        { ar: 'عَاصِمٌ', ur: 'بچانے والا / محافظ', note: 'Protector or saver' },
+        { ar: 'مُسْتَسْلِمُونَ', ur: 'فرمانبردار / اطاعت کرنے والے', note: 'Submitting or surrendering ones' },
+        { ar: 'الْمَسَاقِ', ur: 'ہانک کر لے جانے کی جگہ / روانگی', note: 'The driving place / final destination' },
+        { ar: 'الْمُسْتَقَرُّ', ur: 'ٹھکانا / جائے قرار', note: 'Resting place or abode' },
+        { ar: 'أَنْسَابٌ', ur: 'نسب / رشتے داریاں', note: 'Lineage, family ties' },
+        { ar: 'دُونِهِمْ', ur: 'ان کے علاوہ / ان کے سوا', note: 'Besides them / apart from them' },
+        { ar: 'بِيَدِهِ', ur: 'اس کے ہاتھ میں', note: 'In his hand / in his control' },
+        { ar: 'تَحْتَ', ur: 'نیچے / تلے', note: 'Under or beneath' },
+        { ar: 'الثَّرَىٰ', ur: 'مٹی / نم خاک', note: 'Moist earth or soil' },
+        { ar: 'قَائِلُهَا', ur: 'کہنے والا', note: 'The one who says it' },
+        { ar: 'لَظَىٰ', ur: 'بھڑکتی ہوئی آگ', note: 'Blazing flame of fire' },
+        { ar: 'الْفُجَّارِ', ur: 'بدکار لوگ / نافرمان', note: 'The wicked or sinful people' },
+        { ar: 'وَزَرَ', ur: 'جائے پناہ', note: 'A refuge or place of escape' },
+        { ar: 'عَنِيدًا', ur: 'ضدی / دشمن', note: 'Stubbornly opposing' },
+        { ar: 'سِجِّينٍ', ur: 'قیدیوں کا دفتر / بدکاروں کا رجسٹر', note: 'The record or prison of the wicked' },
+        { ar: 'الْأَبْرَارِ', ur: 'نیک لوگ', note: 'The righteous and virtuous people' },
+        { ar: 'الْحَاقَّةُ', ur: 'ثابت ہونے والی حقیقت', note: 'The inevitable reality (Day of Judgment)' },
+        { ar: 'الْعَقَبَةُ', ur: 'دشوار گھاٹی', note: 'A steep and difficult path' },
+        { ar: 'سَقَرُ', ur: 'جہنم کا ایک نام', note: 'A name of Hellfire' },
+        { ar: 'مَرْقُومٌ', ur: 'لکھا ہوا', note: 'Inscribed or written down' },
+        { ar: 'بَالِغُ', ur: 'پہنچنے والا / پورا کرنے والا', note: 'Reaching or accomplishing fully' },
+        { ar: 'بِالْمُعْتَدِينَ', ur: 'حد سے بڑھنے والوں کے ساتھ', note: 'With the transgressors' },
+        { ar: 'الْمَصِيرُ', ur: 'ٹھکانا / لوٹ کر جانے کی جگہ', note: 'Final return or destination' },
+        { ar: 'قَسْوَةً', ur: 'سختی', note: 'Hardness or harshness' },
+        { ar: 'صِبْغَةً', ur: 'رنگ', note: 'Color; metaphorically the religion/nature given by Allah' },
+        { ar: 'تَنْكِيلًا', ur: 'عبرت ناک سزا', note: 'Exemplary punishment' },
+        { ar: 'بَطْشًا', ur: 'سخت پکڑ', note: 'Mighty seizure or punishment' },
+        { ar: 'حَرًّا', ur: 'گرمی', note: 'Heat' },
+        { ar: 'مَقِيلًا', ur: 'آرام کی جگہ', note: 'A resting place, especially at midday' },
+        { ar: 'رَهْبَةً', ur: 'ڈر', note: 'Fear or awe' },
+        { ar: 'تَأْوِيلًا', ur: 'انجام / حقیقی مطلب', note: 'Interpretation or ultimate outcome' },
+        { ar: 'نُزُلًا', ur: 'مہمانی / ابتدائی ضیافت', note: 'Hospitality or prepared provision for a guest' },
+        { ar: 'أَمَلًا', ur: 'امید', note: 'Hope or aspiration' },
+        { ar: 'مَرَدًّا', ur: 'لوٹنے کی جگہ', note: 'A place or point of return' },
+        { ar: 'الْأَعْرَابُ', ur: 'دیہاتی عرب', note: 'Bedouin Arabs / desert dwellers' },
+        { ar: 'وَكِيلًا', ur: 'کارساز / ذمہ دار', note: 'Guardian, disposer of affairs, or trustee' },
+        { ar: 'نَكِيرٌ', ur: 'انکار / ناگوار چیز', note: 'Denial, rejection, or something greatly disapproved' },
+        { ar: 'مُدَّكِرٌ', ur: 'نصیحت حاصل کرنے والا', note: 'One who takes heed or learns a lesson' },
+        { ar: 'دَافِعٌ', ur: 'دفع کرنے والا', note: 'One who repels or pushes away' },
+        { ar: 'مُضِلٌّ', ur: 'گمراہ کرنے والا', note: 'One who leads astray' },
+        { ar: 'مَحِيصٌ', ur: 'بھاگنے کی جگہ', note: 'Place of escape or refuge' },
+        { ar: 'نَفَادٌ', ur: 'ختم ہو جانا', note: 'Exhaustion or depletion' },
+        { ar: 'شَافِعُونَ', ur: 'سفارش کرنے والے', note: 'Intercessors' },
+        { ar: 'مَلْجَإٍ', ur: 'پناہ کی جگہ', note: 'A refuge or shelter' },
+        { ar: 'وَاقٍ', ur: 'بچانے والا', note: 'Protector or savior' },
+        { ar: 'اتِّبَاعَ', ur: 'پیروی کرنا', note: 'Following or obeying' },
+        { ar: 'الظَّنِّ', ur: 'گمان', note: 'Assumption or conjecture' },
+        { ar: 'أَشَقُّ', ur: 'زیادہ سخت / دشوار', note: 'More difficult or harder' },
+        { ar: 'بِمُعْجِزِينَ', ur: 'عاجز کرنے والے', note: 'Those who frustrate or overpower' },
+        { ar: 'نَبَأٌ', ur: 'بڑی خبر / اہم اطلاع', note: 'Great news or important information' },
+        { ar: 'الْأَنْفَالُ', ur: 'غنیمتیں / مالِ غنیمت', note: 'Spoils of war' },
+        { ar: 'الْحُجَّةُ', ur: 'دلیل / برہان / پکا ثبوت', note: 'Proof, argument, or decisive evidence' },
+        { ar: 'الْبَالِغَةُ', ur: 'پوری / مکمل / پہنچنے والی', note: 'Complete, effective, reaching its goal (as in decisive proof)' },
+        { ar: 'سَبْعٌ', ur: 'سات', note: 'Seven' },
+        { ar: 'مُعْرِضُونَ', ur: 'اعراض کرنے والے / منہ موڑنے والے', note: 'Those who turn away or ignore' },
+        { ar: 'جَمِيعًا', ur: 'سب کے سب / سارے مل کر', note: 'All together, entirely' },
+        { ar: 'نُسُكِي', ur: 'میری قربانی / میری عبادت', note: 'My sacrifice or my acts of worship' },
+        { ar: 'مَحْيَايَ', ur: 'میرا جینا / میری زندگی', note: 'My life / my living' },
+        { ar: 'مَمَاتِي', ur: 'میری موت / میرا مرنا', note: 'My death / my dying' },
+        { ar: 'الْآثِمِينَ', ur: 'گناہ گار لوگ / مجرم', note: 'Sinners or guilty people' },
+        { ar: 'سُعُرٍ', ur: 'دیوانگی / جنون', note: 'Madness, insanity (also blazing fire in some contexts)' },
+        { ar: 'بِئْسَ الْمَصِيرُ', ur: 'بہت برا لوٹنے کا ٹھکانا', note: 'What an evil destination / final return' },
+        { ar: 'بِئْسَ الشَّرَابُ', ur: 'بہت برا مشروب / پینے کی چیز', note: 'What an evil drink' },
+        { ar: 'بِئْسَ الْقَرِينُ', ur: 'بہت برا ساتھی', note: 'What an evil companion' },
+        { ar: 'بِئْسَ مَثْوَى الظَّالِمِينَ', ur: 'ظالموں کا بہت برا ٹھکانا', note: 'What an evil abode for the wrongdoers' },
+        { ar: 'بِئْسَ مَثْوَى الْمُتَكَبِّرِينَ', ur: 'تکبر کرنے والوں کا بہت برا ٹھکانا', note: 'What an evil abode for the arrogant' },
+        { ar: 'بِئْسَ الْقَرَارُ', ur: 'بہت برا رہنے کا مقام / بدترین ٹھکانا', note: 'What an evil resting place' },
+        { ar: 'بِئْسَ الْمِهَادُ', ur: 'بہت برا بچھونا / بدترین ٹھکانا', note: 'What an evil bed or resting place' },
+        { ar: 'بِئْسَ الِاسْمُ', ur: 'بہت برا نام', note: 'What an evil name/title' },
+        { ar: 'بِئْسَ الْعَشِيرُ', ur: 'بہت برا ساتھی / رفیق', note: 'What an evil associate or companion' },
+        { ar: 'بِئْسَ الْمَوْلَى', ur: 'بہت برا کارساز / مددگار', note: 'What an evil protector or patron' },
+        { ar: 'بِئْسَ', ur: 'بہت برا / بدترین', note: 'An expression of condemnation: evil, wretched' },
 
+        // from Before/Moellim
+        // groups
+        { ar: 'مُهْتَدِين', ur: 'ہدایت یافتہ لوگ', note: 'Those rightly guided' },
+        { ar: 'الضَّالُّون', ur: 'گمراہ ہونے والے', note: 'Those who are astray' },
+        { ar: 'فَرِحُون', ur: 'اکڑنے والے', note: 'Those who exult / boast' },
+        { ar: 'مُعْتَدُون', ur: 'زیادتی کرنے والے', note: 'The transgressors' },
+        { ar: 'عَادُون', ur: 'حد سے بڑھنے والے', note: 'Those who exceed limits' },
+        { ar: 'الْمُبَذِّرُون', ur: 'فضول خرچ لوگ', note: 'The wasteful' },
+        { ar: 'مُكْرَمُون', ur: 'عزت دیے گئے', note: 'Those who are honoured' },
+        { ar: 'مُنْظَرُون', ur: 'مہلت دیے گئے', note: 'Those given respite' },
+        { ar: 'مُخْلَصُون', ur: 'چنے گئے / مخلص', note: 'The chosen / sincere ones' },
+        { ar: 'الْكَارِهُون', ur: 'ناپسند کرنے والے', note: 'Those who dislike' },
+        { ar: 'الْمَسْحُورُون', ur: 'جادو میں مبتلا', note: 'Those bewitched' },
+        { ar: 'الْخَاشِعُون', ur: 'ڈرنے والے / عاجز', note: 'The humble / fearful' },
+        { ar: 'الأَذَلُّون', ur: 'سب سے رسوا', note: 'The most disgraced' },
+        { ar: 'الْخَائِفُون', ur: 'ڈرے ہوئے', note: 'The fearful' },
+        { ar: 'الزَّاهِدِين', ur: 'رغبت نہ رکھنے والے', note: 'The ascetics / detached' },
+        { ar: 'الْفَائِزُون', ur: 'کامیاب لوگ', note: 'The successful' },
+        { ar: 'السَّاخِرِين', ur: 'مذاق کرنے والے', note: 'Those who mock' },
+        { ar: 'الْقَانِتُون', ur: 'فرمانبردار لوگ', note: 'The obedient / devout' },
+        { ar: 'الْحَاكِمِين', ur: 'فیصلہ کرنے والے', note: 'The judges / rulers' },
+        { ar: 'الْمُفْلِحُون', ur: 'فلاح پانے والے', note: 'Those who prosper / succeed' },
+        { ar: 'الْجَاعِلُون', ur: 'بنانے والے', note: 'Those who make / appoint' },
+        { ar: 'الْمُجْتَمِعُون', ur: 'اکٹھے ہونے والے', note: 'Those who gather together' },
+        { ar: 'صَامِتُون', ur: 'خاموش', note: 'The silent ones' },
+        { ar: 'عَاكِفُون', ur: 'معتکف', note: 'Those in i\'tikaf / seclusion' },
+        { ar: 'مُلْقُون', ur: 'پھینکنے والے', note: 'Those who throw / cast' },
+        { ar: 'مُنْتَهُون', ur: 'باز آنے والے', note: 'Those who desist / stop' },
+        { ar: 'مُطَفِّفِين', ur: 'ہیرا پھیری کرنے والے', note: 'Those who give short measure' },
+        { ar: 'الْقَاعِدِين', ur: 'بیٹھے رہ جانے والے', note: 'Those who stay behind' },
+        { ar: 'الْمُقْتَسِمِين', ur: 'بٹ جانے والے', note: 'Those who divided up' },
+        { ar: 'الْغَابِرِين', ur: 'پیچھے رہ جانے والے', note: 'Those left behind' },
+        { ar: 'شَارِبِين', ur: 'پینے والے', note: 'Those who drink' },
+        { ar: 'آكِلِين', ur: 'کھانے والے', note: 'Those who eat' },
+        { ar: 'الْمُتَوَكِّلُون', ur: 'بھروسہ کرنے والے', note: 'Those who put trust in Allah' },
+        { ar: 'الْمُسَبِّحُون', ur: 'تسبیح کرنے والے', note: 'Those who glorify Allah' },
+        { ar: 'الْمُوقِنُون', ur: 'یقین کرنے والے', note: 'Those who are certain' },
+        { ar: 'الْمُنْزِلُون', ur: 'نازل کرنے والے', note: 'Those who send down' },
+        { ar: 'اساطیر', ur: 'داستانیں / افسانے', note: 'Legends / fables' },
+        { ar: 'الْخَاسِرُون', ur: 'ہارنے والے', note: 'The losers' },
+        { ar: 'الْفَاسِقُون', ur: 'گناہ کرنے والے', note: 'The disobedient / sinners' },
+        { ar: 'المُشْفِقُون', ur: 'ڈرنے والے', note: 'Those who are fearful' },
+        { ar: 'مُعَذَّبُوْنَ', ur: 'عذاب کیے گئے', note: 'Those who are punished' },
+        { ar: 'مُبْعَدُوْنَ', ur: 'دور کیے گئے', note: 'Those who are driven away' },
+        { ar: 'الأَعْلَون', ur: 'سب سے بلند', note: 'The highest' },
+        { ar: 'التَّائِبَات', ur: 'توبہ کرنے والی عورتیں', note: 'Women who repent' },
+        { ar: 'اَلْمُسَخَّرَات', ur: 'مسخر کردہ', note: 'Those subjected / controlled' },
+        { ar: 'النَّادِمِین', ur: 'شرمندہ ہونے والے', note: 'Those who regret' },
+        { ar: 'الْغَائِبِین', ur: 'غائب ہونے والے', note: 'Those who are absent' },
+        { ar: 'غَاوِین', ur: 'گمراہ لوگ', note: 'Those who are astray' },
+        { ar: 'طَاغِين', ur: 'سرکش لوگ', note: 'The rebellious / transgressors' },
+        { ar: 'خَامِدُونَ', ur: 'سست / بے جان', note: 'Still / lifeless' },
+        { ar: 'مُبْلِسُونَ', ur: 'مایوس', note: 'Despairing' },
+        { ar: 'نَائِمُونَ', ur: 'سوئے ہوئے / غافل', note: 'Sleeping / unaware' },
+        { ar: 'صَاغِرُونَ', ur: 'پست / ذلیل', note: 'Humbled / disgraced' },
+        { ar: 'مُضْعِفُون', ur: 'دوگنا کرنے والے', note: 'Those who multiply' },
+        { ar: 'رَاعُونَ', ur: 'خیال رکھنے والے', note: 'Caretakers' },
+        { ar: 'مَوْقُوفُونَ', ur: 'رکے ہوئے', note: 'Stopped' },
+        { ar: 'أَجْرُ غَيْرُ مَمْنُون', ur: 'نہ ختم ہونے والا اجر', note: 'Endless reward' },
+        { ar: 'وَارِدُونَ', ur: 'آنے والے', note: 'Arriving' },
+        { ar: 'مُطَّلِعُونَ', ur: 'آگاہ رہنے والے', note: 'Aware' },
+        { ar: 'مَغْنُون', ur: 'خوش / بچانے والے', note: 'Satisfied' },
+        { ar: 'مَحْرُومُون', ur: 'محروم لوگ', note: 'Those who are deprived' },
+        { ar: 'مُخْلِصُون', ur: 'مخلص لوگ / خلوص دل والے', note: 'Sincere ones' },
+
+        // difficult
+        { ar: 'وَیْلٌ', ur: 'تباہی ہے', note: 'Woe / destruction' },
+        { ar: 'مَفَازًا', ur: 'کامیابی / فتح', note: 'Success / victory' },
+        { ar: 'بَيْضَاءُ', ur: 'سفید', note: 'White / bright' },
+        { ar: 'ذِكْرَى', ur: 'نصیحت / یاد دہانی', note: 'Reminder / admonition' },
+        { ar: 'یَوْمَئِذٍ', ur: 'اس روز', note: 'On that day' },
+        { ar: 'عُيُونٍ', ur: 'آنکھیں / چشمے', note: 'Eyes / springs' },
+        { ar: 'مَآبٍ', ur: 'ٹھکانہ', note: 'Final return / abode' },
+        { ar: 'الأسْفَلِ', ur: 'سب سے نچلا حصہ', note: 'The lowest' },
+        { ar: 'الدَّرَك', ur: 'گہرائی', note: 'Depth / lowest level' },
+        { ar: 'سَبِیلُ', ur: 'راستہ', note: 'Path / way' },
+        { ar: 'رَیْبَ', ur: 'شک', note: 'Doubt' },
+        { ar: 'زُبُرِ', ur: 'صحیفے', note: 'Scriptures' },
+        { ar: 'سَفَاهَةٌ', ur: 'بےوقوفی / پاگل پن', note: 'Foolishness' },
+        { ar: 'نِعْمَ', ur: 'شاندار', note: 'Excellent' },
+        { ar: 'سَفِيهٌ', ur: 'نادان / بیوقوف', note: 'Foolish person' },
+        { ar: 'نِدٌّ', ur: 'شریک', note: 'Partner / equal' },
+        { ar: 'صَاحِبٌ', ur: 'ساتھی', note: 'Companion' },
+        { ar: 'فَاجِرٌ', ur: 'بدکار', note: 'Wicked' },
+        { ar: 'بَرٌّ', ur: 'نیک', note: 'Righteous' },
+        { ar: 'نَصْر', ur: 'مدد / فتح / کامیابی', note: 'Help / victory' },
+        { ar: 'كَلْبٌ', ur: 'کتا', note: 'Dog' },
+        { ar: 'جَمْعٌ', ur: 'لشکر', note: 'Army / group' },
+        { ar: 'خَوْضٌ', ur: 'تماشہ', note: 'Idle talk / engagement' },
+        { ar: 'سِیْمَا', ur: 'نشانیاں', note: 'Signs / marks' },
+        { ar: 'مُهْلِكٌ', ur: 'ہلاک کرنے والا', note: 'Destroyer' },
+        { ar: 'طُغْیَانٌ', ur: 'سرکشی', note: 'Transgression' },
+        { ar: 'مَكْرٌ', ur: 'سازش / تدبیر', note: 'Plot / plan' },
+        { ar: 'مَاكِرِينَ', ur: 'چالاک', note: 'Plotters' },
+        { ar: 'تَقَلُّبٌ', ur: 'گھومنا', note: 'Turning about' },
+        { ar: 'مَبْلَغٌ', ur: 'انتہا', note: 'Limit' },
+        { ar: 'مِیقَاتٌ', ur: 'مقررہ وقت', note: 'Appointed time' },
+        { ar: 'طَائِرٌ', ur: 'نحوست', note: 'Omen' },
+        { ar: 'حَرِيرٌ', ur: 'ریشم', note: 'Silk' },
+        { ar: 'دَاحِضَةٌ', ur: 'جھٹلانے والی / رائیگان', note: 'False / nullified' },
+        { ar: 'خَاوِيَةً', ur: 'خالی / ویران', note: 'Empty / deserted' },
+        { ar: 'شُورَىٰ', ur: 'مشاورت', note: 'Consultation' },
+        { ar: 'أَتْرَاب', ur: 'ہم عمر', note: 'Of equal age' },
+        { ar: 'وَرَاءِهِمْ', ur: 'ان کے پیچھے', note: 'Behind them' },
+        { ar: 'فُرُوجِهِمْ', ur: 'انکی شرم گاہیں', note: 'Their private parts' },
+        { ar: 'صَدّ', ur: 'روکنا', note: 'To prevent' },
+        { ar: 'ذُرِّيَّات', ur: 'اولاد', note: 'Offspring' },
+        { ar: 'سَاهُون', ur: 'غافل', note: 'Heedless' },
+        { ar: 'مَأْمُون', ur: 'محفوظ', note: 'Safe' },
+        { ar: 'ضَرًّا', ur: 'نقصان', note: 'Harm' },
+        { ar: 'مَطَرًا', ur: 'بارش', note: 'Rain' },
+        { ar: 'سَوَاءٌ', ur: 'برابر', note: 'Equal' },
+        { ar: 'مَعَك', ur: 'تمہارے ساتھ', note: 'With you' },
+        { ar: 'طِين', ur: 'مٹی', note: 'Clay' },
+        { ar: 'جَنَّات', ur: 'باغات', note: 'Gardens' },
+        { ar: 'نَعِيم', ur: 'نعمت', note: 'Blessing' },
+        { ar: 'حَرِيق', ur: 'آگ', note: 'Fire' },
+        { ar: 'عَذَابُ الحَرِيق', ur: 'جلنے کا عذاب', note: 'Punishment of burning' },
+        { ar: 'وَاصِب', ur: 'شدید / مسلسل', note: 'Constant / severe' },
+        { ar: 'عَذَابٌ وَاصِبٌ', ur: 'مسلسل عذاب', note: 'Continuous punishment' },
+        { ar: 'مَوْلَى', ur: 'مالک / مددگار', note: 'Master / protector' },
+        { ar: 'ثِيَاب', ur: 'کپڑے / لباس', note: 'Clothes' },
+        { ar: 'تَعْسًا', ur: 'ہلاکت', note: 'Ruin' },
+        { ar: 'مَقَامِعُ', ur: 'ڈنڈے', note: 'Iron rods' },
+        { ar: 'عَمًى', ur: 'اندھا', note: 'Blindness' },
+        { ar: 'ضَرِيعٍ', ur: 'کانٹے اور جھاڑیاں', note: 'Thorny plant' },
+        { ar: 'حَمِيم', ur: 'گرم پانی', note: 'Boiling water' },
+        { ar: 'فَوْقَهُمْ', ur: 'ان کے اوپر', note: 'Above them' },
+        { ar: 'ظِلٌّ', ur: 'سایہ / سائبان', note: 'Shade' },
+        { ar: 'مُمَدَّدَةٌ', ur: 'طویل / لمبی کی ہوئی', note: 'Extended' },
+        { ar: 'عَمَدٍ', ur: 'ستون', note: 'Pillars' },
+        { ar: 'مُؤْصَدَةٌ', ur: 'بند کی ہوئی', note: 'Closed / sealed' },
+        { ar: 'سَنَةً', ur: 'سال / مدت', note: 'Year' },
+        { ar: 'أَرْبَعِينَ', ur: 'چالیس', note: 'Forty' },
+        { ar: 'مُسْرِفُونَ', ur: 'حد سے بڑھے ہوئے / فضول خرچ', note: 'Extravagant' },
+        { ar: 'سُكَارَىٰ', ur: 'نشے میں مبتلا', note: 'Intoxicated' },
+        { ar: 'أَكْرَمُ', ur: 'سب سے بہتر', note: 'Most honorable' },
+        { ar: 'عَشِيرَةٌ', ur: 'برادری', note: 'Tribe' },
+        { ar: 'مَأوَى', ur: 'ٹھکانہ', note: 'Refuge' },
+        { ar: 'مَنَامٌ', ur: 'سونا / Sleep', note: 'Sleep' },
+        { ar: 'بَعْثٌ', ur: 'اٹھایا جانا', note: 'Resurrection' },
+        { ar: 'مَقْتٌ', ur: 'غصہ', note: 'Hatred' },
+        { ar: 'بَارِئٌ', ur: 'خالق', note: 'Creator' },
+        { ar: 'سَعْیٌ', ur: 'کوشش', note: 'Effort' },
+        { ar: 'عَمَّة', ur: 'پھوپھی', note: 'Paternal aunt' },
+        { ar: 'أَيْمَان', ur: 'قسمیں', note: 'Oaths' },
+        { ar: 'شَتَّى', ur: 'مختلف / جدا جدا', note: 'Various / scattered' },
+        { ar: 'الْفُلْك', ur: 'کشتیاں', note: 'Ships' },
+        { ar: 'مَاءً', ur: 'پانی', note: 'Water' },
+        { ar: 'عِشْرُون', ur: 'بیس', note: 'Twenty' },
+        { ar: 'عَشَرَة', ur: 'دس', note: 'Ten' },
+        { ar: 'أَفْئِدَة', ur: 'دل / قلب', note: 'Hearts' },
+        { ar: 'كُرْهٌ', ur: 'ناپسندیدہ', note: 'Disliked / hateful' },
+        { ar: 'بَقِيَّة', ur: 'باقی / باقی رہ جانے والا', note: 'Remainder / leftover' },
+        { ar: 'لَذَائِقُ', ur: 'ذائقے / چکھنے والے', note: 'Tasters / tastes' },
+        { ar: 'دِفْءٌ', ur: 'گرمی / حرارت', note: 'Warmth / heat' },
+        { ar: 'لَا تَثْرِيب', ur: 'کوئی تنقید نہیں / کوئی پکڑ نہیں', note: 'No blame / no reproach' },
+        { ar: 'أَجَلٍ', ur: 'مقررہ وقت', note: 'Appointed term' },
+        { ar: 'مُسَمًّى', ur: 'طے شدہ / مقرر', note: 'Specified / fixed' },
+        { ar: 'كِرَامٌ كَاتِبِينَ', ur: 'معزز لکھنے والے (فرشتے)', note: 'Noble recording angels' },
+        { ar: 'أَقْسَط', ur: 'زیادہ انصاف والی', note: 'More just / fairer' },
+        { ar: 'أَغْنِيَاء', ur: 'امیر لوگ / مالدار', note: 'The wealthy ones' },
+        { ar: 'عِصْبَة', ur: 'ٹولی / گروہ / قبیلہ', note: 'Group / Faction / Tribe' },
+        { ar: 'حَبْلِ الْوَرِيدِ', ur: 'شہ رگ', note: 'The vein of the neck / jugular vein' },
+        { ar: 'أَهْل', ur: 'اہل / لوگ / خاندان', note: 'People / Family / Members' },
+        { ar: 'عَطَاءٗ', ur: 'عطا / بخشش / انعام', note: 'Gift / Grant / Bestowal' },
+        { ar: 'قَبْل', ur: 'قبل / پہلے / پیشتر', note: 'Before / Prior / Earlier' },
+        { ar: 'أُمّ', ur: 'ماں / والدہ', note: 'Mother' },
+        { ar: 'عَمّ', ur: 'چچا / والد کے بھائی', note: 'Paternal uncle' },
+        { ar: 'خَال', ur: 'ماموں / ماں کے بھائی', note: 'Maternal uncle' },
+        { ar: 'خَالَة', ur: 'خالہ / ماں کی بہن', note: 'Maternal aunt' },
+        { ar: 'أَخ', ur: 'بھائی', note: 'Brother' },
+        { ar: 'أُخْت', ur: 'بہن', note: 'Sister' },
+        { ar: 'أَب', ur: 'اب / والد', note: 'Father' },
+        { ar: 'ابْن', ur: 'بیٹا / فرزند', note: 'Son / Child' },
+        { ar: 'بِنْت', ur: 'بیٹی / دختر', note: 'Daughter' },
+        { ar: 'أَبَوَان', ur: 'والدین / ابو اور ماں', note: 'Parents / Father and Mother' },
+        { ar: 'أَبْنَاء', ur: 'بیٹے / فرزند', note: 'Sons / Children' },
+        { ar: 'بَنَات', ur: 'بیٹیاں / دختر', note: 'Daughters' },
+        { ar: 'لِقَاءٌ', ur: 'ملاقات / دیدار / ملاقات کا وقت', note: 'Meeting / Encounter / Gathering' },
+        { ar: 'ذُكُور', ur: 'مرد / مذکر', note: 'Males / Masculine' },
+        { ar: 'شُفَعَاء', ur: 'وسیلہ دینے والے / سفارش کرنے والے', note: 'Intercessors / Advocates' },
+        { ar: 'حَسْبُنَا', ur: 'ہمارے لیے کافی ہے / ہمارے لیے بس ہے', note: 'Sufficient for us / Enough for us' },
+        { ar: 'شَيْخ', ur: ' بزرگ / عالم / معمر مرد', note: 'Elder / Scholar / Senior man' },
+        { ar: 'غُلْفٌ', ur: 'موٹا / گھنا / سخت', note: 'Thick / Dense / Heavy cover' },
+        { ar: 'لَدَيْنَا', ur: 'ہمارے پاس / ہمارے نزدیک', note: 'With us / In our possession' },
+        { ar: 'جُنْدَنَا', ur: 'ہمارا لشکر / ہماری فوج', note: 'Army / Troops' },
+        { ar: 'غِلًّا', ur: 'کینہ / بغض', note: 'Malice / Hatred' },
+        { ar: 'سَبْعِينَ', ur: 'ستر', note: 'Seventy' },
+        { ar: 'إِسْرَاف', ur: 'حد سے تجاوز / فضول خرچی', note: 'Excess / Extravagance' },
+        { ar: 'شُرَكَاء', ur: 'شریک / ساتھی', note: 'Partners / Associates' },
+        { ar: 'مَرَد', ur: 'سرکشی / بغاوت / پلٹنا', note: 'Rebellion / Defiance' },
+        { ar: 'نَكَالًا', ur: 'عبرت / سزا', note: 'Exemplary punishment' },
+        { ar: 'طَعَام', ur: 'کھانا / غذا', note: 'Food' },
+        { ar: 'غُصَّة', ur: 'گھٹن / اٹکنا', note: 'Choking / Suffocation' },
+        { ar: 'بُطُون', ur: 'پیٹ', note: 'Bellies / Stomachs' },
+        { ar: 'مَائِدَة', ur: 'دسترخوان', note: 'Table spread' },
+        { ar: 'نَصَارَى', ur: 'عیسائی', note: 'Christians' },
+        { ar: 'كُلّ', ur: 'ہر / سب', note: 'Every / All' },
+        { ar: 'إِيَاب', ur: 'واپسی / لوٹنا', note: 'Return' },
+        { ar: 'قَاسِطُون', ur: 'ظالم', note: 'Unjust / Wrongdoers' },
+        { ar: 'يَسِير', ur: 'آسان / تھوڑا', note: 'Easy / Little' },
+        { ar: 'أُمِّي', ur: 'ان پڑھ', note: 'Unlettered / Illiterate' },
+        { ar: 'مَيْمَنَة', ur: 'دائیں طرف / دائیں ہاتھ والے', note: 'Right side / People of the right' },
+        { ar: 'صَلَوَات', ur: 'دعائیں / رحمتیں', note: 'Prayers / Blessings' },
+        { ar: 'أَغْلَال', ur: 'بیڑیاں / طوق', note: 'Chains / Shackles' },
+        { ar: 'أَعْنَاق', ur: 'گردنیں', note: 'Necks' },
+        { ar: 'أَجْمَعِين', ur: 'سب / سب کے سب', note: 'All together' },
+        { ar: 'مِهَاد', ur: 'بچھونا / آرام کی جگہ', note: 'Resting place / Bed' },
+        { ar: 'أُولُو الْأَلْبَاب', ur: 'عقل والے / سمجھدار لوگ', note: 'People of understanding' },
+        { ar: 'وَقُود', ur: 'ایندھن', note: 'Fuel' },
+        { ar: 'كَفَرَ', ur: 'ناشکری کرنا / انکار کرنا', note: 'To disbelieve / To be ungrateful' },
+        { ar: 'ضَيْف', ur: 'مہمان', note: 'Guest' },
       ],
       allah: [
         { ar: 'الغَنِيُّ', ur: 'بے نیاز', note: 'The Self-Sufficient' },
@@ -1673,18 +2530,24 @@
         { ar: 'خَالِد', ur: 'ہمیشہ رہنے والا', note: 'The Everlasting' },
         { ar: 'الغَافِر', ur: 'بخشنے والا', note: 'The Forgiver (of sin)' },
         { ar: 'الشَّاكِر', ur: 'قدردان', note: 'The Grateful / Appreciative' },
-      ],
-      groups: [
-        { ar: 'مُهْتَدِين', ur: 'ہدایت یافتہ لوگ', note: 'Those rightly guided' },
-        { ar: 'الضَّالُّون', ur: 'گمراہ ہونے والے', note: 'Those who are astray' },
       ]
     };
-    DATA.overall = shuffle([...DATA.basic, ...DATA.difficult, ...DATA.allah, ...DATA.groups]);
+    DATA.overall = shuffle([...DATA.basic, ...DATA.difficult, ...DATA.allah]);
 
     // ══════════════════════════════
     //  STATE
     // ══════════════════════════════
     const S = { total: 0, correct: 0, wrong: 0, quizzes: {} };
+    let toastTimer;
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
+    }
+
     function updScore() {
       document.getElementById('sc-t').textContent = S.total;
       document.getElementById('sc-c').textContent = S.correct;
@@ -1711,6 +2574,8 @@
         loadFC('all', document.querySelector('#panel-flashcards .tbtn'));
       if (name === 'reference') buildRef();
       if (name === 'notes') buildNotesGrid();
+      if (name === 'ayats') startAyats();
+      if (name === 'saved') showSavedView();
     }
 
     // ══════════════════════════════
@@ -1719,7 +2584,7 @@
     function startQuiz(sec, type, btn) {
       document.getElementById('panel-' + sec).querySelectorAll('.tbtn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
-      const pool = shuffle(DATA[sec]).slice(0, type === 'match' ? 6 : 250);
+      const pool = shuffle(DATA[sec]).slice(0, type === 'match' ? 6 : 500);
       S.quizzes[sec] = { pool, type, idx: 0, score: 0 };
       render(sec);
     }
@@ -1737,18 +2602,20 @@
     // ── MCQ ──
     function renderMCQ(sec, q, el) {
       const item = q.pool[q.idx];
-      const askAr = q.idx % 2 === 0;
+      // Always show Arabic word, ask for Urdu meaning
       const wrongs = shuffle(DATA[sec].filter(x => x.ar !== item.ar)).slice(0, 3);
       const opts = shuffle([item, ...wrongs]);
+      const isSaved = isWordSaved(item.ar);
       el.innerHTML = `<div class="qcard">
-    <div class="qmeta"><span class="qnum">Question ${q.idx + 1} of ${q.pool.length}</span><span class="qbadge badge-mcq">Multiple Choice</span></div>
-    <div class="${askAr ? 'q-ar' : 'q-ur'}">${askAr ? item.ar : item.ur}</div>
-    <div class="q-inst">${askAr ? 'Select the Urdu meaning' : 'Select the Arabic word'}</div>
+    <div class="qmeta"><span class="qnum">Question ${q.idx + 1} of ${q.pool.length}</span><span class="qbadge badge-mcq">Multiple Choice</span>
+      <button class="save-btn${isSaved ? ' saved' : ''}" id="save-btn-${sec}" data-ar="${item.ar.replace(/"/g,'&quot;')}" onclick="toggleSaveWord(this.dataset.ar,this)">${saveBtnHtml(isSaved, isSaved ? 'Saved' : 'Save')}</button>
+    </div>
+    <div class="q-ar">${item.ar}</div>
+    <div class="q-inst">Select the Urdu meaning</div>
     <div class="opts" id="opts-${sec}">
       ${opts.map(o => {
-        const label = askAr ? o.ur : o.ar;
         const ok = o.ar === item.ar;
-        return `<button class="opt${askAr ? ' ur-opt' : ''}" onclick="checkMCQ('${sec}',${ok},this)">${label}</button>`;
+        return `<button class="opt ur-opt" data-answer="${o.ur}" onclick="checkMCQ('${sec}',${ok},this)">${o.ur}</button>`;
       }).join('')}
     </div>
     <div class="fb" id="fb-${sec}"><div class="fb-lbl" id="fb-l-${sec}"></div><div class="fb-word" id="fb-w-${sec}"></div><div class="fb-note" id="fb-n-${sec}"></div></div>
@@ -1759,11 +2626,10 @@
     }
     function checkMCQ(sec, ok, btn) {
       const q = S.quizzes[sec];
-      const askAr = q.idx % 2 === 0;
-      const correct = askAr ? q.pool[q.idx].ur : q.pool[q.idx].ar;
+      const correctUr = q.pool[q.idx].ur;
       document.getElementById('opts-' + sec).querySelectorAll('.opt').forEach(b => {
         b.disabled = true;
-        if (b.textContent.trim() === correct.trim()) b.classList.add('correct');
+        if (b.getAttribute('data-answer') === correctUr) b.classList.add('correct');
       });
       if (!ok) btn.classList.add('wrong');
       showFB(sec, ok, q.pool[q.idx]);
@@ -1775,12 +2641,14 @@
     // ── FILL ──
     function renderFill(sec, q, el) {
       const item = q.pool[q.idx];
-      const askAr = q.idx % 2 === 0;
+      const isSaved = isWordSaved(item.ar);
       el.innerHTML = `<div class="qcard">
-    <div class="qmeta"><span class="qnum">Question ${q.idx + 1} of ${q.pool.length}</span><span class="qbadge badge-fill">Write Answer</span></div>
-    <div class="${askAr ? 'q-ar' : 'q-ur'}">${askAr ? item.ar : item.ur}</div>
-    <div class="q-inst">${askAr ? 'Type the Urdu meaning below' : 'Type the Arabic word below'}</div>
-    <input class="fill-inp" id="fi-${sec}" type="text" dir="rtl" placeholder="${askAr ? 'اردو معنی لکھیں ...' : 'عربی لفظ لکھیں ...'}" onkeydown="if(event.key==='Enter')checkFill('${sec}')">
+    <div class="qmeta"><span class="qnum">Question ${q.idx + 1} of ${q.pool.length}</span><span class="qbadge badge-fill">Write Answer</span>
+      <button class="save-btn${isSaved ? ' saved' : ''}" id="save-btn-${sec}" data-ar="${item.ar.replace(/"/g,'&quot;')}" onclick="toggleSaveWord(this.dataset.ar,this)">${saveBtnHtml(isSaved, isSaved ? 'Saved' : 'Save')}</button>
+    </div>
+    <div class="q-ar">${item.ar}</div>
+    <div class="q-inst">Type the Urdu meaning below</div>
+    <input class="fill-inp" id="fi-${sec}" type="text" dir="rtl" placeholder="اردو معنی لکھیں ..." onkeydown="if(event.key==='Enter')checkFill('${sec}')">
     <div class="fb" id="fb-${sec}"><div class="fb-lbl" id="fb-l-${sec}"></div><div class="fb-word" id="fb-w-${sec}"></div><div class="fb-note" id="fb-n-${sec}"></div></div>
     <div class="btn-row">
       <button class="btn btn-p" id="sub-${sec}" onclick="checkFill('${sec}')">Check Answer</button>
@@ -1795,8 +2663,7 @@
       const inp = document.getElementById('fi-' + sec);
       const val = inp.value.trim();
       if (!val) return;
-      const askAr = q.idx % 2 === 0;
-      const correct = askAr ? item.ur : item.ar;
+      const correct = item.ur;
       const ok = norm(val) === norm(correct) || norm(correct).split('/').some(p => norm(val) === norm(p.trim()));
       inp.disabled = true;
       inp.classList.add(ok ? 'correct' : 'wrong');
@@ -1838,8 +2705,8 @@
         const sel = document.getElementById(`ms-${sec}-${i}`);
         const icon = document.getElementById(`mi-${sec}-${i}`);
         sel.disabled = true;
-        if (sel.value === item.ur) { sel.classList.add('correct'); icon.textContent = '✓'; icon.style.color = 'var(--ok)'; correct++; }
-        else { sel.classList.add('wrong'); icon.textContent = '✗'; icon.style.color = 'var(--err)'; }
+        if (sel.value === item.ur) { sel.classList.add('correct'); icon.innerHTML = SVG.check; icon.style.color = 'var(--ok)'; correct++; }
+        else { sel.classList.add('wrong'); icon.innerHTML = SVG.cross; icon.style.color = 'var(--err)'; }
       });
       const fb = document.getElementById('fb-' + sec);
       const lbl = document.getElementById('fb-l-' + sec);
@@ -1847,7 +2714,7 @@
       const ok = correct === count;
       fb.className = 'fb show ' + (ok ? 'ok' : 'bad');
       lbl.className = 'fb-lbl ' + (ok ? 'ok' : 'bad');
-      lbl.textContent = ok ? '✓ Perfect! All pairs correct!' : correct + ' / ' + count + ' correct';
+      lbl.innerHTML = ok ? SVG.check + ' Perfect! All pairs correct!' : correct + ' / ' + count + ' correct';
       wd.textContent = ok ? 'Excellent work!' : 'Incorrect pairs are highlighted in red.';
       S.total += count; S.correct += correct; S.wrong += (count - correct); updScore();
       q.idx = Math.min(q.pool.length, q.idx + count);
@@ -1860,7 +2727,7 @@
       const nt = document.getElementById('fb-n-' + sec);
       fb.className = 'fb show ' + (ok ? 'ok' : 'bad');
       lbl.className = 'fb-lbl ' + (ok ? 'ok' : 'bad');
-      lbl.textContent = ok ? '✓ Correct!' : '✗ Incorrect — correct answer:';
+      lbl.innerHTML = ok ? SVG.check + ' Correct!' : SVG.cross + ' Incorrect — correct answer:';
       wd.textContent = item.ar + ' — ' + item.ur;
       if (nt) nt.textContent = item.note || '';
     }
@@ -1870,7 +2737,7 @@
     function showResults(sec) {
       const q = S.quizzes[sec];
       const pct = Math.round(q.score / q.pool.length * 100);
-      const msgs = ['Keep practising!', 'Good effort, keep going!', 'Getting better — try again!', 'Great work! Well done.', 'Excellent! Mashallah! 🌟'];
+      const msgs = ['Keep practising!', 'Good effort, keep going!', 'Getting better — try again!', 'Great work! Well done.', 'Excellent! Mashallah!'];
       document.getElementById('quiz-' + sec).innerHTML = `<div class="res-card">
     <div class="res-sub">Quiz Complete</div>
     <div class="res-pct">${pct}%</div>
@@ -1905,6 +2772,10 @@
       document.getElementById('fc-ctr').textContent = (fcIdx + 1) + ' / ' + fcDeck.length;
       document.getElementById('fc-note').textContent = item.note || '';
       document.getElementById('flashcard').classList.remove('flipped');
+      // Keep data-ar in sync so syncSaveBtns can find this button
+      const saveBtn = document.getElementById('fc-save-btn');
+      if (saveBtn) saveBtn.dataset.ar = item.ar;
+      updateFCSaveBtn();
     }
     function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
     function fcNext() { fcIdx = (fcIdx + 1) % fcDeck.length; showFC(); }
@@ -1916,14 +2787,20 @@
     let refBuilt = false;
     function buildRef() {
       if (refBuilt) return; refBuilt = true;
-      ['basic', 'allah', 'difficult', 'groups'].forEach(sec => {
+      ['basic', 'allah', 'difficult'].forEach(sec => {
         const el = document.getElementById('ref-' + sec);
         if (!el) return;
-        el.innerHTML = DATA[sec].map(item => `
+        el.innerHTML = DATA[sec].map(item => {
+          const isSaved = isWordSaved(item.ar);
+          return `
       <div class="ref-item">
         <div class="ref-ar">${item.ar}</div>
-        <div><div class="ref-ur">${item.ur}</div>${item.note ? `<div class="ref-nt">${item.note}</div>` : ''}</div>
-      </div>`).join('');
+        <div style="flex:1"><div class="ref-ur">${item.ur}</div>${item.note ? `<div class="ref-nt">${item.note}</div>` : ''}</div>
+        <button class="save-btn${isSaved ? ' saved' : ''}" data-ar="${item.ar.replace(/"/g,'&quot;')}" onclick="toggleSaveWord(this.dataset.ar,this)" title="${isSaved ? 'Remove from saved' : 'Save word'}">
+          ${saveBtnHtml(isSaved, '').trim()}
+        </button>
+      </div>`;
+        }).join('');
       });
     }
 
@@ -2523,7 +3400,7 @@
       const wd = document.getElementById('fb-w-notes');
       fb.className = 'fb show ' + (ok ? 'ok' : 'bad');
       lbl.className = 'fb-lbl ' + (ok ? 'ok' : 'bad');
-      lbl.textContent = ok ? '✓ Correct!' : '✗ Incorrect — correct answer:';
+      lbl.innerHTML = ok ? SVG.check + ' Correct!' : SVG.cross + ' Incorrect — correct answer:';
       wd.textContent = NQ.pool[NQ.idx].correct;
       if (ok) { NQ.score++; S.correct++; } else { S.wrong++; }
       S.total++; updScore();
@@ -2534,7 +3411,7 @@
 
     function showNQResults() {
       const pct = Math.round(NQ.score / NQ.pool.length * 100);
-      const msgs = ['Keep practising!', 'Good effort, keep going!', 'Getting better — try again!', 'Great work! Well done.', 'Excellent! Mashallah! 🌟'];
+      const msgs = ['Keep practising!', 'Good effort, keep going!', 'Getting better — try again!', 'Great work! Well done.', 'Excellent! Mashallah!'];
       document.getElementById('quiz-notes').innerHTML = `<div class="res-card">
         <div class="res-sub">Notes Quiz Complete</div>
         <div class="res-pct">${pct}%</div>
@@ -2553,12 +3430,407 @@
     function toggleTheme() {
       const isDark = document.body.classList.toggle('dark');
       document.getElementById('theme-label').textContent = isDark ? 'Light Mode' : 'Dark Mode';
+      try { localStorage.setItem('moellim_theme', isDark ? 'dark' : 'light'); } catch(e) {}
+    }
+
+    // ══════════════════════════════
+    //  AYATS DATA
+    //  keyWords: words whose Urdu must appear in the answer (any one form counts)
+    //  Each keyWord is { ar, ur: ['form1','form2',...] }
+    // ══════════════════════════════
+    const AYATS = [
+      {
+        ar: 'إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ فَأَصْلِحُوا بَيْنَ أَخَوَيْكُمْ',
+        translation: 'بے شک مومن آپس میں بھائی بھائی ہیں، پس اپنے دونوں بھائیوں کے درمیان صلح کرا دو۔',
+        keyWords: [
+          { ar: 'الْمُؤْمِنُونَ', ur: ['مومن', 'ایمان والے', 'مسلمان'] },
+          { ar: 'إِخْوَةٌ',       ur: ['بھائی'] },
+          { ar: 'أَصْلِحُوا',     ur: ['صلح', 'میل کرو', 'درست کرو', 'اصلاح'] },
+        ]
+      },
+      {
+        ar: 'وَمَا الْحَيَاةُ الدُّنْيَا إِلَّا لَعِبٌ وَلَهْوٌ',
+        translation: 'اور دنیا کی زندگی محض کھیل اور تماشے کے سوا کچھ نہیں۔',
+        keyWords: [
+          { ar: 'الْحَيَاةُ الدُّنْيَا', ur: ['دنیاوی زندگی', 'دنیا کی زندگی', 'دنیا'] },
+          { ar: 'لَعِبٌ',               ur: ['کھیل'] },
+          { ar: 'لَهْوٌ',               ur: ['تماشا', 'غفلت', 'لہو'] },
+        ]
+      },
+      {
+        ar: 'وَاللَّهُ بِمَا تَعْمَلُونَ عَلِيمٌ',
+        translation: 'اور اللہ تعالیٰ تمہارے تمام اعمال سے خوب واقف ہے۔',
+        keyWords: [
+          { ar: 'تَعْمَلُونَ', ur: ['عمل', 'کرتے', 'کام'] },
+          { ar: 'عَلِيمٌ',    ur: ['جاننے والا', 'علیم', 'جانتا', 'واقف'] },
+        ]
+      },
+    ];
+
+    // ══════════════════════════════
+    //  AYATS ENGINE
+    // ══════════════════════════════
+    let AQ = { pool: [], idx: 0, score: 0 };
+
+    function startAyats() {
+      AQ = { pool: shuffle([...AYATS]), idx: 0, score: 0 };
+      renderAyat();
+    }
+
+    function renderAyat() {
+      const prog = document.getElementById('prog-ayats');
+      prog.style.width = Math.round(AQ.idx / AQ.pool.length * 100) + '%';
+      if (AQ.idx >= AQ.pool.length) { showAyatResults(); return; }
+      const ayat = AQ.pool[AQ.idx];
+      const el = document.getElementById('quiz-ayats');
+      el.innerHTML = `<div class="qcard">
+        <div class="qmeta">
+          <span class="qnum">Ayat ${AQ.idx + 1} of ${AQ.pool.length}</span>
+          <span class="qbadge badge-ayat">Ayat Quiz</span>
+        </div>
+        <div class="ayat-ar">${ayat.ar}</div>
+        <textarea class="ayat-inp" id="ayat-inp" placeholder="پوری آیت کا اردو ترجمہ یہاں لکھیں ..." onkeydown="if(event.ctrlKey&&event.key==='Enter')checkAyat()"></textarea>
+        <div class="fb" id="fb-ayats">
+          <div class="fb-lbl" id="fb-l-ayats"></div>
+          <div id="fb-correct-translation" style="font-family:var(--urdu);font-size:1.1rem;direction:rtl;line-height:2;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)"></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-p" id="ayat-sub-btn" onclick="checkAyat()">Check Translation</button>
+          <button class="btn btn-p" id="ayat-nb-btn" style="display:none" onclick="nextAyat()">Next Ayat →</button>
+          <button class="btn btn-g" onclick="startAyats()">Restart</button>
+        </div>
+        <div style="margin-top:12px;font-size:0.75rem;color:var(--text3)">Tip: Press Ctrl+Enter to check</div>
+      </div>`;
+      setTimeout(() => document.getElementById('ayat-inp')?.focus(), 80);
+    }
+
+    function checkAyat() {
+      const ayat = AQ.pool[AQ.idx];
+      const inp = document.getElementById('ayat-inp');
+      const val = inp.value.trim();
+      if (!val) return;
+
+      const normVal = val.replace(/\s+/g, ' ').trim();
+      let found = 0;
+
+      ayat.keyWords.forEach(kw => {
+        if (kw.ur.some(form => normVal.includes(form))) found++;
+      });
+
+      const total = ayat.keyWords.length;
+      const ok = found === total;
+      const partial = found > 0 && found < total;
+
+      const fb = document.getElementById('fb-ayats');
+      const lbl = document.getElementById('fb-l-ayats');
+      const ct = document.getElementById('fb-correct-translation');
+      fb.className = 'fb show ' + (ok ? 'ok' : 'bad');
+      lbl.className = 'fb-lbl ' + (ok ? 'ok' : 'bad');
+      lbl.textContent = ok
+        ? `${SVG.check} کامل! — صحیح ترجمہ:`
+        : partial
+          ? `${found} / ${total} اہم الفاظ ملے — صحیح ترجمہ:`
+          : `${SVG.cross} کوئی اہم لفظ نہیں ملا — صحیح ترجمہ:`;
+      ct.textContent = ayat.translation;
+
+      inp.disabled = true;
+      document.getElementById('ayat-sub-btn').style.display = 'none';
+      document.getElementById('ayat-nb-btn').style.display = 'inline-block';
+
+      if (ok) { AQ.score++; S.correct++; } else { S.wrong++; }
+      S.total++; updScore();
+    }
+
+    function nextAyat() { AQ.idx++; renderAyat(); }
+
+    function showAyatResults() {
+      const pct = Math.round(AQ.score / AQ.pool.length * 100);
+      const msgs = ['Keep practising!', 'Good effort!', 'Getting better!', 'Great work! Well done.', 'Excellent! Mashallah!'];
+      document.getElementById('quiz-ayats').innerHTML = `<div class="res-card">
+        <div class="res-sub">Ayat Quiz Complete</div>
+        <div class="res-pct">${pct}%</div>
+        <div class="res-score">${AQ.score} / ${AQ.pool.length} correct</div>
+        <div class="res-msg">${msgs[Math.min(4, Math.floor(pct / 20))]}</div>
+        <div class="btn-row" style="justify-content:center">
+          <button class="btn btn-p" onclick="startAyats()">Play Again</button>
+        </div>
+      </div>`;
+      document.getElementById('prog-ayats').style.width = '100%';
+    }
+
+    // ══════════════════════════════
+    //  QUICK NAV
+    // ══════════════════════════════
+    function quickNav(name) {
+      const tab = [...document.querySelectorAll('.tab')].find(t => t.getAttribute('onclick') && t.getAttribute('onclick').includes("'" + name + "'"));
+      if (tab) switchTab(name, tab);
+      else {
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+        document.getElementById('panel-' + name).classList.add('active');
+        if (name === 'reference') buildRef();
+        if (name === 'notes') buildNotesGrid();
+      }
+    }
+
+    // ══════════════════════════════
+    //  SAVED WORDS SYSTEM
+    // ══════════════════════════════
+    const SAVE_KEY = 'moellim_saved_words';
+
+    function getSavedWords() {
+      try { return JSON.parse(localStorage.getItem(SAVE_KEY) || '[]'); } catch { return []; }
+    }
+    function setSavedWords(arr) {
+      localStorage.setItem(SAVE_KEY, JSON.stringify(arr));
+    }
+    function isWordSaved(ar) {
+      return getSavedWords().some(w => w.ar === ar);
+    }
+    function toggleSaveWord(ar, btn) {
+      // Find the full word object from all data
+      const allWords = [...DATA.basic, ...DATA.difficult, ...DATA.allah];
+      const item = allWords.find(w => w.ar === ar);
+      if (!item) return;
+      const saved = getSavedWords();
+      const idx = saved.findIndex(w => w.ar === ar);
+      if (idx === -1) {
+        saved.push(item);
+        setSavedWords(saved);
+        // Update the clicked button immediately before any DOM rebuilds
+        if (btn) { btn.classList.add('saved'); btn.innerHTML = saveBtnHtml(true, 'Saved'); }
+        showToast('Word saved!');
+        syncSaveBtns(ar, true, btn);
+      } else {
+        saved.splice(idx, 1);
+        setSavedWords(saved);
+        // Update the clicked button immediately before any DOM rebuilds
+        if (btn) { btn.classList.remove('saved'); btn.innerHTML = saveBtnHtml(false, 'Save'); }
+        showToast('Removed from saved');
+        syncSaveBtns(ar, false, btn);
+      }
+      // Rebuild saved panel if it's visible
+      const panel = document.getElementById('panel-saved');
+      if (panel && panel.classList.contains('active')) {
+        buildSavedGrid();
+      }
+    }
+    function syncSaveBtns(ar, isSaved, originBtn) {
+      // Update all other save buttons for the same word using data-ar attribute
+      document.querySelectorAll('.save-btn[data-ar]').forEach(btn => {
+        if (btn === originBtn) return; // already updated
+        if (btn.dataset.ar === ar) {
+          if (isSaved) {
+            btn.classList.add('saved');
+            btn.innerHTML = saveBtnHtml(true, 'Saved');
+          } else {
+            btn.classList.remove('saved');
+            btn.innerHTML = saveBtnHtml(false, 'Save');
+          }
+        }
+      });
+      // Force reference panel rebuild next time it's opened
+      if (refBuilt) {
+        refBuilt = false;
+      }
+    }
+
+    // Flashcard save toggle
+    function toggleSaveFC() {
+      if (!fcDeck.length) return;
+      const item = fcDeck[fcIdx];
+      const btn = document.getElementById('fc-save-btn');
+      toggleSaveWord(item.ar, btn);
+      // After toggle, re-read state and fix label
+      const nowSaved = isWordSaved(item.ar);
+      btn.classList.toggle('saved', nowSaved);
+      btn.innerHTML = saveBtnHtml(nowSaved, nowSaved ? 'Saved' : 'Save Word');
+    }
+
+    // Update FC save button when card changes
+    function updateFCSaveBtn() {
+      if (!fcDeck.length) return;
+      const btn = document.getElementById('fc-save-btn');
+      if (!btn) return;
+      const item = fcDeck[fcIdx];
+      const nowSaved = isWordSaved(item.ar);
+      btn.classList.toggle('saved', nowSaved);
+      btn.innerHTML = saveBtnHtml(nowSaved, nowSaved ? 'Saved' : 'Save Word');
+    }
+
+    // ── SAVED VIEW ──
+    function showSavedView() {
+      document.getElementById('saved-view-btn').classList.add('active');
+      document.getElementById('saved-quiz-btn').classList.remove('active');
+      document.getElementById('saved-view-panel').style.display = '';
+      document.getElementById('saved-quiz-panel').style.display = 'none';
+      buildSavedGrid();
+    }
+    function buildSavedGrid() {
+      const saved = getSavedWords();
+      const el = document.getElementById('saved-words-grid');
+      if (!saved.length) {
+        el.innerHTML = `<div class="saved-empty">
+          <span class="empty-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+          <strong>No saved words yet</strong><br>
+          Use the bookmark button on any quiz card, flashcard, or the Reference Guide to save words here.
+        </div>`;
+        return;
+      }
+      el.innerHTML = `<div style="font-size:0.82rem;color:var(--text3);margin-bottom:12px">${saved.length} word${saved.length !== 1 ? 's' : ''} saved</div>
+      <div class="saved-grid">` +
+        saved.map(item => `
+          <div class="saved-item">
+            <div class="ref-ar">${item.ar}</div>
+            <div style="flex:1"><div class="ref-ur">${item.ur}</div>${item.note ? `<div class="ref-nt">${item.note}</div>` : ''}</div>
+            <button class="remove-saved-btn" data-ar="${item.ar.replace(/"/g,'&quot;')}" onclick="removeSavedWord(this.dataset.ar,this)">${SVG.remove}</button>
+          </div>`).join('') + `</div>`;
+    }
+    function removeSavedWord(ar, btn) {
+      const saved = getSavedWords();
+      const idx = saved.findIndex(w => w.ar === ar);
+      if (idx !== -1) { saved.splice(idx, 1); setSavedWords(saved); }
+      showToast('Removed from saved');
+      // Animate the card out, then rebuild
+      const card = btn ? btn.closest('.saved-item') : null;
+      if (card) {
+        card.style.transition = 'opacity 0.2s, transform 0.2s';
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.93)';
+        setTimeout(() => buildSavedGrid(), 200);
+      } else {
+        buildSavedGrid();
+      }
+    }
+
+    // ── SAVED QUIZ ──
+    let SQ = { pool: [], idx: 0, score: 0 };
+
+    function startSavedQuiz() {
+      document.getElementById('saved-view-btn').classList.remove('active');
+      document.getElementById('saved-quiz-btn').classList.add('active');
+      document.getElementById('saved-view-panel').style.display = 'none';
+      document.getElementById('saved-quiz-panel').style.display = '';
+      const saved = getSavedWords();
+      if (saved.length < 2) {
+        document.getElementById('quiz-saved').innerHTML = `<div class="qcard" style="text-align:center;padding:36px 24px">
+          <div style="color:var(--text3);margin-bottom:12px"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div style="font-weight:600;margin-bottom:8px">Not enough saved words</div>
+          <div style="color:var(--text3);font-size:0.88rem;margin-bottom:20px">Save at least 2 words to start a quiz.</div>
+          <button class="btn btn-g" onclick="showSavedView()">View Saved Words</button>
+        </div>`;
+        return;
+      }
+      SQ = { pool: shuffle([...saved]), idx: 0, score: 0 };
+      renderSQ();
+    }
+
+    function renderSQ() {
+      const prog = document.getElementById('prog-saved');
+      prog.style.width = Math.round(SQ.idx / SQ.pool.length * 100) + '%';
+      if (SQ.idx >= SQ.pool.length) { showSQResults(); return; }
+      const item = SQ.pool[SQ.idx];
+      const allWords = [...DATA.basic, ...DATA.difficult, ...DATA.allah];
+      const wrongs = shuffle(allWords.filter(x => x.ar !== item.ar)).slice(0, 3);
+      const opts = shuffle([item, ...wrongs]);
+      const el = document.getElementById('quiz-saved');
+      el.innerHTML = `<div class="qcard">
+        <div class="qmeta">
+          <span class="qnum">Question ${SQ.idx + 1} of ${SQ.pool.length}</span>
+          <span class="qbadge badge-saved">Saved Words Quiz</span>
+          <button class="save-btn saved" data-ar="${item.ar.replace(/"/g,'&quot;')}" onclick="removeSavedWord(this.dataset.ar);startSavedQuiz()">${SVG.starFilled} Remove</button>
+        </div>
+        <div class="q-ar">${item.ar}</div>
+        <div class="q-inst">Select the Urdu meaning</div>
+        <div class="opts" id="opts-saved">
+          ${opts.map(o => {
+            const ok = o.ar === item.ar;
+            return `<button class="opt ur-opt" data-answer="${o.ur}" onclick="checkSQ(${ok},this)">${o.ur}</button>`;
+          }).join('')}
+        </div>
+        <div class="fb" id="fb-saved"><div class="fb-lbl" id="fb-l-saved"></div><div class="fb-word" id="fb-w-saved"></div><div class="fb-note" id="fb-n-saved"></div></div>
+        <div class="btn-row">
+          <button class="btn btn-p" id="nb-saved" style="display:none" onclick="nextSQ()">Next Question →</button>
+          <button class="btn btn-g" onclick="startSavedQuiz()">Restart</button>
+        </div>
+      </div>`;
+    }
+
+    function checkSQ(ok, btn) {
+      const item = SQ.pool[SQ.idx];
+      const correctUr = item.ur;
+      document.getElementById('opts-saved').querySelectorAll('.opt').forEach(b => {
+        b.disabled = true;
+        if (b.getAttribute('data-answer') === correctUr) b.classList.add('correct');
+      });
+      if (!ok) btn.classList.add('wrong');
+      showFB('saved', ok, item);
+      if (ok) { SQ.score++; S.correct++; } else { S.wrong++; }
+      S.total++; updScore();
+      document.getElementById('nb-saved').style.display = 'inline-block';
+    }
+
+    function nextSQ() { SQ.idx++; renderSQ(); }
+
+    function showSQResults() {
+      const pct = Math.round(SQ.score / SQ.pool.length * 100);
+      const msgs = ['Keep practising!', 'Good effort, keep going!', 'Getting better — try again!', 'Great work! Well done.', 'Excellent! Mashallah!'];
+      document.getElementById('quiz-saved').innerHTML = `<div class="res-card">
+        <div class="res-sub">Saved Words Quiz Complete</div>
+        <div class="res-pct">${pct}%</div>
+        <div class="res-score">${SQ.score} / ${SQ.pool.length} correct</div>
+        <div class="res-msg">${msgs[Math.min(4, Math.floor(pct / 20))]}</div>
+        <div class="btn-row" style="justify-content:center">
+          <button class="btn btn-p" onclick="startSavedQuiz()">Play Again</button>
+          <button class="btn btn-g" onclick="showSavedView()">View Saved</button>
+        </div></div>`;
+      document.getElementById('prog-saved').style.width = '100%';
+    }
+
+    // ══════════════════════════════
+    //  BACKGROUND PARTICLES
+    // ══════════════════════════════
+    function initParticles() {
+      const container = document.getElementById('bg-particles');
+      if (!container) return;
+      const colors = [
+        'rgba(200,147,42,0.18)',
+        'rgba(139,94,42,0.12)',
+        'rgba(45,106,143,0.10)',
+        'rgba(200,147,42,0.10)',
+      ];
+      for (let i = 0; i < 18; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = 3 + Math.random() * 6;
+        const left = Math.random() * 100;
+        const dur = 18 + Math.random() * 22;
+        const delay = Math.random() * -30;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        p.style.cssText = `
+          width:${size}px;height:${size}px;
+          left:${left}%;
+          background:${color};
+          animation-duration:${dur}s;
+          animation-delay:${delay}s;
+        `;
+        container.appendChild(p);
+      }
     }
 
     // ══════════════════════════════
     //  INIT
     // ══════════════════════════════
     window.onload = () => {
+      // Restore theme preference
+      try {
+        if (localStorage.getItem('moellim_theme') === 'dark') {
+          document.body.classList.add('dark');
+          document.getElementById('theme-label').textContent = 'Light Mode';
+        }
+      } catch(e) {}
+
+      initParticles();
       startQuiz('basic', 'mcq', document.querySelector('#panel-basic .tbtn'));
       loadFC('all', document.querySelector('#panel-flashcards .tbtn'));
     };

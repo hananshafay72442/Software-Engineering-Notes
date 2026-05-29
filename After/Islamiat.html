@@ -1,0 +1,2892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Islamic Studies — Riphah International University</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;500;700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Gulzar&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@500;600;700&family=Source+Serif+4:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #faf8f4;
+      --bg-card: #ffffff;
+      --bg-hero: #f4f0e8;
+      --bg-topic: #ffffff;
+      --bg-syllabus: #f0ece0;
+      --emerald: #1a5c3e;
+      --emerald-light: #2d8a5e;
+      --emerald-faint: rgba(26,92,62,0.07);
+      --gold: #8b6914;
+      --gold-light: #b8890e;
+      --gold-bg: rgba(139,105,20,0.08);
+      --gold-border: rgba(139,105,20,0.22);
+      --teal: #0f6674;
+      --teal-light: #1a8a9e;
+      --teal-bg: rgba(15,102,116,0.07);
+      --teal-border: rgba(15,102,116,0.2);
+      --accent-red: #8b2020;
+      --text-main: #1e1a15;
+      --text-soft: #6b6358;
+      --text-muted: #9a9086;
+      --text-arabic: #1a3a28;
+      --border: rgba(0,0,0,0.09);
+      --border-strong: rgba(0,0,0,0.16);
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.1);
+      --radius: 14px;
+      --font-arabic: 'Scheherazade New', serif;
+      --font-urdu: 'Gulzar', 'Noto Nastaliq Urdu', serif;
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Source Serif 4', serif;
+      --font-accent: 'Lora', serif;
+    }
+
+    /* ── DARK MODE ── */
+    /*
+      Design philosophy: warm zinc-charcoal base, single emerald accent,
+      gold for Hadith/questions, no harsh reds anywhere.
+      Feels like a premium night-reading app.
+    */
+    body.dark {
+      --bg: #18181b;
+      --bg-card: #1f1f23;
+      --bg-hero: #18181b;
+      --bg-topic: #1f1f23;
+      --bg-syllabus: #1c1c20;
+      --emerald: #4ade80;
+      --emerald-light: #6ee7a0;
+      --emerald-faint: rgba(74,222,128,0.07);
+      --gold: #f0b429;
+      --gold-light: #f5c842;
+      --gold-bg: rgba(240,180,41,0.07);
+      --gold-border: rgba(240,180,41,0.18);
+      --teal: #38bdf8;
+      --teal-light: #60cff8;
+      --teal-bg: rgba(56,189,248,0.06);
+      --teal-border: rgba(56,189,248,0.15);
+      --accent-red: #f0b429; /* repurposed — use gold instead of red */
+      --text-main: #e4e4e7;
+      --text-soft: #a1a1aa;
+      --text-muted: #52525b;
+      --text-arabic: #bbf7d0;
+      --border: rgba(255,255,255,0.06);
+      --border-strong: rgba(255,255,255,0.1);
+      --shadow-sm: 0 1px 8px rgba(0,0,0,0.4);
+      --shadow-md: 0 6px 28px rgba(0,0,0,0.55);
+    }
+
+    /* ── NAV ── */
+    body.dark .top-nav {
+      background: rgba(24,24,27,0.97);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(16px);
+    }
+    body.dark .nav-brand { color: var(--emerald); }
+
+    /* ── HERO ── */
+    body.dark .hero {
+      background: #18181b;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    body.dark .hero::before { opacity: 0.03; }
+    body.dark .hero-title { color: #f4f4f5; }
+    body.dark .hero-subtitle { color: var(--text-soft); }
+    body.dark .hero-badge {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.08);
+      color: var(--text-muted);
+    }
+    body.dark .hero-badge svg { color: var(--emerald); }
+    body.dark .hero-authors {
+      background: rgba(74,222,128,0.06);
+      border-color: rgba(74,222,128,0.15);
+    }
+    body.dark .authors-label { color: var(--text-muted); }
+    body.dark .author-name { color: var(--emerald); }
+    body.dark .authors-amp { color: var(--text-muted); }
+
+    /* ── LECTURE SELECTOR ── */
+    body.dark #lecture-selector { background: #18181b; }
+    body.dark .selector-title { color: var(--text-muted); }
+    body.dark .selector-title::before,
+    body.dark .selector-title::after { background: rgba(255,255,255,0.07); }
+
+    /* ── LECTURE CARDS ── */
+    body.dark .lec-card {
+      background: #1f1f23;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: none;
+    }
+    body.dark .lec-card::before {
+      background: var(--emerald);
+      opacity: 0.9;
+    }
+    body.dark .lec-card:hover {
+      background: #27272a;
+      border-color: rgba(74,222,128,0.25);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    }
+    body.dark .lec-num { color: var(--emerald); opacity: 0.45; }
+    body.dark .lec-title { color: #e4e4e7; }
+    body.dark .lec-sub { color: var(--text-muted); }
+    body.dark .lec-topics { color: var(--text-muted); opacity: 0.7; }
+
+    /* ── SYLLABUS ── */
+    body.dark .syllabus-container {
+      background: #1c1c20;
+      border-color: rgba(240,180,41,0.14);
+    }
+    body.dark .syllabus-title { color: var(--gold); }
+    body.dark .syllabus-item {
+      background: #232326;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    body.dark .syllabus-item:hover {
+      background: rgba(74,222,128,0.04);
+      border-color: rgba(74,222,128,0.18);
+    }
+    body.dark .syllabus-num { color: var(--emerald); }
+    body.dark .syllabus-text { color: var(--text-soft); }
+
+    /* ── TOPIC CARDS ── */
+    body.dark .topic-card {
+      background: #1f1f23;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    body.dark .topic-header {
+      background: #27272a;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    body.dark .topic-icon { color: var(--emerald); opacity: 0.8; }
+    body.dark .topic-title { color: #e4e4e7; }
+    body.dark .topic-summary {
+      background: rgba(240,180,41,0.05);
+      border-left: 3px solid rgba(240,180,41,0.5);
+      color: var(--text-soft);
+    }
+
+    /* ── OVERVIEW BOX ── */
+    body.dark .overview-box {
+      background: rgba(56,189,248,0.05);
+      border: 1px solid rgba(56,189,248,0.12);
+      border-left: 3px solid rgba(56,189,248,0.5);
+    }
+    body.dark .overview-label { color: var(--teal); }
+    body.dark .overview-text { color: var(--text-soft); }
+
+    /* ── LECTURE HEADER ── */
+    body.dark .lecture-header { border-bottom: 1px solid rgba(255,255,255,0.06); }
+    body.dark .lecture-title { color: #f4f4f5; }
+    body.dark .lecture-sub { color: var(--text-soft); }
+    body.dark .lh-badge {
+      background: rgba(74,222,128,0.1);
+      color: var(--emerald);
+      border: 1px solid rgba(74,222,128,0.18);
+    }
+
+    /* ── AYAT CARDS ── */
+    body.dark .card-ayat {
+      background: rgba(74,222,128,0.04);
+      border: 1px solid rgba(74,222,128,0.12);
+    }
+    body.dark .card-ayat .card-ref {
+      color: var(--emerald);
+      opacity: 0.65;
+    }
+    body.dark .card-ayat .arabic-text {
+      color: #86efac;
+      border-bottom: 1px solid rgba(74,222,128,0.1);
+    }
+    body.dark .card-ayat .card-translation { color: #71a882; }
+    body.dark .card-ayat .card-translation-ur { color: #71a882; }
+
+    /* ── HADITH CARDS ── */
+    body.dark .card-hadith {
+      background: rgba(240,180,41,0.04);
+      border: 1px solid rgba(240,180,41,0.14);
+    }
+    body.dark .card-hadith .card-ref {
+      color: var(--gold);
+      opacity: 0.65;
+    }
+    body.dark .card-hadith .arabic-text {
+      color: #fcd34d;
+      border-bottom: 1px solid rgba(240,180,41,0.1);
+    }
+    body.dark .card-hadith .card-translation { color: #a8894a; }
+    body.dark .card-hadith .card-translation-ur { color: #a8894a; }
+
+    /* ── KEY POINTS ── */
+    body.dark .key-points {
+      background: rgba(74,222,128,0.03);
+      border: 1px solid rgba(74,222,128,0.1);
+      border-left: 3px solid rgba(74,222,128,0.4);
+    }
+    body.dark .key-points-title { color: var(--emerald); opacity: 0.75; }
+    body.dark .key-points li { color: var(--text-soft); }
+    body.dark .key-points li::before { color: var(--emerald); }
+
+    /* ── QUESTIONS — gold instead of red, clean & calm ── */
+    body.dark .questions-section {
+      background: rgba(240,180,41,0.04);
+      border: 1px solid rgba(240,180,41,0.14);
+    }
+    body.dark .qs-title { color: var(--gold); }
+    body.dark .qs-title::after { background: rgba(240,180,41,0.1); }
+    body.dark .question-item {
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    body.dark .q-num { color: var(--gold); opacity: 0.8; }
+    body.dark .q-text-en { color: var(--text-soft); }
+    body.dark .q-text-ur { color: var(--text-soft); }
+
+    /* ── BUTTONS & CONTROLS ── */
+    body.dark .icon-btn {
+      background: #27272a;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-soft);
+    }
+    body.dark .icon-btn:hover {
+      background: rgba(74,222,128,0.08);
+      border-color: rgba(74,222,128,0.25);
+      color: var(--emerald);
+    }
+    body.dark .back-btn {
+      color: var(--text-soft);
+      border-color: rgba(255,255,255,0.08);
+    }
+    body.dark .back-btn:hover {
+      color: var(--emerald);
+      border-color: rgba(74,222,128,0.25);
+    }
+    body.dark .toggle-pill {
+      background: #27272a;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    body.dark .toggle-option { color: var(--text-muted); }
+    body.dark .toggle-option.active {
+      background: var(--emerald);
+      color: #052e16;
+      font-weight: 600;
+    }
+
+    /* ── SCROLL TO TOP ── */
+    body.dark #scrollTopBtn {
+      background: var(--emerald);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    }
+    body.dark #scrollTopBtn svg { stroke: #052e16; }
+
+    /* ── FOOTER ── */
+    body.dark footer {
+      background: #111113;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    body.dark .footer-brand { color: var(--emerald); }
+    body.dark .footer-text { color: var(--text-muted); }
+
+        /* ── URDU MODE ── */
+    body.urdu-mode .en-text { display: none !important; }
+    body.urdu-mode .urdu-text { display: block !important; }
+    body.urdu-mode span.urdu-text { display: inline !important; }
+    body.urdu-mode .q-text-ur { display: inline !important; }
+    body.urdu-mode .card-translation-ur { display: block !important; }
+    body.urdu-mode .card-translation.en-text { display: none !important; }
+
+    .urdu-text {
+      display: none;
+      font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
+      direction: rtl;
+      text-align: right;
+      font-size: 1.05rem;
+      line-height: 2.8;
+      color: var(--text-main);
+    }
+    .card-translation-ur {
+      display: none;
+      font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
+      direction: rtl;
+      text-align: right;
+      font-size: 1rem;
+      line-height: 2.8;
+      color: var(--text-soft);
+      margin-top: 8px;
+    }
+
+
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    /* ── NAV CONTROLS ── */
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .toggle-pill {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: 30px;
+      padding: 3px 4px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s;
+      position: relative;
+      min-width: 80px;
+      justify-content: space-between;
+    }
+    .toggle-pill:hover { border-color: var(--emerald); }
+    .toggle-opt {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      color: var(--text-muted);
+      transition: color 0.2s;
+      z-index: 1;
+      letter-spacing: 0.3px;
+    }
+    .toggle-opt.active { color: white; }
+    .toggle-knob {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: calc(50% - 4px);
+      height: calc(100% - 6px);
+      background: var(--emerald);
+      border-radius: 20px;
+      transition: left 0.25s cubic-bezier(0.4,0,0.2,1), background 0.2s;
+      z-index: 0;
+    }
+    .toggle-pill.urdu-active .toggle-knob { left: calc(50% + 1px); }
+    .toggle-pill.urdu-active #langEN { color: var(--text-muted); }
+    .toggle-pill.urdu-active #langUR { color: white; }
+    #langEN { color: white; }
+    #langUR { color: var(--text-muted); }
+
+    .icon-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      background: var(--bg-card);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .icon-btn:hover { border-color: var(--emerald); background: var(--emerald-faint); }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(250,248,244,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-strong);
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+      gap: 12px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      color: var(--emerald);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .back-btn {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      color: var(--emerald);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      padding: 5px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .back-btn:hover { background: var(--emerald-faint); }
+    .back-btn.visible { display: flex; }
+    .nav-right {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--bg-hero);
+      border-bottom: 1px solid var(--border-strong);
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+    .bismillah {
+      font-family: var(--font-arabic);
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      color: var(--emerald);
+      direction: rtl;
+      line-height: 2;
+      margin-bottom: 18px;
+      text-shadow: 0 1px 3px rgba(26,92,62,0.1);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .hero-sub {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+    .hero-divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 16px auto 28px;
+    }
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-badge {
+      background: white;
+      border: 1px solid var(--border-strong);
+      border-radius: 30px;
+      padding: 5px 16px;
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      font-family: var(--font-body);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-badge svg { color: var(--emerald); flex-shrink: 0; }
+
+    /* ── HERO AUTHORS ── */
+    .hero-authors {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px;
+      padding: 9px 20px;
+      border-radius: 30px;
+      background: var(--emerald-faint);
+      border: 1px solid rgba(26,92,62,0.14);
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .authors-label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+      font-style: italic;
+    }
+    .author-name {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      color: var(--emerald);
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .authors-amp {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    body.dark .hero-authors {
+      border-color: rgba(61,184,130,0.18);
+    }
+
+    /* ── SYLLABUS BOX ── */
+    .syllabus-container {
+      max-width: 860px;
+      margin: 32px auto 0;
+      background: var(--bg-syllabus);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+    }
+    .syllabus-title {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .syllabus-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gold-border);
+    }
+    .syllabus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .syllabus-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .syllabus-item:hover {
+      border-color: var(--emerald-light);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
+    }
+    .syl-num {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .syl-name {
+      font-size: 0.82rem;
+      color: var(--text-main);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* ── LECTURE SELECTOR ── */
+    #lecture-selector {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 18px 80px;
+    }
+    .selector-title {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      color: var(--teal);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .lecture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .lec-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .lec-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--emerald), var(--emerald-light));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .lec-card:hover {
+      border-color: var(--emerald-light);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+    .lec-card:hover::before { opacity: 1; }
+    .lec-num {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      color: var(--emerald);
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+    }
+    .lec-num
+    .lec-num::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .lec-title {
+      font-family: var(--font-display);
+      font-size: 0.96rem;
+      color: var(--text-main);
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    .lec-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      font-style: italic;
+      font-family: var(--font-accent);
+    }
+    .lec-subtitle
+    .lec-topics-count {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── LECTURE VIEW ── */
+    #lecture-view { display: none; }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 18px 80px;
+    }
+
+    /* ── LECTURE HEADER ── */
+    .lecture-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-strong);
+    }
+    .lh-badge {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      color: white;
+      background: var(--emerald);
+      border-radius: 12px;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .lh-content h2 {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+    .lh-content .lh-sub {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      font-style: italic;
+      font-family: var(--font-accent);
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* ── OVERVIEW BOX ── */
+    .overview-box {
+      background: var(--teal-bg);
+      border: 1px solid var(--teal-border);
+      border-left: 4px solid var(--teal);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 36px;
+      font-size: 0.94rem;
+      color: var(--text-main);
+      line-height: 1.8;
+    }
+    .overview-label {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      color: var(--teal);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    /* ── TOPIC BLOCK ── */
+    .topic-block {
+      margin-bottom: 44px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--bg-topic);
+      box-shadow: var(--shadow-sm);
+    }
+    .topic-header {
+      background: linear-gradient(135deg, #f5f0e8 0%, #ede8dc 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .topic-icon { flex-shrink: 0; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
+    .topic-icon svg { width: 20px; height: 20px; }
+    .topic-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .topic-title
+    .lh-content h2
+
+    .topic-body { padding: 22px 24px 24px; }
+
+    /* topic summary */
+    .topic-summary {
+      background: var(--gold-bg);
+      border-left: 3px solid var(--gold);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      line-height: 1.8;
+    }
+
+    /* ── AYAT CARD ── */
+    .card-ayat {
+      background: #f0f7f3;
+      border: 1px solid rgba(26,92,62,0.18);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+    }
+    .card-label {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-ayat .card-label { color: var(--emerald); }
+    .card-ayat .card-label::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--emerald);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .arabic-text {
+      font-family: var(--font-arabic);
+      font-size: clamp(1.3rem, 3vw, 1.75rem);
+      color: var(--text-arabic);
+      direction: rtl;
+      line-height: 2.2;
+      text-align: right;
+      margin-bottom: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(26,92,62,0.1);
+    }
+    .card-translation {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      font-style: italic;
+      font-family: var(--font-accent);
+      line-height: 1.7;
+    }
+    .card-ref {
+      margin-top: 8px;
+      font-size: 0.72rem;
+      color: var(--emerald);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── HADITH CARD ── */
+    .card-hadith {
+      background: #f5f0e8;
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+    }
+    .card-hadith .card-label { color: var(--gold); }
+    .card-hadith .card-label::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .card-hadith .arabic-text {
+      color: #3d2c0a;
+      border-bottom-color: var(--gold-border);
+    }
+    .card-hadith .card-translation { color: #5a4a2a; }
+    .card-hadith .card-ref { color: var(--gold); }
+
+    /* ── KEY POINTS ── */
+    .key-points {
+      background: #f8f9ff;
+      border: 1px solid rgba(74,85,164,0.15);
+      border-left: 3px solid #4a55a4;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 14px;
+    }
+    .key-points-title {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #4a55a4;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .key-points ul {
+      padding-left: 18px;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      line-height: 1.8;
+    }
+    .key-points li { margin-bottom: 4px; }
+
+    /* ── IMPORTANT QUESTIONS ── */
+    .questions-section {
+      background: #fff5f5;
+      border: 1px solid rgba(139,32,32,0.18);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 6px;
+    }
+    .qs-title {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      color: var(--accent-red);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .qs-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(139,32,32,0.15);
+    }
+    .question-item {
+      display: flex;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(139,32,32,0.08);
+      font-size: 0.9rem;
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+    .question-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .q-num {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      color: var(--accent-red);
+      font-weight: 700;
+      flex-shrink: 0;
+      padding-top: 3px;
+    }
+
+    .q-text-ur {
+      font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
+      direction: rtl;
+      text-align: right;
+      line-height: 2.4;
+      flex: 1;
+    }
+    .q-text-en { flex: 1; }
+    body.urdu-mode .question-item { flex-direction: row-reverse; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px 18px;
+      border-top: 1px solid var(--border);
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      background: var(--bg-syllabus);
+    }
+    .footer-brand {
+      font-family: var(--font-display);
+      color: var(--emerald);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .footer-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0;
+      color: var(--gold);
+      font-family: var(--font-arabic);
+      font-size: 1.1rem;
+    }
+    .footer-ornament::before, .footer-ornament::after {
+      content: '';
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: var(--gold-border);
+    }
+
+    /* ── ANIMATIONS ── */
+    .topic-block { animation: fadeUp 0.35s ease both; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── TOPIC ICON COLORS ── */
+    .topic-header .topic-icon svg { stroke: var(--emerald); }
+    .card-ayat .card-label::before { content: ''; width: 8px; height: 8px; background: var(--emerald); border-radius: 50%; flex-shrink: 0; }
+
+    /* ── SCROLL TO TOP BTN ── */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--emerald);
+      border: none;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      transition: all 0.2s;
+      z-index: 100;
+    }
+    #scrollTopBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+    #scrollTopBtn svg { stroke: white; }
+    #scrollTopBtn.visible { display: flex; }
+
+    /* ── IMPROVED KEY POINTS DARK ── */
+            /* ── SELECTOR TITLE REFINED ── */
+    .selector-title {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      color: var(--teal);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .selector-title::before, .selector-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-strong);
+    }
+
+    /* ── CARD REFINEMENTS ── */
+    .card-ref {
+      margin-top: 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .card-ayat .card-ref { color: var(--emerald); }
+    .card-hadith .card-ref { color: var(--gold); }
+
+    /* ── OVERVIEW BOX INNER ── */
+    .overview-box .en-text {
+      display: block;
+      font-size: 0.94rem;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 600px) {
+      .syllabus-grid { grid-template-columns: 1fr 1fr; }
+      .lecture-grid { grid-template-columns: 1fr; }
+      .hero { padding: 36px 18px 32px; }
+      .topic-body { padding: 16px; }
+      .hero-meta { gap: 10px; }
+      .hero-badge { font-size: 0.72rem; padding: 4px 12px; }
+    }
+
+    /* ══════════ ENHANCED ANIMATIONS & POLISH ══════════ */
+
+    /* Geometric Islamic pattern overlay on hero */
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a5c3e' fill-opacity='0.04'%3E%3Cpath d='M30 0l8.66 5v10L30 20l-8.66-5V5L30 0zm0 40l8.66 5v10L30 60l-8.66-5v-10L30 40zM0 20l8.66 5v10L0 40l-8.66-5V25L0 20zm60 0l8.66 5v10L60 40l-8.66-5V25L60 20zM15 10l8.66 5v10L15 30l-8.66-5V15L15 10zm30 0l8.66 5v10L45 30l-8.66-5V15L45 10zM15 30l8.66 5v10L15 50l-8.66-5V35L15 30zm30 0l8.66 5v10L45 50l-8.66-5V35L45 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+
+    /* Animated bismillah entrance */
+    @keyframes bismillahFadeIn {
+      0% { opacity: 0; transform: translateY(-20px) scale(0.95); filter: blur(4px); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInScale {
+      from { opacity: 0; transform: scale(0.94); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(26,92,62,0.15); }
+      50% { box-shadow: 0 0 0 10px rgba(26,92,62,0); }
+    }
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(20px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes topBarSlide {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    @keyframes navIn {
+      from { opacity: 0; transform: translateY(-100%); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes dividerGrow {
+      from { width: 0; opacity: 0; }
+      to { width: 80px; opacity: 1; }
+    }
+    @keyframes badgeIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes rotateIn {
+      from { opacity: 0; transform: rotate(-5deg) scale(0.9); }
+      to { opacity: 1; transform: rotate(0deg) scale(1); }
+    }
+
+    /* Hero animations */
+    .bismillah { animation: bismillahFadeIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+    .hero h1 { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both; }
+    .hero-sub { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both; }
+    .hero-divider { animation: dividerGrow 0.7s ease 0.7s both; }
+    .hero-meta { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both; }
+    .hero-badge:nth-child(1) { animation: badgeIn 0.6s ease 0.85s both; }
+    .hero-badge:nth-child(2) { animation: badgeIn 0.6s ease 0.95s both; }
+    .hero-badge:nth-child(3) { animation: badgeIn 0.6s ease 1.05s both; }
+    .hero-authors { animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.1s both; }
+
+    /* Nav animation */
+    .top-nav { animation: navIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    /* Lecture card staggered animations */
+    .lec-card {
+      animation: cardReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+      transform-origin: bottom center;
+    }
+    .lec-card:nth-child(1)  { animation-delay: 0.05s; }
+    .lec-card:nth-child(2)  { animation-delay: 0.1s; }
+    .lec-card:nth-child(3)  { animation-delay: 0.15s; }
+    .lec-card:nth-child(4)  { animation-delay: 0.2s; }
+    .lec-card:nth-child(5)  { animation-delay: 0.25s; }
+    .lec-card:nth-child(6)  { animation-delay: 0.3s; }
+    .lec-card:nth-child(7)  { animation-delay: 0.35s; }
+    .lec-card:nth-child(8)  { animation-delay: 0.4s; }
+    .lec-card:nth-child(9)  { animation-delay: 0.45s; }
+
+    /* Enhanced card hover effects */
+    .lec-card {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .lec-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 12px 40px rgba(26,92,62,0.15), 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .lec-card::before {
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s;
+    }
+    .lec-card:hover::before {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    /* Topic blocks with scroll-triggered animation */
+    .topic-block {
+      animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+      transition: box-shadow 0.3s ease;
+    }
+    .topic-block:nth-child(1) { animation-delay: 0.05s; }
+    .topic-block:nth-child(2) { animation-delay: 0.12s; }
+    .topic-block:nth-child(3) { animation-delay: 0.19s; }
+    .topic-block:nth-child(4) { animation-delay: 0.26s; }
+    .topic-block:nth-child(5) { animation-delay: 0.33s; }
+    .topic-block:nth-child(6) { animation-delay: 0.40s; }
+    .topic-block:nth-child(7) { animation-delay: 0.47s; }
+    .topic-block:hover {
+      box-shadow: 0 8px 32px rgba(26,92,62,0.1), 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    /* Improved topic header with subtle gradient shift */
+    .topic-header {
+      transition: background 0.3s ease;
+    }
+    .topic-block:hover .topic-header {
+      background: linear-gradient(135deg, #ede8dc 0%, #e6e0d0 100%);
+    }
+
+    /* Ayat & Hadith card hover */
+    .card-ayat, .card-hadith {
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+    }
+    .card-ayat:hover {
+      transform: translateX(3px);
+      box-shadow: -3px 0 0 var(--emerald), 0 4px 16px rgba(26,92,62,0.1);
+    }
+    .card-hadith:hover {
+      transform: translateX(3px);
+      box-shadow: -3px 0 0 var(--gold), 0 4px 16px rgba(139,105,20,0.1);
+    }
+
+    /* Arabic text pulse on hover */
+    .arabic-text {
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .card-ayat:hover .arabic-text {
+      text-shadow: 0 0 20px rgba(26,92,62,0.15);
+    }
+    .card-hadith:hover .arabic-text {
+      text-shadow: 0 0 20px rgba(139,105,20,0.15);
+    }
+
+    /* Syllabus items */
+    .syllabus-item {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .syllabus-item:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(26,92,62,0.12);
+    }
+
+    /* ── PDF LECTURE BUTTON ── */
+    .lec-pdf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 14px;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-light) 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 2px 8px rgba(26,92,62,0.3);
+      width: 100%;
+      justify-content: center;
+    }
+    .lec-pdf-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(26,92,62,0.4);
+      filter: brightness(1.08);
+    }
+    .lec-pdf-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+    .lec-pdf-btn svg {
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    .lec-pdf-btn:hover svg {
+      transform: translateY(-1px) scale(1.1);
+    }
+    body.dark .lec-pdf-btn {
+      box-shadow: 0 2px 12px rgba(74,222,128,0.25);
+    }
+    body.dark .lec-pdf-btn:hover {
+      box-shadow: 0 6px 24px rgba(74,222,128,0.35);
+    }
+
+    /* ── LECTURE HEADER PDF BUTTON ── */
+    .lecture-open-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-light) 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 3px 12px rgba(26,92,62,0.3);
+      margin-top: 14px;
+    }
+    .lecture-open-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,92,62,0.4);
+    }
+    body.dark .lecture-open-btn {
+      box-shadow: 0 3px 12px rgba(74,222,128,0.2);
+    }
+
+    /* ── IMPROVED READABILITY ── */
+    /* Increase body line-height and font sizing */
+    .topic-summary {
+      font-size: 0.97rem;
+      line-height: 1.95;
+    }
+    .card-translation {
+      font-size: 0.92rem;
+      line-height: 1.85;
+    }
+    .key-points ul {
+      font-size: 0.93rem;
+      line-height: 1.9;
+    }
+    .question-item {
+      font-size: 0.93rem;
+      line-height: 1.85;
+      padding: 13px 0;
+    }
+    .overview-box .en-text {
+      font-size: 0.97rem;
+      line-height: 1.9;
+    }
+    /* Better contrast for topic titles */
+    .topic-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+    /* Topic body spacing */
+    .topic-body {
+      padding: 26px 28px 28px;
+    }
+    /* Larger Arabic text for readability */
+    .arabic-text {
+      font-size: clamp(1.4rem, 3.2vw, 1.9rem);
+      line-height: 2.4;
+    }
+
+    /* ── PROGRESS BAR ON NAV ── */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--emerald), var(--emerald-light), var(--gold));
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* ── SELECTOR TITLE ANIMATION ── */
+    #lecture-selector .selector-title {
+      animation: fadeInUp 0.6s ease 0.1s both;
+    }
+
+    /* ── SCROLL TO TOP BUTTON ENHANCED ── */
+    #scrollTopBtn {
+      width: 44px;
+      height: 44px;
+      animation: floatUp 3s ease-in-out infinite;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+    #scrollTopBtn:hover {
+      transform: translateY(-4px) scale(1.1) !important;
+      box-shadow: 0 8px 28px rgba(26,92,62,0.4) !important;
+    }
+
+    /* ── SHIMMER EFFECT ON BISMILLAH ── */
+    .bismillah {
+      background: linear-gradient(
+        120deg,
+        var(--emerald) 0%,
+        var(--emerald-light) 40%,
+        #2fa86e 50%,
+        var(--emerald-light) 60%,
+        var(--emerald) 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: bismillahFadeIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both,
+                 shimmer 4s linear 1.5s infinite;
+    }
+
+    /* Hero badge hover */
+    .hero-badge {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .hero-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-color: var(--emerald);
+    }
+
+    /* Author chip hover */
+    .hero-authors {
+      transition: all 0.3s ease;
+    }
+    .hero-authors:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 16px rgba(26,92,62,0.12);
+    }
+
+    /* Back button enhanced */
+    .back-btn {
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .back-btn:hover {
+      transform: translateX(-2px);
+    }
+
+    /* Nav brand subtle animation */
+    .nav-brand {
+      transition: color 0.3s ease;
+    }
+
+    /* Questions section enhanced */
+    .questions-section {
+      border-radius: 14px;
+      border-left: 4px solid var(--accent-red);
+    }
+    .question-item {
+      transition: background 0.2s ease;
+      border-radius: 6px;
+      padding-left: 6px;
+      padding-right: 6px;
+      margin: 0 -6px;
+    }
+    .question-item:hover {
+      background: rgba(139,32,32,0.04);
+    }
+
+    /* Key points enhanced */
+    .key-points {
+      border-radius: 10px;
+    }
+    .key-points li {
+      transition: transform 0.2s ease;
+      padding: 2px 0;
+    }
+    .key-points li:hover {
+      transform: translateX(4px);
+    }
+
+    /* Dark mode bismillah shimmer adjustment */
+    body.dark .bismillah {
+      background: linear-gradient(
+        120deg,
+        var(--emerald) 0%,
+        #86efac 40%,
+        #a7f3d0 50%,
+        #86efac 60%,
+        var(--emerald) 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: bismillahFadeIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both,
+                 shimmer 4s linear 1.5s infinite;
+    }
+
+    /* Lecture view entrance */
+    #lectureContent > * {
+      animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .lecture-header { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0s both; }
+    .overview-box { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both; }
+
+    /* ── LOTTIE-LIKE ICON ANIMATION ON TOPIC HOVER ── */
+    .topic-block:hover .topic-icon svg {
+      animation: rotateIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Enhanced overview box */
+    .overview-box {
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .overview-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--teal), var(--teal-light));
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* Lecture header PDF button area */
+    .lecture-header-actions {
+      margin-top: 12px;
+    }
+
+    /* Pulsing dot on active/new lectures */
+    .lec-badge-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background: var(--emerald);
+      border-radius: 50%;
+      margin-right: 4px;
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- READING PROGRESS BAR -->
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <span class="nav-brand">Islamic Studies · Riphah</span>
+    <button class="back-btn" id="backBtn" onclick="showSelector()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </button>
+    <div class="nav-controls">
+      <!-- Language Toggle -->
+      <div class="toggle-pill" id="langToggle" onclick="toggleLang()" title="Toggle Urdu / English">
+        <span class="toggle-opt" id="langEN">EN</span>
+        <span class="toggle-knob" id="langKnob"></span>
+        <span class="toggle-opt" id="langUR">اردو</span>
+      </div>
+      <!-- Dark Mode Toggle -->
+      <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle Light / Dark">
+        <svg id="iconMoon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="iconSun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+    <h1>Islamic Studies — Comprehensive Notes</h1>
+    <p class="hero-sub">Riphah International University · Department of Islamic Studies · Faculty of Social Sciences &amp; Humanities</p>
+    <div class="hero-divider"></div>
+    <div class="hero-meta">
+      <span class="hero-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Lectures 1, 2, 3, 8, 9, 10, 11, 12, 13
+      </span>
+      <span class="hero-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Quranic Ayat &amp; Hadith Highlighted
+      </span>
+      <span class="hero-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Important Questions Included
+      </span>
+    </div>
+    <div class="hero-authors">
+      <span class="authors-label">Made by</span>
+      <span class="author-name">Hanan Shafay</span>
+      <span class="authors-amp">&amp;</span>
+      <span class="author-name">Mohid Ahmed</span>
+    </div>
+  </div>
+
+  <!-- LECTURE SELECTOR -->
+  <div id="lecture-selector">
+    <p class="selector-title">Select a Lecture to Begin</p>
+    <div class="lecture-grid" id="lectureGrid"></div>
+  </div>
+
+  <!-- LECTURE VIEW -->
+  <div id="lecture-view">
+    <main id="lectureContent"></main>
+  </div>
+
+  <!-- Scroll to top -->
+  <button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <footer>
+    <div class="footer-brand">Islamic Studies — Riphah International University</div>
+    <div class="footer-ornament">﷽</div>
+    <div>Life and Living · Department of Islamic Studies · Faculty of Social Sciences &amp; Humanities</div>
+  </footer>
+
+<script>
+// ══════════ HELPERS ══════════
+// Each helper accepts an optional urduText param for pre-translated content
+// The CSS handles show/hide via .urdu-mode body class
+
+function ayat(ref, arabic, translation, urdu) {
+  return `<div class="card-ayat">
+    <div class="card-label">${ref}</div>
+    <div class="arabic-text">${arabic}</div>
+    <div class="card-translation en-text">${translation}</div>
+    ${urdu ? `<div class="card-translation-ur">${urdu}</div>` : `<div class="card-translation-ur" style="display:none"></div>`}
+  </div>`;
+}
+
+function hadith(ref, arabic, translation, urdu) {
+  return `<div class="card-hadith">
+    <div class="card-label">${ref}</div>
+    <div class="arabic-text">${arabic}</div>
+    <div class="card-translation en-text">${translation}</div>
+    ${urdu ? `<div class="card-translation-ur">${urdu}</div>` : `<div class="card-translation-ur" style="display:none"></div>`}
+  </div>`;
+}
+
+function points(titleEn, items, titleUr, itemsUr) {
+  const urduBlock = (titleUr && itemsUr) ? `
+    <div class="key-points-title urdu-text">${titleUr}</div>
+    <ul class="urdu-text">${itemsUr.map(i => `<li>${i}</li>`).join('')}</ul>` : '';
+  return `<div class="key-points">
+    <div class="key-points-title en-text">${titleEn}</div>
+    <ul class="en-text">${items.map(i => `<li>${i}</li>`).join('')}</ul>
+    ${urduBlock}
+  </div>`;
+}
+
+function topic(iconSvg, titleEn, summaryEn, content, titleUr, summaryUr) {
+  return `<div class="topic-block">
+    <div class="topic-header">
+      <span class="topic-icon">${iconSvg}</span>
+      <span class="topic-title en-text">${titleEn}</span>
+      ${titleUr ? `<span class="topic-title urdu-text">${titleUr}</span>` : ''}
+    </div>
+    <div class="topic-body">
+      ${summaryEn ? `<div class="topic-summary en-text">${summaryEn}</div>` : ''}
+      ${summaryUr ? `<div class="topic-summary urdu-text">${summaryUr}</div>` : ''}
+      ${content}
+    </div>
+  </div>`;
+}
+
+function questions(qs, qsUr) {
+  // Each item: EN text and UR text co-exist in same row, toggled by .urdu-mode CSS
+  const items = qs.map((q, i) => {
+    const urPart = (qsUr && qsUr[i])
+      ? `<span class="urdu-text q-text-ur">${qsUr[i]}</span>`
+      : '';
+    return `<div class="question-item"><span class="q-num">Q${i+1}.</span><span class="en-text q-text-en">${q}</span>${urPart}</div>`;
+  }).join('');
+  return `<div class="questions-section">
+    <div class="qs-title en-text">Important Questions</div>
+    <div class="qs-title urdu-text">اہم سوالات</div>
+    ${items}
+  </div>`;
+}
+
+function overviewBox(textEn, textUr) {
+  return `<div class="overview-box">
+    <div class="overview-label en-text">Lecture Overview</div>
+    <div class="overview-label urdu-text">لیکچر کا جائزہ</div>
+    <span class="en-text">${textEn}</span>
+    ${textUr ? `<span class="urdu-text">${textUr}</span>` : ''}
+  </div>`;
+}
+
+function lectureHeader(num, titleEn, subEn, titleUr, subUr) {
+  return `<div class="lecture-header">
+    <div class="lh-badge">L${num}</div>
+    <div class="lh-content">
+      <h2 class="en-text">${titleEn}</h2>
+      ${titleUr ? `<h2 class="urdu-text">${titleUr}</h2>` : ''}
+      <span class="lh-sub en-text">${subEn}</span>
+      ${subUr ? `<span class="lh-sub urdu-text">${subUr}</span>` : ''}
+      <div class="lecture-header-actions">
+        <a class="lecture-open-btn" href="islamiat/Lecture${num}.pdf" target="_blank">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span class="en-text">Open Lecture ${num} PDF</span>
+          <span class="urdu-text">لیکچر ${num} پی ڈی ایف</span>
+        </a>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ══════════ LECTURES DATA ══════════
+const lectures = {
+  1: {
+    title: "An Introduction to Islamic Vision of Life",
+    sub: "Concepts of Life, Purpose, Tawhid, and Islam as a Complete Way of Life",
+    topics: 6,
+    render: lecture1
+  },
+  2: {
+    title: "Meaning & Role of Ethics in Building a Holistic Personality",
+    sub: "Individual & Social Ethics, Universal Values, Common Ethical Concerns",
+    topics: 7,
+    render: lecture2
+  },
+  3: {
+    title: "Islamic Ideology and its Importance",
+    sub: "Islamic View of God, Universe, Man as Vicegerent, Characteristics of Islamic Ideology",
+    topics: 5,
+    render: lecture3
+  },
+  8: {
+    title: "Basic Features of Modern Ideologies",
+    sub: "Materialism, Secularism, Democracy, Nationalism & Humanism — Islamic Critique",
+    topics: 5,
+    render: lecture8
+  },
+  9: {
+    title: "Characteristics of Islamic Civilization",
+    sub: "Definition, Divine Origin, Foundations & Universality of Islamic Civilization",
+    topics: 4,
+    render: lecture9
+  },
+  10: {
+    title: "Social Ethics & Objectives of Shariah",
+    sub: "Maqasid al-Shari'ah, Personal Ethics, Social Ethics, Economic Ethics",
+    topics: 5,
+    render: lecture10
+  },
+  11: {
+    title: "Ethics & Economy",
+    sub: "Islamic Economic Order, Business Ethics, Socio-Economic Justice",
+    topics: 7,
+    render: lecture11
+  },
+  12: {
+    title: "Islam and Political Ethics",
+    sub: "Islamic Political System, Democracy, Secularism, Socialism & Khilafah",
+    topics: 6,
+    render: lecture12
+  },
+  13: {
+    title: "Features of an Islamic State",
+    sub: "Allah's Sovereignty, Khilafah, Shura, Welfare, Justice & Rights",
+    topics: 6,
+    render: lecture13
+  }
+};
+
+// ══════════ LECTURE 1 ══════════
+
+// ══════════ LECTURE 1 ══════════
+function lecture1() {
+  return lectureHeader(1,
+    "An Introduction to Islamic Vision of Life",
+    "Concepts of Life, Tawhid, Purpose, and Islam as a Complete Way of Life",
+    "اسلامی تصورِ حیات کا تعارف",
+    "زندگی، توحید، مقصدِ حیات، اور اسلام بطور مکمل ضابطۂ حیات"
+  ) +
+  overviewBox(
+    "Islamic concept of life is natural, realistic and highly purposeful. Man is the viceroy of Allah, required to be obedient to Him. Tawhid is the revolutionary foundation of Islam — the belief in one supreme Lord that transforms every sphere of human existence, from governance to finance to law.",
+    "اسلام کا تصورِ حیات فطری، حقیقت پسندانہ اور بہت بامقصد ہے۔ انسان اللہ کا خلیفہ ہے، اسے اللہ کا فرمانبردار رہنا ضروری ہے۔ توحید اسلام کی انقلابی بنیاد ہے — ایک اعلیٰ پروردگار پر ایمان جو حکومت سے لے کر معاملات اور قانون تک ہر شعبۂ زندگی کو بدل دیتا ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    "What is Life? — The Islamic Perspective",
+    "Worldly life is temporary and the hereafter is the eternal abode. Islam calls us to understand this reality so we may prioritize wisely. Life is not to be hated nor to be indulged in excessively — it is a balance and a trust.",
+    ayat("Surah al-Hadid 57:20", "اعْلَمُوا أَنَّمَا الْحَيَاةُ الدُّنْيَا لَعِبٌ وَلَهْوٌ وَزِينَةٌ وَتَفَاخُرٌ بَيْنَكُمْ وَتَكَاثُرٌ فِي الْأَمْوَالِ وَالْأَوْلَادِ",
+    "Know well that the worldly life is but a play and an amusement, a show of beauty and boastful competition in riches and children. The worldly life is nothing but a material of delusion.",
+    "جان لو کہ دنیاوی زندگی محض کھیل، تماشا، بناوٹ، اور آپس میں فخر و مال و اولاد کی کثرت ہے۔ دنیاوی زندگی دھوکے کا سامان ہے۔") +
+    ayat("Surah al-Baqarah 2:201", "وَمِنْهُمْ مَنْ يَقُولُ رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+    "And there are men who say: Our Lord! Give us good in this world and good in the Hereafter and defend us from the torment of the Fire!",
+    "اور ان میں سے کچھ کہتے ہیں: اے ہمارے رب! ہمیں دنیا میں بھلائی دے اور آخرت میں بھی بھلائی دے اور ہمیں آگ کے عذاب سے بچا۔"),
+    "زندگی کیا ہے؟ — اسلامی نقطۂ نظر",
+    "دنیاوی زندگی عارضی ہے اور آخرت ابدی ٹھکانہ ہے۔ اسلام ہمیں اس حقیقت کو سمجھنے پر زور دیتا ہے تاکہ ہم صحیح ترجیحات مقرر کریں۔ زندگی نہ قابلِ نفرت ہے نہ اس میں غرق ہونا درست ہے — یہ توازن اور امانت ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+    "Purpose of Life in Islam",
+    "The purpose of creation for all humankind is to recognize Allah Almighty and worship Him (Ubudiyyah). This is not merely ritual worship but a total submission — Deen — encompassing every action, thought and intention.",
+    ayat("Surah al-Dhariyat 51:56", "وَمَا خَلَقْتُ الْجِنَّ وَالْاِنْسَ اِلَّا لِيَعْبُدُوْنِ",
+    "And I did not create the jinn and mankind except to worship Me.",
+    "اور میں نے جنوں اور انسانوں کو صرف اس لیے پیدا کیا کہ وہ میری عبادت کریں۔") +
+    ayat("Surah al-Mulk 67:2", "الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا",
+    "He Who created Death and Life, that He may try which of you is best in deed; and He is the Exalted in Might, Oft-Forgiving.",
+    "جس نے موت اور زندگی اس لیے پیدا کی کہ تمہیں آزمائے کہ تم میں سے کون سب سے بہتر عمل کرتا ہے۔") +
+    hadith("Sunan Abi Dawud, Book 43, Hadith 172", "الدِّينُ النَّصِيحَةُ", "The Prophet ﷺ said: Religion is sincere conduct — to Allah, His Book, His Messenger, the leaders, and the Muslims in general.",
+    "نبیٔ کریم ﷺ نے فرمایا: دین خیرخواہی ہے — اللہ کے لیے، اس کی کتاب کے لیے، اس کے رسول کے لیے، مسلمان حکمرانوں کے لیے، اور عام مسلمانوں کے لیے۔") +
+    hadith("Al-Mu'jam al-Awsat, Tabarani", "وَخَيْرُ النَّاسِ أَنْفَعُهُمْ لِلنَّاسِ", "The Holy Prophet ﷺ says: The best person is the one who benefits all human beings.",
+    "آنحضرت ﷺ نے فرمایا: لوگوں میں سب سے بہتر وہ ہے جو لوگوں کو سب سے زیادہ فائدہ پہنچائے۔") +
+    points("Concept of Ubudiyyah", [
+      "Ubudiyyah = Allah's Obedience & Servitude out of His Love & Reverence",
+      "Muslim = One who submits to Allah",
+      "Islam = Total System of Submission to Allah",
+      "Deen = Operational Application of Ubudiyyah"
+    ], "عبودیت کا تصور", [
+      "عبودیت = محبت و عظمت سے اللہ کی اطاعت و بندگی",
+      "مسلمان = وہ جو اللہ کے سامنے سرِ تسلیم خم کرے",
+      "اسلام = اللہ کے سامنے مکمل سپردگی کا نظام",
+      "دین = عبودیت کا عملی اطلاق"
+    ]),
+    "اسلام میں مقصدِ حیات",
+    "تمام انسانوں کی تخلیق کا مقصد اللہ تعالیٰ کو پہچاننا اور اس کی عبادت کرنا (عبودیت) ہے۔ یہ محض رسمی عبادت نہیں بلکہ مکمل سپردگی — دین — ہے جو ہر عمل، فکر اور نیت کو شامل ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22V9M21 22V9M12 2 2 9h20L12 2zM7 22V9M17 22V9M3 22h18"/></svg>`,
+    "Islamic Vision of Life — Man as Vicegerent",
+    "Human beings hold the triple role of viceroy (khalifah), servant ('abd), and trustee (amin) on earth. This position demands obedience to Allah and responsibility toward all of creation.",
+    ayat("Surah al-Baqarah 2:30", "وَاِذۡ قَالَ رَبُّكَ لِلۡمَلٰٓـئِكَةِ اِنِّىۡ جَاعِلٌ فِى الۡاَرۡضِ خَلِيۡفَةً",
+    "And when your Lord said to the angels: Lo! I am about to place a vicegerent on earth.",
+    "اور جب تمہارے رب نے فرشتوں سے کہا: میں زمین میں ایک خلیفہ بنانے والا ہوں۔") +
+    ayat("Surah al-Baqarah 2:30 (Full context)", "قَالُوا أَتَجْعَلُ فِيهَا مَنْ يُفْسِدُ فِيهَا وَيَسْفِكُ الدِّمَاءَ وَنَحْنُ نُسَبِّحُ بِحَمْدِكَ",
+    "They said: Will You place on it one who will spread mischief and shed blood while we celebrate Your glory? He said: Surely, I know what you do not know.",
+    "انہوں نے کہا: کیا تو اس میں ایسے کو رکھے گا جو فساد مچائے اور خون بہائے، جبکہ ہم تیری تسبیح کرتے ہیں؟ فرمایا: بے شک میں وہ جانتا ہوں جو تم نہیں جانتے۔"),
+    "اسلامی تصورِ حیات — انسان بطور خلیفۃ اللہ",
+    "انسان زمین پر خلیفہ، عبد اور امین کا تہرا کردار ادا کرتا ہے۔ یہ مقام اللہ کی اطاعت اور پوری مخلوق کے تئیں ذمہ داری کا تقاضا کرتا ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v10M8 6l4-4 4 4"/><circle cx="12" cy="17" r="5"/></svg>`,
+    "Tawhid and its Impact on All Spheres of Life",
+    "Tawhid is the most revolutionary concept in Islam — the belief in one supreme Lord who is omnipotent, omnipresent and the sustainer. It has comprehensive implications across governance, financial dealings, administrative justice, and law.",
+    ayat("Surah al-Ana'am 6:162", "قُلْ إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ",
+    "Say: My prayer, my offering, my life and my death are for Allah, the Lord of all the worlds.",
+    "کہہ دو: بے شک میری نماز، میری قربانی، میرا جینا اور میرا مرنا سب اللہ رب العالمین کے لیے ہے۔") +
+    ayat("Surah Yusuf 12:40 — Tawhid's Impact on Governance", "إِنِ الْحُكْمُ إِلَّا لِلَّهِ أَمَرَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ ذَلِكَ الدِّينُ الْقَيِّمُ",
+    "All sovereignty belongs to Allah. He has commanded that you serve none but Him. This is the Right Way of Life.",
+    "حکم صرف اللہ کا ہے۔ اس نے حکم دیا کہ اس کے سوا کسی کی عبادت نہ کرو۔ یہی سیدھا دین ہے۔") +
+    ayat("Surah al-Nahl 16:90 — Tawhid in Administrative Justice", "إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ وَإِيتَاءِ ذِي الْقُرْبَى وَيَنْهَى عَنِ الْفَحْشَاءِ وَالْمُنْكَرِ وَالْبَغْيِ",
+    "Surely Allah enjoins justice, kindness, and doing of good to kith and kin and forbids all that is shameful, evil and oppressive.",
+    "بے شک اللہ عدل، احسان اور قرابت داروں کو دینے کا حکم دیتا ہے اور بے حیائی، برائی اور سرکشی سے منع کرتا ہے۔"),
+    "توحید اور زندگی کے تمام شعبوں پر اس کا اثر",
+    "توحید اسلام کا سب سے انقلابی تصور ہے — ایک قادرِ مطلق، سمیع و بصیر اور پالنہار رب پر ایمان۔ اس کے حکمرانی، مالیات، انتظامی عدل اور قانون پر گہرے اثرات ہیں۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+    "Islam: A Complete Way of Life (Nizam-e-Hayat)",
+    "Islam provides specific guidelines for all people to follow in their daily lives. Its guidance is comprehensive and includes the social, economic, political, moral, and spiritual aspects of life. Islam covers all fields of human life — it is a complete Deen.",
+    ayat("Surah al-Baqarah 2:208", "يَاأَيُّهَا الَّذِينَ آمَنُوا ادْخُلُوا فِي السِّلْمِ كَافَّةً وَلَا تَتَّبِعُوا خُطُوَاتِ الشَّيْطَانِ",
+    "O ye who believe! Enter into Islam whole-heartedly; and follow not the footsteps of the evil one.",
+    "اے ایمان والو! اسلام میں پورے کے پورے داخل ہو جاؤ اور شیطان کے قدموں کی پیروی نہ کرو۔") +
+    points("Dimensions of Islamic Life", [
+      "Adab (Manners): Proper conduct in all affairs",
+      "Akhlaq (Ethics): Disciplined behavior as prescribed by the Quran",
+      "Mu'amalat: Fulfilling the rights of others in dealings",
+      "Muashraat: Social relationships and community life",
+      "Governance, Economics, Family — all governed by divine guidance"
+    ], "اسلامی زندگی کے ابعاد", [
+      "آداب: تمام معاملات میں مناسب طرزِ عمل",
+      "اخلاق: قرآن کے مطابق ضبط شدہ رویہ",
+      "معاملات: لین دین میں دوسروں کے حقوق ادا کرنا",
+      "معاشرت: سماجی تعلقات اور برادری کی زندگی",
+      "حکمرانی، معیشت، خاندان — سب الٰہی رہنمائی کے تحت"
+    ]),
+    "اسلام: مکمل ضابطۂ حیات (نظامِ حیات)",
+    "اسلام تمام لوگوں کو ان کی روزمرہ زندگی میں رہنمائی کے لیے مخصوص احکامات فراہم کرتا ہے۔ اس کی رہنمائی جامع ہے اور سماجی، معاشی، سیاسی، اخلاقی اور روحانی پہلوؤں کو شامل ہے۔ اسلام ایک مکمل دین ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+    "Important Questions — Lecture 1", "",
+    questions([
+      "Explain the Islamic concept of life. How does Islam view the worldly life in comparison to the Hereafter? Support your answer with Quranic references.",
+      "What is the purpose of life according to Islam? Elaborate on the concept of 'Ubudiyyah' and 'Deen' in detail.",
+      "Discuss the role of man as Allah's vicegerent (Khalifah) on Earth. What responsibilities does this position entail?",
+      "Explain the concept of Tawhid and its practical impacts on governance, financial dealings, administrative justice, and law. Provide relevant Quranic verses.",
+      "How does Islam present itself as a complete way of life (Nizam-e-Hayat)? Discuss with reference to social, economic, political, and moral dimensions."
+    ], [
+      "اسلامی تصورِ حیات کی وضاحت کریں۔ اسلام دنیاوی زندگی کو آخرت کے مقابلے میں کیسے دیکھتا ہے؟ قرآنی حوالوں سے جواب دیں۔",
+      "اسلام کے مطابق مقصدِ حیات کیا ہے؟ عبودیت اور دین کے تصور کو تفصیل سے بیان کریں۔",
+      "زمین پر اللہ کے خلیفہ کے طور پر انسان کے کردار پر بحث کریں۔ اس مقام کے کیا تقاضے ہیں؟",
+      "توحید کا تصور اور حکمرانی، مالیات، انتظامی عدل اور قانون پر اس کے عملی اثرات بیان کریں۔",
+      "اسلام اپنے آپ کو مکمل ضابطۂ حیات کیسے پیش کرتا ہے؟ سماجی، معاشی، سیاسی اور اخلاقی ابعاد کے حوالے سے بیان کریں۔"
+    ]),
+    "اہم سوالات — لیکچر ۱"
+  );
+}
+
+// ══════════ LECTURE 2 ══════════
+function lecture2() {
+  return lectureHeader(2,
+    "Meaning & Role of Ethics in Building a Holistic Personality",
+    "Individual & Social Ethics, Universal Ethical Values, Common Ethical Concerns",
+    "اخلاق کا معنی اور کامل شخصیت سازی میں اس کا کردار",
+    "انفرادی و سماجی اخلاق، آفاقی اقدار، عام اخلاقی خدشات"
+  ) +
+  overviewBox(
+    "Ethics (Akhlaq) are the cornerstone of a holistic personality in Islam. From truthfulness and modesty to mercy and justice, the Quran and Sunnah provide a comprehensive ethical framework that governs both individual conduct and social interaction.",
+    "اخلاق اسلام میں کامل شخصیت کی بنیاد ہیں۔ سچائی اور حیا سے لے کر رحم اور عدل تک، قرآن و سنت ایک جامع اخلاقی ڈھانچہ فراہم کرتے ہیں جو انفرادی اور سماجی دونوں طرح کے طرزِ عمل کی رہنمائی کرتا ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`,
+    "Meaning and Origin of Ethics",
+    "Ethics (Greek: ethikos) is the philosophical study of moral life. In Islamic tradition, Khuluq (خُلُق) is a comprehensive term covering the moral and behavioral aspects of a person — the condition of human conduct in which actions come out easily and without trouble.",
+    points("Key Definitions", [
+      "Ethics = normative science of human conduct judging it as right/wrong, good/bad (William Lille)",
+      "Khuluq (خلق) = habits, natures, behaviors, customs",
+      "Morals = habitual conduct of a society; principles imposed on people",
+      "Ethics as a science provides a systematic body of norms, values, and principles regulating human conduct"
+    ], "اہم تعریفات", [
+      "اخلاق = انسانی طرزِ عمل کی وہ معیاری سائنس جو اسے درست/غلط، اچھا/برا قرار دیتی ہے",
+      "خُلُق = عادات، طبیعتیں، رویے، رسوم",
+      "اخلاقیات = معاشرے کا عادتی طرزِ عمل؛ لوگوں پر نافذ اصول",
+      "اخلاق بطور علم: انسانی طرزِ عمل کو منظم کرنے والے اصولوں، اقدار اور معیارات کا منظم مجموعہ"
+    ]),
+    "اخلاق کا معنی اور ماخذ",
+    "اخلاق (یونانی: ethikos) اخلاقی زندگی کا فلسفیانہ مطالعہ ہے۔ اسلامی روایت میں خُلُق ایک جامع اصطلاح ہے جو کسی شخص کے اخلاقی و رویاتی پہلوؤں کو محیط ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+    "Core Ethical Virtues in Islam — Individual Level",
+    "The Quran and Sunnah present a comprehensive set of virtues that must be found in a holistic personality. These ethical values are not suggestions — they are obligations of faith.",
+    ayat("Surah al-Tawbah 9:119 — Truthfulness", "يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ",
+    "Believers! Have fear of Allah and stand with those that are truthful.",
+    "ایمان والو! اللہ سے ڈرو اور سچوں کے ساتھ رہو۔") +
+    hadith("Shu'ab al-Iman, Bayhaqi — Honesty", "الْمُؤْمِنُ يُطْبَعُ عَلَى كُلِّ خُلُقٍ إِلَّا الْكَذِبَ وَالْخِيَانَةَ",
+    "A believer has all kinds of natures save treachery and telling lies.",
+    "مومن ہر طرح کی فطرت پر پیدا ہو سکتا ہے سوائے خیانت اور جھوٹ کے۔") +
+    hadith("Musnad Ahmad — Trustworthiness", "لاَ إِيمَانَ لِمَنْ لاَ أَمَانَةَ لَهُ وَلاَ دِينَ لِمَنْ لاَ عَهْدَ لَهُ",
+    "He who is not trustworthy has no faith, and he who does not keep his covenant has no religion.",
+    "جو امانتدار نہیں اس کا ایمان نہیں، اور جو عہد نہیں نبھاتا اس کا کوئی دین نہیں۔") +
+    ayat("Surah al-Baqarah 2:153 — Patience", "يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",
+    "Believers! Seek help in patience and in Prayer; Allah is with those that are patient.",
+    "اے ایمان والو! صبر اور نماز سے مدد لو؛ بے شک اللہ صبر کرنے والوں کے ساتھ ہے۔") +
+    hadith("Sahih Muslim — Productive Personality", "مَنْ نَفَّسَ عَنْ مُؤْمِنٍ كُرْبَةً مِنْ كُرَبِ الدُّنْيَا نَفَّسَ اللهُ عَنْهُ كُرْبَةً مِنْ كُرَبِ يَوْمِ الْقِيَامَةِ",
+    "If anyone relieves a Muslim believer from one of the hardships of this worldly life, Allah will relieve him of one of the hardships of the Day of Resurrection.",
+    "جو کوئی کسی مومن کی دنیاوی تکالیف میں سے ایک تکلیف دور کرے، اللہ اس کی قیامت کی تکالیف میں سے ایک تکلیف دور کرے گا۔"),
+    "اسلام میں بنیادی اخلاقی فضائل — انفرادی سطح",
+    "قرآن و سنت فضائل کا ایک جامع مجموعہ پیش کرتے ہیں جو کامل شخصیت میں ضرور پائے جانے چاہئیں۔ یہ اخلاقی اقدار محض مشورے نہیں — یہ ایمان کے تقاضے ہیں۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><polyline points="3 7 12 3 21 7"/><path d="M6 12l-3 6h6l-3-6z"/><path d="M18 12l-3 6h6l-3-6z"/></svg>`,
+    "Common Ethical Concerns — Social Level",
+    "The Quran identifies both positive values (ma'rufat) and negative behaviors (munkarat). Social disorder arises from mockery, suspicion, backbiting, pride, breaking ties of kinship, and prohibited acts.",
+    ayat("Surah al-Nahl 16:90", "إِنَّ اللَّهَ يَأْمُرُ بِالْعَدْلِ وَالْإِحْسَانِ وَإِيتَاءِ ذِي الْقُرْبَى وَيَنْهَى عَنِ الْفَحْشَاءِ وَالْمُنْكَرِ وَالْبَغْيِ",
+    "Surely Allah enjoins justice, kindness and doing of good to kith and kin, and forbids all that is shameful, evil and oppressive.",
+    "بے شک اللہ عدل، احسان اور قرابت داروں کو دینے کا حکم دیتا ہے اور بے حیائی، برائی اور سرکشی سے روکتا ہے۔") +
+    ayat("Surah al-Hujurat 49:11-12", "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا يَسْخَرْ قَوْمٌ مِنْ قَوْمٍ",
+    "Believers, let not a group scoff at another group. Do not spy, nor backbite one another. Would any of you like to eat the flesh of his dead brother?",
+    "اے ایمان والو! کوئی قوم کسی قوم کا مذاق نہ اڑائے۔ ایک دوسرے کی جاسوسی نہ کرو اور نہ غیبت کرو۔ کیا تم میں سے کوئی اپنے مردہ بھائی کا گوشت کھانا پسند کرے گا؟") +
+    hadith("Sahih Muslim — Pride", "لَا يَدْخُلُ الْجَنَّةَ مَنْ كَانَ فِي قَلْبِهِ مِثْقَالُ ذَرَّةٍ مِنْ كِبْرٍ",
+    "He who has in his heart the weight of a mustard seed of pride shall not enter Paradise.",
+    "جس کے دل میں ذرہ برابر بھی تکبر ہوگا وہ جنت میں داخل نہ ہوگا۔"),
+    "عام اخلاقی خدشات — سماجی سطح",
+    "قرآن مثبت اقدار (معروفات) اور منفی رویوں (منکرات) دونوں کی نشاندہی کرتا ہے۔ تمسخر، بدگمانی، غیبت، تکبر، قطعِ رحمی اور ممنوع اعمال سے سماجی بدنظمی پیدا ہوتی ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    "Universal Ethical Values of Islam",
+    "Islam presents seven universal, unchangeable ethical values that form the backbone of its moral system. These values are permanent across all times, places, and cultures.",
+    points("The Seven Universal Islamic Values", [
+      "Tawhid — Unity in Life and Cosmos",
+      "'Adl — Equity, Justice, and Fairness",
+      "Nafs — Protection and Promotion of Life",
+      "'Aql — Protection of Reason/Intellect",
+      "Din — Preservation of Religio-Cultural Freedom",
+      "Nasl — Protection and Dignity of Genealogy and Offspring",
+      "Mal — Protection of Property and Wealth"
+    ], "اسلام کی سات آفاقی اخلاقی اقدار", [
+      "توحید — زندگی اور کائنات میں وحدانیت",
+      "عدل — انصاف، مساوات اور حق گوئی",
+      "نفس — زندگی کی حفاظت اور فروغ",
+      "عقل — عقل و شعور کی حفاظت",
+      "دین — مذہبی و ثقافتی آزادی کا تحفظ",
+      "نسل — اولاد اور نسب کا تحفظ اور وقار",
+      "مال — جائیداد اور دولت کی حفاظت"
+    ]) +
+    ayat("Surah al-Anbiya 21:22 — Tawhid", "لَوْ كَانَ فِيهِمَا آلِهَةٌ إِلَّا اللَّهُ لَفَسَدَتَا",
+    "Had there been any gods in the heavens and the earth apart from Allah, the order of both would have gone to ruins.",
+    "اگر آسمانوں اور زمین میں اللہ کے سوا اور بھی معبود ہوتے تو دونوں کا نظام درہم برہم ہو جاتا۔"),
+    "اسلام کی آفاقی اخلاقی اقدار",
+    "اسلام سات آفاقی، ناقابلِ تبدیل اخلاقی اقدار پیش کرتا ہے جو اس کے اخلاقی نظام کی ریڑھ کی ہڈی ہیں۔ یہ اقدار ہر زمانے، جگہ اور ثقافت میں مستقل ہیں۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+    "Important Questions — Lecture 2", "",
+    questions([
+      "Define ethics in both Western philosophy and Islamic tradition (Akhlaq). What is the literal and conventional meaning of Khuluq?",
+      "Discuss the core ethical virtues required for a holistic personality in Islam. Support your answer with at least three Quranic ayat and two Hadith.",
+      "What are the common ethical concerns in Islam? Explain the Islamic prohibitions regarding social misconduct with references from Surah al-Hujurat.",
+      "Explain the seven universal ethical values of Islam. Why are these values considered permanent and unchangeable?",
+      "How does Islam promote a productive and morally excellent personality? What is the relationship between individual ethics and social welfare in Islam?"
+    ], [
+      "مغربی فلسفے اور اسلامی روایت دونوں میں اخلاق کی تعریف کریں۔ خلق کا لغوی اور اصطلاحی معنی کیا ہے؟",
+      "اسلام میں کامل شخصیت کے لیے درکار بنیادی اخلاقی فضائل بیان کریں۔ کم از کم تین قرآنی آیات اور دو احادیث سے جواب دیں۔",
+      "اسلام میں عام اخلاقی خدشات کیا ہیں؟ سورہ الحجرات کے حوالے سے سماجی بدعملی پر اسلامی پابندیوں کی وضاحت کریں۔",
+      "اسلام کی سات آفاقی اخلاقی اقدار بیان کریں۔ یہ اقدار مستقل اور ناقابلِ تبدیل کیوں ہیں؟",
+      "اسلام ایک نتیجہ خیز اور اعلیٰ اخلاقی شخصیت کو کیسے فروغ دیتا ہے؟ انفرادی اخلاق اور سماجی فلاح کا آپس میں کیا تعلق ہے؟"
+    ]),
+    "اہم سوالات — لیکچر ۲"
+  );
+}
+
+// ══════════ LECTURE 3 ══════════
+function lecture3() {
+  return lectureHeader(3,
+    "Islamic Ideology and its Importance",
+    "Islamic View of God, Universe, Man as Vicegerent, Characteristics & Impact of Islamic Ideology",
+    "اسلامی نظریہ اور اس کی اہمیت",
+    "اللہ، کائنات، انسان بطور خلیفہ اور اسلامی نظریے کی خصوصیات"
+  ) +
+  overviewBox(
+    "Islamic ideology rests on the divine origin of Tawhid — the belief in one supreme Allah who is omnipotent and omnipresent. This ideology defines man's relationship to the universe and to his Creator, establishes man's role as Khalifah, and shapes a complete, dynamic, and error-free worldview.",
+    "اسلامی نظریہ توحید کی الٰہی بنیاد پر قائم ہے — ایک قادرِ مطلق اور سمیع و بصیر اللہ پر ایمان۔ یہ نظریہ انسان کا کائنات اور اپنے خالق سے تعلق متعین کرتا ہے، خلافت میں انسان کا کردار قائم کرتا ہے، اور ایک مکمل، متحرک اور غلطی سے پاک عالمی نظریہ تشکیل دیتا ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1 0-2 .5-2 1.5V5H8l-4 4v11h16V9l-4-4h-2V3.5C14 2.5 13 2 12 2z"/><line x1="12" y1="9" x2="12" y2="20"/><path d="M8 14h8"/></svg>`,
+    "Islamic View of God (Allah)",
+    "Everything has a creator. Allah alone is the Creator and Provider of this universe. Tawhid is a revolutionary concept — there is only one supreme Lord of the universe who is omnipotent, omnipresent and the Sustainer.",
+    ayat("Surah al-Zumar 39:62", "اللَّهُ خَالِقُ كُلِّ شَيْءٍ وَهُوَ عَلَى كُلِّ شَيْءٍ وَكِيلٌ",
+    "Allah is the Creator of everything and over everything He is the Guardian.",
+    "اللہ ہر چیز کا خالق ہے اور وہ ہر چیز پر نگہبان ہے۔") +
+    ayat("Surah al-Ikhlas 112:1-4", "قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُواً أَحَدٌ",
+    "Say: He is Allah, the One. Allah, the Absolute. He begets not, nor was He begotten. And there is nothing comparable unto Him.",
+    "کہو: وہ اللہ ایک ہے، اللہ بے نیاز ہے، نہ اس نے کسی کو جنا نہ اسے جنا گیا، اور نہ کوئی اس کا ہمسر ہے۔"),
+    "اسلام میں اللہ کا تصور",
+    "ہر چیز کا ایک خالق ہے۔ اللہ ہی اس کائنات کا واحد خالق اور رازق ہے۔ توحید ایک انقلابی تصور ہے — کائنات کا صرف ایک سپریم رب ہے جو قادرِ مطلق، سمیع و بصیر اور پالنہار ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8a4 4 0 0 1 4 4"/><circle cx="12" cy="12" r="1"/></svg>`,
+    "Islamic View of the Universe",
+    "The universe is created and administered according to Allah's regulations — the 'Laws of Nature.' It is not a product of accident. The whole universe is subservient to man for his use and benefit. Life on earth is a place of trial upon which depends man's life in the Hereafter.",
+    ayat("Surah al-Baqarah 2:21-22", "يٰٓاَيُّهَا النَّاسُ اعْبُدُوْا رَبَّكُمُ الَّذِىْ خَلَقَكُمْ وَالَّذِيْنَ مِنْ قَبْلِكُمْ",
+    "O Mankind: worship your Lord Who created you and those before you, so that you may ward off evil. Who has made the earth a resting place for you, and the sky a canopy.",
+    "اے لوگو! اپنے اس رب کی عبادت کرو جس نے تمہیں اور تم سے پہلوں کو پیدا کیا۔ جس نے زمین کو تمہارا بستر اور آسمان کو چھت بنایا۔") +
+    points("Key Aspects of the Islamic Worldview", [
+      "Negation of the mechanical concept: the universe is not a product of accident",
+      "Whole universe is subservient to Man for his use and benefit",
+      "Life is temporary; Death is certain; Afterlife exists with full accountability",
+      "Laws of Nature are Allah's regulations governing the cosmos"
+    ], "اسلامی عالمی نظریے کے اہم پہلو", [
+      "میکانکی تصور کی نفی: کائنات کسی اتفاق کا نتیجہ نہیں",
+      "پوری کائنات انسان کے استعمال اور فائدے کے لیے مسخر ہے",
+      "زندگی عارضی ہے؛ موت یقینی ہے؛ مکمل احتساب کے ساتھ آخرت موجود ہے",
+      "قوانینِ فطرت کائنات پر حکمرانی کرنے والے اللہ کے ضابطے ہیں"
+    ]),
+    "اسلام میں کائنات کا تصور",
+    "کائنات اللہ کے ضوابط — 'قوانینِ فطرت' — کے مطابق تخلیق اور منظم ہے۔ یہ کسی اتفاق کی پیداوار نہیں۔ پوری کائنات انسان کے فائدے کے لیے مسخر ہے۔ زمین پر زندگی آزمائش کی جگہ ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 16L2 6l5 5 5-6 5 6 5-5-2 10H4z"/></svg>`,
+    "Man as Allah's Vicegerent (Khalifah) on Earth",
+    "Islamic worldview uses the term 'Vicegerency' (Khilafah) instead of sovereignty, recognizing that sovereignty belongs to Allah alone. Every believer is a Caliph of Allah in his individual capacity and is individually responsible to Allah.",
+    ayat("Surah al-Baqarah 2:30", "وَاِذْ قَالَ رَبُّكَ لِلْمَلٰۗىِٕكَةِ اِنِّىۡ جَاعِلٌ فِى الْاَرْضِ خَلِيۡفَةً",
+    "And when your Lord said to the angels: Verily, I am going to place mankind generations after generations on earth.",
+    "اور جب تمہارے رب نے فرشتوں سے کہا: میں زمین میں خلیفہ بنانے والا ہوں۔") +
+    hadith("Hadith — Accountability", "كُلُّكُمْ رَاعٍ وَكُلُّكُمْ مَسْؤُولٌ عَنْ رَعِيَّتِهِ",
+    "Every one of you is a shepherd and every one is responsible for his flock. (Sahih Bukhari)",
+    "تم میں سے ہر ایک ذمہ دار ہے اور ہر ایک سے اس کی رعیت کے بارے میں پوچھا جائے گا۔") +
+    points("Principles of Khilafah", [
+      "No reservation in favour of any family, class or race",
+      "No individual is inferior to another",
+      "Every believer is a Caliph of Allah in his individual capacity",
+      "Power is delegated by Allah; no one can exceed Allah's permitted limits",
+      "Sovereignty belongs exclusively to Allah; humans are vicegerents (trustees)"
+    ], "خلافت کے اصول", [
+      "کسی خاندان، طبقے یا نسل کے حق میں کوئی تحفظ نہیں",
+      "کوئی فرد دوسرے سے کمتر نہیں",
+      "ہر مومن اپنی انفرادی حیثیت میں اللہ کا خلیفہ ہے",
+      "اختیار اللہ نے تفویض کیا ہے؛ کوئی بھی اللہ کی دی ہوئی حدود سے تجاوز نہیں کر سکتا",
+      "حاکمیت صرف اللہ کی ہے؛ انسان نائب (امین) ہیں"
+    ]),
+    "زمین پر اللہ کے خلیفہ کے طور پر انسان",
+    "اسلامی عالمی نظریہ حاکمیت کی بجائے 'خلافت' کی اصطلاح استعمال کرتا ہے، جو تسلیم کرتا ہے کہ حاکمیت صرف اللہ کی ہے۔ ہر مومن اپنی انفرادی حیثیت میں اللہ کا خلیفہ ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>`,
+    "Characteristics of Islamic Ideology",
+    "Islamic ideology is Divine, comprehensive, error-free, dynamic, and progressive. It places high moral values first and teaches the concept of accountability for all actions.",
+    ayat("Surah al-Maidah 5:3", "الْيَوْمَ أَكْمَلْتُ لَكُمْ دِينَكُمْ وَأَتْمَمْتُ عَلَيْكُمْ نِعْمَتِي وَرَضِيتُ لَكُمُ الْإِسْلَامَ دِينًا",
+    "This day I have perfected your religion for you and completed My favor to you. I have approved Islam to be your religion.",
+    "آج میں نے تمہارے لیے تمہارا دین مکمل کر دیا اور تم پر اپنی نعمت پوری کر دی اور تمہارے لیے اسلام کو دین کے طور پر پسند کر لیا۔") +
+    points("Characteristics of Islamic Ideology", [
+      "Divine: Based on revelation — error-free and from all-Perfect Allah",
+      "Comprehensive: Covers time, place, human, and rulings",
+      "Dynamic: Progressive and applicable in every era",
+      "Stable yet Flexible: Combines stability with adaptability",
+      "Places high moral values first in all codes of conduct",
+      "Teaches Accountability: Actions have consequences in this life and hereafter",
+      "Universal: Sent as a mercy for all of mankind"
+    ], "اسلامی نظریے کی خصوصیات", [
+      "الٰہی: وحی پر مبنی — غلطی سے پاک اور کامل اللہ کی طرف سے",
+      "جامع: وقت، جگہ، انسان اور احکام سب کو محیط",
+      "متحرک: ترقی پذیر اور ہر دور میں قابلِ اطلاق",
+      "مستحکم مگر لچکدار: ثبات اور موافقت کا امتزاج",
+      "طرزِ عمل کے تمام ضابطوں میں اعلیٰ اخلاقی اقدار کو ترجیح",
+      "احتساب کی تعلیم: اعمال کے نتائج دنیا اور آخرت دونوں میں",
+      "آفاقی: تمام انسانوں کے لیے رحمت بنا کر بھیجا گیا"
+    ]),
+    "اسلامی نظریے کی خصوصیات",
+    "اسلامی نظریہ الٰہی، جامع، غلطی سے پاک، متحرک اور ترقی پذیر ہے۔ یہ تمام ضابطوں میں اعلیٰ اخلاقی اقدار کو ترجیح دیتا ہے اور اس دنیا اور آخرت میں تمام اعمال کے احتساب کی تعلیم دیتا ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+    "Important Questions — Lecture 3", "",
+    questions([
+      "Describe the Islamic view of God (Allah). How does Tawhid serve as the revolutionary foundation of Islam? Use Quranic references.",
+      "Explain the Islamic concept of the universe. How does it reject the materialist or accidental view of creation?",
+      "What is meant by man being Allah's vicegerent (Khalifah) on Earth? Discuss the concept of Khilafah and its implications.",
+      "Discuss the characteristics and impact of Islamic ideology. How is it comprehensive, dynamic and universal?",
+      "How does the concept of accountability in Islamic ideology shape human behavior in personal and social life?"
+    ], [
+      "اللہ کے بارے میں اسلامی نظریے کو بیان کریں۔ توحید اسلام کی انقلابی بنیاد کیسے ہے؟ قرآنی حوالے دیں۔",
+      "کائنات کے بارے میں اسلامی تصور کی وضاحت کریں۔ یہ تخلیق کے مادی یا اتفاقی نظریے کو کیسے رد کرتا ہے؟",
+      "زمین پر اللہ کے خلیفہ ہونے سے کیا مراد ہے؟ خلافت کے تصور اور اس کے مضمرات پر بحث کریں۔",
+      "اسلامی نظریے کی خصوصیات اور اثرات بیان کریں۔ یہ جامع، متحرک اور آفاقی کیوں ہے؟",
+      "اسلامی نظریے میں احتساب کا تصور انفرادی اور سماجی زندگی میں انسانی رویے کو کیسے تشکیل دیتا ہے؟"
+    ]),
+    "اہم سوالات — لیکچر ۳"
+  );
+}
+
+// ══════════ LECTURE 8 ══════════
+function lecture8() {
+  return lectureHeader(8,
+    "Basic Features of Modern Ideologies",
+    "Materialism, Secularism, Democracy, Nationalism & Humanism — Islamic Critique",
+    "جدید نظریات کی بنیادی خصوصیات",
+    "مادیت، سیکولرازم، جمہوریت، قوم پرستی اور ہیومنزم — اسلامی تنقید"
+  ) +
+  overviewBox(
+    "This lecture examines five dominant modern ideologies from an Islamic perspective. Islam does not oppose human values but rejects any philosophy that places man or matter at the center by ignoring or denying Allah. Islamic sovereignty belongs to Allah alone; national identity is built on Taqwa, not race.",
+    "یہ لیکچر اسلامی نقطۂ نظر سے پانچ غالب جدید نظریات کا جائزہ لیتا ہے۔ اسلام انسانی اقدار کی مخالفت نہیں کرتا لیکن ہر اس فلسفے کو رد کرتا ہے جو اللہ کو نظرانداز کر کے انسان یا مادے کو مرکز میں رکھتا ہے۔ اسلامی حاکمیت صرف اللہ کی ہے؛ قومی شناخت نسل پر نہیں بلکہ تقویٰ پر بنتی ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="4" rx="1"/><rect x="2" y="14" width="20" height="4" rx="1"/></svg>`,
+    "Materialism and Islam",
+    "Materialism holds that matter is the only reality — denying the existence of God, angels, souls, and the unseen. It is fundamentally incompatible with Islam because five of Islam's six articles of faith are metaphysical (unseen).",
+    ayat("Surah Al-Imran 3:14", "زُيِّنَ لِلنَّاسِ حُبُّ الشَّهَوَاتِ مِنَ النِّسَاءِ وَالْبَنِينَ وَالْقَنَاطِيرِ الْمُقَنْطَرَةِ",
+    "Men are naturally tempted by the lure of women, children, treasures of gold and silver, horses of mark, cattle and plantations. These are the enjoyments of worldly life; but with Allah lies a goodly abode.",
+    "لوگوں کے لیے عورتوں، بیٹوں، سونے چاندی کے ڈھیروں، نشان زدہ گھوڑوں، مویشیوں اور کھیتوں کی محبت خوشنما بنا دی گئی ہے۔ یہ دنیاوی زندگی کا سامان ہے، اور اللہ کے پاس بہترین ٹھکانہ ہے۔") +
+    points("Why Islam Rejects Materialism", [
+      "Denies the existence of Allah, angels, the soul — all fundamental to Islam",
+      "Contradicts the core teaching of Tawhid (Monotheism)",
+      "Five of Islam's six articles of faith are metaphysical (unseen)",
+      "Contrary to human nature (Fitrah) which is inherently oriented toward Allah",
+      "Reduces ethical behavior to material interests only"
+    ], "اسلام مادیت کو کیوں رد کرتا ہے", [
+      "اللہ، فرشتوں اور روح کے وجود سے انکار — یہ سب اسلام کی بنیادیں ہیں",
+      "توحید کی بنیادی تعلیم سے متصادم",
+      "اسلام کے ایمان کے چھ ارکان میں سے پانچ مابعدالطبیعی (غیبی) ہیں",
+      "انسانی فطرت (فطرت) کے خلاف جو اللہ کی طرف جھکی ہوئی ہے",
+      "اخلاقی رویے کو محض مادی مفادات تک محدود کر دیتی ہے"
+    ]),
+    "مادیت اور اسلام",
+    "مادیت یہ مانتی ہے کہ مادہ ہی واحد حقیقت ہے — اللہ، فرشتوں، روح اور غیب کے وجود سے انکار کرتی ہے۔ یہ اسلام سے بنیادی طور پر متصادم ہے کیونکہ اسلام کے ایمان کے چھ ارکان میں سے پانچ مابعدالطبیعی ہیں۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22V9M21 22V9M12 2 2 9h20L12 2zM7 22V9M17 22V9M3 22h18"/></svg>`,
+    "Secularism and Islam",
+    "Secularism separates religion from state and public life, treating faith as a purely private matter. Islam fundamentally rejects this: the Quran is a complete code of life that guides all matters — religious, social, civil, criminal, military, economic, and commercial.",
+    ayat("Surah al-Ana'am 6:162", "قُلۡ اِنَّ صَلَاتِىۡ وَنُسُكِىۡ وَ مَحۡيَاىَ وَمَمَاتِىۡ لِلّٰهِ رَبِّ الۡعٰلَمِيۡنَ",
+    "Say: Surely my Prayer, all my acts of worship, and my living and my dying are for Allah alone, the Lord of the whole universe.",
+    "کہو: بے شک میری نماز، میری عبادتیں، میرا جینا اور میرا مرنا سب اللہ رب العالمین کے لیے ہے۔") +
+    points("Islam vs. Secularism", [
+      "Islam: Religion governs ALL of life — public and private",
+      "Secularism: Religion is only a private matter",
+      "Islam: Quran guides social, criminal, economic, military affairs",
+      "Secularism: Science and rationality replace revealed knowledge",
+      "Islam: Universe was created by Allah; Secularism: universe is self-created"
+    ], "اسلام بمقابلہ سیکولرازم", [
+      "اسلام: دین زندگی کے ہر پہلو — عوامی و نجی — کو کنٹرول کرتا ہے",
+      "سیکولرازم: مذہب صرف ایک نجی معاملہ ہے",
+      "اسلام: قرآن سماجی، فوجداری، معاشی اور فوجی معاملات میں رہنمائی کرتا ہے",
+      "سیکولرازم: وحی کی جگہ سائنس اور عقلیت آتی ہے",
+      "اسلام: کائنات اللہ نے پیدا کی؛ سیکولرازم: کائنات خود پیدا ہوئی"
+    ]),
+    "سیکولرازم اور اسلام",
+    "سیکولرازم مذہب کو ریاست اور عوامی زندگی سے الگ کرتا ہے اور ایمان کو محض نجی معاملہ سمجھتا ہے۔ اسلام اسے بنیادی طور پر رد کرتا ہے: قرآن تمام معاملات میں رہنمائی دینے والا مکمل ضابطۂ حیات ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>`,
+    "Democracy and Islam",
+    "Democracy gives legislative authority to the people — majority opinion becomes law. Islam holds that legislation belongs to Allah alone. However, Islamic concepts like Shura (consultation), Masalaha (public interest), and 'Adl (justice) share the spirit of representative governance.",
+    ayat("Surah Ghafir 40:12", "فَالْحُكْمُ لِلَّهِ الْعَلِيِّ الْكَبِيرِ",
+    "So the judgment is only with Allah, the Most High, the Most Great!",
+    "پس فیصلہ صرف اللہ کا ہے جو سب سے بلند اور سب سے بڑا ہے۔") +
+    points("Main Differences: Democracy vs Islamic System", [
+      "Democracy: popular sovereignty | Islam: sovereignty of Allah",
+      "Democracy: elected representatives may legislate freely | Islam: laws must align with Quran & Sunnah",
+      "Democracy: welfare of capitalists | Islamic system: welfare of all citizens",
+      "Both share: Shura (consultation), public interest, and justice principles"
+    ], "جمہوریت اور اسلامی نظام میں فرق", [
+      "جمہوریت: عوامی حاکمیت | اسلام: اللہ کی حاکمیت",
+      "جمہوریت: منتخب نمائندے آزادی سے قانون بنا سکتے ہیں | اسلام: قوانین قرآن و سنت کے مطابق ہونے چاہئیں",
+      "جمہوریت: سرمایہ داروں کی فلاح | اسلامی نظام: تمام شہریوں کی فلاح",
+      "دونوں میں مشترک: شوریٰ، مصلحتِ عامہ اور عدل کے اصول"
+    ]),
+    "جمہوریت اور اسلام",
+    "جمہوریت قانون سازی کا اختیار عوام کو دیتی ہے — اکثریتی رائے قانون بن جاتی ہے۔ اسلام کا موقف ہے کہ قانون سازی صرف اللہ کا حق ہے۔ تاہم شوریٰ، مصلحت اور عدل جیسے اسلامی تصورات نمائندہ حکمرانی کی روح سے ہم آہنگ ہیں۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    "Nationalism and Islam",
+    "Nationalism places loyalty to the nation-state above all else — based on race, color, or territory. Islam rejects this. In Islam, the basis of human identity is Iman (faith) and Taqwa (piety).",
+    ayat("Surah al-Hujurat 49:13", "يَاأَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُمْ مِنْ ذَكَرٍ وَأُنْثَى وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا إِنَّ أَكْرَمَكُمْ عِنْدَ اللَّهِ أَتْقَاكُمْ",
+    "O mankind! We created you from a single male and female, and made you into nations and tribes that you may know one another. The most noble of you in Allah's sight is the most pious of you.",
+    "اے لوگو! ہم نے تمہیں ایک مرد اور ایک عورت سے پیدا کیا اور تمہیں قومیں اور قبیلے بنایا تاکہ تم ایک دوسرے کو پہچانو۔ اللہ کے نزدیک تم میں سب سے زیادہ عزت والا وہ ہے جو سب سے زیادہ متقی ہو۔"),
+    "قوم پرستی اور اسلام",
+    "قوم پرستی نسل، رنگ یا علاقے کی بنیاد پر قومی ریاست سے وفاداری کو سب سے اوپر رکھتی ہے۔ اسلام اسے رد کرتا ہے۔ اسلام میں انسانی شناخت کی بنیاد ایمان اور تقویٰ ہے، نسل نہیں۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22c1.25-1.25 2.5-5 10-5s8.75 3.75 10 5"/><path d="M12 17V2"/></svg>`,
+    "Humanism and Islam",
+    "Humanism stresses human values and dignity, and proposes resolving problems through science and reason. Islam affirms human dignity — but rejects secular humanism which negates Allah and places Man at the center of the universe.",
+    ayat("Surah al-Isra 17:70", "وَلَقَدْ كَرَّمْنَا بَنِي آدَمَ وَحَمَلْنَاهُمْ فِي الْبَرِّ وَالْبَحْرِ وَرَزَقْنَاهُمْ مِنَ الطَّيِّبَاتِ",
+    "And We bestowed dignity on the children of Adam and provided them with rides on land and sea and provided them with good things.",
+    "اور ہم نے بنی آدم کو عزت بخشی اور انہیں خشکی اور سمندر میں سواریاں دیں اور انہیں پاکیزہ چیزوں سے رزق دیا۔"),
+    "ہیومنزم اور اسلام",
+    "ہیومنزم انسانی اقدار اور وقار پر زور دیتا ہے اور سائنس و عقل سے مسائل حل کرنے کی تجویز دیتا ہے۔ اسلام انسانی وقار کو تسلیم کرتا ہے — لیکن سیکولر ہیومنزم کو رد کرتا ہے جو اللہ کی نفی کر کے انسان کو کائنات کا مرکز بناتا ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+    "Important Questions — Lecture 8", "",
+    questions([
+      "What is Materialism? Why is it fundamentally incompatible with Islam? Discuss with reference to Tawhid and the six articles of faith.",
+      "Explain the concept of Secularism. How does Islam respond to the idea of separating religion from the state? Support with Quranic evidence.",
+      "Compare and contrast Democracy with the Islamic political system. What role does Shura play in bridging the two?",
+      "Discuss Nationalism from an Islamic perspective. How does Allama Iqbal's concept of Muslim nationhood differ from Western nationalism?",
+      "What is Humanism? How does Islam affirm human dignity while rejecting Secular Humanism?"
+    ], [
+      "مادیت کیا ہے؟ یہ اسلام سے بنیادی طور پر متصادم کیوں ہے؟ توحید اور ایمان کے چھ ارکان کے حوالے سے بحث کریں۔",
+      "سیکولرازم کا تصور بیان کریں۔ مذہب کو ریاست سے الگ کرنے کے خیال پر اسلام کا کیا ردعمل ہے؟ قرآنی دلائل دیں۔",
+      "جمہوریت اور اسلامی سیاسی نظام کا موازنہ کریں۔ دونوں کو ملانے میں شوریٰ کیا کردار ادا کرتی ہے؟",
+      "اسلامی نقطۂ نظر سے قوم پرستی پر بحث کریں۔ علامہ اقبال کا مسلم قومیت کا تصور مغربی قوم پرستی سے کیسے مختلف ہے؟",
+      "ہیومنزم کیا ہے؟ اسلام سیکولر ہیومنزم کو رد کرتے ہوئے انسانی وقار کو کیسے تسلیم کرتا ہے؟"
+    ]),
+    "اہم سوالات — لیکچر ۸"
+  );
+}
+
+// ══════════ LECTURE 9 ══════════
+function lecture9() {
+  return lectureHeader(9,
+    "Characteristics of Islamic Civilization",
+    "Definition, Divine Origin, Foundations & Universal Features of Islamic Civilization",
+    "اسلامی تہذیب کی خصوصیات",
+    "تعریف، الٰہی ماخذ، بنیادیں اور اسلامی تہذیب کی آفاقی خصوصیات"
+  ) +
+  overviewBox(
+    "Islamic Civilization is a unique and universal system built on the twin foundations of the Oneness of Allah and the oneness of humanity. It is not restricted to any race, era, or geography — it stands for universal humanism, moral excellence, tolerance, and a balanced integration of material and spiritual life.",
+    "اسلامی تہذیب ایک منفرد اور آفاقی نظام ہے جو اللہ کی وحدانیت اور انسانیت کی وحدت کی دوہری بنیادوں پر قائم ہے۔ یہ کسی نسل، دور یا جغرافیے تک محدود نہیں — یہ آفاقی انسانیت، اخلاقی اعلیٰ مرتبے، رواداری اور مادی و روحانی زندگی کے توازن کی علامت ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+    "Definition of Culture and Civilization",
+    "The word 'civilization' derives from the Latin civilis (civil). Dr. Mustafa al-Sibai defines civilization as: 'a social system that helps man to increase his cultural production.' A civilization comprises four elements: economic resources, political systems, moral traditions, and the pursuit of science and arts.",
+    points("Five Elements of a Civilization (Maududi)", [
+      "1. The concept about worldly life",
+      "2. The aim of life",
+      "3. The fundamental thoughts and beliefs",
+      "4. The training of individuals — qualities and characteristics",
+      "5. The collective system: moral, social, legal, political, and international relations"
+    ], "تہذیب کے پانچ عناصر (مودودی)", [
+      "۱۔ دنیاوی زندگی کے بارے میں تصور",
+      "۲۔ زندگی کا مقصد",
+      "۳۔ بنیادی افکار اور عقائد",
+      "۴۔ افراد کی تربیت — خوبیاں اور خصوصیات",
+      "۵۔ اجتماعی نظام: اخلاقی، سماجی، قانونی، سیاسی اور بین الاقوامی تعلقات"
+    ]),
+    "ثقافت اور تہذیب کی تعریف",
+    "لفظ 'تہذیب' لاطینی civilis سے ماخوذ ہے۔ ڈاکٹر مصطفیٰ السباعی تہذیب کو 'ایک سماجی نظام کے طور پر بیان کرتے ہیں جو انسان کو ثقافتی پیداوار بڑھانے میں مدد کرتا ہے۔'"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>`,
+    "The Divine Origin of Islamic Civilization",
+    "The basic sources of Islamic civilization are the Quran and the Sunnah of the Prophet Muhammad ﷺ. To meet man's spiritual, social, and cultural needs, Allah raised His prophets and revealed a complete code of life — Islam.",
+    hadith("Muwatta Imam Malik — Two Treasures", "تَرَكْتُ فِيكُمْ أَمْرَيْنِ لَنْ تَضِلُّوا مَا تَمَسَّكْتُمْ بِهِمَا كِتَابَ اللهِ وَسُنَّةَ نَبِيِّهِ",
+    "I have left two matters with you. As long as you hold to them, you will not go the wrong way. They are the Book of Allah and the Sunnah of His Prophet.",
+    "میں نے تم میں دو چیزیں چھوڑی ہیں۔ جب تک تم انہیں تھامے رہوگے گمراہ نہ ہوگے: اللہ کی کتاب اور اس کے نبی کی سنت۔") +
+    points("Core Beliefs that Founded Islamic Civilization", [
+      "Monotheism — belief in One Creator of the universe",
+      "Belief in Prophethood and revealed guidance",
+      "Belief in the Hereafter and resurrection",
+      "Man's place and relationship in the universe",
+      "Human behavior and relationships guided by divine law"
+    ], "اسلامی تہذیب کی بنیادی عقائد", [
+      "توحید — کائنات کے ایک خالق پر ایمان",
+      "نبوت اور وحی کی رہنمائی پر ایمان",
+      "آخرت اور بعث بعد الموت پر ایمان",
+      "کائنات میں انسان کا مقام اور اس کا تعلق",
+      "انسانی طرزِ عمل اور تعلقات الٰہی قانون سے رہنمائی پاتے ہیں"
+    ]),
+    "اسلامی تہذیب کا الٰہی ماخذ",
+    "اسلامی تہذیب کے بنیادی ماخذ قرآن اور نبی محمد ﷺ کی سنت ہیں۔ انسان کی روحانی، سماجی اور ثقافتی ضروریات پوری کرنے کے لیے اللہ نے انبیاء بھیجے اور ایک مکمل ضابطۂ حیات — اسلام — نازل کیا۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    "Universality of Islamic Civilization",
+    "Islamic civilization is committed to two basic principles: the Oneness of Allah and the Oneness of humanity. It does not allow racial, linguistic, or ethnic discrimination. Islam stands for universal humanism.",
+    hadith("Musnad Ahmad — Universal Equality", "لَا فَضْلَ لِعَرَبِيٍّ عَلَى عَجَمِيٍّ وَلَا لِعَجَمِيٍّ عَلَى عَرَبِيٍّ وَلَا لِأَبْيَضَ عَلَى أَسْوَدَ",
+    "There is no superiority of an Arab over a non-Arab, or of a non-Arab over an Arab, and no superiority of a white person over a black person, except on the basis of personal piety and righteousness.",
+    "کسی عرب کو عجمی پر، عجمی کو عرب پر، گورے کو کالے پر کوئی فضیلت نہیں، سوائے تقویٰ اور نیکی کی بنیاد پر۔") +
+    points("Salient Features of Islamic Civilization", [
+      "1. Faith-Based: Monotheistic — characterized by submission to Allah and service to humankind",
+      "2. Universal Dimension: Not associated with any specific race, geography, or era",
+      "3. Moral Values: Honesty, justice, sacrifice, hospitality, simplicity and equality",
+      "4. Tolerance: Demonstrated by the Constitution of al-Madinah",
+      "5. Integrated and Balanced: Equilibrium between material and spiritual dimensions"
+    ], "اسلامی تہذیب کی نمایاں خصوصیات", [
+      "۱۔ ایمان پر مبنی: توحیدی — اللہ کے سامنے سرِ تسلیم خم اور انسانیت کی خدمت",
+      "۲۔ آفاقی جہت: کسی مخصوص نسل، جغرافیے یا دور سے وابستہ نہیں",
+      "۳۔ اخلاقی اقدار: دیانتداری، انصاف، قربانی، مہمان نوازی، سادگی اور مساوات",
+      "۴۔ رواداری: آئینِ مدینہ سے ثابت — مسلم اور غیر مسلم مل کر",
+      "۵۔ مربوط اور متوازن: زندگی کے مادی اور روحانی ابعاد میں توازن"
+    ]),
+    "اسلامی تہذیب کی آفاقیت",
+    "اسلامی تہذیب دو بنیادی اصولوں کی پابند ہے: اللہ کی وحدانیت اور انسانیت کی وحدت۔ یہ نسلی، لسانی یا نسبی امتیاز کی اجازت نہیں دیتی۔ اسلام آفاقی انسانیت کا علمبردار ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+    "Important Questions — Lecture 9", "",
+    questions([
+      "Define culture and civilization. What are the five elements of a civilization according to Maududi? How do these apply to Islamic civilization?",
+      "Explain the divine origin of Islamic civilization. What are the foundational sources of Islamic doctrine?",
+      "Discuss the universality of Islamic civilization. How does Islam reject racial and ethnic discrimination? Support with evidence.",
+      "What are the salient (distinctive) features of Islamic civilization? Discuss each feature in detail with examples.",
+      "How does the concept of tolerance in Islamic civilization manifest, as seen in the Constitution of al-Madinah?"
+    ], [
+      "ثقافت اور تہذیب کی تعریف کریں۔ مودودی کے مطابق تہذیب کے پانچ عناصر کیا ہیں؟ یہ اسلامی تہذیب پر کیسے لاگو ہوتے ہیں؟",
+      "اسلامی تہذیب کے الٰہی ماخذ کی وضاحت کریں۔ اسلامی عقیدے کے بنیادی ماخذ کیا ہیں؟",
+      "اسلامی تہذیب کی آفاقیت پر بحث کریں۔ اسلام نسلی اور قومی امتیاز کو کیسے رد کرتا ہے؟ دلائل دیں۔",
+      "اسلامی تہذیب کی نمایاں خصوصیات کیا ہیں؟ ہر خصوصیت کو مثالوں کے ساتھ تفصیل سے بیان کریں۔",
+      "اسلامی تہذیب میں رواداری کا تصور آئینِ مدینہ میں کیسے ظاہر ہوتا ہے؟"
+    ]),
+    "اہم سوالات — لیکچر ۹"
+  );
+}
+
+// ══════════ LECTURE 10 ══════════
+function lecture10() {
+  return lectureHeader(10,
+    "Social Ethics & Objectives of Shariah",
+    "Maqasid al-Shari'ah, Personal Ethics, Social Ethics, Economic Ethics",
+    "سماجی اخلاق اور شریعت کے مقاصد",
+    "مقاصدِ شریعت، ذاتی اخلاق، سماجی اخلاق، معاشی اخلاق"
+  ) +
+  overviewBox(
+    "The Shari'ah shapes Islamic society conducive to the unfettered growth of goodness and truth. The main objectives of the Shari'ah are to ensure human life is based on Ma'rufat (good) and to cleanse it of Munkarat (evils). These five objectives protect the essential pillars of human civilization.",
+    "شریعت اسلامی معاشرے کو بھلائی اور سچائی کی بے روک بڑھوتری کے لیے سازگار بناتی ہے۔ شریعت کے اہم مقاصد یہ ہیں کہ انسانی زندگی معروفات (بھلائیوں) پر قائم ہو اور منکرات (برائیوں) سے پاک ہو۔ یہ پانچ مقاصد انسانی تہذیب کے ضروری ستونوں کی حفاظت کرتے ہیں۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><polyline points="3 7 12 3 21 7"/><path d="M6 12l-3 6h6l-3-6z"/><path d="M18 12l-3 6h6l-3-6z"/></svg>`,
+    "Objectives of Islamic Shari'ah (Maqasid)",
+    "The Shari'ah removes all impediments along the path to goodness, eradicates corruption by prohibiting evil, removes its causes, closes the inlets through which evil creeps into society, and adopts deterrent measures to check its occurrence.",
+    points("The Five Essential Objectives (Maqasid al-Shari'ah)", [
+      "1. Preservation of Religion (Din): Protecting the sum of beliefs, rituals and divine rules",
+      "2. Preservation of Life (Nafs): Protecting the soul and securing surviving needs — food, shelter, marriage, clothing",
+      "3. Preservation of the Mind/Intellect ('Aql): Forbidding intoxicants and all that disables reason",
+      "4. Preservation of Lineage/Offspring (Nasl): Legitimizing marriage; forbidding adultery",
+      "5. Preservation of Wealth/Property (Mal): Permitting trade; forbidding theft, deception"
+    ], "مقاصدِ شریعت کے پانچ ضروری مقاصد", [
+      "۱۔ دین کی حفاظت: عقائد، عبادات اور الٰہی احکام کے مجموعے کی حفاظت",
+      "۲۔ نفس کی حفاظت: جان کی حفاظت اور بنیادی ضروریات — خوراک، رہائش، نکاح، لباس",
+      "۳۔ عقل کی حفاظت: نشہ آور چیزوں اور عقل کو معطل کرنے والی ہر شے کی ممانعت",
+      "۴۔ نسل کی حفاظت: نکاح کو قانونی قرار دینا؛ زنا کی ممانعت",
+      "۵۔ مال کی حفاظت: تجارت کی اجازت؛ چوری، دھوکہ دہی اور ناحق مال کھانے کی ممانعت"
+    ]),
+    "اسلامی شریعت کے مقاصد (مقاصدِ شریعت)",
+    "شریعت بھلائی کی راہ میں تمام رکاوٹیں دور کرتی ہے، برائی کو منع کر کے فساد ختم کرتی ہے، اس کے اسباب ہٹاتی ہے، معاشرے میں برائی کے داخل ہونے کے راستے بند کرتی ہے، اور اسے روکنے کے لیے دفعی اقدامات اختیار کرتی ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    "Personal and Social Ethics",
+    "Islam establishes that all mankind originated from one couple — there is no real difference based on race, color, country or language. True differences are of ideas, beliefs, and principles. Islam builds a principled, ideological society.",
+    ayat("Surah Al-Imran 3:110", "كُنْتُمْ خَيْرَ اُمَّةٍ اُخْرِجَتْ لِلنَّاسِ تَاْمُرُوْنَ بِالْمَعْرُوْفِ وَتَنْهَوْنَ عَنِ الْمُنْكَرِ",
+    "You are now the best Ummah brought forth for mankind. You enjoin what is right and forbid what is wrong and believe in Allah.",
+    "تم بہترین امت ہو جو لوگوں کے لیے پیدا کی گئی ہے۔ تم نیکی کا حکم دیتے ہو اور برائی سے روکتے ہو اور اللہ پر ایمان رکھتے ہو۔") +
+    points("Foundations of Islamic Social Ethics", [
+      "Equality of Mankind: no superiority based on race, color, or territory",
+      "Institution of Family: the foundational unit of civilization — source of progress and strength",
+      "Ma'ruf (good), Sidq (truthfulness), and Ukhuwah (brotherhood) as social pillars",
+      "Duty of Muslim Ummah: enjoin right and forbid wrong (Amr bil Ma'ruf wa Nahy 'an al-Munkar)"
+    ], "اسلامی سماجی اخلاق کی بنیادیں", [
+      "انسانی مساوات: نسل، رنگ یا علاقے کی بنیاد پر کوئی فضیلت نہیں",
+      "خاندان کا ادارہ: تہذیب کی بنیادی اکائی — ترقی اور طاقت کا منبع",
+      "معروف، صدق اور اخوت بطور سماجی ستون",
+      "مسلم امت کا فرض: امر بالمعروف اور نہی عن المنکر"
+    ]),
+    "ذاتی اور سماجی اخلاق",
+    "اسلام قائم کرتا ہے کہ تمام انسان ایک جوڑے سے پیدا ہوئے — نسل، رنگ، ملک یا زبان کی بنیاد پر کوئی حقیقی فرق نہیں۔ حقیقی فرق افکار، عقائد اور اصولوں کا ہے۔ اسلام ایک اصولی، نظریاتی معاشرہ تعمیر کرتا ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+    "Economic Ethics in Islam",
+    "Human actions must be based on good (ma'ruf), virtue (birr), and permissibility (halal). Islam protects wealth, promotes legitimate trade, and forbids all forms of economic injustice.",
+    ayat("Surah al-Isra 17:26-29", "وَآتِ ذَا الْقُرْبَى حَقَّهُ وَالْمِسْكِينَ وَابْنَ السَّبِيلِ وَلَا تُبَذِّرْ تَبْذِيرًا إِنَّ الْمُبَذِّرِينَ كَانُوا إِخْوَانَ الشَّيَاطِينِ",
+    "Give the relative his right, and the needy and the wayfarer. And do not squander recklessly. Verily the squanderers are the brothers of the Shayatin.",
+    "قرابتدار کو اس کا حق دو اور محتاج اور مسافر کو بھی۔ اور فضول خرچی نہ کرو؛ بے شک فضول خرچ شیطانوں کے بھائی ہیں۔") +
+    hadith("Sahih Bukhari — Business Ethics", "رَحِمَ اللَّهُ رَجُلًا سَمْحًا إِذَا بَاعَ وَإِذَا اشْتَرَى وَإِذَا اقْتَضَى",
+    "May Allah show mercy to a man who adopts a kind attitude when he sells, buys and demands for the repayment of loans.",
+    "اللہ اس شخص پر رحم کرے جو بیچتے، خریدتے اور قرض وصول کرتے وقت نرمی اختیار کرے۔"),
+    "اسلام میں معاشی اخلاق",
+    "انسانی اعمال معروف، نیکی اور حلال پر مبنی ہونے چاہئیں۔ اسلام دولت کی حفاظت کرتا ہے، جائز تجارت کو فروغ دیتا ہے، اور معاشی ناانصافی کی تمام اقسام کو ممنوع قرار دیتا ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+    "Important Questions — Lecture 10", "",
+    questions([
+      "Explain the objectives of Islamic Shari'ah (Maqasid al-Shari'ah). Discuss the five essentials that the Shari'ah aims to protect.",
+      "What is the role of ethics in Islamic society? How does Islam define Ma'rufat and Munkarat? Support with Quranic verses.",
+      "Discuss the concept of personal ethics in Islam. How does Islam promote truthfulness, justice, and mercy in individual conduct?",
+      "Explain social ethics in Islam with reference to the concept of Amr bil Ma'ruf wa Nahy 'an al-Munkar. What is the duty of the Muslim Ummah?",
+      "How does Islam approach economic ethics? What is the Islamic stance on trade, wealth distribution, and economic justice?"
+    ], [
+      "اسلامی شریعت کے مقاصد (مقاصدِ شریعت) بیان کریں۔ شریعت کے پانچ ضروری مقاصد کو تفصیل سے بیان کریں۔",
+      "اسلامی معاشرے میں اخلاق کا کیا کردار ہے؟ اسلام معروفات اور منکرات کو کیسے بیان کرتا ہے؟ قرآنی آیات سے جواب دیں۔",
+      "اسلام میں ذاتی اخلاق کا تصور بیان کریں۔ اسلام انفرادی طرزِ عمل میں سچائی، عدل اور رحم کو کیسے فروغ دیتا ہے؟",
+      "امر بالمعروف اور نہی عن المنکر کے حوالے سے اسلام میں سماجی اخلاق کی وضاحت کریں۔ مسلم امت کا فرض کیا ہے؟",
+      "اسلام معاشی اخلاق کے بارے میں کیا کہتا ہے؟ تجارت، دولت کی تقسیم اور معاشی انصاف پر اسلام کا موقف کیا ہے؟"
+    ]),
+    "اہم سوالات — لیکچر ۱۰"
+  );
+}
+
+// ══════════ LECTURE 12 ══════════
+function lecture12() {
+  return lectureHeader(12,
+    "Islam and Political Ethics",
+    "Islamic Political System, Democracy, Secularism, Socialism & Khilafah",
+    "اسلام اور سیاسی اخلاق",
+    "اسلامی سیاسی نظام، جمہوریت، سیکولرازم، سوشلزم اور خلافت"
+  ) +
+  overviewBox(
+    "The political system of Islam rests on two foundations: Allah's absolute sovereignty over the universe, and man's position as His humble slave and vicegerent. No individual or institution may legislate against divine command. The Islamic system promotes Shura (consultation), justice, and the welfare of all citizens.",
+    "اسلام کا سیاسی نظام دو بنیادوں پر قائم ہے: کائنات پر اللہ کی مطلق حاکمیت، اور اس کے عاجز بندے اور خلیفہ کے طور پر انسان کا مقام۔ کوئی فرد یا ادارہ الٰہی حکم کے خلاف قانون سازی نہیں کر سکتا۔ اسلامی نظام شوریٰ، عدل اور تمام شہریوں کی فلاح کو فروغ دیتا ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 16L2 6l5 5 5-6 5 6 5-5-2 10H4z"/></svg>`,
+    "Political System of Islam — Foundational Principles",
+    "The Islamic political system is based on two realities: (1) Allah alone is the Creator, Supporter, and real Master; and (2) Man is Allah's humble slave and vicegerent. No clan, community, or institution shares in Allah's sovereignty.",
+    ayat("Surah al-A'raf 7:54", "أَلَا لَهُ الْخَلْقُ وَالْأَمْرُ",
+    "Lo! To Him alone belong the creation and the command.",
+    "آگاہ رہو! تخلیق اور حکم اسی کا ہے۔") +
+    ayat("Surah Yusuf 12:40", "إِنِ الْحُكْمُ إِلَّا لِلَّهِ أَمَرَ أَلَّا تَعْبُدُوا إِلَّا إِيَّاهُ ذَلِكَ الدِّينُ الْقَيِّمُ",
+    "Sovereignty belongs to none but Allah. He has ordained that you shall not worship anyone but Him. This is the only right path.",
+    "حاکمیت صرف اللہ کی ہے۔ اس نے حکم دیا کہ اس کے سوا کسی کی عبادت نہ کرو۔ یہی سیدھا دین ہے۔") +
+    points("10 Salient Features of the Islamic Political System", [
+      "1. Supreme authority and sovereignty rest with Allah alone",
+      "2. Allah alone is the real Legislator — no institution may legislate against divine command",
+      "3. The Prophet ﷺ is the representative and expounder of divine injunctions",
+      "4. The state is governed through the institution of Khilafat / Imamat / Amarat",
+      "5. Every Muslim is a citizen of the Islamic State, regardless of country of origin",
+      "6. A council of advisors (Shura) assists the Khalifah",
+      "7. The election method is based on choosing the most qualified, pious, and trusted person",
+      "8. The Khilafat cannot be given to one who seeks or demands it",
+      "9. Citizens are obligated to obey the Khalifah within the limits of Shari'ah",
+      "10. The Islamic State protects the life, property, and honor of every citizen regardless of religion"
+    ], "اسلامی سیاسی نظام کی دس نمایاں خصوصیات", [
+      "۱۔ اعلیٰ اقتدار اور حاکمیت صرف اللہ کی",
+      "۲۔ اصل قانون ساز صرف اللہ ہے — کوئی ادارہ الٰہی حکم کے خلاف قانون نہیں بنا سکتا",
+      "۳۔ نبی ﷺ الٰہی احکام کے نمائندے اور شارح ہیں",
+      "۴۔ ریاست خلافت / امامت / امارت کے ادارے کے ذریعے چلائی جاتی ہے",
+      "۵۔ ہر مسلمان اسلامی ریاست کا شہری ہے، قطع نظر ملک کے",
+      "۶۔ مشاورتی کونسل (شوریٰ) خلیفہ کی معاونت کرتی ہے",
+      "۷۔ انتخاب کا اصول: سب سے قابل، متقی اور قابلِ اعتماد شخص",
+      "۸۔ خلافت کا طلبگار یا خواہاں شخص اس کا حقدار نہیں",
+      "۹۔ شہری شریعت کی حدود میں خلیفہ کی اطاعت کے پابند ہیں",
+      "۱۰۔ اسلامی ریاست ہر شہری کی جان، مال اور عزت کی حفاظت کرتی ہے، مذہب سے قطع نظر"
+    ]),
+    "اسلام کا سیاسی نظام — بنیادی اصول",
+    "اسلامی سیاسی نظام دو حقیقتوں پر مبنی ہے: (۱) صرف اللہ ہی خالق، پالنہار اور حقیقی مالک ہے؛ اور (۲) انسان اس کا عاجز بندہ اور خلیفہ ہے۔ کوئی قبیلہ، جماعت یا ادارہ اللہ کی حاکمیت میں شریک نہیں۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>`,
+    "Islam and Democracy",
+    "Islam does not fully align with Western democracy because democracy gives sovereignty to the people while Islam gives sovereignty to Allah. However, Islamic values like Shura, Masalaha, and 'Adl are broadly aligned with the spirit of representative governance.",
+    ayat("Surah Al-Imran 3:159", "وَشَاوِرۡهُمۡ فِى الۡاَمۡرِ",
+    "And take counsel from them in matters of importance.",
+    "اور معاملات میں ان سے مشورہ لو۔") +
+    ayat("Surah al-Shura 42:38", "وَأَمْرُهُمْ شُورَى بَيْنَهُمْ",
+    "And whose affairs are settled with mutual consultation between them.",
+    "اور ان کے معاملات آپس کے مشورے سے طے پاتے ہیں۔") +
+    points("Islam vs. Democracy", [
+      "Islam: sovereignty of Allah | Democracy: popular sovereignty",
+      "Islam: laws must align with Quran & Sunnah | Democracy: majority decides law",
+      "Islam: cares for all citizens | Democracy: often serves capitalist interests",
+      "Both share: consultation (Shura), justice ('Adl), public interest (Masalaha)"
+    ], "اسلام بمقابلہ جمہوریت", [
+      "اسلام: اللہ کی حاکمیت | جمہوریت: عوامی حاکمیت",
+      "اسلام: قوانین قرآن و سنت کے مطابق ہونے چاہئیں | جمہوریت: اکثریت قانون بناتی ہے",
+      "اسلام: تمام شہریوں کی فلاح کا خیال | جمہوریت: اکثر سرمایہ دارانہ مفادات کی خدمت",
+      "دونوں میں مشترک: شوریٰ، عدل اور مصلحتِ عامہ"
+    ]),
+    "اسلام اور جمہوریت",
+    "اسلام مغربی جمہوریت سے مکمل طور پر ہم آہنگ نہیں کیونکہ جمہوریت حاکمیت عوام کو دیتی ہے جبکہ اسلام حاکمیت اللہ کو۔ تاہم شوریٰ، مصلحت اور عدل جیسی اسلامی اقدار نمائندہ حکمرانی کی روح سے ہم آہنگ ہیں۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    "Islam and Secularism",
+    "Secularism discards the influence of religion from public life and separates the state from religious teachings. Islam rejects this: for Muslims, Islam is more than beliefs or rituals — it is a complete code of conduct governing all of life.",
+    ayat("Surah Yusuf 12:40", "إن الحكم إلا لله أمر ألا تعبدوا إلا إياه",
+    "The Decision belongs to none but Allah.",
+    "حکم صرف اللہ کا ہے جس نے حکم دیا کہ اس کے سوا کسی کی عبادت نہ کرو۔") +
+    ayat("Surah al-Maidah 5:44", "وَمَنْ لَمْ يَحْكُمْ بِمَا أَنزَلَ اللَّهُ فَأُوْلَئِكَ هُمُ الْكَافِرُونَ",
+    "Whosoever does not establish and decide by what Allah has revealed, they are indeed the disbelievers.",
+    "اور جو اللہ کے نازل کردہ کے مطابق فیصلہ نہ کریں، وہی کافر ہیں۔"),
+    "اسلام اور سیکولرازم",
+    "سیکولرازم عوامی زندگی سے مذہب کا اثر ختم کرتا ہے اور ریاست کو مذہبی تعلیمات سے الگ کرتا ہے۔ اسلام اسے رد کرتا ہے: مسلمانوں کے لیے اسلام محض عقائد یا عبادات سے بڑھ کر ہے — یہ ایک مکمل ضابطۂ حیات ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+    "Islam and Socialism",
+    "Some Islamic scholars view socialism as echoing the socio-economic justice principles of Islam. However, Islam seeks a middle path — neither fully free-market capitalism nor total state control.",
+    points("Islamic View on Socialism", [
+      "Islam does not recognize unlimited free market economy (capitalism)",
+      "Islam does not endorse fully state-controlled economy (pure socialism)",
+      "Islam seeks the socio-economic welfare of individuals as well as the state",
+      "Zakat, Sadaqah, and prohibitions on interest (riba) provide a unique Islamic economic model",
+      "Some concepts of economic justice in socialism are compatible with Islamic values"
+    ], "سوشلزم کے بارے میں اسلامی نقطۂ نظر", [
+      "اسلام لامحدود آزاد منڈی کی معیشت (سرمایہ داری) کو تسلیم نہیں کرتا",
+      "اسلام مکمل ریاستی کنٹرول والی معیشت (خالص سوشلزم) کی تائید نہیں کرتا",
+      "اسلام افراد اور ریاست دونوں کی سماجی و معاشی فلاح کا خواہاں ہے",
+      "زکوٰۃ، صدقات اور سود کی ممانعت ایک منفرد اسلامی معاشی نمونہ فراہم کرتے ہیں",
+      "سوشلزم میں معاشی انصاف کے کچھ تصورات اسلامی اقدار سے ہم آہنگ ہیں"
+    ]),
+    "اسلام اور سوشلزم",
+    "بعض اسلامی علماء سوشلزم کو اسلام کے سماجی و معاشی انصاف کے اصولوں کی بازگشت سمجھتے ہیں۔ تاہم اسلام درمیانی راہ اختیار کرتا ہے — نہ مکمل آزاد منڈی نہ مکمل ریاستی کنٹرول۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+    "Important Questions — Lecture 12", "",
+    questions([
+      "Describe the salient features of the Islamic political system. How does it differ from modern democratic and secular models?",
+      "What is the Islamic concept of sovereignty? Why does Islam reject popular sovereignty? Provide Quranic evidence.",
+      "Compare and contrast Islam and Democracy. What role does Shura play in the Islamic political system?",
+      "Explain the Islamic stance on Secularism. Why does Islam reject the separation of religion from the state?",
+      "Discuss the relationship between Islam and Socialism. To what extent are their goals of economic justice compatible?"
+    ], [
+      "اسلامی سیاسی نظام کی نمایاں خصوصیات بیان کریں۔ یہ جدید جمہوری اور سیکولر ماڈلوں سے کیسے مختلف ہے؟",
+      "حاکمیت کا اسلامی تصور کیا ہے؟ اسلام عوامی حاکمیت کو کیوں رد کرتا ہے؟ قرآنی دلائل دیں۔",
+      "اسلام اور جمہوریت کا موازنہ کریں۔ اسلامی سیاسی نظام میں شوریٰ کیا کردار ادا کرتی ہے؟",
+      "سیکولرازم پر اسلامی موقف بیان کریں۔ اسلام مذہب کو ریاست سے الگ کرنے کو کیوں رد کرتا ہے؟",
+      "اسلام اور سوشلزم کے درمیان تعلق پر بحث کریں۔ معاشی انصاف کے اہداف میں وہ کس حد تک ہم آہنگ ہیں؟"
+    ]),
+    "اہم سوالات — لیکچر ۱۲"
+  );
+}
+
+// ══════════ LECTURE 13 ══════════
+function lecture13() {
+  return lectureHeader(13,
+    "Features of an Islamic State",
+    "Allah's Sovereignty, Khilafah, Shura, Welfare, Justice & Rights of Citizens",
+    "اسلامی ریاست کی خصوصیات",
+    "اللہ کی حاکمیت، خلافت، شوریٰ، فلاح، عدل اور شہریوں کے حقوق"
+  ) +
+  overviewBox(
+    "An Islamic State is built on complete sovereignty of Allah, the implementation of Shari'ah, consultation (Shura) in all affairs, and the welfare of every citizen. It is an ideological state — not ethnic, racial, or territorial — that upholds justice, human rights, and the supremacy of divine law.",
+    "اسلامی ریاست اللہ کی مکمل حاکمیت، شریعت کے نفاذ، تمام معاملات میں شوریٰ، اور ہر شہری کی فلاح پر قائم ہے۔ یہ ایک نظریاتی ریاست ہے — نسلی، قبائلی یا علاقائی نہیں — جو عدل، انسانی حقوق اور الٰہی قانون کی بالادستی کو برقرار رکھتی ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1 0-2 .5-2 1.5V5H8l-4 4v11h16V9l-4-4h-2V3.5C14 2.5 13 2 12 2z"/><line x1="12" y1="9" x2="12" y2="20"/><path d="M8 14h8"/></svg>`,
+    "Allah's Sovereignty and People's Authority",
+    "Allah Al-Mighty is the only creator, sustainer, and master of the universe — thus He alone has the right to govern all spheres of human life. The role of the state is to implement and uphold His divine law, not to legislate independently.",
+    ayat("Surah al-A'raf 7:54", "أَلَا لَهُ الْخَلْقُ وَالْأَمْرُ تَبَارَكَ اللَّهُ رَبُّ الْعَالَمِينَ",
+    "Lo! His is the creation and His is the command. Blessed is Allah, the Lord of the universe.",
+    "آگاہ ہو! تخلیق اور حکم اسی کا ہے۔ بابرکت ہے اللہ جو رب العالمین ہے۔") +
+    ayat("Surah al-Nisa 4:59 — Order of Obedience", "يَا أَيُّهَا الَّذِينَ آمَنُوا أَطِيعُوا اللَّهَ وَأَطِيعُوا الرَّسُولَ وَأُولِي الْأَمْرِ مِنْكُمْ",
+    "O you who believe! Obey Allah and obey the Messenger and those charged with authority among you. If you differ in anything, refer it to Allah and His Messenger.",
+    "اے ایمان والو! اللہ کی اطاعت کرو، رسول کی اطاعت کرو اور اپنے اولی الامر کی بھی۔ اگر کسی معاملے میں اختلاف ہو تو اسے اللہ اور اس کے رسول کی طرف لوٹاؤ۔"),
+    "اللہ کی حاکمیت اور عوام کا اختیار",
+    "اللہ تعالیٰ ہی کائنات کا واحد خالق، پالنہار اور مالک ہے — لہٰذا صرف اسی کو انسانی زندگی کے تمام شعبوں پر حکمرانی کا حق ہے۔ ریاست کا کام اس کے الٰہی قانون کو نافذ کرنا ہے، آزادانہ قانون سازی نہیں۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 16L2 6l5 5 5-6 5 6 5-5-2 10H4z"/></svg>`,
+    "Khilafah vs. Kingship",
+    "Islamic state is NOT a theocracy in the sense of priestly rule, nor a monarchy. The Khilafah is the collective right of all those who accept Allah's absolute sovereignty. It is an anti-thesis of theocracy, monarchy, and Western secular democracy.",
+    hadith("Sahih Bukhari — Accountability of Leaders", "كُلُّكُمْ رَاعٍ وَكُلُّكُمْ مَسْؤُولٌ عَنْ رَعِيَّتِهِ",
+    "Every one of you is a shepherd and every one is responsible for his flock.",
+    "تم میں سے ہر ایک ذمہ دار (چرواہا) ہے اور ہر ایک سے اپنی رعیت کے بارے میں پوچھا جائے گا۔") +
+    points("Khilafah vs. Other Systems", [
+      "Khilafah: sovereignty belongs to Allah | Monarchy: sovereignty of the king",
+      "Khilafah: head is accountable to Allah and people | Monarchy: no accountability",
+      "Khilafah: law is Shari'ah | Theocracy: law is what priests say",
+      "Khilafah: collective right of all Muslims | Monarchy: hereditary privilege",
+      "Khilafah: head chosen by Shura | Monarchy: by birth or force"
+    ], "خلافت بمقابلہ دیگر نظام", [
+      "خلافت: حاکمیت اللہ کی | بادشاہت: بادشاہ کی حاکمیت",
+      "خلافت: سربراہ اللہ اور عوام کے سامنے جوابدہ | بادشاہت: کوئی جوابدہی نہیں",
+      "خلافت: قانون شریعت | تھیوکریسی: پادریوں کا فرمان قانون",
+      "خلافت: تمام مسلمانوں کا اجتماعی حق | بادشاہت: موروثی استحقاق",
+      "خلافت: شوریٰ سے سربراہ چنا جاتا ہے | بادشاہت: ولادت یا طاقت سے"
+    ]),
+    "خلافت بمقابلہ بادشاہت",
+    "اسلامی ریاست پادریانہ حکمرانی یا بادشاہت نہیں ہے۔ خلافت ان سب کا اجتماعی حق ہے جو اللہ کی مطلق حاکمیت کو تسلیم کریں۔ یہ تھیوکریسی، بادشاہت اور مغربی سیکولر جمہوریت — تینوں کی ضد ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    "Rights of Citizens in an Islamic State",
+    "The Islamic state guarantees fundamental rights to all citizens — Muslim and non-Muslim alike. These rights are God-given, not granted by the state, and cannot be revoked.",
+    points("Guaranteed Rights of Citizens", [
+      "Protection of life, property, honor, and dignity for every citizen",
+      "Freedom of religion for non-Muslim citizens (dhimmis)",
+      "Right to justice — the ruler is not above the law",
+      "Right to basic needs: food, shelter, clothing, and healthcare",
+      "Right to education and knowledge",
+      "Protection from oppression and tyranny"
+    ], "شہریوں کے ضمانت شدہ حقوق", [
+      "ہر شہری کی جان، مال، آبرو اور وقار کی حفاظت",
+      "غیر مسلم شہریوں (ذمیوں) کے لیے مذہبی آزادی",
+      "انصاف کا حق — حاکم قانون سے بالاتر نہیں",
+      "بنیادی ضروریات کا حق: خوراک، رہائش، لباس اور صحت",
+      "تعلیم اور علم کا حق",
+      "ظلم اور جبر سے تحفظ"
+    ]),
+    "اسلامی ریاست میں شہریوں کے حقوق",
+    "اسلامی ریاست تمام شہریوں — مسلم اور غیر مسلم — کو بنیادی حقوق کی ضمانت دیتی ہے۔ یہ حقوق اللہ کے دیے ہوئے ہیں، ریاست کے عطا کردہ نہیں، اور انہیں منسوخ نہیں کیا جا سکتا۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+    "Welfare State in Islam",
+    "An Islamic state is a welfare state that ensures social security, justice, and equitable distribution of resources. Every citizen's basic needs are met from the state treasury (Bait al-Mal).",
+    ayat("Surah al-Hashr 59:7", "كَيْ لَا يَكُونَ دُولَةً بَيْنَ الْأَغْنِيَاءِ مِنْكُمْ",
+    "So that wealth does not circulate only among the rich from among you.",
+    "تاکہ وہ (مال) تمہارے مالداروں کے درمیان ہی گردش کرتا نہ رہے۔") +
+    points("Features of an Islamic Welfare State", [
+      "Bait al-Mal (State Treasury): Zakat, Kharaj, Jizya collected for redistribution",
+      "Guaranteed basic needs for all — no citizen should go hungry",
+      "Justice is the cornerstone: even the Khalifah can be taken to court",
+      "No class privilege — all citizens equal before the law",
+      "Environmental responsibility: protection of earth as Allah's trust (amanah)"
+    ], "اسلامی فلاحی ریاست کی خصوصیات", [
+      "بیت المال (ریاستی خزانہ): زکوٰۃ، خراج، جزیہ دوبارہ تقسیم کے لیے جمع کیے جاتے ہیں",
+      "سب کی بنیادی ضروریات کی ضمانت — کوئی شہری بھوکا نہ رہے",
+      "عدل بنیادی اصول ہے: خلیفہ کو بھی عدالت میں بلایا جا سکتا ہے",
+      "کوئی طبقاتی استحقاق نہیں — قانون کے سامنے سب شہری برابر",
+      "ماحولیاتی ذمہ داری: زمین کی حفاظت بطور اللہ کی امانت"
+    ]),
+    "اسلام میں فلاحی ریاست",
+    "اسلامی ریاست ایک فلاحی ریاست ہے جو سماجی تحفظ، عدل اور وسائل کی منصفانہ تقسیم کو یقینی بناتی ہے۔ ہر شہری کی بنیادی ضروریات ریاستی خزانے (بیت المال) سے پوری کی جاتی ہیں۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+    "Important Questions — Lecture 13", "",
+    questions([
+      "Explain the concept of Allah's sovereignty in an Islamic state. How does this differ from popular sovereignty in democracy?",
+      "What is Khilafah? How does it differ from monarchy and theocracy? What are the key features of Khilafah?",
+      "Discuss the rights guaranteed to citizens in an Islamic state. How does Islam protect both Muslim and non-Muslim citizens?",
+      "Explain the concept of an Islamic welfare state. What role does Bait al-Mal play in ensuring social justice?",
+      "How does the Islamic state ensure justice and accountability? Can the ruler be held accountable? Provide evidence."
+    ], [
+      "اسلامی ریاست میں اللہ کی حاکمیت کا تصور بیان کریں۔ یہ جمہوریت میں عوامی حاکمیت سے کیسے مختلف ہے؟",
+      "خلافت کیا ہے؟ یہ بادشاہت اور تھیوکریسی سے کیسے مختلف ہے؟ خلافت کی اہم خصوصیات کیا ہیں؟",
+      "اسلامی ریاست میں شہریوں کو ضمانت شدہ حقوق بیان کریں۔ اسلام مسلم اور غیر مسلم دونوں شہریوں کی حفاظت کیسے کرتا ہے؟",
+      "اسلامی فلاحی ریاست کا تصور بیان کریں۔ سماجی انصاف کو یقینی بنانے میں بیت المال کیا کردار ادا کرتا ہے؟",
+      "اسلامی ریاست عدل اور جوابدہی کو کیسے یقینی بناتی ہے؟ کیا حاکم کو جوابدہ ٹھہرایا جا سکتا ہے؟ دلائل دیں۔"
+    ]),
+    "اہم سوالات — لیکچر ۱۳"
+  );
+}
+
+
+// ══════════ LECTURE 11 ══════════
+function lecture11() {
+  return lectureHeader(11, "Ethics & Economy", "Islamic Economic Order, Business Ethics, Socio-Economic Justice",
+    "اخلاق اور معیشت", "اسلامی معاشی نظام، تجارتی اخلاق، سماجی و اقتصادی انصاف") +
+  overviewBox("Islam presents a complete and balanced economic system rooted in divine guidance. The Islamic economic order goes beyond profit motive — its core objective is Falah (success in this world and the Hereafter). It combines ethical transactions, prohibition of interest, Zakah, and socio-economic justice to create a welfare economy beneficial for all of society.",
+    "اسلام ایک مکمل اور متوازن معاشی نظام پیش کرتا ہے جو الہٰی رہنمائی پر مبنی ہے۔ اسلامی معاشی نظام محض نفع کمانے سے آگے ہے — اس کا بنیادی مقصد فلاح ہے (دنیا اور آخرت میں کامیابی)۔ یہ اخلاقی لین دین، سود کی حرمت، زکوٰۃ، اور سماجی و اقتصادی انصاف کو یکجا کر کے سب کے لیے فائدہ مند فلاحی معیشت بناتا ہے۔") +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+    "Characteristics of the Islamic Economic Order",
+    "Islam's economic system rests on a special concept of ownership: Allah alone is the ultimate owner of all things. Humans are trustees (Khulafa) who hold wealth as a trust. Islam recognizes private, communal, and state ownership — each governed by divine guidelines.",
+    ayat("Surah al-Baqarah 2:284 — Allah is the Real Owner", "لِلَّهِ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ",
+      "To Allah belongs whatever is in the heavens and whatever is in the earth.",
+      "آسمانوں اور زمین میں جو کچھ ہے سب اللہ ہی کا ہے۔") +
+    ayat("Surah al-A'raf 7:10 — Man as Trustee", "وَلَقَدْ مَكَّنَّاكُمْ فِي الْأَرْضِ وَجَعَلْنَا لَكُمْ فِيهَا مَعَايِشَ",
+      "And We have certainly established you upon the earth and made for you therein ways of livelihood.",
+      "اور ہم نے تمہیں زمین میں جگہ دی اور اس میں تمہارے لیے معیشت کے ذرائع بنائے۔") +
+    ayat("Surah al-Jumu'ah 62:9-10 — Integration of Din and Dunya", "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا نُودِيَ لِلصَّلَاةِ مِنْ يَوْمِ الْجُمُعَةِ فَاسْعَوْا إِلَى ذِكْرِ اللَّهِ وَذَرُوا الْبَيْعَ ۚ فَإِذَا قُضِيَتِ الصَّلَاةُ فَانْتَشِرُوا فِي الْأَرْضِ وَابْتَغُوا مِنْ فَضْلِ اللَّهِ",
+      "Believers! When the call for Prayer is made on Friday, hasten to the remembrance of Allah and give up all trading. But when the Prayer is ended, disperse in the land and seek Allah's Bounty so that you may prosper.",
+      "اے ایمان والو! جب جمعہ کے دن نماز کی اذان ہو تو اللہ کی یاد کی طرف دوڑو اور خرید و فروخت چھوڑ دو۔ پھر جب نماز ادا ہو جائے تو زمین میں پھیل جاؤ اور اللہ کا فضل تلاش کرو تاکہ تم فلاح پاؤ۔"),
+    "اسلامی معاشی نظام کی خصوصیات",
+    "اسلام کا معاشی نظام ملکیت کے ایک خاص تصور پر قائم ہے: اللہ تعالیٰ تمام اشیاء کا حقیقی مالک ہے۔ انسان خلیفہ اور امانتدار ہیں جو دولت کو امانت کے طور پر رکھتے ہیں۔ اسلام نجی، اجتماعی، اور سرکاری ملکیت کو تسلیم کرتا ہے — ہر ایک الہٰی ہدایات کے تحت۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm0 0v20M2 12h20"/></svg>`,
+    "Falah, Prohibition of Riba & System of Zakah",
+    "Islam replaces the profit motive with Falah — comprehensive success in this world and the Hereafter. Interest (Riba) is strictly forbidden. Zakah is compulsory purification of wealth that redistributes resources from the rich to the poor, creating a just economic order.",
+    ayat("Surah Al-Imran 3:130 — Prohibition of Riba", "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَأْكُلُوا الرِّبَا أَضْعَافًا مُضَاعَفَةً وَاتَّقُوا اللَّهَ لَعَلَّكُمْ تُفْلِحُونَ",
+      "O believers! Do not devour usury doubled and multiplied. Fear Allah so that you may prosper.",
+      "اے ایمان والو! سود کو دوگنا اور چوگنا کر کے نہ کھاؤ۔ اللہ سے ڈرو تاکہ تم فلاح پاؤ۔") +
+    ayat("Surah al-Noor 24:56 — Zakah", "وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ وَأَطِيعُوا الرَّسُولَ لَعَلَّكُمْ تُرْحَمُونَ",
+      "Establish Prayer and pay Zakah and obey the Messenger so that mercy may be shown to you.",
+      "نماز قائم کرو، زکوٰۃ ادا کرو اور رسول کی اطاعت کرو تاکہ تم پر رحم کیا جائے۔") +
+    ayat("Surah al-Baqarah 2:275 — Business Made Lawful", "وَأَحَلَّ اللَّهُ الْبَيْعَ وَحَرَّمَ الرِّبَا",
+      "Allah has made trade lawful and interest unlawful.",
+      "اللہ نے تجارت کو حلال اور سود کو حرام کیا ہے۔"),
+    "فلاح، سود کی حرمت اور زکوٰۃ کا نظام",
+    "اسلام منافع کے محرک کو فلاح سے بدلتا ہے — دنیا اور آخرت میں جامع کامیابی۔ سود (ربا) سختی سے ممنوع ہے۔ زکوٰۃ دولت کی لازمی پاکیزگی ہے جو امیروں سے غریبوں میں وسائل تقسیم کرتی ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    "Concern for the Poor & Distribution of Inheritance",
+    "Islam has a special concern for the weak and destitute. Infaq fi Sabilillah (spending in the way of Allah) is a continuous duty. The Islamic law of inheritance prevents concentration of wealth — property is distributed among multiple heirs after every generation.",
+    ayat("Surah al-Qasas 28:5 — Allah's Favour on the Weak", "وَنُرِيدُ أَنْ نَمُنَّ عَلَى الَّذِينَ اسْتُضْعِفُوا فِي الْأَرْضِ وَنَجْعَلَهُمْ أَئِمَّةً وَنَجْعَلَهُمُ الْوَارِثِينَ",
+      "We desired to show favour to those who were oppressed in the earth, to make them leaders and make them the inheritors.",
+      "ہم چاہتے تھے کہ ان لوگوں پر احسان کریں جو زمین میں کمزور کر دیے گئے تھے، انہیں پیشوا بنائیں اور وارث بنائیں۔") +
+    ayat("Surah al-Ma'arij 70:24-25 — Rights of the Poor", "وَالَّذِينَ فِي أَمْوَالِهِمْ حَقٌّ مَعْلُومٌ لِلسَّائِلِ وَالْمَحْرُومِ",
+      "And those in whose wealth there is a recognized right for the beggar and the deprived.",
+      "اور وہ لوگ جن کے مال میں سائل اور محروم کا ایک معلوم حق ہے۔"),
+    "غریبوں کی فکر اور وراثت کی تقسیم",
+    "اسلام کمزوروں اور محتاجوں کا خاص خیال رکھتا ہے۔ انفاق فی سبیل اللہ ایک مستقل فرض ہے۔ اسلامی قانون وراثت دولت کے ارتکاز کو روکتا ہے — ہر نسل کے بعد جائیداد متعدد وارثوں میں تقسیم ہوتی ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+    "Socio-Economic Justice in Islam",
+    "The primary mission of all Prophets was to establish justice ('Adl) in the world. The Quran teaches that injustice ultimately leads to destruction. The prohibition of Riba, the system of Zakah, and equitable distribution of wealth are the three pillars of Islamic socio-economic justice.",
+    ayat("Surah al-Hadid 57:25 — Mission of Prophets", "لَقَدْ أَرْسَلْنَا رُسُلَنَا بِالْبَيِّنَاتِ وَأَنْزَلْنَا مَعَهُمُ الْكِتَابَ وَالْمِيزَانَ لِيَقُومَ النَّاسُ بِالْقِسْطِ",
+      "We sent Our Messengers with clear evidence, and sent down with them the Book and the Balance, so that people may uphold justice.",
+      "ہم نے اپنے رسولوں کو واضح دلائل کے ساتھ بھیجا اور ان کے ساتھ کتاب اور میزان نازل کی تاکہ لوگ انصاف پر قائم رہیں۔") +
+    ayat("Surah al-Tawbah 9:60 — Disbursement of Zakah", "إِنَّمَا الصَّدَقَاتُ لِلْفُقَرَاءِ وَالْمَسَاكِينِ وَالْعَامِلِينَ عَلَيْهَا وَالْمُؤَلَّفَةِ قُلُوبُهُمْ وَفِي الرِّقَابِ وَالْغَارِمِينَ وَفِي سَبِيلِ اللَّهِ وَابْنِ السَّبِيلِ",
+      "The Sadaqat (Zakah) are only for the poor, the needy, those employed to collect them, those whose hearts are to be reconciled, for freeing captives, for those in debt, in the way of Allah, and for the wayfarer. This is an obligation from Allah.",
+      "صدقات تو صرف فقراء، مساکین، ان پر کام کرنے والوں، جن کے دل پکڑنے ہوں، غلاموں کی آزادی، قرض داروں، اللہ کی راہ میں اور مسافروں کے لیے ہیں۔ یہ اللہ کی طرف سے فرض ہے۔"),
+    "اسلام میں سماجی و اقتصادی انصاف",
+    "تمام انبیاء کی بنیادی مہم دنیا میں عدل قائم کرنا تھی۔ قرآن سکھاتا ہے کہ ظلم بالآخر تباہی کا باعث بنتا ہے۔ سود کی حرمت، زکوٰۃ کا نظام، اور دولت کی منصفانہ تقسیم اسلامی سماجی و اقتصادی انصاف کے تین ستون ہیں۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
+    "Islamic Business Ethics",
+    "Islam provides a complete code of business ethics: enjoining lawful earnings, dignity of labor, honest transactions, prohibition of bribery, fair weights and measures, moderation in spending, and the honored status of the honest tradesman. All forms of earning through deception, theft, gambling, or interest are strictly prohibited.",
+    hadith("Sahih Bukhari — Dignity of Labor", "مَا أَكَلَ أَحَدٌ طَعَامًا قَطُّ خَيْرًا مِنْ أَنْ يَأْكُلَ مِنْ عَمَلِ يَدِهِ وَإِنَّ نَبِيَّ اللَّهِ دَاوُدَ كَانَ يَأْكُلُ مِنْ عَمَلِ يَدِهِ",
+      "No one has ever eaten better food than what he eats as a result of the labor of his hands. Verily, Allah's Prophet Dawud used to eat from the work of his own hands.",
+      "کسی نے بھی اس کھانے سے بہتر کھانا نہیں کھایا جو اس نے اپنے ہاتھ کی محنت سے کمایا۔ اللہ کے نبی داؤد علیہ السلام اپنے ہاتھ کی محنت سے کھاتے تھے۔") +
+    ayat("Surah al-Nisa 4:29 — Ethical Transactions", "يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَأْكُلُوا أَمْوَالَكُمْ بَيْنَكُمْ بِالْبَاطِلِ إِلَّا أَنْ تَكُونَ تِجَارَةً عَنْ تَرَاضٍ مِنْكُمْ",
+      "O believers! Do not devour one another's property by unjust means. Only through trade by mutual consent.",
+      "اے ایمان والو! آپس میں ایک دوسرے کا مال ناجائز طریقے سے نہ کھاؤ، مگر یہ کہ آپس کی رضامندی سے تجارت ہو۔") +
+    ayat("Surah al-Baqarah 2:188 — Prohibition of Bribery", "وَلَا تَأْكُلُوا أَمْوَالَكُمْ بَيْنَكُمْ بِالْبَاطِلِ وَتُدْلُوا بِهَا إِلَى الْحُكَّامِ لِتَأْكُلُوا فَرِيقًا مِنْ أَمْوَالِ النَّاسِ بِالْإِثْمِ",
+      "Do not consume one another's property by unjust means, nor offer it to the authorities so that you may sinfully consume a portion of other people's wealth.",
+      "اور ایک دوسرے کا مال ناحق نہ کھاؤ اور نہ حاکموں کو رشوت دو تاکہ گناہ کے ساتھ لوگوں کے مال میں سے کچھ کھا سکو۔") +
+    ayat("Surah al-Mutaffifin 83:1-3 — Fair Weights & Measures", "وَيْلٌ لِلْمُطَفِّفِينَ الَّذِينَ إِذَا اكْتَالُوا عَلَى النَّاسِ يَسْتَوْفُونَ وَإِذَا كَالُوهُمْ أَوْ وَزَنُوهُمْ يُخْسِرُونَ",
+      "Woe to the defrauders who, when they take the measure from men, take it in full; but when they measure or weigh for others, give less than is due.",
+      "تباہی ہے ناپ تول میں کمی کرنے والوں کے لیے جو جب لوگوں سے ناپتے ہیں تو پورا لیتے ہیں اور جب انہیں ناپ کر یا تول کر دیتے ہیں تو کم دیتے ہیں۔") +
+    hadith("Sunan Tirmidhi — Status of Honest Tradesman", "التَّاجِرُ الصَّدُوقُ الْأَمِينُ مَعَ النَّبِيِّينَ وَالصِّدِّيقِينَ وَالشُّهَدَاءِ",
+      "The honest and truthful tradesman shall be with the Prophets, the truthful, and the martyrs (in the Hereafter).",
+      "سچا اور امانتدار تاجر آخرت میں انبیاء، صدیقین اور شہداء کے ساتھ ہوگا۔"),
+    "اسلامی تجارتی اخلاق",
+    "اسلام تجارتی اخلاق کا مکمل ضابضہ فراہم کرتا ہے: حلال کمائی، محنت کی عزت، دیانتدارانہ لین دین، رشوت کی حرمت، منصفانہ ناپ تول، اعتدال، اور دیانتدار تاجر کا اعلیٰ مقام۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22V9M21 22V9M12 2 2 9h20L12 2zM7 22V9M17 22V9M3 22h18"/></svg>`,
+    "Impacts of Islamic Economic Teachings",
+    "When Islamic ethics are applied in the economy, the results are: liberation from selfishness, prevention of unethical resource generation, circulation of wealth, proper ethics of spending, and ultimately a welfare economy that brings stability and removes class consciousness.",
+    points("Key Impacts on the Economy",
+      [
+        "Liberation from Selfishness — transforms individualistic materialism into benevolent, humanistic conduct",
+        "Prevents Unethical Generation — no hoarding, monopoly, gambling or speculation allowed",
+        "Infaq, Sadaqat & Zakah — compulsory redistribution of surplus wealth removes poverty",
+        "Ethics of Spending — no squandering on gambling, drugs, or prohibited activities; investment in education, health and welfare is encouraged",
+        "Circulation of Wealth — Islamic inheritance law prevents concentration of resources in a few hands",
+        "Welfare Economy — social justice, mass education, and social security bring stability for all citizens"
+      ],
+      "معیشت پر کلیدی اثرات",
+      [
+        "خود غرضی سے آزادی — انفرادی مادیت کو انسانی برادرانہ طرزِ عمل میں بدلتا ہے",
+        "غیر اخلاقی ذرائع پر پابندی — ذخیرہ اندوزی، اجارہ داری، جوا اور سٹہ ممنوع",
+        "انفاق، صدقات اور زکوٰۃ — فاضل دولت کی لازمی تقسیم غربت ختم کرتی ہے",
+        "خرچ کے اخلاق — جوئے، شراب اور ممنوع سرگرمیوں پر فضول خرچی ممنوع؛ تعلیم، صحت اور فلاح میں سرمایہ کاری کی ترغیب",
+        "دولت کی گردش — اسلامی قانون وراثت چند ہاتھوں میں وسائل کے ارتکاز کو روکتا ہے",
+        "فلاحی معیشت — سماجی انصاف، عوامی تعلیم، اور سماجی تحفظ تمام شہریوں کے لیے استحکام لاتا ہے"
+      ]
+    ),
+    "اسلامی معاشی تعلیمات کے اثرات",
+    "جب معیشت میں اسلامی اخلاق لاگو ہوتے ہیں تو نتائج یہ ہوتے ہیں: خود غرضی سے نجات، غیر اخلاقی وسائل کی روک تھام، دولت کی گردش، خرچ کے اخلاق، اور بالآخر ایک فلاحی معیشت جو استحکام لاتی ہے۔"
+  ) +
+
+  topic(`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+    "Important Questions — Lecture 11", "",
+    questions([
+      "Explain the concept of ownership in Islam. How does it differ from capitalist and socialist notions of ownership? What types of ownership does Islam recognize?",
+      "What is Falah? How does it differ from the conventional profit motive? Explain with Quranic references.",
+      "Discuss the prohibition of Riba (interest) in Islam. What are the economic implications of this prohibition, and how has Islamic banking emerged as an alternative?",
+      "Explain the system of Zakah and its role in achieving socio-economic justice. How does Zakah influence investment, savings, and wealth distribution?",
+      "What are the key business ethics prescribed by Islam? Discuss at least five principles with supporting Quranic verses and Hadith.",
+      "How does the Islamic law of inheritance prevent concentration of wealth? Compare this with Western inheritance practices.",
+      "Discuss the impacts of applying Islamic economic ethics on society. How does Islam's comprehensive social security system work?"
+    ],
+    [
+      "اسلام میں ملکیت کے تصور کی وضاحت کریں۔ یہ سرمایہ دارانہ اور اشتراکی ملکیت کے تصورات سے کیسے مختلف ہے؟",
+      "فلاح کیا ہے؟ یہ روایتی نفع کے محرک سے کیسے مختلف ہے؟ قرآنی حوالوں کے ساتھ وضاحت کریں۔",
+      "اسلام میں سود (ربا) کی حرمت پر بحث کریں۔ اس کے معاشی اثرات کیا ہیں اور اسلامی بینکنگ کس طرح ایک متبادل کے طور پر ابھری ہے؟",
+      "زکوٰۃ کے نظام اور سماجی و اقتصادی انصاف میں اس کے کردار کی وضاحت کریں۔",
+      "اسلام کے مقرر کردہ بنیادی تجارتی اخلاق کیا ہیں؟ کم از کم پانچ اصولوں کو قرآنی آیات اور احادیث کے ساتھ بیان کریں۔",
+      "اسلامی قانون وراثت دولت کے ارتکاز کو کیسے روکتا ہے؟",
+      "اسلامی معاشی اخلاق کے اطلاق کے معاشرے پر اثرات بیان کریں۔"
+    ]),
+    "اہم سوالات — لیکچر ۱۱"
+  );
+}
+
+// ══════════ RENDERING ══════════
+function buildGrid() {
+  const grid = document.getElementById('lectureGrid');
+  // Sort lecture keys numerically
+  const sortedEntries = Object.entries(lectures).sort((a,b) => Number(a[0]) - Number(b[0]));
+  grid.innerHTML = sortedEntries.map(([num, lec]) => `
+    <div class="lec-card" onclick="openLecture(${num})">
+      <div class="lec-num en-text"><span class="lec-badge-dot"></span>Lecture ${num}</div>
+      <div class="lec-num urdu-text"><span class="lec-badge-dot"></span>لیکچر ${num}</div>
+      <div class="lec-title">${lec.title}</div>
+      <div class="lec-subtitle en-text">${lec.sub}</div>
+      <div class="lec-topics-count en-text">${lec.topics} topics &nbsp;·&nbsp; <span style="color:var(--emerald)">View Notes &rarr;</span></div>
+      <div class="lec-topics-count urdu-text">${lec.topics} موضوعات &nbsp;·&nbsp; <span style="color:var(--emerald)">نوٹس دیکھیں ←</span></div>
+      <a class="lec-pdf-btn" href="islamiat/Lecture${num}.pdf" target="_blank" onclick="event.stopPropagation()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span class="en-text">Open Lecture PDF</span>
+        <span class="urdu-text" style="display:none">لیکچر پی ڈی ایف کھولیں</span>
+      </a>
+    </div>
+  `).join('');
+}
+
+function openLecture(num) {
+  const lec = lectures[num];
+  if (!lec) return;
+  document.getElementById('lecture-selector').style.display = 'none';
+  const view = document.getElementById('lecture-view');
+  view.style.display = 'block';
+  document.getElementById('lectureContent').innerHTML = lec.render();
+  document.getElementById('backBtn').classList.add('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+}
+
+function showSelector() {
+  document.getElementById('lecture-view').style.display = 'none';
+  document.getElementById('lecture-selector').style.display = 'block';
+  document.getElementById('backBtn').classList.remove('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+
+// ══════════ LANGUAGE TOGGLE ══════════
+let isUrdu = false;
+
+function toggleLang() {
+  isUrdu = !isUrdu;
+  document.body.classList.toggle('urdu-mode', isUrdu);
+  document.getElementById('langToggle').classList.toggle('urdu-active', isUrdu);
+  // Toggle PDF button text in cards
+  document.querySelectorAll('.lec-pdf-btn .en-text').forEach(el => el.style.display = isUrdu ? 'none' : '');
+  document.querySelectorAll('.lec-pdf-btn .urdu-text').forEach(el => el.style.display = isUrdu ? 'inline' : 'none');
+  localStorage.setItem('islaLang', isUrdu ? 'ur' : 'en');
+}
+
+// ══════════ THEME TOGGLE ══════════
+let isDark = false;
+function toggleTheme() {
+  isDark = !isDark;
+  document.body.classList.toggle('dark', isDark);
+  document.getElementById('iconMoon').style.display = isDark ? 'none' : 'block';
+  document.getElementById('iconSun').style.display = isDark ? 'block' : 'none';
+  localStorage.setItem('islaTheme', isDark ? 'dark' : 'light');
+}
+
+// ══════════ RESTORE PREFS ══════════
+(function() {
+  const theme = localStorage.getItem('islaTheme');
+  const lang = localStorage.getItem('islaLang');
+  if (theme === 'dark') {
+    isDark = true;
+    document.body.classList.add('dark');
+    document.getElementById('iconMoon').style.display = 'none';
+    document.getElementById('iconSun').style.display = 'block';
+  }
+  if (lang === 'ur') {
+    isUrdu = true;
+    document.body.classList.add('urdu-mode');
+    document.getElementById('langToggle').classList.add('urdu-active');
+  }
+})();
+
+// Init
+buildGrid();
+
+// Scroll-to-top visibility + reading progress
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTopBtn');
+  if (window.scrollY > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+
+  // Reading progress bar
+  const bar = document.getElementById('readingProgress');
+  if (bar) {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+});
+</script>
+</body>
+</html>
