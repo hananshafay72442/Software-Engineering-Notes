@@ -3026,82 +3026,485 @@ const NOTES = {
 `,
 
   8: `
+
 <h2>Why Do We Need Counters?</h2>
 <div class="why-box">
-  <strong><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> The Problem</strong>
-  Digital systems constantly need to count: clock cycles, clock ticks, events, items, frequencies. A <strong>counter</strong> is a sequential circuit that cycles through a sequence of states. It's used in everything from digital clocks (which count seconds, minutes, hours) to CPU program counters (which track which instruction to execute next) to frequency dividers in communication circuits.
+  <strong>🔢 The Core Idea</strong>
+  A <strong>counter</strong> is a sequential circuit that cycles through a fixed sequence of states, advancing by one state on each clock pulse. Digital systems use counters everywhere: digital clocks count seconds/minutes/hours, CPU program counters track the next instruction, frequency dividers scale clock speeds, odometers count distance. Counters are the bridge between raw clock pulses and meaningful digital information.
 </div>
 
-<h2>Key Terminology</h2>
-<ul>
-  <li><strong>MOD-N counter:</strong> Cycles through N unique states, then repeats. A MOD-8 counter has 8 states (0–7).</li>
-  <li><strong>Ripple (Asynchronous) counter:</strong> Each flip-flop's clock is driven by the output of the previous one.</li>
-  <li><strong>Synchronous (Parallel) counter:</strong> All flip-flops share the same clock signal.</li>
-</ul>
+<div class="concept-card">
+  <div class="concept-card-header">
+    <span class="concept-card-icon">📐</span>
+    <span class="concept-card-title">Key Terminology You Must Know</span>
+  </div>
+  <div class="concept-card-body">
+    <p><strong>MOD-N counter (Modulus-N):</strong> A counter that cycles through exactly N unique states before repeating. N is called the modulus. A MOD-8 counter visits states 0, 1, 2, 3, 4, 5, 6, 7, then back to 0.</p>
+    <p><strong>n flip-flops → MOD-2ⁿ:</strong> With n flip-flops in toggle mode, you get a natural count of 2ⁿ states. 2 flip-flops = MOD-4. 3 flip-flops = MOD-8. 4 flip-flops = MOD-16.</p>
+    <p><strong>Frequency divider:</strong> The MSB (last flip-flop) output has a frequency exactly equal to CLK ÷ MOD-number. A MOD-8 counter divides the input clock frequency by 8.</p>
+    <p><strong>Two counter families:</strong></p>
+    <p>→ <strong>Asynchronous (Ripple)</strong> — flip-flops chain-clock each other. Simple but slow.<br>
+       → <strong>Synchronous (Parallel)</strong> — all flip-flops share one common clock. Fast and glitch-free.</p>
+  </div>
+</div>
 
-<h2>Asynchronous (Ripple) Counters</h2>
-<p>Simple to build: chain T flip-flops (or JK with J=K=1) together. The first flip-flop toggles on every clock edge; each subsequent flip-flop toggles when the previous one's Q falls (or rises).</p>
+<div class="notes-section-divider" style="margin-top:2.5rem">
+  <span class="notes-section-num" style="font-size:0.75rem;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent);border-radius:6px;padding:2px 10px;font-family:'JetBrains Mono',monospace;font-weight:700">8.1</span>
+  <h2 style="margin-left:12px">Asynchronous (Ripple) Counters</h2>
+  <div class="notes-section-line"></div>
+</div>
+
+<div class="concept-card">
+  <div class="concept-card-header">
+    <span class="concept-card-icon">🌊</span>
+    <span class="concept-card-title">How Ripple Counters Work — Step by Step</span>
+  </div>
+  <div class="concept-card-body">
+    <p>Each flip-flop is a JK flip-flop with J=K=1 permanently (this puts it in <strong>toggle mode</strong>). In toggle mode, the flip-flop flips its output on every falling edge of its clock input.</p>
+    <p><strong>The chain rule:</strong> The Q output of flip-flop 0 (FF0) drives the clock of FF1. The Q output of FF1 drives the clock of FF2. And so on. This is why it "ripples" — the change propagates like a wave from LSB to MSB.</p>
+    <p><strong>Why falling edge?</strong> When FF0's Q goes from HIGH to LOW (falling edge), that transition clocks FF1. So FF1 only toggles when FF0 transitions from 1→0, which happens every 2 clock pulses. FF2 only toggles when FF1 transitions 1→0, which happens every 4 clock pulses.</p>
+  </div>
+</div>
+
+<h3 style="margin-top:1.5rem;font-size:1rem;color:var(--accent)">3-Bit Ripple Counter — Full Counting Sequence</h3>
 <div class="table-wrap"><table class="truth-table">
-<tr><th>Clock Pulse</th><th>Q2 (MSB)</th><th>Q1</th><th>Q0 (LSB)</th><th>Decimal</th></tr>
-<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-<tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
-<tr><td>2</td><td>0</td><td>1</td><td>0</td><td>2</td></tr>
-<tr><td>3</td><td>0</td><td>1</td><td>1</td><td>3</td></tr>
-<tr><td>4</td><td>1</td><td>0</td><td>0</td><td>4</td></tr>
-<tr><td>5</td><td>1</td><td>0</td><td>1</td><td>5</td></tr>
-<tr><td>6</td><td>1</td><td>1</td><td>0</td><td>6</td></tr>
-<tr><td>7</td><td>1</td><td>1</td><td>1</td><td>7</td></tr>
+<tr><th>Clock Pulse</th><th>Q2 (MSB)</th><th>Q1</th><th>Q0 (LSB)</th><th>Decimal Value</th><th>What Happened</th></tr>
+<tr><td>0 (start)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>Initial state / after reset</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>CLK falls → FF0 toggles 0→1</td></tr>
+<tr><td>2</td><td>0</td><td>1</td><td>0</td><td>2</td><td>CLK falls → FF0 goes 1→0 (clocks FF1: 0→1)</td></tr>
+<tr><td>3</td><td>0</td><td>1</td><td>1</td><td>3</td><td>CLK falls → FF0 toggles 0→1 only</td></tr>
+<tr><td>4</td><td>1</td><td>0</td><td>0</td><td>4</td><td>FF0: 1→0 clocks FF1; FF1: 1→0 clocks FF2: 0→1</td></tr>
+<tr><td>5</td><td>1</td><td>0</td><td>1</td><td>5</td><td>FF0 toggles 0→1 only</td></tr>
+<tr><td>6</td><td>1</td><td>1</td><td>0</td><td>6</td><td>FF0: 1→0 clocks FF1: 0→1 (no further ripple)</td></tr>
+<tr><td>7</td><td>1</td><td>1</td><td>1</td><td>7</td><td>FF0 toggles 0→1 only</td></tr>
+<tr><td>8 (recycles)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>All ripple: FF0→FF1→FF2 all go 1→0. Back to 0!</td></tr>
 </table></div>
-<div class="why-box">
-  <strong>⚠️ Main Drawback of Ripple Counters</strong>
-  Propagation delay accumulates: flip-flop 2 can't update until flip-flop 1 settles, which can't update until flip-flop 0 settles. For a 16-bit ripple counter, you wait for 16 sequential delays. At high frequencies, the counter may produce incorrect intermediate states (glitches). This is why synchronous counters are preferred for speed.
+
+<div class="tip-box">
+  <strong>✓ Pattern Recognition — Memorise This</strong>
+  Q0 (LSB) toggles on every clock pulse. Q1 toggles every 2 pulses. Q2 toggles every 4 pulses. Each bit is exactly half the frequency of the bit below it. This is what makes counters frequency dividers.
 </div>
 
-<h2>MOD-N Counters (N < 2ⁿ)</h2>
-<p>To make a counter stop before its natural maximum, detect the target count and force a reset:</p>
-<div class="steps-wrap">
-  <div class="step-box"><div class="step-num">1</div>
-    Determine which state to detect. For a MOD-6 counter using 3 flip-flops, detect state 6 (binary: 110).
+<div class="why-box" style="border-left-color:var(--red);background:var(--red-dim)">
+  <strong style="color:var(--red)">⚠️ The Propagation Delay Problem</strong>
+  Flip-flops don't switch instantly. Each has a propagation delay (tPHL or tPLH). In a ripple counter, these delays stack sequentially. At count 7 (0111) going to 8 (1000), all 4 flip-flops must change — but they do so one by one. During that window you see glitch states like 0110, 0100, 0000 before landing on 1000. At high clock speeds, the next edge can arrive before settling — causing wrong counts. This is why synchronous counters exist.
+</div>
+
+<div class="notes-section-divider" style="margin-top:2.5rem">
+  <span class="notes-section-num" style="font-size:0.75rem;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent);border-radius:6px;padding:2px 10px;font-family:'JetBrains Mono',monospace;font-weight:700">8.2</span>
+  <h2 style="margin-left:12px">MOD-N Counters Where N &lt; 2ⁿ</h2>
+  <div class="notes-section-line"></div>
+</div>
+
+<div class="concept-card">
+  <div class="concept-card-header">
+    <span class="concept-card-icon">✂️</span>
+    <span class="concept-card-title">Truncating the Count — Forcing an Early Reset</span>
   </div>
-  <div class="step-box"><div class="step-num">2</div>
-    Use a NAND or AND gate connected to the flip-flop outputs that are 1 in that state (Q2 and Q1 for state 6).
-  </div>
-  <div class="step-box"><div class="step-num">3</div>
-    Feed the gate output to the active-LOW Clear (CLR) inputs of all flip-flops. When the count reaches 6, all flip-flops are immediately reset to 0.
+  <div class="concept-card-body">
+    <p>A natural n-bit binary counter counts 0 to 2ⁿ−1. To get MOD-6, MOD-10, or MOD-12, you must <strong>force the counter to reset before it naturally would</strong>. The technique: detect the first unwanted state and use it to immediately clear all flip-flops.</p>
+    <p>This creates a very brief "temporary state" — the forbidden count appears for nanoseconds before the CLR pulse arrives. In a timing diagram, this shows as a tiny spike, generally harmless in practice.</p>
   </div>
 </div>
-<p><strong>Decade counter (MOD-10 / BCD counter):</strong> Counts 0–9, then resets. Detect state 10 (1010) and reset. Used in digital clocks and any base-10 application.</p>
 
-<h2>Down Counters</h2>
-<p>Count downward (7, 6, 5, … 0, 7, …). For a ripple down counter, take the Q' (complemented) output of each flip-flop as the clock for the next stage (instead of Q).</p>
+<h3 style="margin-top:1.5rem;font-size:1rem;color:var(--accent)">Step-by-Step: Building a MOD-6 Counter</h3>
+<div class="steps-v2">
+  <div class="step-v2"><div class="step-v2-num">1</div>
+    <div class="step-v2-content"><strong>Choose flip-flop count:</strong> You need 3 flip-flops (since 2² = 4 &lt; 6 but 2³ = 8 &gt; 6). Label them C, B, A (MSB to LSB).</div>
+  </div>
+  <div class="step-v2"><div class="step-v2-num">2</div>
+    <div class="step-v2-content"><strong>Identify the reset state:</strong> The counter must reset when it reaches count 6. Binary 6 = 110, meaning C=1, B=1, A=0.</div>
+  </div>
+  <div class="step-v2"><div class="step-v2-num">3</div>
+    <div class="step-v2-content"><strong>Build the detect gate:</strong> Connect a NAND gate to C and B (the bits that are HIGH in state 6). When C=1 AND B=1, NAND output goes LOW.</div>
+  </div>
+  <div class="step-v2"><div class="step-v2-num">4</div>
+    <div class="step-v2-content"><strong>Connect to CLR:</strong> Feed the NAND output to the active-LOW CLR input of all flip-flops. When NAND output goes LOW, all flip-flops are instantly cleared to 000.</div>
+  </div>
+  <div class="step-v2"><div class="step-v2-num">5</div>
+    <div class="step-v2-content"><strong>Result:</strong> Sequence: 000 → 001 → 010 → 011 → 100 → 101 → [110 briefly] → 000. Effective count: 6 states = MOD-6 ✓</div>
+  </div>
+</div>
 
-<h2>Cascading Asynchronous Counters</h2>
-<p>Connect the MSB output of one counter to the clock input of the next counter. This builds larger counters: a MOD-4 counter cascaded with a MOD-8 counter gives a MOD-32 counter.</p>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Clock</th><th>C</th><th>B</th><th>A</th><th>Decimal</th><th>NAND(C,B) output</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>HIGH — normal</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>HIGH — normal</td></tr>
+<tr><td>2</td><td>0</td><td>1</td><td>0</td><td>2</td><td>HIGH — normal</td></tr>
+<tr><td>3</td><td>0</td><td>1</td><td>1</td><td>3</td><td>HIGH — normal</td></tr>
+<tr><td>4</td><td>1</td><td>0</td><td>0</td><td>4</td><td>HIGH — normal</td></tr>
+<tr><td>5</td><td>1</td><td>0</td><td>1</td><td>5</td><td>HIGH — normal</td></tr>
+<tr><td>6 (temp!)</td><td>1</td><td>1</td><td>0</td><td>6</td><td style="color:var(--red)">LOW → CLR fires! → resets to 000</td></tr>
+</table></div>
 
-<h2>Synchronous (Parallel) Counters</h2>
-<p>All flip-flops are clocked simultaneously. No ripple delay — the maximum delay is just one flip-flop stage, regardless of bit width.</p>
-<h3>Design Rules for Synchronous Binary Counters (using T flip-flops):</h3>
-<ul>
-  <li><code>T₀ = 1</code> (LSB always toggles)</li>
-  <li><code>T₁ = Q₀</code> (bit 1 toggles when bit 0 = 1)</li>
-  <li><code>T₂ = Q₁·Q₀</code> (bit 2 toggles when bits 0 and 1 are both 1)</li>
-  <li><code>T₃ = Q₂·Q₁·Q₀</code> (bit 3 toggles when bits 0, 1, 2 are all 1)</li>
-  <li>General: <code>Tₙ = Qₙ₋₁ · Qₙ₋₂ · … · Q₀</code></li>
-</ul>
+<div class="info-box">
+  <strong>📌 General Rule for Any MOD-N Counter</strong>
+  Identify the binary representation of N. Find which bits are HIGH in that state. Connect those Q outputs to a NAND gate. Feed NAND output to all CLR inputs.<br><br>
+  <strong>Examples:</strong><br>
+  • MOD-5: Detect 101 (C=1, A=1). Use NAND(C, A) → CLR<br>
+  • MOD-10 (BCD): Detect 1010 (D=1, B=1). Use NAND(D, B) → CLR<br>
+  • MOD-12: Detect 1100 (D=1, C=1). Use NAND(D, C) → CLR
+</div>
 
-<h2>Up/Down Synchronous Counters</h2>
-<p>A bidirectional counter with a mode-control input (Up/Down). When Up=1, it counts up; when Up=0, it counts down.</p>
-<p>For a 3-bit example:<br>
-<code>TQ1 = (Q0·Up) + (Q0'·Up')</code> — toggle Q1 when Q0=1 (counting up) or Q0=0 (counting down).</p>
+<h3 style="margin-top:1.5rem;font-size:1rem;color:var(--accent)">Asynchronous BCD / Decade Counter (MOD-10)</h3>
+<div class="concept-card">
+  <div class="concept-card-header">
+    <span class="concept-card-icon">🔟</span>
+    <span class="concept-card-title">BCD Counter — The Most Important MOD-N Counter</span>
+  </div>
+  <div class="concept-card-body">
+    <p>A BCD counter counts 0–9 then resets. Used in digital clocks, calculators, odometers — wherever base-10 counting is displayed as binary.</p>
+    <p><strong>Reset condition:</strong> State 10 = 1010 (D=1, B=1, A=0, C=0). Detect when D=1 AND B=1 simultaneously using NAND(D, B) → CLR.</p>
+    <p><strong>Why detect 10, not 9?</strong> State 9 (1001) is valid and must display. We only reset at the first invalid state (10), which forces a return to 0. States 10–15 are never visible.</p>
+  </div>
+</div>
 
-<h2>74x163 — Standard 4-bit Synchronous Counter</h2>
-<p>A very common MSI counter chip with: synchronous count enable (CEP, CET), synchronous load (LD), synchronous clear (CLR), and a terminal count output (TC/RCO). The TC output goes HIGH when the counter reaches 15 (1111), allowing counters to be cascaded by connecting TC to the count-enable of the next chip.</p>
+<div class="notes-section-divider" style="margin-top:2.5rem">
+  <span class="notes-section-num" style="font-size:0.75rem;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent);border-radius:6px;padding:2px 10px;font-family:'JetBrains Mono',monospace;font-weight:700">8.3</span>
+  <h2 style="margin-left:12px">Asynchronous Down Counters</h2>
+  <div class="notes-section-line"></div>
+</div>
 
-<h2>Ring & Johnson Counters</h2>
-<ul>
-  <li><strong>Ring counter:</strong> A shift register with the last output fed back to the first input. Circulates a single 1. With n flip-flops, has n states.</li>
-  <li><strong>Johnson (twisted-ring) counter:</strong> The complemented (Q') output of the last flip-flop is fed back to the D input of the first. With n flip-flops, has 2n states. Produces a smooth, easily-decoded sequence.</li>
-</ul>
+<div class="concept-card">
+  <div class="concept-card-header">
+    <span class="concept-card-icon">⬇️</span>
+    <span class="concept-card-title">Counting Downward — One Simple Wiring Change</span>
+  </div>
+  <div class="concept-card-body">
+    <p>An up counter uses each FF's <strong>Q output</strong> as the clock for the next FF. A down counter uses each FF's <strong>Q' (complement) output</strong> as the clock for the next FF. That is the only difference.</p>
+    <p><strong>Why it works:</strong> In an up counter, FF1 clocks when Q0 falls (1→0). In a down counter, FF1 clocks when Q0' falls — meaning when Q0 rises (0→1). This reverses the counting direction completely.</p>
+  </div>
+</div>
+
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Clock Pulse</th><th>Q2</th><th>Q1</th><th>Q0</th><th>Decimal</th></tr>
+<tr><td>0 (start at 7)</td><td>1</td><td>1</td><td>1</td><td>7</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>0</td><td>6</td></tr>
+<tr><td>2</td><td>1</td><td>0</td><td>1</td><td>5</td></tr>
+<tr><td>3</td><td>1</td><td>0</td><td>0</td><td>4</td></tr>
+<tr><td>4</td><td>0</td><td>1</td><td>1</td><td>3</td></tr>
+<tr><td>5</td><td>0</td><td>1</td><td>0</td><td>2</td></tr>
+<tr><td>6</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>7</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>8 (recycles)</td><td>1</td><td>1</td><td>1</td><td>7</td></tr>
+</table></div>
+
+<div class="tip-box">
+  <strong>✓ Up vs Down Summary</strong>
+  Up counter: connect Q of each FF to clock of next FF.<br>
+  Down counter: connect Q' of each FF to clock of next FF.<br>
+  The flip-flops themselves are identical (JK with J=K=1). Only the clock source changes.
+</div>
+
+<div class="notes-section-divider" style="margin-top:2.5rem">
+  <span class="notes-section-num" style="font-size:0.75rem;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent);border-radius:6px;padding:2px 10px;font-family:'JetBrains Mono',monospace;font-weight:700">8.4</span>
+  <h2 style="margin-left:12px">Cascading Asynchronous Counters</h2>
+  <div class="notes-section-line"></div>
+</div>
+
+<div class="concept-card">
+  <div class="concept-card-header">
+    <span class="concept-card-icon">🔗</span>
+    <span class="concept-card-title">Chaining Counters for Higher Modulus</span>
+  </div>
+  <div class="concept-card-body">
+    <p>To build a counter larger than a single IC's capacity, chain multiple counters. The rule: <strong>connect the MSB output (Q of last FF) of counter 1 to the clock input of counter 2</strong>. Counter 2 advances once per complete cycle of counter 1.</p>
+    <p><strong>Combined MOD = MOD₁ × MOD₂</strong></p>
+    <p>MOD-4 × MOD-8 = MOD-32. Two MOD-10 decade counters = MOD-100 (counts 0–99).</p>
+    <p>When the counters are not natural binary counters, use the TC (Terminal Count) output instead of the raw MSB — it pulses when the counter is about to recycle, giving a cleaner cascade signal.</p>
+  </div>
+</div>
+
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Counter 1</th><th>Counter 2</th><th>Combined MOD</th><th>Real-world use case</th></tr>
+<tr><td>MOD-4</td><td>MOD-8</td><td>32</td><td>General purpose large counter</td></tr>
+<tr><td>MOD-8</td><td>MOD-8</td><td>64</td><td>6-bit binary counter (0–63)</td></tr>
+<tr><td>MOD-10</td><td>MOD-10</td><td>100</td><td>Stopwatch seconds display (00–99)</td></tr>
+<tr><td>MOD-10</td><td>MOD-6</td><td>60</td><td>Minute/second counter (00–59)</td></tr>
+<tr><td>MOD-10</td><td>MOD-2 + MOD-4</td><td>24</td><td>Hour counter (00–23)</td></tr>
+</table></div>
+
+<div class="notes-section-divider" style="margin-top:2.5rem">
+  <span class="notes-section-num" style="font-size:0.75rem;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent);border-radius:6px;padding:2px 10px;font-family:'JetBrains Mono',monospace;font-weight:700">8.5</span>
+  <h2 style="margin-left:12px">Synchronous (Parallel) Counters</h2>
+  <div class="notes-section-line"></div>
+</div>
+
+<div class="concept-card">
+  <div class="concept-card-header">
+    <span class="concept-card-icon">⚡</span>
+    <span class="concept-card-title">All Flip-Flops Clock Together — No Ripple, No Glitch</span>
+  </div>
+  <div class="concept-card-body">
+    <p>In a synchronous counter, <strong>all flip-flops receive the same clock signal simultaneously</strong>. No chaining of clocks. Instead, combinational AND gates determine which flip-flop should toggle and drive the T (or JK) inputs accordingly.</p>
+    <p><strong>Maximum delay</strong> = AND gate delay + one flip-flop. Constant regardless of bit width — a massive advantage at high clock speeds.</p>
+    <p>Uses T flip-flops (or JK with J tied to K). A T flip-flop toggles when T=1, holds when T=0.</p>
+  </div>
+</div>
+
+<div class="eq-block">
+  <div class="eq-label">Toggle Input Equations — n-bit Synchronous Binary Counter</div>
+  T₀ = 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ← LSB always toggles<br>
+  T₁ = Q₀ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ← bit 1 toggles when bit 0 = 1<br>
+  T₂ = Q₁ · Q₀ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ← bit 2 toggles when bits 0,1 are both 1<br>
+  T₃ = Q₂ · Q₁ · Q₀ &nbsp;← bit 3 toggles when bits 0,1,2 are all 1<br>
+  Tₙ = Qₙ₋₁ · Qₙ₋₂ · ... · Q₀ &nbsp; ← general rule for bit n
+</div>
+
+<div class="concept-card" style="margin-top:1rem">
+  <div class="concept-card-header">
+    <span class="concept-card-icon">🧠</span>
+    <span class="concept-card-title">Intuition: Why These Equations?</span>
+  </div>
+  <div class="concept-card-body">
+    <p>Bit n flips <em>exactly when all lower bits are 1 and are about to roll over to 0</em>.</p>
+    <p>• 0011 → 0100: bits 0 and 1 were both 1, so bit 2 must toggle.<br>
+       • 0111 → 1000: bits 0, 1, 2 all 1, so bit 3 must toggle.<br>
+       • 1111 → 0000: all lower bits 1, so all higher bits toggle.</p>
+    <p>The AND gate asks "are all lower bits = 1?" If yes, set T=1 to trigger toggle on next clock edge. This happens simultaneously for all bits — no ripple.</p>
+  </div>
+</div>
+
+<h3 style="margin-top:1.5rem;font-size:1rem;color:var(--accent)">2-Bit Synchronous Counter — Full Derivation</h3>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Current A₁</th><th>Current A₀</th><th>Next A₁⁺</th><th>Next A₀⁺</th><th>TA₁</th><th>TA₀</th><th>Reasoning</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>A₀ toggles 0→1. A₁ stays.</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>Both toggle: A₀ 1→0, A₁ 0→1</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>A₀ toggles only</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>Both toggle: rollover</td></tr>
+</table></div>
+<div class="eq-block" style="margin-top:0.5rem">
+  <div class="eq-label">Derived Equations — 2-bit Synchronous Counter</div>
+  TA₀ = 1 &nbsp;&nbsp;&nbsp;&nbsp; (always 1 — LSB always toggles)<br>
+  TA₁ = A₀ &nbsp;&nbsp; (only toggle when A₀ = 1)
+</div>
+
+<h3 style="margin-top:1.5rem;font-size:1rem;color:var(--accent)">3-Bit Synchronous Binary Counter — State Table</h3>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>A₂</th><th>A₁</th><th>A₀</th><th>A₂⁺</th><th>A₁⁺</th><th>A₀⁺</th><th>TA₂</th><th>TA₁</th><th>TA₀</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+</table></div>
+<div class="eq-block" style="margin-top:0.5rem">
+  <div class="eq-label">3-Bit Synchronous Counter — Final Equations</div>
+  TA₀ = 1 &nbsp;&nbsp;&nbsp;&nbsp; TA₁ = A₀ &nbsp;&nbsp;&nbsp;&nbsp; TA₂ = A₁ · A₀
+</div>
+
+<h3 style="margin-top:1.5rem;font-size:1rem;color:var(--accent)">Synchronous BCD / Decade Counter</h3>
+<p>A synchronous decade counter counts 0–9 then resets. The T equations are not the simple binary pattern because the sequence is truncated. They must be derived from the state table:</p>
+<div class="eq-block">
+  <div class="eq-label">Synchronous Decade Counter (Q3 Q2 Q1 Q0)</div>
+  T₀ = 1<br>
+  T₁ = Q₃' · Q₀ &nbsp;&nbsp; ← Q₃' prevents Q₁ from toggling after state 9<br>
+  T₂ = Q₁ · Q₀<br>
+  T₃ = Q₂·Q₁·Q₀ + Q₃·Q₀ &nbsp;&nbsp; ← extra Q₃·Q₀ term handles reset from 9 to 0
+</div>
+
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Clock</th><th>Q3</th><th>Q2</th><th>Q1</th><th>Q0</th><th>Decimal</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>2</td><td>0</td><td>0</td><td>1</td><td>0</td><td>2</td></tr>
+<tr><td>3</td><td>0</td><td>0</td><td>1</td><td>1</td><td>3</td></tr>
+<tr><td>4</td><td>0</td><td>1</td><td>0</td><td>0</td><td>4</td></tr>
+<tr><td>5</td><td>0</td><td>1</td><td>0</td><td>1</td><td>5</td></tr>
+<tr><td>6</td><td>0</td><td>1</td><td>1</td><td>0</td><td>6</td></tr>
+<tr><td>7</td><td>0</td><td>1</td><td>1</td><td>1</td><td>7</td></tr>
+<tr><td>8</td><td>1</td><td>0</td><td>0</td><td>0</td><td>8</td></tr>
+<tr><td>9</td><td>1</td><td>0</td><td>0</td><td>1</td><td>9</td></tr>
+<tr><td>10 (recycles)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</table></div>
+
+<div class="notes-section-divider" style="margin-top:2.5rem">
+  <span class="notes-section-num" style="font-size:0.75rem;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent);border-radius:6px;padding:2px 10px;font-family:'JetBrains Mono',monospace;font-weight:700">8.6</span>
+  <h2 style="margin-left:12px">Up/Down Synchronous Counters</h2>
+  <div class="notes-section-line"></div>
+</div>
+
+<div class="concept-card">
+  <div class="concept-card-header">
+    <span class="concept-card-icon">↕️</span>
+    <span class="concept-card-title">Bidirectional Counting — One Counter, Two Directions</span>
+  </div>
+  <div class="concept-card-body">
+    <p>An up/down counter has a control input called <strong>Up</strong>. When Up=1, the counter increments. When Up=0, it decrements.</p>
+    <p>For bit n — toggle when counting <strong>up</strong>: all lower bits are 1. Toggle when counting <strong>down</strong>: all lower bits are 0. These conditions are combined with the Up control signal using AND/OR logic.</p>
+  </div>
+</div>
+
+<div class="eq-block">
+  <div class="eq-label">3-Bit Up/Down Counter — T Equations</div>
+  TQ₀ = 1<br>
+  TQ₁ = (Q₀ · Up) + (Q₀' · Up')<br>
+  TQ₂ = (Q₁·Q₀ · Up) + (Q₁'·Q₀' · Up')
+</div>
+
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Up</th><th>Direction</th><th>TQ₁ simplifies to</th><th>TQ₂ simplifies to</th></tr>
+<tr><td>1</td><td>Count Up</td><td>Q₀</td><td>Q₁ · Q₀</td></tr>
+<tr><td>0</td><td>Count Down</td><td>Q₀'</td><td>Q₁' · Q₀'</td></tr>
+</table></div>
+
+<div class="notes-section-divider" style="margin-top:2.5rem">
+  <span class="notes-section-num" style="font-size:0.75rem;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent);border-radius:6px;padding:2px 10px;font-family:'JetBrains Mono',monospace;font-weight:700">8.7</span>
+  <h2 style="margin-left:12px">Designing Synchronous Counters (Gray Code Example)</h2>
+  <div class="notes-section-line"></div>
+</div>
+
+<div class="concept-card">
+  <div class="concept-card-header">
+    <span class="concept-card-icon">🎯</span>
+    <span class="concept-card-title">The 5-Step Design Process — Works for Any Sequence</span>
+  </div>
+  <div class="concept-card-body">
+    <p>When the counter sequence is not a standard binary count, use the formal sequential logic design process.</p>
+  </div>
+</div>
+
+<div class="steps-v2">
+  <div class="step-v2"><div class="step-v2-num">1</div>
+    <div class="step-v2-content"><strong>Define the state sequence.</strong> For a 3-bit Gray code: 000 → 001 → 011 → 010 → 110 → 111 → 101 → 100 → (back to 000).</div>
+  </div>
+  <div class="step-v2"><div class="step-v2-num">2</div>
+    <div class="step-v2-content"><strong>Build the state transition table.</strong> For each current state, write the next state. Then determine the JK excitation inputs. Excitation table: 0→0: J=0,K=X; 0→1: J=1,K=X; 1→0: J=X,K=1; 1→1: J=X,K=0.</div>
+  </div>
+  <div class="step-v2"><div class="step-v2-num">3</div>
+    <div class="step-v2-content"><strong>Fill in Karnaugh Maps.</strong> One K-map per flip-flop input (JQ₀, KQ₀, JQ₁, KQ₁, JQ₂, KQ₂). Use current state variables as K-map coordinates. Don't-cares (X) simplify expressions dramatically.</div>
+  </div>
+  <div class="step-v2"><div class="step-v2-num">4</div>
+    <div class="step-v2-content"><strong>Read minimized Boolean expressions.</strong> Group 1s in K-maps (include X when it helps). Write simplified expressions for each J and K input.</div>
+  </div>
+  <div class="step-v2"><div class="step-v2-num">5</div>
+    <div class="step-v2-content"><strong>Draw the circuit.</strong> Implement Boolean expressions as combinational gates. Connect gate outputs to J and K inputs. Connect the same clock to ALL flip-flops.</div>
+  </div>
+</div>
+
+<h3 style="margin-top:1.5rem;font-size:1rem;color:var(--accent)">3-Bit Gray Code Counter — State Transition Table</h3>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Q₂</th><th>Q₁</th><th>Q₀</th><th>Q₂⁺</th><th>Q₁⁺</th><th>Q₀⁺</th><th>JQ₂</th><th>KQ₂</th><th>JQ₁</th><th>KQ₁</th><th>JQ₀</th><th>KQ₀</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>X</td><td>0</td><td>X</td><td>1</td><td>X</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>X</td><td>1</td><td>X</td><td>X</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>X</td><td>X</td><td>0</td><td>0</td><td>X</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>X</td><td>X</td><td>0</td><td>X</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>X</td><td>1</td><td>0</td><td>X</td><td>0</td><td>X</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>X</td><td>0</td><td>0</td><td>X</td><td>X</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>X</td><td>0</td><td>X</td><td>0</td><td>1</td><td>X</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>X</td><td>0</td><td>X</td><td>1</td><td>X</td><td>0</td></tr>
+</table></div>
+<div class="eq-block" style="margin-top:0.5rem">
+  <div class="eq-label">Gray Code Counter — Minimized JK Equations (from K-maps)</div>
+  JQ₂ = Q₁·Q₀' &nbsp;&nbsp;&nbsp;&nbsp; KQ₂ = Q₁'·Q₀'<br>
+  JQ₁ = Q₂'·Q₀ &nbsp;&nbsp;&nbsp;&nbsp; KQ₁ = Q₂·Q₀<br>
+  JQ₀ = (Q₂ XNOR Q₁) &nbsp;&nbsp;&nbsp;&nbsp; KQ₀ = (Q₂ XOR Q₁)
+</div>
+
+<div class="notes-section-divider" style="margin-top:2.5rem">
+  <span class="notes-section-num" style="font-size:0.75rem;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent);border-radius:6px;padding:2px 10px;font-family:'JetBrains Mono',monospace;font-weight:700">8.8</span>
+  <h2 style="margin-left:12px">Decoding a Counter</h2>
+  <div class="notes-section-line"></div>
+</div>
+
+<div class="concept-card">
+  <div class="concept-card-header">
+    <span class="concept-card-icon">🔍</span>
+    <span class="concept-card-title">Detecting Specific States — Active-HIGH vs Active-LOW</span>
+  </div>
+  <div class="concept-card-body">
+    <p>Decoding means <strong>producing a signal that is asserted only when the counter is in a particular state</strong>. You use AND or NAND gates connected to the flip-flop Q outputs.</p>
+    <p><strong>Active-HIGH decoding:</strong> Output is 1 only in the target state. Use AND gate on all relevant Q and Q' inputs.</p>
+    <p><strong>Active-LOW decoding:</strong> Output is 0 only in the target state. Use NAND gate instead.</p>
+  </div>
+</div>
+
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Target State</th><th>A B C values</th><th>Active-HIGH decoder expression</th><th>Gate used</th></tr>
+<tr><td>State 0</td><td>000</td><td>A'·B'·C'</td><td>AND(A', B', C')</td></tr>
+<tr><td>State 1</td><td>001</td><td>A'·B'·C</td><td>AND(A', B', C)</td></tr>
+<tr><td>State 3</td><td>011</td><td>A'·B·C</td><td>AND(A', B, C)</td></tr>
+<tr><td>State 5</td><td>101</td><td>A·B'·C</td><td>AND(A, B', C)</td></tr>
+<tr><td>State 7</td><td>111</td><td>A·B·C</td><td>AND(A, B, C)</td></tr>
+<tr><td>All odd states</td><td>XX1</td><td>C</td><td>Direct wire — no gate!</td></tr>
+<tr><td>States 0 or 1</td><td>00X</td><td>A'·B'</td><td>AND(A', B')</td></tr>
+</table></div>
+
+<div class="info-box">
+  <strong>📌 Partial Decoding Trick</strong>
+  If multiple consecutive states share a common partial pattern, you can detect the group without using all bits. This saves gates. "Is the counter at an odd state?" = just check C (LSB). "Is Q3=1?" = the counter is in states 8 or 9 (in a decade counter) — no gate needed.
+</div>
+
+<div class="notes-section-divider" style="margin-top:2.5rem">
+  <span class="notes-section-num" style="font-size:0.75rem;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent);border-radius:6px;padding:2px 10px;font-family:'JetBrains Mono',monospace;font-weight:700">8.9</span>
+  <h2 style="margin-left:12px">Counters with Parallel Load</h2>
+  <div class="notes-section-line"></div>
+</div>
+
+<div class="concept-card">
+  <div class="concept-card-header">
+    <span class="concept-card-icon">📥</span>
+    <span class="concept-card-title">Loading a Starting Value — Maximum Flexibility</span>
+  </div>
+  <div class="concept-card-body">
+    <p>A counter with parallel load can be <strong>preset to any value</strong> synchronously (on the clock edge). A LOAD input and data input pins (I₁–I₄) allow this. When LOAD=1, the counter captures the data inputs instead of counting.</p>
+    <p><strong>Why this is useful:</strong></p>
+    <p>• <strong>Custom start value:</strong> Load 3 to count 3, 4, 5, 6, 7, 8 — a MOD-6 counter starting at 3.<br>
+       • <strong>Different sequences:</strong> Use carry-out or decoder to trigger a load to a non-zero starting point.<br>
+       • <strong>Processor control:</strong> A CPU can write any starting count into the counter at runtime.</p>
+  </div>
+</div>
+
+<h3 style="margin-top:1.5rem;font-size:1rem;color:var(--accent)">4-Bit Counter with Parallel Load — Function Table</h3>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Clear</th><th>Clock</th><th>Load</th><th>Count</th><th>Function</th></tr>
+<tr><td>0</td><td>X</td><td>X</td><td>X</td><td style="color:var(--red)">Async clear to 0000 immediately</td></tr>
+<tr><td>1</td><td>X</td><td>0</td><td>0</td><td>Hold — no change</td></tr>
+<tr><td>1</td><td>↑</td><td>1</td><td>X</td><td style="color:var(--purple)">Load: capture I₁I₂I₃I₄ on clock edge</td></tr>
+<tr><td>1</td><td>↑</td><td>0</td><td>1</td><td style="color:var(--green)">Count: advance to next state</td></tr>
+</table></div>
+
+<h3 style="margin-top:1.5rem;font-size:1rem;color:var(--accent)">Four Ways to Make a MOD-6 Counter Using Parallel Load</h3>
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Method</th><th>States visited</th><th>Mechanism</th></tr>
+<tr><td>(a) Reset to 0</td><td>0, 1, 2, 3, 4, 5</td><td>Detect state 6, load 0000 on next clock</td></tr>
+<tr><td>(b) Async clear</td><td>0, 1, 2, 3, 4, 5</td><td>Detect state 6, trigger async CLR immediately</td></tr>
+<tr><td>(c) Load to 10</td><td>10, 11, 12, 13, 14, 15</td><td>Use carry-out (at 15) to reload 1010</td></tr>
+<tr><td>(d) Load to 3</td><td>3, 4, 5, 6, 7, 8</td><td>Carry-out (at 8) reloads 0011 — still 6 states</td></tr>
+</table></div>
+
+<div class="tip-box">
+  <strong>✓ The 74x163 — The Standard Synchronous Counter IC</strong>
+  The 74163 is the go-to 4-bit synchronous binary counter (0–15). Key pins:<br>
+  <strong>CEP &amp; CET:</strong> Count enable — both must be HIGH to count.<br>
+  <strong>LD':</strong> Active-LOW synchronous load — captures data inputs on next clock edge.<br>
+  <strong>CLR':</strong> Synchronous clear — resets to 0 on next clock edge.<br>
+  <strong>RCO/TC:</strong> Terminal Count — goes HIGH when counter is at 1111 AND CET=1. Used to cascade 74163 chips for wider counts (connect TC of chip 1 to CEP of chip 2).
+</div>
+
+<div class="notes-section-divider" style="margin-top:2.5rem">
+  <span class="notes-section-num" style="font-size:0.75rem;background:var(--green-dim);color:var(--green);border:1px solid var(--green);border-radius:6px;padding:2px 10px;font-family:'JetBrains Mono',monospace;font-weight:700">★</span>
+  <h2 style="margin-left:12px">Topic 8 — Master Summary</h2>
+  <div class="notes-section-line"></div>
+</div>
+
+<div class="table-wrap"><table class="truth-table">
+<tr><th>Concept</th><th>Key Fact</th><th>Exam Hook</th></tr>
+<tr><td>Ripple counter</td><td>Q of each FF clocks the next (falling edge)</td><td>Cumulative delay; glitches possible at high speed</td></tr>
+<tr><td>MOD number</td><td>n flip-flops → natural MOD-2ⁿ</td><td>For MOD-N: detect N, assert CLR via NAND</td></tr>
+<tr><td>Down counter</td><td>Use Q' instead of Q as clock source</td><td>No gate changes — only wiring to Q' changes</td></tr>
+<tr><td>Cascading</td><td>MSB output → next counter's clock input</td><td>Combined MOD = MOD₁ × MOD₂</td></tr>
+<tr><td>Sync counter</td><td>Common clock; AND gates drive T inputs</td><td>Tₙ = Qₙ₋₁ · ... · Q₀ for n-bit binary</td></tr>
+<tr><td>Up/Down</td><td>Up=1: use Q for logic; Up=0: use Q'</td><td>T equations combine both with Up control</td></tr>
+<tr><td>Designing sync</td><td>State table → K-maps → equations → circuit</td><td>Don't-cares (X) greatly simplify JK designs</td></tr>
+<tr><td>Decoding</td><td>AND gate on correct Q and Q' outputs</td><td>Active-HIGH = AND; Active-LOW = NAND</td></tr>
+<tr><td>Parallel load</td><td>LOAD=1 on clock edge captures data inputs</td><td>Enables custom start states and sequences</td></tr>
+<tr><td>74x163 IC</td><td>4-bit sync counter; CEP, CET, LD', CLR', RCO</td><td>RCO goes HIGH at 1111 when CET=1 — use for cascading</td></tr>
+</table></div>
+
 `
 };
 

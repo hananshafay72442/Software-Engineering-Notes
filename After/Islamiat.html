@@ -1055,13 +1055,266 @@
       line-height: 1.8;
     }
 
+    /* ── SAMPLE PAPERS HERO BUTTON ── */
+    .sample-papers-hero-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: linear-gradient(135deg, #1a2e1e 0%, #0f3d2b 100%);
+      border: 1px solid rgba(74,222,128,0.18);
+      border-radius: 16px;
+      padding: 18px 24px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 4px 20px rgba(26,92,62,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .sample-papers-hero-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .sample-papers-hero-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 36px rgba(26,92,62,0.38);
+      border-color: rgba(74,222,128,0.35);
+    }
+    .spb-icon {
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: #86efac;
+      flex-shrink: 0;
+    }
+    .spb-text { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+    .spb-main { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: #f0fdf4; }
+    .spb-sub  { font-size: 0.78rem; color: rgba(240,253,244,0.55); font-family: var(--font-body); }
+    .spb-arrow { font-size: 1.4rem; color: #86efac; transition: transform 0.3s ease; }
+    .sample-papers-hero-btn:hover .spb-arrow { transform: translateX(5px); }
+
+    body.dark .sample-papers-hero-btn {
+      background: linear-gradient(135deg, #0d1f14 0%, #0a2818 100%);
+      border-color: rgba(74,222,128,0.2);
+    }
+
+    /* ── SAMPLE PAPER DISCLAIMER ── */
+    .sp-disclaimer {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #fffbeb;
+      border: 1px solid #fbbf24;
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 32px;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #78350f;
+    }
+    body.dark .sp-disclaimer {
+      background: rgba(245,158,11,0.08);
+      border-color: rgba(245,158,11,0.3);
+      border-left-color: #f59e0b;
+      color: #fde68a;
+    }
+    .sp-disc-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── SAMPLE PAPER BLOCK ── */
+    .sp-paper-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 36px;
+      box-shadow: var(--shadow-md);
+      animation: fadeInUp 0.4s ease both;
+    }
+    .sp-paper-header {
+      background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-light) 100%);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .sp-paper-badge {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .sp-paper-meta {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ── PAPER IMAGE ── */
+    .sp-paper-img-wrap {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      max-height: 520px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sp-paper-img {
+      width: 100%;
+      height: auto;
+      max-height: 520px;
+      object-fit: contain;
+      display: block;
+    }
+    .sp-img-fallback {
+      padding: 28px 24px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      font-style: italic;
+    }
+    .sp-img-fallback code {
+      background: var(--bg-syllabus);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--emerald);
+    }
+
+    /* ── PAPER CONTENT ── */
+    .sp-paper-content { padding: 24px; }
+
+    .sp-instructions {
+      background: var(--teal-bg);
+      border: 1px solid var(--teal-border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+    }
+    .sp-inst-title {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .sp-instructions ul {
+      padding-left: 18px;
+      color: var(--text-soft);
+      line-height: 1.9;
+    }
+    .sp-instructions li { margin-bottom: 1px; }
+
+    .sp-questions { display: flex; flex-direction: column; gap: 0; }
+    .sp-q {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .sp-q:last-child { border-bottom: none; }
+    .sp-q-num {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--emerald);
+      flex-shrink: 0;
+      font-size: 0.82rem;
+      min-width: 28px;
+    }
+    .sp-q-text { flex: 1; color: var(--text-main); }
+    .sp-q-marks {
+      flex-shrink: 0;
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      color: var(--gold);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-family: var(--font-body);
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+    }
+    .sp-total-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      padding: 10px 16px;
+      background: var(--emerald-faint);
+      border: 1px solid rgba(26,92,62,0.15);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-soft);
+    }
+    .sp-total-num {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      color: var(--emerald);
+      font-weight: 700;
+    }
+
+    /* ── SOLUTION BUTTON ── */
+    .sp-solution-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 24px 24px;
+      padding: 13px 20px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      box-shadow: 0 3px 14px rgba(139,105,20,0.3);
+      transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .sp-solution-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(139,105,20,0.4);
+      filter: brightness(1.07);
+    }
+    .sp-sol-badge {
+      background: rgba(255,255,255,0.25);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.65rem;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+    }
+    body.dark .sp-solution-btn {
+      box-shadow: 0 3px 14px rgba(240,180,41,0.25);
+    }
+
     @media (max-width: 600px) {
-      .syllabus-grid { grid-template-columns: 1fr 1fr; }
-      .lecture-grid { grid-template-columns: 1fr; }
-      .hero { padding: 36px 18px 32px; }
-      .topic-body { padding: 16px; }
-      .hero-meta { gap: 10px; }
-      .hero-badge { font-size: 0.72rem; padding: 4px 12px; }
+      .sp-q { flex-wrap: wrap; }
+      .sp-q-marks { margin-left: 28px; }
+      .sample-papers-hero-btn { padding: 14px 16px; gap: 12px; }
+      .spb-main { font-size: 0.95rem; }
     }
 
     /* ══════════ ENHANCED ANIMATIONS & POLISH ══════════ */
@@ -1516,6 +1769,86 @@
       margin-right: 4px;
       animation: pulseGlow 2s ease-in-out infinite;
     }
+
+    /* ── ANSWER KEY BAR ── */
+    .qs-answer-bar {
+      margin-top: 20px;
+      padding: 16px 18px;
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .qs-answer-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .qs-answer-icon {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(139,105,20,0.3);
+    }
+    body.dark .qs-answer-icon {
+      box-shadow: 0 3px 10px rgba(240,180,41,0.25);
+    }
+    .qs-answer-label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .qs-answer-sub {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+    .qs-answer-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .qs-ans-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.83rem;
+      font-weight: 700;
+      border: 1.5px solid rgba(255,255,255,0.18);
+      transition: transform 0.15s, box-shadow 0.15s;
+      white-space: nowrap;
+    }
+    .qs-ans-btn--gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      box-shadow: 0 4px 14px rgba(139,105,20,0.32);
+    }
+    body.dark .qs-ans-btn--gold {
+      box-shadow: 0 4px 14px rgba(240,180,41,0.22);
+    }
+    @media (max-width: 600px) {
+      .qs-answer-bar { flex-direction: column; align-items: flex-start; }
+      .qs-ans-btn { width: 100%; justify-content: center; }
+    }
   </style>
 </head>
 <body>
@@ -1576,8 +1909,142 @@
 
   <!-- LECTURE SELECTOR -->
   <div id="lecture-selector">
-    <p class="selector-title">Select a Lecture to Begin</p>
+    <!-- Sample Papers Button -->
+    <div style="max-width:900px;margin:32px auto 0;padding:0 18px;">
+      <button class="sample-papers-hero-btn" onclick="showSamplePapers()">
+        <span class="spb-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </span>
+        <span class="spb-text">
+          <span class="spb-main">📋 Sample Final Papers</span>
+          <span class="spb-sub">3 practice papers · 30 marks each · with solutions</span>
+        </span>
+        <span class="spb-arrow">→</span>
+      </button>
+    </div>
+
+    <p class="selector-title" style="margin-top:32px">Select a Lecture to Begin</p>
     <div class="lecture-grid" id="lectureGrid"></div>
+  </div>
+
+  <!-- SAMPLE PAPERS VIEW -->
+  <div id="sample-papers-view" style="display:none">
+    <div style="max-width:860px;margin:0 auto;padding:36px 18px 80px;">
+
+      <!-- Disclaimer -->
+      <div class="sp-disclaimer">
+        <div class="sp-disc-icon">⚠️</div>
+        <div class="sp-disc-text">
+          <strong>Please Note:</strong> These are sample papers prepared for practice purposes only. The actual exam may be completely different in terms of questions, format, and topics. Use these to familiarise yourself with the pattern — not to predict exact questions.
+        </div>
+      </div>
+
+      <!-- PAPER 1 -->
+      <div class="sp-paper-block">
+        <div class="sp-paper-header">
+          <div class="sp-paper-badge">Paper 1</div>
+          <div class="sp-paper-meta">Islamic Studies · Final Exam · 30 Marks</div>
+        </div>
+        <div class="sp-paper-img-wrap">
+          <img src="islamiat/exam/paper1.jpg" alt="Sample Paper 1" class="sp-paper-img" onerror="this.parentElement.innerHTML='<div class=\'sp-img-fallback\'>📄 Paper image not available at <code>islamiat/exam/paper1.jpg</code></div>'">
+        </div>
+        <div class="sp-paper-content">
+          <div class="sp-instructions">
+            <div class="sp-inst-title">Instructions</div>
+            <ul>
+              <li>Write your name and SAP ID on all answer sheets</li>
+              <li>Write page number on all sheets</li>
+              <li>Please be analytical and specific in answering questions</li>
+              <li>Switch off your Mobile Phone</li>
+              <li>Attempt all the following questions critically and creatively</li>
+            </ul>
+          </div>
+          <div class="sp-questions">
+            <div class="sp-q"><span class="sp-q-num">Q1.</span><span class="sp-q-text">Explain the role of Ethics in building a Holistic Personality with arguments?</span><span class="sp-q-marks">5 Marks</span></div>
+            <div class="sp-q"><span class="sp-q-num">Q2.</span><span class="sp-q-text">Define the following terminologies with arguments in your own words: <br><strong>(a)</strong> Secularism (سیکولرازم) &nbsp;&nbsp; <strong>(b)</strong> Shura (شوری)</span><span class="sp-q-marks">5 Marks</span></div>
+            <div class="sp-q"><span class="sp-q-num">Q3.</span><span class="sp-q-text">Explain the Basic Features of Modern Ideologies — Materialism, Secularism, and Democracy — and provide a critical Islamic response to each?</span><span class="sp-q-marks">10 Marks</span></div>
+            <div class="sp-q"><span class="sp-q-num">Q4.</span><span class="sp-q-text">Elaborate the Features of an Islamic State with special reference to Allah's Sovereignty, Khilafah, and the Rights of Citizens?</span><span class="sp-q-marks">10 Marks</span></div>
+          </div>
+          <div class="sp-total-bar"><span>Total</span><span class="sp-total-num">30 Marks</span></div>
+        </div>
+        <a href="islamiat/exam/solution1.pdf" target="_blank" class="sp-solution-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          View Solution — Paper 1
+          <span class="sp-sol-badge">PDF</span>
+        </a>
+      </div>
+
+      <!-- PAPER 2 -->
+      <div class="sp-paper-block">
+        <div class="sp-paper-header">
+          <div class="sp-paper-badge">Paper 2</div>
+          <div class="sp-paper-meta">Islamic Studies · Final Exam · 30 Marks</div>
+        </div>
+        <div class="sp-paper-img-wrap">
+          <img src="islamiat/exam/paper2.jpg" alt="Sample Paper 2" class="sp-paper-img" onerror="this.parentElement.innerHTML='<div class=\'sp-img-fallback\'>📄 Paper image not available at <code>islamiat/exam/paper2.jpg</code></div>'">
+        </div>
+        <div class="sp-paper-content">
+          <div class="sp-instructions">
+            <div class="sp-inst-title">Instructions</div>
+            <ul>
+              <li>Write your name and SAP ID on all answer sheets</li>
+              <li>Write page number on all sheets</li>
+              <li>Please be analytical and specific in answering questions</li>
+              <li>Switch off your Mobile Phone</li>
+              <li>Attempt all the following questions critically and creatively</li>
+            </ul>
+          </div>
+          <div class="sp-questions">
+            <div class="sp-q"><span class="sp-q-num">Q1.</span><span class="sp-q-text">Explain the Islamic Vision of Life and its impact on human existence?</span><span class="sp-q-marks">5 Marks</span></div>
+            <div class="sp-q"><span class="sp-q-num">Q2.</span><span class="sp-q-text">Define the following terminologies with arguments in your own words: <br><strong>(a)</strong> Nationalism — Islamic Perspective (قوم پرستی) &nbsp;&nbsp; <strong>(b)</strong> Maqasid al-Shari'ah (مقاصد الشریعہ)</span><span class="sp-q-marks">5 Marks</span></div>
+            <div class="sp-q"><span class="sp-q-num">Q3.</span><span class="sp-q-text">Explain the Characteristics of Islamic Civilization. How does its Divine Origin and Universal Dimension distinguish it from all other civilizations?</span><span class="sp-q-marks">10 Marks</span></div>
+            <div class="sp-q"><span class="sp-q-num">Q4.</span><span class="sp-q-text">Elaborate the Islamic Political System and its salient features. How does Islam respond to Democracy and Secularism as systems of governance?</span><span class="sp-q-marks">10 Marks</span></div>
+          </div>
+          <div class="sp-total-bar"><span>Total</span><span class="sp-total-num">30 Marks</span></div>
+        </div>
+        <a href="islamiat/exam/solution2.pdf" target="_blank" class="sp-solution-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          View Solution — Paper 2
+          <span class="sp-sol-badge">PDF</span>
+        </a>
+      </div>
+
+      <!-- PAPER 3 -->
+      <div class="sp-paper-block">
+        <div class="sp-paper-header">
+          <div class="sp-paper-badge">Paper 3</div>
+          <div class="sp-paper-meta">Islamic Studies · Final Exam · 30 Marks</div>
+        </div>
+        <div class="sp-paper-img-wrap">
+          <img src="islamiat/exam/paper3.jpg" alt="Sample Paper 3" class="sp-paper-img" onerror="this.parentElement.innerHTML='<div class=\'sp-img-fallback\'>📄 Paper image not available at <code>islamiat/exam/paper3.jpg</code></div>'">
+        </div>
+        <div class="sp-paper-content">
+          <div class="sp-instructions">
+            <div class="sp-inst-title">Instructions</div>
+            <ul>
+              <li>Write your name and SAP ID on all answer sheets</li>
+              <li>Write page number on all sheets</li>
+              <li>Please be analytical and specific in answering questions</li>
+              <li>Switch off your Mobile Phone</li>
+              <li>Attempt all the following questions critically and creatively</li>
+            </ul>
+          </div>
+          <div class="sp-questions">
+            <div class="sp-q"><span class="sp-q-num">Q1.</span><span class="sp-q-text">Explain Islamic Ideology and its Importance in the modern world?</span><span class="sp-q-marks">5 Marks</span></div>
+            <div class="sp-q"><span class="sp-q-num">Q2.</span><span class="sp-q-text">Define the following terminologies with arguments in your own words: <br><strong>(a)</strong> Khilafah (خلافت) &nbsp;&nbsp; <strong>(b)</strong> Amr bil Ma'ruf wa Nahy 'an al-Munkar (امر بالمعروف و نہی عن المنکر)</span><span class="sp-q-marks">5 Marks</span></div>
+            <div class="sp-q"><span class="sp-q-num">Q3.</span><span class="sp-q-text">Critically analyze Nationalism and Humanism as modern ideologies from an Islamic perspective. How does Islam provide a superior alternative?</span><span class="sp-q-marks">10 Marks</span></div>
+            <div class="sp-q"><span class="sp-q-num">Q4.</span><span class="sp-q-text">Elaborate Social Ethics in Islam with reference to the Objectives of Shariah (Maqasid). How does Islam ensure justice, equality, and welfare in society?</span><span class="sp-q-marks">10 Marks</span></div>
+          </div>
+          <div class="sp-total-bar"><span>Total</span><span class="sp-total-num">30 Marks</span></div>
+        </div>
+        <a href="islamiat/exam/solution3.pdf" target="_blank" class="sp-solution-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          View Solution — Paper 3
+          <span class="sp-sol-badge">PDF</span>
+        </a>
+      </div>
+
+    </div>
   </div>
 
   <!-- LECTURE VIEW -->
@@ -1645,7 +2112,7 @@ function topic(iconSvg, titleEn, summaryEn, content, titleUr, summaryUr) {
   </div>`;
 }
 
-function questions(qs, qsUr) {
+function questions(qs, qsUr, lectureNum) {
   // Each item: EN text and UR text co-exist in same row, toggled by .urdu-mode CSS
   const items = qs.map((q, i) => {
     const urPart = (qsUr && qsUr[i])
@@ -1653,10 +2120,36 @@ function questions(qs, qsUr) {
       : '';
     return `<div class="question-item"><span class="q-num">Q${i+1}.</span><span class="en-text q-text-en">${q}</span>${urPart}</div>`;
   }).join('');
+
+  const answerBtn = lectureNum ? `
+  <div class="qs-answer-bar">
+    <div class="qs-answer-header">
+      <div class="qs-answer-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 11l3 3L22 4" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <div class="qs-answer-label en-text">Check Your Answers</div>
+        <div class="qs-answer-label urdu-text">جوابات دیکھیں</div>
+        <div class="qs-answer-sub en-text">Open the answer key PDF for Lecture ${lectureNum}</div>
+        <div class="qs-answer-sub urdu-text">لیکچر ${lectureNum} کا جواب نامہ کھولیں</div>
+      </div>
+    </div>
+    <div class="qs-answer-btns">
+      <a href="islamiat/Lecture${lectureNum}_QnA.pdf" target="_blank" rel="noopener noreferrer" class="qs-ans-btn qs-ans-btn--gold"
+         onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 22px rgba(139,105,20,0.5)';"
+         onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 14px rgba(139,105,20,0.32)';">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14 2 14 8 20 8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><line x1="16" y1="13" x2="8" y2="13" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="17" x2="8" y2="17" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="en-text">Answer Key — Lecture ${lectureNum}</span>
+        <span class="urdu-text">جواب نامہ — لیکچر ${lectureNum}</span>
+      </a>
+    </div>
+  </div>` : '';
+
   return `<div class="questions-section">
     <div class="qs-title en-text">Important Questions</div>
     <div class="qs-title urdu-text">اہم سوالات</div>
     ${items}
+    ${answerBtn}
   </div>`;
 }
 
@@ -1868,7 +2361,7 @@ function lecture1() {
       "زمین پر اللہ کے خلیفہ کے طور پر انسان کے کردار پر بحث کریں۔ اس مقام کے کیا تقاضے ہیں؟",
       "توحید کا تصور اور حکمرانی، مالیات، انتظامی عدل اور قانون پر اس کے عملی اثرات بیان کریں۔",
       "اسلام اپنے آپ کو مکمل ضابطۂ حیات کیسے پیش کرتا ہے؟ سماجی، معاشی، سیاسی اور اخلاقی ابعاد کے حوالے سے بیان کریں۔"
-    ]),
+    ], 1),
     "اہم سوالات — لیکچر ۱"
   );
 }
@@ -1983,7 +2476,7 @@ function lecture2() {
       "اسلام میں عام اخلاقی خدشات کیا ہیں؟ سورہ الحجرات کے حوالے سے سماجی بدعملی پر اسلامی پابندیوں کی وضاحت کریں۔",
       "اسلام کی سات آفاقی اخلاقی اقدار بیان کریں۔ یہ اقدار مستقل اور ناقابلِ تبدیل کیوں ہیں؟",
       "اسلام ایک نتیجہ خیز اور اعلیٰ اخلاقی شخصیت کو کیسے فروغ دیتا ہے؟ انفرادی اخلاق اور سماجی فلاح کا آپس میں کیا تعلق ہے؟"
-    ]),
+    ], 2),
     "اہم سوالات — لیکچر ۲"
   );
 }
@@ -2102,7 +2595,7 @@ function lecture3() {
       "زمین پر اللہ کے خلیفہ ہونے سے کیا مراد ہے؟ خلافت کے تصور اور اس کے مضمرات پر بحث کریں۔",
       "اسلامی نظریے کی خصوصیات اور اثرات بیان کریں۔ یہ جامع، متحرک اور آفاقی کیوں ہے؟",
       "اسلامی نظریے میں احتساب کا تصور انفرادی اور سماجی زندگی میں انسانی رویے کو کیسے تشکیل دیتا ہے؟"
-    ]),
+    ], 3),
     "اہم سوالات — لیکچر ۳"
   );
 }
@@ -2221,7 +2714,7 @@ function lecture8() {
       "جمہوریت اور اسلامی سیاسی نظام کا موازنہ کریں۔ دونوں کو ملانے میں شوریٰ کیا کردار ادا کرتی ہے؟",
       "اسلامی نقطۂ نظر سے قوم پرستی پر بحث کریں۔ علامہ اقبال کا مسلم قومیت کا تصور مغربی قوم پرستی سے کیسے مختلف ہے؟",
       "ہیومنزم کیا ہے؟ اسلام سیکولر ہیومنزم کو رد کرتے ہوئے انسانی وقار کو کیسے تسلیم کرتا ہے؟"
-    ]),
+    ], 8),
     "اہم سوالات — لیکچر ۸"
   );
 }
@@ -2319,7 +2812,7 @@ function lecture9() {
       "اسلامی تہذیب کی آفاقیت پر بحث کریں۔ اسلام نسلی اور قومی امتیاز کو کیسے رد کرتا ہے؟ دلائل دیں۔",
       "اسلامی تہذیب کی نمایاں خصوصیات کیا ہیں؟ ہر خصوصیت کو مثالوں کے ساتھ تفصیل سے بیان کریں۔",
       "اسلامی تہذیب میں رواداری کا تصور آئینِ مدینہ میں کیسے ظاہر ہوتا ہے؟"
-    ]),
+    ], 9),
     "اہم سوالات — لیکچر ۹"
   );
 }
@@ -2405,7 +2898,7 @@ function lecture10() {
       "اسلام میں ذاتی اخلاق کا تصور بیان کریں۔ اسلام انفرادی طرزِ عمل میں سچائی، عدل اور رحم کو کیسے فروغ دیتا ہے؟",
       "امر بالمعروف اور نہی عن المنکر کے حوالے سے اسلام میں سماجی اخلاق کی وضاحت کریں۔ مسلم امت کا فرض کیا ہے؟",
       "اسلام معاشی اخلاق کے بارے میں کیا کہتا ہے؟ تجارت، دولت کی تقسیم اور معاشی انصاف پر اسلام کا موقف کیا ہے؟"
-    ]),
+    ], 10),
     "اہم سوالات — لیکچر ۱۰"
   );
 }
@@ -2530,7 +3023,7 @@ function lecture12() {
       "اسلام اور جمہوریت کا موازنہ کریں۔ اسلامی سیاسی نظام میں شوریٰ کیا کردار ادا کرتی ہے؟",
       "سیکولرازم پر اسلامی موقف بیان کریں۔ اسلام مذہب کو ریاست سے الگ کرنے کو کیوں رد کرتا ہے؟",
       "اسلام اور سوشلزم کے درمیان تعلق پر بحث کریں۔ معاشی انصاف کے اہداف میں وہ کس حد تک ہم آہنگ ہیں؟"
-    ]),
+    ], 12),
     "اہم سوالات — لیکچر ۱۲"
   );
 }
@@ -2643,7 +3136,7 @@ function lecture13() {
       "اسلامی ریاست میں شہریوں کو ضمانت شدہ حقوق بیان کریں۔ اسلام مسلم اور غیر مسلم دونوں شہریوں کی حفاظت کیسے کرتا ہے؟",
       "اسلامی فلاحی ریاست کا تصور بیان کریں۔ سماجی انصاف کو یقینی بنانے میں بیت المال کیا کردار ادا کرتا ہے؟",
       "اسلامی ریاست عدل اور جوابدہی کو کیسے یقینی بناتی ہے؟ کیا حاکم کو جوابدہ ٹھہرایا جا سکتا ہے؟ دلائل دیں۔"
-    ]),
+    ], 13),
     "اہم سوالات — لیکچر ۱۳"
   );
 }
@@ -2781,7 +3274,7 @@ function lecture11() {
       "اسلام کے مقرر کردہ بنیادی تجارتی اخلاق کیا ہیں؟ کم از کم پانچ اصولوں کو قرآنی آیات اور احادیث کے ساتھ بیان کریں۔",
       "اسلامی قانون وراثت دولت کے ارتکاز کو کیسے روکتا ہے؟",
       "اسلامی معاشی اخلاق کے اطلاق کے معاشرے پر اثرات بیان کریں۔"
-    ]),
+    ], 11),
     "اہم سوالات — لیکچر ۱۱"
   );
 }
@@ -2820,8 +3313,17 @@ function openLecture(num) {
 
 }
 
+function showSamplePapers() {
+  document.getElementById('lecture-selector').style.display = 'none';
+  document.getElementById('lecture-view').style.display = 'none';
+  document.getElementById('sample-papers-view').style.display = 'block';
+  document.getElementById('backBtn').classList.add('visible');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function showSelector() {
   document.getElementById('lecture-view').style.display = 'none';
+  document.getElementById('sample-papers-view').style.display = 'none';
   document.getElementById('lecture-selector').style.display = 'block';
   document.getElementById('backBtn').classList.remove('visible');
   window.scrollTo({ top: 0, behavior: 'smooth' });
