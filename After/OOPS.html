@@ -384,44 +384,104 @@
 
     /* ── SP HEADER ── */
     .sp-hero {
-      background: linear-gradient(135deg, #1e3a5f 0%, #1a1040 50%, #0f2d2d 100%);
+      background: #fff;
       border-radius: 16px;
-      padding: 32px 28px 28px;
+      padding: 0;
       margin-bottom: 28px;
       position: relative;
       overflow: hidden;
+      border: 1.5px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
     }
-    .sp-hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(circle at 80% 20%, rgba(99,102,241,0.25), transparent 60%),
-                  radial-gradient(circle at 20% 80%, rgba(16,185,129,0.15), transparent 50%);
-      pointer-events: none;
+    .dark .sp-hero {
+      background: #111827;
+      border-color: #1f2937;
     }
+    .sp-hero-accent {
+      height: 5px;
+      background: linear-gradient(90deg, #6366f1 0%, #38bdf8 50%, #34d399 100%);
+      flex-shrink: 0;
+    }
+    .sp-hero-body {
+      padding: 28px 28px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .sp-hero-icon-wrap {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: #f1f5f9;
+      border: 1.5px solid #e2e8f0;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .dark .sp-hero-icon-wrap {
+      background: #1f2937;
+      border-color: #374151;
+    }
+    .sp-hero-icon-wrap svg { color: #6366f1; }
+    .sp-hero-text { flex: 1; }
     .sp-hero-tag {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 100px;
-      padding: 4px 12px;
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      border-radius: 6px;
+      padding: 3px 10px;
       font-family: var(--mono);
-      font-size: 0.68rem;
-      color: rgba(255,255,255,0.75);
-      letter-spacing: 0.12em;
+      font-size: 0.65rem;
+      color: #4338ca;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
+    }
+    .dark .sp-hero-tag {
+      background: #1e1b4b;
+      border-color: #3730a3;
+      color: #a5b4fc;
     }
     .sp-hero h2 {
-      font-size: 1.8rem;
+      font-size: 1.55rem;
       font-weight: 800;
-      color: #fff;
-      margin-bottom: 8px;
-      line-height: 1.15;
+      color: #0f172a;
+      margin-bottom: 5px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
     }
+    .dark .sp-hero h2 { color: #f1f5f9; }
     .sp-hero-sub {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.55);
+      font-size: 0.82rem;
+      color: #64748b;
       font-family: var(--mono);
+    }
+    .dark .sp-hero-sub { color: #94a3b8; }
+    .sp-hero-stats {
+      display: flex;
+      gap: 0;
+      border-top: 1.5px solid #e2e8f0;
+    }
+    .dark .sp-hero-stats { border-top-color: #1f2937; }
+    .sp-hero-stat {
+      flex: 1;
+      padding: 14px 20px;
+      border-right: 1.5px solid #e2e8f0;
+      font-family: var(--mono);
+    }
+    .dark .sp-hero-stat { border-right-color: #1f2937; }
+    .sp-hero-stat:last-child { border-right: none; }
+    .sp-hero-stat-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #6366f1;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .sp-hero-stat-lbl {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
     }
 
     /* Section heading */
@@ -444,25 +504,60 @@
     .sp-warning {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
-      background: rgba(180,83,9,0.07);
-      border: 1px solid rgba(180,83,9,0.25);
-      border-left: 4px solid var(--sp-gold);
-      border-radius: 10px;
-      padding: 14px 18px;
+      gap: 16px;
+      background: linear-gradient(135deg, rgba(234,88,12,0.08) 0%, rgba(180,83,9,0.05) 100%);
+      border: 1px solid rgba(234,88,12,0.3);
+      border-radius: 14px;
+      padding: 18px 20px;
       margin-bottom: 32px;
       font-size: 0.85rem;
-      color: var(--sp-gold);
-      line-height: 1.65;
+      color: #92400e;
+      line-height: 1.7;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(234,88,12,0.08), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+    .sp-warning::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #f59e0b, #ea580c);
+      border-radius: 14px 0 0 14px;
+    }
+    .sp-warning::after {
+      content: '⚠';
+      position: absolute;
+      right: 16px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 3.5rem;
+      opacity: 0.05;
+      pointer-events: none;
     }
     .dark .sp-warning {
-      background: rgba(250,204,21,0.06);
-      border-color: rgba(250,204,21,0.3);
-      border-left-color: #fbbf24;
+      background: linear-gradient(135deg, rgba(234,88,12,0.1) 0%, rgba(180,83,9,0.07) 100%);
+      border-color: rgba(251,146,60,0.35);
       color: #fcd34d;
+      box-shadow: 0 2px 16px rgba(234,88,12,0.12);
     }
-    .sp-warning-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
-    .sp-warning strong { display: block; font-size: 0.92rem; font-family: system-ui, -apple-system, sans-serif; font-weight: 700; margin-bottom: 4px; }
+    .sp-warning-icon {
+      font-size: 1.2rem; flex-shrink: 0; margin-top: 2px;
+      width: 36px; height: 36px;
+      background: rgba(234,88,12,0.12);
+      border: 1px solid rgba(234,88,12,0.25);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sp-warning strong {
+      display: block;
+      font-size: 0.93rem;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: #b45309;
+      letter-spacing: 0.01em;
+    }
+    .dark .sp-warning strong { color: #fbbf24; }
 
     /* Exam pattern card */
     .sp-pattern-box {
@@ -4939,17 +5034,39 @@ public class Main {
 
       <!-- HERO -->
       <div class="sp-hero">
-        <div class="sp-hero-tag">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          CS201 · OOP · Riphah International University · Spring 2026
+        <div class="sp-hero-accent"></div>
+        <div class="sp-hero-body">
+          <div class="sp-hero-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="sp-hero-text">
+            <div class="sp-hero-tag">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              CS201 · OOP · Riphah · Spring 2026
+            </div>
+            <h2>Sample Papers</h2>
+            <div class="sp-hero-sub">Past papers with fully worked solutions and concept breakdowns</div>
+          </div>
         </div>
-        <h2>Sample Papers</h2>
-        <div class="sp-hero-sub">Past papers with fully worked solutions and concept breakdowns</div>
+        <div class="sp-hero-stats">
+          <div class="sp-hero-stat">
+            <div class="sp-hero-stat-val">3</div>
+            <div class="sp-hero-stat-lbl">Papers</div>
+          </div>
+          <div class="sp-hero-stat">
+            <div class="sp-hero-stat-val">40</div>
+            <div class="sp-hero-stat-lbl">Marks each</div>
+          </div>
+          <div class="sp-hero-stat">
+            <div class="sp-hero-stat-val">Full</div>
+            <div class="sp-hero-stat-lbl">Solutions</div>
+          </div>
+        </div>
       </div>
 
       <!-- WARNING -->
       <div class="sp-warning">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div class="sp-warning-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
         <div>
           <strong>Disclaimer — Read Before Attempting</strong>
           These are sample/past papers for practice only. The actual exam questions may be <em>completely different</em> in style, topic coverage, difficulty, and format. Do not rely solely on these — revise all OOP concepts from your lectures.
