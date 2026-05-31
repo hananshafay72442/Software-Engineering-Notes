@@ -312,7 +312,7 @@
     }
 
     /* ══════════════════════════════
-       SAMPLE PAPER — CLEAN REDESIGN
+       SAMPLE PAPER — RICH REDESIGN
     ══════════════════════════════ */
 
     /* ── SP CSS vars (light/dark) ── */
@@ -326,10 +326,14 @@
       --sp-muted:    #64748b;
       --sp-faint:    #94a3b8;
       --sp-blue:     #2563eb;
-      --sp-blue-dim: rgba(37,99,235,0.12);
+      --sp-blue-dim: rgba(37,99,235,0.10);
       --sp-green:    #16a34a;
-      --sp-green-dim:rgba(22,163,74,0.12);
+      --sp-green-dim:rgba(22,163,74,0.10);
       --sp-gold:     #b45309;
+      --sp-purple:   #7c3aed;
+      --sp-pink:     #db2777;
+      --sp-teal:     #0891b2;
+      --sp-orange:   #ea580c;
       --sp-code-bg:  #f1f5f9;
       --sp-code-bdr: #cbd5e1;
       /* syntax tokens – light */
@@ -359,6 +363,10 @@
       --sp-green:    #3fb950;
       --sp-green-dim:rgba(63,185,80,0.1);
       --sp-gold:     #f5c842;
+      --sp-purple:   #a78bfa;
+      --sp-pink:     #f472b6;
+      --sp-teal:     #22d3ee;
+      --sp-orange:   #fb923c;
       --sp-code-bg:  #0d1117;
       --sp-code-bdr: #21262d;
       --tk-kw:   #ff7b72;
@@ -372,6 +380,48 @@
       --tk-ann:  #79c0ff;
       --tk-op:   #ff7b72;
       --tk-lit:  #a5d6a7;
+    }
+
+    /* ── SP HEADER ── */
+    .sp-hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #1a1040 50%, #0f2d2d 100%);
+      border-radius: 16px;
+      padding: 32px 28px 28px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .sp-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(99,102,241,0.25), transparent 60%),
+                  radial-gradient(circle at 20% 80%, rgba(16,185,129,0.15), transparent 50%);
+      pointer-events: none;
+    }
+    .sp-hero-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .sp-hero h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+    .sp-hero-sub {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      font-family: var(--mono);
     }
 
     /* Section heading */
@@ -418,45 +468,63 @@
     .sp-pattern-box {
       background: var(--sp-surface);
       border: 1px solid var(--sp-border);
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
       margin-bottom: 40px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
     .sp-pattern-header {
       padding: 14px 20px;
-      background: var(--sp-raised);
-      border-bottom: 1px solid var(--sp-border);
+      background: linear-gradient(135deg, #1d4ed8, #7c3aed);
       display: flex;
       align-items: center;
       gap: 8px;
       font-family: system-ui, -apple-system, sans-serif;
       font-size: 0.9rem;
       font-weight: 700;
-      color: var(--sp-blue);
+      color: #fff;
     }
     .sp-q-block {
-      padding: 16px 20px;
+      padding: 18px 20px;
       border-bottom: 1px solid var(--sp-border);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
     }
     .sp-q-block:last-child { border-bottom: none; }
+    .sp-q-num-circle {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 0.8rem; font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .sp-q-num-1 { background: rgba(37,99,235,0.12); color: #2563eb; border: 1.5px solid rgba(37,99,235,0.35); }
+    .sp-q-num-2 { background: rgba(234,88,12,0.12); color: #ea580c; border: 1.5px solid rgba(234,88,12,0.35); }
+    .sp-q-num-3 { background: rgba(22,163,74,0.12); color: #16a34a; border: 1.5px solid rgba(22,163,74,0.35); }
+    .sp-q-content { flex: 1; }
     .sp-q-title {
       font-family: system-ui, -apple-system, sans-serif;
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       font-weight: 700;
-      color: var(--sp-blue);
+      color: var(--sp-text);
       margin-bottom: 7px;
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
     .sp-q-badge {
-      background: var(--sp-blue-dim);
-      border: 1px solid rgba(88,166,255,0.25);
       border-radius: 20px;
-      padding: 1px 9px;
-      font-size: 0.72rem;
-      color: var(--sp-blue);
+      padding: 2px 10px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-family: var(--mono);
+      letter-spacing: 0.04em;
     }
+    .sp-q-badge-1 { background: rgba(37,99,235,0.12); color: #2563eb; border: 1px solid rgba(37,99,235,0.3); }
+    .sp-q-badge-2 { background: rgba(234,88,12,0.12); color: #ea580c; border: 1px solid rgba(234,88,12,0.3); }
+    .sp-q-badge-3 { background: rgba(22,163,74,0.12); color: #16a34a; border: 1px solid rgba(22,163,74,0.3); }
     .sp-q-desc {
       font-size: 0.83rem;
       color: var(--sp-muted);
@@ -466,30 +534,76 @@
     .sp-q-desc li { margin-bottom: 4px; }
     .sp-q-desc strong { color: var(--sp-text); }
 
+    /* Pillars row for Q3 */
+    .sp-pillars-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .sp-pillar-pill {
+      display: flex; align-items: center; gap: 5px;
+      padding: 4px 11px 4px 8px;
+      border-radius: 100px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      font-family: system-ui, -apple-system, sans-serif;
+      border: 1px solid;
+    }
+    .pill-inh { background: rgba(37,99,235,0.10); color: #1d4ed8; border-color: rgba(37,99,235,0.3); }
+    .pill-enc { background: rgba(22,163,74,0.10); color: #15803d; border-color: rgba(22,163,74,0.3); }
+    .pill-pol { background: rgba(124,58,237,0.10); color: #7c3aed; border-color: rgba(124,58,237,0.3); }
+    .pill-abs { background: rgba(8,145,178,0.10); color: #0891b2; border-color: rgba(8,145,178,0.3); }
+    .pill-fil { background: rgba(180,83,9,0.10); color: #b45309; border-color: rgba(180,83,9,0.3); }
+    .pill-exc { background: rgba(220,38,38,0.10); color: #dc2626; border-color: rgba(220,38,38,0.3); }
+
     /* Paper section */
-    .sp-paper-section { margin-bottom: 48px; }
+    .sp-paper-section { margin-bottom: 52px; }
     .sp-paper-header {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
+      padding: 16px 20px;
+      background: var(--sp-surface);
+      border: 1px solid var(--sp-border);
+      border-radius: 12px;
+      border-left: 4px solid;
     }
+    .sp-paper-header.p1 { border-left-color: #2563eb; }
+    .sp-paper-header.p2 { border-left-color: #16a34a; }
+    .sp-paper-header.p3 { border-left-color: #7c3aed; }
+    .sp-paper-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .pi-1 { background: rgba(37,99,235,0.12); }
+    .pi-2 { background: rgba(22,163,74,0.12); }
+    .pi-3 { background: rgba(124,58,237,0.12); }
     .sp-paper-badge {
+      display: inline-block;
       background: var(--sp-raised);
       border: 1px solid var(--sp-border2);
       border-radius: 6px;
-      padding: 3px 10px;
+      padding: 2px 8px;
       font-family: var(--mono);
-      font-size: 0.75rem;
+      font-size: 0.68rem;
       color: var(--sp-muted);
       letter-spacing: 0.06em;
       text-transform: uppercase;
+      margin-bottom: 3px;
     }
     .sp-paper-title {
       font-size: 1rem;
       font-family: system-ui, -apple-system, sans-serif;
       font-weight: 700;
       color: var(--sp-text);
+    }
+    .sp-paper-sub {
+      font-size: 0.75rem;
+      color: var(--sp-muted);
+      font-family: var(--mono);
     }
 
     /* PDF iframe box */
@@ -543,21 +657,22 @@
     .sp-sol-toggle {
       width: 100%;
       text-align: left;
-      padding: 13px 18px;
+      padding: 14px 20px;
       background: var(--sp-surface);
       border: 1px solid var(--sp-border);
       border-radius: 10px;
       cursor: pointer;
-      font-family: var(--mono);
-      font-size: 0.83rem;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
       color: var(--sp-green);
       display: flex;
       align-items: center;
       gap: 10px;
-      transition: background 0.15s, border-color 0.15s;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
       margin-top: 4px;
     }
-    .sp-sol-toggle:hover { background: var(--sp-raised); border-color: var(--sp-green); }
+    .sp-sol-toggle:hover { background: var(--sp-raised); border-color: var(--sp-green); transform: translateY(-1px); }
     .sp-sol-toggle .sp-arrow {
       margin-left: auto;
       transition: transform 0.25s;
@@ -580,27 +695,57 @@
 
     /* Answer blocks */
     .sp-ans-block {
-      padding: 20px 22px;
+      padding: 22px 24px;
       border-bottom: 1px solid var(--sp-raised);
+      position: relative;
     }
     .dark .sp-ans-block { border-bottom-color: var(--sp-border); }
     .sp-ans-block:last-child { border-bottom: none; }
+
+    /* Q-type color stripe on left */
+    .sp-ans-block::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      border-radius: 0 2px 2px 0;
+    }
+    .sp-ans-block.q1::before { background: #2563eb; }
+    .sp-ans-block.q2::before { background: #ea580c; }
+    .sp-ans-block.q3::before { background: #16a34a; }
+
     .sp-ans-title {
-      font-family: var(--mono);
-      font-size: 0.78rem;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.82rem;
       font-weight: 700;
-      color: var(--sp-blue);
-      margin-bottom: 10px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
+    .sp-ans-block.q1 .sp-ans-title { color: #2563eb; }
+    .sp-ans-block.q2 .sp-ans-title { color: #ea580c; }
+    .sp-ans-block.q3 .sp-ans-title { color: #16a34a; }
+    .sp-ans-mark {
+      font-size: 0.68rem;
+      padding: 1px 7px;
+      border-radius: 100px;
+      font-family: var(--mono);
+      font-weight: 600;
+    }
+    .sp-ans-block.q1 .sp-ans-mark { background: rgba(37,99,235,0.1); color: #2563eb; border: 1px solid rgba(37,99,235,0.3); }
+    .sp-ans-block.q2 .sp-ans-mark { background: rgba(234,88,12,0.1); color: #ea580c; border: 1px solid rgba(234,88,12,0.3); }
+    .sp-ans-block.q3 .sp-ans-mark { background: rgba(22,163,74,0.1); color: #16a34a; border: 1px solid rgba(22,163,74,0.3); }
+
     .sp-ans-text {
-      font-size: 0.84rem;
-      color: var(--sp-muted);
-      line-height: 1.75;
+      font-size: 0.85rem;
+      color: var(--sp-text);
+      line-height: 1.8;
     }
-    .sp-ans-text strong { color: var(--sp-text); font-weight: 600; }
-    .sp-ans-text em { color: var(--sp-blue); font-style: normal; }
+    .sp-ans-text strong { color: var(--sp-text); font-weight: 700; }
+    .sp-ans-text em { color: var(--sp-blue); font-style: normal; font-weight: 600; }
     .sp-ans-text code {
       background: var(--sp-code-bg);
       border: 1px solid var(--sp-code-bdr);
@@ -608,10 +753,122 @@
       padding: 1px 6px;
       font-family: var(--mono);
       font-size: 0.8em;
-      color: var(--sp-blue);
+      color: var(--sp-purple);
     }
-    .sp-ans-text ul, .sp-ans-text ol { margin: 8px 0 0 18px; padding: 0; }
-    .sp-ans-text li { margin-bottom: 5px; }
+    .sp-ans-text ul, .sp-ans-text ol { margin: 10px 0 0 20px; padding: 0; }
+    .sp-ans-text li { margin-bottom: 6px; }
+
+    /* Concept callout box */
+    .sp-concept {
+      background: var(--sp-raised);
+      border: 1px solid var(--sp-border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 12px 0;
+      font-size: 0.83rem;
+      color: var(--sp-muted);
+      line-height: 1.7;
+    }
+    .sp-concept-title {
+      font-size: 0.74rem;
+      font-weight: 700;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .sp-concept.blue { border-left: 3px solid #2563eb; }
+    .sp-concept.blue .sp-concept-title { color: #2563eb; }
+    .sp-concept.green { border-left: 3px solid #16a34a; }
+    .sp-concept.green .sp-concept-title { color: #16a34a; }
+    .sp-concept.purple { border-left: 3px solid #7c3aed; }
+    .sp-concept.purple .sp-concept-title { color: #7c3aed; }
+    .sp-concept.orange { border-left: 3px solid #ea580c; }
+    .sp-concept.orange .sp-concept-title { color: #ea580c; }
+    .sp-concept.teal { border-left: 3px solid #0891b2; }
+    .sp-concept.teal .sp-concept-title { color: #0891b2; }
+
+    /* Compare grid - two column */
+    .sp-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0;
+    }
+    @media(max-width:600px){ .sp-compare { grid-template-columns: 1fr; } }
+    .sp-compare-card {
+      background: var(--sp-raised);
+      border: 1px solid var(--sp-border);
+      border-radius: 10px;
+      padding: 13px 14px;
+      font-size: 0.82rem;
+      color: var(--sp-text);
+      line-height: 1.65;
+    }
+    .sp-compare-card h4 {
+      font-size: 0.77rem;
+      font-weight: 700;
+      font-family: var(--mono);
+      margin-bottom: 7px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .sp-compare-card.left h4 { color: #2563eb; }
+    .sp-compare-card.right h4 { color: #16a34a; }
+
+    /* Key point pills row */
+    .sp-key-pills {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 10px 0;
+    }
+    .sp-key-pill {
+      display: flex; align-items: center; gap: 5px;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      border: 1px solid;
+    }
+    .kp-blue  { background: rgba(37,99,235,0.09);  color: #1d4ed8; border-color: rgba(37,99,235,0.25); }
+    .kp-green { background: rgba(22,163,74,0.09);  color: #15803d; border-color: rgba(22,163,74,0.25); }
+    .kp-purple{ background: rgba(124,58,237,0.09); color: #7c3aed; border-color: rgba(124,58,237,0.25); }
+    .kp-red   { background: rgba(220,38,38,0.09);  color: #dc2626; border-color: rgba(220,38,38,0.25); }
+    .kp-teal  { background: rgba(8,145,178,0.09);  color: #0891b2; border-color: rgba(8,145,178,0.25); }
+    .kp-gold  { background: rgba(180,83,9,0.09);   color: #b45309; border-color: rgba(180,83,9,0.25); }
+    .kp-pink  { background: rgba(219,39,119,0.09); color: #be185d; border-color: rgba(219,39,119,0.25); }
+    .kp-orange{ background: rgba(234,88,12,0.09);  color: #c2410c; border-color: rgba(234,88,12,0.25); }
+
+    /* Concept SVG diagram wrapper */
+    .sp-diagram {
+      margin: 14px 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--sp-border);
+      background: var(--sp-raised);
+    }
+    .sp-diagram svg { display: block; width: 100%; }
+
+    /* Scenario callout */
+    .sp-scenario {
+      background: rgba(99,102,241,0.06);
+      border: 1px solid rgba(99,102,241,0.2);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 10px 0;
+      font-size: 0.82rem;
+      color: var(--sp-text);
+      line-height: 1.7;
+    }
+    .sp-scenario-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #6366f1;
+      margin-bottom: 5px;
+      display: flex; align-items: center; gap: 5px;
+    }
 
     /* IDE-style code block */
     .sp-ide {
@@ -4680,12 +4937,19 @@ public class Main {
     <main>
     <section class="quiz-section">
 
-      <h2 class="sp-section-heading">Sample Papers</h2>
-      <p class="sp-section-sub">CS201 · OOP · Riphah International University · Spring 2026</p>
+      <!-- HERO -->
+      <div class="sp-hero">
+        <div class="sp-hero-tag">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          CS201 · OOP · Riphah International University · Spring 2026
+        </div>
+        <h2>Sample Papers</h2>
+        <div class="sp-hero-sub">Past papers with fully worked solutions and concept breakdowns</div>
+      </div>
 
       <!-- WARNING -->
       <div class="sp-warning">
-        <span class="sp-warning-icon">⚠️</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         <div>
           <strong>Disclaimer — Read Before Attempting</strong>
           These are sample/past papers for practice only. The actual exam questions may be <em>completely different</em> in style, topic coverage, difficulty, and format. Do not rely solely on these — revise all OOP concepts from your lectures.
@@ -4695,60 +4959,76 @@ public class Main {
       <!-- EXAM PATTERN -->
       <div class="sp-pattern-box">
         <div class="sp-pattern-header">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          OOP Examination Pattern
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          OOP Examination Pattern — 40 Marks Total
         </div>
 
         <div class="sp-q-block">
-          <div class="sp-q-title">
-            Question 1
-            <span class="sp-q-badge">12 Marks</span>
-          </div>
-          <div class="sp-q-desc">
-            Four <strong>scenario-based theoretical questions</strong> assessing conceptual understanding and analytical thinking related to OOP principles.
-          </div>
-        </div>
-
-        <div class="sp-q-block">
-          <div class="sp-q-title">
-            Question 2
-            <span class="sp-q-badge">8 Marks</span>
-          </div>
-          <div class="sp-q-desc">
-            <strong>Error identification & output prediction.</strong> Students must:
-            <ul>
-              <li>Identify and correct all programming errors in given code</li>
-              <li>Analyze given code and write the exact expected output</li>
-            </ul>
+          <div class="sp-q-num-circle sp-q-num-1">Q1</div>
+          <div class="sp-q-content">
+            <div class="sp-q-title">
+              Scenario-Based Theory
+              <span class="sp-q-badge sp-q-badge-1">12 Marks</span>
+            </div>
+            <div class="sp-q-desc">
+              Four <strong>conceptual questions</strong> assessing understanding of OOP principles through real-world scenarios and analytical thinking.
+            </div>
           </div>
         </div>
 
         <div class="sp-q-block">
-          <div class="sp-q-title">
-            Question 3
-            <span class="sp-q-badge">20 Marks</span>
+          <div class="sp-q-num-circle sp-q-num-2">Q2</div>
+          <div class="sp-q-content">
+            <div class="sp-q-title">
+              Error Correction &amp; Output Prediction
+              <span class="sp-q-badge sp-q-badge-2">8 Marks</span>
+            </div>
+            <div class="sp-q-desc">
+              <strong>Part A</strong> — Identify and fix all bugs in given code snippets.<br>
+              <strong>Part B</strong> — Trace execution and write the exact expected output.
+            </div>
           </div>
-          <div class="sp-q-desc">
-            <strong>Comprehensive long programming question.</strong> Design and implement a complete real-world solution integrating:
-            <ol>
-              <li>Inheritance</li>
-              <li>Encapsulation</li>
-              <li>Polymorphism</li>
-              <li>Abstraction</li>
-              <li>File Handling</li>
-              <li>Exception Handling</li>
-            </ol>
+        </div>
+
+        <div class="sp-q-block">
+          <div class="sp-q-num-circle sp-q-num-3">Q3</div>
+          <div class="sp-q-content">
+            <div class="sp-q-title">
+              Full OOP Program
+              <span class="sp-q-badge sp-q-badge-3">20 Marks</span>
+            </div>
+            <div class="sp-q-desc">
+              Design and implement a complete real-world system integrating all six concepts:
+            </div>
+            <div class="sp-pillars-row">
+              <span class="sp-pillar-pill pill-inh">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                Inheritance
+              </span>
+              <span class="sp-pillar-pill pill-enc">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Encapsulation
+              </span>
+              <span class="sp-pillar-pill pill-pol">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Polymorphism
+              </span>
+              <span class="sp-pillar-pill pill-abs">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Abstraction
+              </span>
+              <span class="sp-pillar-pill pill-fil">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                File Handling
+              </span>
+              <span class="sp-pillar-pill pill-exc">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                Exception Handling
+              </span>
+            </div>
           </div>
         </div>
       </div>
-
-
-      <!-- ════════ PAPER 1 ════════ -->
-      <div class="sp-paper-section">
-        <div class="sp-paper-header">
-          <span class="sp-paper-badge">Paper 01</span>
-          <span class="sp-paper-title">Sample Paper 1 — Library Management System</span>
-        </div>
 
         <div class="sp-pdf-frame">
           <div class="sp-pdf-toolbar">
@@ -4759,60 +5039,196 @@ public class Main {
           <iframe class="sp-pdf-iframe" src="oops/paper1.pdf" title="OOP Paper 1"></iframe>
         </div>
 
+      <!-- ════════ PAPER 1 ════════ -->
+      <div class="sp-paper-section">
+        <div class="sp-paper-header p1">
+          <div class="sp-paper-icon pi-1">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div>
+            <div class="sp-paper-badge">Paper 01</div>
+            <div class="sp-paper-title">Library Management System</div>
+            <div class="sp-paper-sub">Inheritance · Encapsulation · Polymorphism · File I/O · Exceptions</div>
+          </div>
+        </div>
+
         <button class="sp-sol-toggle" onclick="toggleSolution('sol1',this)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           View Full Solution — Paper 1
           <span class="sp-arrow">▼</span>
         </button>
         <div class="sp-sol-body" id="sol1">
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q1(a) · Encapsulation: More Than Just Private [3 marks]</div>
+          <!-- Q1(a) -->
+          <div class="sp-ans-block q1">
+            <div class="sp-ans-title">Q1(a) — Encapsulation: More Than Just Private <span class="sp-ans-mark">3 marks</span></div>
             <div class="sp-ans-text">
-              <strong>Disagree.</strong> Encapsulation is the bundling of <em>data</em> and the <em>methods</em> operating on that data into a single unit, while controlling external access — not just making fields private.<br><br>
-              <strong>Real-world analogy:</strong> An ATM machine. You cannot reach inside and change the cash balance directly. You interact through a controlled interface (buttons, card slot). The internal mechanism is hidden; only the interface is exposed. Similarly, a <code>BankAccount</code> class keeps <code>balance</code> private but exposes <code>deposit()</code> and <code>withdraw()</code>. This controls <em>how</em> the data is modified, not just who can see it.
+              <strong>Disagree.</strong> Encapsulation is the bundling of data <em>and</em> the methods that operate on it into a single unit, while restricting external access — not merely making fields private.
+            </div>
+            <div class="sp-compare" style="margin-top:10px;">
+              <div class="sp-compare-card left">
+                <h4>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                  What it is NOT
+                </h4>
+                Just slapping <code>private</code> on every field. That alone is not encapsulation — it's just access restriction.
+              </div>
+              <div class="sp-compare-card right">
+                <h4>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  What it IS
+                </h4>
+                Data + related methods bundled together, with controlled access through <code>getters</code>/<code>setters</code> that can validate input.
+              </div>
+            </div>
+            <div class="sp-scenario">
+              <div class="sp-scenario-label">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Real-World Analogy
+              </div>
+              An ATM machine — you cannot reach inside and change the cash balance directly. You interact only through a controlled interface (buttons, card slot). The internal mechanism is hidden. Similarly, a <code>BankAccount</code> class keeps <code>balance</code> private but exposes <code>deposit()</code> and <code>withdraw()</code> — controlling <em>how</em> data is modified, not just who sees it.
             </div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q1(b) · Overloading vs Overriding [3 marks]</div>
+          <!-- Q1(b) -->
+          <div class="sp-ans-block q1">
+            <div class="sp-ans-title">Q1(b) — Overloading vs Overriding <span class="sp-ans-mark">3 marks</span></div>
             <div class="sp-ans-text">
-              <strong>Method Overloading</strong> — same method name, different parameter lists, in the <em>same</em> class. Resolved at compile time.<br>
-              <em>Scenario:</em> A <code>Calculator</code> class has <code>add(int, int)</code> and <code>add(double, double)</code>. The compiler picks the right one based on argument types.<br><br>
-              <strong>Method Overriding</strong> — subclass provides its own implementation of a parent method with the <em>same signature</em>. Resolved at runtime.<br>
-              <em>Scenario:</em> <code>Animal</code> has <code>makeSound()</code>. <code>Dog</code> overrides it to print "Woof!". The JVM decides at runtime based on actual object type.
+              <div class="sp-compare">
+                <div class="sp-compare-card left">
+                  <h4>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    Method Overloading
+                  </h4>
+                  Same method name, <strong>different parameters</strong>, in the <em>same class</em>.<br>
+                  Resolved at <strong>compile time</strong>.<br><br>
+                  <em>Example:</em> <code>add(int, int)</code> and <code>add(double, double)</code> in the same <code>Calculator</code> class.
+                </div>
+                <div class="sp-compare-card right">
+                  <h4>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                    Method Overriding
+                  </h4>
+                  Subclass provides its own implementation with the <strong>same signature</strong>.<br>
+                  Resolved at <strong>runtime</strong>.<br><br>
+                  <em>Example:</em> <code>Animal.makeSound()</code> overridden in <code>Dog</code> to print "Woof!".
+                </div>
+              </div>
+              <div class="sp-diagram" style="margin-top:12px;">
+                <svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="background:#f8fafc;">
+                  <!-- Overloading side -->
+                  <text x="16" y="22" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#2563eb">OVERLOADING (Compile-time)</text>
+                  <rect x="16" y="32" width="130" height="30" rx="6" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.2"/>
+                  <text x="81" y="52" text-anchor="middle" font-family="monospace" font-size="10" fill="#1d4ed8">add(int, int)</text>
+                  <rect x="162" y="32" width="130" height="30" rx="6" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.2"/>
+                  <text x="227" y="52" text-anchor="middle" font-family="monospace" font-size="10" fill="#1d4ed8">add(double, double)</text>
+                  <text x="152" y="52" text-anchor="middle" font-family="system-ui" font-size="18" fill="#94a3b8">+</text>
+                  <text x="80" y="90" text-anchor="middle" font-family="system-ui" font-size="10" fill="#64748b">Same class, diff types</text>
+                  <text x="226" y="90" text-anchor="middle" font-family="system-ui" font-size="10" fill="#64748b">Compiler decides</text>
+                  <!-- divider -->
+                  <line x1="335" y1="10" x2="335" y2="110" stroke="#e2e8f0" stroke-width="1.5"/>
+                  <!-- Overriding side -->
+                  <text x="352" y="22" font-family="system-ui,sans-serif" font-size="11" font-weight="700" fill="#16a34a">OVERRIDING (Runtime)</text>
+                  <rect x="352" y="32" width="110" height="30" rx="6" fill="rgba(22,163,74,0.1)" stroke="#16a34a" stroke-width="1.2"/>
+                  <text x="407" y="52" text-anchor="middle" font-family="monospace" font-size="10" fill="#15803d">Animal.sound()</text>
+                  <path d="M462 47 L490 47" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr)"/>
+                  <rect x="492" y="32" width="90" height="30" rx="6" fill="rgba(22,163,74,0.15)" stroke="#16a34a" stroke-width="1.5"/>
+                  <text x="537" y="47" text-anchor="middle" font-family="monospace" font-size="9" fill="#15803d">Dog</text>
+                  <text x="537" y="58" text-anchor="middle" font-family="monospace" font-size="9" fill="#15803d">.sound()</text>
+                  <text x="405" y="90" text-anchor="middle" font-family="system-ui" font-size="10" fill="#64748b">Parent class</text>
+                  <text x="537" y="90" text-anchor="middle" font-family="system-ui" font-size="10" fill="#64748b">JVM decides at runtime</text>
+                  <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#94a3b8"/></marker></defs>
+                </svg>
+              </div>
             </div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q1(c) · Why makeSound() Should Be Abstract [3 marks]</div>
+          <!-- Q1(c) -->
+          <div class="sp-ans-block q1">
+            <div class="sp-ans-title">Q1(c) — Why makeSound() Should Be Abstract <span class="sp-ans-mark">3 marks</span></div>
             <div class="sp-ans-text">
-              <code>makeSound()</code> must be <strong>abstract</strong> in <code>Animal</code> because a generic animal has no meaningful sound — only concrete animals (Dog, Cat) do. Making it abstract:
-              <ul>
-                <li>Forces all subclasses to provide their own implementation</li>
-                <li>Prevents instantiation of <code>Animal</code> directly</li>
-                <li>Enables runtime polymorphism — <code>a.makeSound()</code> automatically calls the correct subclass version</li>
-              </ul>
-              If <strong>not abstract</strong>: method has a dummy body, subclasses are not forced to override it, objects with no real sound can be created silently.
+              <code>makeSound()</code> should be <strong>abstract</strong> in <code>Animal</code> because a generic animal has no meaningful sound — only concrete subclasses (Dog, Cat) do.
+            </div>
+            <div class="sp-key-pills" style="margin-top:10px;">
+              <span class="sp-key-pill kp-blue">Forces subclass override</span>
+              <span class="sp-key-pill kp-red">Prevents Animal instantiation</span>
+              <span class="sp-key-pill kp-purple">Enables runtime polymorphism</span>
+            </div>
+            <div class="sp-diagram" style="margin-top:10px;">
+              <svg viewBox="0 0 600 130" xmlns="http://www.w3.org/2000/svg" style="background:#f8fafc;">
+                <!-- Abstract Animal -->
+                <rect x="210" y="12" width="170" height="42" rx="8" fill="rgba(124,58,237,0.08)" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="5,3"/>
+                <text x="295" y="29" text-anchor="middle" font-family="system-ui" font-size="10" fill="#7c3aed" font-weight="700">«abstract»</text>
+                <text x="295" y="44" text-anchor="middle" font-family="monospace" font-size="11" fill="#1e293b" font-weight="700">Animal</text>
+                <text x="295" y="58" text-anchor="middle" font-family="monospace" font-size="9" fill="#7c3aed">makeSound() — abstract</text>
+                <!-- Lines down -->
+                <line x1="220" y1="54" x2="110" y2="90" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="295" y1="54" x2="295" y2="90" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="370" y1="54" x2="480" y2="90" stroke="#94a3b8" stroke-width="1.5"/>
+                <!-- Dog -->
+                <rect x="50" y="90" width="120" height="30" rx="7" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.2"/>
+                <text x="110" y="105" text-anchor="middle" font-family="monospace" font-size="10" fill="#1d4ed8" font-weight="700">Dog</text>
+                <text x="110" y="117" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">"Woof!"</text>
+                <!-- Cat -->
+                <rect x="230" y="90" width="120" height="30" rx="7" fill="rgba(22,163,74,0.1)" stroke="#16a34a" stroke-width="1.2"/>
+                <text x="290" y="105" text-anchor="middle" font-family="monospace" font-size="10" fill="#15803d" font-weight="700">Cat</text>
+                <text x="290" y="117" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">"Meow!"</text>
+                <!-- Bird -->
+                <rect x="420" y="90" width="120" height="30" rx="7" fill="rgba(180,83,9,0.1)" stroke="#b45309" stroke-width="1.2"/>
+                <text x="480" y="105" text-anchor="middle" font-family="monospace" font-size="10" fill="#b45309" font-weight="700">Bird</text>
+                <text x="480" y="117" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">"Tweet!"</text>
+              </svg>
+            </div>
+            <div class="sp-concept orange" style="margin-top:8px;">
+              <div class="sp-concept-title">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                If NOT abstract
+              </div>
+              Method has a dummy body → subclasses are not forced to override it → objects with no real sound can be created silently with no compile error.
             </div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q1(d) · Class vs Object; Blueprint Analogy [3 marks]</div>
+          <!-- Q1(d) -->
+          <div class="sp-ans-block q1">
+            <div class="sp-ans-title">Q1(d) — Class vs Object; Blueprint Analogy <span class="sp-ans-mark">3 marks</span></div>
             <div class="sp-ans-text">
-              A <strong>class</strong> is a template defining properties and behaviours. An <strong>object</strong> is a concrete instance with actual values.<br><br>
-              <em>Scenario:</em> A <code>Car</code> class defines <code>color</code>, <code>speed</code>, and <code>drive()</code>. A red Toyota and a blue Honda are objects — both built from the same blueprint. A class is called a blueprint because it describes structure without being the thing itself, just like architectural plans describe a building without being one.
+              <div class="sp-compare">
+                <div class="sp-compare-card left">
+                  <h4>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                    Class
+                  </h4>
+                  A <strong>template / blueprint</strong> that defines structure and behavior. It exists in code only — nothing is allocated in memory for a class alone.
+                </div>
+                <div class="sp-compare-card right">
+                  <h4>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/></svg>
+                    Object
+                  </h4>
+                  A <strong>concrete instance</strong> created from the class, with actual values stored in memory. Many objects can be made from one class.
+                </div>
+              </div>
+              <div class="sp-scenario" style="margin-top:10px;">
+                <div class="sp-scenario-label">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  Analogy
+                </div>
+                <code>Car</code> class defines <code>color</code>, <code>speed</code>, and <code>drive()</code>. A red Toyota and a blue Honda are <em>objects</em> — both built from the same blueprint. Like architectural plans: the plans describe a building without being a building.
+              </div>
             </div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q2(a) · Error Correction [4 marks]</div>
+          <!-- Q2(a) -->
+          <div class="sp-ans-block q2">
+            <div class="sp-ans-title">Q2(a) — Error Correction <span class="sp-ans-mark">4 marks</span></div>
             <div class="sp-ans-text">
-              <strong>Error 1:</strong> Missing semicolon after <code>return width * height</code><br>
-              <strong>Error 2:</strong> <code>r.area()</code> → should be <code>r.getArea()</code> (method is named <code>getArea</code>)
+              <div class="sp-key-pills">
+                <span class="sp-key-pill kp-red">Bug 1 — Missing semicolon after <code>return width * height</code></span>
+                <span class="sp-key-pill kp-red">Bug 2 — <code>r.area()</code> should be <code>r.getArea()</code></span>
+              </div>
             </div>
-            <div class="sp-ide">
-              <div class="sp-ide-bar"><span></span><span></span><span></span><span class="sp-ide-lang">JAVA</span></div>
+            <div class="sp-ide" style="margin-top:10px;">
+              <div class="sp-ide-bar"><span></span><span></span><span></span><span class="sp-ide-lang">JAVA — Fixed</span></div>
               <pre><span class="tk-kw">class</span> <span class="tk-cls">Rectangle</span> {
     <span class="tk-kw">private</span> <span class="tk-type">int</span> <span class="tk-var">width</span>;
     <span class="tk-kw">private</span> <span class="tk-type">int</span> <span class="tk-var">height</span>;
@@ -4823,30 +5239,45 @@ public class Main {
     }
 
     <span class="tk-kw">public</span> <span class="tk-type">int</span> <span class="tk-fn">getArea</span>() {
-        <span class="tk-kw">return</span> <span class="tk-var">width</span> <span class="tk-op">*</span> <span class="tk-var">height</span>;   <span class="tk-cm">// ✔ semicolon added</span>
+        <span class="tk-kw">return</span> <span class="tk-var">width</span> <span class="tk-op">*</span> <span class="tk-var">height</span>;   <span class="tk-cm">// ✔ Bug 1 fixed — semicolon added</span>
     }
 }
 
 <span class="tk-kw">class</span> <span class="tk-cls">Main</span> {
     <span class="tk-kw">public static void</span> <span class="tk-fn">main</span>(<span class="tk-type">String</span>[] <span class="tk-var">args</span>) {
         <span class="tk-cls">Rectangle</span> <span class="tk-var">r</span> <span class="tk-op">=</span> <span class="tk-kw">new</span> <span class="tk-cls">Rectangle</span>(<span class="tk-num">5</span>, <span class="tk-num">10</span>);
-        <span class="tk-cls">System</span>.<span class="tk-var">out</span>.<span class="tk-fn">println</span>(<span class="tk-str">"Area: "</span> <span class="tk-op">+</span> <span class="tk-var">r</span>.<span class="tk-fn">getArea</span>());  <span class="tk-cm">// ✔ fixed method name</span>
+        <span class="tk-cls">System</span>.<span class="tk-var">out</span>.<span class="tk-fn">println</span>(<span class="tk-str">"Area: "</span> <span class="tk-op">+</span> <span class="tk-var">r</span>.<span class="tk-fn">getArea</span>());  <span class="tk-cm">// ✔ Bug 2 fixed — getArea()</span>
     }
 }</pre>
             </div>
+            <div class="sp-output">Area: 50</div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q2(b) · Output Prediction [4 marks]</div>
+          <!-- Q2(b) -->
+          <div class="sp-ans-block q2">
+            <div class="sp-ans-title">Q2(b) — Output Prediction <span class="sp-ans-mark">4 marks</span></div>
             <div class="sp-ans-text">
-              <code>count</code> is <strong>static</strong> — shared across all instances. Each constructor call increments it. After c1, c2, c3 are created, <code>count = 3</code>. Both <code>c1.display()</code> and <code>c3.display()</code> read the same static value.
+              <code>count</code> is <strong>static</strong> — shared across all instances. Each constructor increments it. After <code>c1</code>, <code>c2</code>, <code>c3</code> are created: <code>count = 3</code>. Both <code>c1.display()</code> and <code>c3.display()</code> read the same static field.
+            </div>
+            <div class="sp-concept blue" style="margin-top:8px;">
+              <div class="sp-concept-title">Key Rule — Static Fields</div>
+              Static members belong to the <em>class</em>, not instances. Every object sees the same value. There is only one <code>count</code> in memory regardless of how many objects exist.
             </div>
             <div class="sp-output">Count: 3
 Count: 3</div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q3 · Library Management System [20 marks]</div>
+          <!-- Q3 -->
+          <div class="sp-ans-block q3">
+            <div class="sp-ans-title">Q3 — Library Management System <span class="sp-ans-mark">20 marks</span></div>
+            <div class="sp-key-pills" style="margin-bottom:10px;">
+              <span class="sp-key-pill kp-purple">Abstraction</span>
+              <span class="sp-key-pill kp-blue">Inheritance</span>
+              <span class="sp-key-pill kp-green">Encapsulation</span>
+              <span class="sp-key-pill kp-teal">Polymorphism</span>
+              <span class="sp-key-pill kp-gold">File Handling</span>
+              <span class="sp-key-pill kp-red">Exception Handling</span>
+            </div>
             <div class="sp-ide">
               <div class="sp-ide-bar"><span></span><span></span><span></span><span class="sp-ide-lang">JAVA</span></div>
               <pre><span class="tk-kw">import</span> <span class="tk-var">java.io</span>.*;
@@ -4958,9 +5389,15 @@ Count: 3</div>
 
       <!-- ════════ PAPER 2 ════════ -->
       <div class="sp-paper-section">
-        <div class="sp-paper-header">
-          <span class="sp-paper-badge">Paper 02</span>
-          <span class="sp-paper-title">Sample Paper 2 — Hospital Patient Management</span>
+        <div class="sp-paper-header p2">
+          <div class="sp-paper-icon pi-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div>
+            <div class="sp-paper-badge">Paper 02</div>
+            <div class="sp-paper-title">Hospital Patient Management System</div>
+            <div class="sp-paper-sub">super · Encapsulation · Polymorphism · Abstract Classes · Interfaces</div>
+          </div>
         </div>
 
         <div class="sp-pdf-frame">
@@ -4973,58 +5410,112 @@ Count: 3</div>
         </div>
 
         <button class="sp-sol-toggle" onclick="toggleSolution('sol2',this)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           View Full Solution — Paper 2
           <span class="sp-arrow">▼</span>
         </button>
         <div class="sp-sol-body" id="sol2">
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q1(a) · The 'super' Keyword in Inheritance [3 marks]</div>
+          <div class="sp-ans-block q1">
+            <div class="sp-ans-title">Q1(a) — The <code>super</code> Keyword in Inheritance <span class="sp-ans-mark">3 marks</span></div>
             <div class="sp-ans-text">
-              <code>super</code> refers to the immediate parent class — used to call the parent's constructor (<code>super(...)</code>) or parent's overridden methods (<code>super.method()</code>).<br><br>
-              <strong>Scenario where omitting causes wrong behaviour:</strong> <code>Employee</code> sets <code>name</code> and <code>salary</code> in its constructor. <code>Manager extends Employee</code> adds <code>department</code>. If <code>Manager</code>'s constructor doesn't call <code>super(name, salary)</code>, those inherited fields stay <code>null</code> and <code>0</code> — the program compiles but outputs garbage values.
+              <code>super</code> refers to the immediate parent class. It is used to call the parent's constructor (<code>super(...)</code>) or an overridden parent method (<code>super.method()</code>).
+            </div>
+            <div class="sp-diagram" style="margin-top:10px;">
+              <svg viewBox="0 0 620 130" xmlns="http://www.w3.org/2000/svg" style="background:#f8fafc;">
+                <text x="20" y="20" font-family="system-ui" font-size="11" font-weight="700" fill="#1e293b">Constructor Chaining with super()</text>
+                <!-- Person -->
+                <rect x="20" y="32" width="140" height="38" rx="8" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.5"/>
+                <text x="90" y="50" text-anchor="middle" font-family="monospace" font-size="11" fill="#1d4ed8" font-weight="700">Person</text>
+                <text x="90" y="63" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">Person(name)</text>
+                <!-- Arrow 1 -->
+                <path d="M160 51 L210 51" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#a2)"/>
+                <text x="185" y="46" text-anchor="middle" font-family="monospace" font-size="8" fill="#ea580c">super(name)</text>
+                <!-- Employee -->
+                <rect x="212" y="32" width="170" height="38" rx="8" fill="rgba(22,163,74,0.1)" stroke="#16a34a" stroke-width="1.5"/>
+                <text x="297" y="50" text-anchor="middle" font-family="monospace" font-size="11" fill="#15803d" font-weight="700">Employee</text>
+                <text x="297" y="63" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">Employee(name, salary)</text>
+                <!-- Arrow 2 -->
+                <path d="M382 51 L432 51" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#a2)"/>
+                <text x="407" y="46" text-anchor="middle" font-family="monospace" font-size="8" fill="#ea580c">super(name,sal)</text>
+                <!-- Manager -->
+                <rect x="434" y="32" width="170" height="38" rx="8" fill="rgba(124,58,237,0.1)" stroke="#7c3aed" stroke-width="1.5"/>
+                <text x="519" y="50" text-anchor="middle" font-family="monospace" font-size="11" fill="#7c3aed" font-weight="700">Manager</text>
+                <text x="519" y="63" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">Manager(name,sal,dept)</text>
+                <!-- Result label -->
+                <text x="20" y="105" font-family="system-ui" font-size="10" fill="#16a34a" font-weight="600">✔ Omitting super() in Manager → name and salary stay null/0 — program compiles but outputs garbage!</text>
+                <defs><marker id="a2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#94a3b8"/></marker></defs>
+              </svg>
             </div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q1(b) · Hiding Internal Details = Encapsulation [3 marks]</div>
-            <div class="sp-ans-text">
-              This represents <strong>Encapsulation</strong>. Benefits in large-scale development:
-              <ul>
-                <li><strong>Modularity:</strong> Each class manages its own state; others only see what they need</li>
-                <li><strong>Maintainability:</strong> Internal implementation can change without affecting external code</li>
-                <li><strong>Security:</strong> Sensitive data (passwords, balances) is protected from unintended modification</li>
-                <li><strong>Team scalability:</strong> Teams work on modules independently, trusting the interface</li>
-              </ul>
+          <div class="sp-ans-block q1">
+            <div class="sp-ans-title">Q1(b) — Hiding Internal Details = Encapsulation <span class="sp-ans-mark">3 marks</span></div>
+            <div class="sp-ans-text">This represents <strong>Encapsulation</strong>. Key benefits in large-scale development:</div>
+            <div class="sp-key-pills" style="margin-top:8px;">
+              <span class="sp-key-pill kp-blue">Modularity — each class manages its own state</span>
+              <span class="sp-key-pill kp-green">Maintainability — internal changes don't break callers</span>
+              <span class="sp-key-pill kp-red">Security — sensitive data protected from direct writes</span>
+              <span class="sp-key-pill kp-purple">Team scalability — trust the interface, not the internals</span>
             </div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q1(c) · Compile-time vs Runtime Polymorphism [3 marks]</div>
+          <div class="sp-ans-block q1">
+            <div class="sp-ans-title">Q1(c) — Compile-time vs Runtime Polymorphism <span class="sp-ans-mark">3 marks</span></div>
             <div class="sp-ans-text">
-              <strong>Compile-time (Static)</strong> — method overloading, resolved by compiler.<br>
-              <em>Preferred:</em> when multiple versions of a method accept different data types — e.g., <code>print(int)</code> vs <code>print(String)</code>.<br><br>
-              <strong>Runtime (Dynamic)</strong> — method overriding, resolved by JVM based on actual object type.<br>
-              <em>Preferred:</em> when behaviour must vary at runtime — e.g., a list of <code>Shape</code> references each calling their own <code>draw()</code>.
+              <div class="sp-compare">
+                <div class="sp-compare-card left">
+                  <h4>Compile-time (Static)</h4>
+                  Method <strong>overloading</strong> — resolved by the compiler based on argument types.<br><br>
+                  <em>Use when:</em> multiple versions of a method accept different data types — e.g., <code>print(int)</code> vs <code>print(String)</code>.
+                </div>
+                <div class="sp-compare-card right">
+                  <h4>Runtime (Dynamic)</h4>
+                  Method <strong>overriding</strong> — resolved by JVM based on the actual object type at runtime.<br><br>
+                  <em>Use when:</em> behavior must vary at runtime — e.g., a list of <code>Shape</code> references each calling their own <code>draw()</code>.
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q1(d) · Interfaces vs Abstract Classes [3 marks]</div>
+          <div class="sp-ans-block q1">
+            <div class="sp-ans-title">Q1(d) — Interfaces vs Abstract Classes <span class="sp-ans-mark">3 marks</span></div>
             <div class="sp-ans-text">
-              Java does not support extending multiple classes. However, a class can <strong>implement multiple interfaces</strong>, making them preferable when a class must satisfy multiple contracts.<br><br>
-              <em>Scenario:</em> A <code>SmartDevice</code> must be both <code>Printable</code> and <code>Scannable</code>. Since these are separate behaviours, defining them as interfaces lets <code>SmartDevice implements Printable, Scannable</code> work fine. If they were abstract classes, this would be impossible.
+              Java does not support extending multiple classes. However, a class can <strong>implement multiple interfaces</strong>.
+            </div>
+            <div class="sp-diagram" style="margin-top:10px;">
+              <svg viewBox="0 0 580 110" xmlns="http://www.w3.org/2000/svg" style="background:#f8fafc;">
+                <!-- Printable -->
+                <rect x="20" y="20" width="130" height="32" rx="7" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,3"/>
+                <text x="85" y="34" text-anchor="middle" font-family="system-ui" font-size="9" fill="#2563eb">«interface»</text>
+                <text x="85" y="47" text-anchor="middle" font-family="monospace" font-size="10" fill="#1d4ed8" font-weight="700">Printable</text>
+                <!-- Scannable -->
+                <rect x="430" y="20" width="130" height="32" rx="7" fill="rgba(22,163,74,0.1)" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3"/>
+                <text x="495" y="34" text-anchor="middle" font-family="system-ui" font-size="9" fill="#16a34a">«interface»</text>
+                <text x="495" y="47" text-anchor="middle" font-family="monospace" font-size="10" fill="#15803d" font-weight="700">Scannable</text>
+                <!-- SmartDevice -->
+                <rect x="210" y="20" width="160" height="32" rx="7" fill="rgba(124,58,237,0.12)" stroke="#7c3aed" stroke-width="1.8"/>
+                <text x="290" y="34" text-anchor="middle" font-family="monospace" font-size="10" fill="#7c3aed" font-weight="700">SmartDevice</text>
+                <text x="290" y="47" text-anchor="middle" font-family="system-ui" font-size="8" fill="#64748b">implements both</text>
+                <!-- Lines -->
+                <path d="M150 36 L208 36" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#a3)"/>
+                <path d="M372 36 L430 36" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#a3)"/>
+                <text x="290" y="90" text-anchor="middle" font-family="system-ui" font-size="10" fill="#16a34a" font-weight="600">✔ Impossible with abstract classes — Java only allows single class inheritance</text>
+                <defs><marker id="a3" markerWidth="5" markerHeight="5" refX="3" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#94a3b8"/></marker></defs>
+              </svg>
             </div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q2(a) · Error Correction [4 marks]</div>
+          <div class="sp-ans-block q2">
+            <div class="sp-ans-title">Q2(a) — Error Correction <span class="sp-ans-mark">4 marks</span></div>
             <div class="sp-ans-text">
-              <strong>Error:</strong> <code>new Document("Annual Report")</code> — cannot instantiate an abstract class. Fix: use the concrete subclass <code>Report</code>.
+              <div class="sp-key-pills">
+                <span class="sp-key-pill kp-red">Cannot instantiate abstract class <code>Document</code></span>
+                <span class="sp-key-pill kp-green">Fix — use concrete subclass <code>Report</code></span>
+              </div>
             </div>
-            <div class="sp-ide">
-              <div class="sp-ide-bar"><span></span><span></span><span></span><span class="sp-ide-lang">JAVA</span></div>
+            <div class="sp-ide" style="margin-top:10px;">
+              <div class="sp-ide-bar"><span></span><span></span><span></span><span class="sp-ide-lang">JAVA — Fixed</span></div>
               <pre><span class="tk-kw">class</span> <span class="tk-cls">Main</span> {
     <span class="tk-kw">public static void</span> <span class="tk-fn">main</span>(<span class="tk-type">String</span>[] <span class="tk-var">args</span>) {
         <span class="tk-cm">// ✔ Use concrete subclass, not abstract Document</span>
@@ -5036,18 +5527,30 @@ Count: 3</div>
             <div class="sp-output">Printing: Annual Report</div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q2(b) · Output Prediction [4 marks]</div>
+          <div class="sp-ans-block q2">
+            <div class="sp-ans-title">Q2(b) — Output Prediction <span class="sp-ans-mark">4 marks</span></div>
             <div class="sp-ans-text">
               <code>Animal a = new Dog("Rex")</code> — actual object is <code>Dog</code>, so <code>Dog</code>'s overridden <code>sound()</code> runs (runtime polymorphism).<br>
               <code>Animal b = new Animal("Generic")</code> — actual object is <code>Animal</code>, so <code>Animal</code>'s <code>sound()</code> runs.
+            </div>
+            <div class="sp-concept blue" style="margin-top:8px;">
+              <div class="sp-concept-title">Dynamic Dispatch Rule</div>
+              The method called is determined by the <em>actual object type</em>, not the reference type. <code>Animal</code> reference + <code>Dog</code> object → <code>Dog</code>'s method runs.
             </div>
             <div class="sp-output">Rex barks
 Generic makes a sound</div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q3 · Hospital Patient Management System [20 marks]</div>
+          <div class="sp-ans-block q3">
+            <div class="sp-ans-title">Q3 — Hospital Patient Management System <span class="sp-ans-mark">20 marks</span></div>
+            <div class="sp-key-pills" style="margin-bottom:10px;">
+              <span class="sp-key-pill kp-purple">Abstraction</span>
+              <span class="sp-key-pill kp-blue">Inheritance</span>
+              <span class="sp-key-pill kp-green">Encapsulation</span>
+              <span class="sp-key-pill kp-teal">Polymorphism</span>
+              <span class="sp-key-pill kp-gold">File Handling</span>
+              <span class="sp-key-pill kp-red">Exception Handling</span>
+            </div>
             <div class="sp-ide">
               <div class="sp-ide-bar"><span></span><span></span><span></span><span class="sp-ide-lang">JAVA</span></div>
               <pre><span class="tk-kw">import</span> <span class="tk-var">java.io</span>.*;
@@ -5170,9 +5673,15 @@ Generic makes a sound</div>
 
       <!-- ════════ PAPER 3 ════════ -->
       <div class="sp-paper-section">
-        <div class="sp-paper-header">
-          <span class="sp-paper-badge">Paper 03</span>
-          <span class="sp-paper-title">Sample Paper 3 — University Course Registration</span>
+        <div class="sp-paper-header p3">
+          <div class="sp-paper-icon pi-3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="sp-paper-badge">Paper 03</div>
+            <div class="sp-paper-title">University Course Registration System</div>
+            <div class="sp-paper-sub">Constructor Chaining · final keyword · Aggregation vs Composition · Generics</div>
+          </div>
         </div>
 
         <div class="sp-pdf-frame">
@@ -5185,25 +5694,34 @@ Generic makes a sound</div>
         </div>
 
         <button class="sp-sol-toggle" onclick="toggleSolution('sol3',this)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           View Full Solution — Paper 3
           <span class="sp-arrow">▼</span>
         </button>
         <div class="sp-sol-body" id="sol3">
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q1(a) · OOP Violations in a 2000-Line Single Class [3 marks]</div>
+          <div class="sp-ans-block q1">
+            <div class="sp-ans-title">Q1(a) — OOP Violations in a 2000-Line Single Class <span class="sp-ans-mark">3 marks</span></div>
             <div class="sp-ans-text">
-              <strong>Violations:</strong> Single Responsibility Principle (one class doing everything), Encapsulation (data and logic not separated), and Abstraction (no meaningful layer hiding complexity).<br><br>
-              <strong>Restructuring:</strong> Break into focused classes — <code>InputHandler</code>, <code>DataProcessor</code>, <code>ReportGenerator</code>, <code>FileManager</code>. Each has one clear job. Use interfaces to define contracts between them. A <code>Main</code> class only orchestrates the flow.
+            </div>
+            <div class="sp-key-pills" style="margin-top:6px;">
+              <span class="sp-key-pill kp-red">SRP Violation — one class doing everything</span>
+              <span class="sp-key-pill kp-orange">Encapsulation broken — data/logic mixed</span>
+              <span class="sp-key-pill kp-purple">No Abstraction — no layers hiding complexity</span>
+            </div>
+            <div class="sp-concept green" style="margin-top:10px;">
+              <div class="sp-concept-title">Restructuring Strategy</div>
+              Break into focused classes: <code>InputHandler</code>, <code>DataProcessor</code>, <code>ReportGenerator</code>, <code>FileManager</code>. Each has one clear job. Use <strong>interfaces</strong> to define contracts between them. A thin <code>Main</code> class only orchestrates the flow.
             </div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q1(b) · Constructor Chaining [3 marks]</div>
-            <div class="sp-ans-text">Calling one constructor from another using <code>this()</code> (same class) or <code>super()</code> (parent). Avoids duplicating initialisation logic.</div>
-            <div class="sp-ide">
-              <div class="sp-ide-bar"><span></span><span></span><span></span><span class="sp-ide-lang">JAVA</span></div>
+          <div class="sp-ans-block q1">
+            <div class="sp-ans-title">Q1(b) — Constructor Chaining <span class="sp-ans-mark">3 marks</span></div>
+            <div class="sp-ans-text">
+              Calling one constructor from another using <code>this()</code> (same class) or <code>super()</code> (parent). Avoids repeating initialisation logic.
+            </div>
+            <div class="sp-ide" style="margin-top:10px;">
+              <div class="sp-ide-bar"><span></span><span></span><span></span><span class="sp-ide-lang">JAVA — Constructor Chaining</span></div>
               <pre><span class="tk-kw">class</span> <span class="tk-cls">Student</span> {
     <span class="tk-type">String</span> <span class="tk-var">name</span>; <span class="tk-type">int</span> <span class="tk-var">age</span>; <span class="tk-type">String</span> <span class="tk-var">course</span>;
 
@@ -5218,38 +5736,83 @@ Generic makes a sound</div>
     }
 }</pre>
             </div>
-            <div class="sp-ans-text" style="margin-top:8px;"><strong>Problem solved:</strong> Without chaining, default values would be repeated in every constructor. Chaining centralises initialisation — keeping code DRY.</div>
-          </div>
-
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q1(c) · The 'final' Keyword [3 marks]</div>
-            <div class="sp-ans-text">
-              <strong>final variable:</strong> Value cannot change after assignment — acts as a constant. e.g., <code>final double PI = 3.14;</code><br><br>
-              <strong>final method:</strong> Cannot be overridden in subclasses — prevents runtime polymorphism for that specific method. e.g., marking <code>getSSN()</code> final in <code>Person</code> for security.<br><br>
-              <strong>final class:</strong> Cannot be extended/subclassed — prevents inheritance entirely. e.g., <code>java.lang.String</code> is final. Together, <code>final</code> restricts both inheritance and polymorphism, giving the designer control over which behaviours can be customised.
+            <div class="sp-scenario" style="margin-top:8px;">
+              <div class="sp-scenario-label">Why it matters</div>
+              Without chaining, default values would be repeated in every constructor. Chaining centralises initialisation — keeping code DRY (Don't Repeat Yourself).
             </div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q1(d) · Aggregation vs Composition [3 marks]</div>
+          <div class="sp-ans-block q1">
+            <div class="sp-ans-title">Q1(c) — The <code>final</code> Keyword <span class="sp-ans-mark">3 marks</span></div>
             <div class="sp-ans-text">
-              <strong>Aggregation (weak Has-A):</strong> Child can exist independently of parent.<br>
-              <em>Example:</em> <code>University</code> has <code>Professor</code>s. If university closes, professors still exist.<br><br>
-              <strong>Composition (strong Has-A):</strong> Child cannot exist without parent.<br>
-              <em>Example:</em> <code>House</code> has <code>Room</code>s. If house is demolished, rooms cease to exist.<br><br>
-              <strong>Why it matters:</strong> Composition implies ownership and lifecycle dependency — deleting the parent must clean up children. Choosing wrong leads to memory leaks or dangling references.
+              <div class="sp-compare" style="grid-template-columns:1fr 1fr 1fr;">
+                <div class="sp-compare-card" style="border-color:#2563eb30;">
+                  <h4 style="color:#2563eb;">final variable</h4>
+                  Value cannot change after assignment — a constant.<br><code>final double PI = 3.14;</code>
+                </div>
+                <div class="sp-compare-card" style="border-color:#ea580c30;">
+                  <h4 style="color:#ea580c;">final method</h4>
+                  Cannot be overridden in subclasses — blocks polymorphism for that method.
+                </div>
+                <div class="sp-compare-card" style="border-color:#7c3aed30;">
+                  <h4 style="color:#7c3aed;">final class</h4>
+                  Cannot be extended. e.g. <code>java.lang.String</code> is final — no subclassing allowed.
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="sp-ans-block">
-            <div class="sp-ans-title">Q2(a) · Error Correction [4 marks]</div>
+          <div class="sp-ans-block q1">
+            <div class="sp-ans-title">Q1(d) — Aggregation vs Composition <span class="sp-ans-mark">3 marks</span></div>
             <div class="sp-ans-text">
-              <strong>Error 1:</strong> Missing braces in <code>else</code> block — <code>println("Withdrawn...")</code> runs unconditionally.<br>
-              <strong>Error 2:</strong> <code>getBalance</code> missing parentheses — should be <code>getBalance()</code>.<br>
-              <strong>Error 3:</strong> <code>BankAccount(500)</code> missing <code>new</code> keyword.
+              <div class="sp-compare">
+                <div class="sp-compare-card left">
+                  <h4>Aggregation — weak Has-A</h4>
+                  Child can <strong>exist independently</strong> of parent.<br><br>
+                  <em>University</em> has <em>Professors</em>. If university closes, professors still exist as people.
+                </div>
+                <div class="sp-compare-card right">
+                  <h4>Composition — strong Has-A</h4>
+                  Child <strong>cannot exist</strong> without parent. Lifecycle is tied together.<br><br>
+                  <em>House</em> has <em>Rooms</em>. If house is demolished, rooms cease to exist.
+                </div>
+              </div>
+              <div class="sp-diagram" style="margin-top:10px;">
+                <svg viewBox="0 0 600 110" xmlns="http://www.w3.org/2000/svg" style="background:#f8fafc;">
+                  <!-- Aggregation -->
+                  <text x="20" y="20" font-family="system-ui" font-size="11" font-weight="700" fill="#2563eb">Aggregation (◇ open diamond)</text>
+                  <rect x="20" y="30" width="100" height="30" rx="6" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.2"/>
+                  <text x="70" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#1d4ed8">University</text>
+                  <path d="M120 45 L170 45" stroke="#2563eb" stroke-width="1.5"/>
+                  <polygon points="120,45 130,40 140,45 130,50" fill="none" stroke="#2563eb" stroke-width="1.2"/>
+                  <rect x="172" y="30" width="100" height="30" rx="6" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.2"/>
+                  <text x="222" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#1d4ed8">Professor</text>
+                  <text x="145" y="90" text-anchor="middle" font-family="system-ui" font-size="10" fill="#64748b">Professor survives if University is deleted</text>
+                  <!-- Composition -->
+                  <text x="330" y="20" font-family="system-ui" font-size="11" font-weight="700" fill="#16a34a">Composition (◆ filled diamond)</text>
+                  <rect x="330" y="30" width="80" height="30" rx="6" fill="rgba(22,163,74,0.12)" stroke="#16a34a" stroke-width="1.5"/>
+                  <text x="370" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#15803d">House</text>
+                  <path d="M410 45 L455 45" stroke="#16a34a" stroke-width="1.5"/>
+                  <polygon points="410,45 420,40 430,45 420,50" fill="#16a34a" stroke="#16a34a" stroke-width="1.2"/>
+                  <rect x="457" y="30" width="80" height="30" rx="6" fill="rgba(22,163,74,0.12)" stroke="#16a34a" stroke-width="1.5"/>
+                  <text x="497" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#15803d">Room</text>
+                  <text x="433" y="90" text-anchor="middle" font-family="system-ui" font-size="10" fill="#dc2626" font-weight="600">Room is destroyed when House is destroyed</text>
+                </svg>
+              </div>
             </div>
-            <div class="sp-ide">
-              <div class="sp-ide-bar"><span></span><span></span><span></span><span class="sp-ide-lang">JAVA</span></div>
+          </div>
+
+          <div class="sp-ans-block q2">
+            <div class="sp-ans-title">Q2(a) — Error Correction <span class="sp-ans-mark">4 marks</span></div>
+            <div class="sp-ans-text">
+              <div class="sp-key-pills">
+                <span class="sp-key-pill kp-red">Bug 1 — Missing braces in <code>else</code> block</span>
+                <span class="sp-key-pill kp-red">Bug 2 — <code>getBalance</code> missing parentheses <code>()</code></span>
+                <span class="sp-key-pill kp-red">Bug 3 — Missing <code>new</code> keyword in object creation</span>
+              </div>
+            </div>
+            <div class="sp-ide" style="margin-top:10px;">
+              <div class="sp-ide-bar"><span></span><span></span><span></span><span class="sp-ide-lang">JAVA — All 3 Bugs Fixed</span></div>
               <pre><span class="tk-kw">class</span> <span class="tk-cls">BankAccount</span> {
     <span class="tk-kw">private</span> <span class="tk-type">double</span> <span class="tk-var">balance</span>;
 
@@ -5260,18 +5823,18 @@ Generic makes a sound</div>
     <span class="tk-kw">public void</span> <span class="tk-fn">withdraw</span>(<span class="tk-type">double</span> <span class="tk-var">amount</span>) {
         <span class="tk-kw">if</span> (<span class="tk-var">amount</span> <span class="tk-op">&gt;</span> <span class="tk-var">balance</span>) {
             <span class="tk-cls">System</span>.<span class="tk-var">out</span>.<span class="tk-fn">println</span>(<span class="tk-str">"Insufficient funds"</span>);
-        } <span class="tk-kw">else</span> {                          <span class="tk-cm">// ✔ braces added</span>
+        } <span class="tk-kw">else</span> {                          <span class="tk-cm">// ✔ Bug 1: braces added</span>
             <span class="tk-var">balance</span> <span class="tk-op">-=</span> <span class="tk-var">amount</span>;
             <span class="tk-cls">System</span>.<span class="tk-var">out</span>.<span class="tk-fn">println</span>(<span class="tk-str">"Withdrawn: "</span> <span class="tk-op">+</span> <span class="tk-var">amount</span>);
         }
     }
 
-    <span class="tk-kw">public</span> <span class="tk-type">double</span> <span class="tk-fn">getBalance</span>() { <span class="tk-kw">return</span> <span class="tk-var">balance</span>; }  <span class="tk-cm">// ✔ () added</span>
+    <span class="tk-kw">public</span> <span class="tk-type">double</span> <span class="tk-fn">getBalance</span>() { <span class="tk-kw">return</span> <span class="tk-var">balance</span>; }  <span class="tk-cm">// ✔ Bug 2: () added</span>
 }
 
 <span class="tk-kw">class</span> <span class="tk-cls">Main</span> {
     <span class="tk-kw">public static void</span> <span class="tk-fn">main</span>(<span class="tk-type">String</span>[] <span class="tk-var">args</span>) {
-        <span class="tk-cls">BankAccount</span> <span class="tk-var">acc</span> <span class="tk-op">=</span> <span class="tk-kw">new</span> <span class="tk-cls">BankAccount</span>(<span class="tk-num">500</span>);   <span class="tk-cm">// ✔ new added</span>
+        <span class="tk-cls">BankAccount</span> <span class="tk-var">acc</span> <span class="tk-op">=</span> <span class="tk-kw">new</span> <span class="tk-cls">BankAccount</span>(<span class="tk-num">500</span>);   <span class="tk-cm">// ✔ Bug 3: new added</span>
         <span class="tk-var">acc</span>.<span class="tk-fn">withdraw</span>(<span class="tk-num">100</span>);
         <span class="tk-cls">System</span>.<span class="tk-var">out</span>.<span class="tk-fn">println</span>(<span class="tk-str">"Balance: "</span> <span class="tk-op">+</span> <span class="tk-var">acc</span>.<span class="tk-fn">getBalance</span>());
     }
