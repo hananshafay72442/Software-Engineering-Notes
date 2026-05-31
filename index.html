@@ -982,11 +982,11 @@
 
     <nav class="sidebar-nav">
       <div class="nav-section-label">Sections</div>
-      <button class="nav-item active" onclick="switchSection('before')">
+      <button class="nav-item" onclick="switchSection('before')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         Before Midterms
       </button>
-      <button class="nav-item" onclick="switchSection('after')">
+      <button class="nav-item active" onclick="switchSection('after')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
         After Midterms
       </button>
@@ -1027,14 +1027,14 @@
 
     <!-- TOP BAR -->
     <header class="topbar">
-      <div class="page-title">Overview</div>
+      <div class="page-title">After Midterms</div>
       <div class="search-bar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="search-input" placeholder="Search subjects…" oninput="filterCards(this.value)">
       </div>
       <div class="tab-pills">
         <button class="tab-pill" onclick="switchSection('before')">Before Midterms</button>
-        <button class="tab-pill active-before" onclick="switchSection('after')">After Midterms</button>
+        <button class="tab-pill active-after" onclick="switchSection('after')">After Midterms</button>
         <button class="tab-pill" onclick="switchSection('gpa')">GPA Calc</button>
       </div>
       <button onclick="openSettings()" style="display:none;width:34px;height:34px;border-radius:10px;border:1px solid var(--border);background:var(--main-bg);cursor:pointer;align-items:center;justify-content:center;color:var(--text-mid);flex-shrink:0;" class="mobile-settings-btn">
@@ -1059,8 +1059,8 @@
 
     <!-- MOBILE SECTION TABS (shown only on mobile) -->
     <div style="display:none;" class="mobile-tabs">
-      <button class="mob-tab active-before" onclick="switchSection('before')">Before Mids</button>
-      <button class="mob-tab" onclick="switchSection('after')">After Mids</button>
+      <button class="mob-tab" onclick="switchSection('before')">Before Mids</button>
+      <button class="mob-tab active-after" onclick="switchSection('after')">After Mids</button>
       <button class="mob-tab" onclick="switchSection('gpa')">GPA</button>
     </div>
 
@@ -1068,7 +1068,7 @@
     <main class="main">
 
       <!-- ── BEFORE MIDTERMS ── -->
-      <div class="section active" id="sect-before">
+      <div class="section" id="sect-before">
         <div class="section-info">
           <h2>Before Midterms</h2>
           <p>Practice sets covering the first half of the semester</p>
@@ -1198,7 +1198,7 @@
       </div>
 
       <!-- ── AFTER MIDTERMS ── -->
-      <div class="section" id="sect-after">
+      <div class="section active" id="sect-after">
         <div class="section-info">
           <h2>After Midterms</h2>
           <p>Practice sets covering the second half of the semester</p>
