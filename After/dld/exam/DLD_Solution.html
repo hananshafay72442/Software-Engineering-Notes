@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DLD — Mid Term Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5fafa;
+  --bg2: #eef6f6;
+  --bg3: #e0eeee;
+  --topbar-bg: rgba(245,250,250,0.96);
+  --glass: rgba(0,0,0,0.03);
+  --glass-border: rgba(0,120,110,0.12);
+  --accent: #0d7377;
+  --accent2: #14a085;
+  --accent-dim: rgba(13,115,119,0.09);
+  --accent2-dim: rgba(20,160,133,0.09);
+  --green: #15803d;
+  --green-dim: rgba(21,128,61,0.09);
+  --red: #be123c;
+  --red-dim: rgba(190,18,60,0.09);
+  --gold: #b45309;
+  --purple: #7c3aed;
+  --purple-dim: rgba(124,58,237,0.09);
+  --teal: #0d7377;
+  --teal2: #14a085;
+  --text: #0f1f1f;
+  --text2: #2c4444;
+  --text3: #6b8c8c;
+  --sidebar-w: 265px;
+  --radius: 12px;
+}
+html.dark {
+  --bg: #061414;
+  --bg2: #0c1e1e;
+  --bg3: #122424;
+  --topbar-bg: rgba(6,20,20,0.96);
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(20,200,180,0.1);
+  --accent: #2dd4c7;
+  --accent2: #34d399;
+  --accent-dim: rgba(45,212,199,0.12);
+  --accent2-dim: rgba(52,211,153,0.10);
+  --green: #4ade80;
+  --green-dim: rgba(74,222,128,0.10);
+  --red: #fb7185;
+  --red-dim: rgba(251,113,133,0.10);
+  --gold: #fbbf24;
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.10);
+  --teal: #2dd4c7;
+  --teal2: #34d399;
+  --text: #e0f2f1;
+  --text2: #80b2b0;
+  --text3: #4a7070;
+}
+body,.sidebar,.topbar,.card{transition:background-color .25s,border-color .25s,color .2s}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(13,115,119,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(13,115,119,0.03) 1px,transparent 1px);background-size:36px 36px;pointer-events:none;z-index:0}
+html.dark body::before{background-image:linear-gradient(rgba(45,212,199,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(45,212,199,0.04) 1px,transparent 1px)}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--text3);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+.app{display:flex;min-height:100vh;position:relative;z-index:1}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-w);background:var(--bg);border-right:1px solid var(--glass-border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:100;display:flex;flex-direction:column;transition:transform .3s}
+.sidebar-logo{padding:20px 18px 16px;border-bottom:1px solid var(--glass-border)}
+.logo-name{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;letter-spacing:-1.5px;color:var(--accent)}
+.logo-sub{font-size:9.5px;font-weight:600;color:var(--text3);letter-spacing:0.14em;text-transform:uppercase;margin-top:4px}
+.sidebar-title{font-size:9px;font-weight:700;color:var(--text3);letter-spacing:0.22em;text-transform:uppercase;padding:20px 18px 10px}
+.sidebar-nav{padding:6px 0 4px;flex:1}
+.nav-section{padding:2px 10px;margin-bottom:2px}
+.nav-section-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text3);padding:6px 10px 4px;letter-spacing:0.08em;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between}
+.nav-badge{font-size:9px;color:var(--accent);background:var(--accent-dim);border-radius:4px;padding:2px 6px;font-weight:700}
+.nav-item{display:flex;align-items:center;gap:8px;padding:7px 10px 7px 14px;border-radius:7px;font-size:12px;color:var(--text2);cursor:pointer;transition:all .18s;text-decoration:none;font-weight:500}
+.nav-item:hover{color:var(--accent);background:var(--accent-dim)}
+.nav-item.active{color:var(--accent);background:var(--accent-dim);font-weight:700}
+.sidebar-bottom{padding:12px;border-top:1px solid var(--glass-border)}
+.theme-btn{width:100%;display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:9px;background:var(--bg3);border:1px solid var(--glass-border);color:var(--text2);cursor:pointer;font-size:12px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;transition:all .2s}
+.theme-btn:hover{color:var(--text);border-color:var(--accent);background:var(--accent-dim)}
+
+/* MAIN */
+.main{margin-left:var(--sidebar-w);flex:1;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:50;background:var(--topbar-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--glass-border);padding:0 36px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.topbar-title{font-size:15px;font-weight:800;letter-spacing:-0.2px}
+.topbar-sub{font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-top:1px}
+.menu-toggle{display:none;background:none;border:none;color:var(--text2);cursor:pointer;font-size:22px;padding:4px}
+.content{padding:36px 40px;max-width:920px;margin:0 auto}
+.section{display:none}.section.active{display:block}
+
+/* Q CARDS */
+.q-card{border:1px solid var(--glass-border);border-radius:16px;overflow:hidden;margin-bottom:32px;box-shadow:0 2px 16px rgba(0,0,0,0.04)}
+html.dark .q-card{box-shadow:0 2px 16px rgba(0,0,0,0.25)}
+.q-header{padding:14px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--glass-border)}
+.q-header-q1{background:linear-gradient(135deg,var(--accent-dim),rgba(13,115,119,0.04))}
+.q-header-q2{background:linear-gradient(135deg,var(--purple-dim),rgba(124,58,237,0.04))}
+.q-header-q3{background:linear-gradient(135deg,var(--green-dim),rgba(21,128,61,0.04))}
+.q-header-q4{background:linear-gradient(135deg,rgba(180,83,9,0.08),rgba(180,83,9,0.02))}
+.q-header-q5{background:linear-gradient(135deg,rgba(45,212,199,0.12),rgba(45,212,199,0.03))}
+.q-header-q6{background:linear-gradient(135deg,var(--red-dim),rgba(190,18,60,0.02))}
+.q-header-q7{background:linear-gradient(135deg,rgba(251,191,36,0.12),rgba(251,191,36,0.03))}
+.q-title{font-weight:800;font-family:'JetBrains Mono',monospace;font-size:0.95rem}
+.q-title-q1{color:var(--accent)}
+.q-title-q2{color:var(--purple)}
+.q-title-q3{color:var(--green)}
+.q-title-q4{color:var(--gold)}
+.q-title-q5{color:var(--teal)}
+.q-title-q6{color:var(--red)}
+.q-title-q7{color:#b45309}
+.q-marks{font-family:'JetBrains Mono',monospace;font-size:0.72rem;border-radius:5px;padding:3px 10px;border:1px solid currentColor}
+.q-body{padding:24px 26px}
+
+/* Typography */
+h2.sol-h{font-size:1rem;font-weight:800;margin:1.6rem 0 0.6rem;letter-spacing:-0.2px}
+h3.sol-h3{font-size:0.9rem;font-weight:700;margin:1.2rem 0 0.5rem;color:var(--text2)}
+p{font-size:0.88rem;line-height:1.7;color:var(--text2);margin-bottom:0.7rem}
+p:last-child{margin-bottom:0}
+
+/* EQ block */
+.eq{background:var(--bg3);border:1px solid var(--glass-border);border-radius:10px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;line-height:1.7;margin:0.8rem 0;position:relative}
+.eq-label{font-size:0.62rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
+.eq strong{color:var(--accent)}
+
+/* Tables */
+.table-wrap{overflow-x:auto;margin:0.8rem 0;border-radius:10px;border:1px solid var(--glass-border)}
+table.tt{width:100%;border-collapse:collapse;font-size:0.82rem;font-family:'JetBrains Mono',monospace}
+table.tt th{background:var(--bg3);color:var(--text3);font-weight:700;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;padding:8px 12px;text-align:center;border-bottom:1px solid var(--glass-border)}
+table.tt td{padding:7px 12px;text-align:center;border-bottom:1px solid var(--glass-border);color:var(--text2)}
+table.tt tr:last-child td{border-bottom:none}
+table.tt tr.epi td{background:var(--accent-dim);color:var(--accent);font-weight:700}
+table.tt .hi{color:var(--accent);font-weight:700}
+table.tt .x{color:var(--accent2);font-weight:700}
+
+/* Steps */
+.steps{display:flex;flex-direction:column;gap:10px;margin:0.8rem 0}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step-n{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--accent-dim);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:700;color:var(--accent);margin-top:1px}
+.step-c{font-size:0.87rem;line-height:1.65;color:var(--text2);padding-top:3px}
+
+/* Tip */
+.tip{background:var(--accent-dim);border:1px solid rgba(13,115,119,0.22);border-radius:10px;padding:12px 16px;font-size:0.84rem;line-height:1.6;margin:0.9rem 0;color:var(--text2)}
+.tip strong{color:var(--accent)}
+.warn{background:var(--red-dim);border:1px solid rgba(190,18,60,0.2);border-radius:10px;padding:12px 16px;font-size:0.84rem;line-height:1.6;margin:0.9rem 0;color:var(--text2)}
+.warn strong{color:var(--red)}
+.note{background:var(--green-dim);border:1px solid rgba(21,128,61,0.2);border-radius:10px;padding:12px 16px;font-size:0.84rem;line-height:1.6;margin:0.9rem 0;color:var(--text2)}
+.note strong{color:var(--green)}
+
+/* Answer box */
+.ans-box{background:linear-gradient(135deg,var(--accent-dim),var(--accent2-dim));border:1.5px solid var(--accent);border-radius:12px;padding:14px 18px;margin:1rem 0}
+.ans-label{font-size:0.65rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px}
+.ans-expr{font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:var(--accent)}
+
+/* SVG diagrams */
+.diag{background:var(--bg2);border:1px solid var(--glass-border);border-radius:12px;padding:16px;margin:1rem 0;overflow-x:auto;text-align:center}
+.diag svg text{font-family:'JetBrains Mono',monospace}
+
+/* Timing diagram */
+.timing{background:var(--bg3);border:1px solid var(--glass-border);border-radius:10px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;margin:0.8rem 0;overflow-x:auto}
+.timing-row{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.timing-label{width:32px;color:var(--text3);font-weight:700;flex-shrink:0}
+.timing-wave{color:var(--accent);letter-spacing:-1px;white-space:nowrap}
+
+/* Minterm tag */
+.mt{display:inline-block;background:var(--accent-dim);color:var(--accent);border-radius:4px;padding:1px 6px;font-family:'JetBrains Mono',monospace;font-size:0.78rem;margin:1px}
+.mt.epi{background:var(--accent);color:#fff;font-weight:700}
+
+/* Home hero */
+.hero{padding:3rem 0 2.2rem}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--accent);border:1px solid var(--accent);padding:0.3rem 0.9rem;border-radius:5px;letter-spacing:0.1em;text-transform:uppercase;background:var(--accent-dim);margin-bottom:1.4rem}
+.hero h1{font-family:'JetBrains Mono',monospace;font-size:clamp(2.4rem,5.5vw,3.5rem);font-weight:700;line-height:1.08;letter-spacing:-2.5px;color:var(--text);margin-bottom:1rem}
+.hero h1 em{color:var(--accent);font-style:normal}
+.hero p{color:var(--text2);font-size:0.9rem;max-width:480px;line-height:1.75}
+.hero-meta{display:flex;gap:2rem;margin-top:1.8rem;padding-top:1.4rem;border-top:1px solid var(--glass-border);flex-wrap:wrap}
+.hero-stat .val{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--accent)}
+.hero-stat .lbl{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px}
+.q-nav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:2.2rem}
+.q-nav-card{background:var(--bg2);border:1px solid var(--glass-border);border-radius:14px;padding:18px 20px;cursor:pointer;transition:all 0.22s;position:relative;overflow:hidden}
+.q-nav-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0}
+.qnc-1::before{background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.qnc-2::before{background:linear-gradient(90deg,var(--purple),#a78bfa)}
+.qnc-3::before{background:linear-gradient(90deg,var(--green),#4ade80)}
+.qnc-4::before{background:linear-gradient(90deg,var(--gold),#fbbf24)}
+.qnc-5::before{background:linear-gradient(90deg,var(--teal),var(--teal2))}
+.qnc-6::before{background:linear-gradient(90deg,var(--red),#fb7185)}
+.qnc-7::before{background:linear-gradient(90deg,#b45309,#fbbf24)}
+.q-nav-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.1);border-color:transparent}
+html.dark .q-nav-card:hover{box-shadow:0 16px 40px rgba(0,0,0,0.4)}
+.qnc-num{font-family:'JetBrains Mono',monospace;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.6rem}
+.qnc-1 .qnc-num{color:var(--accent)}
+.qnc-2 .qnc-num{color:var(--purple)}
+.qnc-3 .qnc-num{color:var(--green)}
+.qnc-4 .qnc-num{color:var(--gold)}
+.qnc-5 .qnc-num{color:var(--teal)}
+.qnc-6 .qnc-num{color:var(--red)}
+.qnc-7 .qnc-num{color:#b45309}
+.qnc-title{font-size:0.95rem;font-weight:800;margin-bottom:0.4rem;letter-spacing:-0.2px}
+.qnc-desc{font-size:0.79rem;color:var(--text2);line-height:1.5}
+.qnc-marks{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text3);margin-top:0.9rem;padding-top:0.8rem;border-top:1px solid var(--glass-border)}
+
+/* Responsive */
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .menu-toggle{display:block}
+  .content{padding:20px 18px}
+  .topbar{padding:0 18px}
+}
+
+/* Counter state table coloring */
+.st-reset td{color:var(--red);font-weight:700}
+.st-count td{color:var(--text2)}
+
+/* Section titles inside solution */
+.sol-section-chip{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent);border-radius:4px;padding:2px 8px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.section.active{animation:fadeUp .3s ease}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-name">DLD</div>
+    <div class="logo-sub">Mid Term · Worked Solutions</div>
+  </div>
+  <div class="sidebar-title">Questions</div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-item active" onclick="showSec('home');closeSidebar()">🏠 Overview</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Solutions <span class="nav-badge">40 Marks</span></div>
+      <div class="nav-item" onclick="showSec('q1');closeSidebar()">Q1 · Quine-McCluskey <span style="margin-left:auto;font-size:0.65rem;color:var(--text3)">5M</span></div>
+      <div class="nav-item" onclick="showSec('q2');closeSidebar()">Q2 · Adder/Subtractor <span style="margin-left:auto;font-size:0.65rem;color:var(--text3)">5M</span></div>
+      <div class="nav-item" onclick="showSec('q3');closeSidebar()">Q3 · Decoder & OR Gates <span style="margin-left:auto;font-size:0.65rem;color:var(--text3)">5M</span></div>
+      <div class="nav-item" onclick="showSec('q4');closeSidebar()">Q4 · 8-to-1 MUX <span style="margin-left:auto;font-size:0.65rem;color:var(--text3)">5M</span></div>
+      <div class="nav-item" onclick="showSec('q5');closeSidebar()">Q5 · Flip-Flops <span style="margin-left:auto;font-size:0.65rem;color:var(--text3)">5M</span></div>
+      <div class="nav-item" onclick="showSec('q6');closeSidebar()">Q6 · Mod-6 Counter <span style="margin-left:auto;font-size:0.65rem;color:var(--text3)">5M</span></div>
+      <div class="nav-item" onclick="showSec('q7');closeSidebar()">Q7 · Project <span style="margin-left:auto;font-size:0.65rem;color:var(--text3)">10M</span></div>
+    </div>
+  </nav>
+  <div class="sidebar-bottom">
+    <button class="theme-btn" onclick="toggleTheme()">
+      <span id="themeIcon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+      <span id="themeLabel">Dark Mode</span>
+    </button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <div>
+        <div class="topbar-title" id="topbarTitle">DLD — Mid Term Examination</div>
+        <div class="topbar-sub" id="topbarSub">Spring 2026 · Complete Worked Solutions</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent);border-radius:7px;padding:5px 12px;font-weight:700">40 Marks · 2 Hours</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ═══════ HOME ═══════ -->
+    <div class="section active" id="sec-home">
+      <div class="hero">
+        <div class="hero-tag">📄 Mid Term · Spring 2026</div>
+        <h1>Digital Logic<br><em>Design</em> Solutions</h1>
+        <p>Complete, step-by-step worked solutions for all 7 questions. Select any question from the sidebar or the cards below.</p>
+        <div class="hero-meta">
+          <div class="hero-stat"><div class="val">7</div><div class="lbl">Questions</div></div>
+          <div class="hero-stat"><div class="val">40</div><div class="lbl">Total Marks</div></div>
+          <div class="hero-stat"><div class="val">6</div><div class="lbl">Topics</div></div>
+        </div>
+      </div>
+      <div class="q-nav-grid">
+        <div class="q-nav-card qnc-1" onclick="showSec('q1')">
+          <div class="qnc-num">Q1 · Quine-McCluskey</div>
+          <div class="qnc-title">Boolean Minimization</div>
+          <div class="qnc-desc">F(A,B,C,D) = Σm(0,1,3,7,8,9,11,15) — full tabulation, PIs, EPIs, SOP.</div>
+          <div class="qnc-marks">5 Marks</div>
+        </div>
+        <div class="q-nav-card qnc-2" onclick="showSec('q2')">
+          <div class="qnc-num">Q2 · Adders & Subtractors</div>
+          <div class="qnc-title">4-bit Adder/Subtractor</div>
+          <div class="qnc-desc">XOR-gate design with mode select bit M — M=0 for addition, M=1 for subtraction.</div>
+          <div class="qnc-marks">5 Marks</div>
+        </div>
+        <div class="q-nav-card qnc-3" onclick="showSec('q3')">
+          <div class="qnc-num">Q3 · Decoders & Encoders</div>
+          <div class="qnc-title">74x138 Decoder + OR Gates</div>
+          <div class="qnc-desc">F1 = Σm(1,3,5,7), F2 = Σm(0,2,6,7) simultaneously.</div>
+          <div class="qnc-marks">5 Marks</div>
+        </div>
+        <div class="q-nav-card qnc-4" onclick="showSec('q4')">
+          <div class="qnc-num">Q4 · Multiplexers</div>
+          <div class="qnc-title">8-to-1 MUX Function</div>
+          <div class="qnc-desc">F(A,B,C) = Σm(0,2,3,5,7) — data inputs I0–I7 for 74151A.</div>
+          <div class="qnc-marks">5 Marks</div>
+        </div>
+        <div class="q-nav-card qnc-5" onclick="showSec('q5')">
+          <div class="qnc-num">Q5 · Latches & Flip-Flops</div>
+          <div class="qnc-title">JK Toggle & D Conversion</div>
+          <div class="qnc-desc">J=K=1 toggle behavior, 6 consecutive clock pulses, timing diagram with Q starting at 0.</div>
+          <div class="qnc-marks">5 Marks</div>
+        </div>
+        <div class="q-nav-card qnc-6" onclick="showSec('q6')">
+          <div class="qnc-num">Q6 · Counters</div>
+          <div class="qnc-title">Synchronous Mod-6 Counter</div>
+          <div class="qnc-desc">JK flip-flops, state table, K-map simplification, reset logic.</div>
+          <div class="qnc-marks">5 Marks</div>
+        </div>
+        <div class="q-nav-card qnc-7" onclick="showSec('q7')">
+          <div class="qnc-num">Q7 · Semester Project</div>
+          <div class="qnc-title">Project Description</div>
+          <div class="qnc-desc">Guidelines — write your own project description here.</div>
+          <div class="qnc-marks">10 Marks</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ Q1 · QUINE-McCLUSKEY ═══════ -->
+    <div class="section" id="sec-q1">
+      <div class="q-card">
+        <div class="q-header q-header-q1">
+          <div class="q-title q-title-q1">Q1 — Quine-McCluskey Method</div>
+          <span class="q-marks q-title-q1">5 Marks</span>
+        </div>
+        <div class="q-body">
+          <p>Minimize <strong>F(A,B,C,D) = Σm(0, 1, 3, 7, 8, 9, 11, 15)</strong></p>
+
+          <h2 class="sol-h" style="color:var(--accent)">Step 1 — List Minterms in Binary</h2>
+          <div class="table-wrap">
+            <table class="tt">
+              <tr><th>Minterm</th><th>A</th><th>B</th><th>C</th><th>D</th><th>1-count</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>8</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>3</td><td>0</td><td>0</td><td>1</td><td>1</td><td>2</td></tr>
+              <tr><td>9</td><td>1</td><td>0</td><td>0</td><td>1</td><td>2</td></tr>
+              <tr><td>7</td><td>0</td><td>1</td><td>1</td><td>1</td><td>3</td></tr>
+              <tr><td>11</td><td>1</td><td>0</td><td>1</td><td>1</td><td>3</td></tr>
+              <tr><td>15</td><td>1</td><td>1</td><td>1</td><td>1</td><td>4</td></tr>
+            </table>
+          </div>
+
+          <h2 class="sol-h" style="color:var(--accent)">Step 2 — Round 1 Combinations (differ by 1 bit)</h2>
+          <div class="table-wrap">
+            <table class="tt">
+              <tr><th>Pair</th><th>Binary</th><th>Minterms</th><th>Used?</th></tr>
+              <tr><td>0,1</td><td>000<span class="hi">-</span></td><td>0,1</td><td>✓</td></tr>
+              <tr><td>0,8</td><td><span class="hi">-</span>000</td><td>0,8</td><td>✓</td></tr>
+              <tr><td>1,3</td><td>00<span class="hi">-</span>1</td><td>1,3</td><td>✓</td></tr>
+              <tr><td>1,9</td><td><span class="hi">-</span>001</td><td>1,9</td><td>✓</td></tr>
+              <tr><td>8,9</td><td>100<span class="hi">-</span></td><td>8,9</td><td>✓</td></tr>
+              <tr><td>3,7</td><td>0<span class="hi">-</span>11</td><td>3,7</td><td>✓</td></tr>
+              <tr><td>3,11</td><td><span class="hi">-</span>011</td><td>3,11</td><td>✓</td></tr>
+              <tr><td>9,11</td><td>10<span class="hi">-</span>1</td><td>9,11</td><td>✓</td></tr>
+              <tr><td>7,15</td><td><span class="hi">-</span>111</td><td>7,15</td><td>✓</td></tr>
+              <tr><td>11,15</td><td>1<span class="hi">-</span>11</td><td>11,15</td><td>✓</td></tr>
+            </table>
+          </div>
+
+          <h2 class="sol-h" style="color:var(--accent)">Step 3 — Round 2 Combinations</h2>
+          <div class="table-wrap">
+            <table class="tt">
+              <tr><th>Group</th><th>Binary</th><th>Minterms</th><th>Used?</th></tr>
+              <tr><td>0,1,8,9</td><td><span class="hi">-</span>00<span class="hi">-</span></td><td>0,1,8,9</td><td>✓</td></tr>
+              <tr><td>1,3,9,11</td><td><span class="hi">-</span>0<span class="hi">-</span>1</td><td>1,3,9,11</td><td>✓</td></tr>
+              <tr><td>3,7,11,15</td><td><span class="hi">-</span><span class="hi">-</span>11</td><td>3,7,11,15</td><td>✓</td></tr>
+            </table>
+          </div>
+
+          <h2 class="sol-h" style="color:var(--accent)">Step 4 — Round 3 (no new combinations — PIs identified)</h2>
+          <p>No further merging possible. All three Round 2 groups are <strong>Prime Implicants</strong>.</p>
+
+          <h2 class="sol-h" style="color:var(--accent)">Step 5 — Prime Implicant Table</h2>
+          <div class="table-wrap">
+            <table class="tt">
+              <tr><th>PI</th><th>Expression</th><th>0</th><th>1</th><th>3</th><th>7</th><th>8</th><th>9</th><th>11</th><th>15</th></tr>
+              <tr class="epi"><td>PI₁ (0,1,8,9)</td><td>B'C'</td><td class="x">✓</td><td class="x">✓</td><td></td><td></td><td class="x">✓</td><td class="x">✓</td><td></td><td></td></tr>
+              <tr class="epi"><td>PI₂ (1,3,9,11)</td><td>B'D</td><td></td><td class="x">✓</td><td class="x">✓</td><td></td><td></td><td class="x">✓</td><td class="x">✓</td><td></td></tr>
+              <tr class="epi"><td>PI₃ (3,7,11,15)</td><td>CD</td><td></td><td></td><td class="x">✓</td><td class="x">✓</td><td></td><td></td><td class="x">✓</td><td class="x">✓</td></tr>
+            </table>
+          </div>
+
+          <h2 class="sol-h" style="color:var(--accent)">Step 6 — Essential Prime Implicants</h2>
+          <div class="steps">
+            <div class="step"><div class="step-n">1</div><div class="step-c">Minterm 0 is covered only by PI₁ → <strong>PI₁ = B'C' is Essential</strong></div></div>
+            <div class="step"><div class="step-n">2</div><div class="step-c">Minterm 7 is covered only by PI₃ → <strong>PI₃ = CD is Essential</strong></div></div>
+            <div class="step"><div class="step-n">3</div><div class="step-c">PI₁ covers {0,1,8,9}. PI₃ covers {3,7,11,15}. Together they miss minterm 1 ✓, 3 ✓, but we need to check — PI₁+PI₃ covers all 8 minterms? Missing: {1→PI₁✓, 3→PI₃✓, 9→PI₁✓, 11→PI₃✓} — yes all covered!</div></div>
+            <div class="step"><div class="step-n">4</div><div class="step-c">PI₂ (B'D) is not required — all minterms already covered by PI₁ and PI₃.</div></div>
+          </div>
+
+          <div class="ans-box">
+            <div class="ans-label">Minimized SOP Expression</div>
+            <div class="ans-expr">F = B'C' + CD</div>
+          </div>
+          <div class="tip"><strong>✓ Verification:</strong> Check: m0(0000)=B'C'✓, m1(0001)=B'C'✓, m3(0011)=CD✓, m7(0111)=CD✓, m8(1000)=B'C'✓, m9(1001)=B'C'✓, m11(1011)=CD✓, m15(1111)=CD✓. All 8 minterms covered.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ Q2 · ADDER/SUBTRACTOR ═══════ -->
+    <div class="section" id="sec-q2">
+      <div class="q-card">
+        <div class="q-header q-header-q2">
+          <div class="q-title q-title-q2">Q2 — 4-bit Adder/Subtractor</div>
+          <span class="q-marks q-title-q2">5 Marks</span>
+        </div>
+        <div class="q-body">
+
+          <h2 class="sol-h" style="color:var(--purple)">Circuit Design & Role of Mode Bit M</h2>
+          <p>A 4-bit Adder/Subtractor uses a <strong>4-bit ripple carry adder</strong> with <strong>XOR gates</strong> on the B inputs, controlled by a mode select bit M.</p>
+
+          <div class="eq">
+            <div class="eq-label">Key Principle</div>
+            Each B bit is XORed with M:<br>
+            • <strong>M = 0 (Addition):</strong> B⊕0 = B → adder computes A + B, Cin = 0<br>
+            • <strong>M = 1 (Subtraction):</strong> B⊕1 = B' → adder computes A + B' + 1 = A + (2's complement of B) = A − B
+          </div>
+
+          <div class="diag">
+            <svg viewBox="0 0 580 200" width="100%" xmlns="http://www.w3.org/2000/svg" style="max-width:580px">
+              <style>.dl{font-family:'JetBrains Mono',monospace;font-size:11px;fill:var(--text2)}.dh{font-family:'JetBrains Mono',monospace;font-size:11px;fill:var(--accent);font-weight:700}.da{stroke:var(--accent2);stroke-width:1.5;fill:none}</style>
+              <!-- XOR gates -->
+              <rect x="10" y="30" width="60" height="24" rx="5" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+              <text x="40" y="46" text-anchor="middle" class="dh">XOR</text>
+              <rect x="10" y="65" width="60" height="24" rx="5" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+              <text x="40" y="81" text-anchor="middle" class="dh">XOR</text>
+              <rect x="10" y="100" width="60" height="24" rx="5" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+              <text x="40" y="116" text-anchor="middle" class="dh">XOR</text>
+              <rect x="10" y="135" width="60" height="24" rx="5" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+              <text x="40" y="151" text-anchor="middle" class="dh">XOR</text>
+              <!-- Labels B inputs -->
+              <text x="5" y="38" class="dl" text-anchor="end">B0</text>
+              <text x="5" y="73" class="dl" text-anchor="end">B1</text>
+              <text x="5" y="108" class="dl" text-anchor="end">B2</text>
+              <text x="5" y="143" class="dl" text-anchor="end">B3</text>
+              <!-- M line -->
+              <line x1="40" y1="170" x2="40" y2="185" stroke="var(--accent)" stroke-width="1.5"/>
+              <text x="40" y="197" class="dh" text-anchor="middle">M</text>
+              <line x1="40" y1="170" x2="10" y2="53" stroke="var(--accent)" stroke-width="1" stroke-dasharray="4,3"/>
+              <line x1="40" y1="170" x2="10" y2="88" stroke="var(--accent)" stroke-width="1" stroke-dasharray="4,3"/>
+              <line x1="40" y1="170" x2="10" y2="123" stroke="var(--accent)" stroke-width="1" stroke-dasharray="4,3"/>
+              <line x1="40" y1="170" x2="10" y2="158" stroke="var(--accent)" stroke-width="1" stroke-dasharray="4,3"/>
+              <!-- 4-bit Adder block -->
+              <rect x="160" y="20" width="140" height="150" rx="10" fill="none" stroke="var(--accent2)" stroke-width="2"/>
+              <text x="230" y="100" text-anchor="middle" class="dh" style="font-size:13px">4-bit</text>
+              <text x="230" y="118" text-anchor="middle" class="dh" style="font-size:13px">Adder</text>
+              <!-- Connections XOR → Adder -->
+              <line x1="70" y1="42" x2="160" y2="42" class="da"/>
+              <line x1="70" y1="77" x2="160" y2="77" class="da"/>
+              <line x1="70" y1="112" x2="160" y2="112" class="da"/>
+              <line x1="70" y1="147" x2="160" y2="147" class="da"/>
+              <text x="115" y="38" class="dl" text-anchor="middle">B0⊕M</text>
+              <!-- A inputs -->
+              <line x1="115" y1="55" x2="160" y2="55" class="da"/>
+              <text x="90" y="51" class="dl">A0</text>
+              <line x1="115" y1="90" x2="160" y2="90" class="da"/>
+              <text x="90" y="86" class="dl">A1</text>
+              <!-- Cin = M -->
+              <line x1="160" y1="168" x2="130" y2="168" class="da"/>
+              <text x="120" y="164" class="dh" style="font-size:10px">Cin=M</text>
+              <!-- Outputs -->
+              <line x1="300" y1="42" x2="350" y2="42" class="da"/>
+              <line x1="300" y1="77" x2="350" y2="77" class="da"/>
+              <line x1="300" y1="112" x2="350" y2="112" class="da"/>
+              <line x1="300" y1="147" x2="350" y2="147" class="da"/>
+              <text x="360" y="38" class="dl">S0</text>
+              <text x="360" y="73" class="dl">S1</text>
+              <text x="360" y="108" class="dl">S2</text>
+              <text x="360" y="143" class="dl">S3</text>
+              <line x1="300" y1="168" x2="400" y2="168" class="da"/>
+              <text x="410" y="172" class="dh" style="font-size:10px">Cout/Borrow</text>
+            </svg>
+            <div style="font-size:0.75rem;color:var(--text3);margin-top:6px;font-family:'JetBrains Mono',monospace">Fig: 4-bit Adder/Subtractor — M=0 → Addition, M=1 → Subtraction</div>
+          </div>
+
+          <div class="tip"><strong>✓ Carry Propagation:</strong> In a ripple carry adder, each full adder's Cout feeds into the next stage's Cin. When M=1 (subtraction), Cin=1 completes the 2's complement, and a final Cout=1 indicates no borrow (positive result).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ Q3 · DECODER ═══════ -->
+    <div class="section" id="sec-q3">
+      <div class="q-card">
+        <div class="q-header q-header-q3">
+          <div class="q-title q-title-q3">Q3 — 3-to-8 Decoder Implementation</div>
+          <span class="q-marks q-title-q3">5 Marks</span>
+        </div>
+        <div class="q-body">
+          <p>Implement simultaneously: <strong>F1(A,B,C) = Σm(1,3,5,7)</strong> and <strong>F2(A,B,C) = Σm(0,2,6,7)</strong> using a single <strong>74x138</strong> (3-to-8 decoder) and external OR gates.</p>
+
+          <h2 class="sol-h" style="color:var(--green)">74x138 Key Facts</h2>
+          <div class="eq">
+            <div class="eq-label">74x138 Outputs</div>
+            The 74x138 has <strong>active-LOW outputs</strong>: output Ȳᵢ = 0 when minterm i is selected.<br>
+            Enable: G1=1 (active HIGH), G2A=0, G2B=0 (active LOW) — all must be satisfied.<br>
+            To implement F using active-LOW outputs: use a <strong>NAND gate</strong> instead of OR, OR connect to a bubbled-input OR (= NAND).<br>
+            <strong>Simplification:</strong> Since 74x138 outputs are active-LOW, connecting them to a NAND gate gives the correct active-HIGH output of the OR function.
+          </div>
+
+          <h2 class="sol-h" style="color:var(--green)">F1 = Σm(1,3,5,7) — Connection</h2>
+          <div class="steps">
+            <div class="step"><div class="step-n">1</div><div class="step-c">Minterms: 1, 3, 5, 7 → connect outputs <strong>Ȳ1, Ȳ3, Ȳ5, Ȳ7</strong> to a 4-input NAND gate.</div></div>
+            <div class="step"><div class="step-n">2</div><div class="step-c">NAND of active-LOW lines = OR of corresponding minterms → F1 = m1 + m3 + m5 + m7</div></div>
+            <div class="step"><div class="step-n">3</div><div class="step-c"><strong>Insight:</strong> F1 = C (these are all odd minterms — C=1). You could also just wire C directly.</div></div>
+          </div>
+
+          <h2 class="sol-h" style="color:var(--green)">F2 = Σm(0,2,6,7) — Connection</h2>
+          <div class="steps">
+            <div class="step"><div class="step-n">1</div><div class="step-c">Minterms: 0, 2, 6, 7 → connect outputs <strong>Ȳ0, Ȳ2, Ȳ6, Ȳ7</strong> to a 4-input NAND gate.</div></div>
+            <div class="step"><div class="step-n">2</div><div class="step-c">F2 = m0 + m2 + m6 + m7</div></div>
+          </div>
+
+          <div class="diag">
+            <svg viewBox="0 0 500 260" width="100%" xmlns="http://www.w3.org/2000/svg" style="max-width:500px">
+              <style>.dl{font-family:'JetBrains Mono',monospace;font-size:10px;fill:var(--text2)}.dh{font-family:'JetBrains Mono',monospace;font-size:10px;fill:var(--accent);font-weight:700}</style>
+              <!-- Decoder block -->
+              <rect x="150" y="30" width="120" height="200" rx="10" fill="none" stroke="var(--accent2)" stroke-width="2"/>
+              <text x="210" y="105" text-anchor="middle" class="dh" style="font-size:12px">74x138</text>
+              <text x="210" y="120" text-anchor="middle" class="dl">3-to-8</text>
+              <text x="210" y="135" text-anchor="middle" class="dl">Decoder</text>
+              <!-- Inputs -->
+              <text x="148" y="55" class="dh" text-anchor="end">A (S2)</text>
+              <text x="148" y="75" class="dh" text-anchor="end">B (S1)</text>
+              <text x="148" y="95" class="dh" text-anchor="end">C (S0)</text>
+              <line x1="80" y1="52" x2="150" y2="52" stroke="var(--accent)" stroke-width="1.5"/>
+              <line x1="80" y1="72" x2="150" y2="72" stroke="var(--accent)" stroke-width="1.5"/>
+              <line x1="80" y1="92" x2="150" y2="92" stroke="var(--accent)" stroke-width="1.5"/>
+              <!-- Enable -->
+              <text x="148" y="168" class="dl" text-anchor="end">G1=1</text>
+              <text x="148" y="183" class="dl" text-anchor="end">G2A=0</text>
+              <text x="148" y="198" class="dl" text-anchor="end">G2B=0</text>
+              <!-- Outputs Y0-Y7 -->
+              <line x1="270" y1="45" x2="310" y2="45" stroke="var(--text3)" stroke-width="1"/>
+              <text x="312" y="48" class="dl">Ȳ0 ──────┐</text>
+              <line x1="270" y1="60" x2="310" y2="60" stroke="var(--text3)" stroke-width="1"/>
+              <text x="312" y="63" class="dl">Ȳ1 ─────────┐</text>
+              <line x1="270" y1="75" x2="310" y2="75" stroke="var(--accent)" stroke-width="2"/>
+              <text x="312" y="78" class="dh">Ȳ2 ──────┤</text>
+              <line x1="270" y1="90" x2="310" y2="90" stroke="var(--accent)" stroke-width="2"/>
+              <text x="312" y="93" class="dh">Ȳ3 ─────────┤ NAND→F1</text>
+              <line x1="270" y1="105" x2="310" y2="105" stroke="var(--text3)" stroke-width="1"/>
+              <text x="312" y="108" class="dl">Ȳ4</text>
+              <line x1="270" y1="120" x2="310" y2="120" stroke="var(--accent)" stroke-width="2"/>
+              <text x="312" y="123" class="dh">Ȳ5 ─────────┤</text>
+              <line x1="270" y1="135" x2="310" y2="135" stroke="var(--accent2)" stroke-width="2"/>
+              <text x="312" y="138" class="dl" style="fill:var(--teal2)">Ȳ6 ──────┤ NAND→F2</text>
+              <line x1="270" y1="150" x2="310" y2="150" stroke="var(--accent)" stroke-width="2"/>
+              <text x="312" y="153" class="dh">Ȳ7 ─────────┘(both)</text>
+              <!-- Legend -->
+              <rect x="10" y="220" width="12" height="3" fill="var(--accent)"/>
+              <text x="26" y="226" class="dh">F1 connections (Ȳ1,Ȳ3,Ȳ5,Ȳ7)</text>
+              <rect x="10" y="238" width="12" height="3" fill="var(--teal2)"/>
+              <text x="26" y="244" class="dl" style="fill:var(--teal2)">F2 connections (Ȳ0,Ȳ2,Ȳ6,Ȳ7)</text>
+            </svg>
+          </div>
+
+          <div class="table-wrap">
+            <table class="tt">
+              <tr><th>Function</th><th>Minterms</th><th>Decoder Outputs (NAND inputs)</th><th>Expression</th></tr>
+              <tr><td style="color:var(--accent);font-weight:700">F1</td><td>1, 3, 5, 7</td><td>Ȳ1, Ȳ3, Ȳ5, Ȳ7</td><td>= C</td></tr>
+              <tr><td style="color:var(--teal2);font-weight:700">F2</td><td>0, 2, 6, 7</td><td>Ȳ0, Ȳ2, Ȳ6, Ȳ7</td><td>= A'B'C' + A'BC' + ABC' + ABC = B'C' + AB</td></tr>
+            </table>
+          </div>
+
+          <div class="tip"><strong>✓ Key Point:</strong> The 74x138 active-LOW outputs feed into NAND gates. A NAND of active-LOW signals = OR of the corresponding minterms (by De Morgan's theorem). Ȳ7 is shared between both F1 and F2 — connect it to both NAND gates.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ Q4 · MUX ═══════ -->
+    <div class="section" id="sec-q4">
+      <div class="q-card">
+        <div class="q-header q-header-q4">
+          <div class="q-title q-title-q4">Q4 — 8-to-1 Multiplexer</div>
+          <span class="q-marks q-title-q4">5 Marks</span>
+        </div>
+        <div class="q-body">
+          <p>Implement <strong>F(A,B,C) = Σm(0, 2, 3, 5, 7)</strong> using a <strong>74151A</strong> (8-to-1 MUX). Connect A→S2, B→S1, C→S0.</p>
+
+          <h2 class="sol-h" style="color:var(--gold)">Method: Each minterm number directly selects one data input</h2>
+          <p>With A,B,C on S2,S1,S0 — the 3-bit select value ABC chooses data input Iₙ where n = minterm number. Set Iₙ = 1 if n is in the function, else 0.</p>
+
+          <div class="table-wrap">
+            <table class="tt">
+              <tr><th>Minterm</th><th>A(S2)</th><th>B(S1)</th><th>C(S0)</th><th>F</th><th>Data Input</th><th>Value</th></tr>
+              <tr><td>m0</td><td>0</td><td>0</td><td>0</td><td class="hi">1</td><td>I0</td><td class="hi">1</td></tr>
+              <tr><td>m1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>I1</td><td>0</td></tr>
+              <tr><td>m2</td><td>0</td><td>1</td><td>0</td><td class="hi">1</td><td>I2</td><td class="hi">1</td></tr>
+              <tr><td>m3</td><td>0</td><td>1</td><td>1</td><td class="hi">1</td><td>I3</td><td class="hi">1</td></tr>
+              <tr><td>m4</td><td>1</td><td>0</td><td>0</td><td>0</td><td>I4</td><td>0</td></tr>
+              <tr><td>m5</td><td>1</td><td>0</td><td>1</td><td class="hi">1</td><td>I5</td><td class="hi">1</td></tr>
+              <tr><td>m6</td><td>1</td><td>1</td><td>0</td><td>0</td><td>I6</td><td>0</td></tr>
+              <tr><td>m7</td><td>1</td><td>1</td><td>1</td><td class="hi">1</td><td>I7</td><td class="hi">1</td></tr>
+            </table>
+          </div>
+
+          <div class="ans-box">
+            <div class="ans-label">74151A Data Input Connections</div>
+            <div class="ans-expr" style="font-size:0.9rem">I0=1, I1=0, I2=1, I3=1, I4=0, I5=1, I6=0, I7=1</div>
+          </div>
+
+          <div class="diag">
+            <svg viewBox="0 0 420 240" width="100%" xmlns="http://www.w3.org/2000/svg" style="max-width:420px">
+              <!-- MUX block -->
+              <polygon points="160,20 260,40 260,200 160,220" fill="none" stroke="var(--accent2)" stroke-width="2"/>
+              <text x="210" y="120" text-anchor="middle" class="dh" style="font-size:12px">74151A</text>
+              <text x="210" y="136" text-anchor="middle" class="dl">8-to-1 MUX</text>
+              <!-- Data inputs -->
+              <text x="30" y="42" class="dh" style="font-size:9px">I0 = 1</text><line x1="80" y1="40" x2="160" y2="52" stroke="var(--accent)" stroke-width="1.5"/>
+              <text x="30" y="62" class="dl" style="font-size:9px">I1 = 0</text><line x1="80" y1="60" x2="160" y2="69" stroke="var(--text3)" stroke-width="1"/>
+              <text x="30" y="82" class="dh" style="font-size:9px">I2 = 1</text><line x1="80" y1="80" x2="160" y2="86" stroke="var(--accent)" stroke-width="1.5"/>
+              <text x="30" y="102" class="dh" style="font-size:9px">I3 = 1</text><line x1="80" y1="100" x2="160" y2="103" stroke="var(--accent)" stroke-width="1.5"/>
+              <text x="30" y="122" class="dl" style="font-size:9px">I4 = 0</text><line x1="80" y1="120" x2="160" y2="120" stroke="var(--text3)" stroke-width="1"/>
+              <text x="30" y="142" class="dh" style="font-size:9px">I5 = 1</text><line x1="80" y1="140" x2="160" y2="137" stroke="var(--accent)" stroke-width="1.5"/>
+              <text x="30" y="162" class="dl" style="font-size:9px">I6 = 0</text><line x1="80" y1="160" x2="160" y2="154" stroke="var(--text3)" stroke-width="1"/>
+              <text x="30" y="182" class="dh" style="font-size:9px">I7 = 1</text><line x1="80" y1="180" x2="160" y2="171" stroke="var(--accent)" stroke-width="1.5"/>
+              <!-- Select lines -->
+              <line x1="190" y1="230" x2="190" y2="220" stroke="var(--accent)" stroke-width="1.5"/>
+              <line x1="210" y1="230" x2="210" y2="220" stroke="var(--accent)" stroke-width="1.5"/>
+              <line x1="230" y1="230" x2="230" y2="220" stroke="var(--accent)" stroke-width="1.5"/>
+              <text x="190" y="244" class="dh" text-anchor="middle" style="font-size:9px">A(S2)</text>
+              <text x="210" y="244" class="dh" text-anchor="middle" style="font-size:9px">B(S1)</text>
+              <text x="230" y="244" class="dh" text-anchor="middle" style="font-size:9px">C(S0)</text>
+              <!-- Output Y -->
+              <line x1="260" y1="120" x2="320" y2="120" stroke="var(--accent)" stroke-width="2"/>
+              <text x="325" y="124" class="dh">Y = F</text>
+              <!-- Enable -->
+              <text x="210" y="210" class="dl" text-anchor="middle" style="font-size:8px">Ē = 0 (enabled)</text>
+            </svg>
+          </div>
+
+          <div class="tip"><strong>✓ 74151A Enable:</strong> The active-LOW enable pin (Ē) must be tied to GND (logic 0) to enable the MUX. The Y output gives F directly; W gives F' (complemented output).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ Q5 · FLIP-FLOPS ═══════ -->
+    <div class="section" id="sec-q5">
+      <div class="q-card">
+        <div class="q-header q-header-q5">
+          <div class="q-title q-title-q5">Q5 — Latches & Flip-Flops</div>
+          <span class="q-marks q-title-q5">5 Marks</span>
+        </div>
+        <div class="q-body">
+
+          <h2 class="sol-h" style="color:var(--teal)">JK Flip-Flop with J=K=1: Toggle Behavior</h2>
+          <p>When J=K=1, a JK flip-flop <strong>toggles</strong> on every rising clock edge: Q(next) = Q'(current).</p>
+
+          <div class="table-wrap">
+            <table class="tt">
+              <tr><th>Clock Pulse</th><th>J</th><th>K</th><th>Q (before)</th><th>Q (after)</th></tr>
+              <tr><td>Initial</td><td>—</td><td>—</td><td>—</td><td class="hi">0</td></tr>
+              <tr><td>1↑</td><td>1</td><td>1</td><td>0</td><td class="hi">1</td></tr>
+              <tr><td>2↑</td><td>1</td><td>1</td><td>1</td><td class="hi">0</td></tr>
+              <tr><td>3↑</td><td>1</td><td>1</td><td>0</td><td class="hi">1</td></tr>
+              <tr><td>4↑</td><td>1</td><td>1</td><td>1</td><td class="hi">0</td></tr>
+              <tr><td>5↑</td><td>1</td><td>1</td><td>0</td><td class="hi">1</td></tr>
+              <tr><td>6↑</td><td>1</td><td>1</td><td>1</td><td class="hi">0</td></tr>
+            </table>
+          </div>
+
+          <h3 class="sol-h3">Timing Diagram</h3>
+          <div class="timing">
+            <div class="timing-row">
+              <span class="timing-label">CLK</span>
+              <span class="timing-wave" style="color:var(--text3)">_|‾|_|‾|_|‾|_|‾|_|‾|_|‾|_</span>
+            </div>
+            <div class="timing-row">
+              <span class="timing-label" style="color:var(--accent)">Q</span>
+              <span class="timing-wave">____|‾‾‾|___|‾‾‾|___|‾‾‾|__</span>
+            </div>
+            <div style="font-size:0.72rem;color:var(--text3);margin-top:6px">↑ = rising edge. Q toggles every clock cycle (T flip-flop behavior). Period of Q = 2× clock period.</div>
+          </div>
+
+          <div class="tip"><strong>✓ Toggle Behavior:</strong> With J=K=1, the JK flip-flop toggles on every active clock edge. This is equivalent to a T flip-flop with T=1. The output Q has exactly half the frequency of the clock signal.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ Q6 · MOD-6 COUNTER ═══════ -->
+    <div class="section" id="sec-q6">
+      <div class="q-card">
+        <div class="q-header q-header-q6">
+          <div class="q-title q-title-q6">Q6 — Synchronous Mod-6 Counter</div>
+          <span class="q-marks q-title-q6">5 Marks</span>
+        </div>
+        <div class="q-body">
+          <p>Design a synchronous Mod-6 counter (counts 0→1→2→3→4→5→0) using JK flip-flops.</p>
+          <p>We need 3 flip-flops (Q2 Q1 Q0) since 2³=8 ≥ 6. States 6 and 7 are unused — reset on state 6 (110).</p>
+
+          <h2 class="sol-h" style="color:var(--red)">State Table</h2>
+          <div class="table-wrap">
+            <table class="tt">
+              <tr><th>State</th><th>Q2</th><th>Q1</th><th>Q0</th><th>→</th><th>Q2⁺</th><th>Q1⁺</th><th>Q0⁺</th><th>J2</th><th>K2</th><th>J1</th><th>K1</th><th>J0</th><th>K0</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>→</td><td>0</td><td>0</td><td>1</td><td>0</td><td>X</td><td>0</td><td>X</td><td>1</td><td>X</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>→</td><td>0</td><td>1</td><td>0</td><td>0</td><td>X</td><td>1</td><td>X</td><td>X</td><td>1</td></tr>
+              <tr><td>2</td><td>0</td><td>1</td><td>0</td><td>→</td><td>0</td><td>1</td><td>1</td><td>0</td><td>X</td><td>X</td><td>0</td><td>1</td><td>X</td></tr>
+              <tr><td>3</td><td>0</td><td>1</td><td>1</td><td>→</td><td>1</td><td>0</td><td>0</td><td>1</td><td>X</td><td>X</td><td>1</td><td>X</td><td>1</td></tr>
+              <tr><td>4</td><td>1</td><td>0</td><td>0</td><td>→</td><td>1</td><td>0</td><td>1</td><td>X</td><td>0</td><td>0</td><td>X</td><td>1</td><td>X</td></tr>
+              <tr><td>5</td><td>1</td><td>0</td><td>1</td><td>→</td><td>0</td><td>0</td><td>0</td><td>X</td><td>1</td><td>0</td><td>X</td><td>X</td><td>1</td></tr>
+              <tr class="st-reset"><td>6 (reset)</td><td>1</td><td>1</td><td>0</td><td>→0</td><td colspan="9">← Force reset to 000</td></tr>
+              <tr style="color:var(--text3)"><td>7 (unused)</td><td>1</td><td>1</td><td>1</td><td>—</td><td colspan="9">Don't-care</td></tr>
+            </table>
+          </div>
+
+          <h2 class="sol-h" style="color:var(--red)">K-map Simplification</h2>
+          <p>Using the JK excitation table (J=0,K=X for no change; J=1,K=X to set; J=X,K=1 to reset):</p>
+
+          <div class="eq">
+            <div class="eq-label">Simplified Expressions (from K-maps)</div>
+            <strong>J2 = Q1·Q0</strong> &nbsp;&nbsp; <strong>K2 = Q0</strong><br>
+            <strong>J1 = Q2'·Q0</strong> &nbsp;&nbsp; <strong>K1 = Q0</strong><br>
+            <strong>J0 = Q2' + Q1' = (Q2·Q1)'</strong> &nbsp;&nbsp; [= 1 when NOT in state 6]&nbsp;&nbsp; <strong>K0 = 1</strong>
+          </div>
+
+          <div class="tip"><strong>✓ Reset Condition:</strong> When Q2=1 and Q1=1 (state 6 or 7), J0 is driven low and the CLR/reset line forces the counter back to 000. In practice, detect Q2·Q1=1 with an AND gate and feed it to the synchronous CLR inputs of all flip-flops.</div>
+
+          <h2 class="sol-h" style="color:var(--red)">State Diagram</h2>
+          <div class="diag">
+            <svg viewBox="0 0 500 160" width="100%" xmlns="http://www.w3.org/2000/svg" style="max-width:500px">
+              <defs><marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="var(--accent)"/></marker></defs>
+              <!-- States 0-5 in a ring -->
+              <circle cx="60" cy="80" r="22" fill="none" stroke="var(--accent)" stroke-width="2"/>
+              <text x="60" y="85" text-anchor="middle" class="dh">000</text>
+              <circle cx="145" cy="35" r="22" fill="none" stroke="var(--accent)" stroke-width="2"/>
+              <text x="145" y="40" text-anchor="middle" class="dh">001</text>
+              <circle cx="240" cy="20" r="22" fill="none" stroke="var(--accent)" stroke-width="2"/>
+              <text x="240" y="25" text-anchor="middle" class="dh">010</text>
+              <circle cx="335" cy="35" r="22" fill="none" stroke="var(--accent)" stroke-width="2"/>
+              <text x="335" y="40" text-anchor="middle" class="dh">011</text>
+              <circle cx="415" cy="80" r="22" fill="none" stroke="var(--accent)" stroke-width="2"/>
+              <text x="415" y="85" text-anchor="middle" class="dh">100</text>
+              <circle cx="335" cy="125" r="22" fill="none" stroke="var(--accent)" stroke-width="2"/>
+              <text x="335" y="130" text-anchor="middle" class="dh">101</text>
+              <!-- State labels -->
+              <text x="60" y="110" text-anchor="middle" class="dl">0</text>
+              <text x="145" y="68" text-anchor="middle" class="dl">1</text>
+              <text x="240" y="50" text-anchor="middle" class="dl">2</text>
+              <text x="335" y="68" text-anchor="middle" class="dl">3</text>
+              <text x="415" y="110" text-anchor="middle" class="dl">4</text>
+              <text x="335" y="155" text-anchor="middle" class="dl">5</text>
+              <!-- Arrows -->
+              <line x1="82" y1="67" x2="126" y2="46" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr)"/>
+              <line x1="167" y1="35" x2="218" y2="25" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr)"/>
+              <line x1="262" y1="25" x2="313" y2="35" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr)"/>
+              <line x1="354" y1="50" x2="398" y2="68" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr)"/>
+              <line x1="415" y1="102" x2="356" y2="116" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#arr)"/>
+              <line x1="313" y1="125" x2="82" y2="87" stroke="var(--red)" stroke-width="2" marker-end="url(#arr)"/>
+              <text x="188" y="130" class="dl" style="fill:var(--red)">reset to 0</text>
+            </svg>
+          </div>
+
+          <h2 class="sol-h" style="color:var(--red)">Logic Circuit Summary</h2>
+          <div class="steps">
+            <div class="step"><div class="step-n">1</div><div class="step-c">Three negative-edge JK flip-flops (FF2, FF1, FF0) clocked simultaneously.</div></div>
+            <div class="step"><div class="step-n">2</div><div class="step-c">AND gate: detects Q2·Q1 = state 6. Output feeds asynchronous CLR of all three FFs → instant reset to 000.</div></div>
+            <div class="step"><div class="step-n">3</div><div class="step-c">Connect J/K inputs per equations above. K0=1 (tie HIGH). All FFs share the same clock.</div></div>
+          </div>
+
+          <div class="note"><strong>✓ Synchronous Reset Alternative:</strong> For a fully synchronous design, decode state 6 and feed it back as a synchronous clear input, so the reset happens on the next clock edge (counter goes 0→1→2→3→4→5→0, with state 6 never appearing in steady state).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ Q7 · PROJECT ═══════ -->
+    <div class="section" id="sec-q7">
+      <div class="q-card">
+        <div class="q-header q-header-q7">
+          <div class="q-title q-title-q7">Q7 — Semester Project</div>
+          <span class="q-marks q-title-q7" style="color:#b45309">10 Marks</span>
+        </div>
+        <div class="q-body">
+
+          <div style="background:linear-gradient(135deg,rgba(180,83,9,0.08),rgba(251,191,36,0.06));border:1.5px dashed rgba(180,83,9,0.35);border-radius:14px;padding:24px 26px;text-align:center">
+            <div style="font-size:2rem;margin-bottom:10px">✏️</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:#b45309;margin-bottom:10px">Write Your Own Project Description</div>
+            <p style="color:var(--text2);max-width:500px;margin:0 auto;font-size:0.87rem;line-height:1.7">Your answer must be based on your actual semester project. Describe it in your own words covering the four required points below.</p>
+          </div>
+
+          <h2 class="sol-h" style="color:#b45309">Required Points (10 Marks)</h2>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-n" style="background:rgba(180,83,9,0.1);border-color:#b45309;color:#b45309">1</div>
+              <div class="step-c">
+                <strong>Project Title & Overview</strong><br>
+                State the name of your circuit/system and briefly explain what it does in 2–3 sentences. Be specific — avoid vague statements like "it processes signals."
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-n" style="background:rgba(180,83,9,0.1);border-color:#b45309;color:#b45309">2</div>
+              <div class="step-c">
+                <strong>Digital Logic Components Used</strong><br>
+                List the specific components: logic gates (AND, OR, XOR…), flip-flops (D, JK, T…), counters, MUX/DEMUX, decoders, encoders, registers, adders, etc. Explain the role of each major component.
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-n" style="background:rgba(180,83,9,0.1);border-color:#b45309;color:#b45309">3</div>
+              <div class="step-c">
+                <strong>Block Diagram or Schematic</strong><br>
+                Draw a clear block diagram showing inputs, outputs, and the major sub-modules of your design with signal flow between them.
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-n" style="background:rgba(180,83,9,0.1);border-color:#b45309;color:#b45309">4</div>
+              <div class="step-c">
+                <strong>Challenges & Real-World Relevance</strong><br>
+                Describe one or two challenges you faced (e.g., timing issues, glitches, incorrect logic) and how you resolved them. End by stating the practical application of your design.
+              </div>
+            </div>
+          </div>
+
+          <div class="warn"><strong>⚠️ Note:</strong> This question is personal — there is no single correct answer. Your marks depend on how well you describe your own project, the clarity of your block diagram, and your explanation of challenges and applications.</div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+</div><!-- /app -->
+
+<script>
+// Navigation
+function showSec(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('sec-' + id);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const topTitles = {
+    home: ['DLD — Mid Term Examination','Spring 2026 · Complete Worked Solutions'],
+    q1: ['Q1 — Quine-McCluskey Method','F(A,B,C,D) = Σm(0,1,3,7,8,9,11,15) · 5 Marks'],
+    q2: ['Q2 — 4-bit Adder/Subtractor','XOR gate design, Mode bit M · 5 Marks'],
+    q3: ['Q3 — Decoders & OR Gates','74x138 Implementation · 5 Marks'],
+    q4: ['Q4 — 8-to-1 Multiplexer','F(A,B,C) = Σm(0,2,3,5,7) · 5 Marks'],
+    q5: ['Q5 — Latches & Flip-Flops','JK Toggle Timing Diagram · 5 Marks'],
+    q6: ['Q6 — Mod-6 Counter','Synchronous JK Design · 5 Marks'],
+    q7: ['Q7 — Semester Project','Write your own project description · 10 Marks'],
+  };
+  if (topTitles[id]) {
+    document.getElementById('topbarTitle').textContent = topTitles[id][0];
+    document.getElementById('topbarSub').textContent = topTitles[id][1];
+  }
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+function closeSidebar() {
+  if(window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const dark = html.classList.toggle('dark');
+  document.getElementById('themeLabel').textContent = dark ? 'Light Mode' : 'Dark Mode';
+  document.getElementById('themeIcon').innerHTML = dark
+    ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+    : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+}
+</script>
+</body>
+</html>
