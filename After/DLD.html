@@ -1282,6 +1282,39 @@ html.dark .step-v2-num { color: #0a1628; }
         <div class="topbar-sub" id="topbarSub">Study Hub — Select a topic to begin</div>
       </div>
     </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button onclick="toggleSamplePaper()" id="samplePaperBtn" style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:700;padding:7px 14px;border-radius:9px;border:1.5px solid var(--accent);color:var(--accent);background:var(--accent-dim);cursor:pointer;transition:all .2s;letter-spacing:0.03em">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Sample Paper
+      </button>
+      <button onclick="showSection('solution');updateTopbar('Mid Term Paper — Solution','Question-by-Question Worked Solutions')" style="display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:700;padding:7px 14px;border-radius:9px;border:1.5px solid var(--green);color:var(--green);background:var(--green-dim);cursor:pointer;transition:all .2s;letter-spacing:0.03em">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Solutions
+      </button>
+    </div>
+  </div>
+
+  <!-- ─── SAMPLE PAPER PANEL ─── -->
+  <div id="samplePaperPanel" style="display:none;position:sticky;top:64px;z-index:40;background:var(--bg2);border-bottom:1px solid var(--glass-border);padding:0">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 40px 10px 40px;border-bottom:1px solid var(--glass-border)">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:700;color:var(--accent)">📄 Mid Term Examination — Spring 2026 · DLD</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text3);background:var(--bg3);border:1px solid var(--glass-border);border-radius:4px;padding:2px 7px">40 Marks · 2 Hours</span>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <a href="dld/exam/paper1.pdf" target="_blank" style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;padding:5px 12px;border-radius:7px;border:1px solid var(--glass-border);color:var(--text3);background:var(--bg3);cursor:pointer;font-weight:700;text-decoration:none">↗ Open PDF</a>
+        <button onclick="showSection('solution');updateTopbar('Mid Term Paper — Solution','Question-by-Question Worked Solutions');toggleSamplePaper()" style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;padding:5px 12px;border-radius:7px;border:1px solid var(--green);color:var(--green);background:var(--green-dim);cursor:pointer;font-weight:700">View Solutions →</button>
+        <button onclick="toggleSamplePaper()" style="background:none;border:1px solid var(--glass-border);color:var(--text3);border-radius:7px;padding:5px 10px;cursor:pointer;font-size:0.8rem">✕ Close</button>
+      </div>
+    </div>
+    <div id="samplePaperContent" style="line-height:0;font-size:0">
+      <iframe src="dld/exam/paper1.pdf" style="width:100%;height:560px;border:none;display:block" title="Mid Term Exam Paper">
+        <div style="padding:24px 40px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;color:var(--text2)">
+          Your browser cannot display the PDF inline.
+          <a href="dld/exam/paper1.pdf" target="_blank" style="color:var(--accent);font-weight:700">Open paper1.pdf in a new tab →</a>
+        </div>
+      </iframe>
+    </div>
   </div>
 
   <div class="content">
@@ -1440,6 +1473,415 @@ html.dark .step-v2-num { color: #0a1628; }
     <div class="section" id="section-score">
       <div class="score-screen" id="scoreContent"></div>
     </div>
+
+    <!-- ─── SOLUTION SECTION ─── -->
+    <div class="section" id="section-solution">
+      <div class="notes-header">
+        <button class="back-btn" onclick="showHome()">← Home</button>
+        <div class="notes-title">Mid Term Examination — Complete Solutions</div>
+        <a href="dld/exam/paper1.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;padding:7px 14px;border-radius:9px;border:1.5px solid var(--accent);color:var(--accent);background:var(--accent-dim);cursor:pointer;font-weight:700;text-decoration:none">📄 View Paper ↗</a>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;padding:4px 10px;border-radius:6px;background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent)">Q1 · 12 Marks · QM Method</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;padding:4px 10px;border-radius:6px;background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple)">Q2 · 14 Marks · Adders & Comparators</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;padding:4px 10px;border-radius:6px;background:var(--green-dim);color:var(--green);border:1px solid var(--green)">Q3 · 14 Marks · Decoders, MUX, DEMUX</span>
+      </div>
+
+      <!-- ══════════════════ QUESTION 1 ══════════════════ -->
+      <div style="border:1px solid var(--glass-border);border-radius:14px;overflow:hidden;margin-bottom:28px">
+        <div style="background:var(--accent-dim);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--glass-border)">
+          <div style="font-weight:800;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:1rem">Question 1 — Quine-McCluskey Method</div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--accent);background:var(--bg);border-radius:5px;padding:3px 10px;border:1px solid var(--accent)">12 Marks</span>
+        </div>
+        <div class="notes-body" style="padding:20px 24px">
+
+          <!-- Q1a -->
+          <h2 style="color:var(--accent)">Part (a) — F(A,B,C,D) = Σm(0,1,3,7,8,9,11,15) &nbsp; [6 Marks]</h2>
+
+          <h3>Step 1 — Binary Representation &amp; Grouping</h3>
+          <div class="table-wrap">
+            <table class="truth-table">
+              <tr><th>Minterm</th><th>Binary (ABCD)</th><th># of 1s</th></tr>
+              <tr><td>0</td><td>0000</td><td>0</td></tr>
+              <tr><td>1</td><td>0001</td><td>1</td></tr>
+              <tr><td>8</td><td>1000</td><td>1</td></tr>
+              <tr><td>3</td><td>0011</td><td>2</td></tr>
+              <tr><td>9</td><td>1001</td><td>2</td></tr>
+              <tr><td>7</td><td>0111</td><td>3</td></tr>
+              <tr><td>11</td><td>1011</td><td>3</td></tr>
+              <tr><td>15</td><td>1111</td><td>4</td></tr>
+            </table>
+          </div>
+
+          <h3>Step 2 — Column 1 Combinations (pairs differing by 1 bit)</h3>
+          <div class="table-wrap">
+            <table class="truth-table">
+              <tr><th>Pair</th><th>Binary</th><th>Minterms</th></tr>
+              <tr><td>0,1</td><td>000–</td><td>0,1</td></tr>
+              <tr><td>0,8</td><td>–000</td><td>0,8</td></tr>
+              <tr><td>1,3</td><td>00–1</td><td>1,3</td></tr>
+              <tr><td>1,9</td><td>–001</td><td>1,9</td></tr>
+              <tr><td>8,9</td><td>100–</td><td>8,9</td></tr>
+              <tr><td>3,7</td><td>0–11</td><td>3,7</td></tr>
+              <tr><td>3,11</td><td>–011</td><td>3,11</td></tr>
+              <tr><td>9,11</td><td>10–1</td><td>9,11</td></tr>
+              <tr><td>7,15</td><td>–111</td><td>7,15</td></tr>
+              <tr><td>11,15</td><td>1–11</td><td>11,15</td></tr>
+            </table>
+          </div>
+
+          <h3>Step 3 — Column 2 Combinations (quads differing by 1 bit)</h3>
+          <div class="table-wrap">
+            <table class="truth-table">
+              <tr><th>Quad</th><th>Binary</th><th>Minterms</th></tr>
+              <tr><td>0,1,8,9</td><td>–00–</td><td>0,1,8,9</td></tr>
+              <tr><td>1,3,9,11</td><td>–0–1</td><td>1,3,9,11</td></tr>
+              <tr><td>3,7,11,15</td><td>––11</td><td>3,7,11,15</td></tr>
+            </table>
+          </div>
+
+          <div class="why-box">
+            <strong>Prime Implicants Identified (unchecked terms)</strong>
+            All column-1 terms that were NOT combined further become prime implicants. But here all column-1 pairs got combined into column-2 quads. The <strong>Prime Implicants (PIs)</strong> are the three quads:
+            <ul style="margin-top:8px">
+              <li><code>–00–</code> → covers m(0,1,8,9) → <strong>B'C'</strong></li>
+              <li><code>–0–1</code> → covers m(1,3,9,11) → <strong>B'D</strong></li>
+              <li><code>––11</code> → covers m(3,7,11,15) → <strong>CD</strong></li>
+            </ul>
+          </div>
+
+          <h3>Step 4 — Prime Implicant Table</h3>
+          <div class="table-wrap">
+            <table class="truth-table">
+              <tr><th>PI / Expression</th><th>Binary</th><th>0</th><th>1</th><th>3</th><th>7</th><th>8</th><th>9</th><th>11</th><th>15</th></tr>
+              <tr style="background:var(--green-dim)"><td><strong>B'C' ★EPI</strong></td><td>–00–</td><td>✓</td><td>✓</td><td></td><td></td><td>✓</td><td>✓</td><td></td><td></td></tr>
+              <tr><td><strong>B'D</strong></td><td>–0–1</td><td></td><td>✓</td><td>✓</td><td></td><td></td><td>✓</td><td>✓</td><td></td></tr>
+              <tr style="background:var(--green-dim)"><td><strong>CD ★EPI</strong></td><td>––11</td><td></td><td></td><td>✓</td><td>✓</td><td></td><td></td><td>✓</td><td>✓</td></tr>
+            </table>
+          </div>
+
+          <div class="tip-box">
+            <strong>✓ Essential Prime Implicants &amp; Final Answer</strong>
+            Minterm 0 is covered only by <strong>B'C'</strong> → it is an EPI.<br>
+            Minterm 7 is covered only by <strong>CD</strong> → it is an EPI.<br>
+            Selecting B'C' covers {0,1,8,9}. Selecting CD covers {3,7,11,15}.<br>
+            Remaining: minterm 1 (already covered by B'C') ✓ — All minterms covered!<br><br>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--accent);font-weight:800">F = B'C' + CD</span>
+          </div>
+
+          <!-- Q1b -->
+          <h2 style="margin-top:2rem;color:var(--accent)">Part (b) — F(W,X,Y,Z) = Σm(2,6,8,9,10) + Σd(0,11,15) &nbsp; [4 Marks]</h2>
+
+          <h3>Step 1 — List all terms (minterms + don't-cares)</h3>
+          <div class="table-wrap">
+            <table class="truth-table">
+              <tr><th>Term</th><th>Binary (WXYZ)</th><th>Type</th><th># of 1s</th></tr>
+              <tr><td>0</td><td>0000</td><td style="color:var(--gold)">DC</td><td>0</td></tr>
+              <tr><td>2</td><td>0010</td><td style="color:var(--green)">ON</td><td>1</td></tr>
+              <tr><td>8</td><td>1000</td><td style="color:var(--green)">ON</td><td>1</td></tr>
+              <tr><td>6</td><td>0110</td><td style="color:var(--green)">ON</td><td>2</td></tr>
+              <tr><td>9</td><td>1001</td><td style="color:var(--green)">ON</td><td>2</td></tr>
+              <tr><td>10</td><td>1010</td><td style="color:var(--green)">ON</td><td>2</td></tr>
+              <tr><td>11</td><td>1011</td><td style="color:var(--gold)">DC</td><td>3</td></tr>
+              <tr><td>15</td><td>1111</td><td style="color:var(--gold)">DC</td><td>4</td></tr>
+            </table>
+          </div>
+
+          <h3>Step 2 — Combine (using DCs freely)</h3>
+          <div class="table-wrap">
+            <table class="truth-table">
+              <tr><th>Pair</th><th>Binary</th><th>Minterms</th></tr>
+              <tr><td>0,2</td><td>00–0</td><td>0,2</td></tr>
+              <tr><td>0,8</td><td>–000</td><td>0,8</td></tr>
+              <tr><td>2,6</td><td>0–10</td><td>2,6</td></tr>
+              <tr><td>2,10</td><td>–010</td><td>2,10</td></tr>
+              <tr><td>8,9</td><td>100–</td><td>8,9</td></tr>
+              <tr><td>8,10</td><td>10–0</td><td>8,10</td></tr>
+              <tr><td>9,11</td><td>10–1</td><td>9,11</td></tr>
+              <tr><td>10,11</td><td>101–</td><td>10,11</td></tr>
+              <tr><td>11,15</td><td>1–11</td><td>11,15</td></tr>
+            </table>
+          </div>
+          <p>Column-2: (0,2,8,10) → <code>–0–0</code>, (8,9,10,11) → <code>10––</code></p>
+
+          <div class="tip-box">
+            <strong>✓ Prime Implicants &amp; Final Expression</strong>
+            After all combinations, remaining unchecked PIs are:<br>
+            <ul>
+              <li><code>–0–0</code> → m(0,2,8,10) → <strong>X'Z'</strong></li>
+              <li><code>10––</code> → m(8,9,10,11) → <strong>WX'</strong></li>
+              <li><code>0–10</code> → m(2,6) → <strong>W'YZ'</strong></li>
+            </ul>
+            PI Table: m(2) covered by X'Z' and W'YZ'; m(6) only by W'YZ' (EPI); m(8,9,10) covered by WX'; m(10) also by X'Z'.<br><br>
+            Select <strong>W'YZ'</strong> (EPI for 6), <strong>WX'</strong> (covers 8,9,10,11), <strong>X'Z'</strong> covers remaining m(2).<br><br>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--accent);font-weight:800">F = W'YZ' + WX' + X'Z'</span>
+          </div>
+
+          <!-- Q1c -->
+          <h2 style="margin-top:2rem;color:var(--accent)">Part (c) — 5-Variable Function [2 Marks]</h2>
+          <div class="why-box">
+            <strong>Why QM over K-map for 5+ variables?</strong>
+            A 5-variable K-map requires 32 cells arranged across two 4×4 grids. Visually identifying prime implicant groupings across the two halves is error-prone and extremely difficult for humans. The QM method is algorithmic — it systematically pairs terms by 1-bit difference without requiring any spatial visualization, making it far more reliable and computer-implementable.
+          </div>
+          <h3>First-Column Groupings (grouped by number of 1-bits in binary)</h3>
+          <div class="table-wrap">
+            <table class="truth-table">
+              <tr><th>Group (# of 1s)</th><th>Minterms</th><th>Binary (ABCDE)</th></tr>
+              <tr><td>Group 1 (one 1)</td><td>1, 4</td><td>00001, 00100</td></tr>
+              <tr><td>Group 2 (two 1s)</td><td>6, 10, 20, 24</td><td>00110, 01010, 10100, 11000</td></tr>
+              <tr><td>Group 3 (three 1s)</td><td>22, 26</td><td>10110, 11010</td></tr>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════ QUESTION 2 ══════════════════ -->
+      <div style="border:1px solid var(--glass-border);border-radius:14px;overflow:hidden;margin-bottom:28px">
+        <div style="background:var(--purple-dim);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--glass-border)">
+          <div style="font-weight:800;color:var(--purple);font-family:'JetBrains Mono',monospace;font-size:1rem">Question 2 — Adders, Subtractors &amp; Comparators</div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--purple);background:var(--bg);border-radius:5px;padding:3px 10px;border:1px solid var(--purple)">14 Marks</span>
+        </div>
+        <div class="notes-body" style="padding:20px 24px">
+
+          <!-- Q2a -->
+          <h2 style="color:var(--purple)">Part (a) — Full Adder Design &nbsp; [4 Marks]</h2>
+
+          <h3>Truth Table</h3>
+          <div class="table-wrap">
+            <table class="truth-table">
+              <tr><th>X</th><th>Y</th><th>Cin</th><th>Sum (S)</th><th>Cout</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+          </div>
+
+          <div class="eq-block">
+            <div class="eq-label">Simplified Boolean Expressions</div>
+            <strong>S = X ⊕ Y ⊕ Cin</strong> &nbsp;&nbsp;&nbsp; (XOR of all three inputs)<br>
+            <strong>Cout = X·Y + X·Cin + Y·Cin</strong> &nbsp;&nbsp;&nbsp; (majority function)
+          </div>
+
+          <div class="tip-box">
+            <strong>✓ Logic Circuit Description</strong>
+            <strong>Sum:</strong> Gate 1: XOR(X, Y) → output P. Gate 2: XOR(P, Cin) → output S.<br>
+            <strong>Cout:</strong> Gate 3: AND(X, Y) → G1. Gate 4: AND(X, Cin) → G2. Gate 5: AND(Y, Cin) → G3. Gate 6: OR(G1, G2, G3) → Cout.<br>
+            Total gates: 2 XOR + 3 AND + 1 OR = 6 basic gates.
+          </div>
+
+          <!-- Q2b -->
+          <h2 style="margin-top:2rem;color:var(--purple)">Part (b) — 4-bit Adder/Subtractor &nbsp; [4 Marks]</h2>
+
+          <div class="concept-card">
+            <div class="concept-card-header">
+              <span class="concept-card-icon">⚙️</span>
+              <span class="concept-card-title">Design using 4-bit ripple carry adder + XOR gates + Mode select M</span>
+            </div>
+            <div class="concept-card-body">
+              <p>Each bit of B passes through an XOR gate: <strong>XOR(Bᵢ, M)</strong>. The carry-in of the LSB adder is also connected to M.</p>
+              <p><strong>When M = 0 (Addition):</strong> XOR(Bᵢ, 0) = Bᵢ → B unchanged. Cin₀ = 0. Circuit computes <strong>A + B</strong>.</p>
+              <p><strong>When M = 1 (Subtraction):</strong> XOR(Bᵢ, 1) = Bᵢ' → B is inverted (one's complement). Cin₀ = 1 → adds 1. Combined: B' + 1 = two's complement of B. Circuit computes <strong>A + (−B) = A − B</strong>.</p>
+            </div>
+          </div>
+
+          <!-- Q2c -->
+          <h2 style="margin-top:2rem;color:var(--purple)">Part (c) — 8-bit Adder using two 74x283 ICs &nbsp; [3 Marks]</h2>
+
+          <div class="concept-card">
+            <div class="concept-card-header">
+              <span class="concept-card-icon">🔗</span>
+              <span class="concept-card-title">Connection: Cout of lower IC → Cin of upper IC</span>
+            </div>
+            <div class="concept-card-body">
+              <p><strong>Lower nibble (IC1):</strong> handles bits [3:0] of A and B. Its Cin = 0. Its Cout feeds into IC2's Cin.<br>
+              <strong>Upper nibble (IC2):</strong> handles bits [7:4]. Its Cin = Cout of IC1.</p>
+            </div>
+          </div>
+
+          <h3>Computation: A = 10110011, B = 01101110</h3>
+          <div class="table-wrap">
+            <table class="truth-table">
+              <tr><th>Nibble</th><th>A bits</th><th>B bits</th><th>Cin</th><th>Sum</th><th>Cout</th></tr>
+              <tr><td>Lower (IC1) [3:0]</td><td>0011</td><td>1110</td><td>0</td><td>0001</td><td style="color:var(--accent);font-weight:700">1</td></tr>
+              <tr><td>Upper (IC2) [7:4]</td><td>1011</td><td>0110</td><td style="color:var(--accent);font-weight:700">1</td><td>0010</td><td>1 (overflow)</td></tr>
+            </table>
+          </div>
+          <div class="eq-block">
+            <div class="eq-label">Final Result</div>
+            A + B = 10110011 + 01101110 = <strong>100100001</strong><br>
+            (9-bit result: 8-bit sum = <strong>00100001</strong> = 33 decimal, with overflow carry = 1)<br>
+            Verify: 179 + 110 = 289 = 256 + 33 ✓
+          </div>
+
+          <!-- Q2d -->
+          <h2 style="margin-top:2rem;color:var(--purple)">Part (d) — 74x85 Comparator: A = 1011, B = 1101 &nbsp; [3 Marks]</h2>
+
+          <div class="steps-v2">
+            <div class="step-v2"><div class="step-v2-num">1</div>
+              <div class="step-v2-content">Convert to decimal: A = 1011₂ = <strong>11</strong>, B = 1101₂ = <strong>13</strong>.</div>
+            </div>
+            <div class="step-v2"><div class="step-v2-num">2</div>
+              <div class="step-v2-content">Compare: 11 &lt; 13 → <strong>A &lt; B</strong>.</div>
+            </div>
+            <div class="step-v2"><div class="step-v2-num">3</div>
+              <div class="step-v2-content">Outputs: <strong>A&gt;B = 0, A=B = 0, A&lt;B = 1</strong>.</div>
+            </div>
+          </div>
+
+          <div class="tip-box">
+            <strong>✓ Cascading Inputs for Standalone Operation</strong>
+            For a non-cascaded (standalone) 74x85, tie the cascading inputs to:<br>
+            <strong>A=B_IN = 1, A&gt;B_IN = 0, A&lt;B_IN = 0</strong><br>
+            This tells the chip "so far everything is equal" — the chip makes the final decision based only on A and B.
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════ QUESTION 3 ══════════════════ -->
+      <div style="border:1px solid var(--glass-border);border-radius:14px;overflow:hidden;margin-bottom:28px">
+        <div style="background:var(--green-dim);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--glass-border)">
+          <div style="font-weight:800;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:1rem">Question 3 — Decoders, Encoders, MUX &amp; DEMUX</div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--green);background:var(--bg);border-radius:5px;padding:3px 10px;border:1px solid var(--green)">14 Marks</span>
+        </div>
+        <div class="notes-body" style="padding:20px 24px">
+
+          <!-- Q3a -->
+          <h2 style="color:var(--green)">Part (a) — 3-to-8 Decoder Implementation &nbsp; [3 Marks]</h2>
+          <p>A 3-to-8 decoder with inputs A, B, C produces outputs Y0–Y7 where each output Yᵢ = minterm mᵢ.</p>
+          <div class="eq-block">
+            <div class="eq-label">Function Implementation using OR gates</div>
+            <strong>F1(A,B,C) = Σm(1,3,5,7)</strong> → OR(Y1, Y3, Y5, Y7)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;These are all minterms where C = 1 (odd minterms).<br><br>
+            <strong>F2(A,B,C) = Σm(0,2,4,6)</strong> → OR(Y0, Y2, Y4, Y6)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;These are all minterms where C = 0 (even minterms).
+          </div>
+          <div class="tip-box">
+            <strong>✓ Observation</strong>
+            F1 = C (wire C directly — no OR gate needed!)<br>
+            F2 = C' (invert C — one NOT gate!)<br>
+            However, using the decoder as instructed: connect the listed OR inputs as above.
+          </div>
+
+          <!-- Q3b -->
+          <h2 style="margin-top:2rem;color:var(--green)">Part (b) — 4-to-1 MUX Design &amp; F(A,B,C) = Σm(0,2,5,7) &nbsp; [4 Marks]</h2>
+
+          <div class="concept-card">
+            <div class="concept-card-header">
+              <span class="concept-card-icon">🔀</span>
+              <span class="concept-card-title">4-to-1 MUX Circuit (basic gates)</span>
+            </div>
+            <div class="concept-card-body">
+              <p>Inputs: I0, I1, I2, I3. Select lines: S1, S0. Enable: E (active HIGH).<br>
+              Output: Y = E·(S1'·S0'·I0 + S1'·S0·I1 + S1·S0'·I2 + S1·S0·I3)<br>
+              Implementation: 4 AND gates (3-input each: Sn, Sn, In) feeding into a 4-input OR gate.</p>
+            </div>
+          </div>
+
+          <h3>Implementing F(A,B,C) = Σm(0,2,5,7) using 4-to-1 MUX (A=S1, B=S0, C=data)</h3>
+          <div class="table-wrap">
+            <table class="truth-table">
+              <tr><th>A (S1)</th><th>B (S0)</th><th>C</th><th>F</th><th>Input</th><th>Connect I to</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td><td>1</td><td rowspan="2">I0 (AB=00)</td><td rowspan="2" style="color:var(--accent);font-weight:700">I0 = C' (connect C' to I0 — but F=1 when C=0 and F=0 when C=1... actually F=1,0 → I0=C')</td></tr>
+              <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td><td>0</td><td rowspan="2">I1 (AB=01)</td><td rowspan="2" style="color:var(--accent);font-weight:700">I1 = C (F=0 when C=0, F=1 when C=1... wait m2 is AB=01,C=0→F=1 → I1=C')</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td><td>0</td><td rowspan="2">I2 (AB=10)</td><td rowspan="2" style="color:var(--accent);font-weight:700">I2 = C (m5: AB=10,C=1→F=1)</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td><td>0</td><td rowspan="2">I3 (AB=11)</td><td rowspan="2" style="color:var(--accent);font-weight:700">I3 = C (m7: AB=11,C=1→F=1)</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+            </table>
+          </div>
+          <div class="eq-block">
+            <div class="eq-label">Data Input Summary</div>
+            <strong>I0 = C'</strong> &nbsp;&nbsp;&nbsp; (when AB=00: F=1 for C=0, F=0 for C=1)<br>
+            <strong>I1 = C'</strong> &nbsp;&nbsp;&nbsp; (when AB=01: F=1 for m2 i.e. C=0, F=0 for C=1 — but m3 not in sum, correct)<br>
+            <strong>I2 = C</strong> &nbsp;&nbsp;&nbsp; (when AB=10: F=1 for m5 i.e. C=1)<br>
+            <strong>I3 = C</strong> &nbsp;&nbsp;&nbsp; (when AB=11: F=1 for m7 i.e. C=1)
+          </div>
+
+          <!-- Q3c -->
+          <h2 style="margin-top:2rem;color:var(--green)">Part (c) — 8-to-1 MUX (74151A): F(A,B,C) = Σm(1,2,4,6,7) &nbsp; [4 Marks]</h2>
+          <p>Connect A→S2, B→S1, C→S0. Data inputs Ik = 1 if minterm k is in the function, else 0.</p>
+          <div class="table-wrap">
+            <table class="truth-table">
+              <tr><th>k (decimal)</th><th>A B C (S2 S1 S0)</th><th>In Σm(1,2,4,6,7)?</th><th>Ik</th></tr>
+              <tr><td>I0</td><td>000</td><td>No (m0 not listed)</td><td style="color:var(--red)">0</td></tr>
+              <tr><td>I1</td><td>001</td><td>Yes (m1 ✓)</td><td style="color:var(--green)">1</td></tr>
+              <tr><td>I2</td><td>010</td><td>Yes (m2 ✓)</td><td style="color:var(--green)">1</td></tr>
+              <tr><td>I3</td><td>011</td><td>No (m3 not listed)</td><td style="color:var(--red)">0</td></tr>
+              <tr><td>I4</td><td>100</td><td>Yes (m4 ✓)</td><td style="color:var(--green)">1</td></tr>
+              <tr><td>I5</td><td>101</td><td>No (m5 not listed)</td><td style="color:var(--red)">0</td></tr>
+              <tr><td>I6</td><td>110</td><td>Yes (m6 ✓)</td><td style="color:var(--green)">1</td></tr>
+              <tr><td>I7</td><td>111</td><td>Yes (m7 ✓)</td><td style="color:var(--green)">1</td></tr>
+            </table>
+          </div>
+          <div class="tip-box">
+            <strong>✓ Verification — Check minterm m4 (A=1, B=0, C=0)</strong>
+            S2=1, S1=0, S0=0 → MUX selects I4 = 1 → Output F = 1 ✓<br>
+            m4 is in Σm(1,2,4,6,7) so output should be 1. Confirmed correct.
+          </div>
+
+          <!-- Q3d -->
+          <h2 style="margin-top:2rem;color:var(--green)">Part (d) — 1-to-8 DEMUX from two 1-to-4 DEMUX ICs &nbsp; [3 Marks]</h2>
+
+          <div class="concept-card">
+            <div class="concept-card-header">
+              <span class="concept-card-icon">🔀</span>
+              <span class="concept-card-title">Cascading two 1-to-4 DEMUXes → 1-to-8 DEMUX</span>
+            </div>
+            <div class="concept-card-body">
+              <p><strong>Key idea:</strong> Add one more select line (S2) that enables either the first or second DEMUX chip.</p>
+              <p><strong>Data input D</strong> → feeds into both DEMUX ICs simultaneously.<br>
+              <strong>S2 (new MSB select)</strong> → S2=0 enables DEMUX1 (outputs Y0–Y3); S2=1 enables DEMUX2 (outputs Y4–Y7).<br>
+              <strong>S1, S0</strong> → fed to <em>both</em> ICs in parallel — they select which output within the active chip.</p>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="truth-table">
+              <tr><th>S2</th><th>S1</th><th>S0</th><th>Active DEMUX</th><th>Active Output</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td><td>DEMUX1 (enabled)</td><td>Y0</td></tr>
+              <tr><td>0</td><td>0</td><td>1</td><td>DEMUX1</td><td>Y1</td></tr>
+              <tr><td>0</td><td>1</td><td>0</td><td>DEMUX1</td><td>Y2</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td><td>DEMUX1</td><td>Y3</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td><td>DEMUX2 (enabled)</td><td>Y4</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td><td>DEMUX2</td><td>Y5</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td><td>DEMUX2</td><td>Y6</td></tr>
+              <tr><td>1</td><td>1</td><td>1</td><td>DEMUX2</td><td>Y7</td></tr>
+            </table>
+          </div>
+          <div class="tip-box">
+            <strong>✓ Connection Summary</strong>
+            • Data input D → both DEMUXes<br>
+            • S1, S0 → both DEMUXes (shared select lines)<br>
+            • S2 → active-HIGH Enable of DEMUX2 AND (through inverter) → active-HIGH Enable of DEMUX1<br>
+            • When S2=0: DEMUX1 enabled, DEMUX2 disabled → data routes to Y0–Y3<br>
+            • When S2=1: DEMUX2 enabled, DEMUX1 disabled → data routes to Y4–Y7
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Final score summary -->
+      <div style="background:var(--bg2);border:1px solid var(--glass-border);border-top:3px solid var(--accent);border-radius:14px;padding:20px 24px;text-align:center;margin-bottom:24px">
+        <div style="font-family:'JetBrains Mono',monospace;font-weight:800;font-size:1rem;color:var(--accent);margin-bottom:8px">Mark Distribution</div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <div style="background:var(--accent-dim);border:1px solid var(--accent);border-radius:8px;padding:10px 16px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:800;color:var(--accent)">12</div><div style="font-size:0.72rem;color:var(--text3)">Q1 · QM Method</div></div>
+          <div style="background:var(--purple-dim);border:1px solid var(--purple);border-radius:8px;padding:10px 16px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:800;color:var(--purple)">14</div><div style="font-size:0.72rem;color:var(--text3)">Q2 · Adders</div></div>
+          <div style="background:var(--green-dim);border:1px solid var(--green);border-radius:8px;padding:10px 16px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:800;color:var(--green)">14</div><div style="font-size:0.72rem;color:var(--text3)">Q3 · MUX/DEMUX</div></div>
+          <div style="background:var(--bg3);border:1px solid var(--glass-border);border-radius:8px;padding:10px 16px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:800;color:var(--text)">40</div><div style="font-size:0.72rem;color:var(--text3)">Total</div></div>
+        </div>
+      </div>
+
+    </div><!-- /section-solution -->
 
   </div><!-- /content -->
 </main>
@@ -3702,6 +4144,21 @@ function showHome() {
   showSection('home');
   document.getElementById('topbarTitle').textContent = 'Digital Logic Design';
   document.getElementById('topbarSub').textContent = 'Study Hub — Select a topic to begin';
+}
+
+function updateTopbar(title, sub) {
+  document.getElementById('topbarTitle').textContent = title;
+  document.getElementById('topbarSub').textContent = sub;
+}
+
+let samplePaperOpen = false;
+function toggleSamplePaper() {
+  samplePaperOpen = !samplePaperOpen;
+  const panel = document.getElementById('samplePaperPanel');
+  const btn = document.getElementById('samplePaperBtn');
+  panel.style.display = samplePaperOpen ? 'block' : 'none';
+  btn.style.background = samplePaperOpen ? 'var(--accent)' : 'var(--accent-dim)';
+  btn.style.color = samplePaperOpen ? '#fff' : 'var(--accent)';
 }
 
 function goNotes(topic) {

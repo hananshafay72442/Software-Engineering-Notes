@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>English Language & Literature — Practice Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       /* ── Default: Light Mode ── */
@@ -45,24 +45,24 @@
     .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:0 20px 100px}
     /* Header */
     .site-header{padding:56px 0 40px;text-align:center;position:relative}
-    .header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--violet);margin-bottom:18px;display:flex;align-items:center;justify-content:center;gap:12px}
+    .header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--violet);margin-bottom:18px;display:flex;align-items:center;justify-content:center;gap:12px}
     .header-eyebrow::before,.header-eyebrow::after{content:'';width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--violet))}
     .header-eyebrow::after{background:linear-gradient(90deg,var(--violet),transparent)}
-    .site-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,6vw,50px);font-weight:700;letter-spacing:.01em;background:linear-gradient(135deg,var(--ink) 20%,var(--violet) 60%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:12px}
+    .site-title{font-family:'Fraunces',Georgia,serif;font-size:clamp(28px,6vw,50px);font-weight:700;letter-spacing:.01em;background:linear-gradient(135deg,var(--ink) 20%,var(--violet) 60%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:12px}
     body.dark .site-title{background:linear-gradient(135deg,#fff 30%,var(--gold-light) 70%,var(--violet) 100%);-webkit-background-clip:text;background-clip:text}
-    .site-subtitle{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-muted)}
+    .site-subtitle{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-muted)}
     /* Theme toggle */
-    .theme-toggle{position:fixed;top:18px;right:18px;z-index:100;background:var(--card);border:1.5px solid var(--border-light);border-radius:100px;padding:8px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);transition:all .2s}
+    .theme-toggle{position:fixed;top:18px;right:18px;z-index:100;background:var(--card);border:1.5px solid var(--border-light);border-radius:100px;padding:8px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);transition:all .2s}
     .theme-toggle:hover{border-color:var(--violet);color:var(--ink)}
     .theme-toggle svg{width:14px;height:14px;flex-shrink:0}
     /* Nav */
     .nav-strip{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:16px 0 32px;border-bottom:1px solid var(--border);margin-bottom:36px}
-    .nav-pill{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:7px 16px;border-radius:100px;border:1px solid var(--border-light);background:transparent;color:var(--ink-muted);cursor:pointer;transition:all .2s}
+    .nav-pill{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:7px 16px;border-radius:100px;border:1px solid var(--border-light);background:transparent;color:var(--ink-muted);cursor:pointer;transition:all .2s}
     .nav-pill:hover{border-color:var(--violet);color:var(--violet);background:var(--violet-dim)}
     .nav-pill.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
     /* Progress */
     .progress-wrap{margin-bottom:36px;display:none}
-    .progress-meta{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;color:var(--ink-muted);margin-bottom:8px}
+    .progress-meta{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--ink-muted);margin-bottom:8px}
     .progress-track{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
     .progress-fill{height:100%;background:linear-gradient(90deg,var(--violet),var(--gold));border-radius:2px;transition:width .6s cubic-bezier(.4,0,.2,1);width:0%}
     /* Cards */
@@ -70,15 +70,15 @@
     .card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(155,109,232,.03) 0%,transparent 50%);pointer-events:none}
     .card.active{display:block}
     @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-    .section-label{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--violet);background:var(--violet-dim);border:1px solid rgba(155,109,232,.3);padding:4px 12px;border-radius:100px;margin-bottom:16px}
-    .section-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink);margin-bottom:8px;line-height:1.2}
-    .section-desc{font-size:14px;color:var(--ink-muted);margin-bottom:30px;font-style:italic;line-height:1.7}
+    .section-label{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--violet);background:var(--violet-dim);border:1px solid rgba(155,109,232,.3);padding:4px 12px;border-radius:100px;margin-bottom:16px}
+    .section-title{font-family:'Fraunces',serif;font-size:28px;font-weight:700;color:var(--ink);margin-bottom:8px;line-height:1.2}
+    .section-desc{font-size:14px;color:var(--ink-muted);margin-bottom:30px;font-style:normal;line-height:1.7}
     /* Q Block */
     .q-block{padding:24px 0;border-bottom:1px solid var(--border)}
     .q-block:last-of-type{border-bottom:none}
-    .q-num{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.18em;color:var(--gold);margin-bottom:10px;text-transform:uppercase}
+    .q-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--gold);margin-bottom:10px;text-transform:uppercase}
     .q-text{font-size:16px;line-height:1.8;color:var(--ink);margin-bottom:18px}
-    .q-passage{font-size:14px;line-height:1.8;background:var(--card2);border-left:3px solid var(--violet);padding:16px 20px;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:18px;color:var(--ink-muted);font-style:italic}
+    .q-passage{font-size:14px;line-height:1.8;background:var(--card2);border-left:3px solid var(--violet);padding:16px 20px;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:18px;color:var(--ink-muted);font-style:normal}
     /* MCQ */
     .mcq-options{display:flex;flex-direction:column;gap:8px}
     .mcq-btn{display:flex;align-items:center;gap:14px;padding:13px 18px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--surface);cursor:pointer;font-family:'Inter',sans-serif;font-size:15px;color:var(--ink);text-align:left;width:100%;transition:border-color .2s,background .2s,transform .1s}
@@ -86,7 +86,7 @@
     .mcq-btn.selected{border-color:var(--gold);background:var(--gold-dim)}
     .mcq-btn.correct{border-color:var(--teal)!important;background:var(--teal-dim)!important;color:var(--teal)!important}
     .mcq-btn.wrong{border-color:var(--crimson)!important;background:var(--rose-dim)!important;color:var(--crimson)!important}
-    .opt-letter{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--ink-faint);min-width:18px;flex-shrink:0;background:var(--card2);border-radius:4px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border)}
+    .opt-letter{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);min-width:18px;flex-shrink:0;background:var(--card2);border-radius:4px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border)}
     .mcq-btn.selected .opt-letter{border-color:var(--gold);color:var(--gold)}
     .mcq-btn.correct .opt-letter{border-color:var(--teal);color:var(--teal);background:rgba(62,207,168,.15)}
     .mcq-btn.wrong .opt-letter{border-color:var(--crimson);color:var(--crimson)}
@@ -96,31 +96,31 @@
     .blank-input.correct{border-color:var(--teal);color:var(--teal)}
     .blank-input.wrong{border-color:var(--crimson);color:var(--crimson)}
     /* Explain reveal */
-    .explain-reveal{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-muted);margin-top:10px;display:none;line-height:1.7;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:var(--radius);border-left:2px solid var(--ink-faint)}
+    .explain-reveal{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-muted);margin-top:10px;display:none;line-height:1.7;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:var(--radius);border-left:2px solid var(--ink-faint)}
     body.dark .explain-reveal{background:rgba(0,0,0,.03)}
     /* Writing area */
     .writing-area{width:100%;min-height:200px;padding:18px 20px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--surface);font-family:'Inter',sans-serif;font-size:16px;line-height:1.85;color:var(--ink);resize:vertical;outline:none;transition:border-color .2s}
     .writing-area:focus{border-color:var(--violet)}
     .word-count{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);text-align:right;margin-top:6px}
     /* Tip box */
-    .tip-box{border-left:2px solid var(--violet);padding:12px 16px;background:var(--violet-dim);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-muted);line-height:1.8;letter-spacing:.03em;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:20px}
+    .tip-box{border-left:2px solid var(--violet);padding:12px 16px;background:var(--violet-dim);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-muted);line-height:1.8;letter-spacing:.03em;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:20px}
     /* Feedback */
     .feedback-box{margin-top:22px;padding:22px 26px;background:linear-gradient(135deg,rgba(155,109,232,.07),rgba(212,168,67,.04));border:1px solid rgba(155,109,232,.2);border-radius:var(--radius-lg);display:none;animation:rise .3s ease}
     .feedback-box.visible{display:block}
-    .feedback-label{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);margin-bottom:12px}
+    .feedback-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);margin-bottom:12px}
     .feedback-text{font-size:15px;line-height:1.8;color:var(--ink)}
     .feedback-score{display:inline-block;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold-light);letter-spacing:.08em;padding:6px 14px;background:var(--gold-dim);border-radius:100px;border:1px solid rgba(212,168,67,.3)}
     body.dark .feedback-score{color:var(--gold)}
     /* Rubric grid */
     .rubric-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
-    .rubric-item{padding:9px 13px;border-radius:var(--radius);font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+    .rubric-item{padding:9px 13px;border-radius:var(--radius);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;display:flex;align-items:center;gap:8px}
     .rubric-item.pass{background:var(--teal-dim);border:1px solid rgba(14,143,106,.3);color:var(--teal)}
 
     .rubric-item.fail{background:var(--rose-dim);border:1px solid rgba(184,48,96,.25);color:var(--crimson)}
 
     .rubric-item.partial{background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.25);color:var(--gold)}
     /* Buttons */
-    .btn{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:13px 28px;border:1.5px solid var(--gold);background:var(--gold);color:#09080a;font-weight:700;cursor:pointer;border-radius:var(--radius);transition:background .2s,border-color .2s,opacity .2s,transform .15s}
+    .btn{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:13px 28px;border:1.5px solid var(--gold);background:var(--gold);color:#09080a;font-weight:700;cursor:pointer;border-radius:var(--radius);transition:background .2s,border-color .2s,opacity .2s,transform .15s}
     .btn:hover:not(:disabled){background:var(--gold-light);border-color:var(--gold-light);transform:translateY(-2px)}
     .btn:active:not(:disabled){transform:translateY(0)}
     .btn:disabled{opacity:.3;cursor:not-allowed}
@@ -128,14 +128,14 @@
     .btn-ghost:hover:not(:disabled){background:var(--surface);border-color:var(--violet);color:var(--ink)}
     .btn-violet{background:var(--violet);border-color:var(--violet);color:#fff}
     .btn-violet:hover:not(:disabled){background:#b07ff5;border-color:#b07ff5}
-    .btn-sm{padding:9px 20px;font-size:8px}
+    .btn-sm{padding:9px 20px;font-size:11px}
     .btn-row{display:flex;align-items:center;gap:12px;margin-top:24px;flex-wrap:wrap}
     /* Divider */
     .divider{display:flex;align-items:center;gap:14px;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;margin:30px 0}
     .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
     /* Home hub */
-    .hub-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;text-align:center;margin-bottom:6px;color:var(--ink)}
-    .hub-sub{text-align:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-muted);letter-spacing:.12em;margin-bottom:32px}
+    .hub-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;text-align:center;margin-bottom:6px;color:var(--ink)}
+    .hub-sub{text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-muted);letter-spacing:.12em;margin-bottom:32px}
     .hub-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
     @media(max-width:540px){.hub-grid{grid-template-columns:1fr}}
     .hub-card{border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:26px 22px;cursor:pointer;background:var(--surface);transition:border-color .25s,background .25s,transform .25s;position:relative;overflow:hidden}
@@ -149,10 +149,10 @@
     .hub-card.teal-card::after{background:linear-gradient(135deg,rgba(62,207,168,.07),transparent)}
     .hub-card.teal-card:hover{border-color:var(--teal)}
     .hub-card-icon{margin-bottom:12px;display:block;width:38px;height:38px}
-    .hub-card-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.3}
-    .hub-card-meta{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;color:var(--ink-muted);margin-bottom:10px}
+    .hub-card-title{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.3}
+    .hub-card-meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--ink-muted);margin-bottom:10px}
     .hub-card-desc{font-size:13px;color:var(--ink-muted);line-height:1.6}
-    .hub-card-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:100px;margin-top:12px}
+    .hub-card-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:100px;margin-top:12px}
     .badge-violet{background:var(--violet-dim);color:var(--violet);border:1px solid rgba(155,109,232,.3)}
     .badge-gold{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,.3)}
     .badge-teal{background:var(--teal-dim);color:var(--teal);border:1px solid rgba(62,207,168,.3)}
@@ -161,8 +161,8 @@
     .full-test-row:hover{border-color:var(--gold);transform:translateY(-2px)}
     .full-test-icon{width:34px;height:34px;flex-shrink:0}
     .full-test-info{flex:1}
-    .full-test-title{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:2px}
-    .full-test-meta{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--ink-muted);letter-spacing:.1em}
+    .full-test-title{font-family:'Fraunces',serif;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:2px}
+    .full-test-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-muted);letter-spacing:.1em}
     /* Score page */
     .result-center{text-align:center;padding:50px 20px 30px}
     .score-ring-wrap{width:160px;height:160px;margin:0 auto 24px;position:relative}
@@ -170,42 +170,42 @@
     .score-ring::before{content:'';position:absolute;inset:-5px;border-radius:50%;border:5px solid transparent;border-top-color:var(--violet);border-right-color:var(--gold);animation:spin 3s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
     .score-pct{font-family:'JetBrains Mono',monospace;font-size:2.2rem;font-weight:700;background:linear-gradient(135deg,var(--violet),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .score-pct-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--ink-faint);letter-spacing:.15em}
-    .big-grade{font-family:'Playfair Display',serif;font-size:80px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:6px;text-shadow:0 0 40px rgba(212,168,67,.3)}
-    .grade-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:32px}
+    .score-pct-lbl{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);letter-spacing:.15em}
+    .big-grade{font-family:'Fraunces',serif;font-size:80px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:6px;text-shadow:0 0 40px rgba(212,168,67,.3)}
+    .grade-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:32px}
     .score-table{max-width:440px;margin:0 auto 32px;display:flex;flex-direction:column;gap:8px;text-align:left}
     .score-row{display:flex;justify-content:space-between;align-items:center;padding:13px 18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
-    .score-row-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--ink-muted);letter-spacing:.05em}
+    .score-row-lbl{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-muted);letter-spacing:.05em}
     .score-row-val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;color:var(--gold-light)}
     body.dark .score-row-val{color:var(--gold)}
     .score-total-row{background:var(--card2)!important;border-color:var(--border-light)!important}
     .score-total-row .score-row-lbl{color:var(--ink)}
     .score-total-row .score-row-val{font-size:14px;color:var(--gold)}
-    .quiz-strip{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-muted);margin-bottom:16px;padding:10px 14px;background:var(--card2);border-radius:var(--radius);border:1px solid var(--border)}
-    .back-link{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;padding:6px 12px;border:1px solid var(--border);border-radius:100px;transition:all .2s;background:transparent}
+    .quiz-strip{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-muted);margin-bottom:16px;padding:10px 14px;background:var(--card2);border-radius:var(--radius);border:1px solid var(--border)}
+    .back-link{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;padding:6px 12px;border:1px solid var(--border);border-radius:100px;transition:all .2s;background:transparent}
     .back-link:hover{color:var(--ink);border-color:var(--border-light)}
     @media(max-width:600px){.card{padding:26px 22px}.site-header{padding:36px 0 28px}.rubric-grid{grid-template-columns:1fr}.hub-grid{grid-template-columns:1fr}}
     .hero{text-align:center;padding:1rem 0 0}
-    .hero-chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--gold);border:1px solid var(--gold);padding:.3rem .9rem;border-radius:100px;margin-bottom:1.5rem;letter-spacing:.1em;text-transform:uppercase;animation:pulse-border 3s ease-in-out infinite}
+    .hero-chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--gold);border:1px solid var(--gold);padding:.3rem .9rem;border-radius:100px;margin-bottom:1.5rem;letter-spacing:.1em;text-transform:uppercase;animation:pulse-border 3s ease-in-out infinite}
     @keyframes pulse-border{0%,100%{box-shadow:0 0 0 0 rgba(212,168,67,0)}50%{box-shadow:0 0 0 6px rgba(212,168,67,.12)}}
     /* Syllabus bubble */
     .syllabus-bubble{background:var(--card2);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:22px 28px;margin-bottom:32px}
     .syllabus-header{display:flex;align-items:center;gap:14px;margin-bottom:14px}
-    .syllabus-eyebrow{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+    .syllabus-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
     .syllabus-divider{flex:1;height:1px;background:var(--border)}
     .syllabus-list{list-style:none;display:flex;flex-direction:column;gap:6px}
     .syllabus-list li{font-size:14px;color:var(--ink-muted);padding-left:18px;position:relative}
     .syllabus-list li::before{content:'◆';position:absolute;left:0;color:var(--violet);font-size:8px;top:4px}
     /* Notes styles */
     .notes-body{font-size:15px;line-height:1.8;color:var(--ink)}
-    .notes-h2{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
-    .notes-h3{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:18px 0 8px}
+    .notes-h2{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--ink);margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+    .notes-h3{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:18px 0 8px}
     .notes-p{color:var(--ink-muted);margin-bottom:10px}
     .notes-ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
     .notes-ul li{padding-left:20px;position:relative;color:var(--ink-muted)}
     .notes-ul li::before{content:'→';position:absolute;left:0;color:var(--violet);font-size:12px}
-    .notes-example{background:var(--card2);border-left:3px solid var(--gold);padding:12px 16px;border-radius:0 var(--radius) var(--radius) 0;font-style:italic;font-size:14px;color:var(--ink-muted);margin:12px 0;line-height:1.7}
-    .notes-example strong{display:block;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+    .notes-example{background:var(--card2);border-left:3px solid var(--gold);padding:12px 16px;border-radius:0 var(--radius) var(--radius) 0;font-style:normal;font-size:14px;color:var(--ink-muted);margin:12px 0;line-height:1.7}
+    .notes-example strong{display:block;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
     .notes-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
     @media(max-width:540px){.notes-grid{grid-template-columns:1fr}}
     .note-card{border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:22px 18px;cursor:pointer;background:var(--surface);transition:border-color .25s,transform .25s}
@@ -215,18 +215,45 @@
     .note-card.rose-card:hover{border-color:var(--rose)}
     .note-card.teal-card:hover{border-color:var(--teal)}
     .note-card-icon{width:32px;height:32px;margin-bottom:10px;display:block}
-    .note-card-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:2px}
-    .note-card-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--ink-muted);letter-spacing:.08em}
-    .notes-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin:2px 3px 2px 0}
+    .note-card-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:2px}
+    .note-card-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-muted);letter-spacing:.08em}
+    .notes-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin:2px 3px 2px 0}
     .tag-violet{background:var(--violet-dim);color:var(--violet);border:1px solid rgba(155,109,232,.3)}
     .tag-gold{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,.3)}
     .tag-teal{background:var(--teal-dim);color:var(--teal);border:1px solid rgba(62,207,168,.3)}
     .tag-rose{background:var(--rose-dim);color:var(--rose);border:1px solid rgba(224,90,122,.3)}
     .notes-divider{border:none;border-top:1px solid var(--border);margin:28px 0}
+    /* Poem Viewer */
+    .poem-viewer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}
+    .poem-viewer-overlay.open{display:flex}
+    .poem-viewer-box{background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius-lg);max-width:680px;width:100%;max-height:90vh;overflow-y:auto;padding:40px 44px;position:relative;animation:rise .3s ease}
+    .poem-viewer-close{position:sticky;top:-40px;margin:-30px -34px 20px;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;background:var(--surface);border-bottom:1px solid var(--border);border-radius:var(--radius-lg) var(--radius-lg) 0 0;z-index:10}
+    .poem-viewer-title{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--ink)}
+    .poem-viewer-author{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+    .poem-line{cursor:pointer;transition:background .15s,padding-left .15s;border-radius:4px;padding:3px 8px;margin:0 -8px;line-height:2;color:var(--ink-muted);font-style:normal;font-size:16px;font-family:'Inter',sans-serif}
+    .poem-line:hover{background:var(--violet-dim);color:var(--ink);padding-left:14px}
+    .poem-line-explain{display:none;font-family:'Inter',sans-serif;font-size:14px;color:var(--ink-muted);line-height:1.75;padding:10px 16px;background:linear-gradient(135deg,rgba(155,109,232,.07),rgba(212,168,67,.04));border-left:2px solid var(--violet);border-radius:0 var(--radius) var(--radius) 0;margin:4px 0 8px 8px}
+    .poem-line-explain.open{display:block}
+    .poem-viewer-hint{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);text-align:center;margin:18px 0 0;letter-spacing:.08em}
+    /* Poem buttons strip */
+    .poem-btn-strip{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+    .poem-btn{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border:1.5px solid var(--border-light);border-radius:100px;background:transparent;color:var(--ink-muted);cursor:pointer;transition:all .2s}
+    .poem-btn:hover{border-color:var(--violet);color:var(--violet);background:var(--violet-dim)}
+    /* Essay intro viewer */
+    .essay-intro-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}
+    .essay-intro-overlay.open{display:flex}
+    .essay-intro-box{background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius-lg);max-width:680px;width:100%;max-height:90vh;overflow-y:auto;padding:40px 44px;position:relative;animation:rise .3s ease}
+    .essay-intro-close-bar{position:sticky;top:-40px;margin:-30px -34px 20px;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;background:var(--surface);border-bottom:1px solid var(--border);border-radius:var(--radius-lg) var(--radius-lg) 0 0;z-index:10}
+    .ei-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-right:8px}
+    .ei-hook{background:var(--violet-dim);color:var(--violet);border:1px solid rgba(155,109,232,.3)}
+    .ei-bridge{background:var(--teal-dim);color:var(--teal);border:1px solid rgba(62,207,168,.3)}
+    .ei-thesis{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(212,168,67,.3)}
+    .ei-para{font-size:15px;line-height:1.9;color:var(--ink);margin:8px 0 20px;padding:14px 18px;background:var(--card2);border-radius:var(--radius)}
+    .essay-btn-strip{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
     .notes-key-box{background:linear-gradient(135deg,rgba(155,109,232,.07),rgba(212,168,67,.05));border:1px solid rgba(155,109,232,.3);border-radius:var(--radius);padding:16px 20px;margin:16px 0}
     .notes-key-box-title{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--violet);margin-bottom:10px}
     .notes-table{width:100%;border-collapse:collapse;font-size:14px;margin:14px 0 20px}
-    .notes-table th{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:var(--card2);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
+    .notes-table th{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:var(--card2);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
     .notes-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--ink);vertical-align:top;line-height:1.6}
     .notes-table tr:last-child td{border-bottom:none}
     .notes-table tr:hover td{background:rgba(155,109,232,.04)}
@@ -238,21 +265,21 @@
     .interview-input{border:none;background:transparent;font-family:'Inter',sans-serif;font-size:15px;color:var(--ink);outline:none;border-bottom:1.5px solid var(--border);width:100%;padding:2px 0 4px;transition:border-color .2s}
     .interview-input:focus{border-color:var(--violet)}
     /* Poem box */
-    .poem-box{background:var(--card2);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:24px;font-family:'Inter',sans-serif;font-size:15px;line-height:2.1;color:var(--ink-muted);font-style:italic}
-    .poem-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);font-style:normal;margin-bottom:4px}
+    .poem-box{background:var(--card2);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:24px;font-family:'Inter',sans-serif;font-size:15px;line-height:2.1;color:var(--ink-muted);font-style:normal}
+    .poem-title{font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--ink);font-style:normal;margin-bottom:4px}
     .poem-author{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.15em;color:var(--gold);margin-bottom:20px;font-style:normal;text-transform:uppercase}
     .poem-stanza{margin-bottom:18px}
     .comp-answer{width:100%;min-height:90px;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--surface);font-family:'Inter',sans-serif;font-size:15px;color:var(--ink);resize:vertical;outline:none;transition:border-color .2s;line-height:1.7}
     .comp-answer:focus{border-color:var(--violet)}
     .comp-answer.correct-ans{border-color:var(--teal)!important}
     .comp-answer.wrong-ans{border-color:var(--crimson)!important}
-    .marks-badge{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--violet);background:var(--violet-dim);border:1px solid rgba(155,109,232,.3);padding:2px 8px;border-radius:100px;margin-left:8px;letter-spacing:.08em}
+    .marks-badge{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--violet);background:var(--violet-dim);border:1px solid rgba(155,109,232,.3);padding:2px 8px;border-radius:100px;margin-left:8px;letter-spacing:.08em}
     /* Essay section */
     .essay-breakdown{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0 22px}
     @media(max-width:540px){.essay-breakdown{grid-template-columns:1fr}}
     .essay-part{border:1px solid var(--border);border-radius:var(--radius);padding:14px;background:var(--surface)}
-    .essay-part-label{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-    .essay-part-desc{font-size:12px;color:var(--ink-muted);line-height:1.6}
+    .essay-part-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+    .essay-part-desc{font-size:13px;color:var(--ink-muted);line-height:1.6}
     .essay-part-result{margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:9px}
     .essay-part-result.found{color:var(--teal)}
     .essay-part-result.missing{color:var(--crimson)}
@@ -287,7 +314,23 @@
       <li>Essay Introduction — Hook, Bridge &amp; Thesis Statement</li>
       <li>Interview Activity — Structured interview questions &amp; responses</li>
       <li>Comprehension — Poem analysis with guided questions</li>
+      <li><strong>Poems for Comprehension:</strong> <em>Ozymandias</em> (Shelley) · <em>If—</em> (Kipling) · <em>We Wear the Mask</em> (Dunbar)</li>
+      <li><strong>Essay Topics:</strong> An investment in knowledge pays the best interest · Young people are obsessed with fame · The One Who Uses Force is Afraid of Reasoning</li>
     </ul>
+    <div style="margin-top:16px">
+      <div class="syllabus-eyebrow" style="margin-bottom:10px">◆ Poems — Click to Read &amp; Explore</div>
+      <div class="poem-btn-strip">
+        <button class="poem-btn" onclick="openPoemViewer('ozymandias')">Ozymandias — Shelley</button>
+        <button class="poem-btn" onclick="openPoemViewer('if')">If— — Kipling</button>
+        <button class="poem-btn" onclick="openPoemViewer('mask')">We Wear the Mask — Dunbar</button>
+      </div>
+      <div class="syllabus-eyebrow" style="margin-bottom:10px;margin-top:16px">◆ Essay Introductions — Click to See Model Answer</div>
+      <div class="essay-btn-strip">
+        <button class="poem-btn" onclick="openEssayIntro('knowledge')" style="border-color:rgba(212,168,67,.4);color:var(--gold)">Knowledge Pays Best Interest</button>
+        <button class="poem-btn" onclick="openEssayIntro('fame')" style="border-color:rgba(212,168,67,.4);color:var(--gold)">Fame &amp; Celebrity Obsession</button>
+        <button class="poem-btn" onclick="openEssayIntro('force')" style="border-color:rgba(212,168,67,.4);color:var(--gold)">Force vs Reasoning</button>
+      </div>
+    </div>
   </div>
 
   <div class="progress-wrap" id="progress-wrap">
@@ -431,14 +474,22 @@
     <button class="back-link" onclick="goHome()">← Back to Hub</button>
     <div class="section-label">Section IV</div>
     <div class="section-title">Poem Comprehension</div>
-    <div class="section-desc">Read the poem carefully, then answer the questions that follow. Support your answers with evidence from the poem where asked.</div>
+    <div class="section-desc">Choose a poem below, then answer the comprehension questions that follow. Support your answers with evidence from the poem where asked.</div>
+    <div id="comp-poem-selector">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Select a Poem</div>
+      <div class="poem-btn-strip">
+        <button class="poem-btn" onclick="loadCompPoem('ozymandias')">Ozymandias — Shelley</button>
+        <button class="poem-btn" onclick="loadCompPoem('if')">If— — Kipling</button>
+        <button class="poem-btn" onclick="loadCompPoem('mask')">We Wear the Mask — Dunbar</button>
+      </div>
+    </div>
     <div id="poem-container"></div>
     <div id="comp-questions-container"></div>
     <div class="feedback-box" id="feedback-comp">
       <div class="feedback-label">◆ Comprehension Feedback</div>
       <div class="feedback-text" id="feedback-comp-text"></div>
     </div>
-    <div class="btn-row">
+    <div class="btn-row" id="comp-action-row" style="display:none">
       <button class="btn btn-sm btn-ghost" onclick="checkComprehension()">Check Answers</button>
       <button class="btn" id="next-4" onclick="nextFromSection(4)" disabled>View Results →</button>
     </div>
@@ -648,6 +699,32 @@
 
 </div><!-- end .wrap -->
 
+<!-- ══ POEM VIEWER OVERLAY ══ -->
+<div class="poem-viewer-overlay" id="poem-viewer-overlay" onclick="closePoemViewer(event)">
+  <div class="poem-viewer-box" id="poem-viewer-box">
+    <div class="poem-viewer-close">
+      <div>
+        <div class="poem-viewer-title" id="pv-title"></div>
+        <div class="poem-viewer-author" id="pv-author"></div>
+      </div>
+      <button class="btn btn-sm btn-ghost" onclick="closePoemViewer()">✕ Close</button>
+    </div>
+    <div id="pv-content"></div>
+    <div class="poem-viewer-hint">Click any line to see its explanation</div>
+  </div>
+</div>
+
+<!-- ══ ESSAY INTRO OVERLAY ══ -->
+<div class="essay-intro-overlay" id="essay-intro-overlay" onclick="closeEssayIntro(event)">
+  <div class="essay-intro-box" id="essay-intro-box">
+    <div class="essay-intro-close-bar">
+      <div style="font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--ink)" id="ei-title"></div>
+      <button class="btn btn-sm btn-ghost" onclick="closeEssayIntro()">✕ Close</button>
+    </div>
+    <div id="ei-content"></div>
+  </div>
+</div>
+
 <script>
 /* ═══════════ THEME TOGGLE ═══════════ */
 function toggleTheme(){
@@ -695,6 +772,9 @@ const essayTopics = [
   'Students should be allowed to choose their own subjects from the age of 12.',
   'Kindness is more important than intelligence.',
   'City life is better than country life.',
+  'An investment in knowledge pays the best interest.',
+  'Young people are obsessed with fame and imitating celebrities.',
+  'The One Who Uses Force is Afraid of Reasoning.',
 ];
 
 /* --- INTERVIEW QUESTION SETS --- */
@@ -736,48 +816,6 @@ const interviewSets = [
 /* --- POEMS & COMPREHENSION --- */
 const poems = [
   {
-    title: 'The Road Not Taken',
-    author: 'Robert Frost',
-    text: [
-      'Two roads diverged in a yellow wood,\nAnd sorry I could not travel both\nAnd be one traveler, long I stood\nAnd looked down one as far as I could\nTo where it bent in the undergrowth;',
-      'Then took the other, as just as fair,\nAnd having perhaps the better claim,\nBecause it was grassy and wanted wear;\nThough as for that the passing there\nHad worn them really about the same,',
-      'And both that morning equally lay\nIn leaves no step had trodden black.\nOh, I kept the first for another day!\nYet knowing how way leads on to way,\nI doubted if I should ever come back.',
-      'I shall be telling this with a sigh\nSomewhere ages and ages hence:\nTwo roads diverged in a wood, and I—\nI took the one less traveled by,\nAnd that has made all the difference.'
-    ],
-    questions: [
-      {
-        q: 'What is the speaker trying to decide at the start of the poem?',
-        marks: 2,
-        keywords: ['road','path','choice','direction','which way','travel','both roads','decide'],
-        model: 'The speaker is standing at a fork in the road in a forest and is trying to decide which of two paths to take, as he cannot travel both.'
-      },
-      {
-        q: 'What do the two roads in this poem most likely represent?',
-        marks: 3,
-        keywords: ['choice','life','decision','opportunities','metaphor','represent','symbolise','path in life','choices we make'],
-        model: 'The two roads are a metaphor for the choices we face in life. The speaker must choose one path and cannot go back, just as in real life our decisions shape who we become and where we end up.'
-      },
-      {
-        q: 'Find ONE example of imagery in the poem. Quote it and explain what picture it creates.',
-        marks: 3,
-        keywords: ['yellow wood','leaves','grassy','undergrowth','imagery','picture','creates','suggests','autumn','forest'],
-        model: 'An example of imagery is "a yellow wood," which creates a vivid picture of an autumn forest with golden leaves. It sets a calm, reflective mood that suits the speaker\'s thoughtful decision-making.'
-      },
-      {
-        q: 'How does the speaker feel about the choice he made? Use evidence from the poem to support your answer.',
-        marks: 4,
-        keywords: ['sigh','difference','all the difference','doubt','regret','satisfied','uncertain','telling','ages hence','looking back','reflection'],
-        model: 'The speaker seems both proud and slightly uncertain. The word "sigh" in the final stanza suggests a hint of regret or wistfulness. Yet the final line — "that has made all the difference" — shows he believes his choice was significant and meaningful, even if he cannot be sure it was right.'
-      },
-      {
-        q: 'What is the mood of the poem? Name the mood and explain how the poet creates it.',
-        marks: 3,
-        keywords: ['reflective','nostalgic','thoughtful','melancholic','wistful','mood','tone','creates','language','imagery','choice','regret'],
-        model: 'The mood is reflective and nostalgic. Frost creates this through quiet imagery of a peaceful forest and the speaker\'s slow, meditative voice. The use of past tense ("I took") and the phrase "ages and ages hence" suggests the speaker is looking back on a life-defining moment with a mixture of acceptance and wistfulness.'
-      },
-    ]
-  },
-  {
     title: 'If—',
     author: 'Rudyard Kipling',
     text: [
@@ -811,6 +849,36 @@ const poems = [
         keywords: ['repetition','if','builds','conditions','list','accumulates','emphasis','weight','mounting pressure','challenges','sense of challenge','conditional'],
         model: 'The repetition of "If" creates a series of conditions that mount up through the poem. Each line adds another challenge or test, which builds a sense of how demanding and difficult the ideal life the poet describes truly is. By the final stanza, the reader feels the full weight of what is being asked before the reward is revealed.'
       },
+    ]
+  },
+  {
+    title: 'Ozymandias',
+    author: 'Percy Bysshe Shelley',
+    text: [
+      'I met a traveller from an antique land,\nWho said—"Two vast and trunkless legs of stone\nStand in the desert. . . . Near them, on the sand,\nHalf sunk a shattered visage lies, whose frown,',
+      'And wrinkled lip, and sneer of cold command,\nTell that its sculptor well those passions read\nWhich yet survive, stamped on these lifeless things,\nThe hand that mocked them, and the heart that fed;',
+      'And on the pedestal, these words appear:\n    My name is Ozymandias, King of Kings;\n    Look on my Works, ye Mighty, and despair!\nNothing beside remains. Round the decay\nOf that colossal Wreck, boundless and bare\nThe lone and level sands stretch far away."'
+    ],
+    questions: [
+      { q:'What has the traveller seen in the desert? Describe it in your own words.', marks:2, keywords:['statue','legs','broken','face','desert','sand','ruins','stone','shattered'], model:'The traveller has seen the ruins of a giant stone statue in the desert. Only two legs remain standing; nearby, a broken stone face lies half-buried in the sand beside a pedestal with an inscription.' },
+      { q:'What does the phrase "sneer of cold command" tell us about Ozymandias as a ruler?', marks:3, keywords:['arrogant','cruel','cold','power','contempt','sneering','authoritarian','ruthless','proud'], model:'"Sneer of cold command" tells us Ozymandias was an arrogant, ruthless ruler. "Cold" suggests emotional distance and cruelty; "sneer" implies contempt for those beneath him. He ruled not with warmth but with intimidating authority.' },
+      { q:'Explain the irony in the inscription "Look on my Works, ye Mighty, and despair!"', marks:4, keywords:['irony','nothing remains','ruin','decay','empty','no works','desert','boast','pride','contrast','destroyed','sand'], model:'The irony is that the inscription commands powerful rulers to despair at his great achievements — yet nothing remains. The "Works" he boasted of are entirely gone; all that exists is rubble and sand. The boast meant to intimidate now reads as a warning about the vanity of earthly power.' },
+      { q:'What is the theme of the poem? Explain how Shelley conveys it.', marks:4, keywords:['power','decay','time','mortality','pride','hubris','fleeting','nothing lasts','nature','humility','vanity'], model:'The theme is the inevitable decay of power and human pride. Shelley conveys this through the contrast between the king\'s boastful inscription and the surrounding emptiness — "Nothing beside remains." The image of "lone and level sands" stretching endlessly suggests that nature and time outlast all human ambition.' },
+    ]
+  },
+  {
+    title: 'We Wear the Mask',
+    author: 'Paul Laurence Dunbar',
+    text: [
+      'We wear the mask that grins and lies,\nIt hides our cheeks and shades our eyes,—\nThis debt we pay to human guile;\nWith torn and bleeding hearts we smile,\nAnd mouth with myriad subtleties.',
+      'Why should the world be over-wise,\nIn counting all our tears and sighs?\nNay, let them only see us, while\n    We wear the mask!',
+      'We smile, but, O great Christ, our cries\nTo thee from tortured souls arise.\nWe sing, but oh the clay is vile\nBeneath our feet, and long the mile;\nBut let the world dream otherwise,\n    We wear the mask!'
+    ],
+    questions: [
+      { q:'What does the "mask" represent in this poem?', marks:2, keywords:['false face','pretend','hide','pain','suffering','smile','disguise','concealment','performance'], model:'The mask represents the false, smiling expression worn to conceal true suffering and pain. It is a metaphor for hiding genuine emotions — grief, anger, and anguish — behind a performance of happiness for the outside world.' },
+      { q:'Explain the contrast between "torn and bleeding hearts" and "we smile."', marks:3, keywords:['contrast','inside','outside','suffering','pain','hidden','false','public','private','torn','smile','opposite'], model:'"Torn and bleeding hearts" describes intense internal suffering — raw, violent emotional pain. "We smile" is the opposite: the outward expression shown to the world. The contrast highlights the exhausting gap between private anguish and public performance.' },
+      { q:'How does the repetition of "We wear the mask!" affect the poem?', marks:3, keywords:['repetition','refrain','emphasis','defiance','endurance','collective','persistent','declaration','pride','chorus'], model:'The repeated refrain creates a sense of collective identity and defiant endurance. Rather than simply a lament, repetition turns it into a declaration — the mask is worn with dignity. It gives the poem a chant-like quality that emphasises persistence in the face of suffering.' },
+      { q:'What mood does Dunbar create in the final stanza, and how?', marks:4, keywords:['despair','anguish','spiritual','prayer','Christ','tortured','vile','long','endurance','resigned'], model:'Dunbar creates a mood of deep spiritual anguish. He appeals to "great Christ" suggesting prayer to God is the only place where the mask can be removed. Words like "tortured souls" and "vile" convey depth of suffering. Yet "We wear the mask!" ends with defiant endurance, adding a note of sorrowful pride.' },
     ]
   },
 ];
@@ -1155,25 +1223,50 @@ function submitInterview(){
 /* ═══════════════════════════════════════════════
    SECTION 4 — COMPREHENSION
 ═══════════════════════════════════════════════ */
-function loadSection4(){
-  currentPoem=pick(poems);
-  document.getElementById('feedback-comp').classList.remove('visible');
-  document.getElementById('next-4').disabled=true;
+const poemByKey = { 'if': poems[0], 'ozymandias': poems[1], 'mask': poems[2] };
 
-  // Build poem
-  let poemHTML=`<div class="poem-box">
+function loadSection4(){
+  currentPoem = null;
+  document.getElementById('comp-poem-selector').style.display = 'block';
+  document.getElementById('poem-container').innerHTML = '';
+  document.getElementById('comp-questions-container').innerHTML = '';
+  document.getElementById('feedback-comp').classList.remove('visible');
+  document.getElementById('comp-action-row').style.display = 'none';
+  document.getElementById('next-4').disabled = true;
+  // Reset selector button states
+  document.querySelectorAll('#comp-poem-selector .poem-btn').forEach(b => {
+    b.style.borderColor = ''; b.style.color = '';
+  });
+}
+
+function loadCompPoem(key){
+  currentPoem = poemByKey[key];
+  if(!currentPoem) return;
+
+  // Highlight selected button
+  document.querySelectorAll('#comp-poem-selector .poem-btn').forEach(b => {
+    b.style.borderColor = ''; b.style.color = '';
+  });
+  event.target.style.borderColor = 'var(--violet)';
+  event.target.style.color = 'var(--violet)';
+
+  document.getElementById('feedback-comp').classList.remove('visible');
+  document.getElementById('next-4').disabled = true;
+
+  // Build poem display
+  let poemHTML = `<div class="poem-box" style="margin-top:20px">
     <div class="poem-title">${currentPoem.title}</div>
     <div class="poem-author">— ${currentPoem.author}</div>`;
-  currentPoem.text.forEach(stanza=>{
-    poemHTML+=`<div class="poem-stanza">${stanza.replace(/\n/g,'<br>')}</div>`;
+  currentPoem.text.forEach(stanza => {
+    poemHTML += `<div class="poem-stanza">${stanza.replace(/\n/g,'<br>')}</div>`;
   });
-  poemHTML+=`</div>`;
-  document.getElementById('poem-container').innerHTML=poemHTML;
+  poemHTML += `</div>`;
+  document.getElementById('poem-container').innerHTML = poemHTML;
 
   // Build questions
-  let qHTML='';
-  currentPoem.questions.forEach((q,i)=>{
-    qHTML+=`<div class="q-block">
+  let qHTML = '';
+  currentPoem.questions.forEach((q, i) => {
+    qHTML += `<div class="q-block">
       <div class="q-num">Question ${i+1} <span class="marks-badge">[${q.marks} marks]</span></div>
       <div class="q-text">${q.q}</div>
       <textarea class="comp-answer" id="comp-ans-${i}" placeholder="Write your answer here…" style="min-height:${q.marks>=4?'120px':'80px'}" oninput="updateWordCount('comp-ans-${i}','comp-wc-${i}')"></textarea>
@@ -1181,10 +1274,12 @@ function loadSection4(){
       <div class="explain-reveal" id="comp-exp-${i}"></div>
     </div>`;
   });
-  document.getElementById('comp-questions-container').innerHTML=qHTML;
+  document.getElementById('comp-questions-container').innerHTML = qHTML;
+  document.getElementById('comp-action-row').style.display = 'flex';
 }
 
 function checkComprehension(){
+  if(!currentPoem) return;
   const questions=currentPoem.questions;
   let totalEarned=0;
   let totalPossible=0;
@@ -1284,6 +1379,201 @@ function showResults(){
 window.addEventListener('DOMContentLoaded',()=>{
   goHome();
 });
+
+/* ═══════════════════════════════════════════════
+   POEM VIEWER
+═══════════════════════════════════════════════ */
+const poemData = {
+  ozymandias: {
+    title: 'Ozymandias',
+    author: 'Percy Bysshe Shelley',
+    lines: [
+      { text: 'I met a traveller from an antique land,', exp: 'The poem opens with a framing device — the speaker is recounting a story told by another person. "Antique land" suggests Egypt, a civilisation of great ancient power. The indirect narration creates distance between us and the statue, making it feel mysterious.' },
+      { text: 'Who said—"Two vast and trunkless legs of stone', exp: '"Vast" emphasises the colossal scale of the statue. "Trunkless" (without a body) is immediately ironic — what was once enormous is now broken and incomplete. This introduces the theme of the decay of power.' },
+      { text: 'Stand in the desert. . . . Near them, on the sand,', exp: 'The setting — a vast, empty desert — creates a mood of desolation and loneliness. The ellipsis ("...") mimics the vast empty space and the pause of reflection. The sand surrounds the ruins, indifferent to what they once represented.' },
+      { text: 'Half sunk a shattered visage lies, whose frown,', exp: '"Shattered visage" (broken face) shows the destruction of what was once a powerful portrait. The "frown" tells us the ruler was stern and authoritarian. The face is now literally broken — a symbol of how tyrannical power crumbles.' },
+      { text: 'And wrinkled lip, and sneer of cold command,', exp: '"Sneer of cold command" is a powerful phrase revealing arrogance and contempt. The ruler commanded not with warmth but with cruelty. The adjective "cold" suggests emotional distance and ruthlessness.' },
+      { text: 'Tell that its sculptor well those passions read', exp: 'The sculptor understood and captured the king\'s arrogant personality perfectly. Ironically, it is the artist\'s work — not the king\'s empire — that has survived, suggesting art outlasts power.' },
+      { text: 'Which yet survive, stamped on these lifeless things,', exp: '"Lifeless things" — the stone — still carries the king\'s expression. The word "stamped" suggests force and aggression, as if even on stone, the king\'s character was imposed by violence.' },
+      { text: 'The hand that mocked them, and the heart that fed;', exp: 'The sculptor\'s hand "mocked" (imitated/reproduced) the king\'s passions, while the king\'s heart "fed" those passions. Both the creator and the subject are now gone — only stone remains. A quiet meditation on mortality.' },
+      { text: 'And on the pedestal, these words appear:', exp: 'The pedestal (base of the statue) once carried words meant to intimidate all who read them. The fact that the pedestal survives while the empire is gone gives these words a deeply ironic new meaning.' },
+      { text: '"My name is Ozymandias, King of Kings;', exp: '"King of Kings" is a boastful, grandiose title, echoing ancient rulers like Ramesses II. The first-person declaration feels arrogant and commanding — yet the king is now long dead. The contrast between this claim and the surrounding ruin is the heart of the poem.' },
+      { text: 'Look on my Works, ye Mighty, and despair!"', exp: 'The inscription commands other great rulers to look at his achievements and feel overwhelmed. Now, of course, there are no "Works" — only rubble. Shelley turns the king\'s boast into a bitter irony: the mighty should despair because power is temporary.' },
+      { text: 'Nothing beside remains. Round the decay', exp: '"Nothing beside remains" — three devastating words. The abrupt simplicity of this line is far more powerful than any grand statement. "Decay" is a key word, emphasising that ruin is a natural process that defeats all human ambition.' },
+      { text: 'Of that colossal Wreck, boundless and bare', exp: '"Colossal Wreck" contrasts greatness (colossal) with destruction (wreck). "Boundless and bare" — the desert stretches endlessly in all directions, empty and indifferent. The alliteration of \'b\' creates a hollow, echoing sound.' },
+      { text: 'The lone and level sands stretch far away."', exp: 'The final image: vast, flat, featureless sands. The alliteration ("lone… level") and the long \'a\' sounds in "sands… away" create a slow, echoing rhythm that feels like emptiness stretching forever. Nature — not the king — is what endures.' },
+    ]
+  },
+  if: {
+    title: 'If—',
+    author: 'Rudyard Kipling',
+    lines: [
+      { text: 'If you can keep your head when all about you', exp: '"Keep your head" means stay calm and rational. The poem immediately establishes its central virtue: self-control. The conditional "If" structures the whole poem — these are the conditions that must be met to be a truly admirable person.' },
+      { text: '    Are losing theirs and blaming it on you,', exp: 'Others may panic and blame you unjustly. The ability to remain composed while being wrongly criticised requires exceptional emotional strength. Kipling admires people who remain steady even when under unfair attack.' },
+      { text: 'If you can trust yourself when all men doubt you,', exp: 'Self-belief in the face of universal doubt is a mark of moral courage. However, the next line balances this — it is not blind arrogance, but self-belief tempered by humility.' },
+      { text: '    But make allowance for their doubting too;', exp: 'A crucial qualification: true confidence also allows for the possibility of being wrong. This shows Kipling values humility alongside self-assurance — a balance that prevents arrogance.' },
+      { text: 'If you can wait and not be tired by waiting,', exp: 'Patience is presented as a rare and difficult virtue. In a world that demands quick results, the ability to wait calmly without frustration shows true inner strength and emotional discipline.' },
+      { text: '    Or being lied about, don\'t deal in lies,', exp: 'Even when others use dishonesty against you, you must not respond in kind. This emphasises moral integrity — your character should not change in response to the failings of others.' },
+      { text: 'Or being hated, don\'t give way to hate,', exp: 'One of the poem\'s most powerful lines. Returning hate with hate is easy; refusing to do so requires genuine strength of character. Kipling presents love and forgiveness as signs of strength, not weakness.' },
+      { text: '    And yet don\'t look too good, nor talk too wise:', exp: 'A warning against self-righteousness. Even in virtue, do not perform your goodness to impress others. True morality is quiet and humble, not a display designed to win approval.' },
+      { text: 'If you can dream—and not make dreams your master;', exp: 'Dreams and ambitions are good, but they must not become obsessions. The em-dash creates a pause of emphasis. Kipling values imagination but warns against losing yourself in fantasy at the expense of practical action.' },
+      { text: '    If you can think—and not make thoughts your aim;', exp: 'Thinking and intellectual life are valuable — but thinking for the sake of it, without purpose or action, becomes self-indulgent. Thought should lead to something real.' },
+      { text: 'If you can meet with Triumph and Disaster', exp: '"Triumph and Disaster" are capitalised — personified as characters. This gives them a grand, almost mythological weight, but the next line immediately deflates them. They feel significant, but Kipling will argue they are equally deceptive.' },
+      { text: '    And treat those two impostors just the same;', exp: '"Impostors" is the key word. Both success and failure are false friends — they are not as permanent or meaningful as they feel in the moment. A truly wise person is not inflated by success or crushed by failure.' },
+      { text: 'Yours is the Earth and everything that\'s in it,', exp: 'The reward for meeting all these conditions is nothing less than the world itself. This is a metaphor for a rich, full life — someone who has achieved all these qualities will be able to engage fully with everything life offers.' },
+      { text: '    And—which is more—you\'ll be a Man, my son!', exp: 'The final line reveals the poem\'s recipient: the speaker\'s son. "Which is more" signals that being a Man (in Kipling\'s sense — a person of complete moral character) is the greatest achievement of all. This reveals the poem\'s deepest purpose: a father\'s wish for his child.' },
+    ]
+  },
+  mask: {
+    title: 'We Wear the Mask',
+    author: 'Paul Laurence Dunbar',
+    lines: [
+      { text: 'We wear the mask that grins and lies,', exp: 'The opening line introduces the central metaphor: a false mask of smiling happiness worn to hide true pain. "Grins and lies" — the grin is dishonest, a performance for the outside world. The "we" immediately creates a sense of collective suffering.' },
+      { text: 'It hides our cheeks and shades our eyes,—', exp: '"Hides" and "shades" — both words suggest concealment and darkness. The mask covers not just the face but the eyes (the windows to the soul), meaning observers cannot see the true emotional suffering beneath.' },
+      { text: 'This debt we pay to human guile;', exp: '"Human guile" means human deception and manipulation. The mask is a debt — it must be worn because of the dishonesty and cruelty of others (in Dunbar\'s context, the oppressive society that forced Black Americans to conceal their pain). The mask is a survival strategy, not a choice.' },
+      { text: 'With torn and bleeding hearts we smile,', exp: 'A powerful contrast: "torn and bleeding hearts" (raw internal suffering) versus "we smile" (the outward performance). The violence of "torn and bleeding" makes the forced smile feel deeply tragic. The suffering is invisible to outsiders.' },
+      { text: 'And mouth with myriad subtleties.', exp: '"Myriad subtleties" — the mask involves countless small, careful deceptions. The word "myriad" (countless) suggests just how exhausting and complex this performance is. Every word and expression must be carefully managed.' },
+      { text: 'Why should the world be over-wise,', exp: 'A rhetorical question: why should those outside understand the full truth of this suffering? There is bitterness here — the world is not willing to truly see or understand, so why offer them honesty? The mask protects dignity in an indifferent or hostile world.' },
+      { text: 'In counting all our tears and sighs?', exp: '"Counting all our tears and sighs" — a vivid image of grief measured and recorded. The outside world does not want to truly witness this suffering; it is easier for them not to know. The poem quietly condemns this willful ignorance.' },
+      { text: 'Nay, let them only see us, while', exp: '"Nay" (no) — a firm refusal. The decision to wear the mask is presented as deliberate, even defiant. Rather than beg for understanding, they choose what they reveal. There is a quiet, proud control in this choice.' },
+      { text: '    We wear the mask!', exp: 'The repetition of the title line here is emphatic and defiant. It now sounds less like a lament and more like a declaration. We wear it — we have chosen to wear it. The exclamation mark adds force, turning suffering into a kind of resistant pride.' },
+      { text: 'We smile, but, O great Christ, our cries', exp: 'A sudden, direct prayer. The appeal to "great Christ" shows the depth of spiritual anguish — this cry goes to God because no human audience will hear it. The contrast between the public "smile" and the private "cries" is at its most painful here.' },
+      { text: 'To thee from tortured souls arise.', exp: '"Tortured souls" — the strongest language in the poem. The internal world is one of profound anguish, completely invisible to the outside world. The prayer rises "to thee" (to God) — the only place where the mask can be removed.' },
+      { text: 'We sing, but oh the clay is vile', exp: '"Clay" refers to the earth — the earthly world is "vile" (degrading, corrupt). The singing is another public performance, like the smiling. Beneath it is moral outrage at the world that forces this concealment.' },
+      { text: 'Beneath our feet, and long the mile;', exp: '"Long the mile" — the journey through life is long and difficult. The earth beneath them is corrupt, the road ahead is hard. This is a quiet lament for the endurance required just to live with dignity in such a world.' },
+      { text: 'But let the world dream otherwise,', exp: 'The outside world can believe whatever it wants. The poem accepts that the world will not understand — it will "dream" (remain in pleasant ignorance). There is resignation here, but also a kind of protective irony.' },
+      { text: '    We wear the mask!', exp: 'The final repetition of the refrain, again with an exclamation. The poem ends where it began — the mask is still in place. But the reader now understands the full weight of what lies beneath it. The last line is both a cry and a declaration of endurance.' },
+    ]
+  }
+};
+
+const essayIntroData = {
+  knowledge: {
+    title: 'An investment in knowledge pays the best interest',
+    hook: 'What if the most valuable thing you could ever own cost nothing to carry, could never be stolen, and grew in value every time you used it?',
+    hookExp: 'This hook uses a rhetorical question to intrigue the reader immediately. It presents knowledge metaphorically as a unique type of "possession" — piquing curiosity before the topic is even named.',
+    bridge: 'Throughout history, the most successful individuals — scientists, leaders, artists — have been defined not by their wealth or status, but by their pursuit of learning. In a rapidly changing world, where careers shift and technologies evolve, knowledge is the one investment that adapts and multiplies with every experience.',
+    bridgeExp: 'The bridge provides historical and contemporary context, connecting the hook\'s abstract idea to real-world relevance. It broadens the topic before the thesis narrows it into a specific argument.',
+    thesis: 'An investment in knowledge pays the best interest because it empowers individuals to make better decisions, opens doors to career and personal growth, and creates a lasting legacy that wealth alone cannot provide.',
+    thesisExp: 'A strong thesis states the main claim directly and lists three specific supporting arguments — no preamble needed. Notice how it immediately commits to a position and gives the reader a clear roadmap for the essay without announcing itself.'
+  },
+  fame: {
+    title: 'Young people are obsessed with fame and imitating celebrities',
+    hook: 'A teenager spends four hours a day watching influencer videos, memorising their outfits, rehearsing their speech patterns, and dreaming of becoming just like them — is this a harmless aspiration, or a crisis of identity?',
+    hookExp: 'This hook uses a vivid, specific scenario to draw the reader in. It feels real and relatable, immediately raising the central concern of the essay before posing a provocative question that signals the debate to come.',
+    bridge: 'In the age of social media, celebrities and influencers have become the dominant role models for young people worldwide. Unlike previous generations, who looked to family, teachers, or local leaders for guidance, today\'s youth measure success and self-worth against the curated, often unrealistic lives they see online.',
+    bridgeExp: 'The bridge contextualises the issue within modern social media culture and introduces the generational contrast, helping to explain why this obsession has intensified in recent decades.',
+    thesis: 'Young people\'s obsession with fame and celebrities is ultimately harmful — it distorts their sense of self-worth, promotes unrealistic and unhealthy standards, and distracts them from developing their own authentic identities and values.',
+    thesisExp: 'The thesis opens with a direct, confident claim rather than announcing itself. The dash after "harmful" gives it emphasis before the three supporting arguments follow. This is how a thesis reads in polished essay writing — assertive and immediate.'
+  },
+  force: {
+    title: 'The One Who Uses Force is Afraid of Reasoning',
+    hook: 'History\'s most oppressive rulers — from ancient tyrants to modern dictators — shared one thing in common: they silenced debate, banned books, and punished questions. Why?',
+    hookExp: 'This hook uses a historical observation followed by a sharp rhetorical question. The "Why?" at the end creates immediate intellectual tension, compelling the reader to seek the answer — which the essay will provide.',
+    bridge: 'When arguments and evidence are powerful enough to stand on their own, persuasion requires no force. It is only when a position cannot withstand scrutiny that its defender resorts to intimidation, coercion, or violence. From playground bullying to international conflicts, the pattern is the same: force fills the space where reason fails.',
+    bridgeExp: 'The bridge moves from the historical hook to a logical principle, then applies it across different scales of human behaviour. This universalises the argument and prepares the reader for the thesis.',
+    thesis: 'Those who use force are fundamentally afraid of reasoning — because rational debate exposes the weakness of unjust positions, dialogue demands equality that the powerful wish to deny, and history shows that movements built on reason ultimately outlast those built on violence.',
+    thesisExp: 'The thesis makes a bold, direct claim without announcing itself. The dash creates a pause that separates the central argument from its three supporting reasons, giving the sentence rhythm and making it easy to follow. This is the mark of a confident, well-structured thesis.'
+  }
+};
+
+function openPoemViewer(key) {
+  const poem = poemData[key];
+  if (!poem) return;
+  document.getElementById('pv-title').textContent = poem.title;
+  document.getElementById('pv-author').textContent = '— ' + poem.author;
+
+  // Detect stanza breaks: a line whose text starts with whitespace or is blank
+  // We group consecutive non-blank lines into stanzas, splitting on indented lines that start a new stanza
+  // Simple heuristic: split into stanzas every 4 lines (standard for Ozymandias/If/Mask)
+  // Better: split wherever a line starts with 4+ spaces after a non-indented line — or just group by 4
+  // Use stanza property if defined, else auto-group by checking indentation pattern
+  let stanzas = [];
+  let currentStanza = [];
+  poem.lines.forEach((line, i) => {
+    // A new stanza starts when: we have accumulated lines AND the current line does NOT start with spaces
+    // AND the previous line did start with spaces (end of stanza couplet)
+    const isIndented = line.text.startsWith('    ');
+    currentStanza.push({ ...line, idx: i });
+    // End of stanza: indented line closes a stanza pair in If—; for others use 4-line groups
+    if (poem.title === 'If—') {
+      if (isIndented) {
+        stanzas.push(currentStanza);
+        currentStanza = [];
+      }
+    } else {
+      // For sonnets/other: group every 4 lines
+      if (currentStanza.length === 4) {
+        stanzas.push(currentStanza);
+        currentStanza = [];
+      }
+    }
+  });
+  if (currentStanza.length > 0) stanzas.push(currentStanza);
+
+  let html = '<div style="font-family:\'Inter\',sans-serif;line-height:2">';
+  stanzas.forEach((stanza, si) => {
+    html += `<div style="margin-bottom:24px;">`;
+    stanza.forEach(line => {
+      html += `<div class="poem-line" onclick="toggleLineExp(${line.idx})" data-idx="${line.idx}">${line.text}</div>
+      <div class="poem-line-explain" id="line-exp-${line.idx}">${line.exp}</div>`;
+    });
+    html += `</div>`;
+  });
+  html += '</div>';
+  document.getElementById('pv-content').innerHTML = html;
+  document.getElementById('poem-viewer-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function toggleLineExp(i) {
+  const el = document.getElementById('line-exp-' + i);
+  el.classList.toggle('open');
+}
+
+function closePoemViewer(e) {
+  if (e && e.target !== document.getElementById('poem-viewer-overlay')) return;
+  document.getElementById('poem-viewer-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function openEssayIntro(key) {
+  const data = essayIntroData[key];
+  if (!data) return;
+  document.getElementById('ei-title').textContent = '"' + data.title + '"';
+  let html = `
+    <p style="font-size:13px;color:var(--ink-muted);font-family:'JetBrains Mono',monospace;letter-spacing:.06em;margin-bottom:20px">Model Introduction — click each section to see the explanation</p>
+    <div style="margin-bottom:20px">
+      <span class="ei-label ei-hook">Hook</span>
+      <div class="ei-para" onclick="toggleEiExp('hook-exp')" style="cursor:pointer">${data.hook}</div>
+      <div class="poem-line-explain" id="hook-exp">${data.hookExp}</div>
+    </div>
+    <div style="margin-bottom:20px">
+      <span class="ei-label ei-bridge">Bridge</span>
+      <div class="ei-para" onclick="toggleEiExp('bridge-exp')" style="cursor:pointer">${data.bridge}</div>
+      <div class="poem-line-explain" id="bridge-exp">${data.bridgeExp}</div>
+    </div>
+    <div style="margin-bottom:20px">
+      <span class="ei-label ei-thesis">Thesis Statement</span>
+      <div class="ei-para" onclick="toggleEiExp('thesis-exp')" style="cursor:pointer">${data.thesis}</div>
+      <div class="poem-line-explain" id="thesis-exp">${data.thesisExp}</div>
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-faint);text-align:center;margin-top:8px">Click any paragraph above to reveal its explanation</div>
+  `;
+  document.getElementById('ei-content').innerHTML = html;
+  document.getElementById('essay-intro-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function toggleEiExp(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+function closeEssayIntro(e) {
+  if (e && e.target !== document.getElementById('essay-intro-overlay')) return;
+  document.getElementById('essay-intro-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
 </script>
 </body>
 </html>
