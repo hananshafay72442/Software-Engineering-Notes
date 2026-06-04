@@ -304,6 +304,22 @@
       line-height: 2.8;
       color: var(--text-main);
     }
+    /* Ensure lec-num Urdu text inherits the emerald colour, not --text-main */
+    .lec-num.urdu-text {
+      color: var(--emerald);
+    }
+    /* Urdu/en text inside buttons must inherit button colour, not global --text-main */
+    .lec-pdf-btn span.urdu-text,
+    .lec-pdf-btn span.en-text,
+    .lecture-open-btn span.urdu-text,
+    .lecture-open-btn span.en-text {
+      color: inherit !important;
+      font-size: inherit !important;
+      line-height: normal !important;
+      direction: inherit !important;
+      text-align: inherit !important;
+      font-family: inherit !important;
+    }
     .card-translation-ur {
       display: none;
       font-family: 'Gulzar', 'Noto Nastaliq Urdu', serif;
@@ -1061,47 +1077,58 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      background: linear-gradient(135deg, #1a2e1e 0%, #0f3d2b 100%);
-      border: 1px solid rgba(74,222,128,0.18);
-      border-radius: 16px;
-      padding: 18px 24px;
+      background: #ffffff;
+      border: 1.5px solid rgba(26,92,62,0.18);
+      border-radius: 14px;
+      padding: 16px 22px;
       cursor: pointer;
       text-align: left;
-      transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-      box-shadow: 0 4px 20px rgba(26,92,62,0.25);
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 12px rgba(26,92,62,0.07);
       position: relative;
       overflow: hidden;
     }
     .sample-papers-hero-btn::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%);
-      pointer-events: none;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--emerald), var(--emerald-light));
+      border-radius: 0;
     }
     .sample-papers-hero-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 36px rgba(26,92,62,0.38);
-      border-color: rgba(74,222,128,0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(26,92,62,0.13);
+      border-color: rgba(26,92,62,0.32);
     }
     .spb-icon {
-      width: 48px; height: 48px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 12px;
+      width: 42px; height: 42px;
+      background: var(--emerald-faint);
+      border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
-      color: #86efac;
+      color: var(--emerald);
       flex-shrink: 0;
     }
-    .spb-text { flex: 1; display: flex; flex-direction: column; gap: 3px; }
-    .spb-main { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: #f0fdf4; }
-    .spb-sub  { font-size: 0.78rem; color: rgba(240,253,244,0.55); font-family: var(--font-body); }
-    .spb-arrow { font-size: 1.4rem; color: #86efac; transition: transform 0.3s ease; }
-    .sample-papers-hero-btn:hover .spb-arrow { transform: translateX(5px); }
+    .spb-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .spb-main { font-family: var(--font-display); font-size: 0.97rem; font-weight: 700; color: var(--text-main); }
+    .spb-sub  { font-size: 0.76rem; color: var(--text-muted); font-family: var(--font-body); }
+    .spb-arrow { font-size: 1.1rem; color: var(--emerald); transition: transform 0.25s ease; opacity: 0.7; }
+    .sample-papers-hero-btn:hover .spb-arrow { transform: translateX(4px); opacity: 1; }
 
     body.dark .sample-papers-hero-btn {
-      background: linear-gradient(135deg, #0d1f14 0%, #0a2818 100%);
-      border-color: rgba(74,222,128,0.2);
+      background: #1f1f23;
+      border-color: rgba(74,222,128,0.15);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
     }
+    body.dark .sample-papers-hero-btn:hover {
+      border-color: rgba(74,222,128,0.3);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+    }
+    body.dark .spb-icon {
+      background: rgba(74,222,128,0.08);
+    }
+    body.dark .spb-main { color: #e4e4e7; }
+    body.dark .spb-sub { color: var(--text-muted); }
 
     /* ── SAMPLE PAPER DISCLAIMER ── */
     .sp-disclaimer {
@@ -1492,48 +1519,65 @@
       box-shadow: 0 8px 24px rgba(26,92,62,0.12);
     }
 
-    /* ── PDF LECTURE BUTTON ── */
+    /* ── SLIDE OPEN BUTTONS ── */
+    .lec-pdf-btns {
+      display: flex;
+      gap: 7px;
+      margin-top: 14px;
+    }
     .lec-pdf-btn {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      margin-top: 14px;
-      padding: 8px 16px;
-      background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-light) 100%);
-      color: white;
-      border: none;
+      gap: 6px;
+      flex: 1;
+      padding: 7px 10px;
+      background: var(--bg);
+      color: var(--emerald);
+      border: 1.5px solid rgba(26,92,62,0.25);
       border-radius: 8px;
       font-family: var(--font-body);
-      font-size: 0.76rem;
+      font-size: 0.71rem;
       font-weight: 600;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.2px;
       cursor: pointer;
       text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 2px 8px rgba(26,92,62,0.3);
-      width: 100%;
+      transition: all 0.2s ease;
       justify-content: center;
+      white-space: nowrap;
+    }
+    .lec-pdf-btn--ur {
+      color: var(--gold);
+      border-color: rgba(139,105,20,0.28);
     }
     .lec-pdf-btn:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 6px 20px rgba(26,92,62,0.4);
-      filter: brightness(1.08);
+      background: var(--emerald-faint);
+      border-color: var(--emerald);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(26,92,62,0.12);
     }
-    .lec-pdf-btn:active {
-      transform: translateY(0) scale(0.98);
+    .lec-pdf-btn--ur:hover {
+      background: var(--gold-bg);
+      border-color: var(--gold);
+      box-shadow: 0 3px 10px rgba(139,105,20,0.12);
     }
-    .lec-pdf-btn svg {
-      flex-shrink: 0;
-      transition: transform 0.3s ease;
-    }
-    .lec-pdf-btn:hover svg {
-      transform: translateY(-1px) scale(1.1);
-    }
+    .lec-pdf-btn:active { transform: translateY(0); }
+    .lec-pdf-btn svg { flex-shrink: 0; }
     body.dark .lec-pdf-btn {
-      box-shadow: 0 2px 12px rgba(74,222,128,0.25);
+      background: transparent;
+      color: var(--emerald);
+      border-color: rgba(74,222,128,0.2);
+    }
+    body.dark .lec-pdf-btn--ur {
+      color: var(--gold);
+      border-color: rgba(240,180,41,0.2);
     }
     body.dark .lec-pdf-btn:hover {
-      box-shadow: 0 6px 24px rgba(74,222,128,0.35);
+      background: rgba(74,222,128,0.07);
+      border-color: var(--emerald);
+    }
+    body.dark .lec-pdf-btn--ur:hover {
+      background: rgba(240,180,41,0.07);
+      border-color: var(--gold);
     }
 
     /* ── LECTURE HEADER PDF BUTTON ── */
@@ -1916,7 +1960,7 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         </span>
         <span class="spb-text">
-          <span class="spb-main">📋 Sample Final Papers</span>
+          <span class="spb-main">Sample Final Papers</span>
           <span class="spb-sub">3 practice papers · 30 marks each · with solutions</span>
         </span>
         <span class="spb-arrow">→</span>
@@ -3292,11 +3336,18 @@ function buildGrid() {
       <div class="lec-subtitle en-text">${lec.sub}</div>
       <div class="lec-topics-count en-text">${lec.topics} topics &nbsp;·&nbsp; <span style="color:var(--emerald)">View Notes &rarr;</span></div>
       <div class="lec-topics-count urdu-text">${lec.topics} موضوعات &nbsp;·&nbsp; <span style="color:var(--emerald)">نوٹس دیکھیں ←</span></div>
-      <a class="lec-pdf-btn" href="islamiat/Lecture${num}.pdf" target="_blank" onclick="event.stopPropagation()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        <span class="en-text">Open Lecture PDF</span>
-        <span class="urdu-text" style="display:none">لیکچر پی ڈی ایف کھولیں</span>
-      </a>
+      <div class="lec-pdf-btns" onclick="event.stopPropagation()">
+        <a class="lec-pdf-btn lec-pdf-btn--en" href="islamiat/english/Lecture${num}.pdf" target="_blank" onclick="event.stopPropagation()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span class="en-text">English Slides</span>
+          <span class="urdu-text" style="display:none">انگریزی سلائیڈز</span>
+        </a>
+        <a class="lec-pdf-btn lec-pdf-btn--ur" href="islamiat/urdu/Lecture${num}.pdf" target="_blank" onclick="event.stopPropagation()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span class="en-text">Urdu Slides</span>
+          <span class="urdu-text" style="display:none">اردو سلائیڈز</span>
+        </a>
+      </div>
     </div>
   `).join('');
 }
@@ -3338,7 +3389,7 @@ function toggleLang() {
   isUrdu = !isUrdu;
   document.body.classList.toggle('urdu-mode', isUrdu);
   document.getElementById('langToggle').classList.toggle('urdu-active', isUrdu);
-  // Toggle PDF button text in cards
+  // Toggle slide button text in cards
   document.querySelectorAll('.lec-pdf-btn .en-text').forEach(el => el.style.display = isUrdu ? 'none' : '');
   document.querySelectorAll('.lec-pdf-btn .urdu-text').forEach(el => el.style.display = isUrdu ? 'inline' : 'none');
   localStorage.setItem('islaLang', isUrdu ? 'ur' : 'en');
