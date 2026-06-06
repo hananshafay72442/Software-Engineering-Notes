@@ -366,22 +366,45 @@
 
   <!-- ══ HOME ══ -->
   <div class="card active" id="section-home">
-    <div class="full-test-row" onclick="openNotesHub()" style="border-color:rgba(62,207,168,.3);margin-bottom:24px;">
-      <svg class="full-test-icon" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      <div class="full-test-info">
-        <div class="full-test-title">Study Notes</div>
-        <div class="full-test-meta">All 4 syllabus topics · Key concepts, techniques &amp; examples</div>
+    <!-- Inline Study Notes -->
+    <div style="margin-bottom:32px">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--teal)">Study Notes</div>
+        <div style="flex:1;height:1px;background:var(--border)"></div>
+        <button class="btn btn-sm" style="background:var(--teal-dim);border-color:var(--teal);color:var(--teal);padding:6px 14px" onclick="openNotesHub()">All Notes →</button>
       </div>
-      <button class="btn btn-sm" style="pointer-events:none;background:var(--teal-dim);border-color:var(--teal);color:var(--teal);">Open →</button>
+      <div class="notes-grid">
+        <div class="note-card violet-card" onclick="openNote('dahl')">
+          <svg class="note-card-icon" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <div class="note-card-title">Roald Dahl — Boy</div>
+          <div class="note-card-sub">Life, school &amp; The Great Mouse Plot</div>
+        </div>
+        <div class="note-card gold-card" onclick="openNote('essay')">
+          <svg class="note-card-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <div class="note-card-title">Essay Introduction</div>
+          <div class="note-card-sub">Hook · Bridge · Thesis</div>
+        </div>
+        <div class="note-card rose-card" onclick="openNote('interview')">
+          <svg class="note-card-icon" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <div class="note-card-title">Interview Activity</div>
+          <div class="note-card-sub">Structure &amp; technique</div>
+        </div>
+        <div class="note-card teal-card" onclick="openNote('comprehension')">
+          <svg class="note-card-icon" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <div class="note-card-title">Poem Comprehension</div>
+          <div class="note-card-sub">How to answer poem questions</div>
+        </div>
+      </div>
     </div>
+    <div style="height:1px;background:var(--border);margin-bottom:28px"></div>
     <div class="hub-title">Choose Your Practice Mode</div>
     <div class="hub-sub">Practice individual topics or take the full examination</div>
     <div class="hub-grid">
       <div class="hub-card" onclick="startPractice('dahl')">
         <svg class="hub-card-icon" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         <div class="hub-card-title">Roald Dahl — <em>Boy</em></div>
-        <div class="hub-card-meta">Section I · MCQ &amp; School Experience</div>
-        <div class="hub-card-desc">Questions on Dahl's autobiography including personal school experience prompts and comprehension.</div>
+        <div class="hub-card-meta">Section I · Three Syllabus Questions</div>
+        <div class="hub-card-desc">Answer the three set exam questions on <em>Boy</em> — retrospective voice, powerlessness, and dark humour. Reference specific episodes.</div>
         <span class="hub-card-badge badge-violet">Practice</span>
       </div>
       <div class="hub-card gold-card" onclick="startPractice('essay')">
@@ -599,6 +622,56 @@
         <li><strong>Child's perspective</strong> — events feel large and dramatic, adults often seem absurd or cruel.</li>
         <li><strong>Autobiographical fiction feel</strong> — real events told with a storyteller's exaggeration.</li>
       </ul>
+
+      <div class="notes-h2">Key Episodes to Know</div>
+      <table class="notes-table">
+        <tr><th>Episode</th><th>What Happens</th><th>What It Shows</th></tr>
+        <tr><td>The Great Mouse Plot</td><td>Dahl and friends place a dead mouse in Mrs. Pratchett's gobstopper jar</td><td>Childhood mischief, resistance to unfair authority, camaraderie</td></tr>
+        <tr><td>The Caning</td><td>The headmaster canes Dahl for the mouse prank</td><td>Institutional cruelty, adult abuse of power, child's powerlessness</td></tr>
+        <tr><td>Mrs. Pratchett's Revenge</td><td>Pratchett identifies the boys; they are punished at school</td><td>Adult authority networks; the powerlessness of children</td></tr>
+        <tr><td>Norway Holidays</td><td>Summers spent on the Norwegian coast with family</td><td>Contrast with school life — freedom, joy, warmth of family bonds</td></tr>
+        <tr><td>St Peter's School</td><td>Dahl is sent to boarding school far from home at age 9</td><td>Isolation, homesickness, the brutality of the British school system</td></tr>
+      </table>
+
+      <div class="notes-h2">Syllabus Questions — What Each One Asks</div>
+      <div class="notes-key-box" style="margin-bottom:14px">
+        <div class="notes-key-box-title">◆ Q1 — Adult Narrator's Retrospective Voice</div>
+        <p class="notes-p" style="margin:0 0 8px"><strong>The question:</strong> How does Dahl use the <em>adult narrator's retrospective voice</em> to expose and critique the institutions of school and authority? Refer to at least <strong>three episodes</strong>.</p>
+        <ul class="notes-ul" style="margin:0">
+          <li><strong>Retrospective voice</strong> = Dahl is an adult looking back at his child self. He adds irony, bitterness, and dark humour that the child wouldn't have had.</li>
+          <li>Look for moments where the narrator comments beyond what the child felt — e.g. describing the headmaster with restrained adult contempt.</li>
+          <li>Three episodes to use: The Caning, The Great Mouse Plot consequences, Mrs. Pratchett's character.</li>
+          <li>Key idea: the adult voice gives us distance <em>and</em> allows Dahl to critique authority without rage — through wit and irony.</li>
+        </ul>
+      </div>
+      <div class="notes-key-box" style="margin-bottom:14px">
+        <div class="notes-key-box-title">◆ Q2 — Childhood as a World of Cruelty &amp; Powerlessness</div>
+        <p class="notes-p" style="margin:0 0 8px"><strong>The question:</strong> Dahl presents childhood as governed by <em>adult cruelty and institutional authority</em>. Examine how he constructs the child's <strong>powerlessness</strong> and how he <strong>subverts</strong> it through humour and narrative perspective.</p>
+        <ul class="notes-ul" style="margin:0">
+          <li><strong>Powerlessness</strong>: children cannot speak back, cannot escape punishment, are at the mercy of teachers, headmasters, and shopkeepers.</li>
+          <li><strong>Subversion</strong>: Dahl fights back through the mouse plot (action) and through the narrator's darkly comic tone (language). Humour is a weapon against power.</li>
+          <li>Episodes: The Caning, The Mouse Plot, arrival at boarding school (loneliness and isolation).</li>
+          <li>Key contrast: Dahl shows both helplessness <em>and</em> cunning — the child is not passive, but still ultimately powerless against institutions.</li>
+        </ul>
+      </div>
+      <div class="notes-key-box" style="margin-bottom:14px">
+        <div class="notes-key-box-title">◆ Q3 — Physical Pain, Humiliation &amp; Dark Humour</div>
+        <p class="notes-p" style="margin:0 0 8px"><strong>The question:</strong> How does Dahl use <em>physical pain and humiliation</em> to highlight the powerlessness of children, and how does <strong>dark humour shape the reader's response</strong>?</p>
+        <ul class="notes-ul" style="margin:0">
+          <li><strong>Physical pain</strong>: the caning is described in physical detail — Dahl doesn't hide the violence. This forces the reader to feel the injustice directly.</li>
+          <li><strong>Humiliation</strong>: being identified by Mrs. Pratchett, standing before the headmaster, the public nature of punishment.</li>
+          <li><strong>Dark humour</strong>: Dahl makes us laugh at events that are genuinely awful — the headmaster's ceremony-like caning is absurd. Laughter becomes a way of condemning without screaming.</li>
+          <li>Reader response: we feel sympathy for the child <em>and</em> amusement at the absurdity of the adults — which is exactly Dahl's intention.</li>
+        </ul>
+      </div>
+
+      <div class="notes-h2">How to Answer These Questions</div>
+      <ul class="notes-ul">
+        <li><strong>Always use at least three episodes</strong> — name them specifically (e.g. "The Great Mouse Plot", "the caning scene at St Peter's").</li>
+        <li><strong>Quote or closely reference</strong> — even paraphrasing a specific detail shows close reading.</li>
+        <li><strong>Link technique to effect</strong> — don't just say what happens; explain why Dahl wrote it that way and what effect it has on the reader.</li>
+        <li><strong>Use the key terms</strong>: retrospective narrator, dark humour, irony, child's perspective, institutional authority, powerlessness, subversion.</li>
+      </ul>
     </div>
     <div class="btn-row" style="margin-top:28px;">
       <button class="btn btn-sm btn-ghost" onclick="openNotesHub()">← All Notes</button>
@@ -768,36 +841,30 @@ function toggleTheme(){
 
 /* ═══════════ DATA BANKS ═══════════ */
 
-/* --- DAHL QUESTIONS --- */
+/* --- DAHL QUESTIONS (syllabus only) --- */
 const dahlBank = [
-  { type:'mcq', q:'Where was Roald Dahl born?', options:['Oslo, Norway','Llandaff, Wales','London, England','Bristol, England'], answer:'Llandaff, Wales', exp:'Dahl was born in Llandaff, Cardiff, Wales, to Norwegian parents.' },
-  { type:'mcq', q:'What was Dahl\'s father\'s profession?', options:['A school teacher','A doctor','A ship broker','A farmer'], answer:'A ship broker', exp:'Harald Dahl was a prosperous ship broker who had settled in Wales from Norway.' },
-  { type:'mcq', q:'How does Dahl primarily characterise Mrs. Pratchett in Boy?', options:['Kind but strict','Unpleasant and slovenly','Absent-minded and gentle','Ambitious and clever'], answer:'Unpleasant and slovenly', exp:'Dahl describes Mrs. Pratchett as dirty, bad-tempered and mean — she would pick unsold sweets off the floor.' },
-  { type:'mcq', q:'What is the genre of the book Boy by Roald Dahl?', options:['Fiction','Autobiography','Historical novel','Short story collection'], answer:'Autobiography', exp:'Boy is an autobiography — Dahl recounts real events from his own childhood with a vivid storytelling style.' },
-  { type:'mcq', q:'Where did Dahl\'s family typically spend their summer holidays?', options:['England','Norway','France','Scotland'], answer:'Norway', exp:'The Dahl family made regular summer trips to Norway, where Dahl developed a deep love for the sea.' },
-  { type:'mcq', q:'What literary technique does Dahl frequently use in Boy to engage readers?', options:['Formal, academic language','Humour and exaggeration','Complex symbolism','Stream of consciousness'], answer:'Humour and exaggeration', exp:'Dahl narrates childhood events with warmth, dark humour, and deliberate exaggeration.' },
-  { type:'mcq', q:'Which of the following best describes the tone of Boy?', options:['Solemn and melancholic','Nostalgic and darkly comic','Angry and political','Detached and academic'], answer:'Nostalgic and darkly comic', exp:'Dahl balances genuine nostalgia for childhood with dark comedy — even painful events are recounted with wry distance.' },
-  { type:'mcq', q:'What detail reveals Mrs. Pratchett was unhygienic?', options:['She stored sweets in old tins','She never washed the jars','She picked fallen sweets off the floor and returned them to the jar','She handled them without gloves'], answer:'She picked fallen sweets off the floor and returned them to the jar', exp:'Dahl specifically notes Mrs. Pratchett retrieved sweets from the dirty floor and put them back in the jar.' },
-  { type:'mcq', q:'What does the episode of The Great Mouse Plot reveal about Dahl as a child?', options:['He was timid and easily frightened','He was mischievous, imaginative and daring','He was kind and compassionate','He was obedient and rule-abiding'], answer:'He was mischievous, imaginative and daring', exp:'The episode shows a young Dahl as inventive, courageous and willing to take risks.' },
-  { type:'mcq', q:'In Boy, Dahl\'s early schools are generally depicted as:', options:['Warm and nurturing','Places of strict discipline and occasional cruelty','Academically excellent and fair','Free and expressive'], answer:'Places of strict discipline and occasional cruelty', exp:'Dahl recounts a school environment dominated by rigid rules, corporal punishment, and arbitrary adult authority.' },
-  { type:'mcq', q:'What attitude does Dahl take towards the headmaster who caned him?', options:['Fearful admiration','Deep forgiveness','Bitter, darkly humorous condemnation','Sympathetic understanding'], answer:'Bitter, darkly humorous condemnation', exp:'Dahl depicts the caning with controlled anger and dark irony, using it to critique violence in British schools.' },
-  { type:'mcq', q:'What is the significance of the title "Boy" for this memoir?', options:['The book is written for young boys','It emphasises the child\'s perspective throughout','It refers to a character named Boy','It is taken from a quotation in the book'], answer:'It emphasises the child\'s perspective throughout', exp:'The simple title reflects Dahl\'s intention to recapture the genuine viewpoint and emotional world of a child.' },
-  // Personal/school experience open questions
-  { type:'open', q:'Dahl describes how he was caned unfairly at school. Describe a time at school when you (or someone you know) felt a rule or punishment was unfair. How does your experience connect to Dahl\'s?', exp:'A strong answer briefly describes a personal incident (2–3 sentences), then connects it to a theme from Dahl — e.g. unfair authority, helplessness as a child, or the lasting impact of school discipline.' },
-  { type:'open', q:'Dahl and his friends devised the Great Mouse Plot as revenge against Mrs. Pratchett. Have you ever felt the urge to "get back" at someone who treated you unfairly? What does Dahl\'s story teach us about acting on that urge?', exp:'A strong answer reflects honestly on a personal feeling of injustice, then uses Dahl\'s story to explore the consequences of revenge — fun but risky — showing understanding of the text.' },
-  { type:'open', q:'Dahl recalls his school days with a mix of humour and horror. How do you think he wants the reader to feel about his teachers and headmaster? Use evidence from the text to support your view.', exp:'Look for evidence of exaggeration and dark comedy (e.g. the caning scene) to argue Dahl wants readers to feel both amused and appalled. Quote or reference specific scenes.' },
+  {
+    type:'open',
+    q:'How does Dahl use the adult narrator\'s retrospective voice to expose and critique the institutions of school and authority in <em>Boy</em>? Refer closely to at least three episodes.',
+    exp:'A strong answer identifies specific episodes (e.g. The Great Mouse Plot consequences, the caning, boarding school arrival) and explains how the adult narrator\'s irony, dark humour, and controlled tone criticise authority without overt anger. Reference the gap between child experience and adult narration — e.g. the headmaster caning is described with wry ceremony, exposing the absurdity of institutional violence. Use key terms: retrospective voice, irony, dark humour, institutional authority.',
+    keywords:['narrator','adult','voice','retrospective','irony','humour','episode','caning','mouse','authority','school','critique','dark','perspective','institution']
+  },
+  {
+    type:'open',
+    q:'Roald Dahl presents childhood as a world governed by adult cruelty and institutional authority. With close reference to at least three episodes in <em>Boy</em>, critically examine how Dahl constructs the child\'s experience of powerlessness and how he subverts it through humour and narrative perspective.',
+    exp:'A strong answer discusses powerlessness through concrete episodes (caning, Mrs. Pratchett, boarding school isolation) and then explains subversion — the mouse plot as active resistance, dark humour as literary resistance. The retrospective narrator allows Dahl to reframe painful events with irony. Key terms: powerlessness, subversion, dark humour, institutional cruelty, child\'s perspective.',
+    keywords:['powerless','authority','cruel','cruelty','humour','subvert','perspective','caning','mouse','boarding','irony','resistance','child','adult','narrator']
+  },
+  {
+    type:'open',
+    q:'With close reference to at least three episodes in <em>Boy</em>, explore how Dahl uses physical pain and humiliation to highlight the powerlessness of children, and consider how dark humour shapes the reader\'s response.',
+    exp:'A strong answer gives specific detail about physical pain (the caning described blow by blow) and humiliation (being identified by Mrs. Pratchett, standing before the headmaster in public). It then analyses how dark humour works — making the reader laugh at something awful — and how this shapes our response: sympathy for the child, condemnation of the adult institution, and an uncomfortable awareness that we are amused by real cruelty. Key terms: physical pain, humiliation, powerlessness, dark humour, reader response.',
+    keywords:['pain','humiliation','caning','dark humour','reader','response','powerless','sympathy','physical','headmaster','pratchett','episode','irony','amused','condemnation']
+  },
 ];
 
-/* --- ESSAY TOPICS --- */
+/* --- ESSAY TOPICS (syllabus only) --- */
 const essayTopics = [
-  'Social media does more harm than good.',
-  'School uniforms should be abolished.',
-  'Technology is making us less social.',
-  'Reading books is more valuable than watching films.',
-  'Climate change is the biggest challenge facing our generation.',
-  'Students should be allowed to choose their own subjects from the age of 12.',
-  'Kindness is more important than intelligence.',
-  'City life is better than country life.',
   'An investment in knowledge pays the best interest.',
   'Young people are obsessed with fame and imitating celebrities.',
   'The One Who Uses Force is Afraid of Reasoning.',
@@ -1007,9 +1074,7 @@ function nextFromSection(n){
    SECTION 1 — ROALD DAHL
 ═══════════════════════════════════════════════ */
 function loadSection1(){
-  // Only open school-experience questions about Dahl
-  const openPool = dahlBank.filter(q=>q.type==='open');
-  currentDahlQ = sample(openPool, Math.min(3, openPool.length));
+  currentDahlQ = [...dahlBank]; // All 3 syllabus questions
   document.getElementById('dahl-counter').textContent=`${currentDahlQ.length} questions`;
   document.getElementById('dahl-score-live').textContent='Score: —';
   document.getElementById('next-1').disabled=true;
@@ -1019,7 +1084,7 @@ function loadSection1(){
     html+=`<div class="q-block">
       <div class="q-num">Question ${i+1} of ${currentDahlQ.length}</div>
       <div class="q-text">${q.q}</div>
-      <div class="tip-box">Connect a personal school memory to a theme in <em>Boy</em>. Aim for 3–5 sentences.</div>
+      <div class="tip-box">Reference at least three specific episodes from <em>Boy</em>. Use key literary terms (dark humour, retrospective voice, irony, powerlessness). Aim for 5–8 sentences.</div>
       <textarea class="comp-answer" id="dahl-open-${i}" placeholder="Write your answer here…" oninput="updateWordCount('dahl-open-${i}','dahl-wc-${i}')"></textarea>
       <div class="word-count" id="dahl-wc-${i}">0 words</div>
       <div class="explain-reveal" id="dahl-exp-${i}"></div>
@@ -1043,22 +1108,29 @@ function checkDahl(){
     const lower=text.toLowerCase();
     const wc=text?text.split(/\s+/).length:0;
 
-    // Score 0–3: word count + keyword relevance
-    const dahlKeywords=['dahl','school','teacher','punishment','unfair','friend','rule','authority','boy','mischief','memory','experience','discipline','cane','revenge','pratchett','felt','similar','like dahl','reminds'];
-    const kwMatches=dahlKeywords.filter(kw=>lower.includes(kw)).length;
+    // Score 0–5 per question using question-specific keywords
+    const kwMatches=q.keywords.filter(kw=>lower.includes(kw.toLowerCase())).length;
+    const kwRatio=kwMatches/q.keywords.length;
     let qScore=0;
     if(wc>=20) qScore+=1;
-    if(wc>=40) qScore+=1;
-    if(kwMatches>=2) qScore+=1;
+    if(wc>=50) qScore+=1;
+    if(wc>=100) qScore+=1;
+    if(kwRatio>=0.2) qScore+=1;
+    if(kwRatio>=0.4) qScore+=1;
+    // Bonus: mentions specific episodes
+    const episodeHits=['mouse','caning','pratchett','boarding','norway','headmaster','st peter'].filter(ep=>lower.includes(ep)).length;
+    if(episodeHits>=2) qScore+=1;
+    qScore=Math.min(6,qScore);
     totalScore+=qScore;
 
-    expEl.innerHTML=`<strong>Model guidance:</strong> ${q.exp}`;
+    const ratio=qScore/6;
+    expEl.innerHTML=`<strong>${qScore}/6 marks.</strong> Model guidance: ${q.exp}`;
     expEl.style.display='block';
-    expEl.style.borderLeftColor='var(--gold)';
+    expEl.style.borderLeftColor=ratio>=0.75?'var(--teal)':ratio>=0.4?'var(--gold)':'var(--crimson)';
     expEl.style.color='var(--ink-muted)';
   });
 
-  const maxRaw=currentDahlQ.length*3;
+  const maxRaw=currentDahlQ.length*6;
   const finalScore=maxRaw>0?Math.round((totalScore/maxRaw)*20):0;
   scores.dahl=finalScore;
   document.getElementById('dahl-score-live').textContent=`Score assessed`;
@@ -1070,7 +1142,7 @@ function checkDahl(){
   scoreDiv.className='feedback-box visible';
   scoreDiv.style.marginTop='20px';
   scoreDiv.innerHTML=`<div class="feedback-label">◆ Results</div>
-    <div class="feedback-text">Check the model guidance above for each question. Connect your personal experiences to Dahl's themes for full marks.
+    <div class="feedback-text">Check the model guidance above for each question. Reference specific episodes and use key literary terms for full marks.
     <br><span class="feedback-score">Section Score: ${finalScore}/20</span></div>`;
   document.getElementById('dahl-questions-container').appendChild(scoreDiv);
   document.getElementById('next-1').disabled=false;
@@ -1476,30 +1548,30 @@ const poemData = {
 const essayIntroData = {
   knowledge: {
     title: 'An investment in knowledge pays the best interest',
-    hook: 'What if the most valuable thing you could ever own cost nothing to carry, could never be stolen, and grew every time you used it?',
-    hookExp: 'This hook uses a single rhetorical question to intrigue the reader. It presents knowledge metaphorically as a unique "possession" — piquing curiosity before the topic is even named.',
-    bridge: 'Throughout history, the most successful individuals — scientists, leaders, artists — have been defined not by their wealth, but by their pursuit of learning. In a rapidly changing world, where careers shift and technologies evolve, knowledge is the one investment that multiplies with every experience. Unlike money, it cannot be lost, taxed, or taken away.',
-    bridgeExp: 'The bridge provides historical and contemporary context, connecting the hook\'s abstract idea to real-world relevance. Three tight sentences broaden the topic before the thesis narrows it into a specific argument.',
-    thesis: 'An investment in knowledge pays the best interest because it empowers better decisions, opens doors to personal and professional growth, and creates a lasting legacy that wealth alone cannot provide.',
-    thesisExp: 'A strong thesis states the main claim directly and lists three specific supporting arguments in one sentence — no preamble needed. It immediately commits to a position and gives the reader a clear roadmap for the essay.'
+    hook: 'Throughout human history, empires have crumbled, currencies have collapsed, and fortunes have vanished — yet the knowledge accumulated in libraries, laboratories, and human minds has endured and compounded across every generation.',
+    hookExp: 'This hook opens with a bold historical sweep, contrasting the fragility of material wealth with the permanence of knowledge. Rather than asking a question, it makes an assertive, memorable claim that immediately establishes the essay\'s argument.',
+    bridge: 'Benjamin Franklin\'s maxim — "an investment in knowledge pays the best interest" — is more than a clever saying; it is a principle confirmed by centuries of human progress. Every scientific breakthrough, every social reform, every technological revolution began not with money but with an idea pursued with rigour and discipline. In a world where information changes daily and careers that exist today may disappear tomorrow, the capacity to learn, adapt, and reason is the only currency that reliably grows.',
+    bridgeExp: 'The bridge opens by citing the source of the quotation (Franklin), then expands the idea into historical and contemporary relevance. Three tight sentences move from past evidence to present-day urgency, preparing the reader for the thesis.',
+    thesis: 'An investment in knowledge pays the best interest because it sharpens the judgement needed to navigate an uncertain world, unlocks professional and personal opportunities that wealth alone cannot buy, and leaves a legacy — through ideas, teaching, and innovation — that outlasts any material possession.',
+    thesisExp: 'The thesis is a single, complete sentence with no introductory formula. It states the claim directly and follows with three distinct reasons, joined with parallel structure. Note the final phrase — "outlasts any material possession" — which echoes and resolves the hook.'
   },
   fame: {
     title: 'Young people are obsessed with fame and imitating celebrities',
-    hook: 'When a teenager spends more time studying an influencer\'s life than building their own, something has gone deeply wrong.',
-    hookExp: 'This hook uses a vivid, specific scenario to draw the reader in immediately. It raises the central concern of the essay in one direct, provocative sentence — no question needed.',
-    bridge: 'In the age of social media, celebrities and influencers have become the dominant role models for young people worldwide. Unlike previous generations, who looked to family, teachers, or community leaders, today\'s youth measure self-worth against the curated, unrealistic lives they see online. The result is a generation that chases an image rather than an identity.',
-    bridgeExp: 'The bridge contextualises the issue within modern social media culture and introduces the generational contrast in three focused sentences, explaining why this obsession has intensified in recent decades.',
-    thesis: 'Young people\'s obsession with fame and celebrities is ultimately harmful — it distorts their self-worth, promotes unrealistic standards, and distracts them from developing their own authentic values.',
-    thesisExp: 'The thesis opens with a direct, confident claim. The dash after "harmful" adds emphasis before the three supporting arguments follow. This is how a thesis reads in polished essay writing — assertive, immediate, and structured.'
+    hook: 'A generation ago, a teenager\'s heroes were athletes, scientists, or community leaders — people whose achievements were visible. Today, millions of young people study the daily routines, outfits, and opinions of strangers who are famous for nothing except being famous.',
+    hookExp: 'This hook creates a sharp contrast between past and present role models. It avoids cliché by being specific and slightly provocative — "famous for nothing except being famous" — which draws the reader in and sets up the essay\'s critical tone.',
+    bridge: 'The rise of social media has transformed the relationship between audiences and celebrities, giving the illusion of intimacy while carefully curating an image of wealth, beauty, and effortless success. For young people still forming their identities, this constant exposure is not neutral entertainment — it is a mirror against which they measure, and often diminish, themselves. The obsession with fame is not merely a distraction; it shapes values, distorts ambition, and quietly teaches that visibility matters more than substance.',
+    bridgeExp: 'The bridge avoids simply restating the topic and instead advances the argument: it explains the mechanism through which celebrity culture affects young people. The final sentence builds toward the thesis by previewing the essay\'s three lines of critique.',
+    thesis: 'Young people\'s obsession with fame and celebrity culture is genuinely harmful — it distorts self-worth by promoting unrealistic and manufactured standards, crowds out the development of authentic identity, and redirects ambition away from meaningful contribution toward the hollow pursuit of visibility.',
+    thesisExp: 'The thesis uses a dash to create a strong pause before the three supporting reasons, giving the sentence rhythm and emphasis. The language is confident and specific — "manufactured standards", "authentic identity", "hollow pursuit" — which signals that the essay will engage critically rather than just describe.'
   },
   force: {
     title: 'The One Who Uses Force is Afraid of Reasoning',
-    hook: 'History\'s most oppressive rulers all shared one habit: they silenced debate, banned books, and punished questions.',
-    hookExp: 'This hook opens with a sharp historical observation in a single sentence. It creates immediate intellectual tension and leads the reader to ask "why?" — which the essay will answer.',
-    bridge: 'When an argument is strong enough to stand on its own, persuasion requires no force. It is only when a position cannot survive scrutiny that its defender turns to intimidation, coercion, or violence. From playground bullying to international conflict, the pattern is always the same: force fills the space where reason fails.',
-    bridgeExp: 'The bridge moves from the historical hook to a logical principle, then applies it across different scales of human behaviour in three sentences. This universalises the argument and prepares the reader for the thesis.',
-    thesis: 'Those who use force are fundamentally afraid of reasoning — because rational debate exposes the weakness of unjust positions, dialogue demands equality that the powerful wish to deny, and history shows that movements built on reason outlast those built on violence.',
-    thesisExp: 'The thesis makes a bold, direct claim without announcing itself. The dash creates a pause separating the central argument from its three supporting reasons, giving the sentence rhythm and clarity.'
+    hook: 'Every authoritarian regime in history has shared one instinct: silence the argument before it can be heard.',
+    hookExp: 'A single, short, sweeping sentence that opens with a historical observation and immediately raises the question the essay will answer: why? Its brevity gives it force — it reads like a verdict. The reader is pulled forward.',
+    bridge: 'Whether it is a dictator banning books, a bully threatening anyone who speaks back, or a politician dismissing inconvenient evidence, the impulse to use force in place of argument follows a consistent logic: the person with power knows, on some level, that their position cannot survive honest scrutiny. Reason is democratic — it asks questions, demands evidence, and treats all voices as potentially equal. Force is the tool of those who cannot afford that equality.',
+    bridgeExp: 'The bridge moves across three different scales — political, personal, social — to show the universality of the claim. The final sentence crystallises the essay\'s central insight: force and reason are not simply opposites, they reveal something about the person who chooses each.',
+    thesis: 'Those who resort to force instead of reasoning do so out of fear — fear that open debate will expose the injustice of their position, that genuine dialogue will demand an equality of voice they are unwilling to grant, and that history will ultimately vindicate those who argued rather than those who struck.',
+    thesisExp: 'The thesis begins with the essay\'s core claim, then breaks into three reasons introduced by "fear that" — a parallel structure that gives the sentence a cumulative, building quality. The final reason — "history will vindicate those who argued" — is the boldest and most memorable, placing the argument in a longer perspective.'
   }
 };
 
