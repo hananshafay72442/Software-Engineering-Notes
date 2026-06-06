@@ -4,28 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ideology & Constitution of Pakistan</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --blue-dark: #1565C0;
-    --blue-mid: #1E88E5;
-    --blue-light: #42A5F5;
-    --blue-pale: #BBDEFB;
-    --teal: #00ACC1;
+    --navy: #0d1b2e;
+    --navy-mid: #162540;
+    --accent: #1a5fe0;
+    --accent-light: #3b7ef5;
+    --accent-pale: #dce9ff;
+    --gold: #c9a84c;
     --white: #ffffff;
-    --text-dark: #1a2340;
-    --text-gray: #5a6a85;
-    --blob-blue: rgba(30,136,229,0.13);
-    --blob-teal: rgba(0,172,193,0.10);
+    --surface: #f6f8fc;
+    --surface-2: #eef2f9;
+    --text: #111827;
+    --text-sub: #4b5772;
+    --border: #dde3ef;
+    --radius-sm: 8px;
+    --radius: 12px;
+    --radius-lg: 18px;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Poppins', sans-serif;
-    background: #f0f6ff;
-    color: var(--text-dark);
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--text);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
   /* ====== NAVBAR ====== */
@@ -33,336 +41,358 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 60px;
-    background: white;
-    box-shadow: 0 2px 20px rgba(30,136,229,0.08);
+    padding: 0 clamp(20px, 5vw, 64px);
+    height: 60px;
+    background: var(--navy);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 200;
   }
   .nav-logo {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 900;
-    font-size: 1.35rem;
-    background: linear-gradient(135deg, var(--blue-dark), var(--teal));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.5px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: white;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-logo-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
   }
   .nav-links {
     display: flex;
-    gap: 32px;
+    gap: 28px;
     list-style: none;
   }
   .nav-links a {
     text-decoration: none;
-    color: var(--text-gray);
-    font-size: 0.88rem;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.83rem;
     font-weight: 500;
-    transition: color 0.2s;
+    transition: color 0.18s;
+    letter-spacing: 0.2px;
   }
-  .nav-links a:hover { color: var(--blue-mid); }
+  .nav-links a:hover { color: rgba(255,255,255,0.95); }
   .nav-btn {
-    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    background: var(--accent);
     color: white;
     border: none;
-    padding: 10px 26px;
-    border-radius: 25px;
-    font-size: 0.85rem;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 0.82rem;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(30,136,229,0.35);
-    transition: transform 0.2s, box-shadow 0.2s;
-    font-family: 'Poppins', sans-serif;
+    transition: background 0.18s, opacity 0.18s;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.2px;
   }
-  .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(30,136,229,0.45); }
+  .nav-btn:hover { background: var(--accent-light); }
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .nav-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px; left: 0; right: 0;
+    background: var(--navy-mid);
+    padding: 16px 24px 20px;
+    z-index: 199;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-mobile-menu.open { display: block; }
+  .nav-mobile-menu a {
+    display: block;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color 0.15s;
+  }
+  .nav-mobile-menu a:last-child { border-bottom: none; }
+  .nav-mobile-menu a:hover { color: white; }
 
   /* ====== HERO ====== */
   .hero {
     position: relative;
-    min-height: 56vh;
+    min-height: clamp(400px, 55vh, 580px);
     display: flex;
     align-items: center;
-    padding: 44px 60px 44px 80px;
+    justify-content: space-between;
+    gap: 40px;
+    padding: clamp(48px, 8vw, 80px) clamp(20px, 5vw, 80px);
     overflow: hidden;
+    background: #0d1b2e;
   }
-  /* Full-bleed Pakistan photo background */
   .hero-bg {
     position: absolute;
     inset: 0;
+    background-color: #0d1b2e;
     background-image: url('https://images.unsplash.com/photo-1470756544705-1848092fbe5f?fm=jpg&q=85&w=1800&auto=format&fit=crop');
     background-size: cover;
     background-position: center 40%;
     z-index: 0;
   }
-  /* Dark gradient overlay for text legibility */
   .hero-bg::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      100deg,
-      rgba(5, 18, 45, 0.82) 0%,
-      rgba(5, 18, 45, 0.70) 50%,
-      rgba(5, 18, 45, 0.30) 100%
-    );
+    background: linear-gradient(100deg, rgba(8,16,36,0.88) 0%, rgba(8,16,36,0.72) 55%, rgba(8,16,36,0.28) 100%);
   }
-  /* hide old blobs/dots — not needed with photo bg */
   .blob, .dot { display: none; }
 
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(36px); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
   .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 560px;
-    animation: fadeSlideUp 0.9s ease both;
+    max-width: 580px;
+    animation: fadeUp 0.8s ease both;
   }
   .hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.25);
-    color: rgba(255,255,255,0.95);
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 5px 14px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
+    gap: 7px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.85);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 5px 13px;
+    border-radius: 4px;
+    margin-bottom: 22px;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
   }
   .hero h1 {
-    font-family: 'Nunito', sans-serif;
-    font-size: 2.6rem;
-    font-weight: 900;
-    line-height: 1.15;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.12;
     color: #ffffff;
-    margin-bottom: 16px;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    margin-bottom: 18px;
   }
-  .hero h1 span {
-    background: linear-gradient(135deg, #64b5f6, #4dd0e1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
   }
   .hero p {
-    color: rgba(255,255,255,0.82);
-    font-size: 0.92rem;
-    line-height: 1.72;
-    margin-bottom: 28px;
-    max-width: 440px;
+    color: rgba(255,255,255,0.7);
+    font-size: clamp(0.87rem, 2vw, 0.96rem);
+    line-height: 1.78;
+    margin-bottom: 32px;
+    max-width: 460px;
+    font-weight: 400;
   }
-  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-  .hero-credit {
-    margin-top: 20px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.3px;
-  }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
   .btn-primary {
-    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    background: var(--accent);
     color: white;
     border: none;
-    padding: 13px 32px;
-    border-radius: 28px;
-    font-size: 0.9rem;
+    padding: 12px 28px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(30,136,229,0.45);
-    transition: transform 0.2s, box-shadow 0.2s;
-    font-family: 'Poppins', sans-serif;
+    transition: background 0.18s, transform 0.15s;
+    font-family: 'DM Sans', sans-serif;
     text-decoration: none;
     display: inline-block;
+    letter-spacing: 0.2px;
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(30,136,229,0.55); }
+  .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+
   .btn-outline {
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(8px);
-    color: white;
-    border: 1.5px solid rgba(255,255,255,0.35);
-    padding: 11px 28px;
-    border-radius: 28px;
-    font-size: 0.9rem;
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    padding: 11px 26px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
-    font-family: 'Poppins', sans-serif;
+    transition: all 0.18s;
+    font-family: 'DM Sans', sans-serif;
     text-decoration: none;
     display: inline-block;
   }
-  .btn-outline:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.6); }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.6); color: white; background: rgba(255,255,255,0.06); }
 
   /* Hero illustration card */
   .hero-illustration {
-    position: absolute;
-    right: 60px;
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
     z-index: 2;
-    animation: fadeSlideUp 1s ease 0.2s both;
+    flex-shrink: 0;
+    animation: fadeUp 0.9s ease 0.15s both;
   }
   .hero-illus-card {
     background: rgba(255,255,255,0.97);
-    border-radius: 24px;
-    box-shadow: 0 24px 70px rgba(0,0,0,0.35);
-    padding: 28px 32px;
-    width: 340px;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.38);
+    padding: 26px 28px;
+    width: 310px;
     position: relative;
   }
-  .illus-stat { margin-bottom: 14px; }
-  .illus-stat-label { font-size: 0.75rem; color: var(--text-gray); margin-bottom: 5px; font-weight: 500; }
-  .illus-bar { height: 8px; border-radius: 10px; background: #e8f0fe; overflow: hidden; }
-  .illus-bar-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--blue-mid), var(--teal)); }
-  .illus-units {
-    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;
-  }
+  .illus-stat { margin-bottom: 13px; }
+  .illus-stat-label { font-size: 0.73rem; color: var(--text-sub); margin-bottom: 5px; font-weight: 500; }
+  .illus-bar { height: 5px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
+  .illus-bar-fill { height: 100%; border-radius: 6px; background: var(--accent); }
+  .illus-units { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
   .illus-unit-chip {
-    background: #e8f4ff;
-    color: var(--blue-mid);
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 20px;
+    background: var(--accent-pale);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
   }
   .floating-badge {
     position: absolute;
-    top: -16px; right: -16px;
-    background: linear-gradient(135deg, var(--blue-dark), var(--teal));
+    top: -14px; right: -14px;
+    background: var(--navy);
     color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 9px 14px;
-    border-radius: 14px;
-    box-shadow: 0 8px 20px rgba(30,136,229,0.45);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 7px 12px;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
     white-space: nowrap;
     display: flex; align-items: center; gap: 5px;
   }
-  /* Photo credit strip at bottom of hero */
+  .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .card-icon {
+    width: 40px; height: 40px; border-radius: var(--radius-sm);
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .card-title { font-weight: 700; font-size: 0.9rem; color: var(--text); }
+  .card-subtitle { font-size: 0.73rem; color: var(--text-sub); }
+
   .hero-photo-credit {
     position: absolute;
     bottom: 10px; right: 14px;
-    font-size: 0.65rem;
-    color: rgba(255,255,255,0.35);
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.28);
     z-index: 3;
-    letter-spacing: 0.2px;
   }
-  .hero-photo-credit a { color: rgba(255,255,255,0.4); text-decoration: none; }
-  .hero-photo-credit a:hover { color: rgba(255,255,255,0.7); }
+  .hero-photo-credit a { color: rgba(255,255,255,0.32); text-decoration: none; }
+  .hero-photo-credit a:hover { color: rgba(255,255,255,0.55); }
 
-  /* ====== SECTION: ABOUT COURSE ====== */
-  .section {
-    padding: 80px 60px;
-    position: relative;
-  }
+  /* ====== SECTION SHARED ====== */
+  .section { padding: clamp(48px, 7vw, 80px) clamp(20px, 5vw, 64px); position: relative; }
   .section-bg-wave {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, #f0f6ff 0%, white 100%);
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, var(--surface) 0%, white 100%);
     z-index: 0;
   }
   .section-inner { position: relative; z-index: 1; }
 
+  .section-label {
+    display: inline-block;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 800;
+    line-height: 1.22;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .section-title span {
+    color: var(--accent);
+  }
+  .section-desc {
+    color: var(--text-sub);
+    font-size: 0.91rem;
+    line-height: 1.76;
+    margin-bottom: 26px;
+    max-width: 520px;
+  }
+  .feature-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+  .pill {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--accent-pale); color: var(--accent);
+    padding: 6px 14px; border-radius: 5px;
+    font-size: 0.78rem; font-weight: 600;
+  }
+  .pill .pill-icon { font-size: 0.9rem; }
+
+  /* ====== ABOUT ROW ====== */
   .about-row {
     display: flex;
     align-items: center;
-    gap: 70px;
+    gap: clamp(32px, 6vw, 70px);
+    flex-wrap: wrap;
   }
-  .about-illus {
-    flex: 0 0 380px;
-  }
+  .about-illus { flex: 0 0 min(360px, 100%); }
   .about-card {
     background: white;
-    border-radius: 24px;
-    padding: 30px;
-    box-shadow: 0 12px 40px rgba(30,136,229,0.12);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    border: 1px solid var(--border);
     position: relative;
   }
   .about-card::before {
     content: '';
     position: absolute;
-    top: -3px; left: 30px; right: 30px; height: 3px;
-    background: linear-gradient(90deg, var(--blue-mid), var(--teal));
-    border-radius: 0 0 3px 3px;
+    top: 0; left: 28px; right: 28px; height: 2px;
+    background: var(--accent);
+    border-radius: 0 0 2px 2px;
   }
-  .card-header {
-    display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
-  }
-  .card-icon {
-    width: 48px; height: 48px; border-radius: 14px;
-    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; color: white;
-    box-shadow: 0 6px 15px rgba(30,136,229,0.35);
-  }
-  .card-title { font-weight: 700; font-size: 1rem; color: var(--text-dark); }
-  .card-subtitle { font-size: 0.78rem; color: var(--text-gray); }
   .mini-unit-list { list-style: none; }
   .mini-unit-list li {
     display: flex; align-items: center; gap: 10px;
     padding: 9px 0;
-    border-bottom: 1px solid #f0f4fa;
-    font-size: 0.84rem;
-    color: var(--text-gray);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.83rem;
+    color: var(--text-sub);
     font-weight: 500;
   }
   .mini-unit-list li:last-child { border-bottom: none; }
   .mini-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
     flex-shrink: 0;
   }
+  .about-text { flex: 1; min-width: 260px; }
 
-  .about-text { flex: 1; }
-  .section-label {
-    display: inline-block;
-    font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--blue-mid);
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Nunito', sans-serif;
-    font-size: 2.1rem; font-weight: 900; line-height: 1.25;
-    color: var(--text-dark);
-    margin-bottom: 18px;
-  }
-  .section-title span {
-    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .section-desc {
-    color: var(--text-gray);
-    font-size: 0.92rem;
-    line-height: 1.78;
-    margin-bottom: 28px;
-  }
-  .feature-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
-  .pill {
-    display: flex; align-items: center; gap: 7px;
-    background: #e8f4ff; color: var(--blue-mid);
-    padding: 7px 16px; border-radius: 20px;
-    font-size: 0.8rem; font-weight: 600;
-  }
-  .pill .pill-icon { font-size: 1rem; }
-
-  /* ====== SERVICES / UNITS ICONS ====== */
+  /* ====== UNITS ICON ROW ====== */
   .units-row {
     display: flex;
     justify-content: center;
     gap: 0;
     flex-wrap: wrap;
-    margin: 10px 0 50px;
+    margin: 8px 0 44px;
     position: relative;
     z-index: 1;
   }
@@ -370,269 +400,228 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    padding: 28px 32px;
+    gap: 10px;
+    padding: 22px 26px;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.18s;
     text-align: center;
-    min-width: 140px;
+    min-width: 120px;
   }
-  .unit-icon-item:hover { transform: translateY(-4px); }
+  .unit-icon-item:hover { transform: translateY(-3px); }
   .unit-icon-bubble {
-    width: 72px; height: 72px;
-    border-radius: 50%;
+    width: 62px; height: 62px;
+    border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.8rem;
     background: white;
-    box-shadow: 0 8px 24px rgba(30,136,229,0.15);
-    transition: box-shadow 0.2s;
-    position: relative;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border: 1px solid var(--border);
+    transition: box-shadow 0.18s;
   }
   .unit-icon-item.active .unit-icon-bubble {
-    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
-    box-shadow: 0 12px 30px rgba(30,136,229,0.4);
+    background: var(--navy);
+    border-color: var(--navy);
+    box-shadow: 0 6px 20px rgba(13,27,46,0.25);
   }
   .unit-icon-item.active .unit-icon-bubble svg { stroke: white; }
-  .unit-icon-item:hover .unit-icon-bubble { box-shadow: 0 12px 30px rgba(30,136,229,0.3); }
+  .unit-icon-item:hover .unit-icon-bubble { box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
   .unit-icon-label {
-    font-size: 0.78rem; font-weight: 700; color: var(--text-gray);
-    max-width: 110px; line-height: 1.3;
+    font-size: 0.75rem; font-weight: 600; color: var(--text-sub);
+    max-width: 100px; line-height: 1.3;
   }
-  .unit-icon-item.active .unit-icon-label { color: var(--blue-mid); }
+  .unit-icon-item.active .unit-icon-label { color: var(--text); }
 
   /* ====== PROMOTE / UNITS SECTION ====== */
   .promote-section {
-    background: linear-gradient(135deg, #f5f9ff, #e8f4ff);
-    padding: 80px 60px;
+    background: var(--surface);
+    padding: clamp(48px, 7vw, 80px) clamp(20px, 5vw, 64px);
     position: relative;
     overflow: hidden;
   }
-  .promote-blob-1 {
-    position: absolute;
-    width: 400px; height: 400px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(30,136,229,0.10) 0%, transparent 70%);
-    bottom: -100px; right: -80px;
-    z-index: 0;
-  }
-  .promote-blob-2 {
-    position: absolute;
-    width: 300px; height: 300px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,172,193,0.10) 0%, transparent 70%);
-    top: -60px; left: 200px;
-    z-index: 0;
-  }
+  .promote-blob-1, .promote-blob-2 { display: none; }
   .promote-row {
     display: flex;
     align-items: center;
-    gap: 70px;
+    gap: clamp(32px, 6vw, 70px);
     position: relative; z-index: 1;
+    flex-wrap: wrap;
   }
   .promote-illus {
-    flex: 0 0 360px;
+    flex: 0 0 min(340px, 100%);
   }
   .promote-illus-card {
     background: white;
-    border-radius: 24px;
-    padding: 28px;
-    box-shadow: 0 16px 50px rgba(30,136,229,0.14);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    border: 1px solid var(--border);
     position: relative;
   }
   .promote-illus-img {
-    width: 100%; height: 200px;
-    background: linear-gradient(135deg, #e3f2fd, #e0f7fa);
-    border-radius: 16px;
+    width: 100%; height: 180px;
+    background: var(--surface-2);
+    border-radius: var(--radius);
     display: flex; align-items: center; justify-content: center;
-    font-size: 3.5rem;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     position: relative;
     overflow: hidden;
+    border: 1px solid var(--border);
   }
-  .promote-illus-img::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0; height: 60px;
-    background: linear-gradient(0deg, rgba(30,136,229,0.08), transparent);
-  }
-  .promote-illus-details { display: flex; gap: 10px; flex-wrap: wrap; }
+  .promote-illus-img::after { display: none; }
+  .promote-illus-details { display: flex; gap: 8px; flex-wrap: wrap; }
   .promote-detail-chip {
-    background: #e8f4ff; color: var(--blue-dark);
-    font-size: 0.75rem; font-weight: 700;
-    padding: 6px 14px; border-radius: 20px;
+    background: var(--accent-pale); color: var(--accent);
+    font-size: 0.72rem; font-weight: 600;
+    padding: 4px 12px; border-radius: 5px;
   }
   .floating-card {
     position: absolute;
-    bottom: -20px; left: -20px;
+    bottom: -16px; left: -16px;
     background: white;
-    border-radius: 16px;
-    padding: 12px 16px;
-    box-shadow: 0 8px 24px rgba(30,136,229,0.2);
-    display: flex; align-items: center; gap: 10px;
-    font-size: 0.8rem; font-weight: 600; color: var(--text-dark);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.78rem; font-weight: 600; color: var(--text);
   }
-  .fc-icon { font-size: 1.2rem; }
+  .fc-icon { font-size: 1rem; }
 
   .units-grid {
     flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 14px;
+    min-width: 0;
   }
   .unit-card {
     background: white;
-    border-radius: 18px;
+    border-radius: var(--radius-lg);
     padding: 20px;
-    box-shadow: 0 6px 20px rgba(30,136,229,0.09);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    border: 1px solid var(--border);
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
     text-decoration: none;
     color: inherit;
     display: block;
   }
   .unit-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 35px rgba(30,136,229,0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+    border-color: var(--accent);
   }
-  .unit-card-icon { font-size: 1.6rem; margin-bottom: 10px; }
+  .unit-card-icon { margin-bottom: 10px; }
   .unit-card-num {
-    font-size: 0.7rem; font-weight: 700; color: var(--blue-mid);
-    text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px;
+    font-size: 0.67rem; font-weight: 700; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
   }
   .unit-card-title {
-    font-weight: 700; font-size: 0.9rem; color: var(--text-dark); margin-bottom: 6px;
+    font-weight: 700; font-size: 0.88rem; color: var(--text); margin-bottom: 5px;
     line-height: 1.3;
   }
-  .unit-card-desc { font-size: 0.77rem; color: var(--text-gray); line-height: 1.5; }
+  .unit-card-desc { font-size: 0.76rem; color: var(--text-sub); line-height: 1.55; }
   .unit-card-btn {
-    display: inline-flex; align-items: center; gap: 5px;
+    display: inline-flex; align-items: center; gap: 4px;
     margin-top: 12px;
-    font-size: 0.78rem; font-weight: 700; color: var(--blue-mid);
+    font-size: 0.76rem; font-weight: 600; color: var(--accent);
   }
   .unit-card-btn::after { content: '→'; }
 
   /* ====== CONTACT SECTION ====== */
   .contact-section {
-    background: linear-gradient(135deg, #1565C0, #0097A7);
-    padding: 80px 60px;
+    background: var(--navy);
+    padding: clamp(48px, 7vw, 80px) clamp(20px, 5vw, 64px);
     position: relative;
     overflow: hidden;
   }
-  .contact-blob {
-    position: absolute;
-    border-radius: 50%; z-index: 0;
-  }
-  .cb1 {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-    top: -150px; right: -100px;
-  }
-  .cb2 {
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
-    bottom: -80px; left: 100px;
-  }
+  .contact-blob { display: none; }
+  .cb1, .cb2 { display: none; }
   .contact-row {
     display: flex;
     align-items: flex-start;
-    gap: 80px;
+    gap: clamp(32px, 6vw, 80px);
     position: relative; z-index: 1;
+    flex-wrap: wrap;
   }
-  .contact-info { flex: 1; }
+  .contact-info { flex: 1; min-width: 240px; }
   .contact-info h2 {
-    font-family: 'Nunito', sans-serif;
-    font-size: 2.2rem; font-weight: 900;
-    color: white; margin-bottom: 14px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    font-weight: 800;
+    color: white; margin-bottom: 12px;
   }
   .contact-info p {
-    color: rgba(255,255,255,0.75); font-size: 0.92rem; line-height: 1.75;
-    margin-bottom: 30px;
+    color: rgba(255,255,255,0.65); font-size: 0.9rem; line-height: 1.75;
+    margin-bottom: 28px;
   }
   .contact-stats {
-    display: flex; gap: 30px; flex-wrap: wrap;
+    display: flex; gap: 20px; flex-wrap: wrap;
   }
   .cstat {
     text-align: center;
-    background: rgba(255,255,255,0.12);
-    padding: 16px 22px; border-radius: 16px;
-    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.08);
+    padding: 14px 20px; border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,0.1);
   }
-  .cstat-num { font-family: 'Nunito', sans-serif; font-size: 1.8rem; font-weight: 900; color: white; }
-  .cstat-label { font-size: 0.75rem; color: rgba(255,255,255,0.7); font-weight: 500; }
+  .cstat-num { font-family: 'DM Sans', sans-serif; font-size: 1.6rem; font-weight: 700; color: white; }
+  .cstat-label { font-size: 0.72rem; color: rgba(255,255,255,0.55); font-weight: 500; }
 
-  .contact-form { flex: 0 0 400px; }
+  .contact-form { flex: 0 0 min(380px, 100%); }
   .form-card {
     background: white;
-    border-radius: 24px;
-    padding: 32px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.2);
   }
   .form-card h3 {
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.3rem; font-weight: 800;
-    color: var(--text-dark); margin-bottom: 22px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--text); margin-bottom: 20px;
   }
-  .form-group { margin-bottom: 16px; }
+  .form-group { margin-bottom: 14px; }
   .form-group label {
-    display: block; font-size: 0.78rem; font-weight: 600;
-    color: var(--text-gray); margin-bottom: 7px;
+    display: block; font-size: 0.75rem; font-weight: 600;
+    color: var(--text-sub); margin-bottom: 6px;
   }
   .form-group input, .form-group select {
-    width: 100%; padding: 11px 16px;
-    border: 1.5px solid #e2e8f4;
-    border-radius: 12px;
-    font-size: 0.87rem; color: var(--text-dark);
-    font-family: 'Poppins', sans-serif;
-    background: #f8faff;
-    transition: border-color 0.2s;
+    width: 100%; padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.86rem; color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    transition: border-color 0.18s;
     outline: none;
   }
   .form-group input:focus, .form-group select:focus {
-    border-color: var(--blue-light); background: white;
+    border-color: var(--accent); background: white;
   }
   .form-submit {
     width: 100%;
-    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    background: var(--accent);
     color: white; border: none;
-    padding: 13px; border-radius: 14px;
-    font-size: 0.92rem; font-weight: 700;
+    padding: 11px; border-radius: var(--radius-sm);
+    font-size: 0.9rem; font-weight: 600;
     cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    box-shadow: 0 6px 20px rgba(30,136,229,0.35);
-    transition: transform 0.2s, box-shadow 0.2s;
-    margin-top: 6px;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.18s, transform 0.15s;
+    margin-top: 4px;
   }
-  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(30,136,229,0.45); }
+  .form-submit:hover { background: var(--accent-light); transform: translateY(-1px); }
 
+  /* ====== FOOTER ====== */
   footer {
-    background: #0a1a35;
-    color: rgba(255,255,255,0.7);
-    padding: 44px 60px 28px;
+    background: var(--navy);
+    color: rgba(255,255,255,0.55);
+    padding: 24px clamp(20px, 5vw, 64px);
+    border-top: 1px solid rgba(255,255,255,0.07);
   }
-  .footer-top {
-    display: flex; gap: 60px; flex-wrap: wrap; margin-bottom: 32px;
-    align-items: flex-start;
-  }
-  .footer-brand { flex: 1; min-width: 200px; }
-  .footer-logo {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 900; font-size: 1.2rem;
-    color: white; margin-bottom: 10px;
-  }
-  .footer-brand p { font-size: 0.82rem; line-height: 1.65; }
-  .footer-col { min-width: 200px; }
-  .footer-col h4 { color: white; font-size: 0.85rem; font-weight: 700; margin-bottom: 12px; }
-  .footer-col ul { list-style: none; }
-  .footer-col ul li { margin-bottom: 8px; }
-  .footer-col ul li a {
-    color: rgba(255,255,255,0.55); text-decoration: none;
-    font-size: 0.82rem; transition: color 0.2s;
-  }
-  .footer-col ul li a:hover { color: var(--blue-light); }
   .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 22px;
     display: flex; align-items: center; justify-content: space-between;
-    font-size: 0.78rem; flex-wrap: wrap; gap: 10px;
+    font-size: 0.77rem; flex-wrap: wrap; gap: 8px;
   }
+  .footer-top { display: none; }
+  .footer-brand { display: none; }
 
   /* ====== NOTES PAGES (hidden by default) ====== */
   .page { display: none; }
@@ -640,142 +629,169 @@
   #home.active { display: block; }
 
   .notes-header {
-    background: linear-gradient(135deg, var(--blue-dark), var(--teal));
-    padding: 60px 60px 40px;
+    background: var(--navy);
+    padding: clamp(32px, 5vw, 60px) clamp(20px, 5vw, 64px) clamp(24px, 4vw, 40px);
     color: white;
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
   }
   .notes-header::before {
     content: '';
     position: absolute;
-    width: 400px; height: 400px; border-radius: 50%;
-    background: rgba(255,255,255,0.07);
-    top: -150px; right: -100px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+    top: -100px; right: -60px;
   }
   .notes-back-btn {
-    display: inline-flex; align-items: center; gap: 7px;
-    color: rgba(255,255,255,0.8);
-    font-size: 0.85rem; font-weight: 600;
-    cursor: pointer; margin-bottom: 20px;
-    transition: color 0.2s;
-    background: none; border: none; font-family: 'Poppins', sans-serif;
+    display: inline-flex; align-items: center; gap: 6px;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.82rem; font-weight: 500;
+    cursor: pointer; margin-bottom: 18px;
+    transition: color 0.18s;
+    background: none; border: none; font-family: 'DM Sans', sans-serif;
   }
-  .notes-back-btn:hover { color: white; }
+  .notes-back-btn:hover { color: rgba(255,255,255,0.9); }
   .notes-header h1 {
-    font-family: 'Nunito', sans-serif;
-    font-size: 2.4rem; font-weight: 900;
-    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 800;
+    margin-bottom: 8px;
   }
-  .notes-header p { opacity: 0.8; font-size: 0.92rem; }
+  .notes-header p { opacity: 0.65; font-size: 0.88rem; }
   .notes-unit-badge {
     display: inline-block;
-    background: rgba(255,255,255,0.2);
-    padding: 4px 14px; border-radius: 20px;
-    font-size: 0.75rem; font-weight: 700;
-    margin-bottom: 14px;
-    letter-spacing: 0.5px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 3px 12px; border-radius: 4px;
+    font-size: 0.68rem; font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
   }
 
   .notes-body {
-    padding: 50px 60px;
-    background: #f5f9ff;
+    padding: clamp(24px, 4vw, 50px) clamp(16px, 4vw, 60px);
+    background: var(--surface);
     min-height: 60vh;
   }
   .notes-tabs {
-    display: flex; gap: 6px;
-    background: white; padding: 6px;
-    border-radius: 14px; box-shadow: 0 4px 14px rgba(30,136,229,0.1);
-    display: inline-flex; margin-bottom: 36px;
+    display: inline-flex; gap: 4px;
+    background: white; padding: 5px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin-bottom: 28px;
   }
   .notes-tab {
-    padding: 10px 24px; border-radius: 10px;
-    font-size: 0.87rem; font-weight: 600; cursor: pointer;
-    color: var(--text-gray);
+    padding: 9px 20px; border-radius: var(--radius-sm);
+    font-size: 0.84rem; font-weight: 600; cursor: pointer;
+    color: var(--text-sub);
     border: none; background: none;
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.18s;
   }
   .notes-tab.active {
-    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
+    background: var(--navy);
     color: white;
-    box-shadow: 0 4px 12px rgba(30,136,229,0.35);
   }
 
   .notes-content-area { display: none; }
   .notes-content-area.active { display: block; }
 
   .notes-card {
-    background: white; border-radius: 20px;
-    padding: 32px; box-shadow: 0 6px 24px rgba(30,136,229,0.09);
-    margin-bottom: 20px;
+    background: white; border-radius: var(--radius-lg);
+    padding: clamp(20px, 4vw, 32px);
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    margin-bottom: 16px;
   }
   .notes-card h2 {
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.3rem; font-weight: 800; color: var(--text-dark);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700; color: var(--text);
     margin-bottom: 14px;
     padding-bottom: 12px;
-    border-bottom: 2px solid #e8f0fe;
+    border-bottom: 1px solid var(--border);
   }
   .notes-card h3 {
-    font-size: 1rem; font-weight: 700; color: var(--blue-dark);
-    margin: 18px 0 8px;
+    font-size: 0.9rem; font-weight: 700; color: var(--navy);
+    margin: 18px 0 7px;
   }
   .notes-card p {
-    color: var(--text-gray); font-size: 0.88rem; line-height: 1.8;
+    color: var(--text-sub); font-size: 0.87rem; line-height: 1.78;
     margin-bottom: 10px;
   }
   .notes-card ul {
-    color: var(--text-gray); font-size: 0.87rem; line-height: 1.9;
-    padding-left: 20px; margin-bottom: 10px;
+    color: var(--text-sub); font-size: 0.86rem; line-height: 1.88;
+    padding-left: 18px; margin-bottom: 10px;
   }
-  .notes-card ul li { margin-bottom: 4px; }
+  .notes-card ul li { margin-bottom: 3px; }
   .notes-card .highlight-box {
-    background: linear-gradient(135deg, #e8f4ff, #e0f7fa);
-    border-left: 4px solid var(--blue-mid);
-    padding: 14px 18px; border-radius: 0 12px 12px 0;
-    margin: 14px 0; font-size: 0.86rem; color: var(--blue-dark); font-weight: 500;
+    background: var(--accent-pale);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 12px 0; font-size: 0.85rem; color: var(--navy); font-weight: 500;
+    line-height: 1.6;
   }
 
   /* Q&A */
-  .qa-item { margin-bottom: 24px; }
+  .qa-item { margin-bottom: 20px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
   .qa-q {
-    background: linear-gradient(135deg, #e8f4ff, #e0f7fa);
-    border-radius: 12px 12px 0 0;
-    padding: 16px 20px;
-    font-weight: 700; font-size: 0.9rem; color: var(--blue-dark);
+    background: var(--surface-2);
+    padding: 14px 18px;
+    font-weight: 600; font-size: 0.88rem; color: var(--text);
     cursor: pointer;
     display: flex; align-items: flex-start; gap: 10px;
+    transition: background 0.15s;
   }
+  .qa-q:hover { background: var(--accent-pale); }
   .qa-q-num {
-    background: linear-gradient(135deg, var(--blue-mid), var(--teal));
-    color: white; font-size: 0.75rem; font-weight: 800;
-    width: 24px; height: 24px; border-radius: 8px;
+    background: var(--navy);
+    color: white; font-size: 0.7rem; font-weight: 700;
+    width: 22px; height: 22px; border-radius: var(--radius-sm);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0; margin-top: 1px;
   }
   .qa-a {
-    background: white; border: 1px solid #e2ecfa;
-    border-top: none; border-radius: 0 0 12px 12px;
-    padding: 18px 20px; font-size: 0.86rem; color: var(--text-gray); line-height: 1.85;
+    background: white; border-top: 1px solid var(--border);
+    padding: 16px 18px; font-size: 0.85rem; color: var(--text-sub); line-height: 1.82;
     display: none;
   }
   .qa-a.open { display: block; }
 
   /* ====== RESPONSIVE ====== */
-  @media (max-width: 900px) {
-    .hero { padding: 44px 22px; min-height: auto; }
-    .hero h1 { font-size: 1.9rem; }
+  @media (max-width: 1024px) {
     .hero-illustration { display: none; }
+    .about-illus { flex: 0 0 100%; }
+    .promote-illus { flex: 0 0 100%; }
+    .contact-form { flex: 0 0 100%; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-btn { display: none; }
+    .nav-hamburger { display: flex; }
+
     .units-grid { grid-template-columns: 1fr; }
     .units-grid a[style*="span 2"] { grid-column: span 1 !important; }
-    #units { padding: 44px 22px 54px !important; }
-    .notes-header { padding: 40px 22px 30px; }
-    .notes-header h1 { font-size: 1.6rem; }
-    .notes-body { padding: 30px 22px; }
-    footer { padding: 40px 22px 22px; }
-    .footer-top { flex-direction: column; gap: 24px; }
-    .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+
+    .unit-icon-item { padding: 16px 18px; min-width: 90px; }
+    .unit-icon-bubble { width: 50px; height: 50px; }
+    .unit-icon-label { font-size: 0.7rem; max-width: 80px; }
+
+    .footer-bottom { flex-direction: column; gap: 4px; text-align: center; }
+
+    .contact-stats { gap: 10px; }
+    .cstat { padding: 10px 14px; }
+    .cstat-num { font-size: 1.3rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 1.75rem; }
+    .hero-btns { flex-direction: column; align-items: flex-start; }
+    .btn-primary, .btn-outline { width: 100%; text-align: center; }
+    .notes-tabs { width: 100%; display: flex; }
+    .notes-tab { flex: 1; text-align: center; padding: 9px 10px; font-size: 0.8rem; }
   }
 </style>
 </head>
@@ -798,7 +814,7 @@
 
     <div class="hero-content">
       <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px;margin-bottom:1px"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> Final Exam Preparation</div>
-      <h1>Ideology &<br><span>Constitution</span><br>of Pakistan</h1>
+      <h1>Ideology &amp;<br><em>Constitution</em><br>of Pakistan</h1>
       <p>Comprehensive notes, key concepts, and practice questions for your university final exam. Master all 5 units with structured study material.</p>
       <div class="hero-btns">
         <a href="#units" class="btn-primary" onclick="document.getElementById('units').scrollIntoView({behavior:'smooth'})">Start Studying</a>
@@ -847,8 +863,8 @@
     <p class="hero-photo-credit">Photo: <a href="https://unsplash.com/@sbjshah" target="_blank">Syed Bilal Javaid</a> / Unsplash — Faisal Mosque, Islamabad</p>
   </section>
   <!-- UNITS GRID SECTION -->
-  <section id="units" style="background:#f5f9ff; padding: 60px 60px 70px;">
-    <div style="text-align:center; margin-bottom:40px;">
+  <section id="units" style="background:var(--surface-2); padding: clamp(40px,6vw,60px) clamp(20px,5vw,64px) clamp(48px,7vw,70px);">
+    <div style="text-align:center; margin-bottom:36px;">
       <div class="section-label">Course Units</div>
       <h2 class="section-title" style="display:inline-block;">Select a <span>Unit</span> to Study</h2>
     </div>
@@ -893,25 +909,9 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-logo">ICP Study Hub</div>
-        <p>Ideology &amp; Constitution of Pakistan — university final exam study resource.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Units</h4>
-        <ul>
-          <li><a href="#" onclick="showPage('unit1')">Unit 1 — Political Ideologies</a></li>
-          <li><a href="#" onclick="showPage('unit2')">Unit 2 — Constitution</a></li>
-          <li><a href="#" onclick="showPage('unit3')">Unit 3 — 18th Amendment</a></li>
-          <li><a href="#" onclick="showPage('unit4')">Unit 4 — Pak–US Relations</a></li>
-          <li><a href="#" onclick="showPage('unit5')">Unit 5 — Current Affairs</a></li>
-        </ul>
-      </div>
-    </div>
     <div class="footer-bottom">
-      <span>© 2025 ICP Study Hub — Ideology &amp; Constitution of Pakistan</span>
-      <span style="color:rgba(255,255,255,0.5); font-size:0.78rem; letter-spacing:0.2px;">Made by <strong style="color:rgba(255,255,255,0.75);">Hanan Shafay &amp; Mohid Ahmed</strong></span>
+      <span>© 2025 Ideology &amp; Constitution of Pakistan — ICP Study Hub</span>
+      <span style="color:rgba(255,255,255,0.4); font-size:0.76rem;">Made by <strong style="color:rgba(255,255,255,0.65); font-weight:600;">Hanan Shafay &amp; Mohid Ahmed</strong></span>
     </div>
   </footer>
 
@@ -1363,62 +1363,124 @@
     </div>
 
     <div id="tab-notes-5" class="notes-content-area active">
+
+      <!-- CARD 1: Pakistan Foreign Policy Foundations -->
       <div class="notes-card">
-        <h2>Pakistan's Foreign Policy Role</h2>
-        <p>Pakistan's foreign policy is shaped by its geographic location (bordered by India, Afghanistan, China, Iran), its Islamic identity, its economic needs, and security concerns.</p>
-        <div class="highlight-box">Article 40 of Pakistan's Constitution: "The State shall endeavor to preserve and strengthen fraternal relations among Muslim countries based on Islamic unity."</div>
+        <h2>Pakistan's Foreign Policy — Foundations &amp; Principles</h2>
+        <p>Pakistan's foreign policy is shaped by four core drivers: geographic position (bordering India, Afghanistan, China, Iran), Islamic identity, economic vulnerabilities, and nuclear security imperatives. It operates under a civil-military framework where the armed forces hold significant influence over strategic decisions.</p>
 
-        <h3>Principles of Pakistan's Foreign Policy</h3>
+        <div class="highlight-box"><strong>Constitutional Basis:</strong> Article 40 — "The State shall endeavor to preserve and strengthen fraternal relations among Muslim countries based on Islamic unity." Article 27 affirms peaceful coexistence and non-interference in the internal affairs of other states.</div>
+
+        <h3>Core Principles</h3>
         <ul>
-          <li>Non-interference in internal affairs of other states</li>
-          <li>Respect for sovereignty and territorial integrity</li>
-          <li>Support for Islamic solidarity (OIC membership)</li>
-          <li>Nuclear deterrence as strategic security policy</li>
-          <li>Strategic depth policy regarding Afghanistan</li>
-          <li>"Geo-economics" over "geo-politics" in recent years</li>
+          <li><strong>Sovereignty &amp; Non-interference:</strong> Pakistan opposes foreign intervention in domestic politics, a principle repeatedly invoked over US drone strikes in FATA (2004–2018) which killed thousands.</li>
+          <li><strong>Islamic Solidarity:</strong> Active membership in the Organisation of Islamic Cooperation (OIC, founded 1969). Pakistan hosted the OIC Summit in 1974 and recognises Palestine as a core Islamic issue.</li>
+          <li><strong>Nuclear Deterrence:</strong> Pakistan conducted nuclear tests on 28 May 1998 (Chagai-I) in response to India's Pokhran-II tests, establishing "minimum credible deterrence" as a cornerstone of national security.</li>
+          <li><strong>Geo-economics over Geo-politics:</strong> Coined under PM Imran Khan (2018–2022) and continued under Shehbaz Sharif — prioritising trade corridors (CPEC, SCO) over purely security-driven alliances.</li>
+          <li><strong>Strategic Autonomy:</strong> Pakistan avoids permanent military blocs. It left SEATO (1972) and CENTO (1979), reflecting preference for issue-specific alignment.</li>
         </ul>
 
-        <h3>Key Regional Relationships</h3>
+        <h3>Key Bilateral Relationships</h3>
         <ul>
-          <li><strong>China:</strong> "All-weather strategic cooperative partnership" — CPEC ($62 billion investment), deepest bilateral relationship</li>
-          <li><strong>India:</strong> Hostile relations over Kashmir; two nuclear-armed states; peace process stalled</li>
-          <li><strong>Afghanistan:</strong> Complex relationship; Taliban government concerns about TTP (Pakistani Taliban)</li>
-          <li><strong>Saudi Arabia &amp; Gulf States:</strong> Religious solidarity, remittances, oil imports</li>
-          <li><strong>Turkey:</strong> Growing partnership; defence cooperation</li>
+          <li><strong>China:</strong> "All-weather strategic cooperative partnership." The China–Pakistan Economic Corridor (CPEC), signed April 2015, involves over $62 billion in infrastructure investment — motorways, the Gwadar deep-sea port, and power plants. Gwadar gives China access to the Arabian Sea, reducing its reliance on the Strait of Malacca. <em>(Source: CPEC Authority, Government of Pakistan)</em></li>
+          <li><strong>India:</strong> Hostile relations since Partition (1947). Three full wars (1947, 1965, 1971), Kargil conflict (1999), and repeated cross-border terrorism accusations. The Kashmir dispute remains unresolved at the UN Security Council. Diplomatic ties were downgraded after India revoked Article 370 of its Constitution in August 2019, removing Jammu &amp; Kashmir's special status.</li>
+          <li><strong>USA:</strong> Transactional "ally" relationship — see Unit 5 Q&amp;A for full breakdown. Key events include the 2011 Abbottabad raid and the post-2021 Afghanistan withdrawal fallout.</li>
+          <li><strong>Afghanistan:</strong> Deeply complex. Pakistan supported the Taliban's first government (1996–2001) and is widely accused of sheltering Taliban leadership during the US occupation. After the Taliban regained power in August 2021, Pakistan initially welcomed the change but relations deteriorated over the Tehreek-e-Taliban Pakistan (TTP), which conducts cross-border attacks from Afghan soil.</li>
+          <li><strong>Saudi Arabia &amp; Gulf:</strong> Over 4 million Pakistanis work in the Gulf — remittances exceeded $27 billion in FY2023, accounting for a major share of Pakistan's foreign exchange. Saudi Arabia has provided emergency financial bailouts (e.g., $3 billion deposit in 2018 and again in 2023).</li>
+          <li><strong>Turkey:</strong> Growing strategic partnership since 2010s. PM Erdoğan has consistently supported Pakistan's position on Kashmir. Joint defence projects include drone technology transfer (Bayraktar TB2 drones).</li>
         </ul>
+        <p style="font-size:0.78rem; color:var(--text-sub); margin-top:10px;"><em>Sources: CPEC Authority (cpec.gov.pk); State Bank of Pakistan (sbp.org.pk) for remittance data; Ministry of Foreign Affairs Pakistan (mofa.gov.pk)</em></p>
       </div>
 
+      <!-- CARD 2: US-Israel-Iran Triangle -->
       <div class="notes-card">
-        <h2>US–Israel–Iran Conflict &amp; Pakistan's Position</h2>
-        <h3>Background of the Conflict</h3>
-        <p>The US–Israel–Iran triangle involves deep strategic, ideological, and nuclear dimensions. Iran's Islamic Revolution (1979) made it a sworn enemy of both the US and Israel. Iran's nuclear program and support for regional proxies (Hezbollah, Houthis, Hamas) are at the center of the conflict.</p>
+        <h2>The US–Israel–Iran Triangle — Historical &amp; Current Context</h2>
+
+        <h3>Origins of the Conflict</h3>
+        <p>The US–Israel relationship is rooted in post-WWII geopolitics. The US recognised Israel on 14 May 1948, minutes after its declaration of independence. The relationship became a "special alliance" from the 1960s onward, built on shared strategic interests in the Middle East, massive US military aid, and strong domestic lobbying (AIPAC).</p>
+        <p>The US–Iran relationship collapsed after the <strong>Islamic Revolution (1979)</strong> and the 444-day hostage crisis at the US Embassy in Tehran. Since then, Iran has been subject to escalating US sanctions and designated a state sponsor of terrorism.</p>
+
+        <h3>Key Events &amp; Timeline</h3>
         <ul>
-          <li>Iran supports Shia militias across Iraq, Syria, Lebanon, Yemen</li>
-          <li>Israel views Iran's nuclear program as existential threat</li>
-          <li>US sanctions on Iran; nuclear deal (JCPOA) negotiations ongoing</li>
-          <li>Gaza conflict (2023–present) escalated regional tensions</li>
+          <li><strong>1979:</strong> Iranian Revolution — Ayatollah Khomeini overthrows the US-backed Shah. Iran becomes an Islamic Republic. Hostage crisis (Nov 1979–Jan 1981) permanently ruptures US-Iran ties.</li>
+          <li><strong>2003:</strong> US invasion of Iraq removes Iran's main Sunni rival (Saddam Hussein), inadvertently expanding Iranian influence through Iraq's Shia majority.</li>
+          <li><strong>2006:</strong> Israel–Hezbollah War in Lebanon (34 days). Iran-backed Hezbollah fires thousands of rockets into northern Israel. Israel conducts large-scale military operations but fails to destroy Hezbollah. Seen as Iran's strategic "success."</li>
+          <li><strong>2015 — JCPOA (Joint Comprehensive Plan of Action):</strong> Historic nuclear deal signed between Iran and P5+1 (US, UK, France, Russia, China + Germany). Iran agreed to limit uranium enrichment in exchange for sanctions relief. Strongly opposed by Israel (Netanyahu addressed US Congress to oppose it in March 2015).</li>
+          <li><strong>2018:</strong> President Trump withdraws the US from the JCPOA ("maximum pressure" policy), reimposing harsh sanctions. Iran gradually resumes uranium enrichment beyond agreed limits.</li>
+          <li><strong>Jan 2020:</strong> US drone strike kills Iran's top general, Qasem Soleimani, at Baghdad airport. Iran retaliates with ballistic missile strikes on US bases in Iraq (Al-Asad airbase). Massive regional tension. Pakistan calls for restraint.</li>
+          <li><strong>Oct 7, 2023 — Hamas Attack on Israel:</strong> Hamas launches a coordinated large-scale attack from Gaza, killing approximately 1,200 Israelis and taking over 250 hostages. The deadliest attack on Jews since the Holocaust.</li>
+          <li><strong>Oct 2023–present — Gaza War:</strong> Israel launches an intensive military campaign in Gaza. By mid-2024, over 37,000 Palestinians killed (UN OCHA data), 1.5 million displaced, and much of northern Gaza reduced to rubble. The UN General Assembly passed multiple resolutions calling for a ceasefire (which the US vetoed at the Security Council level, three times by May 2024).</li>
+          <li><strong>Apr 2024:</strong> Iran directly attacks Israel for the first time in history — over 300 drones and missiles fired in response to an Israeli airstrike on Iran's consulate in Damascus (April 1, 2024). Israel intercepts most projectiles with US/UK/Jordanian assistance. Israel retaliates with a limited strike on Isfahan, Iran.</li>
+          <li><strong>2024 Lebanon Escalation:</strong> Israel expands military operations into Lebanon, assassinating Hezbollah leader Hassan Nasrallah in Beirut (September 2024) and conducting a large ground invasion. Iran-backed axis suffers significant setbacks.</li>
+        </ul>
+        <p style="font-size:0.78rem; color:var(--text-sub); margin-top:8px;"><em>Sources: UN OCHA (ochaopt.org); BBC News; Al Jazeera English; IAEA reports on Iran's nuclear programme; US State Department</em></p>
+
+        <h3>Iran's "Axis of Resistance"</h3>
+        <p>Iran has built a network of non-state proxies across the region to project power and deter direct attack:</p>
+        <ul>
+          <li><strong>Hezbollah (Lebanon):</strong> Iran's most powerful proxy. Receives ~$700 million/year from Iran (US estimates). Has 130,000+ rockets. Fought Israel in 2006 and sustained Israeli strikes since Oct 2023.</li>
+          <li><strong>Hamas (Gaza):</strong> Iran provides funding and weapons, though Hamas is Sunni — a rare sectarian exception in Iran's Shia-led network. Hamas political bureau is based in Qatar.</li>
+          <li><strong>Houthis (Yemen):</strong> Iran-aligned movement controlling northern Yemen including Sanaa. Since Nov 2023, launched over 100 drone/missile attacks on Red Sea shipping, disrupting global trade (Suez Canal traffic fell ~42% by early 2024). US and UK launched retaliatory strikes on Houthi targets in Yemen from January 2024.</li>
+          <li><strong>Shia militias in Iraq &amp; Syria:</strong> Groups like Kataib Hezbollah attacked US bases repeatedly; killed 3 US soldiers at Jordan's Tower 22 base in January 2024.</li>
         </ul>
 
-        <h3>Pakistan's Diplomatic Position</h3>
-        <p>Pakistan faces a delicate balancing act:</p>
+        <h3>Israel's Strategic Concerns</h3>
         <ul>
-          <li><strong>Islamic solidarity:</strong> Strong public sympathy for Palestinians; support for Gaza cause</li>
-          <li><strong>Saudi Arabia vs Iran:</strong> Pakistan avoids choosing between its Sunni Arab allies and Shia Iran (which it shares a long border with)</li>
-          <li><strong>Non-recognition of Israel:</strong> Pakistan does not recognize Israel; supports two-state solution</li>
-          <li><strong>Refused military involvement:</strong> Pakistan declined to join Saudi-led military coalition against Yemen's Houthis (2015 parliament vote)</li>
-          <li><strong>OIC platform:</strong> Uses Organization of Islamic Cooperation to advocate for Palestinian cause</li>
+          <li>Iran enriching uranium to 60% purity (weapons-grade is ~90%). IAEA reports Iran has enough enriched uranium for multiple nuclear devices if further processed.</li>
+          <li>Netanyahu's government has repeatedly threatened military strikes on Iranian nuclear facilities.</li>
+          <li>Israel conducted covert operations inside Iran — assassination of nuclear scientists (2010–2020), Stuxnet cyberattack on Natanz facility (2010, attributed to US-Israel), and an explosion at the Fordow enrichment facility in 2020.</li>
         </ul>
-        <div class="highlight-box">Pakistan's position: Palestine is a core issue of the Muslim Ummah. Pakistan has consistently called for a two-state solution based on pre-1967 borders with East Jerusalem as the capital of Palestine.</div>
-
-        <h3>Impact on Pakistan</h3>
-        <ul>
-          <li>Regional instability affects Pakistan's economy and security</li>
-          <li>Oil price volatility impacts Pakistan's import bill</li>
-          <li>Pakistani diaspora in Gulf States vulnerable to regional conflicts</li>
-          <li>Pakistan must balance relations with both Saudi Arabia and Iran</li>
-          <li>Risk of being drawn into sectarian regional conflicts</li>
-        </ul>
+        <p style="font-size:0.78rem; color:var(--text-sub); margin-top:8px;"><em>Sources: IAEA Director-General Reports (iaea.org); Council on Foreign Relations (cfr.org); Institute for Science and International Security (isis-online.org)</em></p>
       </div>
+
+      <!-- CARD 3: Pakistan's Position -->
+      <div class="notes-card">
+        <h2>Pakistan's Position on the US–Israel–Iran Conflict</h2>
+        <p>Pakistan's response is shaped by a complex web of constraints: Islamic solidarity, Saudi/Gulf economic dependence, Iran as a neighbour, fear of US sanctions, and domestic public opinion that is overwhelmingly pro-Palestinian.</p>
+
+        <h3>1. Palestine &amp; Israel</h3>
+        <p>Pakistan <strong>does not recognise Israel</strong> and has maintained this position since 1948. Pakistani passports until 2015 explicitly stated "valid for all countries except Israel." Pakistan supported every UN General Assembly resolution calling for Palestinian statehood.</p>
+        <ul>
+          <li><strong>OIC Platform:</strong> Pakistan has used the OIC to advocate for Palestinians. It hosted the OIC Extraordinary Summit on Palestine in Dec 2017 after the US recognised Jerusalem as Israel's capital (Trump's declaration).</li>
+          <li><strong>Gaza War 2023:</strong> PM Shehbaz Sharif condemned the Israeli offensive at the UN General Assembly (Sept 2024), calling for an immediate ceasefire and humanitarian corridors. Pakistan voted for the UNGA ceasefire resolution (Dec 2023).</li>
+          <li><strong>No normalisation:</strong> Despite US pressure and the Abraham Accords (2020 — UAE, Bahrain, Sudan, Morocco normalised relations with Israel), Pakistan's civilian and military leadership unanimously rejected normalisation. Army Chief Gen. Asim Munir stated in 2023 that Pakistan would only recognise Israel upon establishment of an independent Palestinian state.</li>
+        </ul>
+        <div class="highlight-box">Pakistan's consistent position: A two-state solution based on pre-1967 borders, with East Jerusalem as the capital of Palestine and the right of return for Palestinian refugees — in line with UN Resolution 194 (1948) and UN Resolution 242 (1967).</div>
+
+        <h3>2. Iran Relations</h3>
+        <p>Pakistan shares an 800+ km border with Iran. Relations are complicated by sectarianism (Pakistan's Sunni majority vs Iran's Shia leadership), but both states maintain formal diplomatic ties.</p>
+        <ul>
+          <li><strong>Iran–Pakistan Gas Pipeline (IP Pipeline / "Peace Pipeline"):</strong> Proposed since 1990s, partially constructed on Iran's side. Pakistan has been unable to complete its section due to US sanctions threats (CAATSA). As of 2024, the pipeline remains incomplete — Pakistan faces a $18 billion penalty from Iran for breach of contract.</li>
+          <li><strong>Jan 2024 — Cross-border strikes:</strong> In an extraordinary escalation, Iran launched missile strikes on Pakistani territory in Balochistan (Jan 16, 2024), claiming to target the Jaish al-Adl militant group. Pakistan recalled its ambassador, expelled Iran's ambassador, and conducted retaliatory strikes inside Iran two days later — marking a historic low in bilateral relations. Relations were restored within weeks due to mutual economic interests.</li>
+          <li><strong>Balochistan dimension:</strong> Iran accuses Pakistan of allowing Sunni extremist groups like Jaish al-Adl to operate from Pakistani territory; Pakistan makes mirror accusations about Iranian support for Baloch separatists.</li>
+        </ul>
+        <p style="font-size:0.78rem; color:var(--text-sub);"><em>Sources: Dawn newspaper (dawn.com); The Express Tribune; Reuters reporting on Jan 2024 cross-border strikes</em></p>
+
+        <h3>3. Saudi Arabia — The Economic Anchor</h3>
+        <ul>
+          <li>Over 2.6 million Pakistanis work in Saudi Arabia — the largest single source of remittances.</li>
+          <li><strong>2015 Yemen Crisis:</strong> Saudi Arabia requested Pakistani military participation in the Saudi-led coalition against Houthi forces. Pakistan's parliament voted on April 10, 2015 to <strong>reject military involvement</strong> — a landmark assertion of parliamentary oversight over foreign policy. Pakistan offered only logistical and diplomatic support.</li>
+          <li>Saudi Arabia has provided emergency financial support multiple times: $1.5 billion grant (2018), $3 billion deposit (2018, repeated in 2021 and 2023 during Pakistan's IMF bailout crises).</li>
+          <li>Crown Prince MBS's Vision 2030 has invited Pakistani skilled workers. Pakistan-Saudi trade reached $6.6 billion in 2022–23.</li>
+        </ul>
+
+        <h3>4. The US Factor</h3>
+        <ul>
+          <li>Pakistan is wary of US secondary sanctions (CAATSA) that could penalise Pakistan for deals with Iran or Russia.</li>
+          <li>Despite diplomatic tensions, Pakistan cooperates with the US on counter-terrorism (Financial Action Task Force — Pakistan was on the FATF "Grey List" 2018–2022, exiting after meeting compliance conditions).</li>
+          <li>Pakistan seeks to balance US and Chinese interests — described by analysts as "strategic ambiguity" or "hedging."</li>
+        </ul>
+
+        <h3>5. Impact on Pakistan</h3>
+        <ul>
+          <li><strong>Oil prices:</strong> Pakistan imports ~80% of its oil. Middle East instability directly affects Pakistan's import bill and foreign exchange reserves. The 2022 oil price spike (post-Ukraine war) worsened Pakistan's balance-of-payments crisis.</li>
+          <li><strong>Diaspora vulnerability:</strong> ~9 million Pakistanis in the Gulf. Any regional war would threaten remittances, potentially costing Pakistan $15–20 billion annually.</li>
+          <li><strong>Sectarianism:</strong> Iran–Saudi rivalry fuels Shia–Sunni tensions domestically. Targeted killings of Shia Hazaras in Quetta and Shia pilgrims (e.g., Mastung bus attack 2018) are linked to regional proxy dynamics.</li>
+          <li><strong>Trade routes:</strong> Houthi attacks on Red Sea shipping (2023–24) increased shipping costs for Pakistan's exports to Europe by 30–40%, adding to inflationary pressure.</li>
+        </ul>
+        <p style="font-size:0.78rem; color:var(--text-sub); margin-top:8px;"><em>Sources: State Bank of Pakistan; World Bank Pakistan Economic Monitor; FATF (fatf-gafi.org); Bureau of Emigration &amp; Overseas Employment, Pakistan</em></p>
+      </div>
+
     </div>
 
     <div id="tab-qa-5" class="notes-content-area">
@@ -1427,46 +1489,91 @@
         <div class="qa-item">
           <div class="qa-q" onclick="toggleQA(this)">
             <span class="qa-q-num">Q1</span>
-            <span>What is Pakistan's foreign policy stance on the US–Israel–Iran conflict? Discuss the diplomatic challenges and Pakistan's position.</span>
+            <span>What is Pakistan's foreign policy stance on the US–Israel–Iran conflict? Discuss the diplomatic challenges and Pakistan's position with reference to specific events.</span>
           </div>
           <div class="qa-a open">
-            <strong>Introduction:</strong> The Middle East conflict involving the United States, Israel, and Iran represents one of the most complex geopolitical challenges of the 21st century. For Pakistan, a Muslim-majority nuclear state with interests in the Arab world, strong ties to China, and historical alliance with the US, navigating this conflict requires careful diplomatic balance.<br><br>
-            <strong>Context of the US–Israel–Iran Conflict:</strong> The United States and Israel share a strategic alliance cemented by shared democratic values, massive US aid to Israel ($3.8 billion annually), and common concerns over Iran's nuclear ambitions. Iran's Islamic Republic views both as enemies of the Muslim world. The conflict has been intensified by: Iran's nuclear program (potentially capable of producing a weapon); Iran's support for regional proxies like Hezbollah in Lebanon, Houthis in Yemen, and Hamas in Gaza; and Israeli military operations in Palestinian territories, particularly the 2023 Gaza war.<br><br>
+            <strong>Introduction:</strong> The Middle East conflict involving the United States, Israel, and Iran represents one of the most complex geopolitical challenges of the 21st century. For Pakistan — a Muslim-majority nuclear state bordered by Iran, dependent on Gulf remittances, and navigating US–China rivalry — this conflict demands a carefully calibrated foreign policy of principled non-alignment.<br><br>
+
+            <strong>Context of the US–Israel–Iran Conflict:</strong><br>
+            The US–Israel alliance dates to 1948 and has deepened through Cold War-era strategic interests. The US provides Israel approximately $3.8 billion in annual military aid under the 10-year Memorandum of Understanding (2016–2026). Iran's 1979 Islamic Revolution transformed it into a sworn adversary of both powers. Key recent developments include:<br>
+            • <strong>Gaza War (Oct 2023–present):</strong> Hamas's surprise attack on October 7, 2023, killing ~1,200 Israelis, triggered Israel's largest military campaign in Gaza. By 2024, over 37,000 Palestinians were killed and 1.5 million displaced (UN OCHA). The US vetoed three UN Security Council ceasefire resolutions (October 2023, February 2024, March 2024).<br>
+            • <strong>Iran–Israel direct exchange (April 2024):</strong> Following Israel's strike on Iran's Damascus consulate on April 1, 2024, Iran launched over 300 drones and missiles at Israel on April 13–14 — the first direct attack on Israeli territory in history. Most were intercepted by Israeli, US, British, and Jordanian forces.<br>
+            • <strong>JCPOA collapse:</strong> The 2015 nuclear deal, which limited Iran's uranium enrichment, was abandoned by the US in 2018 (Trump). Iran now enriches to 60% purity — just below weapons grade. IAEA reports confirm Iran has enough enriched material for multiple weapons if further processed.<br><br>
+
             <strong>Pakistan's Diplomatic Position:</strong><br>
-            <strong>1. Palestine:</strong> Pakistan consistently supports the Palestinian cause through the UN, OIC, and bilateral diplomacy. Pakistan does not recognize Israel and calls for a two-state solution with East Jerusalem as the Palestinian capital.<br><br>
-            <strong>2. Iran Policy:</strong> Despite sectarian differences, Pakistan maintains diplomatic relations with Iran. Both share a 900-km border. Economic ties include the IP (Iran-Pakistan) gas pipeline project, though US sanctions have hindered it. Pakistan cannot afford to alienate Iran.<br><br>
-            <strong>3. Saudi Arabia Policy:</strong> Saudi Arabia is Pakistan's largest source of foreign remittances and oil imports. Pakistan-Saudi relations are built on Islamic solidarity and economic dependence. This creates tension when Saudi-Iran rivalry heats up.<br><br>
-            <strong>4. Neutrality in Arab Conflicts:</strong> Pakistan's parliament voted to stay out of the Saudi military coalition in Yemen (2015), reflecting Pakistan's preference for diplomatic neutrality over military involvement in Arab sectarian conflicts.<br><br>
-            <strong>Challenges:</strong><br>
-            • Balancing US alliance with non-recognition of Israel<br>
-            • Maintaining Iran relations while preserving Saudi ties<br>
-            • Domestic public opinion strongly pro-Palestinian<br>
-            • Risk of domestic extremist groups exploiting sectarian tensions<br><br>
-            <strong>Conclusion:</strong> Pakistan's foreign policy on the US–Israel–Iran conflict reflects its broader challenge: a Muslim state with complex ties to all major powers, seeking to preserve its sovereignty, economic interests, and Islamic identity simultaneously. A policy of principled neutrality combined with active diplomacy through multilateral forums best serves Pakistan's national interest.
+            <strong>1. Palestine — Non-recognition of Israel:</strong> Pakistan has not recognised Israel since 1948 and links any normalisation to Palestinian statehood. Despite the Abraham Accords (2020, UAE/Bahrain/Morocco/Sudan normalised ties with Israel), Pakistan rejected US pressure to follow suit. Army Chief Gen. Asim Munir stated in 2023: "Pakistan stands with Palestine — full stop." At the UNGA, Pakistan voted for ceasefire resolutions in December 2023 and sponsored OIC emergency sessions on Gaza.<br><br>
+            <strong>2. Iran — Neighbour and Competitor:</strong> Pakistan maintains diplomatic relations with Iran despite sectarian tensions. The Iran–Pakistan Gas Pipeline project, proposed in the 1990s, remains incomplete due to US sanctions (CAATSA threats). In January 2024, the relationship hit its lowest point when Iran fired missiles at Balochistan targeting Jaish al-Adl militants. Pakistan recalled its ambassador and conducted retaliatory strikes inside Iran — an unprecedented move. Relations were normalised within weeks, reflecting economic necessity (trade, gas negotiations).<br><br>
+            <strong>3. Saudi Arabia — Economic Anchor:</strong> Pakistan declined Saudi Arabia's request for military participation in the Yemen war (April 2015 parliamentary vote), demonstrating rare democratic assertiveness. However, Pakistan deeply depends on Saudi financial support — receiving a $3 billion emergency deposit in 2023 during its IMF bailout crisis — and on Gulf remittances ($10+ billion/year from the Gulf alone).<br><br>
+            <strong>4. US — Strategic Ambiguity:</strong> Pakistan avoids direct confrontation with the US over Gaza while quietly supporting ceasefire efforts through the OIC and UN. Pakistan fears CAATSA sanctions if it deepens ties with Iran.<br><br>
+
+            <strong>Challenges Pakistan Faces:</strong><br>
+            • Balancing Islamic solidarity with economic pragmatism<br>
+            • Domestic sectarian tensions amplified by regional Shia–Sunni dynamics<br>
+            • Houthi attacks on Red Sea shipping (2023–24) increased Pakistan's export logistics costs by ~35%<br>
+            • Being caught between US pressure (on Iran, on Israel normalisation) and Chinese strategic preferences<br>
+            • Public opinion: massive pro-Palestinian sentiment constrains any diplomatic flexibility<br><br>
+
+            <strong>Conclusion:</strong> Pakistan's foreign policy on the US–Israel–Iran conflict reflects its fundamental dilemma — a Muslim-majority, economically vulnerable nuclear state trying to preserve Islamic credibility, economic lifelines, and strategic relationships simultaneously. Its policy of principled neutrality, vocal support for Palestinian rights through multilateral forums, and careful avoidance of military entanglement best serves Pakistan's national interest in an increasingly fragmented regional order.<br><br>
+            <em style="font-size:0.8rem; color:var(--text-sub);">References: UN OCHA (ochaopt.org); IAEA quarterly reports; Dawn, The News, Express Tribune archives; Ministry of Foreign Affairs Pakistan statements (mofa.gov.pk)</em>
           </div>
         </div>
 
         <div class="qa-item">
           <div class="qa-q" onclick="toggleQA(this)">
             <span class="qa-q-num">Q2</span>
-            <span>Discuss the salient features of Pakistan's foreign policy. What challenges does Pakistan face in the current global order?</span>
+            <span>Discuss the salient features of Pakistan's foreign policy and the challenges it faces in the current global order. Provide examples.</span>
           </div>
           <div class="qa-a">
-            <strong>Introduction:</strong> Pakistan's foreign policy is shaped by its unique geostrategic location at the crossroads of South Asia, Central Asia, and the Middle East, as well as its status as the world's fifth-largest nation and only Muslim nuclear power.<br><br>
-            <strong>Constitutional Basis:</strong> Articles 40 and 27 of the 1973 Constitution provide the framework for foreign policy, emphasizing peaceful coexistence, Islamic solidarity, and non-interference in others' internal affairs.<br><br>
-            <strong>Key Features:</strong><br>
-            <strong>1. Security-centric approach:</strong> India remains the primary security concern, driving Pakistan's nuclear posture, military budget, and strategic alignment decisions.<br><br>
-            <strong>2. China-Pakistan partnership:</strong> CPEC ($62bn) has made China Pakistan's closest partner. The China-Pakistan Economic Corridor connects Gwadar port to Xinjiang, giving China access to warm waters while giving Pakistan infrastructure and investment.<br><br>
-            <strong>3. Nuclear deterrence:</strong> Pakistan's minimum credible deterrence posture ensures that no regional power can threaten its sovereignty. Pakistan refuses to sign the NPT but maintains a no-first-use policy discussions ongoing.<br><br>
-            <strong>4. Islamic solidarity:</strong> Pakistan plays an active role in the OIC, supports Palestinian cause, and positions itself as a voice for the Muslim world.<br><br>
-            <strong>5. Economic diplomacy:</strong> Under the "Geo-economics" framework, recent governments have prioritized trade, investment, and connectivity over pure strategic considerations.<br><br>
+            <strong>Introduction:</strong> Pakistan's foreign policy is shaped by its unique geostrategic position at the crossroads of South Asia, Central Asia, and the Middle East. As the world's fifth-most-populous nation and only Muslim nuclear power, Pakistan's foreign policy balances security concerns, Islamic identity, and severe economic constraints.<br><br>
+
+            <strong>Constitutional Basis:</strong> Articles 40 and 27 of the 1973 Constitution provide the framework — emphasising Islamic solidarity, peaceful coexistence, and non-interference. The Foreign Policy Statement of 1947 (Quaid-e-Azam's vision) emphasised friendship with all, enmity with none.<br><br>
+
+            <strong>Key Features of Pakistan's Foreign Policy:</strong><br><br>
+
+            <strong>1. Security-Centric Approach:</strong> India remains the primary security concern. Pakistan's military budget (~4% of GDP) is shaped almost entirely by the India threat perception. The nuclearisation of the subcontinent (both states tested weapons in 1998) has created a stable deterrence but permanent tension. <em>Example: The Balakot air strikes (Feb 2019) — India's first air strikes inside Pakistani territory since 1971 — and Pakistan's immediate retaliation showed how close nuclear neighbours can approach conflict.</em><br><br>
+
+            <strong>2. China–Pakistan Strategic Partnership:</strong> CPEC ($62+ billion) is the centrepiece. The Gwadar port, ML-1 railway project ($6.8 billion), and Diamer-Bhasha Dam reflect deep Chinese investment. Pakistan was among the first countries to support China's Belt and Road Initiative (BRI). <em>Source: CPEC Authority Annual Reports; Chinese Ministry of Commerce</em><br><br>
+
+            <strong>3. Nuclear Deterrence:</strong> Pakistan's "Full Spectrum Deterrence" doctrine — developed post-2010 — extends deterrence to tactical nuclear weapons (Nasr/Hatf-IX missiles) to counter India's Cold Start military doctrine. Pakistan is not a signatory to the NPT but cooperates with the IAEA on safeguarded facilities.<br><br>
+
+            <strong>4. Islamic Solidarity and OIC:</strong> Pakistan has consistently championed Muslim causes — from the Afghan jihad (1980s) to Bosnian Muslims (1990s), to Kashmir (ongoing), and Palestine (esp. 2023–24 Gaza crisis). PM Imran Khan's "Rehmatul-lil-Alameen Authority" and repeated condemnation of Islamophobia at the UN reflect this identity dimension.<br><br>
+
+            <strong>5. Geo-Economics Framework:</strong> Pakistan joined the Shanghai Cooperation Organisation (SCO) in 2017 and hosted the SCO Council of Heads of Government summit in October 2024 — a major diplomatic milestone. Pakistan also actively seeks IMF stabilisation ($3 billion SBA, 2023; $7 billion EFF, 2024) to maintain economic diplomacy credibility.<br><br>
+
             <strong>Current Challenges:</strong><br>
-            • US-China rivalry forcing Pakistan to navigate between its two most important partners<br>
-            • Economic crisis undermining diplomatic leverage<br>
-            • Afghanistan instability and TTP threat<br>
-            • Kashmir dispute remains unresolved despite 75+ years<br>
-            • Climate change threatening water security (Pakistan is among most climate-vulnerable states)<br><br>
-            <strong>Conclusion:</strong> Pakistan's foreign policy must evolve from a security-dominated paradigm to one that prioritizes economic integration, regional connectivity, and human development to ensure stability and prosperity in the 21st century.
+            • <strong>US–China Rivalry:</strong> Pakistan is being asked to "choose sides." US suspended $800 million in military aid in 2021 citing inadequate action against Taliban factions. China is Pakistan's largest trading partner and creditor. This creates structural tension Pakistan cannot easily resolve.<br>
+            • <strong>Economic Crisis:</strong> Pakistan's $350 billion GDP, 40% inflation (peak 2023), and $126 billion external debt have reduced its diplomatic leverage. Countries offer aid with conditions (IMF, US, Gulf states).<br>
+            • <strong>Afghanistan–TTP Threat:</strong> The Taliban government refuses to crack down on TTP (Pakistani Taliban), which conducted 400+ attacks in Pakistan in 2023 alone (PIPS data). Pakistan's options are limited as it cannot destabilise Afghanistan without refugee and security blowback.<br>
+            • <strong>Kashmir:</strong> India's August 2019 revocation of Article 370 and bifurcation of J&amp;K into Union Territories hardened positions. Pakistan's efforts to internationalise the dispute have had limited success, with major powers (US, EU) reluctant to antagonise India.<br>
+            • <strong>Climate Vulnerability:</strong> Pakistan's 2022 floods submerged one-third of the country, killing 1,700+ people and causing $30 billion in damage (World Bank). Pakistan emits less than 1% of global carbon but bears disproportionate climate impact — shaping Pakistan's "climate diplomacy" agenda at COP27 and COP28.<br><br>
+
+            <strong>Conclusion:</strong> Pakistan's foreign policy is at a crossroads — torn between security imperatives rooted in the 1947 Partition, economic survival needs demanding partnerships with multiple powers, and ideological commitments to Islamic solidarity. A successful 21st-century foreign policy requires Pakistan to reduce its security obsession and invest in economic diplomacy, regional connectivity through CPEC and SCO, and credible democratic governance that gives it weight in multilateral forums.<br><br>
+            <em style="font-size:0.8rem; color:var(--text-sub);">References: PIPS (Pakistan Institute of Peace Studies) Security Report 2023; World Bank Pakistan Floods Assessment; IMF Article IV Consultations — Pakistan; Ministry of Finance Economic Survey of Pakistan</em>
+          </div>
+        </div>
+
+        <div class="qa-item">
+          <div class="qa-q" onclick="toggleQA(this)">
+            <span class="qa-q-num">Q3</span>
+            <span>Analyse the January 2024 Pakistan–Iran cross-border strikes. What does this episode reveal about Pakistan's foreign policy challenges?</span>
+          </div>
+          <div class="qa-a">
+            <strong>Introduction:</strong> The January 2024 Pakistan–Iran cross-border exchange was one of the most dramatic foreign policy incidents in Pakistan's recent history — revealing how regional conflicts and domestic security failures interact to create international crises.<br><br>
+
+            <strong>Sequence of Events:</strong><br>
+            • <strong>Jan 16, 2024:</strong> Iran's Islamic Revolutionary Guard Corps (IRGC) launched ballistic missile and drone strikes on Pakistani territory in Balochistan's Panjgur district, killing 2 children and injuring 3 others. Iran claimed to target bases of Jaish al-Adl, a Sunni extremist group that had killed 13 Iranian police officers in a Dec 2023 attack inside Iran.<br>
+            • <strong>Jan 17, 2024:</strong> Pakistan immediately recalled its ambassador from Tehran, expelled Iran's ambassador, and summoned Iran's chargé d'affaires. PM Anwaar ul Haq Kakar issued a strong condemnation, calling it a "blatant violation of Pakistani sovereignty."<br>
+            • <strong>Jan 18, 2024:</strong> Pakistan conducted retaliatory military strikes — using drones and rockets — on Balochistan Province of Iran (Saravan district), killing 9 people including members of Baloch separatist groups. Pakistan's ISPR statement called it a "precision military operation."<br>
+            • Within two weeks, both countries restored ambassadors and held foreign minister meetings, prioritising bilateral economic interests over the crisis.<br><br>
+
+            <strong>What This Reveals:</strong><br>
+            <strong>1. Governance gaps in Balochistan:</strong> The presence of Jaish al-Adl on Pakistani soil — operating across the Iran border — indicates failure of writ of state in tribal border regions. Iran's frustration had been building for years with Pakistan's inaction.<br>
+            <strong>2. Iran's assertiveness:</strong> Iran's willingness to strike nuclear-armed Pakistan reflects its post-Gaza War confidence and its model of "forward deterrence" through direct military action against perceived threats.<br>
+            <strong>3. Limits of Pakistan–Iran relations:</strong> Despite shared opposition to Israel and US hegemony, sectarian and security tensions mean Pakistan–Iran relations are inherently fragile.<br>
+            <strong>4. Rapid restoration:</strong> The quick normalisation (within 2 weeks) shows economic pragmatism overrides strategic posturing — Pakistan needs Iranian gas (IP pipeline), and Iran needs Pakistani support at the OIC.<br><br>
+
+            <strong>Conclusion:</strong> The Jan 2024 episode exemplifies how Pakistan's domestic security failures create foreign policy crises. It also demonstrates Pakistan's capacity for calibrated retaliation (reasserting deterrence) without escalation — a reflection of the mature strategic culture a nuclear state must maintain.<br><br>
+            <em style="font-size:0.8rem; color:var(--text-sub);">References: ISPR (Inter-Services Public Relations) press releases; Dawn (dawn.com) reporting Jan 16–Feb 2024; Reuters; BBC Urdu</em>
           </div>
         </div>
       </div>
